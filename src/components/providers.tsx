@@ -1,6 +1,8 @@
 'use client';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Assignment } from '@/lib/demo';
+import { AuthProvider } from './auth-context';
+
 type Settings = {
   theme: string;
   toggleTheme: () => void;
@@ -9,8 +11,9 @@ type Settings = {
   assignments: Assignment[];
   setAssignments: (items: Assignment[]) => void;
 };
-const Context = createContext<Settings | null>(null);
-export function Providers({ children }: { children: ReactNode }) {
+const SettingsContext = createContext<Settings | null>(null);
+
+function SettingsProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState('dark');
   const [motion, setMotion] = useState(true);
   const [assignments, updateAssignments] = useState<Assignment[]>([]);
@@ -47,15 +50,26 @@ export function Providers({ children }: { children: ReactNode }) {
     } catch {}
   };
   return (
-    <Context.Provider
+    <SettingsContext.Provider
       value={{ theme, toggleTheme, motion, toggleMotion, assignments, setAssignments }}
     >
       {children}
-    </Context.Provider>
+    </SettingsContext.Provider>
   );
 }
+
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    <AuthProvider>
+      <SettingsProvider>
+        {children}
+      </SettingsProvider>
+    </AuthProvider>
+  );
+}
+
 export function useSettings() {
-  const value = useContext(Context);
+  const value = useContext(SettingsContext);
   if (!value) throw new Error('Missing settings provider');
   return value;
 }
