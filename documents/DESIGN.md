@@ -1,31 +1,36 @@
 # Design and motion
 
-## Direction
+## Current direction
 
-An editorial Y2K study space: near-black or pearl white, chrome lettering, lavender accents, fine orbital wireframes, holographic glass, and a warm pixel-art mascot. The user-supplied `Y2K Style 02.png` informed the visual vocabulary. The approved mockups informed the navigation and content hierarchy. The supplied reference is not published as a site asset.
+An editorial Y2K study space with near-black and pearl-white themes, wide beveled chrome lettering, blue accents, fine orbital wireframes, holographic glass, and Ako, the male lab-rat mascot. The supplied Y2K image is the visual reference; the reference image itself is not published as a site asset.
 
-## Typography and layout
+The main title follows the broad, softly squared, polished-metal lettering in the reference's “CORE VISUAL” headline. `public/art/akoizo-chrome.png` is original generated artwork spelling AKOIZO, with bright bevels, dark metallic faces, and icy-blue reflections. The former tube-shaped SVG is no longer rendered. The landing h1 retains the accessible name Akoizo; an SVG viewport displays the title PNG without its excess transparent margins.
 
-Space Grotesk for display, Manrope for body, IBM Plex Mono for small labels. Fonts are packaged locally so the running site does not request Google Fonts. A large first viewport introduces Akoizo; sequential sections explain features lower down. Theme tokens live in `src/app/globals.css`.
+## Palette and typography
 
-## Ako, the mascot
+Dark mode uses ice blue (`#93c5fd`); light mode uses royal blue (`#2563c9`). Glass, controls, orbit lines, and decorative gradients use blue/slate tones. The small header/footer rat SVG and favicon remain flat monochrome blue.
 
-`public/art/ako-sprite.png` is an original image generated with the built-in imagegen tool: a pixel-art Venezuelan poodle moth inspired by the approved concept, redesigned with expressive eyes, playful feet, feathered antennae, and raised wings. Generation prompt: four consistent transparent poses, ivory fur, plum outline, brown antennae, lavender shadows, hard square pixels, relaxed/lifted/spread/lowered wings.
+Space Grotesk is the display font, Manrope is the body font, and IBM Plex Mono is used for small labels. Fonts are packaged locally. All page, event, and study-tool headings are upright; the previous italic serif emphasis has been removed.
 
-The sheet is 2172 × 724. CSS presents one cell using background positioning, with no raster editing. The two clean poses are animated; the oversized third pose and neighboring fourth-frame edge are excluded to avoid clipping and stray pixels. The runtime therefore uses two-frame flutter plus smooth floating and a tap-triggered celebration. A perfectly registered atlas is listed in the backlog.
+## Composition
 
-## Motion
+The chrome wordmark sits above a concise introduction and primary action. Ako leans into the page from the upper-right corner below the navigation, angled inward. His lower body extends beyond the right edge. He is no longer centered or perched directly on the wordmark. Mobile eyebrow text wraps within the remaining space so it does not collide with him.
 
-- Gentle moth hover/tilt, intermittent wing flutter, short greeting on activation.
-- Fine orbital drift, small floating iridescent spheres, slow holographic light sweep.
-- One-time content reveals as sections enter the viewport.
-- Button hover movement and theme transitions.
+Features appear in sequential sections farther down the page. Other pages retain a full-body mascot. Global style tokens and responsive rules live in `src/app/globals.css`.
 
-All decorative motion stops for `prefers-reduced-motion: reduce` and the footer motion switch. Content remains visible in that state. The moth button is keyboard accessible and its greeting uses a status announcement. No looping flash effects or autoplay audio.
+## Ako v2
 
-## Inspiration research
+The current character uses one persistent set of illustrated body parts with a procedural face and tail. Stable shoulder, elbow, head, and foot pivots replace the retired six-pose slideshow. Head/eye movement, breathing, blinking, arm waving, and tail curls interpolate continuously at the browser's display cadence. No full-character frame changes, squashed mirror turns, or crossfades are used.
 
-- [Lusion v3](https://www.awwwards.com/sites/lusion-v3): reference for reactive detail and scroll pacing.
-- [Active Theory](https://www.commarts.com/webpicks/active-theory-2): reference for an immersive opening with restrained interface chrome.
+The reusable renderer, motion model, source atlas, and manifest are described in [MASCOT_ANIMATION.md](MASCOT_ANIMATION.md). [ANIMATION_RESEARCH.md](ANIMATION_RESEARCH.md) explains how the requested PerfectPixel reference informed the design. Generated artwork prompts are preserved in [ART_PROVENANCE.md](ART_PROVENANCE.md).
 
-These informed motion direction, not copied layouts or assets. The site uses lightweight CSS/SVG geometry rather than a full 3D rendering engine.
+## Motion and accessibility
+
+- Ako periodically changes gaze and follows pointer movement over his interaction area. Click, tap, Enter, or Space triggers a 2.8-second jointed wave and status greeting.
+- Character movement pauses off-screen and in hidden tabs. The footer setting and system reduced-motion preference stop the animation loop while retaining interaction and a still pose.
+- Decorative orbit drift, iridescent spheres, and scroll reveals retain reduced-motion alternatives.
+- Content is usable without animation. No sound, flashing effects, or pointer capture is added.
+
+## Earlier visual research
+
+[Lusion v3](https://www.awwwards.com/sites/lusion-v3) informed scroll pacing; [Active Theory](https://www.commarts.com/webpicks/active-theory-2) informed the spacious opening. These were direction references, not copied layouts or assets.

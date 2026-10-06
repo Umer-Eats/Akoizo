@@ -5,12 +5,12 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const page = await browser.newPage({
   viewport: { width: 1440, height: 1000 },
   deviceScaleFactor: 1,
+  reducedMotion: 'reduce',
 });
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 await page.goto('http://127.0.0.1:3000', { waitUntil: 'networkidle' });
 await page.evaluate(() => {
-  document.documentElement.dataset.motion = 'off';
   document.querySelectorAll('.reveal-ready').forEach((e) => e.classList.add('revealed'));
 });
 await page.screenshot({ path: 'documents/qa/home-dark.png', fullPage: true });

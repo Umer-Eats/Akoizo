@@ -38,8 +38,8 @@ Acceptance: two real test schools can independently enroll students, instructors
 
 ## P3 — Polish and release
 
-- [ ] Commission or refine the moth into a precisely registered production sprite atlas with independent antenna/wing frames. The current generated sheet has four poses; the preview animates the two cleanly aligned poses to avoid clipping the widest pose.
 - [ ] Add additional mascot reactions for completed lessons and milestones once real actions exist.
+- [ ] If a later task needs a full eight-direction game character, author matching side/back views and export renderer-specific animation clips. The current reusable asset is a front-view 2D rig with smoothly changing gaze, not an eight-direction sprite pack.
 - [ ] Decide public profile fields, moderation/reporting, display-name rules, and opt-out policy for a student community.
 - [ ] Review with teachers and students; test screen readers, zoom, touch targets, low-power devices, and contrast across all themes/states.
 - [ ] Test live auth/database behavior in staging, add monitoring/error boundaries, backups, restore drills, and production security headers/CSP.
@@ -48,7 +48,10 @@ Acceptance: two real test schools can independently enroll students, instructors
 ## Completed in this preview
 
 - [x] Responsive dark and light public landing, rankings, and mission pages.
-- [x] Original lively pixel poodle moth with idle flutter, float, and tap reaction; reduced-motion support.
+- [x] Ako v2: a reusable articulated character with fixed pivots, continuously interpolated head/eye/arm/tail motion, pointer-aware gaze, and click/tap/keyboard greeting.
+- [x] Upper-right angled corner placement, periodic gaze changes without flat mirroring, reference-matched beveled chrome title artwork, and upright headings.
+- [x] Mascot animation pauses off-screen and in hidden tabs; footer motion control and system reduced motion preserve a still pose and accessible greeting.
+- [x] Flat monochrome blue rat logo and favicon; blue accent palette across light and dark themes.
 - [x] Chrome type, holographic panel, orbital graphics, fine wireframe details, and scroll reveals inspired by the approved reference.
 - [x] Separate instructor/student entry designs; no live credential collection.
 - [x] Student and instructor demo dashboards, 23-event B/C catalogs, honest A setup state.

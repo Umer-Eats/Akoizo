@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Moth, Orbit, Reveal } from '@/components/art';
+import { Mascot, Orbit, Reveal } from '@/components/art';
 export const metadata: Metadata = { title: 'Our Mission' };
 export default function Page() {
   const values = [
@@ -29,7 +29,7 @@ export default function Page() {
           <span className="chrome">Always free.</span>
         </h1>
         <Orbit />
-        <Moth />
+        <Mascot />
         <p>
           Akoizo helps students grow in their Science Olympiad journey through free lessons,
           practice, and a community that learns together. We’re here to make preparation feel a

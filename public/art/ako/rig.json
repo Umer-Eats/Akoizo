@@ -1,0 +1,160 @@
+{
+  "name": "Ako",
+  "version": 2,
+  "atlas": "/art/ako/parts.png",
+  "atlasSize": [
+    1536,
+    1024
+  ],
+  "viewBox": [
+    0,
+    0,
+    400,
+    480
+  ],
+  "footAnchor": [
+    200,
+    448
+  ],
+  "parts": {
+    "head": {
+      "source": [
+        18,
+        85,
+        570,
+        452
+      ],
+      "alphaCentroid": [
+        301.76,
+        292.83
+      ],
+      "target": [
+        85,
+        70,
+        230,
+        183
+      ],
+      "pivot": [
+        200,
+        246
+      ]
+    },
+    "body": {
+      "source": [
+        636,
+        50,
+        401,
+        525
+      ],
+      "alphaCentroid": [
+        836.54,
+        322.47
+      ],
+      "target": [
+        119,
+        233,
+        165,
+        217
+      ],
+      "pivot": [
+        200,
+        448
+      ]
+    },
+    "restArm": {
+      "source": [
+        1231,
+        84,
+        202,
+        482
+      ],
+      "alphaCentroid": [
+        1330.65,
+        318.49
+      ],
+      "target": [
+        120,
+        285,
+        55,
+        131
+      ],
+      "pivot": [
+        142,
+        294
+      ]
+    },
+    "upperArm": {
+      "source": [
+        160,
+        658,
+        217,
+        324
+      ],
+      "alphaCentroid": [
+        270.77,
+        825.83
+      ],
+      "target": [
+        231,
+        287,
+        49,
+        74
+      ],
+      "pivot": [
+        260,
+        294
+      ]
+    },
+    "forearm": {
+      "source": [
+        697,
+        633,
+        200,
+        358
+      ],
+      "alphaCentroid": [
+        804.47,
+        815.4
+      ],
+      "target": [
+        227,
+        278,
+        45,
+        82
+      ],
+      "pivot": [
+        251,
+        354
+      ]
+    },
+    "muzzle": {
+      "source": [
+        1081,
+        737,
+        425,
+        162
+      ],
+      "alphaCentroid": [
+        1293.26,
+        817.86
+      ],
+      "target": [
+        145,
+        200,
+        109,
+        42
+      ],
+      "pivot": [
+        200,
+        215
+      ]
+    }
+  },
+  "animation": {
+    "type": "articulated-2d",
+    "targetFps": 60,
+    "lookCycleSeconds": 14,
+    "blinkCycleSeconds": 5.4,
+    "waveSeconds": 2.8
+  }
+}

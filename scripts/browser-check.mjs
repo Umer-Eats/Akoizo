@@ -9,11 +9,50 @@ const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 const base = 'http://127.0.0.1:3000';
 await page.goto(base, { waitUntil: 'networkidle' });
-await page.getByRole('button', { name: 'Say hello to Ako, the poodle moth' }).click();
+const ako = page.getByRole('button', { name: 'Say hello to Ako, the lab rat' });
+const character = page.locator('.ako-rig');
+await expect(character).toHaveAttribute('data-motion', 'running');
+const frames = await character.evaluate(async (element) => {
+  const joints = ['head', 'forearm', 'tail'];
+  const samples = [];
+  for (let i = 0; i < 20; i++) {
+    await new Promise(requestAnimationFrame);
+    samples.push(
+      joints.map((name) => {
+        const joint = element.querySelector('[data-joint="' + name + '"]');
+        return joint.getAttribute(name === 'tail' ? 'd' : 'transform');
+      }),
+    );
+  }
+  return {
+    samples,
+    sources: Array.from(element.querySelectorAll('image')).map((image) =>
+      image.getAttribute('href'),
+    ),
+  };
+});
+assert.ok(
+  new Set(frames.samples.map((s) => s.join('|'))).size > 10,
+  'Joints must interpolate between display frames',
+);
+assert.equal(new Set(frames.sources).size, 1, 'All parts retain the same source artwork');
+await page.locator('.site-footer').scrollIntoViewIfNeeded();
+await expect(character).toHaveAttribute('data-motion', 'paused');
+const frozen = await character.locator('[data-joint="head"]').getAttribute('transform');
+await page.waitForTimeout(100);
+assert.equal(await character.locator('[data-joint="head"]').getAttribute('transform'), frozen);
+await ako.scrollIntoViewIfNeeded();
+await expect(character).toHaveAttribute('data-motion', 'running');
+await ako.focus();
+await ako.press('Enter');
+await expect(page.locator('.mascot-wrap')).toHaveClass(/is-happy/);
 await page
   .getByRole('status')
   .filter({ hasText: 'Stay curious, friend.' })
   .waitFor({ state: 'visible' });
+await expect(page.locator('.mascot-wrap')).not.toHaveClass(/is-happy/);
+await ako.click();
+await expect(page.locator('.mascot-wrap')).toHaveClass(/is-happy/);
 await page.getByRole('button', { name: 'A Force', exact: true }).click();
 assert.match(await page.locator('.answer-feedback').textContent(), /SI unit of force/);
 await page.getByRole('button', { name: 'B Energy', exact: true }).click();
@@ -23,6 +62,7 @@ await page.reload();
 assert.equal(await page.locator('html').getAttribute('data-theme'), 'light');
 await page.getByRole('button', { name: 'Motion on', exact: true }).click();
 assert.equal(await page.locator('html').getAttribute('data-motion'), 'off');
+await expect(character).toHaveAttribute('data-motion', 'still');
 await page.goto(base + '/rankings');
 await page.getByRole('button', { name: 'Division B', exact: true }).click();
 assert.equal(await page.locator('tbody tr').count(), 3);
@@ -102,6 +142,14 @@ for (const mode of ['dark', 'light']) {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(base + route, { waitUntil: 'networkidle' });
     assert.equal(await page.locator('main').count(), 1);
+    assert.ok(
+      await page
+        .locator('h1, h2, h3, h1 span, h2 span, h3 span')
+        .evaluateAll((elements) =>
+          elements.every((el) => getComputedStyle(el).fontStyle === 'normal'),
+        ),
+      'Headings should not be italic',
+    );
     assert.equal(
       await page.evaluate(() => document.documentElement.scrollWidth > innerWidth),
       false,
@@ -137,12 +185,11 @@ const reduced = await browser.newContext({ reducedMotion: 'reduce' });
 const reducedPage = await reduced.newPage();
 await reducedPage.goto(base);
 assert.equal(await reducedPage.locator('html').getAttribute('data-motion'), 'off');
-assert.equal(
-  await reducedPage.locator('.moth-sprite').evaluate((el) => getComputedStyle(el).animationName),
-  'none',
-);
+await expect(reducedPage.locator('.ako-rig')).toHaveAttribute('data-motion', 'still');
+await reducedPage.getByRole('button', { name: 'Say hello to Ako, the lab rat' }).click();
+await expect(reducedPage.locator('.ako-rig')).toHaveAttribute('data-motion', 'still');
 await browser.close();
 assert.deepEqual(errors, []);
 console.log(
-  'PASS: navigation, theme persistence, moth interaction, reduced motion, sample quiz, ranking filters/pagination, division event lists, division-safe assignments, placeholders, desktop/mobile layouts. No browser errors.',
+  'PASS: navigation, theme persistence, mascot interaction, reduced motion, sample quiz, ranking filters/pagination, division event lists, division-safe assignments, placeholders, desktop/mobile layouts. No browser errors.',
 );

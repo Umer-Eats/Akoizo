@@ -6,7 +6,10 @@ This version contains no backend identity or persistence. `/preview/*` pages are
 
 ## Public pages
 
-- Landing: large chrome title, pixel moth, concise opening, scroll-driven learning/practice/community sections, and one small interactive science example. No dashboard wall before login.
+- Landing: wide beveled chrome title with Ako peeking diagonally from the page's upper-right corner, concise opening, scroll-driven learning/practice/community sections, and one small interactive science example. No dashboard wall before login.
+- Branding: flat monochrome blue rat SVG in the header, footer, and browser tab; blue accents in both themes.
+- Mascot: Ako is the male lab rat. A reusable articulated rig animates his head, eyelids, pupils, shoulders, elbow, and tail continuously. He looks around and follows nearby pointer movement; click, tap, or keyboard activation plays a smoothly blended wave. Off-screen/hidden-tab animation pauses, and reduced motion or the footer motion switch leaves him still. See [animation behavior](MASCOT_ANIMATION.md).
+- Typography: headings and study-tool/event titles use upright text; the previous italic heading accents are removed.
 - Header: Global Rankings and Mission on the left; Student login and Instructor login on the right. Mobile menu offers the same routes.
 - Mission: free access to study tools, confidence through practice, shared progress.
 - Rankings: all sample members by default; division filter, member/school search, and pagination. Filtering by division recomputes ordinal ranks; searching retains those ranks. Tie sorting is deterministic by handle for this sample only. A live points/tie policy is still required.

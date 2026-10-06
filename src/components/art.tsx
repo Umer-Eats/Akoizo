@@ -1,14 +1,49 @@
 'use client';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-export function Moth({
+import { AkoCharacter } from './ako-character';
+import { useSettings } from './providers';
+import { AKO_WAVE_SECONDS } from '@/lib/ako-motion';
+export function Mascot({
   small = false,
   interactive = true,
+  corner = false,
 }: {
   small?: boolean;
   interactive?: boolean;
+  corner?: boolean;
 }) {
   const [happy, setHappy] = useState(false);
+  const [greeting, setGreeting] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [look, setLook] = useState<number | undefined>();
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const { motion } = useSettings();
+  const scene = useRef<HTMLDivElement>(null);
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  useEffect(() => {
+    const element = scene.current;
+    if (!element) return;
+    let inView = true;
+    const updatePause = () => setPaused(!inView || document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      updatePause();
+    });
+    observer.observe(element);
+    document.addEventListener('visibilitychange', updatePause);
+    updatePause();
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', updatePause);
+    };
+  }, []);
   useEffect(
     () => () => {
       if (timeout.current) clearTimeout(timeout.current);
@@ -17,31 +52,50 @@ export function Moth({
   );
   const hello = () => {
     setHappy(true);
+    setGreeting((value) => value + 1);
     if (timeout.current) clearTimeout(timeout.current);
-    timeout.current = setTimeout(() => setHappy(false), 2400);
+    timeout.current = setTimeout(() => setHappy(false), AKO_WAVE_SECONDS * 1000);
   };
   const sprite = (
-    <span className="moth-float">
-      <span className="moth-sprite" />
-    </span>
+    <AkoCharacter
+      action={happy ? 'wave' : 'idle'}
+      actionKey={greeting}
+      paused={paused}
+      motion={motion && !reducedMotion}
+      look={look}
+    />
   );
   return (
-    <div className={`moth-wrap ${small ? 'moth-small' : ''} ${happy ? 'is-happy' : ''}`}>
+    <div
+      ref={scene}
+      data-paused={paused}
+      className={`mascot-wrap ${small ? 'mascot-small' : ''} ${corner ? 'mascot-corner' : ''} ${happy ? 'is-happy' : ''}`}
+    >
       {interactive ? (
         <button
-          className="moth-button"
+          className="mascot-button"
           onClick={hello}
-          aria-label="Say hello to Ako, the poodle moth"
+          onPointerMove={(event) => {
+            if (event.pointerType !== 'mouse') return;
+            const rect = event.currentTarget.getBoundingClientRect();
+            setLook(
+              Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - 0.5) * 2)),
+            );
+          }}
+          onPointerLeave={() => setLook(undefined)}
+          onFocus={() => setLook(0)}
+          onBlur={() => setLook(undefined)}
+          aria-label="Say hello to Ako, the lab rat"
         >
           {sprite}
         </button>
       ) : (
-        <div role="img" aria-label="Ako, a lively pixel-art Venezuelan poodle moth">
+        <div role="img" aria-label="Ako, a cheerful male pixel-art lab rat">
           {sprite}
         </div>
       )}
       {interactive && (
-        <span role="status" className={`moth-speech ${happy ? 'visible' : ''}`}>
+        <span role="status" className={`mascot-speech ${happy ? 'visible' : ''}`}>
           Stay curious, friend.
         </span>
       )}

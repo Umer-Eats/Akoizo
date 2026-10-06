@@ -17,7 +17,7 @@ import { eventsForDivision, tools, type Division } from '@/lib/events';
 import { members, validateAssignment, type Assignment } from '@/lib/demo';
 import { RankingTable } from './rankings';
 import { useSettings } from './providers';
-import { Moth } from './art';
+import { Mascot } from './art';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -512,7 +512,7 @@ export function ToolPlaceholder({
         {event ? event.name : 'Your study space'}
       </Link>
       <section className="placeholder-stage">
-        <Moth />
+        <Mascot />
         <span className="tag">COMING SOON · DIVISION {division}</span>
         <h1>
           {tool.name}

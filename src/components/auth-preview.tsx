@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Moth, Orbit } from './art';
+import { Mascot, Orbit } from './art';
 export function AuthPreview({ role }: { role: 'student' | 'instructor' }) {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const student = role === 'student';
@@ -9,19 +9,19 @@ export function AuthPreview({ role }: { role: 'student' | 'instructor' }) {
     <main id="main" className="auth-page">
       <section className="auth-art">
         <Orbit />
-        <Moth />
+        <Mascot />
         <h1>
           {student ? (
             <>
               Your next chapter
               <br />
-              starts with <span className="serif-word">curiosity.</span>
+              starts with curiosity.
             </>
           ) : (
             <>
               Help curious
               <br />
-              minds <span className="serif-word">take flight.</span>
+              minds take flight.
             </>
           )}
         </h1>

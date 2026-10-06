@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Sun, Moon, Pause, Play, Sparkle } from 'lucide-react';
+import { Menu, X, Sun, Moon, Pause, Play } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSettings } from './providers';
 export function Header() {
@@ -20,7 +20,7 @@ export function Header() {
     <header className="site-header">
       <div className="header-inner">
         <Link href="/" className="brand" aria-label="Akoizo home">
-          <Sparkle size={23} strokeWidth={1.3} />
+          <span className="brand-mark" aria-hidden="true" />
           <span>akoizo</span>
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -73,7 +73,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="footer-top">
         <Link className="brand" href="/">
-          <Sparkle size={24} />
+          <span className="brand-mark" aria-hidden="true" />
           <span>akoizo</span>
         </Link>
         <p>Free to learn. Room to grow.</p>

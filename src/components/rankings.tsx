@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { LockKeyhole, Search, SearchX } from 'lucide-react';
 import { members, filterRankings } from '@/lib/demo';
 import type { Division } from '@/lib/events';
-import { Moth, Orbit, PixelStar } from './art';
+import { Mascot, Orbit, PixelStar } from './art';
 export function RankingTable({
   school,
   initialDivision = 'All',
@@ -134,7 +134,7 @@ export function Rankings() {
         <p>Every school. One community of curious minds.</p>
         <span className="tag">PREVIEW · FICTIONAL SAMPLE DATA</span>
         <Orbit />
-        <Moth small />
+        <Mascot small />
       </div>
       <RankingTable />
       <aside className="private-callout">

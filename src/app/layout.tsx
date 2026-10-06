@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: { default: 'Akoizo — Stay curious. Go further.', template: '%s · Akoizo' },
   description:
     'A free study space for your Science Olympiad journey. Learn, practice, and grow with your community.',
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: [{ url: '/favicon.svg?v=rat-blue-1', type: 'image/svg+xml', sizes: 'any' }] },
 };
 const themeScript = `(function(){try{var t=localStorage.getItem('akoizo-theme');document.documentElement.dataset.theme=t==='light'?'light':'dark';var m=localStorage.getItem('akoizo-motion');document.documentElement.dataset.motion=m||(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'off':'on');}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

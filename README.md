@@ -1,6 +1,6 @@
 # Akoizo
 
-A free Science Olympiad study space with a chrome-and-pixel Y2K identity, a lively Venezuelan poodle moth mascot, and matching light and dark themes.
+A free Science Olympiad study space with a chrome-and-pixel Y2K identity, Ako the animated male pixel-art lab rat, blue accents, and matching light and dark themes.
 
 ## Current status
 
@@ -48,7 +48,7 @@ They use a fresh headless browser and write ignored screenshots under `documents
 
 Instructor preview assignments persist in `sessionStorage` **within the same browser tab** and can be removed. Switching to the student preview in that tab shows assignments for that sample student. The sample student shown for Division C is Alex, Division B is Drew, and Division A is Sky. No changes reach another person, browser, or server.
 
-Theme and motion preferences are stored on the device. The system's reduced-motion setting is respected. Tap the moth to greet it. The footer includes a motion toggle.
+Ako peeks into the landing page from the upper-right corner at an angle. His reusable articulated rig continuously animates his head, eyes, arms, and tail. He looks around, follows nearby pointer movement, and gives a jointed wave when clicked, tapped, or activated with Enter/Space. The title uses broad beveled chrome artwork based on the supplied reference; headings use upright text. His animation pauses when he is off-screen or the tab is hidden. The footer motion toggle and the system's reduced-motion setting show a still pose while keeping his greeting available. Theme and motion preferences are stored on the device. See [Ako's animation](documents/MASCOT_ANIMATION.md) for the reusable parts, joint timing, and artwork provenance.
 
 ## Project structure
 
@@ -56,7 +56,7 @@ Theme and motion preferences are stored on the device. The system's reduced-moti
 src/app/           Pages, shared layout, styles
 src/components/    UI and preview interactions
 src/lib/           Event catalog and fictional demo data
-public/art/        Original generated moth sprite sheet
+public/art/        Generated mascot art and archived source artwork
 scripts/           Browser verification helpers
 tests/             Domain checks for event lists, rankings, assignments
 documents/         Feature specifications, design decisions, service setup, QA notes

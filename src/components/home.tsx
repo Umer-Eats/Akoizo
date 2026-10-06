@@ -2,31 +2,37 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { ChevronDown, Check, BookOpen, Zap, FolderOpen } from 'lucide-react';
-import { Moth, Orbit, PixelStar, Reveal, WireGlobe } from './art';
+import { Mascot, Orbit, PixelStar, Reveal, WireGlobe } from './art';
 export function Home() {
   const [answer, setAnswer] = useState('');
   return (
     <main id="main">
       <section className="hero">
+        <div className="hero-corner">
+          <Mascot corner />
+        </div>
         <div className="hero-eyebrow">
           <span className="tiny-square" /> A LITTLE CURIOSITY. ENDLESS POSSIBILITIES.
         </div>
-        <h1 className="hero-title chrome" aria-label="Akoizo">
-          AKOIZO
-        </h1>
-        <div className="hero-art">
-          <Orbit />
-          <div className="holo-orb orb-one" />
-          <div className="holo-orb orb-two" />
-          <PixelStar className="hero-star star-one" />
-          <PixelStar className="hero-star star-two" />
-          <Moth />
-          <span className="art-coordinate left">FIG. 01 / CURIOSITY</span>
-          <span className="art-coordinate right">
-            MEET AKO
-            <br />
-            YOUR STUDY COMPANION
-          </span>
+        <div className="hero-brand">
+          <div className="hero-art" aria-hidden="true">
+            <Orbit />
+            <div className="holo-orb orb-one" />
+            <div className="holo-orb orb-two" />
+            <PixelStar className="hero-star star-one" />
+            <PixelStar className="hero-star star-two" />
+          </div>
+          <h1 className="hero-title" aria-label="Akoizo">
+            <svg
+              viewBox="0 165 2172 400"
+              width="2172"
+              height="400"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <image href="/art/akoizo-chrome.png" width="2172" height="724" />
+            </svg>
+          </h1>
         </div>
         <div className="hero-copy">
           <h2>
@@ -80,7 +86,7 @@ export function Home() {
           <h2>
             Make sense
             <br />
-            of the <span className="serif-word">science.</span>
+            of the science.
           </h2>
           <p>
             From your first “why?” to your next “I get it.” Explore lessons built around your event,
@@ -166,7 +172,7 @@ export function Home() {
           </p>
           <h2>
             A little practice.
-            <br />A lot more <span className="serif-word">possibility.</span>
+            <br />A lot more possibility.
           </h2>
           <p>
             Find your rhythm with practice tests and question banks. Make mistakes, connect the
@@ -187,7 +193,7 @@ export function Home() {
             <h2>
               Less scattered.
               <br />
-              More <span className="serif-word">prepared.</span>
+              More prepared.
             </h2>
             <div>
               <p>
@@ -240,7 +246,7 @@ export function Home() {
           <h2>
             A brighter journey.
             <br />
-            <span className="serif-word">For everyone.</span>
+            For everyone.
           </h2>
         </div>
         <div>
