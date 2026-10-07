@@ -148,7 +148,9 @@ function FeatureNavigation({ event, activeTool }: { event: ScienceEvent; activeT
           >
             <Icon strokeWidth={1.3} />
             <span>{tool.name}</span>
-            <span className="feature-arrow" aria-hidden="true">↗</span>
+            <span className="feature-arrow" aria-hidden="true">
+              ↗
+            </span>
           </Link>
         );
       })}
@@ -829,17 +831,34 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   const division = profile!.division!;
   const event = eventsForDivision(division).find((event) => event.id === eventId);
   const tool = tools.find((tool) => tool.id === toolId);
-  if (!event || (toolId && !tool))
+  if (!event || (toolId && !tool)) {
     return (
+      <main id="main" className="page-container">
+        <div className="empty-state">
+          <h1>That page isn’t in your division.</h1>
+          <p>Choose an event from your Division {division} study space.</p>
+          <Link className="button button-primary" href="/dashboard/student">
+            Back to my events
+          </Link>
+        </div>
+      </main>
+    );
+  }
+  return (
     <main id="main" className="page-container event-workspace">
       <Link className="back-link" href="/dashboard/student">
         <ChevronLeft size={16} /> My events
       </Link>
       <div className="event-workspace-grid">
         <div className="event-content" key={`${event.id}/${toolId ?? 'overview'}`}>
-          <div className="page-heading event-heading" data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}>
+          <div
+            className="page-heading event-heading"
+            data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}
+          >
             <span className="slot-chip">
-              {slotForEvent(event.id) ? `${slotForEvent(event.id)!.label} timeslot` : 'Timeslot not assigned'}
+              {slotForEvent(event.id)
+                ? `${slotForEvent(event.id)!.label} timeslot`
+                : 'Timeslot not assigned'}
             </span>
             <p className="eyebrow">
               DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
@@ -853,20 +872,28 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
               <>
                 <span className="tag">COMING SOON</span>
                 <h2>A little room for what’s next.</h2>
-                <p>This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.</p>
-                <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>Event overview</Link>
+                <p>
+                  This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.
+                </p>
+                <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>
+                  Event overview
+                </Link>
               </>
             ) : (
               <>
                 <BookOpen size={32} aria-hidden="true" />
                 <span className="tag">{eventFocus[event.type].title.toUpperCase()}</span>
                 <h2>Make room for your next discovery.</h2>
-                <p>Choose a feature from your toolkit to explore your study space. Lessons, practice, and more are coming soon.</p>
+                <p>
+                  Choose a feature from your toolkit to explore your study space. Lessons, practice,
+                  and more are coming soon.
+                </p>
               </>
             )}
           </section>
           <p className="source-note">
-            These tools support your preparation. Follow your tournament’s rules for permitted notes and materials.
+            These tools support your preparation. Follow your tournament’s rules for permitted notes
+            and materials.
           </p>
         </div>
         <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
