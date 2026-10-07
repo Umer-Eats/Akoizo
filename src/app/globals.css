@@ -2826,3 +2826,129 @@
     }
   }
 }
+
+/* Ako's original pixel-art companion. Only his controls intercept pointer input. */
+.ako-pixel {
+  image-rendering: pixelated;
+}
+.mascot-corner .ako-pixel {
+  transform: none;
+  width: 96%;
+  top: 0;
+  left: 0;
+}
+.ako-companion {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+.ako-companion-body {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  user-select: none;
+}
+.ako-companion-body .ako-pixel {
+  width: 96px;
+  height: 96px;
+}
+.ako-companion-body:focus-visible {
+  outline: 2px dashed #89bcdf;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+.ako-nameplate {
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+  white-space: nowrap;
+  font: 9px var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+.ako-nameplate span {
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.ako-bubble,
+.ako-controls {
+  position: absolute;
+  width: 240px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 4px 4px 0 #24345130;
+  border-radius: 10px;
+}
+.ako-bubble {
+  padding: 13px 15px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.ako-controls {
+  padding: 12px;
+  pointer-events: auto;
+}
+.ako-controls-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+.ako-controls-title button {
+  font-size: 21px;
+  padding: 0 5px;
+}
+.ako-controls p {
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 6px 0 10px;
+}
+.ako-controls-actions {
+  display: flex;
+  gap: 6px;
+}
+.ako-controls-actions button {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  padding: 8px 4px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+.ako-moods {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.ako-moods button {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 7px;
+  font-size: 10px;
+  text-transform: capitalize;
+}
+.ako-moods button[aria-pressed='true'] {
+  background: #89bcdf;
+  color: #243451;
+}
+.ako-cheese {
+  position: absolute;
+}
+.ako-cheese.is-eating {
+  opacity: 0.45;
+}

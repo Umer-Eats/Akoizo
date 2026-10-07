@@ -6,6 +6,7 @@ import './globals.css';
 import './theme.css';
 import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/site-shell';
+import { AkoCompanion } from '@/components/ako-companion';
 import { ArtworkMotion } from '@/components/artwork-motion';
 export const metadata: Metadata = {
   title: { default: 'Akoizo — Stay curious. Go further.', template: '%s · Akoizo' },
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <Providers>
           <ArtworkMotion />
+          <AkoCompanion />
           <a className="skip-link" href="#main">
             Skip to content
           </a>

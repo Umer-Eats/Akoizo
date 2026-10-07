@@ -1,41 +1,9 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import rig from '../../public/art/ako/rig.json';
-import { sampleAkoPose, type AkoAction, type AkoPose } from '@/lib/ako-motion';
+import { useEffect, useState } from 'react';
+import { akoFrame, type AkoAction } from '@/lib/ako-motion';
 
-type PartName = keyof typeof rig.parts;
-function Part({ name }: { name: PartName }) {
-  const [x, y, width, height] = rig.parts[name].target;
-  return (
-    <svg
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      viewBox={rig.parts[name].source.join(' ')}
-      preserveAspectRatio="none"
-      overflow="hidden"
-    >
-      <image href={rig.atlas} width={rig.atlasSize[0]} height={rig.atlasSize[1]} />
-    </svg>
-  );
-}
-
-function Eye({ side }: { side: 'left' | 'right' }) {
-  return (
-    <g data-joint={`${side}-eye`} transform={`translate(${side === 'left' ? 166 : 231} 178)`}>
-      <ellipse rx="14" ry="19" fill="#142047" />
-      <ellipse cx="1" cy="6" rx="10" ry="10" fill="#243e6f" />
-      <g data-joint={`${side}-pupil`}>
-        <ellipse cy="-2" rx="9" ry="13" fill="#101933" />
-        <ellipse cx="-4" cy="-7" rx="4.2" ry="5" fill="#fffdfa" />
-        <circle cx="5" cy="5" r="2.1" fill="#b8dcff" />
-      </g>
-    </g>
-  );
-}
-
-/** Reusable articulated character. The same artwork stays attached to fixed pivots. */
+/** Original 48px artwork: integer pixels, shared palette and a fixed foot anchor.
+ * Discrete clips follow PerfectPixel's frame/identity/anchor consistency approach. */
 export function AkoCharacter({
   action = 'idle',
   actionKey = 0,
@@ -49,152 +17,161 @@ export function AkoCharacter({
   motion?: boolean;
   look?: number;
 }) {
-  const svg = useRef<SVGSVGElement>(null);
-  const clock = useRef(0);
-  const waveStart = useRef(-1);
-  const lookTarget = useRef(look);
-  const currentLook = useRef(-0.65);
-  const previousPose = useRef(sampleAkoPose(0));
-  lookTarget.current = look;
+  const [frame, setFrame] = useState(0);
   useEffect(() => {
-    waveStart.current = action === 'wave' ? clock.current : -1;
-  }, [action, actionKey]);
-
-  useEffect(() => {
-    const root = svg.current;
-    if (!root) return;
-    const joints = Object.fromEntries(
-      Array.from(root.querySelectorAll<SVGElement>('[data-joint]')).map((el) => [
-        el.dataset.joint!,
-        el,
-      ]),
-    );
-    const transform = (name: string, value: string) =>
-      joints[name].setAttribute('transform', value);
-    const rotate = (joint: string, angle: number, part: PartName) => {
-      const [x, y] = rig.parts[part].pivot;
-      transform(joint, `rotate(${angle} ${x} ${y})`);
-    };
-    const paint = (pose: AkoPose) => {
-      const { yaw, blink, breath } = pose;
-      transform('chest', `translate(200 448) scale(1 ${1 + breath * 0.003}) translate(-200 -448)`);
-      transform(
-        'head',
-        `translate(${yaw * 1.5} ${-breath * 0.7}) rotate(${pose.headTilt} 200 246)`,
-      );
-      transform('face', `translate(${yaw * 9} ${Math.abs(yaw) * 1.5})`);
-      transform(
-        'left-eye',
-        `translate(166 178) scale(${1 + yaw * 0.055} ${Math.max(0.025, 1 - blink)})`,
-      );
-      transform(
-        'right-eye',
-        `translate(231 178) scale(${1 - yaw * 0.055} ${Math.max(0.025, 1 - blink)})`,
-      );
-      transform('left-pupil', `translate(${yaw * 2.5} 0)`);
-      transform('right-pupil', `translate(${yaw * 2.5} 0)`);
-      rotate('rest-arm', pose.restArm, 'restArm');
-      rotate('upper-arm', pose.upperArm, 'upperArm');
-      rotate('forearm', pose.forearm, 'forearm');
-      const tail = `M144 406C105 426 65 409 70 374C75 341 68 321 ${pose.tailTipX} ${pose.tailTipY}`;
-      joints.tail.setAttribute('d', tail);
-      joints['tail-fill'].setAttribute('d', tail);
-      joints['tail-light'].setAttribute('d', tail);
-      root.dataset.look = yaw.toFixed(3);
-    };
-    if (!motion) {
-      paint(sampleAkoPose(0, -1, -0.35));
-      root.dataset.motion = 'still';
-      return;
-    }
-    root.dataset.motion = paused ? 'paused' : 'running';
-    if (paused) return;
-    let frame = 0;
-    let previous: number | undefined;
-    const tick = (now: number) => {
-      const dt = previous === undefined ? 0 : Math.min((now - previous) / 1000, 0.05);
-      previous = now;
-      clock.current += dt;
-      const pose = sampleAkoPose(
-        clock.current,
-        waveStart.current < 0 ? -1 : clock.current - waveStart.current,
-        lookTarget.current,
-      );
-      currentLook.current += (pose.yaw - currentLook.current) * (1 - Math.exp(-dt * 7));
-      const filtered = sampleAkoPose(
-        clock.current,
-        waveStart.current < 0 ? -1 : clock.current - waveStart.current,
-        currentLook.current,
-      );
-      for (const joint of ['headTilt', 'upperArm', 'forearm', 'restArm'] as const) {
-        filtered[joint] =
-          previousPose.current[joint] +
-          (filtered[joint] - previousPose.current[joint]) * (1 - Math.exp(-dt * 20));
+    setFrame(0);
+    if (!motion || paused) return;
+    let time = 0;
+    const timer = setInterval(() => {
+      if (!document.hidden) {
+        time += 0.07;
+        setFrame(akoFrame(action, time));
       }
-      previousPose.current = filtered;
-      paint(filtered);
-      frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [paused, motion]);
-
+    }, 70);
+    return () => clearInterval(timer);
+  }, [action, actionKey, motion, paused]);
+  const f = motion ? frame : 0;
+  const moving = action === 'walk' || action === 'run';
+  const joy = action === 'happy';
+  const angry = action === 'angry';
+  const sad = action === 'sad';
+  const sleep = action === 'sleep';
+  const eat = action === 'eat';
+  const think = action === 'thinking';
+  const bounce = moving
+    ? [0, -1, -2, -1, 0, -1, -2, -1][f]
+    : joy
+      ? [0, -2, -4, -3, -1, 0][f]
+      : f % 4 === 2
+        ? -1
+        : 0;
+  const stride = moving ? [0, 2, 3, 2, 0, -2, -3, -2][f] : 0;
+  const outline = '#243451',
+    fur = angry ? '#ef6976' : '#89bcdf',
+    light = angry ? '#ffabb0' : '#c1e2ef';
+  const eye = sleep || (action === 'idle' && f === 6);
   return (
     <svg
-      ref={svg}
-      className="ako-rig"
-      viewBox="0 0 400 480"
-      width="400"
-      height="400"
+      className="ako-rig ako-pixel"
+      viewBox="0 0 48 48"
+      width="192"
+      height="192"
+      shapeRendering="crispEdges"
       aria-hidden="true"
       focusable="false"
-      data-rig-version="2"
+      data-action={action}
+      data-frame={f}
     >
-      <path
-        data-joint="tail"
-        d="M144 406C105 426 65 409 70 374C75 341 68 321 42 343"
-        fill="none"
-        stroke="#142047"
-        strokeWidth="16"
-        strokeLinecap="round"
-      />
-      <path
-        data-joint="tail-fill"
-        d="M144 406C105 426 65 409 70 374C75 341 68 321 42 343"
-        fill="none"
-        stroke="#f3a7ad"
-        strokeWidth="10"
-        strokeLinecap="round"
-      />
-      <path
-        data-joint="tail-light"
-        d="M144 406C105 426 65 409 70 374C75 341 68 321 42 343"
-        fill="none"
-        stroke="#ffd0c6"
-        strokeWidth="3"
-        strokeLinecap="round"
-        transform="translate(0 -2)"
-      />
-      <g data-joint="chest">
-        <Part name="body" />
-      </g>
-      <g data-joint="rest-arm">
-        <Part name="restArm" />
-      </g>
-      <g data-joint="upper-arm">
-        <Part name="upperArm" />
-        <g data-joint="forearm">
-          <Part name="forearm" />
+      <path fill="#213450" opacity=".18" d="M12 44h26v2H12z" />
+      <g transform={look !== undefined && look < -0.2 ? 'translate(48 0) scale(-1 1)' : undefined}>
+        <path fill="none" stroke={outline} strokeWidth="4" d={`M15 37H8v-3H5v-${5 + (f % 2)}H8`} />
+        <path fill="none" stroke="#ee9daa" strokeWidth="2" d={`M15 37H8v-3H5v-${5 + (f % 2)}H8`} />
+        <path
+          fill={outline}
+          d={`M${16 + stride} 40h7v4h-9v-2h2z M${28 - stride} 40h7v4h-9v-2h2z`}
+        />
+        <path
+          fill="#eea9b3"
+          d={`M${16 + stride} 41h5v2h-7v-1h2z M${28 - stride} 41h5v2h-7v-1h2z`}
+        />
+        <g transform={`translate(${angry && f % 2 ? 1 : 0} ${bounce})`}>
+          <path fill={outline} d="M17 27h16v3h3v11H14V30h3z" />
+          <path fill="#f8f4df" d="M18 28h14v3h2v9H16v-9h2z" />
+          <path fill="#c5dce0" d="M16 33h3v7h-3zM31 31h3v9h-3z" />
+          <path fill="#537fbe" d="M22 28h6v5h-6z" />
+          <path fill="#e8f9f0" d="M19 28h3v7l-3-3zM28 28h3v4l-3 3z" />
+          <path fill="#273c5b" d="M24 34h1v1h-1zM24 37h1v1h-1z" />
+          <path fill="#7ab9b3" d="M28 35h4v3h-4z" />
+          <path fill="#f6ca73" d="M30 32h1v4h-1z" />
+          <g transform={`translate(0 ${sad ? 2 : 0})`}>
+            <path fill={outline} d="M10 7h9v2h12V7h9v2h3v10h-3v6h-3v3H16v-3h-4v-6H8V10h2z" />
+            <path fill={fur} d="M11 9h7v3h15V9h6v2h2v7h-4v7h-4v2H18v-3h-4v-7h-4v-6h1z" />
+            <path fill="#ee9daa" d="M12 11h4v7h-4zM35 11h4v7h-4z" />
+            <path fill="#ffccd1" d="M12 11h3v3h-3zM35 11h3v3h-3z" />
+            <path fill={light} d="M19 12h12v2H19zM16 14h5v4h-5zM18 10h4v2h-4z" />
+            <path fill="#fff2d8" d="M21 22h12v2h3v3h-4v2H21v-2h-3v-3h3z" />
+            {eye ? (
+              <path fill={outline} d="M18 20h5v1h-5zM29 20h5v1h-5z" />
+            ) : joy ? (
+              <path
+                fill={outline}
+                d="M18 20v-2h2v-1h2v1h1v2h-2v-1h-1v1zM29 20v-2h2v-1h2v1h1v2h-2v-1h-1v1z"
+              />
+            ) : (
+              <>
+                <path fill={outline} d="M19 17h4v6h-4zM29 17h4v6h-4z" />
+                <path fill="white" d="M19 17h2v2h-2zM29 17h2v2h-2z" />
+              </>
+            )}
+            {angry && <path fill={outline} d="M18 15h2v1h3v2h-2v-1h-3zM29 16h3v-1h2v2h-3v1h-2z" />}
+            {sad && (
+              <>
+                <path fill={outline} d="M18 16h3v-1h2v1h-2v1h-3zM29 15h2v1h3v1h-3v-1h-2z" />
+                <path fill="#63c6ee" d={`M32 ${23 + (f % 3)}h2v3h-2z`} />
+              </>
+            )}
+            <path fill="#e08b9b" d="M24 22h5v2h-1v1h-3v-1h-1zM16 23h3v1h-3zM34 23h3v1h-3z" />
+            <path
+              fill={outline}
+              d={
+                sad
+                  ? 'M25 27h4v1h-4zM24 28h1v1h-1zM29 28h1v1h-1z'
+                  : (eat && f % 2) || action === 'surprised'
+                    ? 'M25 26h4v3h-4z'
+                    : 'M24 26h1v1h4v-1h1v2h-6z'
+              }
+            />
+            {!sad && <path fill="white" d="M26 27h2v2h-2z" />}
+            <path fill={outline} d="M11 22h5v1h-5zM12 25h4v1h-4zM37 22h5v1h-5zM37 25h4v1h-4z" />
+          </g>
+          <path
+            fill={outline}
+            d={action === 'wave' || joy ? `M12 ${23 + (f % 2) * 2}h4v11h-4z` : 'M12 31h4v7h-4z'}
+          />
+          <path
+            fill={fur}
+            d={action === 'wave' || joy ? `M12 ${22 + (f % 2) * 2}h3v4h-3z` : 'M12 34h3v3h-3z'}
+          />
+          <path fill={outline} d={think || eat ? 'M30 28h5v6h-5z' : 'M34 31h3v7h-3z'} />
+          <path fill={fur} d={think || eat ? 'M29 27h5v4h-5z' : 'M34 34h3v3h-3z'} />
+          {eat && (
+            <g transform={`translate(22 ${31 + (f % 2)})`}>
+              <path fill="#ac6a32" d="M0 0h7v6H0z" />
+              <path fill="#ffdc78" d="M0 0h6v4H0z" />
+              <path fill="#d69b3d" d="M2 1h2v2H2z" />
+            </g>
+          )}
         </g>
       </g>
-      <g data-joint="head">
-        <Part name="head" />
-        <g data-joint="face">
-          <Eye side="left" />
-          <Eye side="right" />
-          <Part name="muzzle" />
+      {joy && (
+        <g fill={f % 2 ? '#ffe79c' : '#f6b84e'}>
+          <path d="M7 4h2v3h3v2H9v3H7V9H4V7h3zM39 28h2v3h3v2h-3v3h-2v-3h-3v-2h3z" />
+          <path d={`M${34 + (f % 3)} 3h2v2h-2zM7 20h2v2H7z`} />
         </g>
-      </g>
+      )}
+      {think && (
+        <g fill="#acd6f5">
+          {[0, 1, 2].map((i) => (
+            <rect
+              key={i}
+              x={24 + i * 5}
+              y={4}
+              width="3"
+              height="3"
+              opacity={f % 3 === i ? 1 : 0.25}
+            />
+          ))}
+        </g>
+      )}
+      {angry && <path fill="#f16f7d" d="M37 2h2v3h3v2h-5zM43 8h2v5h-5v-2h3z" />}
+      {sleep && (
+        <path
+          transform={`translate(0 ${-f % 3})`}
+          fill="#8bb5d9"
+          d="M34 2h7v2h-2v2h-2v2h4v2h-7V8h2V6h2V4h-4z"
+        />
+      )}
+      {action === 'surprised' && <path fill="#f6cc72" d="M25 1h2v5h-2zM25 7h2v2h-2z" />}
     </svg>
   );
 }

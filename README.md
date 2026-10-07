@@ -68,3 +68,15 @@ Division B and C each use the official 2027 slate of 23 events. Division A follo
 The Next.js application is ready for standard server deployment. It has not been deployed by this task. Configure service secrets and Firebase authorized domains on the host; do not use a static export. Remaining content and release work is tracked in [BACKLOG.md](BACKLOG.md).
 
 Akoizo is independent and is not affiliated with Science Olympiad, Inc.
+
+## Ako pixel companion
+
+Ako is original code-drawn, 48×48 pixel artwork, shared by the page mascots and the roaming companion. Animation design references [PerfectPixel Studio](https://github.com/gykim80/perfectpixel-studio), especially its `internal/sprite/presets.go` motion catalog and fixed-frame, shared-palette, stable-anchor approach. No external generation service or API key is required.
+
+- Click the roaming Ako for expression previews and controls. Right-click him (or focus him and press M) to toggle encouragement; the preference survives reloads.
+- Triple left-click a spot to drop cheese. Ako runs there, eats, and celebrates. Typing fields are excluded. The Give cheese button (or F while focused on Ako) also works with touch and keyboard.
+- Encouragement appears as text bubbles at most once every 75 seconds after the greeting. Reduced-motion preferences and the site's motion setting disable roaming and frame animation; feeding remains available.
+- Clips: idle, wave, thinking, angry (red), happy (sparkles), sad, walk, run, eat, sleep, and surprised. Click an expression to preview it.
+- Future chat code can import `setAkoMood` from `src/lib/ako-motion.ts`, call `setAkoMood('thinking', 30000)` while waiting, and `setAkoMood('happy')` when finished. These are animation hooks; there is no chatbot backend in this change.
+
+Run `node scripts/ako-browser-check.mjs` against the development server at port 3000 (or supply `TEST_BASE_URL`) to verify feeding, emotions, mute persistence, keyboard controls, and mobile bounds.
