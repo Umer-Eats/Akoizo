@@ -9,6 +9,21 @@ function make(meta) {
   const test = {
     scoringBasis: 'Published rubric',
     ...meta,
+    // Invitational is a tournament format, not a reported rules tier.
+    level: meta.level === 'Invitational' ? null : meta.level,
+    levelEvidence:
+      meta.level === 'Invitational'
+        ? null
+        : {
+            sourceUrl: meta.sourceUrl,
+            text: `${meta.competition} ${meta.level}`,
+            basis: 'Competition identified in the published source',
+          },
+    competition:
+      meta.level === 'Invitational' && !/invitational/i.test(meta.competition)
+        ? `${meta.competition} Invitational`
+        : meta.competition,
+    topicMatch: 'current',
     season: 2027,
     reviewedOn: '2026-10-07',
     minutes: 50,

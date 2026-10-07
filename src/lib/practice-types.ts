@@ -1,8 +1,9 @@
 import type { Division } from './events';
 
 export const PRACTICE_SEASON = 2027;
-export const competitionLevels = ['Regionals', 'States', 'Nationals', 'Invitational'] as const;
+export const competitionLevels = ['Regionals', 'States', 'Nationals'] as const;
 export type CompetitionLevel = (typeof competitionLevels)[number];
+export type LevelEvidence = { sourceUrl: string; text: string; basis: string };
 export type PracticeQuestion = {
   id: string;
   label: string;
@@ -33,7 +34,10 @@ export type PracticeSummary = {
   eventId: string;
   division: Division;
   competition: string;
-  level: CompetitionLevel;
+  level: CompetitionLevel | null;
+  levelEvidence?: LevelEvidence | null;
+  sourceId?: string;
+  topicMatch?: 'current' | 'different' | 'unverified';
   year: number;
   season: number;
   topics: string[];
@@ -96,4 +100,32 @@ export type PracticeReview = {
   questions: PracticeQuestion[];
 };
 export const practiceTitle = (test: Pick<PracticeSummary, 'competition' | 'level' | 'year'>) =>
-  `${test.competition} · ${test.level} · ${test.year}`;
+  `${test.competition} · ${test.level ?? 'Level not reported'} · ${test.year}`;
+
+export type ArchiveSource = {
+  sourceId: string;
+  sourceUrl: string;
+  event: string;
+  divisions: string[];
+  year: number;
+  competition: string;
+  level: CompetitionLevel | null;
+  levelEvidence: LevelEvidence | null;
+  topics: string[];
+  status: string;
+  files: { name: string; type: string; size: number; sha256: string }[];
+};
+
+export function matchesPracticeFilters(
+  test: Pick<PracticeSummary, 'competition' | 'level' | 'year' | 'topics'>,
+  filters: { query: string; level: string; year: string; topic: string },
+) {
+  return (
+    (!filters.level || test.level === filters.level) &&
+    (!filters.year || String(test.year) === filters.year) &&
+    (!filters.topic || test.topics.includes(filters.topic)) &&
+    `${practiceTitle(test)} ${test.topics.join(' ')}`
+      .toLowerCase()
+      .includes(filters.query.trim().toLowerCase())
+  );
+}

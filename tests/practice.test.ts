@@ -6,6 +6,7 @@ import {
   practiceTests,
   findPracticeTest,
   listPracticeTests,
+  listArchiveSources,
   publicPracticePaper,
   validatePracticeCatalog,
 } from '../src/lib/practice-catalog.ts';
@@ -25,6 +26,7 @@ import {
   type Database,
 } from '../src/lib/school-service.ts';
 import type { Answers } from '../src/lib/practice-types.ts';
+import { reportedCompetitionLevel } from '../scripts/scioly-source.mjs';
 
 test('every archived paper has a complete rubric and coherent point total', () => {
   validatePracticeCatalog(practiceTests);
@@ -57,11 +59,31 @@ test('every archived paper has a complete rubric and coherent point total', () =
 
 test('catalog enforces the current season, event and student division', () => {
   assert.equal(listPracticeTests('B', 'heredity').length, 3);
+  assert.equal(listPracticeTests('B', 'water-quality').length, 1);
   assert.ok(listPracticeTests('B', 'meteorology').length > 0);
   assert.throws(() => listPracticeTests('B', 'astronomy'), { status: 404 });
   assert.throws(() => findPracticeTest('B', 'columbia-2023-anatomy-c'), { status: 404 });
   assert.throws(() => findPracticeTest('C', 'invented'), { status: 404 });
   assert.ok(practiceTests.every((t) => t.season === 2027));
+  assert.ok(
+    practiceTests.every(
+      (t) => t.level === null || ['Regionals', 'States', 'Nationals'].includes(t.level),
+    ),
+  );
+  assert.ok(
+    listArchiveSources('B', 'water-quality').every(
+      (source) =>
+        source.level === null || ['Regionals', 'States', 'Nationals'].includes(source.level),
+    ),
+  );
+});
+
+test('Scioly archive levels use only reported competition tiers', () => {
+  assert.equal(reportedCompetitionLevel('Michigan Regions 1, 6 & 11'), 'Regionals');
+  assert.equal(reportedCompetitionLevel('Florida State Tournament'), 'States');
+  assert.equal(reportedCompetitionLevel('National Tournament'), 'Nationals');
+  assert.equal(reportedCompetitionLevel('State University Invitational'), null);
+  assert.equal(reportedCompetitionLevel('MIT Invitational'), null);
 });
 
 test('grading preserves exact text, awards only matched answers, and queues prose', () => {

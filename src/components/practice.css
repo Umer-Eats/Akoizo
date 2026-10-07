@@ -2,6 +2,40 @@
   .practice-library {
     text-align: left;
   }
+  .practice-archive {
+    margin: 24px 0;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .practice-archive summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .practice-archive > p {
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+  .practice-archive ul {
+    list-style: none;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  .practice-archive li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .practice-archive a {
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+  .practice-archive p,
+  .practice-archive span {
+    font-size: 0.8rem;
+  }
+  .practice-archive span {
+    color: var(--muted);
+  }
   .practice-review-list {
     margin: 32px 0;
   }

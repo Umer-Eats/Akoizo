@@ -15,29 +15,43 @@ import { eventsForDivision } from '@/lib/events';
 import {
   competitionLevels,
   practiceTitle,
+  matchesPracticeFilters,
   PRACTICE_SEASON,
   type Answers,
   type PracticePaper,
   type PracticeSummary,
   type PracticeResult,
+  type ArchiveSource,
 } from '@/lib/practice-types';
 import './practice.css';
 
 export function PracticeLibrary({ eventId }: { eventId: string }) {
   const { request, profile } = useAuth();
   const [tests, setTests] = useState<PracticeSummary[] | null>(null);
+  const [archive, setArchive] = useState<ArchiveSource[]>([]);
   const [query, setQuery] = useState('');
   const [level, setLevel] = useState('');
   const [year, setYear] = useState('');
+  const [topic, setTopic] = useState('');
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
   useEffect(() => {
     let active = true;
     setTests(null);
+    setArchive([]);
+    setQuery('');
+    setLevel('');
+    setYear('');
+    setTopic('');
     setError('');
-    request<{ tests: PracticeSummary[] }>(`/api/practice?eventId=${encodeURIComponent(eventId)}`)
+    request<{ tests: PracticeSummary[]; archive?: ArchiveSource[] }>(
+      `/api/practice?eventId=${encodeURIComponent(eventId)}`,
+    )
       .then((data) => {
-        if (active) setTests(data.tests);
+        if (active) {
+          setTests(data.tests);
+          setArchive(data.archive ?? []);
+        }
       })
       .catch((error) => {
         if (active) setError(authMessage(error));
@@ -46,15 +60,18 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
       active = false;
     };
   }, [request, eventId, profile?.division, retry]);
-  const matches =
-    tests?.filter(
-      (test) =>
-        (!level || test.level === level) &&
-        (!year || String(test.year) === year) &&
-        `${practiceTitle(test)} ${test.topics.join(' ')}`
-          .toLowerCase()
-          .includes(query.toLowerCase().trim()),
-    ) ?? [];
+  const filters = { query, level, year, topic };
+  const matches = tests?.filter((test) => matchesPracticeFilters(test, filters)) ?? [];
+  const archiveMatches = archive.filter((test) => matchesPracticeFilters(test, filters));
+  const availableTopics = [
+    ...new Set([...(tests ?? []), ...archive].flatMap((test) => test.topics)),
+  ].sort();
+  const clearFilters = () => {
+    setQuery('');
+    setLevel('');
+    setYear('');
+    setTopic('');
+  };
   return (
     <section className="practice-library" aria-label="Past competition tests">
       <div className="practice-search">
@@ -85,15 +102,31 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
           Year
           <select aria-label="Year" value={year} onChange={(e) => setYear(e.target.value)}>
             <option value="">All years</option>
-            {[...new Set(tests?.map((t) => t.year))]
+            {[...new Set([...(tests ?? []), ...archive].map((t) => t.year))]
               .sort((a, b) => b - a)
               .map((value) => (
                 <option key={value}>{value}</option>
               ))}
           </select>
         </label>
+        {availableTopics.length > 0 && (
+          <label>
+            Topic
+            <select aria-label="Topic" value={topic} onChange={(e) => setTopic(e.target.value)}>
+              <option value="">All topics</option>
+              {availableTopics.map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
+        )}
+        {(query || level || year || topic) && (
+          <button className="text-link" onClick={clearFilters}>
+            Clear filters
+          </button>
+        )}
         <span className="practice-season">
-          <Check size={16} /> Reviewed for {PRACTICE_SEASON} · Division {profile?.division}
+          Division {profile?.division} · {PRACTICE_SEASON} study library
         </span>
       </div>
       {error ? (
@@ -108,7 +141,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
       ) : (
         <>
           <p className="practice-count" aria-live="polite">
-            {matches.length} {matches.length === 1 ? 'test' : 'tests'} available
+            {matches.length} {matches.length === 1 ? 'test' : 'tests'} ready to practice
           </p>
           {matches.length ? (
             <ul className="practice-test-list">
@@ -121,6 +154,13 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
                     <div>
                       <h2>{practiceTitle(test)}</h2>
                       <p>{test.topics.join(' · ')}</p>
+                      <p>
+                        {test.topicMatch === 'current'
+                          ? `${PRACTICE_SEASON} topic match`
+                          : test.topicMatch === 'different'
+                            ? 'Historical topic rotation'
+                            : 'Topic alignment not verified'}
+                      </p>
                       <span>
                         {test.questionCount} answer fields <b>·</b> {test.maxScore} points <b>·</b>{' '}
                         {test.minutes} minutes
@@ -143,28 +183,46 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
               </h2>
               <p>
                 {tests.length
-                  ? 'Try a different competition, year, or level.'
-                  : `A complete paper, scoring key, and ${PRACTICE_SEASON} topic check are required before a test appears here.`}
+                  ? 'Try a different competition, year, level, or topic.'
+                  : 'A complete paper and scoring key must be converted and checked before a test is ready to practice.'}
               </p>
-              {tests.length > 0 && (
-                <button
-                  className="button button-secondary"
-                  onClick={() => {
-                    setQuery('');
-                    setLevel('');
-                    setYear('');
-                  }}
-                >
-                  Clear filters
-                </button>
-              )}
             </div>
           )}
+          {archiveMatches.length > 0 && (
+            <details className="practice-archive">
+              <summary>
+                {archiveMatches.length} more archived{' '}
+                {archiveMatches.length === 1 ? 'test' : 'tests'} awaiting conversion
+              </summary>
+              <p>
+                These source listings are not yet available as graded practice tests. The filters
+                above also apply here.
+              </p>
+              <ul>
+                {archiveMatches.map((test) => (
+                  <li key={test.sourceId}>
+                    <a href={test.sourceUrl} target="_blank" rel="noreferrer">
+                      {practiceTitle(test)} <ArrowUpRight size={14} />
+                    </a>
+                    <p>{test.topics.join(' · ') || 'Topics not reported'}</p>
+                    <span>
+                      {test.status === 'missing-key'
+                        ? 'Answer key not listed'
+                        : test.status === 'source-unavailable'
+                          ? 'Source needs checking'
+                          : 'Paper and rubric conversion pending'}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
           <p className="practice-note">
-            Past papers keep their original questions. Each listing explains its {PRACTICE_SEASON}{' '}
-            subject match, topic differences, and scoring basis. Check the Rules tab for this year’s
-            requirements. Gemini grades written explanations against the published rubric; uncertain
-            answers remain available for instructor review.
+            Use the topic filter to select the subjects you want to study. Older papers may cover a
+            different rotation; check the Rules tab for {PRACTICE_SEASON} requirements. Levels
+            follow the competition’s reported tier. An invitational without a stated tier is labeled
+            “Level not reported.” Gemini grades written explanations against the published rubric;
+            uncertain answers remain available for instructor review.
           </p>
         </>
       )}
@@ -351,9 +409,14 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
           </header>
           <details className="practice-alignment" open>
             <summary>
-              <Check size={16} /> {paper.season} subject match & scoring
+              <Check size={16} /> Topics & scoring
             </summary>
             <p>{paper.alignment}</p>
+            {paper.levelEvidence && (
+              <p>
+                Reported level: {paper.level}. {paper.levelEvidence.text}
+              </p>
+            )}
             <p>
               <strong>{paper.scoringBasis}.</strong> {paper.instructions}
             </p>

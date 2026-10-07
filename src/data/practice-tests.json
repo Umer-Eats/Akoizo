@@ -13,6 +13,12 @@
     "sourceUrl": "https://soinc.org/heredity-b",
     "paperUrl": "https://soinc.org/sites/default/files/uploaded_files/2020_2014_Heredity_Test_0.pdf",
     "keyUrl": "https://soinc.org/sites/default/files/uploaded_files/2020_2014_Heredity_Key_0.pdf",
+    "levelEvidence": {
+      "sourceUrl": "https://soinc.org/heredity-b",
+      "text": "UT Austin Regionals",
+      "basis": "Competition identified in the published source"
+    },
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -443,8 +449,8 @@
     "id": "berkeley-2026-heredity-b",
     "eventId": "heredity",
     "division": "B",
-    "competition": "Science Olympiad at Berkeley",
-    "level": "Invitational",
+    "competition": "Science Olympiad at Berkeley Invitational",
+    "level": null,
     "year": 2026,
     "topics": ["Mendelian genetics", "Cell division", "DNA and RNA", "PCR"],
     "alignment": "Reviewed against 2027 Heredity B: inheritance probabilities and pedigrees; mitosis and meiosis; DNA structure and replication; transcription and translation; PCR. The paper’s numbered gaps are present in the original; no missing questions have been invented.",
@@ -452,6 +458,8 @@
     "sourceUrl": "https://drive.google.com/drive/folders/1vhptBwWINJlHQLefU6vb8UPuvOB-nDRh",
     "paperUrl": "https://drive.google.com/file/d/1zCdgZBNOntoePsUS8PJGJncckMzuqalh/view",
     "keyUrl": "https://drive.google.com/file/d/1gftm-u7VON681nPhlE21RRP4k73CYrWP/view",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -1280,8 +1288,8 @@
     "id": "columbia-2023-anatomy-c",
     "eventId": "anatomy-and-physiology",
     "division": "C",
-    "competition": "Columbia University",
-    "level": "Invitational",
+    "competition": "Columbia University Invitational",
+    "level": null,
     "year": 2023,
     "topics": ["Respiratory system", "Digestive system", "Immune system"],
     "alignment": "This January 28, 2023 paper tests the respiratory, digestive, and immune systems, matching the 2027 rotation. Reviewed against the local 2027 Division C anatomy rules. It includes advanced material useful for State/National preparation; not every current subtopic is assessed.",
@@ -1289,6 +1297,8 @@
     "sourceUrl": "https://www.soinc.org/anatomy-and-physiology-c",
     "paperUrl": "https://drive.google.com/file/d/18_TncAL14rh2LV8xW7p3vDEccxULhepo/view",
     "keyUrl": "https://drive.google.com/file/d/1oThkxBYvNkdt7vebm4VA1itdQ0QNagrL/view",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -2924,8 +2934,8 @@
     "id": "beachwood-2023-dynamic-planet-c",
     "eventId": "dynamic-planet",
     "division": "C",
-    "competition": "Beachwood High School",
-    "level": "Invitational",
+    "competition": "Beachwood High School Invitational",
+    "level": null,
     "year": 2023,
     "topics": ["Freshwater", "Rivers and streams", "Groundwater", "Lakes"],
     "alignment": "The complete paper covers freshwater hydrology: streams, groundwater, drainage patterns, flow calculations, and lakes. These match the 2027 Dynamic Planet C freshwater focus. It is listed by Science Olympiad under previous freshwater-topic papers, rather than the oceanography or glacier rotations.",
@@ -2933,6 +2943,8 @@
     "sourceUrl": "https://www.soinc.org/dynamic-planet-c",
     "paperUrl": "https://www.soinc.org/sites/default/files/uploaded_files/2023%20Beachwood%20DP.pdf",
     "keyUrl": "https://www.soinc.org/sites/default/files/uploaded_files/2023%20Beachwood%20DP%20Answer%20Key.pdf",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -3958,8 +3970,8 @@
     "id": "bullso-2026-heredity-b",
     "eventId": "heredity",
     "division": "B",
-    "competition": "BullSO · University of South Florida",
-    "level": "Invitational",
+    "competition": "BullSO · University of South Florida Invitational",
+    "level": null,
     "year": 2026,
     "topics": ["Mendelian genetics", "Cell division", "DNA and RNA", "Gene regulation", "PCR"],
     "alignment": "Matches the 2027 genetics subject area: inheritance, pedigrees, cell division, DNA, gene expression and PCR. Linkage, incomplete dominance and the lac operon are States/Nationals topics in 2027. The archived paper also has a gel-electrophoresis identification question, outside the explicitly listed 2027 techniques. It does not cover the full expanded 2027 syllabus.",
@@ -3967,6 +3979,8 @@
     "sourceUrl": "https://drive.google.com/drive/folders/1yTFlPVACRN6Vv16EBWGXW8Y7GdOy6Wi-",
     "paperUrl": "https://drive.google.com/file/d/1znwL-jmCmdnL8fHZafIXx_n3me1udOFg/view",
     "keyUrl": "https://drive.google.com/file/d/1FvtSHMaOKHkOsr67ODuKdMf2g1s9_Bmx/view",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -4683,8 +4697,8 @@
     "id": "bullso-2026-disease-detectives-b",
     "eventId": "disease-detectives",
     "division": "B",
-    "competition": "BullSO · University of South Florida",
-    "level": "Invitational",
+    "competition": "BullSO · University of South Florida Invitational",
+    "level": null,
     "year": 2026,
     "topics": ["Surveillance", "Outbreak investigation", "Epidemiology", "Disease prevention"],
     "alignment": "The three subject areas match Disease Detectives B 2027: Background & Surveillance; Outbreak Investigation; Patterns, Control & Prevention. Bias, confounding and herd immunity are States/Nationals topics under the current rules. Archived MCQ 8 asks for a specific disease-category association, which the 2027 rules exclude; it is retained as part of the complete original paper.",
@@ -4692,6 +4706,8 @@
     "sourceUrl": "https://drive.google.com/drive/folders/1euWONjNg48rBOzE036uOKfrkSIOM6Xjd",
     "paperUrl": "https://drive.google.com/file/d/1PwBwUxgCoZND27yd2ylhdKnoEB-sHcLi/view",
     "keyUrl": "https://drive.google.com/file/d/1cVyECcC36IkkkxMw8LtbT6Mt9kwORg1F/view",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -6520,7 +6536,7 @@
     "eventId": "thermodynamics",
     "division": "B",
     "competition": "Lake Erie/Niagara Buffalo State College Invitational",
-    "level": "Invitational",
+    "level": null,
     "year": 2018,
     "topics": ["Temperature and heat", "Ideal gases", "Heat transfer", "Thermodynamic cycles"],
     "alignment": "The December 8, 2018 paper covers the same core thermodynamics areas retained in the 2027 Thermodynamics B rules: temperature, phases, heat transfer, ideal gases, engines, efficiency, and the first and second laws. Its written test does not include the 2027 device-testing component.",
@@ -6528,6 +6544,8 @@
     "sourceUrl": "https://scioly.org/wiki/Scioly.org:Test_Exchange#Thermodynamics",
     "paperUrl": "https://scioly.org/w/images/9/9a/2019_Thermo_Invite_WNY.pdf",
     "keyUrl": "https://scioly.org/w/images/2/27/2019_Thermo_Invite_WNY_Key.pdf",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -6860,6 +6878,12 @@
     "sourceUrl": "https://scioly.org/wiki/Scioly.org:Test_Exchange#Meteorology",
     "paperUrl": "https://scioly.org/w/images/f/fd/Meteorology_Test_2024_Regional.pdf",
     "keyUrl": "https://scioly.org/w/images/8/81/Meteorology_Key_2024_Regional.pdf",
+    "levelEvidence": {
+      "sourceUrl": "https://scioly.org/wiki/Scioly.org:Test_Exchange#Meteorology",
+      "text": "Michigan Regions 1, 6 & 11 Regionals",
+      "basis": "Competition identified in the published source"
+    },
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -7875,8 +7899,8 @@
     "id": "wicklund-2016-food-science-b",
     "eventId": "food-science",
     "division": "B",
-    "competition": "Wicklund",
-    "level": "Invitational",
+    "competition": "Wicklund Invitational",
+    "level": null,
     "year": 2016,
     "topics": ["Milk and dairy", "Nutrition", "Proteins and lipids", "Cheese and butter"],
     "alignment": "The 2016 milk-and-dairy rotation matches the 2027 Food Science B written topics. The paper also asks broader food comparisons and dairy history. Labels, health claims, and the published key are historical. This is the complete written paper; the practical lab and notebook are separate event components.",
@@ -7884,6 +7908,8 @@
     "sourceUrl": "https://scioly.org/wiki/Scioly.org:Test_Exchange#Food_Science",
     "paperUrl": "https://scioly.org/w/images/e/ef/Wicklund_2016_Food_Science_Test.pdf",
     "keyUrl": "https://scioly.org/w/images/d/dc/Wicklund_2016_Food_Science_Key.pdf",
+    "levelEvidence": null,
+    "topicMatch": "current",
     "season": 2027,
     "reviewedOn": "2026-10-07",
     "minutes": 50,
@@ -8868,5 +8894,733 @@
     },
     "questionCount": 64,
     "maxScore": 66
+  },
+  {
+    "scoringBasis": "Published rubric",
+    "id": "greenbrier-2026-water-quality-b",
+    "eventId": "water-quality",
+    "division": "B",
+    "competition": "Greenbrier Invitational",
+    "level": null,
+    "year": 2026,
+    "sourceId": "-DY8qjJU5hY",
+    "topics": ["Freshwater systems", "Ecology", "Human impacts", "Macroinvertebrates"],
+    "alignment": "The 2026 paper covers freshwater systems, ecology, human impacts, and macroinvertebrate indicators. These subjects match the 2027 Water Quality B study areas; the historical tournament is labeled as an invitational because the source does not report a regional, state, or national tier.",
+    "instructions": "All 50 questions are multiple choice and worth one point. The original paper and published answer key are preserved locally so the entire test remains available while you answer.",
+    "sourceUrl": "https://scioly.org/tests/-DY8qjJU5hY",
+    "paperUrl": "/practice/greenbrier-2026-water-quality-b-test.pdf",
+    "keyUrl": "/practice/greenbrier-2026-water-quality-b-key.pdf",
+    "levelEvidence": null,
+    "topicMatch": "current",
+    "season": 2027,
+    "reviewedOn": "2026-10-07",
+    "minutes": 50,
+    "rulesUrl": "/rules/2027/b/water-quality.pdf",
+    "questions": [
+      {
+        "id": "1",
+        "label": "Question 1",
+        "page": 1,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "2",
+        "label": "Question 2",
+        "page": 1,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "3",
+        "label": "Question 3",
+        "page": 1,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "4",
+        "label": "Question 4",
+        "page": 1,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "5",
+        "label": "Question 5",
+        "page": 1,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "6",
+        "label": "Question 6",
+        "page": 1,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "7",
+        "label": "Question 7",
+        "page": 2,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "Question 8",
+        "page": 2,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "9",
+        "label": "Question 9",
+        "page": 2,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "10",
+        "label": "Question 10",
+        "page": 2,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "11",
+        "label": "Question 11",
+        "page": 2,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "12",
+        "label": "Question 12",
+        "page": 2,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "13",
+        "label": "Question 13",
+        "page": 3,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "14",
+        "label": "Question 14",
+        "page": 3,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "15",
+        "label": "Question 15",
+        "page": 3,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "Question 16",
+        "page": 3,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "17",
+        "label": "Question 17",
+        "page": 3,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "18",
+        "label": "Question 18",
+        "page": 3,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "19",
+        "label": "Question 19",
+        "page": 4,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "20",
+        "label": "Question 20",
+        "page": 4,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "21",
+        "label": "Question 21",
+        "page": 4,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "22",
+        "label": "Question 22",
+        "page": 4,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "23",
+        "label": "Question 23",
+        "page": 4,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "24",
+        "label": "Question 24",
+        "page": 4,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "25",
+        "label": "Question 25",
+        "page": 5,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "26",
+        "label": "Question 26",
+        "page": 5,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "27",
+        "label": "Question 27",
+        "page": 5,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "28",
+        "label": "Question 28",
+        "page": 5,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "29",
+        "label": "Question 29",
+        "page": 5,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "30",
+        "label": "Question 30",
+        "page": 5,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "31",
+        "label": "Question 31",
+        "page": 6,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "32",
+        "label": "Question 32",
+        "page": 6,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "33",
+        "label": "Question 33",
+        "page": 6,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "34",
+        "label": "Question 34",
+        "page": 6,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "35",
+        "label": "Question 35",
+        "page": 6,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "36",
+        "label": "Question 36",
+        "page": 6,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "37",
+        "label": "Question 37",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "38",
+        "label": "Question 38",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "39",
+        "label": "Question 39",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "40",
+        "label": "Question 40",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "41",
+        "label": "Question 41",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "42",
+        "label": "Question 42",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "43",
+        "label": "Question 43",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "44",
+        "label": "Question 44",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "45",
+        "label": "Question 45",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "46",
+        "label": "Question 46",
+        "page": 7,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "47",
+        "label": "Question 47",
+        "page": 8,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "48",
+        "label": "Question 48",
+        "page": 8,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "49",
+        "label": "Question 49",
+        "page": 8,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "50",
+        "label": "Question 50",
+        "page": 8,
+        "type": "mcq",
+        "points": 1,
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "B" },
+      "2": { "correctOption": "C" },
+      "3": { "correctOption": "B" },
+      "4": { "correctOption": "D" },
+      "5": { "correctOption": "C" },
+      "6": { "correctOption": "C" },
+      "7": { "correctOption": "D" },
+      "8": { "correctOption": "C" },
+      "9": { "correctOption": "B" },
+      "10": { "correctOption": "C" },
+      "11": { "correctOption": "B" },
+      "12": { "correctOption": "C" },
+      "13": { "correctOption": "B" },
+      "14": { "correctOption": "C" },
+      "15": { "correctOption": "C" },
+      "16": { "correctOption": "C" },
+      "17": { "correctOption": "C" },
+      "18": { "correctOption": "B" },
+      "19": { "correctOption": "C" },
+      "20": { "correctOption": "D" },
+      "21": { "correctOption": "C" },
+      "22": { "correctOption": "B" },
+      "23": { "correctOption": "C" },
+      "24": { "correctOption": "C" },
+      "25": { "correctOption": "C" },
+      "26": { "correctOption": "C" },
+      "27": { "correctOption": "B" },
+      "28": { "correctOption": "C" },
+      "29": { "correctOption": "B" },
+      "30": { "correctOption": "C" },
+      "31": { "correctOption": "B" },
+      "32": { "correctOption": "C" },
+      "33": { "correctOption": "C" },
+      "34": { "correctOption": "B" },
+      "35": { "correctOption": "C" },
+      "36": { "correctOption": "C" },
+      "37": { "correctOption": "C" },
+      "38": { "correctOption": "A" },
+      "39": { "correctOption": "B" },
+      "40": { "correctOption": "B" },
+      "41": { "correctOption": "C" },
+      "42": { "correctOption": "C" },
+      "43": { "correctOption": "C" },
+      "44": { "correctOption": "C" },
+      "45": { "correctOption": "B" },
+      "46": { "correctOption": "C" },
+      "47": { "correctOption": "B" },
+      "48": { "correctOption": "C" },
+      "49": { "correctOption": "A" },
+      "50": { "correctOption": "B" }
+    },
+    "questionCount": 50,
+    "maxScore": 50
   }
 ]

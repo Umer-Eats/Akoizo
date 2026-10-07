@@ -1,13 +1,16 @@
 // Server-side catalog: never import this module from a client component.
 import catalog from '../data/practice-tests.json' with { type: 'json' };
+import imported from '../data/imported-practice-tests.json' with { type: 'json' };
+import archive from '../data/scioly-archive.json' with { type: 'json' };
 import { AppError } from './domain.ts';
-import { eventsForDivision, type Division } from './events.ts';
+import { eventsForDivision, slug, type Division } from './events.ts';
 import {
   PRACTICE_SEASON,
   competitionLevels,
   type PracticeTest,
   type PracticeSummary,
   type PracticePaper,
+  type ArchiveSource,
 } from './practice-types.ts';
 
 // JSON infers a union of every key map. Validate it once before narrowing that union.
@@ -18,6 +21,9 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
     );
   };
   if (!Array.isArray(input)) return fail();
+  const validSourceUrl = (url: unknown) => typeof url === 'string' && /^https:\/\//.test(url);
+  const validAssetUrl = (url: unknown) =>
+    typeof url === 'string' && (/^https:\/\//.test(url) || /^\/practice\//.test(url));
   const ids = new Set<string>();
   for (const test of input as PracticeTest[]) {
     if (
@@ -26,7 +32,7 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       ids.has(test.id) ||
       !['A', 'B', 'C'].includes(test.division) ||
       !eventsForDivision(test.division).some((e) => e.id === test.eventId) ||
-      !competitionLevels.includes(test.level) ||
+      (test.level !== null && !competitionLevels.includes(test.level)) ||
       test.season !== PRACTICE_SEASON ||
       !Number.isInteger(test.year) ||
       test.year < 1984 ||
@@ -36,9 +42,9 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       !test.scoringBasis ||
       !test.instructions ||
       !test.topics?.length ||
-      ![test.paperUrl, test.keyUrl, test.sourceUrl].every(
-        (url) => typeof url === 'string' && /^https:\/\//.test(url),
-      ) ||
+      !validAssetUrl(test.paperUrl) ||
+      !validAssetUrl(test.keyUrl) ||
+      !validSourceUrl(test.sourceUrl) ||
       !Array.isArray(test.questions) ||
       !test.questions.length ||
       !test.keys ||
@@ -102,7 +108,7 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       return fail();
   }
 }
-const checkedCatalog: unknown = catalog;
+const checkedCatalog: unknown = [...catalog, ...imported];
 validatePracticeCatalog(checkedCatalog);
 export const practiceTests = checkedCatalog;
 export function practiceSummary(test: PracticeTest): PracticeSummary {
@@ -120,6 +126,9 @@ export function practiceSummary(test: PracticeTest): PracticeSummary {
     maxScore,
     minutes,
     scoringBasis,
+    levelEvidence,
+    sourceId,
+    topicMatch,
   } = test;
   return {
     id,
@@ -135,7 +144,25 @@ export function practiceSummary(test: PracticeTest): PracticeSummary {
     maxScore,
     minutes,
     scoringBasis,
+    levelEvidence,
+    sourceId,
+    topicMatch,
   };
+}
+export function listArchiveSources(division: Division, eventId: string): ArchiveSource[] {
+  if (!eventsForDivision(division).some((event) => event.id === eventId))
+    throw new AppError(404, 'Choose an event in your division.');
+  const ready = new Set(
+    practiceTests.filter((t) => t.division === division).map((t) => t.sourceId),
+  );
+  return (archive.tests as ArchiveSource[])
+    .filter(
+      (test) =>
+        test.divisions.includes(division) &&
+        slug(test.event) === eventId &&
+        !ready.has(test.sourceId),
+    )
+    .sort((a, b) => b.year - a.year || a.competition.localeCompare(b.competition));
 }
 export function listPracticeTests(division: Division, eventId: string) {
   if (!eventsForDivision(division).some((event) => event.id === eventId))

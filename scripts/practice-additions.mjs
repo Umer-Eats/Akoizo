@@ -270,4 +270,32 @@ export function addArchivePapers(make) {
     );
     t.finish();
   }
+  {
+    const t = make({
+      id: 'greenbrier-2026-water-quality-b',
+      eventId: 'water-quality',
+      division: 'B',
+      competition: 'Greenbrier Invitational',
+      level: 'Invitational',
+      year: 2026,
+      sourceId: '-DY8qjJU5hY',
+      topics: ['Freshwater systems', 'Ecology', 'Human impacts', 'Macroinvertebrates'],
+      alignment:
+        'The 2026 paper covers freshwater systems, ecology, human impacts, and macroinvertebrate indicators. These subjects match the 2027 Water Quality B study areas; the historical tournament is labeled as an invitational because the source does not report a regional, state, or national tier.',
+      instructions:
+        'All 50 questions are multiple choice and worth one point. The original paper and published answer key are preserved locally so the entire test remains available while you answer.',
+      sourceUrl: 'https://scioly.org/tests/-DY8qjJU5hY',
+      paperUrl: '/practice/greenbrier-2026-water-quality-b-test.pdf',
+      keyUrl: '/practice/greenbrier-2026-water-quality-b-key.pdf',
+    });
+    const keys =
+      'B C B D C C D C B C B C B C C C C B C D C B C C C C B C B C B C C B C C C A B B C C C C B C B C A B'.split(
+        ' ',
+      );
+    keys.forEach((key, index) => {
+      const number = index + 1;
+      t.mcq(number, number <= 40 ? Math.ceil(number / 6) : number <= 46 ? 7 : 8, 1, key, 'ABCD');
+    });
+    t.finish();
+  }
 }

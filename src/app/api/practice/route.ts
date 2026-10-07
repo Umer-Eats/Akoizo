@@ -1,6 +1,11 @@
 import { failure, json, memberFor } from '@/lib/api';
 import { AppError } from '@/lib/domain';
-import { findPracticeTest, listPracticeTests, publicPracticePaper } from '@/lib/practice-catalog';
+import {
+  findPracticeTest,
+  listPracticeTests,
+  listArchiveSources,
+  publicPracticePaper,
+} from '@/lib/practice-catalog';
 import { practiceHistory, submitPractice } from '@/lib/practice-service';
 
 export const maxDuration = 60;
@@ -16,7 +21,11 @@ export async function GET(request: Request) {
         test: publicPracticePaper(findPracticeTest(profile.division, testId)),
         attempts: await practiceHistory(db, profile, testId),
       });
-    return json({ tests: listPracticeTests(profile.division, params.get('eventId') ?? '') });
+    const eventId = params.get('eventId') ?? '';
+    return json({
+      tests: listPracticeTests(profile.division, eventId),
+      archive: listArchiveSources(profile.division, eventId),
+    });
   } catch (error) {
     return failure(error);
   }
