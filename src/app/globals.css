@@ -1509,6 +1509,59 @@
   .auth-card .tag {
     margin-top: 0;
   }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+    color: var(--faint);
+    font-size: 0.75rem;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .button-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .button-google:hover:not(:disabled) {
+    background: var(--surface-2);
+    border-color: var(--accent);
+  }
+  .button-google:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .google-icon {
+    flex-shrink: 0;
+  }
+  .loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--line);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
   .dashboard-heading {
     display: flex;
     justify-content: space-between;

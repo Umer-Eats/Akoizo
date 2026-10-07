@@ -6,7 +6,11 @@ import {
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword,
   signOut,
-  updateProfile
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+  linkWithPopup,
+  getAdditionalUserInfo
 } from 'firebase/auth';
 import { getAuthInstance } from '@/lib/firebase';
 
@@ -20,6 +24,11 @@ interface AuthContextType {
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, displayName: string, role: 'student' | 'instructor', extraData: {
+    division?: 'A' | 'B' | 'C';
+    schoolPassword?: string;
+    instructorInvitePassword?: string;
+  }) => Promise<void>;
+  signInWithGoogle: (role: 'student' | 'instructor', extraData: {
     division?: 'A' | 'B' | 'C';
     schoolPassword?: string;
     instructorInvitePassword?: string;
@@ -116,6 +125,54 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const signInWithGoogle = async (
+    role: 'student' | 'instructor',
+    extraData: {
+      division?: 'A' | 'B' | 'C';
+      schoolPassword?: string;
+      instructorInvitePassword?: string;
+    }
+  ) => {
+    const authInstance = getAuthInstance();
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    
+    const result = await signInWithPopup(authInstance, provider);
+    const additionalInfo = getAdditionalUserInfo(result);
+    
+    // If this is a new user, register them with the role and extra data
+    if (additionalInfo?.isNewUser) {
+      const displayName = result.user.displayName || 'User';
+      const token = await result.user.getIdToken();
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ role, ...extraData }),
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Registration failed');
+      }
+    } else {
+      // Existing user - verify they have the correct role
+      const token = await result.user.getIdToken();
+      const profileResponse = await fetch('/api/auth/profile', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      if (profileResponse.ok) {
+        const profile = await profileResponse.json();
+        if (profile.role !== role) {
+          throw new Error(`This account is registered as a ${profile.role}. Please use the correct login.`);
+        }
+      }
+    }
+  };
+
   const logOut = async () => {
     const authInstance = getAuthInstance();
     await signOut(authInstance);
@@ -132,7 +189,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, role, schoolId, division, loading, signIn, signUp, logOut, refreshRole }}
+      value={{ user, role, schoolId, division, loading, signIn, signUp, signInWithGoogle, logOut, refreshRole }}
     >
       {children}
     </AuthContext.Provider>
