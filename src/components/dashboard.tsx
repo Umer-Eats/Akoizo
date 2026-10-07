@@ -201,12 +201,14 @@ function EventCatalog({ division }: { division: Division }) {
   }
   const [query, setQuery] = useState('');
   const [type, setType] = useState('All');
+  const [slotFilter, setSlotFilter] = useState('All');
   const events = eventsForDivision(division);
   const matches = events
     .filter(
       (event) =>
         `${event.name} ${event.category}`.toLowerCase().includes(query.toLowerCase()) &&
-        (type === 'All' || event.type === type),
+        (type === 'All' || event.type === type) &&
+        (slotFilter === 'All' || slotForEvent(event.id)?.color === slotFilter),
     )
     .sort((a, b) => Number(selected.includes(b.id)) - Number(selected.includes(a.id)));
   return (
@@ -237,11 +239,25 @@ function EventCatalog({ division }: { division: Division }) {
           </select>
         </label>
       </div>
-      <div className="slot-legend" aria-label="Timeslot color groups">
+      <div className="slot-legend" role="group" aria-label="Filter by timeslot">
+        <button
+          className="slot-chip"
+          data-slot="unassigned"
+          aria-pressed={slotFilter === 'All'}
+          onClick={() => setSlotFilter('All')}
+        >
+          All timeslots
+        </button>
         {eventSlots.map((slot) => (
-          <span className="slot-chip" data-slot={slot.color} key={slot.color}>
+          <button
+            className="slot-chip"
+            data-slot={slot.color}
+            key={slot.color}
+            aria-pressed={slotFilter === slot.color}
+            onClick={() => setSlotFilter(slotFilter === slot.color ? 'All' : slot.color)}
+          >
             {slot.label} timeslot
-          </span>
+          </button>
         ))}
       </div>
       <p className="selection-summary" role="status">
@@ -275,7 +291,7 @@ function EventCatalog({ division }: { division: Division }) {
               <Link className="event-card-link" href={`/dashboard/student/events/${event.id}`}>
                 <span className="eyebrow">{event.category.toUpperCase()}</span>
                 <h3>{event.name}</h3>
-                <span className="slot-chip">
+                <span className="sr-only">
                   {slot ? `${slot.label} timeslot` : 'Timeslot not assigned'}
                 </span>
                 <div className="event-card-footer">
@@ -294,7 +310,6 @@ function EventCatalog({ division }: { division: Division }) {
                   onChange={(e) => void toggle(event.id, e.target.checked)}
                   aria-label={`Compete in ${event.name}`}
                 />
-                <span>{checked ? 'My competition event' : 'I’m competing'}</span>
               </label>
             </article>
           );
@@ -308,6 +323,7 @@ function EventCatalog({ division }: { division: Division }) {
             onClick={() => {
               setQuery('');
               setType('All');
+              setSlotFilter('All');
             }}
           >
             Clear filters
@@ -846,26 +862,26 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   }
   return (
     <main id="main" className="page-container event-workspace">
-      <Link className="back-link" href="/dashboard/student">
-        <ChevronLeft size={16} /> My events
-      </Link>
       <div className="event-workspace-grid">
+        <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
+          <Link className="back-link" href="/dashboard/student">
+            <ChevronLeft size={16} /> My events
+          </Link>
+          <h2 id="event-toolkit-title">Your toolkit</h2>
+          <FeatureNavigation event={event} activeTool={toolId} />
+          <p className="event-sidebar-note">Study content coming soon.</p>
+        </aside>
         <div className="event-content" key={`${event.id}/${toolId ?? 'overview'}`}>
-          <div
-            className="page-heading event-heading"
-            data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}
-          >
-            <span className="slot-chip">
-              {slotForEvent(event.id)
-                ? `${slotForEvent(event.id)!.label} timeslot`
-                : 'Timeslot not assigned'}
-            </span>
-            <p className="eyebrow">
-              DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
-              {event.special ? ' / SPECIAL EVENT' : ''}
-            </p>
+          <div className="event-feature-heading">
             <h1>{tool ? tool.name : 'Your study space.'}</h1>
             <p>{tool ? tool.description : eventFocus[event.type].description}</p>
+            <p className="event-feature-meta">
+              DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
+              {event.special ? ' / SPECIAL EVENT' : ''}
+              {slotForEvent(event.id)
+                ? ` / ${slotForEvent(event.id)!.label.toUpperCase()} TIMESLOT`
+                : ''}
+            </p>
           </div>
           <section className="empty-state tool-placeholder">
             {tool ? (
@@ -896,12 +912,6 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
             and materials.
           </p>
         </div>
-        <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
-          <p className="eyebrow">EXPLORE & LEARN</p>
-          <h2 id="event-toolkit-title">Your toolkit</h2>
-          <FeatureNavigation event={event} activeTool={toolId} />
-          <p className="event-sidebar-note">Study content coming soon.</p>
-        </aside>
       </div>
     </main>
   );

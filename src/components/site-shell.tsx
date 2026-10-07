@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
 import { eventsForDivision } from '@/lib/events';
+import { slotForEvent } from '@/lib/event-slots';
 export function Header() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -34,7 +35,11 @@ export function Header() {
           <span>akoizo</span>
         </Link>
         {event ? (
-          <Link className="header-event-title" href={`/dashboard/student/events/${event.id}`}>
+          <Link
+            className="header-event-title"
+            data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}
+            href={`/dashboard/student/events/${event.id}`}
+          >
             {event.name}
           </Link>
         ) : (

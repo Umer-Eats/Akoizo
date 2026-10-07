@@ -136,7 +136,7 @@ try {
       );
       const content = await p.locator('.event-content').boundingBox();
       const sidebar = await p.locator('.event-sidebar').boundingBox();
-      assert(sidebar.x >= content.x + content.width, 'sidebar remains on the right');
+      assert(sidebar.x + sidebar.width <= content.x, 'sidebar remains on the left');
       assert.equal(
         await p.locator('.event-content').evaluate((el) => getComputedStyle(el).animationName),
         'none',
