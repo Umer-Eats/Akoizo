@@ -1,0 +1,11 @@
+import { chromium } from '@playwright/test';
+const browser = await chromium.launch({channel:'chrome',headless:true});
+const page = await browser.newPage({viewport:{width:768,height:844},reducedMotion:'reduce'});
+await page.goto('http://127.0.0.1:3000/mission');
+console.log(await page.locator('body *').evaluateAll(els=>els.filter(el=>{const r=el.getBoundingClientRect();return r.right>innerWidth+1||r.left< -1;}).map(el=>({tag:el.tagName,cls:el.getAttribute('class'),left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right})).slice(0,25)));
+await page.setViewportSize({width:390,height:844});
+await page.goto('http://127.0.0.1:3000');
+await page.locator('.study-window').scrollIntoViewIfNeeded();
+console.log(await page.locator('.study-window, .lesson-art, .practice-window').evaluateAll(els=>els.map(el=>({cls:el.className,opacity:getComputedStyle(el).opacity,position:getComputedStyle(el).position,rect:el.getBoundingClientRect().toJSON()}))));
+await page.screenshot({path:'output/theme-qa/study-mobile.png'});
+await browser.close();

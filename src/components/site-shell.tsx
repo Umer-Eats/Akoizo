@@ -44,6 +44,8 @@ export function Header() {
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Switch color theme">
             <Sun className="sun-icon" size={17} />
             <Moon className="moon-icon" size={17} />
+            <span className="theme-day">Day mode</span>
+            <span className="theme-night">Night mode</span>
           </button>
           <button
             className="menu-toggle icon-button"
@@ -71,6 +73,10 @@ export function Footer() {
   const { motion, toggleMotion } = useSettings();
   return (
     <footer className="site-footer">
+      <div className="footer-signoff" aria-hidden="true">
+        <span>STAY CURIOUS.</span>
+        <span className="pixel-cluster" />
+      </div>
       <div className="footer-top">
         <Link className="brand" href="/">
           <span className="brand-mark" aria-hidden="true" />

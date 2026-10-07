@@ -3,8 +3,10 @@ import '@fontsource-variable/manrope';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource/ibm-plex-mono/400.css';
 import './globals.css';
+import './theme.css';
 import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/site-shell';
+import { ArtworkMotion } from '@/components/artwork-motion';
 export const metadata: Metadata = {
   title: { default: 'Akoizo — Stay curious. Go further.', template: '%s · Akoizo' },
   description:
@@ -20,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <Providers>
+          <ArtworkMotion />
           <a className="skip-link" href="#main">
             Skip to content
           </a>

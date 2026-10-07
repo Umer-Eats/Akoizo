@@ -1,57 +1,91 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { ChevronDown, Check, BookOpen, Zap, FolderOpen } from 'lucide-react';
-import { Mascot, Orbit, PixelStar, Reveal, WireGlobe } from './art';
+import { Mascot, PixelStar, Reveal } from './art';
 export function Home() {
   const [answer, setAnswer] = useState('');
   return (
-    <main id="main">
+    <main id="main" className="home-page">
       <section className="hero">
         <div className="hero-corner">
           <Mascot corner />
         </div>
         <div className="hero-eyebrow">
-          <span className="tiny-square" /> A LITTLE CURIOSITY. ENDLESS POSSIBILITIES.
+          <span className="tiny-square" /> THE OPEN STUDY LAB
+          <span className="hero-edition">SCIENCE OLYMPIAD / VOL. 01</span>
         </div>
         <div className="hero-brand">
-          <div className="hero-art" aria-hidden="true">
-            <Orbit />
-            <div className="holo-orb orb-one" />
-            <div className="holo-orb orb-two" />
-            <PixelStar className="hero-star star-one" />
-            <PixelStar className="hero-star star-two" />
-          </div>
           <h1 className="hero-title" aria-label="Akoizo">
-            <svg
-              viewBox="0 165 2172 400"
-              width="2172"
-              height="400"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <image href="/art/akoizo-chrome.png" width="2172" height="724" />
-            </svg>
+            {'AKOIZO'.split('').map((letter, index) => (
+              <span
+                className="title-glyph"
+                aria-hidden="true"
+                key={index}
+                style={{ '--glyph-index': index } as CSSProperties}
+              >
+                {letter}
+              </span>
+            ))}
           </h1>
         </div>
         <div className="hero-copy">
+          <p className="eyebrow hero-kicker">FOCUS. DISCIPLINE. DISCOVERY.</p>
           <h2>
-            Stay curious. <span>Go further.</span>
+            Stay curious.
+            <br />
+            <span>Go further.</span>
           </h2>
           <p>
-            Your Science Olympiad journey, with a little more wonder.
-            <br className="desktop-only" /> Learn, practice, and grow. Always free.
+            Science Olympiad preparation. Built for focus.
+            <br className="desktop-only" /> Study with purpose. Practice with precision. Always
+            free.
           </p>
-          <Link className="button button-primary" href="/login/student">
-            Find your starting point
-            <PixelStar />
-          </Link>
+          <div className="hero-actions">
+            <Link className="button button-primary" href="/login/student">
+              Find your starting point <span aria-hidden="true">↗</span>
+            </Link>
+            <Link className="hero-preview-link" href="/preview/student">
+              Explore the lab <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="hero-access">
+            <span className="pixel-cluster" aria-hidden="true" /> FREE TO LEARN. ROOM TO GROW.
+          </div>
+        </div>
+        <div className="science-specimen" aria-hidden="true">
+          <div className="specimen-top">
+            <span>FIG. 01 — STRUCTURE / PRECISION</span>
+            <span>↗</span>
+          </div>
+          <div className="specimen-field">
+            <span className="specimen-scan" />
+            <span className="axis-label axis-top">Y +</span>
+            <span className="axis-label axis-right">X +</span>
+            <div className="vector-stack">
+              <i />
+              <i />
+              <i />
+              <span className="vector-spine" />
+            </div>
+            <span className="vector-label">Δ / 01</span>
+            <span className="specimen-point" />
+            <span className="specimen-coordinate">
+              BUILD KNOWLEDGE.
+              <br />
+              FIND YOUR EDGE.
+            </span>
+          </div>
+          <div className="specimen-bottom">
+            <span>OBSERVE / QUESTION / DISCOVER</span>
+            <span className="barcode" />
+          </div>
         </div>
         <a className="scroll-cue" href="#discover">
-          <span>THERE’S A WHOLE WORLD TO DISCOVER</span>
+          <span>SCROLL TO EXPLORE</span>
           <ChevronDown size={16} />
         </a>
-        <span className="hero-side-note">MADE FOR THE WAY YOU LEARN</span>
+        <span className="hero-side-note">INDEPENDENT BY DESIGN. OPEN TO EVERYONE.</span>
       </section>
       <div className="marquee-strip" aria-hidden="true">
         <span>CURIOUS MINDS</span>
@@ -76,9 +110,26 @@ export function Home() {
             <br className="desktop-only" /> for everything that comes next.
           </p>
         </Reveal>
-        <WireGlobe />
+        <div className="index-stripes" aria-hidden="true" />
+        <nav className="discovery-index" aria-label="Explore the study lab">
+          <a href="#learn">
+            <span>01 / LEARN</span>
+            <strong>Follow your curiosity.</strong>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="#practice">
+            <span>02 / PRACTICE</span>
+            <strong>Find your momentum.</strong>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="#community">
+            <span>03 / CONNECT</span>
+            <strong>Grow together.</strong>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
       </section>
-      <section className="feature-section container">
+      <section id="learn" className="feature-section container">
         <Reveal className="feature-copy">
           <p className="eyebrow">
             <span>01</span> FIND YOUR SPARK
@@ -110,10 +161,20 @@ export function Home() {
                 <i />
               </span>
             </div>
-            <div className="lesson-orbit">
-              <WireGlobe />
-              <div className="holo-orb" />
-              <PixelStar />
+            <div className="lesson-diagram" aria-hidden="true">
+              <span className="diagram-label">ANALYSIS / 001</span>
+              <div className="diagram-bars">
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+                <i />
+              </div>
+              <span className="diagram-scale">OBSERVE — UNDERSTAND — APPLY</span>
             </div>
             <span className="eyebrow">A WHOLE UNIVERSE OF IDEAS</span>
             <h3>
@@ -129,7 +190,7 @@ export function Home() {
           <PixelStar className="floating-star" />
         </Reveal>
       </section>
-      <section className="feature-section reverse container">
+      <section id="practice" className="feature-section reverse container">
         <Reveal className="practice-art">
           <div className="practice-window glass">
             <div className="window-top">
@@ -216,9 +277,12 @@ export function Home() {
           </div>
         </Reveal>
       </section>
-      <section className="community-section">
-        <div className="community-orbit">
-          <WireGlobe />
+      <section id="community" className="community-section">
+        <div className="community-structure" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
         </div>
         <Reveal className="container community-copy">
           <p className="eyebrow">
