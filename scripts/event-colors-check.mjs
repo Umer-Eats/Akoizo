@@ -100,6 +100,44 @@ try {
   await p.locator('form').getByRole('button', { name: 'Log in', exact: true }).click();
   const astronomy = p.getByRole('checkbox', { name: 'Compete in Astronomy', exact: true });
   await expect(astronomy).toBeEnabled();
+  await p.mouse.move(0, 0);
+  await expect(astronomy).toHaveCSS('opacity', '0');
+  await astronomy.focus();
+  await expect(astronomy).toHaveCSS('opacity', '1');
+  await astronomy.blur();
+  await expect(p.locator('.event-card .slot-chip')).toHaveCount(0);
+  await expect(p.locator('.event-selection')).not.toContainText(['I’m competing']);
+  for (const [name, count] of [
+    ['Pink', 3],
+    ['Yellow', 3],
+    ['Purple', 3],
+    ['Blue', 2],
+    ['Green', 3],
+    ['Orange', 3],
+  ]) {
+    const pill = p.getByRole('button', { name: name + ' timeslot', exact: true });
+    await pill.click();
+    await expect(pill).toHaveAttribute('aria-pressed', 'true');
+    await expect(p.locator('.event-card')).toHaveCount(count);
+    assert.equal(
+      await p
+        .locator('.event-card')
+        .evaluateAll(
+          (cards, color) => cards.every((c) => c.dataset.slot === color),
+          name.toLowerCase(),
+        ),
+      true,
+    );
+  }
+  await p.getByRole('button', { name: 'Orange timeslot', exact: true }).click();
+  await expect(p.locator('.event-card')).toHaveCount(23);
+  await p.getByRole('button', { name: 'Pink timeslot', exact: true }).click();
+  await p.getByRole('textbox', { name: 'Search events' }).fill('Astronomy');
+  await expect(p.locator('.event-card')).toHaveCount(0);
+  await p.getByRole('button', { name: 'Clear filters', exact: true }).click();
+  await expect(p.locator('.event-card')).toHaveCount(23);
+  await p.locator('.event-selection').filter({ has: astronomy }).hover();
+  await expect(astronomy).toHaveCSS('opacity', '1');
   await astronomy.click();
   await expect(p.locator('.event-card').first()).toContainText('Astronomy');
   await expect(astronomy).toBeChecked();
@@ -122,8 +160,23 @@ try {
   await expect(p.locator('.selection-summary')).toContainText('0 competition events');
   await p.getByLabel('Your division', { exact: true }).selectOption('C');
   await expect(astronomy).toBeChecked();
+  await p.emulateMedia({ reducedMotion: 'no-preference' });
+  await p.evaluate(() => (document.documentElement.dataset.motion = 'on'));
+  await expect(astronomy).toHaveCSS('transition-duration', '0.22s, 0.22s');
+  await p.emulateMedia({ reducedMotion: 'reduce' });
+  const cdp = await p.context().newCDPSession(p);
+  await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+  const forensics = p.getByRole('checkbox', { name: 'Compete in Forensics', exact: true });
+  await p.mouse.move(0, 0);
+  await forensics.blur();
+  await expect(forensics).toHaveCSS('opacity', '1');
+  await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: false });
   for (const theme of ['dark', 'light']) {
     await p.evaluate((theme) => (document.documentElement.dataset.theme = theme), theme);
+    const colors = await p
+      .locator('.stat-card strong')
+      .evaluateAll((nodes) => nodes.map((el) => getComputedStyle(el).color));
+    assert.equal(new Set(colors).size, 1);
     for (const width of [1440, 390, 320]) {
       await p.setViewportSize({ width, height: 1000 });
       assert.equal(
@@ -138,12 +191,14 @@ try {
     }
   }
   await p.setViewportSize({ width: 1440, height: 1000 });
+  await p.evaluate(() => (document.documentElement.dataset.theme = 'dark'));
+  await p.locator('.slot-legend').scrollIntoViewIfNeeded();
+  await p.screenshot({ path: 'output/colors-qa/refined-cards-dark.png' });
   await p
     .locator('.event-card-link')
     .filter({ has: p.getByRole('heading', { name: 'Astronomy', exact: true }) })
     .click();
-  await expect(p.locator('.event-heading')).toHaveAttribute('data-slot', 'purple');
-  await expect(p.locator('.tool-card')).toHaveCount(7);
+  await expect(p.locator('.event-workspace')).toBeVisible();
   await p.screenshot({ path: 'output/colors-qa/event-light.png', fullPage: true });
   for (const route of ['/', '/mission', '/login/student', '/rankings']) {
     await p.goto(base + route);
