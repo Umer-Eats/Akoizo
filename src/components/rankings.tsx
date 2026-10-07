@@ -1,36 +1,54 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { LockKeyhole, Search, SearchX } from 'lucide-react';
-import { members, filterRankings } from '@/lib/demo';
+import { Search, Trophy } from 'lucide-react';
 import type { Division } from '@/lib/events';
-import { Mascot, Orbit, PixelStar } from './art';
-export function RankingTable({
-  school,
-  initialDivision = 'All',
-}: {
-  school?: string;
-  initialDivision?: 'All' | Division;
-}) {
-  const [division, setDivision] = useState<'All' | Division>(initialDivision);
+import { Mascot, Orbit } from './art';
+type Ranking = { id: string; handle: string; school: string; division: Division; points: number };
+export function Rankings() {
+  const [rows, setRows] = useState<Ranking[]>([]);
+  const [division, setDivision] = useState('All');
   const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const results = filterRankings(members, { division, query, school });
-  const pages = Math.max(1, Math.ceil(results.length / 6));
-  const current = Math.min(page, pages);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setError('');
+    fetch('/api/rankings', { signal: controller.signal, cache: 'no-store' })
+      .then(async (response) => {
+        const body = await response.json();
+        if (!response.ok) throw new Error(body.error);
+        setRows(body);
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted) setError(error.message || 'Could not load rankings.');
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () => controller.abort();
+  }, [retry]);
+  const ranked = rows
+    .filter((row) => division === 'All' || row.division === division)
+    .map((row, index) => ({ ...row, rank: index + 1 }));
+  const results = ranked.filter((row) =>
+    `${row.handle} ${row.school}`.toLowerCase().includes(query.toLowerCase()),
+  );
   return (
-    <div>
+    <main id="main" className="page-container">
+      <div className="page-heading with-art">
+        <p className="eyebrow">CURIOSITY BRINGS US TOGETHER</p>
+        <h1 className="chrome">Global Rankings</h1>
+        <p>Every school. One community of curious minds.</p>
+        <Orbit />
+        <Mascot small />
+      </div>
       <div className="tabs" aria-label="Filter rankings by division">
-        {(['All', 'A', 'B', 'C'] as const).map((d) => (
-          <button
-            key={d}
-            aria-pressed={division === d}
-            onClick={() => {
-              setDivision(d);
-              setPage(1);
-            }}
-          >
-            {d === 'All' ? 'All divisions' : `Division ${d}`}
+        {['All', 'A', 'B', 'C'].map((value) => (
+          <button key={value} aria-pressed={division === value} onClick={() => setDivision(value)}>
+            {value === 'All' ? 'All divisions' : `Division ${value}`}
           </button>
         ))}
       </div>
@@ -41,24 +59,25 @@ export function RankingTable({
           <input
             placeholder="Search members or schools"
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setPage(1);
-            }}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </label>
-        <p aria-live="polite">
-          {results.length} MEMBERS · {school ? school.toUpperCase() : 'ALL SCHOOLS'} · ALL TIME
-        </p>
+        <p>TOP 500 · ALL TIME</p>
       </div>
-      {results.length ? (
-        <div
-          className="table-wrap"
-          role="region"
-          aria-label="Rankings table, scroll horizontally for more columns"
-          tabIndex={0}
-        >
-          <table aria-label={school ? 'Sample school rankings' : 'Sample global rankings'}>
+      {loading ? (
+        <p className="loading-state" role="status">
+          Loading rankings…
+        </p>
+      ) : error ? (
+        <div className="empty-state">
+          <p role="alert">{error}</p>
+          <button className="button button-primary" onClick={() => setRetry(retry + 1)}>
+            Try again
+          </button>
+        </div>
+      ) : results.length ? (
+        <div className="table-wrap" role="region" aria-label="Global rankings" tabIndex={0}>
+          <table>
             <thead>
               <tr>
                 <th scope="col">RANK</th>
@@ -69,20 +88,13 @@ export function RankingTable({
               </tr>
             </thead>
             <tbody>
-              {results.slice((current - 1) * 6, current * 6).map((m) => (
-                <tr key={m.id}>
-                  <td className="rank-cell">{String(m.rank).padStart(2, '0')}</td>
-                  <td>
-                    <span className="member-cell">
-                      <span className="member-pixel">
-                        <PixelStar />
-                      </span>
-                      {m.handle}
-                    </span>
-                  </td>
-                  <td className="school-cell">{m.school}</td>
-                  <td className="school-cell">{m.division}</td>
-                  <td className="score-cell">{m.points.toLocaleString('en-US')}</td>
+              {results.map((row) => (
+                <tr key={row.id}>
+                  <td>{row.rank}</td>
+                  <td>{row.handle}</td>
+                  <td>{row.school}</td>
+                  <td>{row.division}</td>
+                  <td>{row.points.toLocaleString('en-US')}</td>
                 </tr>
               ))}
             </tbody>
@@ -90,69 +102,21 @@ export function RankingTable({
         </div>
       ) : (
         <div className="empty-state">
-          <SearchX />
-          <h3>No members found.</h3>
-          <p>Try another name or school, or choose a different division.</p>
-          <button
-            className="text-link"
-            onClick={() => {
-              setQuery('');
-              setDivision('All');
-              setPage(1);
-            }}
-          >
-            Clear filters
-          </button>
+          <Trophy size={30} />
+          <h2>{rows.length ? 'No matching rankings.' : 'The first chapter is still to come.'}</h2>
+          <p>
+            {rows.length
+              ? 'Try a different division or search.'
+              : 'Rankings will appear when students start earning points in ranked tests.'}
+          </p>
+          <Link className="button button-glass" href="/login/student">
+            Open your study space
+          </Link>
         </div>
       )}
-      <nav className="pagination" aria-label="Rankings pagination">
-        <button disabled={current === 1} onClick={() => setPage(current - 1)}>
-          Previous
-        </button>
-        {Array.from({ length: pages }, (_, i) => (
-          <button
-            key={i}
-            aria-current={current === i + 1 ? 'page' : undefined}
-            onClick={() => setPage(i + 1)}
-          >
-            {i + 1}
-          </button>
-        ))}
-        <button disabled={current === pages} onClick={() => setPage(current + 1)}>
-          Next
-        </button>
-      </nav>
-    </div>
-  );
-}
-export function Rankings() {
-  return (
-    <main id="main" className="page-container">
-      <div className="page-heading with-art">
-        <p className="eyebrow">CURIOSITY BRINGS US TOGETHER</p>
-        <h1 className="chrome">Global Rankings</h1>
-        <p>Every school. One community of curious minds.</p>
-        <span className="tag">PREVIEW · FICTIONAL SAMPLE DATA</span>
-        <Orbit />
-        <Mascot small />
-      </div>
-      <RankingTable />
-      <aside className="private-callout">
-        <LockKeyhole size={30} strokeWidth={1.2} />
-        <div>
-          <h3>Your school, your team.</h3>
-          <p>
-            Sign in to view your school-only rankings.
-            <br />
-            Available only to members of your school.
-          </p>
-        </div>
-        <Link className="button button-glass" href="/login/student">
-          Student login
-        </Link>
-      </aside>
       <p className="source-note">
-        Preview scores illustrate the layout. Live ranked tests and points are coming later.
+        Only earned points appear here. Public rankings use an assigned learner name. Ranked tests
+        are coming soon.
       </p>
     </main>
   );

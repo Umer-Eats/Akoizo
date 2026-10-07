@@ -4,10 +4,14 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Sun, Moon, Pause, Play } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSettings } from './providers';
+import { useAuth, authMessage } from './auth-context';
 export function Header() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const { toggleTheme } = useSettings();
+  const { profile, logOut } = useAuth();
+  const [error, setError] = useState('');
+  const logout = () => logOut().catch((error) => setError(authMessage(error)));
   useEffect(() => setOpen(false), [path]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -32,15 +36,28 @@ export function Header() {
           </Link>
         </nav>
         <div className="header-right">
-          <Link className="login-link" href="/login/student">
-            Student login
-          </Link>
-          <Link
-            className="button button-small button-glass instructor-link"
-            href="/login/instructor"
-          >
-            Instructor login
-          </Link>
+          {profile ? (
+            <>
+              <Link className="login-link" href={`/dashboard/${profile.role}`}>
+                My dashboard
+              </Link>
+              <button className="button button-small button-glass instructor-link" onClick={logout}>
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className="login-link" href="/login/student">
+                Student login
+              </Link>
+              <Link
+                className="button button-small button-glass instructor-link"
+                href="/login/instructor"
+              >
+                Instructor login
+              </Link>
+            </>
+          )}
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Switch color theme">
             <Sun className="sun-icon" size={17} />
             <Moon className="moon-icon" size={17} />
@@ -61,11 +78,27 @@ export function Header() {
           <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation">
             <Link href="/rankings">Global Rankings</Link>
             <Link href="/mission">Mission</Link>
-            <Link href="/login/student">Student login</Link>
-            <Link href="/login/instructor">Instructor login</Link>
+            {profile ? (
+              <>
+                <Link href={`/dashboard/${profile.role}`}>My dashboard</Link>
+                <button className="text-link" onClick={logout}>
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login/student">Student login</Link>
+                <Link href="/login/instructor">Instructor login</Link>
+              </>
+            )}
           </nav>
         )}
       </div>
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      )}
     </header>
   );
 }

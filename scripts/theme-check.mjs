@@ -9,17 +9,17 @@ const context = await browser.newContext({ reducedMotion: 'reduce' });
 const page = await context.newPage();
 const errors = [];
 page.on('pageerror', (error) => errors.push(error.message));
-const base = 'http://127.0.0.1:3000';
+const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3002';
 const routes = [
   '/',
   '/mission',
   '/rankings',
   '/login/student',
   '/login/instructor',
-  '/preview/student',
-  '/preview/instructor',
-  '/preview/student/events/astronomy?division=C',
-  '/preview/student/tools/lessons?event=astronomy&division=C',
+  '/dashboard/student',
+  '/dashboard/instructor',
+  '/dashboard/student/events/astronomy?division=C',
+  '/dashboard/student/events/astronomy/lessons',
   '/not-a-page',
 ];
 try {
@@ -68,14 +68,16 @@ try {
   for (const role of ['student', 'instructor']) {
     await page.goto(`${base}/login/${role}`);
     await expect(page.getByLabel('Email address')).toBeVisible();
-    await page
-      .getByRole('button', { name: new RegExp(`explore the ${role} preview`, 'i') })
-      .click();
-    await expect(page).toHaveURL(new RegExp(`/preview/${role}$`));
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    await expect(
+      page.getByLabel(role === 'student' ? 'School password' : 'Instructor invitation password', {
+        exact: true,
+      }),
+    ).toBeEnabled();
   }
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: 10 routes, 2 themes, 4 viewport sizes; persisted theme, reduced motion, mobile navigation, section navigation, quiz, and both login preview links. No browser errors.',
+    'PASS: public and guarded routes, 2 themes, 4 viewport sizes; persisted theme, reduced motion, mobile navigation, section navigation, quiz, and both enrollment forms. No browser errors.',
   );
 } finally {
   await browser.close();

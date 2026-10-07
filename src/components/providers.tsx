@@ -1,6 +1,5 @@
 'use client';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import type { Assignment } from '@/lib/demo';
 import { AuthProvider } from './auth-context';
 
 type Settings = {
@@ -8,24 +7,15 @@ type Settings = {
   toggleTheme: () => void;
   motion: boolean;
   toggleMotion: () => void;
-  assignments: Assignment[];
-  setAssignments: (items: Assignment[]) => void;
 };
 const SettingsContext = createContext<Settings | null>(null);
 
 function SettingsProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState('dark');
   const [motion, setMotion] = useState(true);
-  const [assignments, updateAssignments] = useState<Assignment[]>([]);
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme || 'dark');
     setMotion(document.documentElement.dataset.motion !== 'off');
-    try {
-      const a = JSON.parse(sessionStorage.getItem('akoizo-demo-assignments') || '[]');
-      if (Array.isArray(a)) updateAssignments(a);
-    } catch {
-      /* Storage is optional for this preview. */
-    }
   }, []);
   const toggleTheme = () => {
     const value = theme === 'dark' ? 'light' : 'dark';
@@ -43,16 +33,8 @@ function SettingsProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('akoizo-motion', value ? 'on' : 'off');
     } catch {}
   };
-  const setAssignments = (items: Assignment[]) => {
-    updateAssignments(items);
-    try {
-      sessionStorage.setItem('akoizo-demo-assignments', JSON.stringify(items));
-    } catch {}
-  };
   return (
-    <SettingsContext.Provider
-      value={{ theme, toggleTheme, motion, toggleMotion, assignments, setAssignments }}
-    >
+    <SettingsContext.Provider value={{ theme, toggleTheme, motion, toggleMotion }}>
       {children}
     </SettingsContext.Provider>
   );
@@ -61,9 +43,7 @@ function SettingsProvider({ children }: { children: ReactNode }) {
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
-      <SettingsProvider>
-        {children}
-      </SettingsProvider>
+      <SettingsProvider>{children}</SettingsProvider>
     </AuthProvider>
   );
 }

@@ -1,61 +1,35 @@
 # Akoizo backlog
 
-The owner approved a preview first and deferred connection to Firebase and Turso. These items are explicit unfinished work, not working services hidden behind the preview.
+## Completed
 
-## P0 — Live identity, schools, and private data
+- [x] Remove public preview routes, fictional dashboard data, and sample rankings.
+- [x] Firebase email/password and Google login, signup, enrollment recovery, logout, and password-reset action.
+- [x] Server-verified roles and school memberships; student and instructor route guards.
+- [x] Private instructor invitation check and cryptographically random school credentials.
+- [x] Salted school-password hashing, enrollment rate limits, one-session reveal, and password rotation.
+- [x] Turso schema, account-specific dashboards, real roster and progress queries.
+- [x] Saved Division A/B/C choice and instructor options limited to the selected student's current division.
+- [x] 23-event 2027 B/C catalogs and supplied Florida A catalog (15 regular + 2 special).
+- [x] Seven navigable study-tool pages for each event, intentionally empty.
+- [x] Saved practice/ranked assignments with due dates, duplicate checks, removal, and student visibility.
+- [x] Public rankings using actual positive points and generated public learner aliases.
+- [x] Retain responsive themes, mascot, navigation, and existing visual design.
 
-- [ ] Connect Firebase email/password authentication and optionally Google sign-in. Implement verification, password reset, safe error messages, and logout. Verify Firebase ID tokens server-side and establish secure sessions.
-- [ ] Connect a Turso database. Add reviewed migrations for schools, school memberships, student profiles, events, progress, test attempts, assignments, and a points ledger.
-- [ ] Create instructor signup with the requested invitation password checked only by the server. Keep that value in a private environment variable; never bundle it in browser code. Add rate limits before opening registration.
-- [ ] Generate a random school name and cryptographically random joining password when an instructor completes signup. Store a salted password hash, provide a controlled reveal/rotation flow, and handle name collisions.
-- [ ] Require students to supply a valid school password and choose a division before accessing the authenticated study space. Partial Firebase signup must not grant school access.
-- [ ] Authorize school rankings, rosters, progress, and assignments with server-verified membership. Never trust a school ID or role from the browser. Test that one school cannot read or mutate another school's records.
-- [ ] Replace preview routes with real authenticated dashboards or keep them explicitly isolated. Never promote fictional scores or browser storage into real records.
-- [ ] Add secure sessions, CSRF protection for cookie-authenticated mutations, input validation, rate limiting, account recovery, account deletion, and a student-data retention policy before a public live launch.
+## Learning features requested for a later phase
 
-Acceptance: two real test schools can independently enroll students, instructors cannot see other schools, students cannot access instructor actions, and unauthenticated school APIs return 401/403. The public ranking exposes only the intended public profile fields.
+- [ ] Lessons and reviewed event-specific content; lesson completion totals and meaningful completion percentages.
+- [ ] Practice test engine with answer review and explanations.
+- [ ] Ranked test engine, server-authoritative grading, attempt policy, and idempotent points awards.
+- [ ] Automatic assignment completion for an eligible event/type test taken after assignment creation.
+- [ ] Practice question bank and vocab rush.
+- [ ] Notes/binder and cheatsheet generation with editable exports and event resource limits.
+- [ ] Permission/provenance tracking for all study resources and competition papers.
+- [ ] Annual event catalogs with historical season context and additional local Division A slates.
 
-## P1 — Lessons, practice, and ranked tests
+## Release work
 
-- [ ] Source old tournament tests with permission and record provenance/license, event, division, season, answers, and review status. Do not scrape or republish restricted papers.
-- [ ] Build lessons with meaningful completion tracking, accessibility, and event-specific content.
-- [ ] Build practice tests with answer review and explanations. Practice should not add ranked points.
-- [ ] Build reviewed new ranked tests, scoring rules, attempt limits, and server-authoritative scoring. Never let the client submit arbitrary points.
-- [ ] Create a transactional, idempotent points ledger; duplicate requests must not award points twice. Define ties and cross-event/division comparisons before ranking.
-- [ ] Replace sample global ranking with every enrolled member's public ranking; private school rankings must include only verified school members.
-- [ ] Implement instructor assignments across one or more events with a due date and test type. Completion means any eligible test in the assigned event/type after assignment, not a named test. Keep event choices restricted to the selected student's division.
-- [ ] Record overdue/completed states and decide timezone, late completion, and how reassignment works. Preview assignments currently use an unscheduled calendar date only.
-
-## P2 — Remaining study tools
-
-- [ ] Question bank with topics, difficulty, explanations, and provenance.
-- [ ] Vocab rush with an accessible non-timed option and reviewed vocabulary.
-- [ ] Notes/binder generator with editable output and downloads, grounded in the student's event and rules.
-- [ ] Cheatsheet generator respecting each event's allowed resource rules.
-- [ ] Add tailored experiences for study, lab, inquiry, and build events. Current classifications are UI hints, not definitive competition policy.
-- [ ] Configure school-specific Division A slates. Do not invent a national list of 23 A events.
-- [ ] Maintain annual event catalogs and preserve historical test season context.
-
-## P3 — Polish and release
-
-- [ ] Add additional mascot reactions for completed lessons and milestones once real actions exist.
-- [ ] If a later task needs a full eight-direction game character, author matching side/back views and export renderer-specific animation clips. The current reusable asset is a front-view 2D rig with smoothly changing gaze, not an eight-direction sprite pack.
-- [ ] Decide public profile fields, moderation/reporting, display-name rules, and opt-out policy for a student community.
-- [ ] Review with teachers and students; test screen readers, zoom, touch targets, low-power devices, and contrast across all themes/states.
-- [ ] Test live auth/database behavior in staging, add monitoring/error boundaries, backups, restore drills, and production security headers/CSP.
-- [ ] Connect the repository and environment variables to Vercel, verify the intended domain, and deploy after reviewing the live-vs-preview boundary.
-
-## Completed in this preview
-
-- [x] Responsive dark and light public landing, rankings, and mission pages.
-- [x] Ako v2: a reusable articulated character with fixed pivots, continuously interpolated head/eye/arm/tail motion, pointer-aware gaze, and click/tap/keyboard greeting.
-- [x] Upper-right angled corner placement, periodic gaze changes without flat mirroring, reference-matched beveled chrome title artwork, and upright headings.
-- [x] Mascot animation pauses off-screen and in hidden tabs; footer motion control and system reduced motion preserve a still pose and accessible greeting.
-- [x] Flat monochrome blue rat logo and favicon; blue accent palette across light and dark themes.
-- [x] Chrome type, holographic panel, orbital graphics, fine wireframe details, and scroll reveals inspired by the approved reference.
-- [x] Separate instructor/student entry designs; no live credential collection.
-- [x] Student and instructor demo dashboards, 23-event B/C catalogs, honest A setup state.
-- [x] All seven tool buttons with explicit coming-soon destinations.
-- [x] Filterable/searchable/paginated sample rankings; fictional school view inside student preview.
-- [x] Same-tab assignment preview with division validation and date validation.
-- [x] Documentation centralized under `documents/`, with root README and BACKLOG.
+- [ ] Interactive Google consent/provider/domain check using a real user's Google account.
+- [ ] Student-data retention/deletion, community moderation and public-ranking opt-out policy.
+- [ ] Teacher/student accessibility review, screen readers, and zoom checks.
+- [ ] Production monitoring, backup/restore procedures, security headers, and deployed-domain verification.
+- [ ] Configure hosting environment and deploy when requested.

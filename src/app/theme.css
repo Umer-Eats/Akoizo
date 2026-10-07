@@ -297,15 +297,15 @@
   .hero-copy .button {
     min-width: 0;
   }
-  .hero-preview-link {
+  .hero-explore-link {
     font-size: 0.8rem;
     padding: 12px 0;
     border-bottom: 1px solid var(--line-strong);
   }
-  .hero-preview-link span {
+  .hero-explore-link span {
     margin-left: 10px;
   }
-  .hero-preview-link:hover {
+  .hero-explore-link:hover {
     color: var(--accent);
   }
   .hero-access {
@@ -923,7 +923,7 @@
     padding: 36px;
     border-top: 3px solid var(--blue);
   }
-  .auth-card .preview-explainer {
+  .auth-card .enrollment-note {
     border-radius: 0;
     border-left: 1px solid var(--accent);
     font-size: 0.8rem;
@@ -1478,7 +1478,7 @@
       min-width: 0;
       padding-inline: 20px;
     }
-    .hero-preview-link {
+    .hero-explore-link {
       font-size: 0.75rem;
     }
     .hero-access {
@@ -1794,6 +1794,218 @@
     }
     .footer-top > div {
       gap: 12px;
+    }
+  }
+}
+
+/* Live accounts and school dashboards. */
+@layer components {
+  .loading-state {
+    padding: 70px 20px;
+    text-align: center;
+    color: var(--muted);
+  }
+  .account-ready,
+  .school-invite {
+    display: grid;
+    gap: 14px;
+  }
+  .account-actions,
+  .dashboard-actions,
+  .event-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .account-actions .button,
+  .dashboard-actions .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .enrollment-note {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .auth-fields input,
+  .auth-fields select {
+    width: 100%;
+  }
+  .form-error {
+    color: #ff919a;
+    line-height: 1.6;
+    margin: 16px 0;
+    overflow-wrap: anywhere;
+  }
+  [data-theme='light'] .form-error {
+    color: #a22238;
+  }
+  .form-success {
+    color: var(--accent);
+    line-height: 1.6;
+    margin: 16px 0;
+  }
+  .school-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: start;
+    padding: 30px;
+    border: 1px solid var(--line);
+    background: var(--panel-top);
+    margin: 12px 0 42px;
+    border-radius: 16px;
+  }
+  .school-panel h2 {
+    overflow-wrap: anywhere;
+    font-size: clamp(20px, 2.2vw, 28px);
+    margin: 10px 0;
+  }
+  .school-panel p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .school-invite label {
+    display: grid;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .school-invite textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 12px;
+    resize: vertical;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font:
+      12px/1.6 'IBM Plex Mono',
+      monospace;
+    overflow-wrap: anywhere;
+  }
+  .school-invite .source-note {
+    margin: 0;
+  }
+  .live-dashboard .dashboard-heading h1 {
+    font-size: clamp(30px, 3.3vw, 48px);
+    max-width: 800px;
+    overflow-wrap: anywhere;
+  }
+  .division-control,
+  .event-type-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .division-control select,
+  .event-type-filter select {
+    width: auto;
+    min-width: 140px;
+  }
+  .event-toolbar {
+    margin-bottom: 26px;
+    justify-content: space-between;
+  }
+  .event-toolbar .search-field {
+    flex: 1;
+    max-width: 600px;
+  }
+  .event-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .event-card-footer span {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  .event-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .live-dashboard .instructor-layout > section {
+    min-width: 0;
+  }
+  .live-dashboard .instructor-layout .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .assignment-panel > .tag {
+    margin-bottom: 18px;
+  }
+  .assignment-row {
+    flex-wrap: wrap;
+  }
+  .assignment-row > div {
+    min-width: 0;
+    flex: 1 1 240px;
+  }
+  .assignment-row h3,
+  .assignment-row p {
+    overflow-wrap: anywhere;
+  }
+  .assignment-row small {
+    display: block;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .student-list {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+  .student-row > span:nth-child(2) {
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .tool-card h3 {
+    overflow-wrap: anywhere;
+  }
+  .tool-placeholder {
+    min-height: 260px;
+  }
+  .table-wrap th[scope='row'] {
+    font-weight: 500;
+    text-align: left;
+  }
+  @media (max-width: 700px) {
+    .school-panel {
+      grid-template-columns: 1fr;
+      padding: 22px;
+      gap: 24px;
+    }
+    .dashboard-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .dashboard-heading {
+      align-items: start;
+    }
+    .event-toolbar {
+      align-items: stretch;
+    }
+    .event-toolbar .search-field {
+      flex-basis: 100%;
+    }
+    .event-type-filter {
+      justify-content: space-between;
+    }
+    .live-dashboard .stat-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .dashboard-tabs {
+      overflow-x: auto;
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+    .school-invite textarea {
+      font-size: 11px;
     }
   }
 }

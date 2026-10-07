@@ -1,21 +1,33 @@
 # Akoizo
 
-A free Science Olympiad study space with a chrome-and-pixel Y2K identity, Ako the animated male pixel-art lab rat, blue accents, and matching light and dark themes.
+A free Science Olympiad study space with separate student and instructor accounts, a chrome-and-pixel visual identity, and Ako the animated lab rat.
 
-## Current status
+## Working pages
 
-**This version is a working design preview.** Per the project owner's request, Firebase and Turso will be connected later. No account is created, no password is collected, and no real student data or ranked points are stored. All dashboard members, progress, and leaderboard scores are fictional. Study tools intentionally lead to coming-soon pages.
+Firebase handles email/password and Google authentication. Turso stores schools, verified school membership, student divisions, assignments, and progress records. There are no public preview dashboards or fictional students and scores.
+
+- `/login/student` and `/login/instructor`: login, signup, password reset, and recovery of unfinished enrollment.
+- `/dashboard/student`: saved A/B/C division, searchable event catalog, assignments, and progress.
+- `/dashboard/student/events/[eventId]`: seven study-tool buttons for the selected event.
+- `/dashboard/student/events/[eventId]/[toolId]`: intentionally empty study-tool pages.
+- `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
+- `/rankings`: earned points only, using generated public learner names. Empty until ranked tests launch.
+- `/` and `/mission`: public landing and mission pages.
+
+Instructor enrollment checks the private invitation setting before creating school membership. Successful signup generates a random school name and joining password. Students must supply that password before accessing a dashboard. The instructor can generate a replacement password; existing students stay enrolled. School passwords are stored as salted hashes and only shown in the session that creates them.
+
+Study engines are deliberately not implemented yet: lessons, practice tests, ranked tests, practice question bank, vocab rush, notes/binder generator, and cheatsheet generator. New accounts show zero activity. Assignments save across accounts and reloads; completing them will depend on the future test engine.
 
 ## Run locally
 
-Use Node.js 24+ and npm. Open this folder in VS Code, then run:
+Use Node.js 24+ and npm. Copy `.env.example` to `.env.local` and configure Firebase and Turso as described in [service setup](documents/SERVICE_SETUP.md). Existing local credentials are reused.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:3000. No environment variables are needed for the preview. If port 3000 is occupied, follow the address printed by Next.js.
+Open the address printed by Next.js (normally `http://127.0.0.1:3000`).
 
 ```sh
 npm run typecheck
@@ -24,58 +36,35 @@ npm run build
 npm start
 ```
 
-The browser checks require a running server on port 3000 and locally installed Google Chrome:
+The schema and season catalog initialize idempotently on the first service request. No sample accounts or scores are seeded. All private APIs verify Firebase tokens and school membership independently of browser navigation.
+
+## Verification
+
+`npm test` covers enrollment, password hashing/rotation, cross-school and cross-role authorization, assignment dates and divisions, persistent division changes, progress queries, and the mascot rig.
+
+The browser check expects a local server on port 3002 by default; set `TEST_BASE_URL` to use another address. It requires installed Google Chrome.
 
 ```sh
+npm run start -- --port 3002
 npm run test:browser
 ```
 
-They use a fresh headless browser and write ignored screenshots under `documents/qa/`. Chrome is used for verification only, not required for site visitors. The Playwright script can be changed to another installed browser channel if needed.
+For an integration run that creates and then deletes its own temporary Firebase and Turso records:
 
-## Explore
-
-| Route                                                        | Experience                                                                                                   |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `/`                                                          | Spacious animated landing page; interactive sample science question                                          |
-| `/mission`                                                   | Free learning, practice, and community mission                                                               |
-| `/rankings`                                                  | Public sample leaderboard; division filter, search, pagination                                               |
-| `/login/student`                                             | Student login/signup design; link to sample dashboard                                                        |
-| `/login/instructor`                                          | Instructor login/signup design; link to sample dashboard                                                     |
-| `/preview/student`                                           | Division A/B/C selection, event catalog, seven tool entry points, assignments, school/global sample rankings |
-| `/preview/instructor`                                        | Sample roster, per-student progress, division-specific assignment preview                                    |
-| `/preview/student/events/[eventId]?division=C`               | Tools for a selected event                                                                                   |
-| `/preview/student/tools/[toolId]?division=C&event=astronomy` | Clearly marked unimplemented study tool                                                                      |
-
-Instructor preview assignments persist in `sessionStorage` **within the same browser tab** and can be removed. Switching to the student preview in that tab shows assignments for that sample student. The sample student shown for Division C is Alex, Division B is Drew, and Division A is Sky. No changes reach another person, browser, or server.
-
-Ako peeks into the landing page from the upper-right corner at an angle. His reusable articulated rig continuously animates his head, eyes, arms, and tail. He looks around, follows nearby pointer movement, and gives a jointed wave when clicked, tapped, or activated with Enter/Space. The title uses broad beveled chrome artwork based on the supplied reference; headings use upright text. His animation pauses when he is off-screen or the tab is hidden. The footer motion toggle and the system's reduced-motion setting show a still pose while keeping his greeting available. Theme and motion preferences are stored on the device. See [Ako's animation](documents/MASCOT_ANIMATION.md) for the reusable parts, joint timing, and artwork provenance.
-
-## Project structure
-
-```text
-src/app/           Pages, shared layout, styles
-src/components/    UI and preview interactions
-src/lib/           Event catalog and fictional demo data
-public/art/        Generated mascot art and archived source artwork
-scripts/           Browser verification helpers
-tests/             Domain checks for event lists, rankings, assignments
-documents/         Feature specifications, design decisions, service setup, QA notes
-README.md          Getting started
-BACKLOG.md         Remaining work and acceptance criteria
+```sh
+node scripts/browser-check.mjs --live
 ```
 
-All feature Markdown belongs in `documents/`, never next to feature components. README and BACKLOG are the root-level project entry points.
+Use a staging project for repeated live verification. Screenshots are saved under ignored `documents/qa/`. See [verification](documents/VERIFICATION.md).
 
-## Stack and deployment
+## Events
 
-Next.js App Router, React, TypeScript, authored CSS, Lucide icons, locally packaged fonts. Exact dependency versions and the lockfile are checked in. The project is prepared for Vercel's standard Next.js build, but **has not been deployed**.
+Division B and C each use the official 2027 slate of 23 events. Division A follows the supplied **2027 Florida Elementary Science Olympiad manual**: 15 regular events and 2 explicitly marked special events. Special event availability varies by tournament. Event types guide preparation; they do not replace competition rules. See [product scope and sources](documents/FEATURES.md).
 
-To publish the preview later, import its Git repository into Vercel, choose Next.js, and use the repository root. The defaults run `npm run build`; do not configure a static export. Confirm that fictional-data labels and disabled live login are still visible. To make this a live application, complete the service and authorization work in [BACKLOG.md](BACKLOG.md) first. Adding environment variables alone will not activate accounts or rankings.
+## Structure
 
-See [service setup](documents/SERVICE_SETUP.md), [product scope](documents/FEATURES.md), [design and motion](documents/DESIGN.md), and [verification](documents/VERIFICATION.md).
+`src/app/` contains pages and server APIs; `src/components/` contains UI; `src/lib/` contains the event catalog, authorization, data model, and school services. `tests/` covers business rules and persistence with an isolated SQLite database. Feature documentation lives in `documents/`.
 
-## Event content
+The Next.js application is ready for standard server deployment. It has not been deployed by this task. Configure service secrets and Firebase authorized domains on the host; do not use a static export. Remaining content and release work is tracked in [BACKLOG.md](BACKLOG.md).
 
-The catalog uses the official **2027 season** Division B and C event names (23 each). Division A is deliberately empty until a school-specific local slate is supplied. Events, names, and rules change by season. See the sources and review date in [FEATURES.md](documents/FEATURES.md). No competition papers or copyrighted study resources have been copied into this project.
-
-Akoizo is an independent learning project, not affiliated with Science Olympiad, Inc.
+Akoizo is independent and is not affiliated with Science Olympiad, Inc.

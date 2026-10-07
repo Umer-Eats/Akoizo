@@ -1,37 +1,31 @@
-# Product scope and feature behavior
+# Product scope and behavior
 
-## Preview boundary
+## Accounts and dashboards
 
-This version contains no backend identity or persistence. `/preview/*` pages are intentionally public demonstrations using fictional data. The visual school ranking is not an access-control implementation. No real user or school data belongs in `src/lib/demo.ts` or browser storage.
+The previous `/preview/*` routes and demo data are removed. Landing links now open protected study routes. Students and instructors sign in with Firebase email/password or Google. Incomplete enrollment remains recoverable but cannot access school data.
 
-## Public pages
+Instructor signup requires the private invitation password and creates a random school name and joining password. Students choose A/B/C and provide the school password. School/role authorization runs on the server for all data requests.
 
-- Landing: wide beveled chrome title with Ako peeking diagonally from the page's upper-right corner, concise opening, scroll-driven learning/practice/community sections, and one small interactive science example. No dashboard wall before login.
-- Branding: flat monochrome blue rat SVG in the header, footer, and browser tab; blue accents in both themes.
-- Mascot: Ako is the male lab rat. A reusable articulated rig animates his head, eyelids, pupils, shoulders, elbow, and tail continuously. He looks around and follows nearby pointer movement; click, tap, or keyboard activation plays a smoothly blended wave. Off-screen/hidden-tab animation pauses, and reduced motion or the footer motion switch leaves him still. See [animation behavior](MASCOT_ANIMATION.md).
-- Typography: headings and study-tool/event titles use upright text; the previous italic heading accents are removed.
-- Header: Global Rankings and Mission on the left; Student login and Instructor login on the right. Mobile menu offers the same routes.
-- Mission: free access to study tools, confidence through practice, shared progress.
-- Rankings: all sample members by default; division filter, member/school search, and pagination. Filtering by division recomputes ordinal ranks; searching retains those ranks. Tie sorting is deterministic by handle for this sample only. A live points/tie policy is still required.
+The student dashboard shows its own real lesson completions, practice/ranked test counts, total points, assignments, and event catalog. A division change is saved to the account. Each event has seven buttons: lessons, practice tests, ranked tests, practice question bank, vocab rush, notes/binder generator, and cheatsheet generator. The destinations are intentionally empty until the learning features are built.
 
-## Students
+The instructor dashboard contains only its school's students. Selecting a student changes the event list and progress table to that student's current division. Instructors can assign an event, Practice/Ranked type, and due date, without selecting a particular test. Assignments persist in Turso and appear in the assigned student's account. Progress starts at zero and will reflect stored completion records once learning tools launch.
 
-The preview can switch A/B/C to inspect all designs. A live student will belong to a school and division verified by the server. Lessons, practice tests, ranked tests, question bank, vocab rush, notes/binder, and cheatsheet all have navigable placeholders. Nothing generates real tests or points yet.
+The public rankings page displays only actual earned points with generated public learner names. It has an empty state until points exist. No fictional ranking remains.
 
-## Instructors
+## Catalog and sources
 
-Selecting a sample student updates lesson completion, tests completed, points, and assignment choices. The selected student's division determines the available event list. One preview assignment specifies student, event, practice/ranked type, and due date. Duplicate identical assignments are rejected. Removal is supported. Assignments are kept in this browser tab's session storage, shared between the two preview routes, not between users.
+Reviewed October 6, 2026 for the 2027 competition season:
 
-## Live enrollment requirements
+- [Official 2027 Division B list](https://www.soinc.org/events/2027-division-b-events): 23 events.
+- [Official 2027 Division C list](https://www.soinc.org/events/2027-division-c-events): 23 events.
+- [User-supplied 2027 Florida Elementary Science Olympiad manual](https://docs.google.com/document/d/1gji19ZeWW5H_yfTI2mwR4Rboskdwyv27N6BfrShAjR8/edit?tab=t.0): 15 regular Division A events plus 2 special events.
 
-Instructor signup will require the user-requested invitation password, then generate a random school name and joining password. Student signup must validate the school password before access. The actual invitation value is intentionally excluded from source and documentation and must be set as a server-only secret. Firebase authentication alone does not confer school membership or instructor privileges.
+Division A regular events: Aerodynamics; A Matter of Matter; Chew the Fat; Crave the Wave; Crimebusters; Deep Blue Sea; Fast Facts; Metric Mastery; Mission Possible; Mystery Packaging; ProGamers; Rock Hound; Tennis Ball Catapult; Weather Permitting; Write It, Do It.
 
-## Event catalog
+Special events: Shelby Jacobs Rocketry and Professor Jensen’s Potions. The latter's rules specify the Orlando tournament and no contribution to overall team standings. Both are explicitly labeled special in the catalog and assignment chooser. Their availability depends on the tournament.
 
-Reviewed October 5, 2026 for the 2027 competition season. Each B/C slate contains 23 unique event IDs. Names are grounded in:
+The manual's event rules inform the UI's Study/Build/Lab/Skill types; these are preparation categories, not replacements for the manual's competition rules. ProGamers uses Scratch; Write It, Do It emphasizes communication and construction. Notes/binder and cheatsheet tools must respect the event's actual allowed-resource rules when implemented.
 
-- [Official 2027 Division B events](https://www.soinc.org/events/2027-division-b-events)
-- [Official 2027 Division C events](https://www.soinc.org/events/2027-division-c-events)
-- [Official B/C overview](https://www.soinc.org/bc-events)
+## Existing design
 
-Division A remains unconfigured because a local event slate has not been supplied. Event category and study/build/lab tags organize the preview; rules and allowed study resources must be reviewed per event before tools are delivered.
+The responsive dark/light visual system, public mission and landing content, local fonts, blue rat logo, and animated Ako rig are retained. Theme and motion preferences remain local device settings. Account data and assignments are not kept in browser session storage.

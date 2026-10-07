@@ -7,7 +7,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 const errors = [];
 page.on('pageerror', (error) => errors.push(error.message));
-const base = 'http://127.0.0.1:3000';
+const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3002';
 const style = (selector, property, pseudo = null) =>
   page
     .locator(selector)
@@ -44,7 +44,7 @@ try {
   assert.equal(await style('.diagram-bars i', 'animation-name'), 'none');
   assert.equal(await style('.specimen-scan', 'display'), 'none');
   await page.getByRole('button', { name: 'Motion off', exact: true }).click();
-  for (const route of ['/mission', '/login/student', '/rankings', '/preview/student']) {
+  for (const route of ['/mission', '/login/student', '/rankings', '/login/instructor']) {
     await page.goto(base + route);
     const scene =
       route === '/mission'

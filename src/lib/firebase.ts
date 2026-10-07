@@ -15,10 +15,14 @@ function initializeFirebase() {
   if (app) return;
 
   // Check if all required config values are present
-  const hasConfig = firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId && firebaseConfig.appId;
-  
+  const hasConfig =
+    firebaseConfig.apiKey &&
+    firebaseConfig.authDomain &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId;
+
   if (!hasConfig) {
-    // Return null for preview mode - no Firebase initialization
+    // Public pages can render before the site owner configures authentication.
     return;
   }
 
@@ -34,7 +38,9 @@ function initializeFirebase() {
 export function getApp(): FirebaseApp {
   initializeFirebase();
   if (!app) {
-    throw new Error('Firebase not configured. Set NEXT_PUBLIC_FIREBASE_API_KEY, NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, NEXT_PUBLIC_FIREBASE_PROJECT_ID, and NEXT_PUBLIC_FIREBASE_APP_ID environment variables.');
+    throw new Error(
+      'Firebase not configured. Set NEXT_PUBLIC_FIREBASE_API_KEY, NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, NEXT_PUBLIC_FIREBASE_PROJECT_ID, and NEXT_PUBLIC_FIREBASE_APP_ID environment variables.',
+    );
   }
   return app;
 }
@@ -42,7 +48,9 @@ export function getApp(): FirebaseApp {
 export function getAuthInstance(): Auth {
   initializeFirebase();
   if (!auth) {
-    throw new Error('Firebase not configured. Set NEXT_PUBLIC_FIREBASE_API_KEY, NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, NEXT_PUBLIC_FIREBASE_PROJECT_ID, and NEXT_PUBLIC_FIREBASE_APP_ID environment variables.');
+    throw new Error(
+      'Firebase not configured. Set NEXT_PUBLIC_FIREBASE_API_KEY, NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN, NEXT_PUBLIC_FIREBASE_PROJECT_ID, and NEXT_PUBLIC_FIREBASE_APP_ID environment variables.',
+    );
   }
   return auth;
 }

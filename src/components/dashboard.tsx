@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   BookOpen,
@@ -11,13 +11,30 @@ import {
   Search,
   ChevronLeft,
   Clock3,
-  Telescope,
+  Users,
+  RefreshCw,
+  Copy,
+  Check,
 } from 'lucide-react';
-import { eventsForDivision, tools, type Division } from '@/lib/events';
-import { members, validateAssignment, type Assignment } from '@/lib/demo';
-import { RankingTable } from './rankings';
-import { useSettings } from './providers';
-import { Mascot } from './art';
+import {
+  elementaryManualUrl,
+  eventsForDivision,
+  eventFocus,
+  tools,
+  type Division,
+  type ScienceEvent,
+} from '@/lib/events';
+import {
+  dateInZone,
+  type Assignment,
+  type DashboardData,
+  type EventProgress,
+  type Profile,
+  type SchoolCredentials,
+  type Stats,
+  type Student,
+} from '@/lib/domain';
+import { useAuth, authMessage } from './auth-context';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -26,30 +43,110 @@ const icons = {
   bolt: Zap,
   folder: FolderOpen,
 };
-export function DemoNotice() {
+
+function useDashboard() {
+  const { request, profile } = useAuth();
+  const [data, setData] = useState<DashboardData | null>(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const version = useRef(0);
+  const refresh = useCallback(async () => {
+    const revision = ++version.current;
+    setLoading(true);
+    setError('');
+    try {
+      const next = await request<DashboardData>('/api/dashboard');
+      if (version.current === revision) setData(next);
+    } catch (error) {
+      if (version.current === revision) setError(authMessage(error));
+    } finally {
+      if (version.current === revision) setLoading(false);
+    }
+  }, [request]);
+  useEffect(() => {
+    void refresh();
+    return () => {
+      version.current++;
+    };
+  }, [refresh, profile?.id, profile?.division]);
+  useEffect(() => {
+    const focus = () => {
+      void refresh();
+    };
+    window.addEventListener('focus', focus);
+    return () => window.removeEventListener('focus', focus);
+  }, [refresh]);
+  return {
+    data:
+      data?.profile.id === profile?.id && data?.profile.division === profile?.division
+        ? data
+        : null,
+    error,
+    loading,
+    refresh,
+  };
+}
+function LoadState({ error, retry }: { error: string; retry: () => void }) {
   return (
-    <div className="notice">
-      <span>
-        <strong>DESIGN PREVIEW</strong> Fictional students and scores. No real accounts or points.
-      </span>
-      <Link href="/">Back to home</Link>
+    <main id="main" className="page-container">
+      <div className="empty-state">
+        {error ? (
+          <>
+            <h1>Couldn’t load your dashboard.</h1>
+            <p role="alert">{error}</p>
+            <button className="button button-primary" onClick={retry}>
+              Try again
+            </button>
+          </>
+        ) : (
+          <p role="status">Loading your school…</p>
+        )}
+      </div>
+    </main>
+  );
+}
+function StatsGrid({ stats }: { stats: Stats }) {
+  return (
+    <div className="stat-grid">
+      {(
+        [
+          ['lessons', 'Lessons completed', 'Your learning progress'],
+          ['practice', 'Practice tests', 'Completed tests'],
+          ['ranked', 'Ranked tests', 'Completed tests'],
+          ['points', 'Total points', 'Earned through ranked tests'],
+        ] as const
+      ).map(([key, name, hint]) => (
+        <div className="stat-card" key={key}>
+          <span>{name}</span>
+          <strong>{stats[key].toLocaleString('en-US')}</strong>
+          <small>{hint}</small>
+        </div>
+      ))}
     </div>
   );
 }
-export function ToolsGrid({ division, eventId }: { division: Division; eventId?: string }) {
+function RefreshButton({ loading, refresh }: { loading: boolean; refresh: () => void }) {
+  return (
+    <button className="button button-small button-glass" onClick={refresh} disabled={loading}>
+      <RefreshCw size={15} />
+      {loading ? 'Refreshing…' : 'Refresh'}
+    </button>
+  );
+}
+export function ToolsGrid({ event }: { event: ScienceEvent }) {
   return (
     <div className="dashboard-tools">
-      {tools.map((t) => {
-        const Icon = icons[t.icon];
+      {tools.map((tool) => {
+        const Icon = icons[tool.icon];
         return (
           <Link
             className="tool-card"
-            href={`/preview/student/tools/${t.id}?division=${division}${eventId ? `&event=${eventId}` : ''}`}
-            key={t.id}
+            href={`/dashboard/student/events/${event.id}/${tool.id}`}
+            key={tool.id}
           >
             <Icon strokeWidth={1.3} />
-            <h3>{t.name}</h3>
-            <p>{t.description}</p>
+            <h3>{tool.name}</h3>
+            <p>{tool.description}</p>
             <span className="tag">COMING SOON</span>
           </Link>
         );
@@ -57,480 +154,638 @@ export function ToolsGrid({ division, eventId }: { division: Division; eventId?:
     </div>
   );
 }
+function EventCatalog({ division }: { division: Division }) {
+  const [query, setQuery] = useState('');
+  const [type, setType] = useState('All');
+  const events = eventsForDivision(division);
+  const matches = events.filter(
+    (event) =>
+      `${event.name} ${event.category}`.toLowerCase().includes(query.toLowerCase()) &&
+      (type === 'All' || event.type === type),
+  );
+  return (
+    <>
+      <div className="dashboard-section-title">
+        <h2>Find your event.</h2>
+        <span className="tag">
+          {division === 'A' ? 'FLORIDA · 15 EVENTS + 2 SPECIAL' : '2027 SEASON · 23 EVENTS'}
+        </span>
+      </div>
+      <div className="event-toolbar">
+        <label className="search-field">
+          <span className="sr-only">Search events</span>
+          <Search size={16} />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Find an event or subject"
+          />
+        </label>
+        <label className="event-type-filter">
+          Event type
+          <select aria-label="Event type" value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="All">All types</option>
+            {['Study', 'Build', 'Lab', 'Skill'].map((value) => (
+              <option key={value}>{value}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="event-grid">
+        {matches.map((event) => (
+          <Link
+            className="event-card"
+            href={`/dashboard/student/events/${event.id}`}
+            key={event.id}
+          >
+            <span className="eyebrow">{event.category.toUpperCase()}</span>
+            <h3>{event.name}</h3>
+            <div className="event-card-footer">
+              <span>
+                DIVISION {division} · {event.type.toUpperCase()}
+                {event.special ? ' · SPECIAL' : ''}
+              </span>
+            </div>
+          </Link>
+        ))}
+      </div>
+      {!matches.length && (
+        <div className="empty-state">
+          <h3>No matching events.</h3>
+          <button
+            className="text-link"
+            onClick={() => {
+              setQuery('');
+              setType('All');
+            }}
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
+      <p className="source-note">
+        {division === 'A' ? (
+          <>
+            Events follow your{' '}
+            <a href={elementaryManualUrl} target="_blank" rel="noreferrer">
+              2027 Florida Elementary manual
+            </a>
+            . Special event availability depends on your tournament.
+          </>
+        ) : (
+          <>
+            Events follow the{' '}
+            <a
+              href={`https://www.soinc.org/events/2027-division-${division.toLowerCase()}-events`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              official 2027 Division {division} slate
+            </a>
+            .
+          </>
+        )}{' '}
+        All seven study tools have their own pages; content is coming next.
+      </p>
+    </>
+  );
+}
 function AssignmentList({
-  studentId,
-  editable = false,
+  assignments,
+  division,
+  remove,
+  pending,
 }: {
-  studentId?: string;
-  editable?: boolean;
+  assignments: Assignment[];
+  division?: Division;
+  remove?: (id: string) => void;
+  pending?: string;
 }) {
-  const { assignments, setAssignments } = useSettings();
-  const rows = assignments.filter((a) => !studentId || a.studentId === studentId);
-  return rows.length ? (
+  const today = dateInZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  if (!assignments.length)
+    return (
+      <div className="empty-state">
+        <Clock3 size={26} />
+        <h3>No assignments yet.</h3>
+        <p>
+          {remove
+            ? 'Choose a student, event, test type, and due date to get started.'
+            : 'Assignments from your instructor will appear here.'}
+        </p>
+      </div>
+    );
+  return (
     <div className="assignment-list">
-      {rows.map((a) => (
-        <article className="assignment-row" key={a.id}>
+      {assignments.map((assignment) => (
+        <article className="assignment-row" key={assignment.id}>
           <Clock3 size={20} />
           <div>
-            <h3>{a.eventName}</h3>
+            <h3>{assignment.eventName}</h3>
             <p>
-              {members.find((m) => m.id === a.studentId)?.name} · Division {a.division} · Complete
-              any 1 {a.type.toLowerCase()} test · Due {a.due}
+              {remove ? `${assignment.studentName} · ` : ''}Division {assignment.division} ·
+              Complete any 1 {assignment.type.toLowerCase()} test · Due{' '}
+              <time dateTime={assignment.due}>{assignment.due}</time>
             </p>
+            {division && division !== assignment.division && (
+              <small>
+                Assigned in Division {assignment.division}. Switch to that division to open this
+                event.
+              </small>
+            )}
           </div>
-          <span className="tag">{a.type.toUpperCase()}</span>
-          {editable && (
+          <span className="tag">
+            {assignment.completedAt
+              ? 'COMPLETED'
+              : assignment.due < today
+                ? 'OVERDUE'
+                : assignment.type.toUpperCase()}
+          </span>
+          {remove && !assignment.completedAt ? (
             <button
-              aria-label={`Remove ${a.eventName} assignment`}
-              onClick={() => setAssignments(assignments.filter((item) => item.id !== a.id))}
+              disabled={!!pending}
+              onClick={() => remove(assignment.id)}
+              aria-label={`Remove ${assignment.eventName} ${assignment.type.toLowerCase()} assignment`}
             >
-              Remove
+              {pending === assignment.id ? 'Removing…' : 'Remove'}
             </button>
-          )}
+          ) : division === assignment.division && !assignment.completedAt ? (
+            <Link
+              className="text-link"
+              href={`/dashboard/student/events/${assignment.eventId}/${assignment.type === 'Practice' ? 'practice-tests' : 'ranked-tests'}`}
+            >
+              Open event
+            </Link>
+          ) : null}
         </article>
       ))}
     </div>
-  ) : (
-    <div className="empty-state">
-      <Clock3 size={25} />
-      <h3>A little space to get started.</h3>
-      <p>No preview assignments yet. Try assigning one from the instructor preview.</p>
-      <Link className="text-link" href="/preview/instructor">
-        Explore instructor preview
-      </Link>
+  );
+}
+function ProgressTable({ progress }: { progress: EventProgress[] }) {
+  return (
+    <div className="table-wrap" role="region" aria-label="Event progress" tabIndex={0}>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">EVENT</th>
+            <th scope="col">LESSONS COMPLETED</th>
+            <th scope="col">PRACTICE TESTS</th>
+            <th scope="col">RANKED TESTS</th>
+            <th scope="col">POINTS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {progress.map((event) => (
+            <tr key={event.eventId}>
+              <th scope="row">{event.eventName}</th>
+              <td>{event.lessons}</td>
+              <td>{event.practice}</td>
+              <td>{event.ranked}</td>
+              <td>{event.points}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 export function StudentDashboard() {
-  const [division, setDivision] = useState<Division>('C');
+  const { profile, request, refreshProfile } = useAuth();
+  const { data, error, loading, refresh } = useDashboard();
   const [tab, setTab] = useState('study');
-  const [query, setQuery] = useState('');
-  const events = eventsForDivision(division);
-  const student = members.find((m) => m.school === 'Cedar Academy' && m.division === division)!;
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
+  async function changeDivision(division: string) {
+    setSaving(true);
+    setSaveError('');
+    try {
+      await request<Profile>('/api/auth/profile', {
+        method: 'PATCH',
+        body: JSON.stringify({ division }),
+      });
+      await refreshProfile();
+    } catch (error) {
+      setSaveError(authMessage(error));
+    } finally {
+      setSaving(false);
+    }
+  }
+  if (!data) return <LoadState error={error} retry={refresh} />;
+  const division = profile!.division!;
   return (
-    <main id="main" className="page-container">
-      <DemoNotice />
+    <main id="main" className="page-container live-dashboard">
       <div className="dashboard-heading">
         <div>
-          <p className="eyebrow">CEDAR ACADEMY / YOUR STUDY SPACE</p>
-          <h1>Stay curious, {student.name.split(' ')[0]}.</h1>
-          <p>A little progress today. A brighter possibility tomorrow.</p>
+          <p className="eyebrow">STUDENT / {profile!.schoolName}</p>
+          <h1>Your space to grow, {profile!.displayName}.</h1>
+          <p>A new question. A little practice. One step further.</p>
         </div>
-        <label className="division-select">
-          Preview division
-          <select
-            aria-label="Preview division"
-            value={division}
-            onChange={(e) => {
-              setDivision(e.target.value as Division);
-              setQuery('');
-            }}
-          >
-            <option value="A">Division A</option>
-            <option value="B">Division B</option>
-            <option value="C">Division C</option>
-          </select>
-        </label>
-      </div>
-      <div className="stat-grid">
-        <div className="stat-card">
-          <span>Lesson progress</span>
-          <strong>{student.lessons}%</strong>
-          <div className="progress-track">
-            <span style={{ width: `${student.lessons}%` }} />
-          </div>
-        </div>
-        <div className="stat-card">
-          <span>Practice tests</span>
-          <strong>{student.practice}</strong>
-          <small>Sample completions</small>
-        </div>
-        <div className="stat-card">
-          <span>Ranked tests</span>
-          <strong>{student.ranked}</strong>
-          <small>Sample completions</small>
-        </div>
-        <div className="stat-card">
-          <span>Total points</span>
-          <strong>{student.points.toLocaleString('en-US')}</strong>
-          <small>Sample score</small>
+        <div className="dashboard-actions">
+          <label className="division-control">
+            Your division
+            <select
+              aria-label="Your division"
+              value={division}
+              disabled={saving}
+              onChange={(e) => changeDivision(e.target.value)}
+            >
+              {(['A', 'B', 'C'] as const).map((value) => (
+                <option key={value} value={value}>
+                  Division {value}
+                </option>
+              ))}
+            </select>
+          </label>
+          <RefreshButton loading={loading} refresh={refresh} />
         </div>
       </div>
+      {(error || saveError) && (
+        <p className="form-error" role="alert">
+          {error || saveError}
+        </p>
+      )}
+      <StatsGrid stats={data.stats} />
       <div className="tabs dashboard-tabs" aria-label="Student dashboard view">
         {[
           ['study', 'Study space'],
-          ['assignments', 'Assignments'],
-          ['school', 'My school'],
-          ['global', 'Global rankings'],
+          ['assignments', `Assignments (${data.assignments.filter((a) => !a.completedAt).length})`],
+          ['progress', 'My progress'],
         ].map(([id, name]) => (
-          <button aria-pressed={tab === id} key={id} onClick={() => setTab(id)}>
+          <button key={id} aria-pressed={tab === id} onClick={() => setTab(id)}>
             {name}
           </button>
         ))}
       </div>
-      {tab === 'study' && (
-        <>
-          <div className="dashboard-section-title">
-            <h2>Find your event.</h2>
-            <span className="tag">
-              {division === 'A' ? 'LOCAL EVENT LIST' : `2027 SEASON · ${events.length} EVENTS`}
-            </span>
-          </div>
-          {division === 'A' ? (
-            <div className="empty-state">
-              <Telescope />
-              <h3>Small beginnings. Big discoveries.</h3>
-              <p>
-                Division A events vary by local program. Your instructor will add your school’s
-                event list here.
-              </p>
-            </div>
-          ) : (
-            <>
-              <label className="search-field" style={{ display: 'block', marginBottom: 22 }}>
-                <span className="sr-only">Search events</span>
-                <Search size={16} />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Find an event or subject"
-                />
-              </label>
-              <div className="event-grid">
-                {events
-                  .filter((e) =>
-                    `${e.name} ${e.category}`.toLowerCase().includes(query.toLowerCase()),
-                  )
-                  .map((e) => (
-                    <Link
-                      className="event-card"
-                      href={`/preview/student/events/${e.id}?division=${division}`}
-                      key={e.id}
-                    >
-                      <span className="eyebrow">{e.category.toUpperCase()}</span>
-                      <h3>{e.name}</h3>
-                      <span>
-                        DIVISION {division} · {e.type.toUpperCase()}
-                      </span>
-                    </Link>
-                  ))}
-              </div>
-              {!events.some((e) =>
-                `${e.name} ${e.category}`.toLowerCase().includes(query.toLowerCase()),
-              ) && (
-                <div className="empty-state">
-                  <h3>No events found.</h3>
-                  <button className="text-link" onClick={() => setQuery('')}>
-                    Clear search
-                  </button>
-                </div>
-              )}
-              <p className="source-note">
-                Event names follow the{' '}
-                <a
-                  href={`https://www.soinc.org/events/2027-division-${division.toLowerCase()}-events`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  official 2027 Division {division} list
-                </a>
-                . Study content is in development.
-              </p>
-            </>
-          )}
-          <div className="dashboard-section-title">
-            <h2>Your study toolkit.</h2>
-          </div>
-          <ToolsGrid division={division} />
-        </>
-      )}
+      {tab === 'study' && <EventCatalog key={division} division={division} />}
       {tab === 'assignments' && (
         <>
           <div className="dashboard-section-title">
             <h2>Your next steps.</h2>
-            <span className="tag">THIS TAB’S PREVIEW ONLY</span>
+            <span className="tag">FROM YOUR INSTRUCTOR</span>
           </div>
-          <AssignmentList studentId={student.id} />
+          <AssignmentList assignments={data.assignments} division={division} />
+          <p className="source-note">
+            Test pages are ready for future content. Assignment completion will be recorded when the
+            test tools launch.
+          </p>
         </>
       )}
-      {(tab === 'school' || tab === 'global') && (
+      {tab === 'progress' && (
         <>
           <div className="dashboard-section-title">
-            <h2>{tab === 'school' ? 'Your school, your team.' : 'Curious minds, everywhere.'}</h2>
+            <h2>Every step counts.</h2>
+            <span className="tag">DIVISION {division}</span>
           </div>
-          {tab === 'school' && (
-            <p className="source-note" style={{ margin: '0 0 25px' }}>
-              Fictional Cedar Academy members. In the live site, this view will be restricted to
-              authenticated members of your school.
-            </p>
-          )}
-          <RankingTable
-            key={`${tab}-${division}`}
-            initialDivision={division}
-            school={tab === 'school' ? 'Cedar Academy' : undefined}
-          />
+          <ProgressTable progress={data.progress[profile!.id] || []} />
+          <p className="source-note">
+            Completed lessons, tests, and points will appear here when the study tools launch.
+          </p>
         </>
       )}
     </main>
+  );
+}
+function SchoolPanel() {
+  const { profile, credentials: initial, clearCredentials, request } = useAuth();
+  const [credentials, setCredentials] = useState<SchoolCredentials | null>(initial);
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
+  async function rotate() {
+    setBusy(true);
+    setError('');
+    setCopied(false);
+    try {
+      setCredentials(await request<SchoolCredentials>('/api/school/password', { method: 'POST' }));
+      clearCredentials();
+    } catch (error) {
+      setError(authMessage(error));
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(credentials!.joiningPassword);
+      setCopied(true);
+    } catch {
+      setError('Select and copy the password from the field below.');
+    }
+  }
+  return (
+    <section className="school-panel">
+      <div>
+        <span className="eyebrow">YOUR SCHOOL</span>
+        <h2>{profile!.schoolName}</h2>
+        <p>Share your school password with students so they can join your roster.</p>
+      </div>
+      <div className="school-invite">
+        {credentials ? (
+          <>
+            <label>
+              Student joining password
+              <textarea readOnly value={credentials.joiningPassword} rows={2} />
+            </label>
+            <p className="source-note">Save this password now. It is only shown in this session.</p>
+            <div className="account-actions">
+              <button className="button button-small button-primary" onClick={copy}>
+                {copied ? <Check size={15} /> : <Copy size={15} />}
+                {copied ? 'Copied' : 'Copy password'}
+              </button>
+              <button
+                className="text-link"
+                onClick={() => {
+                  setCredentials(null);
+                  clearCredentials();
+                }}
+              >
+                I’ve saved it
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <button className="button button-glass" disabled={busy} onClick={rotate}>
+              {busy ? 'Creating…' : 'Create new joining password'}
+            </button>
+            <p className="source-note">
+              Replaces the previous joining password. Existing students stay enrolled.
+            </p>
+          </>
+        )}
+        {error && (
+          <p className="form-error" role="alert">
+            {error}
+          </p>
+        )}
+      </div>
+    </section>
+  );
+}
+function AssignmentForm({ student, onSaved }: { student: Student; onSaved: () => Promise<void> }) {
+  const { request } = useAuth();
+  const [eventId, setEventId] = useState('');
+  const [type, setType] = useState('Practice');
+  const [due, setDue] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    setBusy(true);
+    setError('');
+    setNotice('');
+    try {
+      await request('/api/assignments', {
+        method: 'POST',
+        body: JSON.stringify({ studentId: student.id, eventId, type, due, timeZone }),
+      });
+      setNotice('Assignment saved. Your student can see it on their dashboard.');
+      await onSaved();
+    } catch (error) {
+      setError(authMessage(error));
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <section className="assignment-panel">
+      <span className="tag">DIVISION {student.division} ONLY</span>
+      <h3>Give their curiosity a direction.</h3>
+      <p>Assign any one practice or ranked test for an event. Your student chooses the test.</p>
+      <form onSubmit={submit}>
+        <label>
+          Student
+          <input value={student.displayName} readOnly />
+        </label>
+        <label>
+          Event
+          <select
+            aria-label="Event"
+            value={eventId}
+            onChange={(e) => setEventId(e.target.value)}
+            required
+            disabled={busy}
+          >
+            <option value="">Choose a Division {student.division} event</option>
+            {eventsForDivision(student.division).map((event) => (
+              <option value={event.id} key={event.id}>
+                {event.name}
+                {event.special ? ' (special event)' : ''}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Test type
+          <select
+            aria-label="Test type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            disabled={busy}
+          >
+            <option>Practice</option>
+            <option>Ranked</option>
+          </select>
+        </label>
+        <label>
+          Due date
+          <input
+            type="date"
+            value={due}
+            min={dateInZone(timeZone)}
+            onChange={(e) => setDue(e.target.value)}
+            required
+            disabled={busy}
+          />
+        </label>
+        <button className="button button-primary" disabled={busy} type="submit">
+          {busy ? 'Saving…' : 'Assign test'}
+        </button>
+        {error && (
+          <p className="form-error" role="alert">
+            {error}
+          </p>
+        )}
+        {notice && (
+          <p className="form-success" role="status">
+            {notice}
+          </p>
+        )}
+      </form>
+    </section>
   );
 }
 export function InstructorDashboard() {
-  const students = members.filter((m) => m.school === 'Cedar Academy');
-  const [studentId, setStudentId] = useState(students[0].id);
-  const student = students.find((s) => s.id === studentId)!;
-  const events = eventsForDivision(student.division);
-  const [eventId, setEventId] = useState('');
-  const [type, setType] = useState<'Practice' | 'Ranked'>('Practice');
-  const [due, setDue] = useState('');
-  const [feedback, setFeedback] = useState('');
-  const { assignments, setAssignments } = useSettings();
-  function assign(e: React.FormEvent) {
-    e.preventDefault();
-    const now = new Date();
-    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const error = validateAssignment(
-      student,
-      events.map((e) => e.id),
-      eventId,
-      due,
-      today,
-    );
-    if (error) {
-      setFeedback(error);
-      return;
+  const { profile, request } = useAuth();
+  const { data, error, loading, refresh } = useDashboard();
+  const [studentId, setStudentId] = useState('');
+  const [pending, setPending] = useState('');
+  const [removeError, setRemoveError] = useState('');
+  async function remove(id: string) {
+    setPending(id);
+    setRemoveError('');
+    try {
+      await request(`/api/assignments?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+      await refresh();
+    } catch (error) {
+      setRemoveError(authMessage(error));
+    } finally {
+      setPending('');
     }
-    const event = events.find((e) => e.id === eventId)!;
-    if (
-      assignments.some(
-        (a) =>
-          a.studentId === student.id && a.eventId === eventId && a.type === type && a.due === due,
-      )
-    ) {
-      setFeedback('This preview assignment already exists.');
-      return;
-    }
-    const a: Assignment = {
-      id: crypto.randomUUID(),
-      studentId,
-      division: student.division,
-      eventId,
-      eventName: event.name,
-      type,
-      due,
-    };
-    setAssignments([...assignments, a]);
-    setFeedback(
-      `Added to ${student.name.split(' ')[0]}’s preview assignments. It stays in this browser tab only.`,
-    );
   }
+  if (!data) return <LoadState error={error} retry={refresh} />;
+  const student = data.students.find((s) => s.id === studentId) || data.students[0];
   return (
-    <main id="main" className="page-container">
-      <DemoNotice />
+    <main id="main" className="page-container live-dashboard">
       <div className="dashboard-heading">
         <div>
-          <p className="eyebrow">INSTRUCTOR / CEDAR ACADEMY</p>
+          <p className="eyebrow">INSTRUCTOR / {profile!.schoolName}</p>
           <h1>Help your team take flight.</h1>
-          <p>A closer look at every student’s next step.</p>
+          <p>Welcome, {profile!.displayName}. A closer look at every student’s next step.</p>
         </div>
-        <span className="tag">4 SAMPLE STUDENTS</span>
+        <div className="dashboard-actions">
+          <span className="tag">{data.students.length} STUDENTS</span>
+          <RefreshButton loading={loading} refresh={refresh} />
+        </div>
       </div>
-      <div className="instructor-layout">
-        <section>
-          <div className="dashboard-section-title" style={{ marginTop: 0 }}>
-            <h2>Your students.</h2>
-          </div>
-          <div className="student-list">
-            {students.map((s) => (
-              <button
-                className="student-row"
-                key={s.id}
-                aria-pressed={s.id === studentId}
-                onClick={() => {
-                  setStudentId(s.id);
-                  setEventId('');
-                  setFeedback('');
-                }}
-              >
-                <span className="student-avatar">
-                  {s.name
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')}
-                </span>
-                <span>
-                  {s.name}
-                  <small>@{s.handle}</small>
-                </span>
-                <span className="tag">DIV {s.division}</span>
-              </button>
-            ))}
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      )}
+      <SchoolPanel />
+      {!student ? (
+        <div className="empty-state">
+          <Users size={32} />
+          <h2>Your team starts here.</h2>
+          <p>
+            Share your school password. Students will appear here after they create an account and
+            join your school.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="instructor-layout">
+            <section>
+              <div className="dashboard-section-title">
+                <h2>Your students.</h2>
+              </div>
+              <div className="student-list">
+                {data.students.map((s) => (
+                  <button
+                    className="student-row"
+                    key={s.id}
+                    aria-pressed={s.id === student.id}
+                    onClick={() => setStudentId(s.id)}
+                  >
+                    <span className="student-avatar">
+                      {s.displayName.slice(0, 2).toUpperCase()}
+                    </span>
+                    <span>
+                      {s.displayName}
+                      <small>{s.points.toLocaleString('en-US')} points</small>
+                    </span>
+                    <span className="tag">DIV {s.division}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="dashboard-section-title">
+                <h2>{student.displayName}’s progress.</h2>
+              </div>
+              <StatsGrid stats={student} />
+            </section>
+            <AssignmentForm
+              key={`${student.id}-${student.division}`}
+              student={student}
+              onSaved={refresh}
+            />
           </div>
           <div className="dashboard-section-title">
-            <h2>{student.name.split(' ')[0]}’s progress.</h2>
+            <h2>Assigned next steps.</h2>
+            <span className="tag">{student.displayName.toUpperCase()}</span>
           </div>
-          <div className="stat-grid" style={{ gridTemplateColumns: 'repeat(2,1fr)' }}>
-            <div className="stat-card">
-              <span>Lesson progress</span>
-              <strong>{student.lessons}%</strong>
-            </div>
-            <div className="stat-card">
-              <span>Total points</span>
-              <strong>{student.points.toLocaleString('en-US')}</strong>
-            </div>
-            <div className="stat-card">
-              <span>Practice tests</span>
-              <strong>{student.practice}</strong>
-            </div>
-            <div className="stat-card">
-              <span>Ranked tests</span>
-              <strong>{student.ranked}</strong>
-            </div>
-          </div>
-        </section>
-        <section className="assignment-panel">
-          <span className="tag" style={{ marginBottom: 18 }}>
-            DIVISION {student.division} ONLY
-          </span>
-          <h3>A little direction goes a long way.</h3>
-          <p>
-            Assign one test for an event. Your student can complete any test of that type for the
-            assigned event.
-          </p>
-          {student.division === 'A' ? (
-            <div className="empty-state" style={{ marginTop: 25, padding: 25 }}>
-              <p>
-                Add your school’s Division A event list before assigning tests. School setup will
-                arrive with live accounts.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={assign}>
-              <label>
-                Student
-                <input value={student.name} readOnly />
-              </label>
-              <label>
-                Event
-                <select
-                  aria-label="Event"
-                  value={eventId}
-                  onChange={(e) => setEventId(e.target.value)}
-                  required
-                >
-                  <option value="">Choose a Division {student.division} event</option>
-                  {events.map((e) => (
-                    <option value={e.id} key={e.id}>
-                      {e.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Test type
-                <select
-                  aria-label="Test type"
-                  value={type}
-                  onChange={(e) => setType(e.target.value as 'Practice' | 'Ranked')}
-                >
-                  <option>Practice</option>
-                  <option>Ranked</option>
-                </select>
-              </label>
-              <label>
-                Due date
-                <input type="date" value={due} required onChange={(e) => setDue(e.target.value)} />
-              </label>
-              <button className="button button-primary" type="submit">
-                Add preview assignment
-              </button>
-              <p className="form-feedback" role="status">
-                {feedback}
-              </p>
-            </form>
+          {removeError && (
+            <p className="form-error" role="alert">
+              {removeError}
+            </p>
           )}
-        </section>
-      </div>
-      <div className="dashboard-section-title">
-        <h2>Assigned next steps.</h2>
-        <span className="tag">SAVED IN THIS TAB ONLY</span>
-      </div>
-      <AssignmentList editable />
-      <div className="private-callout" style={{ marginTop: 35 }}>
-        <div>
-          <h3>Your school’s own little universe.</h3>
-          <p>
-            Live instructor signup will generate your school name and student joining password.
-            <br />
-            School creation and secure invitations will be connected with authentication.
+          <AssignmentList
+            assignments={data.assignments.filter((a) => a.studentId === student.id)}
+            remove={remove}
+            pending={pending}
+          />
+          <div className="dashboard-section-title">
+            <h2>Progress by event.</h2>
+            <span className="tag">DIVISION {student.division} ONLY</span>
+          </div>
+          <ProgressTable progress={data.progress[student.id] || []} />
+          <p className="source-note">
+            Activity starts at zero. Lessons and test completion will be recorded when those tools
+            launch.
           </p>
-        </div>
-      </div>
+        </>
+      )}
     </main>
   );
 }
-export function EventView({ division, eventId }: { division: Division; eventId: string }) {
-  const event = eventsForDivision(division).find((e) => e.id === eventId)!;
+export function EventView({ eventId, toolId }: { eventId: string; toolId?: string }) {
+  const { profile } = useAuth();
+  const division = profile!.division!;
+  const event = eventsForDivision(division).find((event) => event.id === eventId);
+  const tool = tools.find((tool) => tool.id === toolId);
+  if (!event || (toolId && !tool))
+    return (
+      <main id="main" className="page-container">
+        <div className="empty-state">
+          <h1>That page isn’t in your division.</h1>
+          <p>Choose an event from your Division {division} study space.</p>
+          <Link className="button button-primary" href="/dashboard/student">
+            Back to my events
+          </Link>
+        </div>
+      </main>
+    );
   return (
     <main id="main" className="page-container">
-      <DemoNotice />
-      <Link className="back-link" href="/preview/student">
-        <ChevronLeft size={16} /> Your study space
+      <Link
+        className="back-link"
+        href={tool ? `/dashboard/student/events/${event.id}` : '/dashboard/student'}
+      >
+        <ChevronLeft size={16} />
+        {tool ? event.name : 'My events'}
       </Link>
       <div className="page-heading">
         <p className="eyebrow">
-          DIVISION {division} / {event.category.toUpperCase()}
+          DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
+          {event.special ? ' / SPECIAL EVENT' : ''}
         </p>
-        <h1>{event.name}</h1>
-        <p>Your event. Your pace. Choose a tool to explore what’s coming.</p>
-        <span className="tag">{event.type.toUpperCase()} EVENT · 2027 SEASON</span>
+        <h1>{tool ? tool.name : event.name}</h1>
+        <p>{tool ? event.name : eventFocus[event.type].description}</p>
       </div>
-      <ToolsGrid division={division} eventId={eventId} />
-    </main>
-  );
-}
-export function ToolPlaceholder({
-  toolId,
-  division,
-  eventId,
-}: {
-  toolId: string;
-  division: Division;
-  eventId?: string;
-}) {
-  const tool = tools.find((t) => t.id === toolId)!;
-  const event = eventId ? eventsForDivision(division).find((e) => e.id === eventId) : undefined;
-  return (
-    <main id="main" className="page-container">
-      <DemoNotice />
-      <Link
-        className="back-link"
-        href={
-          event ? `/preview/student/events/${event.id}?division=${division}` : '/preview/student'
-        }
-      >
-        <ChevronLeft size={16} />
-        {event ? event.name : 'Your study space'}
-      </Link>
-      <section className="placeholder-stage">
-        <Mascot />
-        <span className="tag">COMING SOON · DIVISION {division}</span>
-        <h1>
-          {tool.name}
-          {event && (
-            <>
-              <br />
-              <span className="muted">{event.name}</span>
-            </>
-          )}
-        </h1>
-        <p>
-          {tool.description} This study tool is still being prepared. There are no tests, generated
-          notes, or real points available yet.
-        </p>
-        <Link className="button button-glass" href="/preview/student">
-          Back to your study space
-        </Link>
-      </section>
+      {tool ? (
+        <section className="empty-state tool-placeholder">
+          <span className="tag">COMING SOON</span>
+          <h2>A little room for what’s next.</h2>
+          <p>This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.</p>
+          <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>
+            Back to {event.name}
+          </Link>
+        </section>
+      ) : (
+        <>
+          <div className="dashboard-section-title">
+            <h2>Your study toolkit.</h2>
+            <span className="tag">{eventFocus[event.type].title.toUpperCase()}</span>
+          </div>
+          <ToolsGrid event={event} />
+          <p className="source-note">
+            These tools support your preparation. Follow your tournament’s rules for permitted notes
+            and materials.
+          </p>
+        </>
+      )}
     </main>
   );
 }

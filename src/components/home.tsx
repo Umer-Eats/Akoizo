@@ -45,7 +45,7 @@ export function Home() {
             <Link className="button button-primary" href="/login/student">
               Find your starting point <span aria-hidden="true">↗</span>
             </Link>
-            <Link className="hero-preview-link" href="/preview/student">
+            <Link className="hero-explore-link" href="/dashboard/student">
               Explore the lab <span aria-hidden="true">↗</span>
             </Link>
           </div>
@@ -143,7 +143,7 @@ export function Home() {
             From your first “why?” to your next “I get it.” Explore lessons built around your event,
             at your pace.
           </p>
-          <Link href="/preview/student" className="text-link">
+          <Link href="/dashboard/student" className="text-link">
             Explore the study space <span>↗</span>
           </Link>
           <div className="mini-label">
@@ -239,7 +239,7 @@ export function Home() {
             Find your rhythm with practice tests and question banks. Make mistakes, connect the
             dots, and watch your confidence grow.
           </p>
-          <Link href="/preview/student" className="text-link">
+          <Link href="/dashboard/student" className="text-link">
             Take a look inside <span>↗</span>
           </Link>
           <div className="mini-label">

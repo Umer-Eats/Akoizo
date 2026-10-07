@@ -1,39 +1,35 @@
-# Verification
+# Verification — October 6, 2026
 
-## October 6, 2026 — Chrome title and articulated Ako
+## Passed
 
-- TypeScript checking and the production Next.js build pass.
-- Five unit tests pass: event slates/division separation, ranking filters, assignment validation, continuous character motion, and rig geometry.
-- Motion tests sample joint targets at 240 Hz to check continuity, bounded blink/gaze values, and a smooth greeting exit. Rig tests validate atlas bounds, non-overlapping source regions, targets, and pivots.
-- The browser suite samples twenty animation frames and confirms changing joint transforms while the artwork remains the same. Off-screen motion pauses and resumes, keyboard/pointer greetings work, and the greeting returns to idle.
-- Footer motion-off and system reduced motion show a still character while retaining the greeting. Hidden-tab pausing is implemented through page visibility; actual background-tab scheduling was not separately exercised by the headless suite.
-- Existing browser flows pass: theme persistence, mobile navigation, sample quiz, rankings, division selection, assignment previews, and event/tool routes.
-- Both themes pass route/layout checks at 1440 × 1000 and 390 × 844, with no page errors or document-level horizontal overflow. All checked heading elements and their spans have normal, non-italic font style.
-- Additional landing screenshots at 320 × 900 and 768 × 900 show the corner character clear of the main title and introduction, without horizontal overflow.
-- Visually reviewed the assembled full-body character, dark desktop landing, light phone landing, and narrow/tablet layouts. The title uses the reference-inspired chrome artwork. The generated atlas remains unchanged; its measured source regions are assembled at runtime.
+- `npm run typecheck`: clean.
+- `npm test`: 8 tests passed, covering event catalogs, enrollment validation, salted school-password hashing and rotation, account-role protection, cross-school access, division-safe assignments, real progress aggregation, enrollment limits, and mascot motion.
+- `npm run build`: production build completed with the real dashboard/API routes and no `/preview/*` routes.
+- `npm run format:check` and `git diff --check`: clean.
+- `node scripts/browser-check.mjs --live`: passed against local production server and the configured Firebase/Turso services.
+- `node scripts/theme-check.mjs`: public and guarded routes, dark/light themes, 320/390/768/1440px layouts, theme persistence, reduced motion, navigation, landing question, and both enrollment forms.
 
-The current implementation and reusable API are documented in [Ako's animation](MASCOT_ANIMATION.md). Research and image-generation provenance are in [animation research](ANIMATION_RESEARCH.md) and [art provenance](ART_PROVENANCE.md).
+## Live account checks
 
-## Scope of existing flow checks
+A temporary instructor created a real school through the signup form. Three temporary students joined that school in Divisions A, B, and C. The instructor saw only the selected student's division events and assigned a practice test and a ranked test. Both assignments survived reloads and appeared in the correct student's account. A saved student division change updated the instructor's choices after refresh.
 
-Assignment checks cover assigning a Division B event to a B student, excluding C-only events, persistence within the tab across reload, no A assignments before a local slate, showing C assignments only to the C sample student, and the sample school-ranking filter. Ranking checks cover division/search/pagination controls; event checks cover division switching, navigation, and invalid cross-division routes. Small-screen ranking tables can scroll inside their labeled keyboard-focusable region.
+All seven feature routes opened. A Division B student could not open Astronomy. Student/instructor route guards and unauthenticated API rejection passed. Logout cleared the private screen; subsequent email/password login worked.
 
-## Not verified or implemented
+An additional temporary Firebase identity without school membership could not access the dashboard API. An incorrect school password was rejected. Completing enrollment with the correct password opened the real dashboard. That student was denied instructor assignment actions.
 
-No Firebase credentials, database, real school membership, live scoring, uploaded test content, deployed Vercel environment, or external messaging was involved. Client-side sample filters are not a privacy boundary. Production school isolation and role authorization require backend tests when services are connected.
+All five temporary Firebase accounts and their school records were deleted after the final run. A follow-up database query confirmed zero QA profiles remained. The event catalog contains 17 A events (15 regular + 2 special), 23 B events, and 23 C events.
 
-Ako currently has a front-view articulated rig and shallow head/gaze turns. Full side/back poses and eight-direction exports are not implemented. His appearance and timing should receive user review before reuse in the next task.
+## Configuration and visual review
 
-This is not a complete accessibility audit or cross-browser certification. Manual screen-reader checks, 200% text enlargement, Safari, Firefox, older devices, and production performance checks remain in the backlog.
+Firebase email/password sign-in was disabled in the existing project. It is now enabled with password-based login. Google sign-in was already enabled. `127.0.0.1` was added to the existing authorized domains for local operation. No other providers or existing domains were removed.
 
-## Repeat the checks
+The instructor invitation setting matches the requested value. A browser-bundle scan confirmed it is absent from frontend JavaScript. School credentials are masked in saved QA screenshots. Desktop instructor, mobile Division A, login, and event-tool screenshots were visually reviewed; the double event arrow found during review was removed.
 
-```sh
-npm run typecheck
-npm test
-npm run build
-# With the preview server already running:
-npm run test:browser
-```
+## Deliberately unfinished / not exercised
 
-The shorter screenshot pass, `scripts/visual-check.mjs`, uses reduced motion for deterministic captures. Generated QA screenshots under `documents/qa/` are ignored by Git.
+- Study engines, generated content, grading, points awards, and automatic assignment completion remain intentionally unimplemented.
+- Interactive Google account consent was not completed with a real user's Google account. Its provider setting and shared enrollment handling are wired, but final consent should be manually checked on the deployed domain.
+- The password-reset action is wired to Firebase. No reset email was sent during verification.
+- No public deployment was performed.
+
+Screenshots are under ignored `documents/qa/`. The browser runner creates uniquely named QA accounts and cleans up only the accounts and schools created in its own run. Run `--live` against a staging project for repeat verification.

@@ -1480,7 +1480,7 @@
     width: 100%;
     margin-top: 20px;
   }
-  .auth-card .preview-explainer {
+  .auth-card .enrollment-note {
     font-size: 0.75rem;
     line-height: 1.75;
     background: var(--accent-soft);
@@ -1538,7 +1538,9 @@
     font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
   }
   .button-google:hover:not(:disabled) {
     background: var(--surface-2);
@@ -1560,7 +1562,9 @@
     animation: spin 0.8s linear infinite;
   }
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
   .dashboard-heading {
     display: flex;
@@ -2703,7 +2707,7 @@
   .text-link,
   .tabs button,
   .auth-footer,
-  .auth-card .preview-explainer,
+  .auth-card .enrollment-note,
   .private-callout p,
   .pagination button,
   .stat-card > span,
