@@ -9,6 +9,11 @@ import {
   Layers,
   Zap,
   FolderOpen,
+  Video,
+  GraduationCap,
+  FlaskConical,
+  FileCheck2,
+  ScrollText,
   Search,
   ChevronLeft,
   Clock3,
@@ -21,10 +26,11 @@ import {
   elementaryManualUrl,
   eventsForDivision,
   eventFocus,
-  tools,
+  toolCatalog,
   type Division,
   type ScienceEvent,
 } from '@/lib/events';
+import { eventToolIds, rulesForEvent } from '@/lib/event-rules';
 import {
   dateInZone,
   type Assignment,
@@ -43,6 +49,11 @@ const icons = {
   layers: Layers,
   bolt: Zap,
   folder: FolderOpen,
+  video: Video,
+  'graduation-cap': GraduationCap,
+  flask: FlaskConical,
+  'file-check': FileCheck2,
+  scroll: ScrollText,
 };
 
 function useDashboard() {
@@ -134,10 +145,19 @@ function RefreshButton({ loading, refresh }: { loading: boolean; refresh: () => 
     </button>
   );
 }
-function FeatureNavigation({ event, activeTool }: { event: ScienceEvent; activeTool?: string }) {
+function FeatureNavigation({
+  division,
+  event,
+  activeTool,
+}: {
+  division: Division;
+  event: ScienceEvent;
+  activeTool?: string;
+}) {
+  const available = new Set(eventToolIds(division, event));
   return (
     <nav className="event-feature-nav" aria-label="Event features">
-      {tools.map((tool) => {
+      {toolCatalog.filter((tool) => available.has(tool.id)).map((tool) => {
         const Icon = icons[tool.icon];
         return (
           <Link
@@ -155,6 +175,39 @@ function FeatureNavigation({ event, activeTool }: { event: ScienceEvent; activeT
         );
       })}
     </nav>
+  );
+}
+function RulesPanel({ division, event }: { division: Division; event: ScienceEvent }) {
+  const rules = rulesForEvent(division, event);
+  const [firstPage, lastPage] = rules.pageRange;
+  return (
+    <div className="rules-panel-content">
+      <span className="tag">DIVISION {division} / 2027 RULES</span>
+      <h2>Official event rules.</h2>
+      <p>{rules.summary}</p>
+      <div className="rules-panel-facts">
+        <div>
+          <strong>Rulebook PDF pages</strong>
+          <span>{firstPage === lastPage ? firstPage : `${firstPage}–${lastPage}`}</span>
+        </div>
+        <div>
+          <strong>Competition resources</strong>
+          <span>{rules.resources}</span>
+        </div>
+      </div>
+      <p className="rules-panel-note">
+        Read the embedded rulebook below before preparing materials. Local tournament clarifications
+        and posted corrections always take precedence over this season manual.
+      </p>
+      <iframe
+        className="rules-embed"
+        src={`${rules.sourceUrl}${rules.sourceUrl.includes('#') ? '&' : '#'}page=${firstPage}`}
+        title={`Division ${division} rules for ${event.name}`}
+      />
+      <a className="text-link" href={rules.sourceUrl} target="_blank" rel="noreferrer">
+        Open the complete Division {division} rulebook
+      </a>
+    </div>
   );
 }
 function EventCatalog({ division }: { division: Division }) {
@@ -352,7 +405,7 @@ function EventCatalog({ division }: { division: Division }) {
             .
           </>
         )}{' '}
-        All seven study tools have their own pages; content is coming next.
+        Every event has its own rules-aware tools; content is coming next.
       </p>
     </>
   );
@@ -846,8 +899,10 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   const { profile } = useAuth();
   const division = profile!.division!;
   const event = eventsForDivision(division).find((event) => event.id === eventId);
-  const tool = tools.find((tool) => tool.id === toolId);
-  if (!event || (toolId && !tool)) {
+  const availableToolIds = event ? eventToolIds(division, event) : [];
+  const tool = toolCatalog.find((candidate) => candidate.id === toolId);
+  const isAvailable = !toolId || availableToolIds.includes(toolId as (typeof availableToolIds)[number]);
+  if (!event || (toolId && (!tool || !isAvailable))) {
     return (
       <main id="main" className="page-container">
         <div className="empty-state">
@@ -868,8 +923,8 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
             <ChevronLeft size={16} /> My events
           </Link>
           <h2 id="event-toolkit-title">Your toolkit</h2>
-          <FeatureNavigation event={event} activeTool={toolId} />
-          <p className="event-sidebar-note">Study content coming soon.</p>
+          <FeatureNavigation division={division} event={event} activeTool={toolId} />
+          <p className="event-sidebar-note">More study content coming soon.</p>
         </aside>
         <div className="event-content" key={`${event.id}/${toolId ?? 'overview'}`}>
           <div className="event-feature-heading">
@@ -883,17 +938,23 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
                 : ''}
             </p>
           </div>
-          <section className="empty-state tool-placeholder">
+          <section className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}>
             {tool ? (
               <>
-                <span className="tag">COMING SOON</span>
-                <h2>A little room for what’s next.</h2>
-                <p>
-                  This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.
-                </p>
-                <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>
-                  Event overview
-                </Link>
+                {toolId === 'rules' ? (
+                  <RulesPanel division={division} event={event} />
+                ) : (
+                  <>
+                    <span className="tag">COMING SOON</span>
+                    <h2>A little room for what’s next.</h2>
+                    <p>
+                      This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.
+                    </p>
+                    <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>
+                      Event overview
+                    </Link>
+                  </>
+                )}
               </>
             ) : (
               <>

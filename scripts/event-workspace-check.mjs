@@ -105,12 +105,12 @@ try {
   await expect(p.locator('.header-event-title')).toHaveText('Anatomy and Physiology');
   const names = [
     'Lessons',
-    'Practice tests',
-    'Ranked tests',
-    'Practice question bank',
-    'Vocab rush',
-    'Notes / binder generator',
-    'Cheatsheet generator',
+    'Practice Tests',
+    'Ranked Tests',
+    'Practice Question Bank',
+    'Vocab Rush',
+    'Cheatsheet Generator',
+    'Rules',
   ];
   for (const name of names) {
     await p
@@ -122,7 +122,7 @@ try {
       new RegExp(name.replace('/', '\\/')),
     );
     await expect(p.locator('.header-event-title')).toHaveText('Anatomy and Physiology');
-    await expect(p.locator('.event-feature-link')).toHaveCount(7);
+    await expect(p.locator('.event-feature-link')).toHaveCount(names.length);
   }
   await mkdir('output/event-workspace-qa', { recursive: true });
   for (const theme of ['dark', 'light']) {

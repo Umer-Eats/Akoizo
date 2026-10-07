@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { eventsForDivision, tools } from '../src/lib/events.ts';
+import { eventToolIds, rulesForEvent } from '../src/lib/event-rules.ts';
 import { validateAssignment, dateInZone, eventKey, readEnrollment } from '../src/lib/domain.ts';
 import { schoolCommunities } from '../src/lib/school-communities.ts';
 
@@ -27,6 +28,33 @@ test('division slates follow the two national lists and the supplied Florida man
   );
   assert.notEqual(eventKey('B', 'circuit-lab'), eventKey('C', 'circuit-lab'));
   assert.equal(new Set(tools.map((tool) => tool.id)).size, 7);
+});
+test('event toolkits follow the competition format and keep Lessons first and Rules last', () => {
+  for (const division of ['A', 'B', 'C'] as const) {
+    for (const event of eventsForDivision(division)) {
+      const ids = eventToolIds(division, event);
+      assert.equal(ids[0], 'lessons');
+      assert.equal(ids.at(-1), 'rules');
+      const rules = rulesForEvent(division, event);
+      assert.equal(rules.division, division);
+      assert.ok(rules.pageRange[0] <= rules.pageRange[1]);
+    }
+  }
+  assert.deepEqual(eventToolIds('C', eventsForDivision('C').find((event) => event.id === 'engineering-cad')!), [
+    'lessons',
+    'cad-file-grader',
+    'rules',
+  ]);
+  assert.deepEqual(eventToolIds('C', eventsForDivision('C').find((event) => event.id === 'experimental-design')!), [
+    'lessons',
+    'lab-generator',
+    'rules',
+  ]);
+  const thermodynamics = eventsForDivision('C').find((event) => event.id === 'thermodynamics')!;
+  assert.ok(eventToolIds('C', thermodynamics).includes('video-grader'));
+  assert.ok(eventToolIds('C', thermodynamics).includes('practice-tests'));
+  const waterQuality = eventsForDivision('C').find((event) => event.id === 'water-quality')!;
+  assert.ok(eventToolIds('C', waterQuality).includes('video-grader'));
 });
 test('assignments reject wrong divisions, invalid test types, and past or impossible dates', () => {
   for (const [division, event, type, due] of [

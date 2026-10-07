@@ -8,6 +8,20 @@ export type ScienceEvent = {
   type: 'Study' | 'Build' | 'Lab' | 'Skill';
   special?: boolean;
 };
+export type EventToolId =
+  | 'lessons'
+  | 'practice-tests'
+  | 'ranked-tests'
+  | 'question-bank'
+  | 'vocab-rush'
+  | 'binder-generator'
+  | 'cheatsheet-generator'
+  | 'video-grader'
+  | 'course-generator'
+  | 'lab-practice'
+  | 'lab-generator'
+  | 'cad-file-grader'
+  | 'rules';
 const groups: Record<'B' | 'C', Record<EventCategory, string[]>> = {
   B: {
     'Life science': [
@@ -73,6 +87,7 @@ const buildEvents = new Set([
   'Electric Vehicle',
   'Mission Possible',
   'Wright Stuff',
+  'Protein Modeling',
   'Hovercraft',
   'Ping-Pong Parachute',
   'Ping Pong Parachute',
@@ -114,41 +129,82 @@ export const tools = [
   },
   {
     id: 'practice-tests',
-    name: 'Practice tests',
+    name: 'Practice Tests',
     description: 'Find your rhythm. Make room for mistakes.',
     icon: 'file',
   },
   {
     id: 'ranked-tests',
-    name: 'Ranked tests',
+    name: 'Ranked Tests',
     description: 'Put your learning to the test and earn points.',
     icon: 'trophy',
   },
   {
     id: 'question-bank',
-    name: 'Practice question bank',
+    name: 'Practice Question Bank',
     description: 'Focus on the concepts you want to strengthen.',
     icon: 'layers',
   },
   {
     id: 'vocab-rush',
-    name: 'Vocab rush',
+    name: 'Vocab Rush',
     description: 'Get familiar with the language of your event.',
     icon: 'bolt',
   },
   {
     id: 'binder-generator',
-    name: 'Notes / binder generator',
+    name: 'Notes / Binder Generator',
     description: 'Give your knowledge a place to come together.',
     icon: 'folder',
   },
   {
     id: 'cheatsheet-generator',
-    name: 'Cheatsheet generator',
+    name: 'Cheatsheet Generator',
     description: 'Keep the key ideas close at hand.',
     icon: 'file',
   },
 ] as const;
+
+export const additionalTools = [
+  {
+    id: 'video-grader',
+    name: 'Video Grader',
+    description: 'Review a build run and get structured feedback on performance.',
+    icon: 'video',
+  },
+  {
+    id: 'course-generator',
+    name: 'Course Generator',
+    description: 'Turn the event rules into a focused build course.',
+    icon: 'graduation-cap',
+  },
+  {
+    id: 'lab-practice',
+    name: 'Lab Practice',
+    description: 'Rehearse procedures, observations, measurements, and analysis.',
+    icon: 'flask',
+  },
+  {
+    id: 'lab-generator',
+    name: 'Lab Generator',
+    description: 'Generate a safe, rules-aligned investigation to practice.',
+    icon: 'flask',
+  },
+  {
+    id: 'cad-file-grader',
+    name: 'CAD File Grader',
+    description: 'Check an Onshape export against the event drawing requirements.',
+    icon: 'file-check',
+  },
+  {
+    id: 'rules',
+    name: 'Rules',
+    description: 'Read the event rules, permitted resources, and competition format.',
+    icon: 'scroll',
+  },
+] as const;
+
+export const toolCatalog = [...tools, ...additionalTools] as const;
 
 // User-supplied 2027 Florida Elementary Science Olympiad manual, reviewed October 6, 2026.
 export const elementaryManualUrl =

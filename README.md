@@ -8,15 +8,15 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 
 - `/login/student` and `/login/instructor`: login, signup, password reset, and recovery of unfinished enrollment.
 - `/dashboard/student`: saved A/B/C division, searchable event catalog, assignments, and progress.
-- `/dashboard/student/events/[eventId]`: seven study-tool buttons for the selected event.
-- `/dashboard/student/events/[eventId]/[toolId]`: intentionally empty study-tool pages.
+- `/dashboard/student/events/[eventId]`: a rules-driven toolkit for the selected event. Lessons is always first and Rules is always last; test, build, and lab tools depend on that event's rules.
+- `/dashboard/student/events/[eventId]/[toolId]`: study-tool pages with an embedded rulebook view for Rules.
 - `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
 - `/rankings`: earned points only, using generated public learner names. Empty until ranked tests launch.
 - `/` and `/mission`: public landing and mission pages.
 
 Instructor enrollment checks the private invitation setting before creating school membership. Successful signup generates a random school name and joining password. Students must supply that password before accessing a dashboard. The instructor can generate a replacement password; existing students stay enrolled. School passwords are stored as salted hashes and only shown in the session that creates them.
 
-Study engines are deliberately not implemented yet: lessons, practice tests, ranked tests, practice question bank, vocab rush, notes/binder generator, and cheatsheet generator. New accounts show zero activity. Assignments save across accounts and reloads; completing them will depend on the future test engine.
+Study engines are deliberately not implemented yet. The event workspace now exposes only the tools supported by each event's rules, including test practice, reference generators, build review, lab practice, CAD review, and the embedded rules tab. New accounts show zero activity. Assignments save across accounts and reloads; completing them will depend on the future test engine.
 
 ## Run locally
 
