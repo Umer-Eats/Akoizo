@@ -37,4 +37,6 @@ Test and lesson engines remain unimplemented. Future completion must be recorded
 
 ## Deployment
 
-Use the Next.js server build on Vercel or another Node host. Set service values in that environment and rebuild to embed the public Firebase settings. Configure the Firebase domain before testing Google sign-in. No deployment was performed in this task.
+Use the Next.js server build on Vercel or another Node host. Set service values in that environment and rebuild to embed the public Firebase settings. Configure the Firebase domain before testing Google sign-in.
+
+On Vercel, also set the non-secret environment variable `NODE_OPTIONS=--experimental-require-module` and redeploy. Firebase Admin 14 uses `jwks-rsa` 4, which requires the ESM-only `jose` package. Vercel disables this Node capability by default; without the setting, API functions crash during module loading with `ERR_REQUIRE_ESM`, before their error handlers can run. See [Vercel's documented runtime setting](https://vercel.com/docs/functions/runtimes/node-js/advanced-node-configuration#experimental-node.js-require-of-es-module). Local Node can load the same code successfully because its default differs from Vercel's. Apply the setting to each Vercel environment where authentication is deployed.

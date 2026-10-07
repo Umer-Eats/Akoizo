@@ -28,8 +28,25 @@ export async function identityFor(request: Request) {
   const auth = getAdminAuth();
   try {
     return await auth.verifyIdToken(header.slice(7), true);
-  } catch {
-    throw new AppError(401, 'Your session has expired. Please log in again.');
+  } catch (error) {
+    const code = (error as { code?: unknown })?.code;
+    // Log only the SDK's error category, never its message (which may contain credentials).
+    const safeCode =
+      typeof code === 'string' && /^(auth|app)\/[a-z-]{1,60}$/.test(code) ? code : 'unknown';
+    console.error('Firebase session verification failed:', safeCode);
+    if (
+      [
+        'auth/id-token-expired',
+        'auth/id-token-revoked',
+        'auth/argument-error',
+        'auth/invalid-argument',
+        'auth/invalid-id-token',
+        'auth/user-disabled',
+        'auth/user-not-found',
+      ].includes(safeCode)
+    )
+      throw new AppError(401, 'Your session has expired. Please log in again.');
+    throw new AppError(503, 'Account services are temporarily unavailable. Please try again.');
   }
 }
 export async function memberFor(request: Request, role?: Role) {

@@ -8,9 +8,9 @@ let adminAuthInstance: Auth | null = null;
 function initializeAdmin() {
   if (adminApp) return;
 
-  const projectId = process.env.FIREBASE_PROJECT_ID;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  const projectId = process.env.FIREBASE_PROJECT_ID?.trim();
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL?.trim();
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n').trim();
 
   if (!projectId || !clientEmail || !privateKey) {
     throw new AppError(503, 'Account services are not configured yet. Please try again later.');
