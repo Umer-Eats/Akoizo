@@ -42,6 +42,8 @@ import {
   type Student,
 } from '@/lib/domain';
 import { useAuth, authMessage } from './auth-context';
+import { PracticeLibrary } from './practice';
+import { PracticeReviews } from './practice-reviews';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -813,6 +815,7 @@ export function InstructorDashboard() {
         </p>
       )}
       <SchoolPanel />
+      <PracticeReviews />
       {!student ? (
         <div className="empty-state">
           <Users size={32} />
@@ -941,44 +944,48 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
                 : ''}
             </p>
           </div>
-          <section
-            className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}
-          >
-            {tool ? (
-              <>
-                {toolId === 'rules' ? (
-                  <RulesPanel division={division} event={event} />
-                ) : (
-                  <>
-                    <span className="tag">COMING SOON</span>
-                    <h2>A little room for what’s next.</h2>
-                    <p>
-                      This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added
-                      yet.
-                    </p>
-                    {toolId !== 'lessons' && (
-                      <Link
-                        className="text-link"
-                        href={`/dashboard/student/events/${event.id}/lessons`}
-                      >
-                        Back to Lessons
-                      </Link>
-                    )}
-                  </>
-                )}
-              </>
-            ) : (
-              <>
-                <BookOpen size={32} aria-hidden="true" />
-                <span className="tag">{eventFocus[event.type].title.toUpperCase()}</span>
-                <h2>Make room for your next discovery.</h2>
-                <p>
-                  Choose a feature from your toolkit to explore your study space. Lessons, practice,
-                  and more are coming soon.
-                </p>
-              </>
-            )}
-          </section>
+          {toolId === 'practice-tests' ? (
+            <PracticeLibrary eventId={event.id} />
+          ) : (
+            <section
+              className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}
+            >
+              {tool ? (
+                <>
+                  {toolId === 'rules' ? (
+                    <RulesPanel division={division} event={event} />
+                  ) : (
+                    <>
+                      <span className="tag">COMING SOON</span>
+                      <h2>A little room for what’s next.</h2>
+                      <p>
+                        This {tool.name.toLowerCase()} page is ready. Study content hasn’t been
+                        added yet.
+                      </p>
+                      {toolId !== 'lessons' && (
+                        <Link
+                          className="text-link"
+                          href={`/dashboard/student/events/${event.id}/lessons`}
+                        >
+                          Back to Lessons
+                        </Link>
+                      )}
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  <BookOpen size={32} aria-hidden="true" />
+                  <span className="tag">{eventFocus[event.type].title.toUpperCase()}</span>
+                  <h2>Make room for your next discovery.</h2>
+                  <p>
+                    Choose a feature from your toolkit to explore your study space. Lessons,
+                    practice, and more are coming soon.
+                  </p>
+                </>
+              )}
+            </section>
+          )}
           <p className="source-note">
             These tools support your preparation. Follow your tournament’s rules for permitted notes
             and materials.

@@ -14,13 +14,17 @@
 - [x] Saved practice/ranked assignments with due dates, duplicate checks, removal, and student visibility.
 - [x] Public rankings using actual positive points and generated public learner aliases.
 - [x] Retain responsive themes, mascot, navigation, and existing visual design.
+- [x] Searchable past-paper practice library, complete embedded tests and scrollable answer sheets, automatic objective scoring, saved attempts, answer colors and instructor rubric review.
+- [x] Six source-checked archived papers / 465 answer fields across four event subjects, with 2027 subject matches and explicit differences.
+- [x] Idempotent practice submission and completion of one pending event practice assignment.
 
 ## Learning features requested for a later phase
 
 - [ ] Lessons and reviewed event-specific content; lesson completion totals and meaningful completion percentages.
-- [ ] Practice test engine with answer review and explanations.
+- [ ] Expand verified past-paper coverage to remaining events and levels; review source discrepancies and full 2027 topic compliance.
+- [ ] Fully automatic semantic grading of open explanations; current prose scores require instructor rubric review.
 - [ ] Ranked test engine, server-authoritative grading, attempt policy, and idempotent points awards.
-- [ ] Automatic assignment completion for an eligible event/type test taken after assignment creation.
+- [ ] Automatic ranked assignment completion when the ranked engine launches.
 - [ ] Practice question bank and vocab rush.
 - [ ] Notes/binder and cheatsheet generation with editable exports and event resource limits.
 - [ ] Permission/provenance tracking for all study resources and competition papers.

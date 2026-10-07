@@ -16,7 +16,7 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 
 Instructor enrollment checks the private invitation setting before creating school membership. Successful signup generates a random school name and joining password. Students must supply that password before accessing a dashboard. The instructor can generate a replacement password; existing students stay enrolled. School passwords are stored as salted hashes and only shown in the session that creates them.
 
-Study engines are deliberately not implemented yet. The event workspace now exposes only the tools supported by each event's rules, including test practice, reference generators, build review, lab practice, CAD review, and the embedded rules tab. New accounts show zero activity. Assignments save across accounts and reloads; completing them will depend on the future test engine.
+Practice Tests now has searchable past-paper lists, complete embedded papers with an answer sheet, saved attempts, points/percentage scores, green multiple-choice corrections and red written rubric answers. The initial catalog has six papers and 465 answer fields across four event subjects, reviewed against the 2027 subject rotations. Written explanations receive provisional scores pending instructor rubric review; exact short answers, numerical answers and multiple choice grade immediately. See [practice catalog and scoring](documents/PRACTICE_TESTS.md) for coverage, source differences and remaining work. Submissions complete one pending practice assignment for the event and increase practice totals without awarding ranked points. Other study engines remain unimplemented.
 
 ## Run locally
 
@@ -40,7 +40,7 @@ The schema and season catalog initialize idempotently on the first service reque
 
 ## Verification
 
-`npm test` covers enrollment, password hashing/rotation, cross-school and cross-role authorization, assignment dates and divisions, persistent division changes, progress queries, and the mascot rig.
+`npm test` covers enrollment, password hashing/rotation, cross-school and cross-role authorization, assignment dates and divisions, persistent division changes, progress queries, the mascot rig, practice scoring, catalog integrity, submission retries, and instructor rubric review.
 
 The browser check expects a local server on port 3002 by default; set `TEST_BASE_URL` to use another address. It requires installed Google Chrome.
 

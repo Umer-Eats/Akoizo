@@ -11,3 +11,4 @@ playwright-report/
 .preview.log
 .preview.err
 documents/qa/
+output/practice-research/

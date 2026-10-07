@@ -14,7 +14,9 @@ The student dashboard shows its own real lesson completions, practice/ranked tes
 
 The instructor dashboard contains only its school's students. Selecting a student changes the event list and progress table to that student's current division. Instructors can assign an event, Practice/Ranked type, and due date, without selecting a particular test. Assignments persist in Turso and appear in the assigned student's account. Progress starts at zero and will reflect stored completion records once learning tools launch.
 
-The public rankings page displays only actual earned points with generated public learner names. It has an empty state until points exist. No fictional ranking remains.
+Practice Tests opens a searchable list by competition, level, year and topic, with optional level/year filters. Six historical papers currently cover Heredity B, Disease Detectives B, Anatomy & Physiology C and Dynamic Planet C. The complete original paper is embedded beside one scrollable answer sheet. Multiple choice supports one or multiple selections; written responses preserve exact text. Scores and rubric corrections persist in the database, and local drafts survive reloads. Open explanations need instructor rubric review before the provisional score becomes final. Only instructors in the student's current study group can review them. See [practice sources and limits](PRACTICE_TESTS.md).
+
+The public rankings page displays only actual earned points with generated public learner names. It has an empty state until points exist. Practice submission does not award ranked points. No fictional ranking remains.
 
 ## Catalog and sources
 

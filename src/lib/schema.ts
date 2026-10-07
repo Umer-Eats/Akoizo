@@ -26,6 +26,10 @@ export const schema = [
   `CREATE TABLE IF NOT EXISTS points_ledger (id TEXT PRIMARY KEY, student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT REFERENCES events(id),
     test_attempt_id TEXT REFERENCES test_attempts(id), points INTEGER NOT NULL, reason TEXT NOT NULL,
     created_at TEXT NOT NULL DEFAULT (datetime('now')))`,
+  `CREATE TABLE IF NOT EXISTS practice_submissions (
+    id TEXT PRIMARY KEY REFERENCES test_attempts(id), student_id TEXT NOT NULL REFERENCES users(id),
+    test_id TEXT NOT NULL, result_json TEXT NOT NULL, created_at TEXT NOT NULL)`,
+  'CREATE INDEX IF NOT EXISTS idx_practice_student_test ON practice_submissions(student_id,test_id,created_at)',
   `CREATE TABLE IF NOT EXISTS lesson_progress (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
     lesson_id TEXT NOT NULL, completed_at TEXT NOT NULL, PRIMARY KEY(student_id, event_id, lesson_id))`,
   `CREATE TABLE IF NOT EXISTS event_selections (student_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
