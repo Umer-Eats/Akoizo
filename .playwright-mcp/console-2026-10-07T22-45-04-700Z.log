@@ -1,0 +1,10 @@
+[    8604ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at rX (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:47214)
+    at rY (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:48247)
+    at https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:142595
+    at sh (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:147756)
+    at sd (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:139006)
+    at https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:133831
+    at se (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:133932)
+    at s$ (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:160496)
+    at MessagePort.O (https://scioly.org/_next/static/chunks/2m1ggjskp33aj.js:1:8661)
