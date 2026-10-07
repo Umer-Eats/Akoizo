@@ -18,7 +18,12 @@ import {
   reviewPractice,
 } from '../src/lib/practice-service.ts';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
-import { registerMember, createAssignment, type Database } from '../src/lib/school-service.ts';
+import {
+  registerMember,
+  createAssignment,
+  dashboardFor,
+  type Database,
+} from '../src/lib/school-service.ts';
 import type { Answers } from '../src/lib/practice-types.ts';
 
 test('every archived paper has a complete rubric and coherent point total', () => {
@@ -287,6 +292,17 @@ test('submission saves once, rejects forged scores, completes one assignment, an
     );
     assert.equal(raw.prepare('SELECT points_awarded FROM test_attempts').get()!.points_awarded, 0);
     assert.equal((await practiceHistory(db, student, input.testId)).length, 1);
+    const repeat = await submitPractice(db, student, {
+      ...input,
+      submissionId: randomUUID(),
+    });
+    assert.equal(repeat.attemptNumber, 2);
+    assert.equal((await practiceHistory(db, student, input.testId)).length, 2);
+    assert.equal(
+      raw.prepare('SELECT count(*) n FROM assignments WHERE completed_at IS NOT NULL').get()!.n,
+      1,
+    );
+    assert.equal((await dashboardFor(db, student)).stats.practice, 1);
     assert.equal((await practiceHistory(db, peer, input.testId)).length, 0);
     await assert.rejects(submitPractice(db, teacher, input), { status: 403 });
     await assert.rejects(

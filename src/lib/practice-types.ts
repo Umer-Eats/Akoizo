@@ -78,6 +78,7 @@ export type QuestionResult = {
 export type PracticeResult = {
   id: string;
   testId: string;
+  attemptNumber?: number;
   completedAt: string;
   score: number;
   maxScore: number;

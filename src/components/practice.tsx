@@ -404,6 +404,12 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                   ? `${result.pendingPoints} points need rubric review for written explanations. These are pending, not marked incorrect.`
                   : 'Your submission is saved. Review every answer below.'}
               </p>
+              {result.attemptNumber && result.attemptNumber > 1 && (
+                <p>
+                  Repeat attempt: this score is for practice feedback only. No additional points or
+                  assignment credit are awarded.
+                </p>
+              )}
               <p>
                 Correct multiple-choice options are green. Written rubric answers are red. Your
                 original answers stay visible.

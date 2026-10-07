@@ -48,10 +48,17 @@ export async function submitPractice(
         sql: `INSERT OR IGNORE INTO practice_submissions (id,student_id,test_id,result_json,created_at) VALUES (?,?,?,?,?)`,
         args: [id, profile.id, test.id, JSON.stringify(result), now],
       },
-      // changes() is connection-local and directly follows the submission insert. Retries cannot complete another assignment.
+      // changes() is connection-local and directly follows the submission insert. Retries, including concurrent retries, cannot complete another assignment.
       {
-        sql: `UPDATE assignments SET completed_at=? WHERE id=(SELECT id FROM assignments WHERE student_id=? AND event_id=? AND type='Practice' AND completed_at IS NULL ORDER BY due_date,created_at,id LIMIT 1) AND changes()=1`,
-        args: [now, profile.id, eventId],
+        sql: `UPDATE assignments SET completed_at=? WHERE id=(SELECT id FROM assignments WHERE student_id=? AND event_id=? AND type='Practice' AND completed_at IS NULL ORDER BY due_date,created_at,id LIMIT 1) AND changes()=1 AND (SELECT COUNT(*) FROM practice_submissions WHERE student_id=? AND test_id=?)=1`,
+        args: [now, profile.id, eventId, profile.id, test.id],
+      },
+      {
+        sql: `UPDATE practice_submissions
+          SET result_json=json_set(result_json, '$.attemptNumber',
+            (SELECT COUNT(*) FROM practice_submissions WHERE student_id=? AND test_id=?))
+          WHERE id=? AND student_id=?`,
+        args: [profile.id, test.id, id, profile.id],
       },
     ],
     'immediate',

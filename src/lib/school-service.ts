@@ -188,7 +188,7 @@ export async function registerMember(
 
 const statsColumns = `
   (SELECT COUNT(*) FROM lesson_progress l WHERE l.student_id=u.id) AS lessons,
-  (SELECT COUNT(*) FROM test_attempts t WHERE t.student_id=u.id AND t.type='Practice') AS practice,
+  (SELECT COUNT(DISTINCT COALESCE(p.test_id,t.id)) FROM test_attempts t LEFT JOIN practice_submissions p ON p.id=t.id WHERE t.student_id=u.id AND t.type='Practice') AS practice,
   (SELECT COUNT(*) FROM test_attempts t WHERE t.student_id=u.id AND t.type='Ranked') AS ranked,
   COALESCE((SELECT SUM(p.points) FROM points_ledger p WHERE p.student_id=u.id),0) AS points`;
 function asStats(row: Row): Stats {
@@ -216,7 +216,7 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
   const progressRows = await db.all(
     `SELECT u.id AS student_id,e.id AS event_id,e.name,
     (SELECT COUNT(*) FROM lesson_progress l WHERE l.student_id=u.id AND l.event_id=e.id) AS lessons,
-    (SELECT COUNT(*) FROM test_attempts t WHERE t.student_id=u.id AND t.event_id=e.id AND t.type='Practice') AS practice,
+    (SELECT COUNT(DISTINCT COALESCE(p.test_id,t.id)) FROM test_attempts t LEFT JOIN practice_submissions p ON p.id=t.id WHERE t.student_id=u.id AND t.event_id=e.id AND t.type='Practice') AS practice,
     (SELECT COUNT(*) FROM test_attempts t WHERE t.student_id=u.id AND t.event_id=e.id AND t.type='Ranked') AS ranked,
     COALESCE((SELECT SUM(p.points) FROM points_ledger p WHERE p.student_id=u.id AND p.event_id=e.id),0) AS points
     FROM users u JOIN events e ON e.division=u.division AND e.season='2027'
