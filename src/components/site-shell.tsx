@@ -41,6 +41,9 @@ export function Header() {
               <Link className="login-link" href={`/dashboard/${profile.role}`}>
                 My dashboard
               </Link>
+              <Link className="login-link" href={`/settings/${profile.role}`}>
+                Settings
+              </Link>
               <button className="button button-small button-glass instructor-link" onClick={logout}>
                 Sign out
               </button>
@@ -81,6 +84,7 @@ export function Header() {
             {profile ? (
               <>
                 <Link href={`/dashboard/${profile.role}`}>My dashboard</Link>
+                <Link href={`/settings/${profile.role}`}>Settings</Link>
                 <button className="text-link" onClick={logout}>
                   Sign out
                 </button>

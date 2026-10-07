@@ -7,15 +7,36 @@ type Settings = {
   toggleTheme: () => void;
   motion: boolean;
   toggleMotion: () => void;
+  ako: { anchored: boolean; muted: boolean; visible: boolean };
+  updateAko: (patch: Partial<Settings['ako']>) => void;
 };
 const SettingsContext = createContext<Settings | null>(null);
 
 function SettingsProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState('dark');
   const [motion, setMotion] = useState(true);
+  const [ako, setAko] = useState({ anchored: false, muted: false, visible: true });
+  const updateAko = (patch: Partial<Settings['ako']>) => {
+    setAko((previous) => {
+      const next = { ...previous, ...patch };
+      try {
+        localStorage.setItem('ako-preferences', JSON.stringify(next));
+        localStorage.setItem('ako-talking-muted', String(next.muted));
+      } catch {}
+      return next;
+    });
+  };
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme || 'dark');
     setMotion(document.documentElement.dataset.motion !== 'off');
+    try {
+      const saved = JSON.parse(localStorage.getItem('ako-preferences') || '{}');
+      setAko({
+        anchored: saved.anchored === true,
+        muted: saved.muted === true || localStorage.getItem('ako-talking-muted') === 'true',
+        visible: saved.visible !== false,
+      });
+    } catch {}
   }, []);
   const toggleTheme = () => {
     const value = theme === 'dark' ? 'light' : 'dark';
@@ -34,7 +55,7 @@ function SettingsProvider({ children }: { children: ReactNode }) {
     } catch {}
   };
   return (
-    <SettingsContext.Provider value={{ theme, toggleTheme, motion, toggleMotion }}>
+    <SettingsContext.Provider value={{ theme, toggleTheme, motion, toggleMotion, ako, updateAko }}>
       {children}
     </SettingsContext.Provider>
   );

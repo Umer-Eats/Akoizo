@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Search, Trophy } from 'lucide-react';
 import type { Division } from '@/lib/events';
-import { Mascot, Orbit } from './art';
+import { Orbit } from './art';
 type Ranking = { id: string; handle: string; school: string; division: Division; points: number };
 export function Rankings() {
   const [rows, setRows] = useState<Ranking[]>([]);
@@ -43,7 +43,6 @@ export function Rankings() {
         <h1 className="chrome">Global Rankings</h1>
         <p>Every school. One community of curious minds.</p>
         <Orbit />
-        <Mascot small />
       </div>
       <div className="tabs" aria-label="Filter rankings by division">
         {['All', 'A', 'B', 'C'].map((value) => (

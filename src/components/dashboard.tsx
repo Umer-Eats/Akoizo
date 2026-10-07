@@ -445,7 +445,7 @@ export function StudentDashboard() {
     </main>
   );
 }
-function SchoolPanel() {
+export function SchoolPanel() {
   const { profile, credentials: initial, clearCredentials, request } = useAuth();
   const [credentials, setCredentials] = useState<SchoolCredentials | null>(initial);
   const [busy, setBusy] = useState(false);

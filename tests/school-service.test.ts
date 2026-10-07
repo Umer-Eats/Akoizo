@@ -235,3 +235,94 @@ test('progress totals reflect stored activity without multiplying joins or leaki
   await assert.rejects(limitEnrollment(db, 'test-user'), { status: 429 });
   raw.close();
 });
+
+test('settings names are validated and scoped to the current community', async () => {
+  const { db, raw, first, second, students } = await setup();
+  const { renameMember, leaveCommunity } = await import('../src/lib/school-service.ts');
+  await renameMember(db, students[0], students[0].id, '  Ada Learner  ');
+  assert.equal((await profileForUid(db, 'a'))!.displayName, 'Ada Learner');
+  await renameMember(db, first.profile, students[0].id, 'Ada Student');
+  await assert.rejects(renameMember(db, students[0], students[1].id, 'Wrong'), { status: 403 });
+  await assert.rejects(renameMember(db, second.profile, students[0].id, 'Wrong'), { status: 404 });
+  await assert.rejects(renameMember(db, students[0], students[0].id, '  '), { status: 400 });
+  await assert.rejects(renameMember(db, students[0], students[0].id, 'a'.repeat(81)), {
+    status: 400,
+  });
+  await leaveCommunity(db, students[0]);
+  await assert.rejects(renameMember(db, first.profile, students[0].id, 'Wrong'), { status: 404 });
+  raw.close();
+});
+
+test('leaving revokes membership, removes assignments, and preserves progress on re-enrollment', async () => {
+  const { db, raw, first, second, students } = await setup();
+  const { leaveCommunity } = await import('../src/lib/school-service.ts');
+  const learner = students[0];
+  const event = raw.prepare("SELECT id FROM events WHERE division='A' LIMIT 1").get()!.id as string;
+  raw
+    .prepare('INSERT INTO lesson_progress VALUES (?,?,?,?)')
+    .run(learner.id, event, 'lesson-1', '2026-10-01');
+  raw
+    .prepare(
+      'INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date) VALUES (?,?,?,?,?,?)',
+    )
+    .run('leave-assignment', learner.id, first.profile.id, event, 'Practice', '2099-01-01');
+  await leaveCommunity(db, learner);
+  assert.equal(await profileForUid(db, 'a'), null);
+  assert.equal(
+    (await dashboardFor(db, first.profile)).students.some((s) => s.id === learner.id),
+    false,
+  );
+  assert.equal(
+    raw.prepare('SELECT COUNT(*) AS n FROM assignments WHERE student_id=?').get(learner.id)!.n,
+    0,
+  );
+  assert.equal(
+    raw.prepare('SELECT COUNT(*) AS n FROM lesson_progress WHERE student_id=?').get(learner.id)!.n,
+    1,
+  );
+  const rejoined = await registerMember(
+    db,
+    identity('a'),
+    {
+      role: 'student',
+      displayName: 'Ada',
+      division: 'A',
+      schoolPassword: second.credentials!.joiningPassword,
+    },
+    undefined,
+  );
+  assert.equal(rejoined.profile.id, learner.id);
+  assert.equal(rejoined.profile.schoolId, second.profile.schoolId);
+  assert.equal((await dashboardFor(db, rejoined.profile)).stats.lessons, 1);
+  raw.close();
+});
+
+test('community deletion requires its instructor and confirmation and invalidates access/password', async () => {
+  const { db, raw, first, second, students } = await setup();
+  const { deleteCommunity } = await import('../src/lib/school-service.ts');
+  await assert.rejects(deleteCommunity(db, students[0], first.profile.schoolName), { status: 403 });
+  await assert.rejects(deleteCommunity(db, first.profile, 'wrong'), { status: 400 });
+  await deleteCommunity(db, first.profile, first.profile.schoolName);
+  for (const uid of ['t1', 'a', 'b', 'c']) assert.equal(await profileForUid(db, uid), null);
+  assert.ok(await profileForUid(db, 't2'));
+  assert.ok(await profileForUid(db, 'outsider'));
+  await assert.rejects(
+    registerMember(
+      db,
+      identity('new'),
+      {
+        role: 'student',
+        displayName: 'New',
+        division: 'A',
+        schoolPassword: first.credentials!.joiningPassword,
+      },
+      undefined,
+    ),
+    { status: 403 },
+  );
+  const returning = await registerMember(db, identity('t1'), teacherData, 'test-invitation');
+  assert.equal(returning.profile.id, first.profile.id);
+  assert.notEqual(returning.profile.schoolId, first.profile.schoolId);
+  assert.equal((await dashboardFor(db, second.profile)).students.length, 1);
+  raw.close();
+});

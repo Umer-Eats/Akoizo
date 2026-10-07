@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Mascot, Orbit } from '@/components/art';
+import { Orbit } from '@/components/art';
 import { useAuth, authMessage } from '@/components/auth-context';
 import type { Enrollment, Profile, Role } from '@/lib/domain';
 import type { Division } from '@/lib/events';
@@ -126,7 +126,7 @@ export function AuthPageClient({ role }: { role: Role }) {
     <main id="main" className="auth-page">
       <section className="auth-art">
         <Orbit />
-        <Mascot />
+
         <h1>
           {student ? 'Your next chapter starts with curiosity.' : 'Help your team take flight.'}
         </h1>

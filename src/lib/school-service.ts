@@ -50,7 +50,7 @@ function asProfile(row: Row): Profile {
 }
 export async function profileForUid(db: Database, uid: string) {
   const row = await db.get(
-    `SELECT ${profileColumns} FROM users u JOIN schools s ON s.id=u.school_id WHERE u.firebase_uid=?`,
+    `SELECT ${profileColumns} FROM users u JOIN schools s ON s.id=u.school_id WHERE u.firebase_uid=? AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND NOT EXISTS (SELECT 1 FROM closed_communities c WHERE c.school_id=s.id)`,
     uid,
   );
   return row ? asProfile(row) : null;
@@ -84,7 +84,10 @@ export async function checkEnrollment(db: Database, data: Enrollment, invite: st
   const password = data.schoolPassword?.trim() || '';
   const id = schoolIdFromPassword(password);
   const school = id
-    ? await db.get('SELECT id,name,password_hash FROM schools WHERE id=?', id)
+    ? await db.get(
+        'SELECT id,name,password_hash FROM schools WHERE id=? AND id NOT IN (SELECT school_id FROM closed_communities)',
+        id,
+      )
     : undefined;
   if (!school || !verifySchoolPassword(password, String(school.password_hash)))
     throw new AppError(
@@ -109,12 +112,15 @@ export async function registerMember(
     return { profile: existing };
   }
   const school = await checkEnrollment(db, data, invite);
-  const id = randomUUID();
+  const previous = await db.get('SELECT id,role FROM users WHERE firebase_uid=?', identity.uid);
+  if (previous && previous.role !== data.role)
+    throw new AppError(409, 'Use your original account role to rejoin a community.');
+  const id = previous ? String(previous.id) : randomUUID();
   if (data.role === 'instructor') {
     const schoolId = randomUUID();
     const schoolName = `School-${randomBytes(5).toString('hex').toUpperCase()}`;
     const joiningPassword = makeSchoolPassword(schoolId);
-    await db.batch(
+    const created = await db.batch(
       [
         {
           sql: 'INSERT INTO schools (id,name,password_hash) VALUES (?,?,?)',
@@ -125,12 +131,24 @@ export async function registerMember(
           args: [schoolId, data.schoolCommunityId!],
         },
         {
-          sql: 'INSERT INTO users (id,firebase_uid,email,display_name,role,school_id,division) VALUES (?,?,?,?,?,?,NULL)',
+          sql: `INSERT INTO users (id,firebase_uid,email,display_name,role,school_id,division) VALUES (?,?,?,?,?,?,NULL) ON CONFLICT(firebase_uid) DO UPDATE SET school_id=excluded.school_id,display_name=excluded.display_name
+            WHERE users.role=excluded.role AND (users.id IN (SELECT user_id FROM departed_members) OR users.school_id IN (SELECT school_id FROM closed_communities))`,
           args: [id, identity.uid, identity.email, data.displayName, 'instructor', schoolId],
+        },
+        { sql: 'DELETE FROM departed_members WHERE user_id=?', args: [id] },
+        {
+          sql: 'DELETE FROM school_communities WHERE school_id=? AND NOT EXISTS (SELECT 1 FROM users WHERE school_id=?)',
+          args: [schoolId, schoolId],
+        },
+        {
+          sql: 'DELETE FROM schools WHERE id=? AND NOT EXISTS (SELECT 1 FROM users WHERE school_id=?)',
+          args: [schoolId, schoolId],
         },
       ],
       'immediate',
     );
+    if (!created[2].rowsAffected)
+      throw new AppError(409, 'Your enrollment changed. Refresh to see your current community.');
     return {
       profile: (await profileForUid(db, identity.uid))!,
       credentials: { schoolName, joiningPassword },
@@ -140,7 +158,9 @@ export async function registerMember(
     [
       {
         sql: `INSERT INTO users (id,firebase_uid,email,display_name,role,school_id,division)
-      SELECT ?,?,?,?,'student',id,? FROM schools WHERE id=? AND password_hash=?`,
+      SELECT ?,?,?,?,'student',id,? FROM schools WHERE id=? AND password_hash=? AND id NOT IN (SELECT school_id FROM closed_communities)
+      ON CONFLICT(firebase_uid) DO UPDATE SET school_id=excluded.school_id,display_name=excluded.display_name,division=excluded.division
+      WHERE users.role=excluded.role AND (users.id IN (SELECT user_id FROM departed_members) OR users.school_id IN (SELECT school_id FROM closed_communities))`,
         args: [
           id,
           identity.uid,
@@ -150,6 +170,10 @@ export async function registerMember(
           String(school!.id),
           String(school!.password_hash),
         ],
+      },
+      {
+        sql: 'DELETE FROM departed_members WHERE user_id=? AND EXISTS (SELECT 1 FROM users WHERE id=? AND school_id=?)',
+        args: [id, id, String(school!.id)],
       },
     ],
     'immediate',
@@ -179,7 +203,7 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
   const instructor = profile.role === 'instructor';
   const rows = await db.all(
     `SELECT ${profileColumns}, ${statsColumns} FROM users u JOIN schools s ON s.id=u.school_id
-    WHERE u.role='student' AND ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY u.display_name,u.id`,
+    WHERE u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY u.display_name,u.id`,
     instructor ? profile.schoolId : profile.id,
   );
   const students = rows.map((row) => ({ ...asProfile(row), ...asStats(row) })) as Student[];
@@ -196,7 +220,7 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
     (SELECT COUNT(*) FROM test_attempts t WHERE t.student_id=u.id AND t.event_id=e.id AND t.type='Ranked') AS ranked,
     COALESCE((SELECT SUM(p.points) FROM points_ledger p WHERE p.student_id=u.id AND p.event_id=e.id),0) AS points
     FROM users u JOIN events e ON e.division=u.division AND e.season='2027'
-    WHERE u.role='student' AND ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY e.name`,
+    WHERE u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY e.name`,
     instructor ? profile.schoolId : profile.id,
   );
   const progress: DashboardData['progress'] = {};
@@ -233,7 +257,7 @@ export async function createAssignment(
   const row =
     typeof body.studentId === 'string'
       ? await db.get(
-          `SELECT ${profileColumns} FROM users u JOIN schools s ON s.id=u.school_id WHERE u.id=?`,
+          `SELECT ${profileColumns} FROM users u JOIN schools s ON s.id=u.school_id WHERE u.id=? AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
           body.studentId,
         )
       : undefined;
@@ -253,7 +277,7 @@ export async function createAssignment(
     [
       {
         sql: `INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date)
-    SELECT ?,u.id,?,?,?,? FROM users u WHERE u.id=? AND u.school_id=? AND u.division=? AND u.role='student'`,
+    SELECT ?,u.id,?,?,?,? FROM users u WHERE u.id=? AND u.school_id=? AND u.division=? AND u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
         args: [
           id,
           instructor.id,
@@ -313,4 +337,75 @@ export async function rotateSchoolPassword(db: Database, instructor: Profile) {
     'immediate',
   );
   return { schoolName: instructor.schoolName, joiningPassword };
+}
+
+function validName(value: unknown) {
+  if (
+    typeof value !== 'string' ||
+    !value.trim() ||
+    value.trim().length > 80 ||
+    /[\u0000-\u001f]/.test(value)
+  )
+    throw new AppError(400, 'Enter a full name between 1 and 80 characters.');
+  return value.trim();
+}
+export async function renameMember(db: Database, actor: Profile, targetId: unknown, name: unknown) {
+  const displayName = validName(name);
+  if (typeof targetId !== 'string') throw new AppError(400, 'Choose a student.');
+  if (actor.role !== 'instructor' && targetId !== actor.id)
+    throw new AppError(403, 'You can only change your own name.');
+  const result = await db.batch(
+    [
+      {
+        sql: `UPDATE users SET display_name=? WHERE id=? AND school_id=? AND role='student'
+    AND id NOT IN (SELECT user_id FROM departed_members)
+    AND school_id NOT IN (SELECT school_id FROM closed_communities)
+    AND EXISTS (SELECT 1 FROM users a WHERE a.id=? AND a.school_id=? AND a.id NOT IN (SELECT user_id FROM departed_members))`,
+        args: [displayName, targetId, actor.schoolId, actor.id, actor.schoolId],
+      },
+    ],
+    'immediate',
+  );
+  if (!result[0].rowsAffected)
+    throw new AppError(404, 'Active student not found in your community.');
+  return { displayName };
+}
+export async function leaveCommunity(db: Database, actor: Profile) {
+  if (actor.role !== 'student') throw new AppError(403, 'Only students can leave a community.');
+  await db.batch(
+    [
+      {
+        sql: 'INSERT OR IGNORE INTO departed_members (user_id) SELECT id FROM users WHERE id=? AND school_id=?',
+        args: [actor.id, actor.schoolId],
+      },
+      {
+        sql: 'DELETE FROM assignments WHERE student_id=? AND student_id IN (SELECT id FROM users WHERE school_id=?)',
+        args: [actor.id, actor.schoolId],
+      },
+    ],
+    'immediate',
+  );
+}
+/** Logical deletion retains individual learning records, while revoking every membership and joining password. */
+export async function deleteCommunity(db: Database, actor: Profile, confirmation: unknown) {
+  if (actor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
+  if (confirmation !== actor.schoolName)
+    throw new AppError(400, 'Type the study group name exactly to confirm deletion.');
+  await db.batch(
+    [
+      {
+        sql: `INSERT OR IGNORE INTO closed_communities (school_id) SELECT school_id FROM users WHERE id=? AND school_id=? AND role='instructor' AND id NOT IN (SELECT user_id FROM departed_members)`,
+        args: [actor.id, actor.schoolId],
+      },
+      {
+        sql: `INSERT OR IGNORE INTO departed_members (user_id) SELECT id FROM users WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities)`,
+        args: [actor.schoolId],
+      },
+      {
+        sql: `DELETE FROM assignments WHERE student_id IN (SELECT id FROM users WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities))`,
+        args: [actor.schoolId],
+      },
+    ],
+    'immediate',
+  );
 }

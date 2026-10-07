@@ -32,9 +32,13 @@ type Scene = {
   nextWalk: number;
 };
 export function AkoCompanion() {
-  const { motion } = useSettings();
+  const { motion, ako, updateAko } = useSettings();
   const [reduced, setReduced] = useState(false);
-  const [muted, setMuted] = useState(false);
+  const muted = ako.muted;
+  const preferences = useRef(ako);
+  preferences.current = ako;
+  const drag = useRef<{ x: number; y: number; origin: Point; moved: boolean } | null>(null);
+  const suppressClick = useRef(false);
   const [menu, setMenu] = useState(false);
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<Scene | null>(null);
@@ -69,7 +73,7 @@ export function AkoCompanion() {
   const toggleTalking = () => {
     const value = !mutedRef.current;
     mutedRef.current = value;
-    setMuted(value);
+    updateAko({ muted: value });
     try {
       localStorage.setItem('ako-talking-muted', String(value));
     } catch {}
@@ -92,7 +96,16 @@ export function AkoCompanion() {
   };
   const feed = (point?: Point) => {
     const s = scene.current;
-    if (!s) return;
+    if (!s || !preferences.current.visible) return;
+    if (preferences.current.anchored) {
+      s.cheese = { ...s.position };
+      s.target = null;
+      s.action = 'eat';
+      s.until = performance.now() + 1700;
+      setMenu(false);
+      publish();
+      return;
+    }
     const target = boundAko(
       point ?? { x: s.position.x + (s.position.x > innerWidth / 2 ? -180 : 180), y: s.position.y },
       innerWidth,
@@ -114,7 +127,6 @@ export function AkoCompanion() {
     try {
       const value = localStorage.getItem('ako-talking-muted') === 'true';
       mutedRef.current = value;
-      setMuted(value);
     } catch {}
     const now = performance.now();
     scene.current = {
@@ -129,6 +141,11 @@ export function AkoCompanion() {
       nextTalk: now + 60000,
       nextWalk: now + 10000,
     };
+    try {
+      const saved = JSON.parse(localStorage.getItem('ako-position') || 'null');
+      if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y))
+        scene.current.position = boundAko(saved, innerWidth, innerHeight);
+    } catch {}
     setReady(true);
     publish();
     const triple = (event: MouseEvent) => {
@@ -170,7 +187,7 @@ export function AkoCompanion() {
       const dt = Math.min((now - previous) / 1000, 0.05);
       previous = now;
       const s = scene.current!;
-      if (!document.hidden) {
+      if (!document.hidden && preferences.current.visible && !drag.current?.moved) {
         if (s.message && now > s.messageUntil) s.message = '';
         if (!menuRef.current && (!held.current || s.cheese)) {
           if (s.target) {
@@ -194,7 +211,12 @@ export function AkoCompanion() {
               s.action = 'idle';
               s.until = 0;
             }
-          } else if (!s.until && now > s.nextWalk && canMoveRef.current) {
+          } else if (
+            !s.until &&
+            now > s.nextWalk &&
+            canMoveRef.current &&
+            !preferences.current.anchored
+          ) {
             roamIndex++;
             s.target = boundAko(
               {
@@ -228,7 +250,26 @@ export function AkoCompanion() {
       window.removeEventListener('resize', resize);
     };
   }, []);
-  if (!ready || !view) return null;
+  useEffect(() => {
+    mutedRef.current = ako.muted;
+    if (scene.current) {
+      if (ako.muted) scene.current.message = '';
+      if (ako.anchored) {
+        scene.current.target = null;
+        if (scene.current.cheese) {
+          scene.current.cheese = { ...scene.current.position };
+          scene.current.action = 'eat';
+          scene.current.until = performance.now() + 1700;
+        } else if (['walk', 'run'].includes(scene.current.action)) scene.current.action = 'idle';
+        try {
+          localStorage.setItem('ako-position', JSON.stringify(scene.current.position));
+        } catch {}
+      }
+      publish();
+    }
+    if (!ako.visible) setMenu(false);
+  }, [ako.muted, ako.anchored, ako.visible]);
+  if (!ready || !view || !ako.visible) return null;
   const panelLeft = Math.max(
     8,
     Math.min(view.position.x - 100, typeof window !== 'undefined' ? innerWidth - 248 : 0),
@@ -240,6 +281,7 @@ export function AkoCompanion() {
       data-testid="ako-companion"
       data-action={view.action}
       data-muted={muted}
+      data-anchored={ako.anchored}
     >
       {view.cheese && (
         <div
@@ -274,6 +316,49 @@ export function AkoCompanion() {
         aria-label={`Ako, your study buddy. ${muted ? 'Talking muted.' : 'Talking enabled.'} Click for controls; right-click to toggle talking.`}
         aria-expanded={menu}
         aria-controls="ako-controls"
+        onPointerDown={(event) => {
+          if (event.button !== 0) return;
+          drag.current = {
+            x: event.clientX,
+            y: event.clientY,
+            origin: { ...scene.current!.position },
+            moved: false,
+          };
+          suppressClick.current = false;
+          event.currentTarget.setPointerCapture(event.pointerId);
+        }}
+        onPointerMove={(event) => {
+          const d = drag.current;
+          if (!d) return;
+          const dx = event.clientX - d.x,
+            dy = event.clientY - d.y;
+          if (!d.moved && Math.hypot(dx, dy) < 5) return;
+          d.moved = true;
+          suppressClick.current = true;
+          clearTimeout(clickTimer.current);
+          setMenu(false);
+          const s = scene.current!;
+          s.position = boundAko(
+            { x: d.origin.x + dx, y: d.origin.y + dy },
+            innerWidth,
+            innerHeight,
+          );
+          s.target = null;
+          s.cheese = null;
+          s.action = 'idle';
+          s.until = 0;
+          publish();
+        }}
+        onLostPointerCapture={() => {
+          if (drag.current?.moved) {
+            updateAko({ anchored: true });
+            try {
+              localStorage.setItem('ako-position', JSON.stringify(scene.current!.position));
+            } catch {}
+          }
+          drag.current = null;
+          held.current = false;
+        }}
         onPointerEnter={() => {
           held.current = true;
         }}
@@ -296,6 +381,12 @@ export function AkoCompanion() {
           if (event.key === 'Escape') setMenu(false);
         }}
         onClick={(event) => {
+          if (suppressClick.current) {
+            event.preventDefault();
+            event.stopPropagation();
+            suppressClick.current = false;
+            return;
+          }
           clearTimeout(clickTimer.current);
           if (event.detail <= 1)
             clickTimer.current = setTimeout(
@@ -315,7 +406,7 @@ export function AkoCompanion() {
           className="ako-controls"
           role="region"
           aria-label="Ako controls"
-          style={{ left: panelLeft, top: Math.max(8, Math.min(innerHeight - 236, panelTop)) }}
+          style={{ left: panelLeft, top: Math.max(8, Math.min(innerHeight - 290, panelTop)) }}
           onKeyDown={(event) => {
             if (event.key === 'Escape') setMenu(false);
           }}
@@ -327,6 +418,8 @@ export function AkoCompanion() {
             </button>
           </div>
           <p>
+            Drag Ako to place and anchor him.
+            <br />
             Triple-click anywhere to leave cheese.
             <br />
             Right-click Ako to toggle his pep talks.
@@ -337,6 +430,18 @@ export function AkoCompanion() {
               {muted ? 'Unmute talks' : 'Mute talks'}
             </button>
           </div>
+          <button
+            className="ako-anchor"
+            aria-pressed={ako.anchored}
+            onClick={() => {
+              updateAko({ anchored: !ako.anchored });
+              try {
+                localStorage.setItem('ako-position', JSON.stringify(scene.current!.position));
+              } catch {}
+            }}
+          >
+            {ako.anchored ? 'Release anchor' : 'Anchor in place'}
+          </button>
           <div className="ako-moods" aria-label="Try an expression">
             {(
               ['thinking', 'happy', 'sad', 'angry', 'wave', 'sleep', 'surprised'] as AkoAction[]

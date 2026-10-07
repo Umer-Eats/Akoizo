@@ -2,15 +2,12 @@
 import Link from 'next/link';
 import { useState, type CSSProperties } from 'react';
 import { ChevronDown, Check, BookOpen, Zap, FolderOpen } from 'lucide-react';
-import { Mascot, PixelStar, Reveal } from './art';
+import { PixelStar, Reveal } from './art';
 export function Home() {
   const [answer, setAnswer] = useState('');
   return (
     <main id="main" className="home-page">
       <section className="hero">
-        <div className="hero-corner">
-          <Mascot corner />
-        </div>
         <div className="hero-eyebrow">
           <span className="tiny-square" /> THE OPEN STUDY LAB
           <span className="hero-edition">SCIENCE OLYMPIAD / VOL. 01</span>

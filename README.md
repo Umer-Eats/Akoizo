@@ -80,3 +80,13 @@ Ako is original code-drawn, 48×48 pixel artwork, shared by the page mascots and
 - Future chat code can import `setAkoMood` from `src/lib/ako-motion.ts`, call `setAkoMood('thinking', 30000)` while waiting, and `setAkoMood('happy')` when finished. These are animation hooks; there is no chatbot backend in this change.
 
 Run `node scripts/ako-browser-check.mjs` against the development server at port 3000 (or supply `TEST_BASE_URL`) to verify feeding, emotions, mute persistence, keyboard controls, and mobile bounds.
+
+### Account settings and placement
+
+The signed-in header and mobile navigation link to `/settings/student` or `/settings/instructor`. Students can edit their full name, configure Ako, and leave a community. Instructors can rotate the joining password, rename students in their own roster, and close their own study group after typing its name.
+
+Community closure is a logical deletion: it invalidates joining passwords and memberships and removes assignments. Leaving also removes the student's assignments and roster access. Authentication accounts and individual learning records are retained so the same account can re-enroll without losing progress. Every authenticated request checks active membership; closed/departed members are excluded from rankings. The new membership tables are created by the existing idempotent schema initialization.
+
+Ako is now the only page character. Dragging him anchors him and saves his screen position in this browser. The panel's Anchor in place / Release anchor button controls roaming; when anchored, feeding happens at his current position. The student settings controls share the same saved browser preferences for visibility, encouragement, and anchoring.
+
+`node scripts/settings-browser-check.mjs` checks placement and both settings interfaces using mocked account APIs (no real account changes). `npm test` checks name authorization, membership revocation, preserved progress, password invalidation, and re-enrollment with an isolated SQLite database.
