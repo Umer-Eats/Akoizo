@@ -55,8 +55,12 @@ async function signUp(page, role, name, extra) {
   if (role === 'student') {
     await page.getByLabel('Your division', { exact: true }).selectOption(extra.division);
     await page.getByLabel('School password', { exact: true }).fill(extra.schoolPassword);
-  } else
+  } else {
+    await page
+      .getByLabel('School community', { exact: true })
+      .selectOption(extra.schoolCommunityId || 'ppchs');
     await page.getByLabel('Instructor invitation password', { exact: true }).fill(extra.invite);
+  }
   await page.locator('form').getByRole('button', { name: 'Create account', exact: true }).click();
   await expect(page).toHaveURL(new RegExp(`/dashboard/${role}$`), { timeout: 30000 });
   await expect(page.locator('.dashboard-heading')).toBeVisible({ timeout: 30000 });
@@ -111,6 +115,19 @@ try {
       .evaluateAll((els) => els.map((el) => el.value)),
     ['A', 'B', 'C'],
   );
+  await page.goto(base + '/login/instructor');
+  await page.getByRole('button', { name: 'Create account', exact: true }).click();
+  const communitySelect = page.getByLabel('School community', { exact: true });
+  await expect(communitySelect).toHaveValue('');
+  assert.equal(await communitySelect.evaluate((select) => select.required), true);
+  assert.deepEqual(await communitySelect.locator('option:not([value=""])').allTextContents(), [
+    'Pembroke Pines Charter High School',
+    'Central Campus Pembroke Pines Charter Middle School',
+    'West Campus Pembroke Pines Charter Middle School',
+    'Academic Village Pembroke Pines Charter Middle School',
+  ]);
+  await communitySelect.selectOption('ppcms-academic-village');
+  await layout(page, 'instructor-signup');
   if (!live) {
     console.log(
       'PASS: public pages, enrollment forms, responsive themes, protected routes, removed previews, unauthenticated API rejection.',
@@ -136,11 +153,19 @@ try {
     const teacher = await newPage();
     await signUp(teacher, 'instructor', 'Teacher', {
       invite: process.env.INSTRUCTOR_INVITE_PASSWORD,
+      schoolCommunityId: 'ppcms-west',
     });
+    await expect(teacher.locator('.school-panel h2')).toHaveText(
+      'West Campus Pembroke Pines Charter Middle School',
+    );
     const schoolPassword = await teacher.getByLabel('Student joining password').inputValue();
     assert.match(schoolPassword, /^AKO-/);
     await expect(teacher.getByRole('heading', { name: 'Your team starts here.' })).toBeVisible();
     await teacher.getByRole('button', { name: 'I’ve saved it', exact: true }).click();
+    await teacher.reload();
+    await expect(teacher.locator('.school-panel h2')).toHaveText(
+      'West Campus Pembroke Pines Charter Middle School',
+    );
     await layout(teacher, 'instructor-empty');
     const students = {};
     for (const division of ['A', 'B', 'C']) {
@@ -148,6 +173,9 @@ try {
       await signUp(studentPage, 'student', `Student${division}`, { division, schoolPassword });
       students[division] = studentPage;
       await expect(studentPage.locator('.event-card')).toHaveCount(division === 'A' ? 17 : 23);
+      await expect(studentPage.locator('.dashboard-heading .eyebrow')).toContainText(
+        'West Campus Pembroke Pines Charter Middle School',
+      );
       await expect(studentPage.locator('.stat-card strong')).toHaveText(['0', '0', '0', '0']);
     }
     await layout(students.A, 'division-a');
@@ -307,10 +335,16 @@ try {
         args: ids,
       });
       for (const school of schoolRows)
-        statements.push({
-          sql: 'DELETE FROM schools WHERE id=? AND NOT EXISTS (SELECT 1 FROM users WHERE school_id=?)',
-          args: [school.school_id, school.school_id],
-        });
+        statements.push(
+          {
+            sql: 'DELETE FROM school_communities WHERE school_id=? AND NOT EXISTS (SELECT 1 FROM users WHERE school_id=?)',
+            args: [school.school_id, school.school_id],
+          },
+          {
+            sql: 'DELETE FROM schools WHERE id=? AND NOT EXISTS (SELECT 1 FROM users WHERE school_id=?)',
+            args: [school.school_id, school.school_id],
+          },
+        );
       await db.batch(statements, 'immediate');
       for (const user of users) await admin.deleteUser(user.uid);
       console.log(`Removed ${users.length} temporary QA accounts and their school data.`);

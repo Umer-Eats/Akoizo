@@ -1,9 +1,13 @@
 import { eventsForDivision } from './events.ts';
 import { eventKey } from './domain.ts';
+import { schoolCommunities } from './school-communities.ts';
 
 export const schema = [
   `CREATE TABLE IF NOT EXISTS schools (id TEXT PRIMARY KEY, name TEXT NOT NULL UNIQUE, password_hash TEXT NOT NULL,
     created_at TEXT NOT NULL DEFAULT (datetime('now')))`,
+  `CREATE TABLE IF NOT EXISTS school_communities (
+    school_id TEXT PRIMARY KEY REFERENCES schools(id) ON DELETE CASCADE,
+    community_id TEXT NOT NULL CHECK(community_id IN (${schoolCommunities.map((community) => `'${community.id}'`).join(',')})))`,
   `CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, firebase_uid TEXT NOT NULL UNIQUE, email TEXT NOT NULL,
     display_name TEXT, role TEXT NOT NULL CHECK(role IN ('student','instructor')),
     school_id TEXT NOT NULL REFERENCES schools(id), division TEXT CHECK(division IN ('A','B','C')),

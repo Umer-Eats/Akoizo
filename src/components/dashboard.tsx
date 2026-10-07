@@ -376,7 +376,7 @@ export function StudentDashboard() {
     <main id="main" className="page-container live-dashboard">
       <div className="dashboard-heading">
         <div>
-          <p className="eyebrow">STUDENT / {profile!.schoolName}</p>
+          <p className="eyebrow">STUDENT / {profile!.schoolCommunityName || profile!.schoolName}</p>
           <h1>Your space to grow, {profile!.displayName}.</h1>
           <p>A new question. A little practice. One step further.</p>
         </div>
@@ -476,7 +476,10 @@ function SchoolPanel() {
     <section className="school-panel">
       <div>
         <span className="eyebrow">YOUR SCHOOL</span>
-        <h2>{profile!.schoolName}</h2>
+        <h2>{profile!.schoolCommunityName || profile!.schoolName}</h2>
+        {profile!.schoolCommunityName && (
+          <p className="source-note">Study group: {profile!.schoolName}</p>
+        )}
         <p>Share your school password with students so they can join your roster.</p>
       </div>
       <div className="school-invite">
@@ -641,7 +644,9 @@ export function InstructorDashboard() {
     <main id="main" className="page-container live-dashboard">
       <div className="dashboard-heading">
         <div>
-          <p className="eyebrow">INSTRUCTOR / {profile!.schoolName}</p>
+          <p className="eyebrow">
+            INSTRUCTOR / {profile!.schoolCommunityName || profile!.schoolName}
+          </p>
           <h1>Help your team take flight.</h1>
           <p>Welcome, {profile!.displayName}. A closer look at every student’s next step.</p>
         </div>

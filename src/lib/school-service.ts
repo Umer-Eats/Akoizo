@@ -15,6 +15,7 @@ import {
   type Assignment,
 } from './domain.ts';
 import { type Division } from './events.ts';
+import { getSchoolCommunity } from './school-communities.ts';
 import {
   equalSecret,
   hashSchoolPassword,
@@ -32,15 +33,18 @@ export type Database = {
     mode: string,
   ) => Promise<{ rowsAffected: number; rows: Row[] }[]>;
 };
-const profileColumns =
-  'u.id, u.role, u.display_name, u.school_id, u.division, s.name AS school_name';
+const profileColumns = `u.id, u.role, u.display_name, u.school_id, u.division, s.name AS school_name,
+  (SELECT sc.community_id FROM school_communities sc WHERE sc.school_id=s.id) AS school_community_id`;
 function asProfile(row: Row): Profile {
+  const community = getSchoolCommunity(row.school_community_id);
   return {
     id: String(row.id),
     role: row.role as Role,
     displayName: String(row.display_name || 'Learner'),
     schoolId: String(row.school_id),
     schoolName: String(row.school_name),
+    schoolCommunityId: community?.id ?? null,
+    schoolCommunityName: community?.name ?? null,
     division: row.division as Division | null,
   };
 }
@@ -70,6 +74,8 @@ export async function limitEnrollment(db: Database, identity: string) {
 }
 export async function checkEnrollment(db: Database, data: Enrollment, invite: string | undefined) {
   if (data.role === 'instructor') {
+    if (!getSchoolCommunity(data.schoolCommunityId))
+      throw new AppError(400, 'Choose a school community from the list.');
     if (!invite) throw new AppError(503, 'Instructor registration is not configured yet.');
     if (!equalSecret(data.instructorInvitePassword || '', invite))
       throw new AppError(403, 'The instructor invitation password is incorrect.');
@@ -113,6 +119,10 @@ export async function registerMember(
         {
           sql: 'INSERT INTO schools (id,name,password_hash) VALUES (?,?,?)',
           args: [schoolId, schoolName, hashSchoolPassword(joiningPassword)],
+        },
+        {
+          sql: 'INSERT INTO school_communities (school_id,community_id) VALUES (?,?)',
+          args: [schoolId, data.schoolCommunityId!],
         },
         {
           sql: 'INSERT INTO users (id,firebase_uid,email,display_name,role,school_id,division) VALUES (?,?,?,?,?,?,NULL)',

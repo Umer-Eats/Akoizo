@@ -1,4 +1,5 @@
 import { eventsForDivision, type Division } from './events.ts';
+import { getSchoolCommunity, type SchoolCommunityId } from './school-communities.ts';
 
 export type Role = 'student' | 'instructor';
 export type Profile = {
@@ -7,6 +8,8 @@ export type Profile = {
   displayName: string;
   schoolId: string;
   schoolName: string;
+  schoolCommunityId: SchoolCommunityId | null;
+  schoolCommunityName: string | null;
   division: Division | null;
 };
 export type SchoolCredentials = { schoolName: string; joiningPassword: string };
@@ -37,6 +40,7 @@ export type Enrollment = {
   division?: Division;
   schoolPassword?: string;
   instructorInvitePassword?: string;
+  schoolCommunityId?: string;
 };
 export class AppError extends Error {
   status: number;
@@ -62,6 +66,8 @@ export function readEnrollment(value: unknown): Enrollment {
   }
   if (body.role === 'student' && !isDivision(body.division))
     throw new AppError(400, 'Choose Division A, B, or C.');
+  if (body.role === 'instructor' && !getSchoolCommunity(body.schoolCommunityId))
+    throw new AppError(400, 'Choose a school community from the list.');
   const key = body.role === 'student' ? 'schoolPassword' : 'instructorInvitePassword';
   if (typeof body[key] !== 'string' || !body[key] || (body[key] as string).length > 256) {
     throw new AppError(
@@ -75,6 +81,8 @@ export function readEnrollment(value: unknown): Enrollment {
     role: body.role,
     displayName: body.displayName.trim(),
     division: isDivision(body.division) ? body.division : undefined,
+    schoolCommunityId:
+      body.role === 'instructor' ? getSchoolCommunity(body.schoolCommunityId)!.id : undefined,
     [key]: body[key],
   };
 }

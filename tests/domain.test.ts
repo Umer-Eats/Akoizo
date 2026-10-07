@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { eventsForDivision, tools } from '../src/lib/events.ts';
 import { validateAssignment, dateInZone, eventKey, readEnrollment } from '../src/lib/domain.ts';
+import { schoolCommunities } from '../src/lib/school-communities.ts';
 
 test('division slates follow the two national lists and the supplied Florida manual', () => {
   for (const division of ['B', 'C'] as const) {
@@ -56,5 +57,32 @@ test('enrollment input validation excludes unsupported roles and divisions', () 
     readEnrollment({ role: 'student', displayName: ' Alex ', division: 'A', schoolPassword: 'x' })
       .displayName,
     'Alex',
+  );
+  const instructor = {
+    role: 'instructor',
+    displayName: 'Teacher',
+    instructorInvitePassword: 'test',
+  };
+  for (const schoolCommunityId of ['', 'other-florida-school', 'toString', undefined]) {
+    assert.throws(
+      () => readEnrollment({ ...instructor, schoolCommunityId }),
+      /Choose a school community/,
+    );
+  }
+  for (const community of schoolCommunities) {
+    assert.equal(
+      readEnrollment({ ...instructor, schoolCommunityId: community.id }).schoolCommunityId,
+      community.id,
+    );
+  }
+  assert.equal(
+    readEnrollment({
+      role: 'student',
+      displayName: 'Student',
+      division: 'C',
+      schoolPassword: 'test',
+      schoolCommunityId: 'ppcms-west',
+    }).schoolCommunityId,
+    undefined,
   );
 });

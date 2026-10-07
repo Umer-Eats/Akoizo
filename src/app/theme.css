@@ -1832,6 +1832,12 @@
   .auth-fields input,
   .auth-fields select {
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .auth-page > div,
+  .auth-fields label {
+    min-width: 0;
   }
   .form-error {
     color: #ff919a;

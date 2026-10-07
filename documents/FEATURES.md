@@ -6,6 +6,10 @@ The previous `/preview/*` routes and demo data are removed. Landing links now op
 
 Instructor signup requires the private invitation password and creates a random school name and joining password. Students choose A/B/C and provide the school password. School/role authorization runs on the server for all data requests.
 
+Instructor signup also requires a school community. The only options are Pembroke Pines Charter High School and the Central, West, and Academic Village campuses of Pembroke Pines Charter Middle School. Campus names are placed first in middle-school options so they are distinct on narrow screens. The choice is saved and shown on instructor and student dashboards. Communities label each instructor's private study group; choosing the same campus does not grant access to another instructor's roster. The generated group name and joining password continue to control enrollment.
+
+The campus list was verified October 6, 2026 against the [official Pembroke Pines Charter directory](https://www.pinescharter.net/2308/Contact-Us). No other Florida schools or elementary-only campuses are offered. Existing groups without a saved community retain their current names.
+
 The student dashboard shows its own real lesson completions, practice/ranked test counts, total points, assignments, and event catalog. A division change is saved to the account. Each event has seven buttons: lessons, practice tests, ranked tests, practice question bank, vocab rush, notes/binder generator, and cheatsheet generator. The destinations are intentionally empty until the learning features are built.
 
 The instructor dashboard contains only its school's students. Selecting a student changes the event list and progress table to that student's current division. Instructors can assign an event, Practice/Ranked type, and due date, without selecting a particular test. Assignments persist in Turso and appear in the assigned student's account. Progress starts at zero and will reflect stored completion records once learning tools launch.

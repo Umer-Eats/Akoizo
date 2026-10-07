@@ -53,12 +53,15 @@ const teacherData = {
   role: 'instructor' as const,
   displayName: 'Teacher',
   instructorInvitePassword: 'test-invitation',
+  schoolCommunityId: 'ppchs',
 };
 const identity = (uid: string) => ({ uid, email: `${uid}@example.test` });
 async function setup() {
   const { db, raw } = fixture();
   const first = await registerMember(db, identity('t1'), teacherData, 'test-invitation');
   const second = await registerMember(db, identity('t2'), teacherData, 'test-invitation');
+  assert.notEqual(first.profile.schoolId, second.profile.schoolId);
+  assert.equal(first.profile.schoolCommunityId, second.profile.schoolCommunityId);
   const students: Profile[] = [];
   for (const [uid, division, password] of [
     ['a', 'A', first.credentials!.joiningPassword],
@@ -95,6 +98,9 @@ test('enrollment gates, hashing, duplicate recovery, and password rotation', asy
   );
   assert.equal(raw.prepare('SELECT COUNT(*) AS n FROM users').get()!.n, 0);
   const instructor = await registerMember(db, identity('teacher'), teacherData, 'test-invitation');
+  assert.equal(instructor.profile.schoolCommunityId, 'ppchs');
+  assert.equal(instructor.profile.schoolCommunityName, 'Pembroke Pines Charter High School');
+  assert.equal((await profileForUid(db, 'teacher'))!.schoolCommunityId, 'ppchs');
   assert.ok(instructor.credentials?.schoolName.startsWith('School-'));
   const password = instructor.credentials!.joiningPassword;
   const hash = raw.prepare('SELECT password_hash FROM schools').get()!.password_hash as string;
@@ -118,6 +124,7 @@ test('enrollment gates, hashing, duplicate recovery, and password rotation', asy
     'test-invitation',
   );
   assert.equal(joined.profile.schoolId, instructor.profile.schoolId);
+  assert.equal(joined.profile.schoolCommunityId, instructor.profile.schoolCommunityId);
   assert.equal(
     (await registerMember(db, identity('teacher'), teacherData, 'test-invitation')).profile.id,
     instructor.profile.id,

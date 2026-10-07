@@ -11,6 +11,8 @@
 
 ## Live account checks
 
+The school-community dropdown update also passed type checking, all 8 unit tests, a production build, and the live browser check. Instructor signup offers exactly four required choices: Pembroke Pines Charter High School and the Central, West, and Academic Village middle school campuses. The selected West campus persisted after reloading the instructor dashboard and appeared on enrolled students' dashboards. Validation rejects missing or unlisted communities, students inherit their school's community, and teachers at the same campus retain separate private groups. Desktop dark-theme and 390px light-theme signup screenshots were visually reviewed with no horizontal overflow. All five temporary accounts and their school-community records were removed by the browser runner.
+
 A temporary instructor created a real school through the signup form. Three temporary students joined that school in Divisions A, B, and C. The instructor saw only the selected student's division events and assigned a practice test and a ranked test. Both assignments survived reloads and appeared in the correct student's account. A saved student division change updated the instructor's choices after refresh.
 
 All seven feature routes opened. A Division B student could not open Astronomy. Student/instructor route guards and unauthenticated API rejection passed. Logout cleared the private screen; subsequent email/password login worked.

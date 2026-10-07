@@ -17,6 +17,8 @@ References: [Firebase ID token verification](https://firebase.google.com/docs/au
 
 `src/lib/schema.ts` defines idempotent schema creation and season event seeds. Initialization adds tables and events; it never inserts fictional users, schools, scores, or assignments. Each request uses a separate Turso connection so concurrent transactions cannot share session state. Registration writes the instructor's school and membership atomically.
 
+`school_communities` stores the selected Pembroke Pines Charter campus for each private school group. Its creation is additive and leaves existing school records intact. Registration writes the community together with the school and instructor in one transaction. The server validates instructor selections against the four allowed choices; student enrollment inherits the community of the school password rather than accepting a caller-supplied campus.
+
 Firebase tokens are verified server-side with revocation checks. Every private read and mutation derives the account and school from the verified UID. Students cannot create assignments, inspect rosters, rotate school passwords, or bypass unfinished enrollment. Instructor event choices and assignment writes use the student's saved division. Mutations use bearer tokens, not ambient authentication cookies.
 
 Instructor enrollment fails closed if the invitation setting is absent. Email signup first checks the enrollment password; registration checks it again. Google sign-in and interrupted signup can leave a Firebase identity without a school membership. This identity must finish enrollment before using the dashboard. Existing membership cannot be promoted to another role by repeating registration.

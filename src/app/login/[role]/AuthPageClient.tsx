@@ -6,6 +6,7 @@ import { Mascot, Orbit } from '@/components/art';
 import { useAuth, authMessage } from '@/components/auth-context';
 import type { Enrollment, Profile, Role } from '@/lib/domain';
 import type { Division } from '@/lib/events';
+import { schoolCommunities, getSchoolCommunity } from '@/lib/school-communities';
 
 export function AuthPageClient({ role }: { role: Role }) {
   const router = useRouter();
@@ -22,6 +23,7 @@ export function AuthPageClient({ role }: { role: Role }) {
     division: 'C' as Division,
     schoolPassword: '',
     instructorInvitePassword: '',
+    schoolCommunityId: '',
   });
   useEffect(() => {
     if (auth.user?.displayName) {
@@ -41,6 +43,7 @@ export function AuthPageClient({ role }: { role: Role }) {
     division: form.division,
     schoolPassword: form.schoolPassword.trim(),
     instructorInvitePassword: form.instructorInvitePassword,
+    schoolCommunityId: student ? undefined : form.schoolCommunityId,
   };
   function change(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -83,6 +86,10 @@ export function AuthPageClient({ role }: { role: Role }) {
   async function google() {
     setError('');
     setNotice('');
+    if (creating && !student && !getSchoolCommunity(form.schoolCommunityId)) {
+      setError('Choose a school community before continuing with Google.');
+      return;
+    }
     if (
       creating &&
       (!data.displayName.trim() || !(student ? data.schoolPassword : data.instructorInvitePassword))
@@ -142,7 +149,7 @@ export function AuthPageClient({ role }: { role: Role }) {
           <p>
             {student
               ? 'Join your instructor’s school and choose your division.'
-              : 'Create your school and guide students across all three divisions.'}
+              : 'Choose your school community and guide your students.'}
           </p>
           {auth.profile ? (
             <div className="account-ready">
@@ -276,6 +283,26 @@ export function AuthPageClient({ role }: { role: Role }) {
                   ) : (
                     <>
                       <label>
+                        School community
+                        <select
+                          name="schoolCommunityId"
+                          aria-label="School community"
+                          value={form.schoolCommunityId}
+                          onChange={change}
+                          required
+                          disabled={disabled}
+                        >
+                          <option value="" disabled>
+                            Choose your school community
+                          </option>
+                          {schoolCommunities.map((community) => (
+                            <option key={community.id} value={community.id}>
+                              {community.name}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label>
                         Instructor invitation password
                         <input
                           name="instructorInvitePassword"
@@ -287,7 +314,8 @@ export function AuthPageClient({ role }: { role: Role }) {
                         />
                       </label>
                       <p className="enrollment-note">
-                        A random school name and student joining password will be created for you.
+                        Your school community will be saved with your account. A private study group
+                        and student joining password will be created for you.
                       </p>
                     </>
                   ))}
