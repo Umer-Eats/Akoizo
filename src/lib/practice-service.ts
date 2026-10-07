@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { AppError, eventKey, type Profile } from './domain.ts';
 import { findPracticeTest, practiceTests } from './practice-catalog.ts';
 import { gradePractice, validateAnswers } from './practice-grading.ts';
+import { gradeWrittenWithGemini } from './practice-ai.ts';
 import { practiceTitle, type PracticeResult, type PracticeReview } from './practice-types.ts';
 import type { Database } from './school-service.ts';
 
@@ -31,7 +32,11 @@ export async function submitPractice(
   );
   if (previous) return JSON.parse(String(previous.result_json)) as PracticeResult;
   const now = new Date().toISOString();
-  const result: PracticeResult = { ...gradePractice(test, answers), id, completedAt: now };
+  const result: PracticeResult = {
+    ...(await gradeWrittenWithGemini(test, gradePractice(test, answers))),
+    id,
+    completedAt: now,
+  };
   const eventId = eventKey(profile.division, test.eventId);
   await db.batch(
     [

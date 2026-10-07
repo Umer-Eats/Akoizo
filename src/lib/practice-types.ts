@@ -62,6 +62,8 @@ export type CriterionResult = {
   points: number;
   earned: number;
   needsReview: boolean;
+  gradedBy?: 'gemini';
+  feedback?: string;
 };
 export type QuestionResult = {
   id: string;
@@ -84,6 +86,7 @@ export type PracticeResult = {
   questions: QuestionResult[];
   keyUrl: string;
   reviewedAt?: string;
+  automaticGrading?: 'complete' | 'unavailable';
 };
 export type PracticeReview = {
   studentName: string;

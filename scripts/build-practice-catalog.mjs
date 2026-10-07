@@ -2,6 +2,7 @@
 // Original papers remain at their publishers' URLs; see documents/PRACTICE_TESTS.md.
 import { writeFile } from 'node:fs/promises';
 import { format, resolveConfig } from 'prettier';
+import { addArchivePapers } from './practice-additions.mjs';
 
 const catalog = [];
 function make(meta) {
@@ -618,6 +619,7 @@ function make(meta) {
 }
 
 const outputPath = 'src/data/practice-tests.json';
+addArchivePapers(make);
 await writeFile(
   outputPath,
   await format(JSON.stringify(catalog), { ...(await resolveConfig(outputPath)), parser: 'json' }),

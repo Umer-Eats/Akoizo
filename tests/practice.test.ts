@@ -10,6 +10,7 @@ import {
   validatePracticeCatalog,
 } from '../src/lib/practice-catalog.ts';
 import { gradePractice, validateAnswers } from '../src/lib/practice-grading.ts';
+import { gradeWrittenWithGemini } from '../src/lib/practice-ai.ts';
 import {
   submitPractice,
   practiceHistory,
@@ -51,7 +52,7 @@ test('every archived paper has a complete rubric and coherent point total', () =
 
 test('catalog enforces the current season, event and student division', () => {
   assert.equal(listPracticeTests('B', 'heredity').length, 3);
-  assert.equal(listPracticeTests('B', 'meteorology').length, 0);
+  assert.ok(listPracticeTests('B', 'meteorology').length > 0);
   assert.throws(() => listPracticeTests('B', 'astronomy'), { status: 404 });
   assert.throws(() => findPracticeTest('B', 'columbia-2023-anatomy-c'), { status: 404 });
   assert.throws(() => findPracticeTest('C', 'invented'), { status: 404 });
@@ -116,6 +117,66 @@ test('multi-select grades the complete selected set; fractions, units and ranges
     1,
     'unrecognized notation can receive instructor review',
   );
+});
+
+test('Gemini rubric responses are bounded, validated, and applied without student identity data', async () => {
+  const paper = findPracticeTest('B', 'michigan-regions-2024-meteorology-b');
+  const initial = gradePractice(paper, { '58': 'Get low and cover the head and neck.' });
+  let received = '';
+  const fetcher = async (_url: string, options: RequestInit) => {
+    received = String(options.body);
+    return new Response(
+      JSON.stringify({
+        candidates: [
+          {
+            finishReason: 'STOP',
+            content: {
+              parts: [
+                {
+                  text: JSON.stringify({
+                    grades: [
+                      {
+                        questionId: '58',
+                        criterionId: 'answer',
+                        earned: 2,
+                        feedback: 'Both safety components are present.',
+                        needsReview: false,
+                      },
+                    ],
+                  }),
+                },
+              ],
+            },
+          },
+        ],
+      }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    );
+  };
+  const result = await gradeWrittenWithGemini(paper, initial, {
+    apiKey: 'test-key',
+    model: 'gemini-2.5-flash',
+    fetcher: fetcher as typeof fetch,
+  });
+  assert.equal(result.automaticGrading, 'complete');
+  assert.equal(result.pendingPoints, 0);
+  assert.equal(result.score, 2);
+  assert.match(received, /58/);
+  assert.doesNotMatch(received, /studentName|studentId|profileId|schoolId/i);
+
+  const malformed = await gradeWrittenWithGemini(paper, initial, {
+    apiKey: 'test-key',
+    model: 'gemini-2.5-flash',
+    fetcher: (async () =>
+      new Response(
+        JSON.stringify({
+          candidates: [{ finishReason: 'STOP', content: { parts: [{ text: '{"grades":[]}' }] } }],
+        }),
+        { status: 200 },
+      )) as typeof fetch,
+  });
+  assert.equal(malformed.automaticGrading, 'unavailable');
+  assert.equal(malformed.pendingPoints, 2);
 });
 
 async function setup() {

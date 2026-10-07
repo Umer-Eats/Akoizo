@@ -155,8 +155,8 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
           <p className="practice-note">
             Past papers keep their original questions. Each listing explains its {PRACTICE_SEASON}{' '}
             subject match, topic differences, and scoring basis. Check the Rules tab for this year’s
-            requirements. Written explanations receive a provisional score until your instructor
-            reviews the rubric.
+            requirements. Gemini grades written explanations against the published rubric; uncertain
+            answers remain available for instructor review.
           </p>
         </>
       )}
@@ -375,6 +375,15 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 Correct multiple-choice options are green. Written rubric answers are red. Your
                 original answers stay visible.
               </p>
+              {result.automaticGrading === 'complete' && (
+                <p>Written feedback was graded with Gemini using this test’s rubric.</p>
+              )}
+              {result.automaticGrading === 'unavailable' && (
+                <p>
+                  Automatic written-answer grading is unavailable. Your answers are saved, and the
+                  remaining points need instructor review.
+                </p>
+              )}
               <div className="practice-result-actions">
                 <a
                   className="button button-secondary"
@@ -547,6 +556,12 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                                 ? 'Needs review'
                                 : `${criterion.earned}/${criterion.points} points`}
                             </span>
+                            {criterion.feedback && (
+                              <span>
+                                {criterion.gradedBy === 'gemini' ? 'Gemini feedback: ' : ''}
+                                {criterion.feedback}
+                              </span>
+                            )}
                           </p>
                         ))}
                       </div>
@@ -561,6 +576,10 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               )}
               {!result && (
                 <div className="practice-submit">
+                  <p>
+                    Written answers may be sent to Gemini with the test rubric for automatic
+                    grading. Avoid including personal information in your answers.
+                  </p>
                   <p>
                     {paper.questionCount - answered > 0
                       ? `${paper.questionCount - answered} unanswered fields will receive zero points.`
