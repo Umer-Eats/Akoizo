@@ -1,7 +1,15 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Check, ChevronLeft, ChevronRight, FileText, Search } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Clock3,
+  FileText,
+  Search,
+} from 'lucide-react';
 import { useAuth, authMessage } from './auth-context';
 import { eventsForDivision } from '@/lib/events';
 import {
@@ -164,7 +172,17 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
   );
 }
 
-type Draft = { answers: Answers; submissionId: string };
+type Draft = { answers: Answers; submissionId: string; elapsedSeconds?: number };
+
+function formatElapsed(seconds: number) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainder = seconds % 60;
+  return hours
+    ? `${hours}:${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`
+    : `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`;
+}
+
 export function PracticeTestView({ eventId, testId }: { eventId: string; testId: string }) {
   const { profile, request } = useAuth();
   const [paper, setPaper] = useState<PracticePaper | null>(null);
@@ -177,6 +195,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
   const [ready, setReady] = useState(false);
   const [retry, setRetry] = useState(0);
   const [viewingHistory, setViewingHistory] = useState(false);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const submissionId = useRef('');
   const summary = useRef<HTMLElement>(null);
   const storageKey = `akoizo-practice:${profile!.id}:${profile!.division}:${testId}`;
@@ -191,6 +210,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
     setAnswers({});
     setViewingHistory(false);
     setSaveWarning('');
+    setElapsedSeconds(0);
     request<{ test: PracticePaper; attempts: PracticeResult[] }>(
       `/api/practice?testId=${encodeURIComponent(testId)}`,
     )
@@ -221,6 +241,13 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 ),
               );
               submissionId.current = draft.submissionId;
+              if (
+                typeof draft.elapsedSeconds === 'number' &&
+                Number.isInteger(draft.elapsedSeconds) &&
+                draft.elapsedSeconds >= 0 &&
+                draft.elapsedSeconds <= 7 * 24 * 60 * 60
+              )
+                setElapsedSeconds(draft.elapsedSeconds);
             }
           }
         } catch {
@@ -242,14 +269,19 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
     try {
       localStorage.setItem(
         storageKey,
-        JSON.stringify({ answers, submissionId: submissionId.current }),
+        JSON.stringify({ answers, submissionId: submissionId.current, elapsedSeconds }),
       );
     } catch {
       setSaveWarning(
         'Your draft could not be saved in this browser. Keep this page open until you submit.',
       );
     }
-  }, [answers, ready, result, storageKey]);
+  }, [answers, elapsedSeconds, ready, result, storageKey]);
+  useEffect(() => {
+    if (!ready || result || pending || viewingHistory) return;
+    const timer = window.setInterval(() => setElapsedSeconds((seconds) => seconds + 1), 1000);
+    return () => window.clearInterval(timer);
+  }, [pending, ready, result, viewingHistory]);
   async function submit() {
     if (pending || !paper) return;
     setPending(true);
@@ -280,6 +312,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
   function startAgain() {
     submissionId.current = crypto.randomUUID();
     setAnswers({});
+    setElapsedSeconds(0);
     setResult(null);
     setError('');
     setViewingHistory(false);
@@ -436,7 +469,14 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               }}
             >
               <div className="practice-answer-heading">
-                <h2>{result ? 'Answer review' : 'Your answers'}</h2>
+                <div className="practice-answer-title">
+                  <h2>{result ? 'Answer review' : 'Your answers'}</h2>
+                  <span className="practice-timer" role="timer" aria-label="Time spent">
+                    <Clock3 size={16} aria-hidden="true" />
+                    <span>Time spent</span>
+                    <strong>{formatElapsed(elapsedSeconds)}</strong>
+                  </span>
+                </div>
                 <p>
                   {result
                     ? 'Question numbers follow the original paper.'

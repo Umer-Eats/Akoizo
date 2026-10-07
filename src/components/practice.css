@@ -258,6 +258,30 @@
   .practice-answer-heading {
     margin-bottom: 18px;
   }
+  .practice-answer-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .practice-timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex: none;
+    padding: 8px 11px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .practice-timer strong {
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
   .practice-answer-heading p {
     color: var(--muted);
     font-size: 0.8rem;
@@ -454,6 +478,11 @@
     }
   }
   @media (max-width: 520px) {
+    .practice-answer-title {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+    }
     .practice-season {
       width: 100%;
       margin: 0;
