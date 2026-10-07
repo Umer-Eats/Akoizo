@@ -2228,11 +2228,7 @@
     --slot: var(--yellow);
   }
   .stat-card {
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--slot) 10%, transparent),
-      transparent
-    );
+    background: none;
   }
   .stat-card strong {
     color: var(--text);
