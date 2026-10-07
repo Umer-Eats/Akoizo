@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import eventRulePages from '../src/lib/event-rule-pages.json' with { type: 'json' };
 import { eventsForDivision, tools } from '../src/lib/events.ts';
 import { eventToolIds, rulesForEvent } from '../src/lib/event-rules.ts';
 import { validateAssignment, dateInZone, eventKey, readEnrollment } from '../src/lib/domain.ts';
@@ -40,21 +42,46 @@ test('event toolkits follow the competition format and keep Lessons first and Ru
       assert.ok(rules.pageRange[0] <= rules.pageRange[1]);
     }
   }
-  assert.deepEqual(eventToolIds('C', eventsForDivision('C').find((event) => event.id === 'engineering-cad')!), [
-    'lessons',
-    'cad-file-grader',
-    'rules',
-  ]);
-  assert.deepEqual(eventToolIds('C', eventsForDivision('C').find((event) => event.id === 'experimental-design')!), [
-    'lessons',
-    'lab-generator',
-    'rules',
-  ]);
+  assert.deepEqual(
+    eventToolIds(
+      'C',
+      eventsForDivision('C').find((event) => event.id === 'engineering-cad')!,
+    ),
+    ['lessons', 'cad-file-grader', 'rules'],
+  );
+  assert.deepEqual(
+    eventToolIds(
+      'C',
+      eventsForDivision('C').find((event) => event.id === 'experimental-design')!,
+    ),
+    ['lessons', 'lab-generator', 'rules'],
+  );
   const thermodynamics = eventsForDivision('C').find((event) => event.id === 'thermodynamics')!;
   assert.ok(eventToolIds('C', thermodynamics).includes('video-grader'));
   assert.ok(eventToolIds('C', thermodynamics).includes('practice-tests'));
   const waterQuality = eventsForDivision('C').find((event) => event.id === 'water-quality')!;
   assert.ok(eventToolIds('C', waterQuality).includes('video-grader'));
+});
+test('every catalog event has its own local PDF section and complete rulebook', () => {
+  for (const division of ['A', 'B', 'C'] as const) {
+    const events = eventsForDivision(division);
+    assert.deepEqual(
+      Object.keys(eventRulePages[division]).sort(),
+      events.map((event) => event.id).sort(),
+    );
+    for (const event of events) {
+      const rules = rulesForEvent(division, event);
+      for (const url of [rules.sectionUrl, rules.sourceUrl]) {
+        assert.ok(url.startsWith('/rules/2027/'));
+        assert.equal(
+          readFileSync(new URL(`../public${url}`, import.meta.url))
+            .subarray(0, 5)
+            .toString(),
+          '%PDF-',
+        );
+      }
+    }
+  }
 });
 test('assignments reject wrong divisions, invalid test types, and past or impossible dates', () => {
   for (const [division, event, type, due] of [

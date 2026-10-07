@@ -1,5 +1,14 @@
 # Verification — October 6, 2026
 
+## Local rulebooks and event navigation — October 7, 2026
+
+- Type checking, all 15 unit tests, and the production build passed.
+- The extraction script verified all 63 event PDFs against the source manuals: page counts, extracted text, and page dimensions match. Representative Division A text, Division B scoring checklist, and Division C construction diagrams were rendered and visually inspected.
+- `scripts/event-workspace-check.mjs` passed against a fresh production preview with mocked authentication and account APIs. All 63 event sections and three complete manuals returned successful PDF responses. Rules assets allow same-origin embedding.
+- Every event card in all three divisions links directly to Lessons; representative clicks and an existing base event URL opened the active Lessons tab.
+- The page range appears beside Rules, and the former introductory block is absent. The embedded Anatomy and Physiology C section visibly renders its three pages. Desktop and phone layouts were reviewed; dark/light checks at 1440, 768, 390, and 320 pixels found no horizontal overflow.
+- Screenshots are under ignored `documents/qa/event-workspace/` and `documents/qa/rules/`. No live accounts or school records were changed by these checks, and no deployment was performed.
+
 ## Passed
 
 - `npm run typecheck`: clean.

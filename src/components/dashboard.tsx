@@ -157,56 +157,45 @@ function FeatureNavigation({
   const available = new Set(eventToolIds(division, event));
   return (
     <nav className="event-feature-nav" aria-label="Event features">
-      {toolCatalog.filter((tool) => available.has(tool.id)).map((tool) => {
-        const Icon = icons[tool.icon];
-        return (
-          <Link
-            className="event-feature-link"
-            aria-current={activeTool === tool.id ? 'page' : undefined}
-            href={`/dashboard/student/events/${event.id}/${tool.id}`}
-            key={tool.id}
-          >
-            <Icon strokeWidth={1.3} />
-            <span>{tool.name}</span>
-            <span className="feature-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </Link>
-        );
-      })}
+      {toolCatalog
+        .filter((tool) => available.has(tool.id))
+        .map((tool) => {
+          const Icon = icons[tool.icon];
+          return (
+            <Link
+              className="event-feature-link"
+              aria-current={activeTool === tool.id ? 'page' : undefined}
+              href={`/dashboard/student/events/${event.id}/${tool.id}`}
+              key={tool.id}
+            >
+              <Icon strokeWidth={1.3} />
+              <span>{tool.name}</span>
+              <span className="feature-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </Link>
+          );
+        })}
     </nav>
   );
 }
 function RulesPanel({ division, event }: { division: Division; event: ScienceEvent }) {
   const rules = rulesForEvent(division, event);
-  const [firstPage, lastPage] = rules.pageRange;
   return (
     <div className="rules-panel-content">
-      <span className="tag">DIVISION {division} / 2027 RULES</span>
-      <h2>Official event rules.</h2>
-      <p>{rules.summary}</p>
-      <div className="rules-panel-facts">
-        <div>
-          <strong>Rulebook PDF pages</strong>
-          <span>{firstPage === lastPage ? firstPage : `${firstPage}–${lastPage}`}</span>
-        </div>
-        <div>
-          <strong>Competition resources</strong>
-          <span>{rules.resources}</span>
-        </div>
-      </div>
-      <p className="rules-panel-note">
-        Read the embedded rulebook below before preparing materials. Local tournament clarifications
-        and posted corrections always take precedence over this season manual.
-      </p>
       <iframe
         className="rules-embed"
-        src={`${rules.sourceUrl}${rules.sourceUrl.includes('#') ? '&' : '#'}page=${firstPage}`}
+        src={`${rules.sectionUrl}#view=FitH`}
         title={`Division ${division} rules for ${event.name}`}
       />
-      <a className="text-link" href={rules.sourceUrl} target="_blank" rel="noreferrer">
-        Open the complete Division {division} rulebook
-      </a>
+      <div className="rules-links">
+        <a className="text-link" href={rules.sectionUrl} target="_blank" rel="noreferrer">
+          Open Event PDF
+        </a>
+        <a className="text-link" href={rules.sourceUrl} target="_blank" rel="noreferrer">
+          Complete Division {division} Rulebook
+        </a>
+      </div>
     </div>
   );
 }
@@ -341,7 +330,10 @@ function EventCatalog({ division }: { division: Division }) {
               data-selected={checked}
               key={event.id}
             >
-              <Link className="event-card-link" href={`/dashboard/student/events/${event.id}`}>
+              <Link
+                className="event-card-link"
+                href={`/dashboard/student/events/${event.id}/lessons`}
+              >
                 <span className="eyebrow">{event.category.toUpperCase()}</span>
                 <h3>{event.name}</h3>
                 <span className="sr-only">
@@ -901,7 +893,8 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   const event = eventsForDivision(division).find((event) => event.id === eventId);
   const availableToolIds = event ? eventToolIds(division, event) : [];
   const tool = toolCatalog.find((candidate) => candidate.id === toolId);
-  const isAvailable = !toolId || availableToolIds.includes(toolId as (typeof availableToolIds)[number]);
+  const isAvailable =
+    !toolId || availableToolIds.includes(toolId as (typeof availableToolIds)[number]);
   if (!event || (toolId && (!tool || !isAvailable))) {
     return (
       <main id="main" className="page-container">
@@ -915,6 +908,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
       </main>
     );
   }
+  const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
   return (
     <main id="main" className="page-container event-workspace">
       <div className="event-workspace-grid">
@@ -928,7 +922,16 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
         </aside>
         <div className="event-content" key={`${event.id}/${toolId ?? 'overview'}`}>
           <div className="event-feature-heading">
-            <h1>{tool ? tool.name : 'Your study space.'}</h1>
+            <div className="event-feature-title">
+              <h1>{tool ? tool.name : 'Your study space.'}</h1>
+              {rulePages && (
+                <span className="rules-page-range">
+                  {rulePages[0] === rulePages[1]
+                    ? `PDF Page ${rulePages[0]}`
+                    : `PDF Pages ${rulePages[0]}–${rulePages[1]}`}
+                </span>
+              )}
+            </div>
             <p>{tool ? tool.description : eventFocus[event.type].description}</p>
             <p className="event-feature-meta">
               DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
@@ -938,7 +941,9 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
                 : ''}
             </p>
           </div>
-          <section className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}>
+          <section
+            className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}
+          >
             {tool ? (
               <>
                 {toolId === 'rules' ? (
@@ -948,11 +953,17 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
                     <span className="tag">COMING SOON</span>
                     <h2>A little room for what’s next.</h2>
                     <p>
-                      This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.
+                      This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added
+                      yet.
                     </p>
-                    <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>
-                      Event overview
-                    </Link>
+                    {toolId !== 'lessons' && (
+                      <Link
+                        className="text-link"
+                        href={`/dashboard/student/events/${event.id}/lessons`}
+                      >
+                        Back to Lessons
+                      </Link>
+                    )}
                   </>
                 )}
               </>

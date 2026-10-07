@@ -8,8 +8,8 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 
 - `/login/student` and `/login/instructor`: login, signup, password reset, and recovery of unfinished enrollment.
 - `/dashboard/student`: saved A/B/C division, searchable event catalog, assignments, and progress.
-- `/dashboard/student/events/[eventId]`: a rules-driven toolkit for the selected event. Lessons is always first and Rules is always last; test, build, and lab tools depend on that event's rules.
-- `/dashboard/student/events/[eventId]/[toolId]`: study-tool pages with an embedded rulebook view for Rules.
+- `/dashboard/student/events/[eventId]`: redirects to Lessons. Event cards link directly to Lessons; Rules is always last in the event toolkit.
+- `/dashboard/student/events/[eventId]/[toolId]`: study-tool pages, including a locally hosted event PDF section for Rules, with its original PDF page range beside the title.
 - `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
 - `/rankings`: earned points only, using generated public learner names. Empty until ranked tests launch.
 - `/` and `/mission`: public landing and mission pages.
@@ -62,6 +62,8 @@ Use a staging project for repeated live verification. Screenshots are saved unde
 Division B and C each use the official 2027 slate of 23 events. Division A follows the supplied **2027 Florida Elementary Science Olympiad manual**: 15 regular events and 2 explicitly marked special events. Special event availability varies by tournament. Event types guide preparation; they do not replace competition rules. See [product scope and sources](documents/FEATURES.md).
 
 ## Structure
+
+The three 2027 rulebooks and 63 event sections are checked in under `public/rules/2027/`, so Rules does not depend on external PDF URLs. `src/lib/event-rule-pages.json` defines inclusive, one-based PDF page ranges (including cover pages in the count). With Python and `pypdf` installed, run `python scripts/extract-event-rules.py` after replacing a manual or updating the ranges. The script preserves original pages and verifies every extracted page against its source. See [rulebook sources](documents/RULEBOOKS.md).
 
 `src/app/` contains pages and server APIs; `src/components/` contains UI; `src/lib/` contains the event catalog, authorization, data model, and school services. `tests/` covers business rules and persistence with an isolated SQLite database. Feature documentation lives in `documents/`.
 
