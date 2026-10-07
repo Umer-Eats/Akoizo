@@ -326,3 +326,33 @@ test('community deletion requires its instructor and confirmation and invalidate
   assert.equal((await dashboardFor(db, second.profile)).students.length, 1);
   raw.close();
 });
+import { selectEvent, selectedEvents } from '../src/lib/event-selections.ts';
+test('competition selections persist per student and division, validate input, and can be removed', async () => {
+  const { db, raw, students, first } = await setup();
+  const student = students[2];
+  assert.deepEqual(
+    await selectEvent(db, student, { division: 'C', eventId: 'astronomy', selected: true }),
+    ['astronomy'],
+  );
+  await selectEvent(db, student, { division: 'C', eventId: 'astronomy', selected: true });
+  assert.deepEqual(await selectedEvents(db, student, 'C'), ['astronomy']);
+  assert.deepEqual(await selectedEvents(db, students[3], 'C'), []);
+  assert.deepEqual(await selectedEvents(db, student, 'B'), []);
+  await assert.rejects(
+    selectEvent(db, student, { division: 'B', eventId: 'astronomy', selected: true }),
+    { status: 400 },
+  );
+  await assert.rejects(
+    selectEvent(db, student, { division: 'C', eventId: 'astronomy', selected: 'true' }),
+    { status: 400 },
+  );
+  await assert.rejects(
+    selectEvent(db, first.profile, { division: 'C', eventId: 'astronomy', selected: true }),
+    { status: 403 },
+  );
+  assert.deepEqual(
+    await selectEvent(db, student, { division: 'C', eventId: 'astronomy', selected: false }),
+    [],
+  );
+  raw.close();
+});

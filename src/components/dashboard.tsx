@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { eventSlots, slotForEvent } from '@/lib/event-slots';
 import {
   BookOpen,
   FileText,
@@ -133,36 +134,79 @@ function RefreshButton({ loading, refresh }: { loading: boolean; refresh: () => 
     </button>
   );
 }
-export function ToolsGrid({ event }: { event: ScienceEvent }) {
+function FeatureNavigation({ event, activeTool }: { event: ScienceEvent; activeTool?: string }) {
   return (
-    <div className="dashboard-tools">
+    <nav className="event-feature-nav" aria-label="Event features">
       {tools.map((tool) => {
         const Icon = icons[tool.icon];
         return (
           <Link
-            className="tool-card"
+            className="event-feature-link"
+            aria-current={activeTool === tool.id ? 'page' : undefined}
             href={`/dashboard/student/events/${event.id}/${tool.id}`}
             key={tool.id}
           >
             <Icon strokeWidth={1.3} />
-            <h3>{tool.name}</h3>
-            <p>{tool.description}</p>
-            <span className="tag">COMING SOON</span>
+            <span>{tool.name}</span>
+            <span className="feature-arrow" aria-hidden="true">↗</span>
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 }
 function EventCatalog({ division }: { division: Division }) {
+  const { request } = useAuth();
+  const [selected, setSelected] = useState<string[]>([]);
+  const [ready, setReady] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+  const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    let active = true;
+    setReady(false);
+    request<string[]>(`/api/event-selections?division=${division}`)
+      .then((ids) => {
+        if (active) {
+          setSelected(ids);
+          setReady(true);
+          setError('');
+        }
+      })
+      .catch((error) => {
+        if (active) setError(authMessage(error));
+      });
+    return () => {
+      active = false;
+    };
+  }, [request, division, retry]);
+  async function toggle(id: string, checked: boolean) {
+    if (pending || !ready) return;
+    setPending(true);
+    setError('');
+    try {
+      setSelected(
+        await request<string[]>('/api/event-selections', {
+          method: 'PATCH',
+          body: JSON.stringify({ division, eventId: id, selected: checked }),
+        }),
+      );
+    } catch (error) {
+      setError(authMessage(error));
+    } finally {
+      setPending(false);
+    }
+  }
   const [query, setQuery] = useState('');
   const [type, setType] = useState('All');
   const events = eventsForDivision(division);
-  const matches = events.filter(
-    (event) =>
-      `${event.name} ${event.category}`.toLowerCase().includes(query.toLowerCase()) &&
-      (type === 'All' || event.type === type),
-  );
+  const matches = events
+    .filter(
+      (event) =>
+        `${event.name} ${event.category}`.toLowerCase().includes(query.toLowerCase()) &&
+        (type === 'All' || event.type === type),
+    )
+    .sort((a, b) => Number(selected.includes(b.id)) - Number(selected.includes(a.id)));
   return (
     <>
       <div className="dashboard-section-title">
@@ -191,23 +235,68 @@ function EventCatalog({ division }: { division: Division }) {
           </select>
         </label>
       </div>
-      <div className="event-grid">
-        {matches.map((event) => (
-          <Link
-            className="event-card"
-            href={`/dashboard/student/events/${event.id}`}
-            key={event.id}
-          >
-            <span className="eyebrow">{event.category.toUpperCase()}</span>
-            <h3>{event.name}</h3>
-            <div className="event-card-footer">
-              <span>
-                DIVISION {division} · {event.type.toUpperCase()}
-                {event.special ? ' · SPECIAL' : ''}
-              </span>
-            </div>
-          </Link>
+      <div className="slot-legend" aria-label="Timeslot color groups">
+        {eventSlots.map((slot) => (
+          <span className="slot-chip" data-slot={slot.color} key={slot.color}>
+            {slot.label} timeslot
+          </span>
         ))}
+      </div>
+      <p className="selection-summary" role="status">
+        {pending
+          ? 'Saving your events…'
+          : !ready
+            ? 'Selections unavailable until loaded.'
+            : `${selected.length} competition events selected · Your events appear first.`}
+      </p>
+      {error && (
+        <p className="form-error" role="alert">
+          {error}{' '}
+          {!ready && (
+            <button className="text-link" onClick={() => setRetry((value) => value + 1)}>
+              Retry selections
+            </button>
+          )}
+        </p>
+      )}
+      <div className="event-grid">
+        {matches.map((event) => {
+          const slot = slotForEvent(event.id);
+          const checked = selected.includes(event.id);
+          return (
+            <article
+              className="event-card selectable-event"
+              data-slot={slot?.color ?? 'unassigned'}
+              data-selected={checked}
+              key={event.id}
+            >
+              <Link className="event-card-link" href={`/dashboard/student/events/${event.id}`}>
+                <span className="eyebrow">{event.category.toUpperCase()}</span>
+                <h3>{event.name}</h3>
+                <span className="slot-chip">
+                  {slot ? `${slot.label} timeslot` : 'Timeslot not assigned'}
+                </span>
+                <div className="event-card-footer">
+                  <span>
+                    DIVISION {division} · {event.type.toUpperCase()}
+                    {event.special ? ' · SPECIAL' : ''}
+                  </span>
+                  <span aria-hidden="true">↗</span>
+                </div>
+              </Link>
+              <label className="event-selection">
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  disabled={!ready || pending}
+                  onChange={(e) => void toggle(event.id, e.target.checked)}
+                  aria-label={`Compete in ${event.name}`}
+                />
+                <span>{checked ? 'My competition event' : 'I’m competing'}</span>
+              </label>
+            </article>
+          );
+        })}
       </div>
       {!matches.length && (
         <div className="empty-state">
@@ -416,7 +505,7 @@ export function StudentDashboard() {
           </button>
         ))}
       </div>
-      {tab === 'study' && <EventCatalog key={division} division={division} />}
+      {tab === 'study' && <EventCatalog key={`${profile!.id}:${division}`} division={division} />}
       {tab === 'assignments' && (
         <>
           <div className="dashboard-section-title">
@@ -742,55 +831,51 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   const tool = tools.find((tool) => tool.id === toolId);
   if (!event || (toolId && !tool))
     return (
-      <main id="main" className="page-container">
-        <div className="empty-state">
-          <h1>That page isn’t in your division.</h1>
-          <p>Choose an event from your Division {division} study space.</p>
-          <Link className="button button-primary" href="/dashboard/student">
-            Back to my events
-          </Link>
-        </div>
-      </main>
-    );
-  return (
-    <main id="main" className="page-container">
-      <Link
-        className="back-link"
-        href={tool ? `/dashboard/student/events/${event.id}` : '/dashboard/student'}
-      >
-        <ChevronLeft size={16} />
-        {tool ? event.name : 'My events'}
+    <main id="main" className="page-container event-workspace">
+      <Link className="back-link" href="/dashboard/student">
+        <ChevronLeft size={16} /> My events
       </Link>
-      <div className="page-heading">
-        <p className="eyebrow">
-          DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
-          {event.special ? ' / SPECIAL EVENT' : ''}
-        </p>
-        <h1>{tool ? tool.name : event.name}</h1>
-        <p>{tool ? event.name : eventFocus[event.type].description}</p>
-      </div>
-      {tool ? (
-        <section className="empty-state tool-placeholder">
-          <span className="tag">COMING SOON</span>
-          <h2>A little room for what’s next.</h2>
-          <p>This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.</p>
-          <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>
-            Back to {event.name}
-          </Link>
-        </section>
-      ) : (
-        <>
-          <div className="dashboard-section-title">
-            <h2>Your study toolkit.</h2>
-            <span className="tag">{eventFocus[event.type].title.toUpperCase()}</span>
+      <div className="event-workspace-grid">
+        <div className="event-content" key={`${event.id}/${toolId ?? 'overview'}`}>
+          <div className="page-heading event-heading" data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}>
+            <span className="slot-chip">
+              {slotForEvent(event.id) ? `${slotForEvent(event.id)!.label} timeslot` : 'Timeslot not assigned'}
+            </span>
+            <p className="eyebrow">
+              DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
+              {event.special ? ' / SPECIAL EVENT' : ''}
+            </p>
+            <h1>{tool ? tool.name : 'Your study space.'}</h1>
+            <p>{tool ? tool.description : eventFocus[event.type].description}</p>
           </div>
-          <ToolsGrid event={event} />
+          <section className="empty-state tool-placeholder">
+            {tool ? (
+              <>
+                <span className="tag">COMING SOON</span>
+                <h2>A little room for what’s next.</h2>
+                <p>This {tool.name.toLowerCase()} page is ready. Study content hasn’t been added yet.</p>
+                <Link className="text-link" href={`/dashboard/student/events/${event.id}`}>Event overview</Link>
+              </>
+            ) : (
+              <>
+                <BookOpen size={32} aria-hidden="true" />
+                <span className="tag">{eventFocus[event.type].title.toUpperCase()}</span>
+                <h2>Make room for your next discovery.</h2>
+                <p>Choose a feature from your toolkit to explore your study space. Lessons, practice, and more are coming soon.</p>
+              </>
+            )}
+          </section>
           <p className="source-note">
-            These tools support your preparation. Follow your tournament’s rules for permitted notes
-            and materials.
+            These tools support your preparation. Follow your tournament’s rules for permitted notes and materials.
           </p>
-        </>
-      )}
+        </div>
+        <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
+          <p className="eyebrow">EXPLORE & LEARN</p>
+          <h2 id="event-toolkit-title">Your toolkit</h2>
+          <FeatureNavigation event={event} activeTool={toolId} />
+          <p className="event-sidebar-note">Study content coming soon.</p>
+        </aside>
+      </div>
     </main>
   );
 }

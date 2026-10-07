@@ -5,11 +5,16 @@ import { Menu, X, Sun, Moon, Pause, Play } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
+import { eventsForDivision } from '@/lib/events';
 export function Header() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const { toggleTheme } = useSettings();
   const { profile, logOut } = useAuth();
+  const eventId = path.match(/^\/dashboard\/student\/events\/([^/]+)(?:\/|$)/)?.[1];
+  const event = profile?.division && eventId
+    ? eventsForDivision(profile.division).find((item) => item.id === eventId)
+    : undefined;
   const [error, setError] = useState('');
   const logout = () => logOut().catch((error) => setError(authMessage(error)));
   useEffect(() => setOpen(false), [path]);
@@ -21,20 +26,24 @@ export function Header() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
   return (
-    <header className="site-header">
+    <header className={`site-header${event ? ' event-header' : ''}`}>
       <div className="header-inner">
         <Link href="/" className="brand" aria-label="Akoizo home">
           <span className="brand-mark" aria-hidden="true" />
           <span>akoizo</span>
         </Link>
-        <nav className="desktop-nav" aria-label="Main navigation">
+        {event ? (
+          <Link className="header-event-title" href={`/dashboard/student/events/${event.id}`}>
+            {event.name}
+          </Link>
+        ) : <nav className="desktop-nav" aria-label="Main navigation">
           <Link className={path === '/rankings' ? 'active' : ''} href="/rankings">
             Global Rankings
           </Link>
           <Link className={path === '/mission' ? 'active' : ''} href="/mission">
             Mission
           </Link>
-        </nav>
+        </nav>}
         <div className="header-right">
           {profile ? (
             <>
