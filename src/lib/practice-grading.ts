@@ -50,6 +50,24 @@ export function gradePractice(
   const questions = test.questions.map((question) => {
     const key = test.keys[question.id];
     const answer = answers[question.id] ?? '';
+    if (!key && test.gradingMode === 'ai-generated') {
+      return {
+        id: question.id,
+        answer,
+        earned: 0,
+        possible: question.points,
+        criteria: [
+          {
+            id: 'answer',
+            answer:
+              'No published answer key. A reference answer is needed before this response can be graded.',
+            points: question.points,
+            earned: 0,
+            needsReview: !!answer.trim() && question.points > 0,
+          },
+        ],
+      };
+    }
     if (question.type === 'mcq') {
       const correct = question.multiple
         ? [...key.correctOptions!].sort().join(',') === answer.split(',').sort().join(',')
@@ -111,5 +129,6 @@ export function gradePractice(
     pendingPoints,
     questions,
     keyUrl: test.keyUrl,
+    gradingBasis: test.gradingMode === 'ai-generated' ? 'ai-generated' : 'published-rubric',
   };
 }

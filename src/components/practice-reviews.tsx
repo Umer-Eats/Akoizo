@@ -86,9 +86,16 @@ function Review({ review, onSaved }: { review: PracticeReview; onSaved: () => vo
       <summary>
         {review.studentName} · {review.title} · {review.result.pendingPoints} points pending
       </summary>
-      <a href={review.result.keyUrl} target="_blank" rel="noreferrer">
-        Open the complete published rubric
-      </a>
+      {review.result.keyUrl ? (
+        <a href={review.result.keyUrl} target="_blank" rel="noreferrer">
+          Open the complete published rubric
+        </a>
+      ) : (
+        <p>
+          No published key. Any AI-generated reference answers must be checked against the
+          questions.
+        </p>
+      )}
       <form onSubmit={submit}>
         {review.result.questions
           .filter((q) => q.criteria.some((c) => c.needsReview))

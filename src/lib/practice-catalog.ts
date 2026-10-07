@@ -43,7 +43,9 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       !test.instructions ||
       !test.topics?.length ||
       !validAssetUrl(test.paperUrl) ||
-      !validAssetUrl(test.keyUrl) ||
+      (test.gradingMode !== undefined &&
+        !['published-key', 'ai-generated'].includes(test.gradingMode)) ||
+      (test.gradingMode === 'ai-generated' ? test.keyUrl !== null : !validAssetUrl(test.keyUrl)) ||
       !validSourceUrl(test.sourceUrl) ||
       !Array.isArray(test.questions) ||
       !test.questions.length ||
@@ -53,6 +55,8 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       test.maxScore <= 0
     )
       return fail();
+    // An absent key must be intentional. Never silently switch a damaged published rubric to AI.
+    if (test.gradingMode === 'ai-generated' && Object.keys(test.keys).length) return fail();
     ids.add(test.id);
     const questionIds = new Set<string>();
     for (const question of test.questions) {
@@ -67,6 +71,29 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       )
         return fail();
       questionIds.add(question.id);
+      if (test.gradingMode === 'ai-generated') {
+        if (
+          typeof question.prompt !== 'string' ||
+          !question.prompt.trim() ||
+          /^Question\s+[\w.-]+$/i.test(question.prompt.trim()) ||
+          question.prompt === question.label ||
+          question.prompt.length > 20000 ||
+          (question.context !== undefined &&
+            (typeof question.context !== 'string' || question.context.length > 30000))
+        )
+          return fail();
+        if (question.type === 'mcq') {
+          const options = question.options;
+          if (
+            !options ||
+            options.length < 2 ||
+            new Set(options.map((o) => o.id)).size !== options.length ||
+            options.some((o) => !o.id || typeof o.text !== 'string' || !o.text.trim())
+          )
+            return fail();
+        } else if (question.type !== 'frq') return fail();
+        continue;
+      }
       const key = test.keys[question.id];
       if (!key) return fail();
       if (question.type === 'mcq') {
@@ -129,6 +156,7 @@ export function practiceSummary(test: PracticeTest): PracticeSummary {
     levelEvidence,
     sourceId,
     topicMatch,
+    gradingMode,
   } = test;
   return {
     id,
@@ -147,6 +175,7 @@ export function practiceSummary(test: PracticeTest): PracticeSummary {
     levelEvidence,
     sourceId,
     topicMatch,
+    gradingMode,
   };
 }
 export function listArchiveSources(division: Division, eventId: string): ArchiveSource[] {

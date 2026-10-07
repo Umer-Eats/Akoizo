@@ -76,6 +76,7 @@ async function account(role) {
     }),
   );
   let failSubmit = true;
+  let failAutoGrade = true;
   await page.route('**/api/**', async (route) => {
     const url = new URL(route.request().url());
     const method = route.request().method();
@@ -95,6 +96,25 @@ async function account(role) {
       return route.fulfill({
         json: { schoolName: 'School-QA', joiningPassword: 'QA-NOT-A-REAL-PASSWORD' },
       });
+    if (url.pathname === '/api/practice/auto-grade') {
+      if (failAutoGrade) {
+        failAutoGrade = false;
+        return route.fulfill({
+          status: 503,
+          json: {
+            error:
+              'Auto Grade is temporarily unavailable. Your saved score and answers are unchanged. Try again.',
+          },
+        });
+      }
+      const body = route.request().postDataJSON();
+      assert.deepEqual(Object.keys(body), ['id']);
+      const result = attempts.find((a) => a.id === body.id);
+      result.autoGradedAt = new Date().toISOString();
+      result.automaticGrading = 'complete';
+      result.gradingBasis = 'published-rubric';
+      return route.fulfill({ json: result });
+    }
     if (url.pathname === '/api/practice/review') {
       if (method === 'POST') {
         const body = route.request().postDataJSON();
@@ -184,7 +204,7 @@ try {
   const auth = await browser.newPage();
   for (const path of ['/api/practice?eventId=heredity', '/api/practice/review'])
     assert.equal((await auth.request.get(base + path)).status(), 401);
-  for (const path of ['/api/practice', '/api/practice/review'])
+  for (const path of ['/api/practice', '/api/practice/review', '/api/practice/auto-grade'])
     assert.equal((await auth.request.post(base + path, { data: {} })).status(), 401);
   await auth.goto(
     base + '/dashboard/student/events/heredity/practice-tests/ut-austin-2014-heredity-b',
@@ -246,6 +266,22 @@ try {
     .first()
     .screenshot({ path: 'documents/qa/practice-frq-review.png' });
   await layout(page, 'result');
+  const autoButton = page.getByRole('button', { name: 'Auto Grade', exact: true });
+  await expect(autoButton).toBeEnabled();
+  await autoButton.click();
+  await expect(page.getByRole('region', { name: 'Test results' }).getByRole('alert')).toContainText(
+    'Your saved score and answers are unchanged',
+  );
+  await expect(page.getByRole('region', { name: 'Test results' })).toContainText('5 / 80 points');
+  await expect(written.nth(0)).toHaveValue(original);
+  await autoButton.click();
+  await expect(autoButton).toBeDisabled();
+  await expect(page.getByRole('region', { name: 'Test results' })).toContainText(
+    'Auto Grade is saved for this attempt.',
+  );
+  await expect(written.nth(0)).toHaveValue(original);
+  assert.equal(attempts.length, 1);
+  await layout(page, 'auto-graded');
   await page.getByRole('button', { name: 'Try again', exact: true }).click();
   await written.nth(0).fill('New draft');
   await page.getByText('Previous submissions (1)', { exact: true }).click();
@@ -253,7 +289,7 @@ try {
   await expect(written.nth(0)).toHaveValue(original);
   await page.getByRole('button', { name: 'Return to your draft' }).click();
   await expect(written.nth(0)).toHaveValue('New draft');
-  await page.goto(base + '/dashboard/student/events/meteorology/practice-tests');
+  await page.goto(base + '/dashboard/student/events/solar-system/practice-tests');
   await expect(
     page.getByRole('heading', { name: 'No verified tests for this event yet.' }),
   ).toBeVisible();
@@ -270,9 +306,10 @@ try {
   await page.locator('.practice-history button').click();
   await expect(page.getByRole('region', { name: 'Test results' })).toContainText('8 / 80 points');
   await expect(page.getByRole('region', { name: 'Test results' })).toContainText('10%');
+  await expect(page.getByRole('button', { name: 'Auto Grade', exact: true })).toBeDisabled();
   assert.deepEqual(errors, []);
   console.log(
-    'Practice browser checks passed: search, filters, drafts, retry, grading colors, history, instructor review, mobile layouts, unauthenticated APIs.',
+    'Practice browser checks passed: search, filters, drafts, retry, Auto Grade retry and saved results, grading colors, history, instructor review, mobile layouts, unauthenticated APIs.',
   );
 } finally {
   await browser.close();

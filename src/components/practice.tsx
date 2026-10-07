@@ -154,6 +154,9 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
                     <div>
                       <h2>{practiceTitle(test)}</h2>
                       <p>{test.topics.join(' · ')}</p>
+                      {test.gradingMode === 'ai-generated' && (
+                        <p>Auto Grade · AI-generated reference answers</p>
+                      )}
                       <p>
                         {test.topicMatch === 'current'
                           ? `${PRACTICE_SEASON} topic match`
@@ -250,6 +253,8 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
   const [error, setError] = useState('');
   const [saveWarning, setSaveWarning] = useState('');
   const [pending, setPending] = useState(false);
+  const [autoGrading, setAutoGrading] = useState(false);
+  const [autoGradeError, setAutoGradeError] = useState('');
   const [ready, setReady] = useState(false);
   const [retry, setRetry] = useState(0);
   const [viewingHistory, setViewingHistory] = useState(false);
@@ -269,6 +274,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
     setViewingHistory(false);
     setSaveWarning('');
     setElapsedSeconds(0);
+    setAutoGradeError('');
     request<{ test: PracticePaper; attempts: PracticeResult[] }>(
       `/api/practice?testId=${encodeURIComponent(testId)}`,
     )
@@ -373,8 +379,27 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
     setElapsedSeconds(0);
     setResult(null);
     setError('');
+    setAutoGradeError('');
     setViewingHistory(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  async function autoGrade() {
+    if (!result || autoGrading || result.autoGradedAt || result.reviewedAt) return;
+    const id = result.id;
+    setAutoGrading(true);
+    setAutoGradeError('');
+    try {
+      const graded = await request<PracticeResult>('/api/practice/auto-grade', {
+        method: 'POST',
+        body: JSON.stringify({ id }),
+      });
+      setResult((current) => (current?.id === id ? graded : current));
+      setAttempts((current) => current.map((attempt) => (attempt.id === id ? graded : attempt)));
+    } catch (error) {
+      setAutoGradeError(authMessage(error));
+    } finally {
+      setAutoGrading(false);
+    }
   }
   const answered = paper?.questions.filter((q) => (answers[q.id] ?? '').trim()).length ?? 0;
   return (
@@ -412,6 +437,12 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               <Check size={16} /> Topics & scoring
             </summary>
             <p>{paper.alignment}</p>
+            {paper.gradingMode === 'ai-generated' && (
+              <p>
+                No published answer key is available. Auto Grade creates AI reference answers from
+                the questions; these scores are estimates.
+              </p>
+            )}
             {paper.levelEvidence && (
               <p>
                 Reported level: {paper.level}. {paper.levelEvidence.text}
@@ -430,10 +461,12 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               {attempts.map((a) => (
                 <button
                   key={a.id}
+                  disabled={autoGrading}
                   onClick={() => {
                     if (!result) setViewingHistory(true);
                     setResult(a);
                     setError('');
+                    setAutoGradeError('');
                   }}
                 >
                   <span>{new Date(a.completedAt).toLocaleString()}</span>
@@ -464,7 +497,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               <strong className="practice-percentage">{result.percentage}%</strong>
               <p>
                 {result.pendingPoints
-                  ? `${result.pendingPoints} points need rubric review for written explanations. These are pending, not marked incorrect.`
+                  ? `${result.pendingPoints} points are awaiting grading or review. These are pending, not marked incorrect.`
                   : 'Your submission is saved. Review every answer below.'}
               </p>
               {result.attemptNumber && result.attemptNumber > 1 && (
@@ -478,7 +511,11 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 original answers stay visible.
               </p>
               {result.automaticGrading === 'complete' && (
-                <p>Written feedback was graded with Gemini using this test’s rubric.</p>
+                <p role="status">
+                  {result.gradingBasis === 'ai-generated'
+                    ? 'Auto Grade used AI-generated reference answers. This is an estimated practice score, not a published answer key.'
+                    : 'Auto Grade checked your responses using this test’s published rubric.'}
+                </p>
               )}
               {result.automaticGrading === 'unavailable' && (
                 <p>
@@ -487,23 +524,49 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 </p>
               )}
               <div className="practice-result-actions">
-                <a
-                  className="button button-secondary"
-                  href={result.keyUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                {result.keyUrl && (
+                  <a
+                    className="button button-secondary"
+                    href={result.keyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Published answer key <ArrowUpRight size={16} />
+                  </a>
+                )}
+                <button
+                  className="button button-primary"
+                  onClick={autoGrade}
+                  disabled={autoGrading || !!result.autoGradedAt || !!result.reviewedAt}
                 >
-                  Published answer key <ArrowUpRight size={16} />
-                </a>
-                <button className="button button-primary" onClick={startAgain}>
+                  {autoGrading ? 'Auto Grading…' : 'Auto Grade'}
+                </button>
+                <button
+                  className="button button-secondary"
+                  onClick={startAgain}
+                  disabled={autoGrading}
+                >
                   Try again
                 </button>
               </div>
+              <p className="practice-note">
+                {result.reviewedAt
+                  ? 'An instructor has reviewed this attempt.'
+                  : result.autoGradedAt
+                    ? 'Auto Grade is saved for this attempt. Any unresolved answers need instructor review.'
+                    : 'Auto Grade reviews your saved answers without awarding additional practice credit. Questions, answers, and any existing rubric are sent to Gemini for this review.'}
+              </p>
+              {autoGradeError && (
+                <p className="form-error" role="alert">
+                  {autoGradeError}
+                </p>
+              )}
             </section>
           )}
           {viewingHistory && (
             <button
               className="button button-secondary"
+              disabled={autoGrading}
               onClick={() => {
                 setResult(null);
                 setViewingHistory(false);
@@ -629,7 +692,10 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                                 {selected && <small>Your answer</small>}
                                 {correct && (
                                   <small>
-                                    <Check size={14} /> Correct answer
+                                    <Check size={14} />{' '}
+                                    {result?.gradingBasis === 'ai-generated'
+                                      ? 'AI reference answer'
+                                      : 'Correct answer'}
                                   </small>
                                 )}
                               </label>
@@ -656,7 +722,11 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                     )}
                     {graded && question.type === 'frq' && (
                       <div className="practice-rubric">
-                        <h3>Rubric answer</h3>
+                        <h3>
+                          {result?.gradingBasis === 'ai-generated'
+                            ? 'AI-generated reference answer'
+                            : 'Rubric answer'}
+                        </h3>
                         {graded.criteria.map((criterion) => (
                           <p key={criterion.id}>
                             {criterion.answer}
@@ -667,7 +737,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                             </span>
                             {criterion.feedback && (
                               <span>
-                                {criterion.gradedBy === 'gemini' ? 'Gemini feedback: ' : ''}
+                                {criterion.gradedBy === 'gemini' ? 'Auto Grade feedback: ' : ''}
                                 {criterion.feedback}
                               </span>
                             )}

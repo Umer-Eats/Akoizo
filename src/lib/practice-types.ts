@@ -12,6 +12,8 @@ export type PracticeQuestion = {
   multiple?: boolean;
   points: number;
   prompt?: string;
+  // Complete source context (including diagram/table descriptions) for AI grading.
+  context?: string;
   options?: { id: string; text: string }[];
 };
 export type Criterion = {
@@ -46,6 +48,7 @@ export type PracticeSummary = {
   maxScore: number;
   minutes: number;
   scoringBasis: string;
+  gradingMode?: 'published-key' | 'ai-generated';
 };
 export type PracticePaper = PracticeSummary & {
   sourceUrl: string;
@@ -54,7 +57,7 @@ export type PracticePaper = PracticeSummary & {
   questions: PracticeQuestion[];
 };
 export type PracticeTest = PracticePaper & {
-  keyUrl: string;
+  keyUrl: string | null;
   reviewedOn: string;
   rulesUrl: string;
   keys: Record<string, QuestionKey>;
@@ -89,8 +92,10 @@ export type PracticeResult = {
   percentage: number;
   pendingPoints: number;
   questions: QuestionResult[];
-  keyUrl: string;
+  keyUrl: string | null;
   reviewedAt?: string;
+  autoGradedAt?: string;
+  gradingBasis?: 'published-rubric' | 'ai-generated';
   automaticGrading?: 'complete' | 'unavailable';
 };
 export type PracticeReview = {

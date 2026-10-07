@@ -2,7 +2,11 @@ import { createHash } from 'node:crypto';
 import { AppError, eventKey, type Profile } from './domain.ts';
 import { findPracticeTest, practiceTests } from './practice-catalog.ts';
 import { gradePractice, validateAnswers } from './practice-grading.ts';
-import { gradeWrittenWithGemini } from './practice-ai.ts';
+import {
+  autoGradePracticeResult,
+  gradeWrittenWithGemini,
+  type PracticeAIConfig,
+} from './practice-ai.ts';
 import { practiceTitle, type PracticeResult, type PracticeReview } from './practice-types.ts';
 import type { Database } from './school-service.ts';
 
@@ -32,8 +36,11 @@ export async function submitPractice(
   );
   if (previous) return JSON.parse(String(previous.result_json)) as PracticeResult;
   const now = new Date().toISOString();
+  const initial = gradePractice(test, answers);
   const result: PracticeResult = {
-    ...(await gradeWrittenWithGemini(test, gradePractice(test, answers))),
+    ...(test.gradingMode === 'ai-generated'
+      ? initial
+      : await gradeWrittenWithGemini(test, initial)),
     id,
     completedAt: now,
   };
@@ -70,6 +77,62 @@ export async function submitPractice(
   );
   if (!stored) throw new AppError(503, 'Your test could not be saved. Please submit again.');
   return JSON.parse(String(stored.result_json)) as PracticeResult;
+}
+
+export async function autoGradePractice(
+  db: Database,
+  profile: Profile,
+  input: Record<string, unknown>,
+  config: PracticeAIConfig = {},
+) {
+  if (profile.role !== 'student' || !profile.division)
+    throw new AppError(403, 'A student account is required.');
+  if (typeof input.id !== 'string' || !/^[\da-f]{64}$/i.test(input.id))
+    throw new AppError(400, 'Choose a saved submission to Auto Grade.');
+  const row = await db.get(
+    'SELECT result_json FROM practice_submissions WHERE id=? AND student_id=?',
+    input.id,
+    profile.id,
+  );
+  if (!row) throw new AppError(404, 'This submission is not available.');
+  const previous = JSON.parse(String(row.result_json)) as PracticeResult;
+  const test = findPracticeTest(profile.division, previous.testId);
+  // Repeated requests reuse the saved review. Instructor decisions take precedence.
+  if (previous.reviewedAt)
+    throw new AppError(409, 'An instructor has already reviewed this attempt.');
+  if (previous.autoGradedAt) return previous;
+  // Only saved answers and the server catalog are used; client scores/answers/keys are ignored.
+  const result = await autoGradePracticeResult(test, previous, config);
+  if (result.automaticGrading === 'unavailable')
+    throw new AppError(
+      503,
+      'Auto Grade is temporarily unavailable. Your saved score and answers are unchanged. Try again.',
+    );
+  result.autoGradedAt = new Date().toISOString();
+  const written = await db.batch(
+    [
+      {
+        sql: 'UPDATE practice_submissions SET result_json=? WHERE id=? AND student_id=? AND result_json=?',
+        args: [JSON.stringify(result), previous.id, profile.id, String(row.result_json)],
+      },
+      {
+        sql: 'UPDATE test_attempts SET score=? WHERE id=? AND student_id=? AND changes()=1',
+        args: [result.score, previous.id, profile.id],
+      },
+    ],
+    'immediate',
+  );
+  if (!written[0].rowsAffected) {
+    const latest = await db.get(
+      'SELECT result_json FROM practice_submissions WHERE id=? AND student_id=?',
+      previous.id,
+      profile.id,
+    );
+    const saved = latest ? (JSON.parse(String(latest.result_json)) as PracticeResult) : null;
+    if (saved?.autoGradedAt || saved?.reviewedAt) return saved;
+    throw new AppError(409, 'This submission changed during grading. Refresh the page.');
+  }
+  return result;
 }
 export async function practiceHistory(db: Database, profile: Profile, testId: string) {
   if (profile.role !== 'student' || !profile.division)
