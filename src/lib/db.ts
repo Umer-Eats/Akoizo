@@ -17,6 +17,18 @@ export async function initializeDatabase() {
       const db = getDb();
       await db.batch(schema, 'immediate');
       await db.batch(eventSeeds, 'immediate');
+      try {
+        await db.batch(
+          [{ sql: 'ALTER TABLE assignments ADD COLUMN test_id TEXT', args: [] }],
+          'immediate',
+        );
+      } catch (error) {
+        if (
+          !(error instanceof Error) ||
+          !/duplicate column name|already exists/i.test(error.message)
+        )
+          throw error;
+      }
     })().catch((error) => {
       initialization = null;
       throw error;

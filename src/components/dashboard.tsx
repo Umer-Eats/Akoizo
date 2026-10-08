@@ -44,6 +44,7 @@ import {
 import { useAuth, authMessage } from './auth-context';
 import { PracticeLibrary } from './practice';
 import { PracticeReviews } from './practice-reviews';
+import { InstructorAssignments } from './instructor-assignments';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -423,7 +424,7 @@ function AssignmentList({
         <h3>No assignments yet.</h3>
         <p>
           {remove
-            ? 'Choose a student, event, test type, and due date to get started.'
+            ? 'Open the Assignments tab, choose an event, then assign a converted test.'
             : 'Assignments from your instructor will appear here.'}
         </p>
       </div>
@@ -437,9 +438,12 @@ function AssignmentList({
             <h3>{assignment.eventName}</h3>
             <p>
               {remove ? `${assignment.studentName} · ` : ''}Division {assignment.division} ·
-              Complete any 1 {assignment.type.toLowerCase()} test · Due{' '}
-              <time dateTime={assignment.due}>{assignment.due}</time>
+              {assignment.testId
+                ? ' Assigned converted test · '
+                : ` Complete any 1 ${assignment.type.toLowerCase()} test · `}
+              Due <time dateTime={assignment.due}>{assignment.due}</time>
             </p>
+            {assignment.testId && <small>Specific test ID: {assignment.testId}</small>}
             {division && division !== assignment.division && (
               <small>
                 Assigned in Division {assignment.division}. Switch to that division to open this
@@ -679,104 +683,10 @@ export function SchoolPanel() {
     </section>
   );
 }
-function AssignmentForm({ student, onSaved }: { student: Student; onSaved: () => Promise<void> }) {
-  const { request } = useAuth();
-  const [eventId, setEventId] = useState('');
-  const [type, setType] = useState('Practice');
-  const [due, setDue] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  async function submit(event: React.FormEvent) {
-    event.preventDefault();
-    setBusy(true);
-    setError('');
-    setNotice('');
-    try {
-      await request('/api/assignments', {
-        method: 'POST',
-        body: JSON.stringify({ studentId: student.id, eventId, type, due, timeZone }),
-      });
-      setNotice('Assignment saved. Your student can see it on their dashboard.');
-      await onSaved();
-    } catch (error) {
-      setError(authMessage(error));
-    } finally {
-      setBusy(false);
-    }
-  }
-  return (
-    <section className="assignment-panel">
-      <span className="tag">DIVISION {student.division} ONLY</span>
-      <h3>Give their curiosity a direction.</h3>
-      <p>Assign any one practice or ranked test for an event. Your student chooses the test.</p>
-      <form onSubmit={submit}>
-        <label>
-          Student
-          <input value={student.displayName} readOnly />
-        </label>
-        <label>
-          Event
-          <select
-            aria-label="Event"
-            value={eventId}
-            onChange={(e) => setEventId(e.target.value)}
-            required
-            disabled={busy}
-          >
-            <option value="">Choose a Division {student.division} event</option>
-            {eventsForDivision(student.division).map((event) => (
-              <option value={event.id} key={event.id}>
-                {event.name}
-                {event.special ? ' (special event)' : ''}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Test type
-          <select
-            aria-label="Test type"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            disabled={busy}
-          >
-            <option>Practice</option>
-            <option>Ranked</option>
-          </select>
-        </label>
-        <label>
-          Due date
-          <input
-            type="date"
-            value={due}
-            min={dateInZone(timeZone)}
-            onChange={(e) => setDue(e.target.value)}
-            required
-            disabled={busy}
-          />
-        </label>
-        <button className="button button-primary" disabled={busy} type="submit">
-          {busy ? 'Saving…' : 'Assign test'}
-        </button>
-        {error && (
-          <p className="form-error" role="alert">
-            {error}
-          </p>
-        )}
-        {notice && (
-          <p className="form-success" role="status">
-            {notice}
-          </p>
-        )}
-      </form>
-    </section>
-  );
-}
 export function InstructorDashboard() {
   const { profile, request } = useAuth();
   const { data, error, loading, refresh } = useDashboard();
+  const [tab, setTab] = useState<'school' | 'assignments' | 'progress'>('assignments');
   const [studentId, setStudentId] = useState('');
   const [pending, setPending] = useState('');
   const [removeError, setRemoveError] = useState('');
@@ -794,8 +704,9 @@ export function InstructorDashboard() {
   }
   if (!data) return <LoadState error={error} retry={refresh} />;
   const student = data.students.find((s) => s.id === studentId) || data.students[0];
+  const selections = data.selections ?? {};
   return (
-    <main id="main" className="page-container live-dashboard">
+    <main id="main" className="page-container live-dashboard instructor-dashboard">
       <div className="dashboard-heading">
         <div>
           <p className="eyebrow">
@@ -814,79 +725,118 @@ export function InstructorDashboard() {
           {error}
         </p>
       )}
-      <SchoolPanel />
-      <PracticeReviews />
-      {!student ? (
-        <div className="empty-state">
-          <Users size={32} />
-          <h2>Your team starts here.</h2>
-          <p>
-            Share your school password. Students will appear here after they create an account and
-            join your school.
+      <div className="event-workspace-grid instructor-workspace">
+        <aside className="event-sidebar" aria-labelledby="instructor-toolkit-title">
+          <h2 id="instructor-toolkit-title">Instructor toolkit</h2>
+          <nav className="event-feature-nav" aria-label="Instructor sections">
+            {(
+              [
+                ['school', 'School Code', Copy],
+                ['assignments', 'Assignments', FileText],
+                ['progress', 'Student Progress', Users],
+              ] as const
+            ).map(([id, label, Icon]) => (
+              <button
+                key={id}
+                className="event-feature-link"
+                aria-current={tab === id ? 'page' : undefined}
+                onClick={() => setTab(id)}
+              >
+                <Icon strokeWidth={1.6} />
+                <span>{label}</span>
+                <span className="feature-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </button>
+            ))}
+          </nav>
+          <p className="event-sidebar-note">
+            {tab === 'school' && 'Share this password so students join your roster.'}
+            {tab === 'assignments' &&
+              'Pick an event, open a converted test, and assign it to students.'}
+            {tab === 'progress' && 'Review each student’s next steps and event progress.'}
           </p>
-        </div>
-      ) : (
-        <>
-          <div className="instructor-layout">
-            <section>
-              <div className="dashboard-section-title">
-                <h2>Your students.</h2>
-              </div>
-              <div className="student-list">
-                {data.students.map((s) => (
-                  <button
-                    className="student-row"
-                    key={s.id}
-                    aria-pressed={s.id === student.id}
-                    onClick={() => setStudentId(s.id)}
-                  >
-                    <span className="student-avatar">
-                      {s.displayName.slice(0, 2).toUpperCase()}
-                    </span>
-                    <span>
-                      {s.displayName}
-                      <small>{s.points.toLocaleString('en-US')} points</small>
-                    </span>
-                    <span className="tag">DIV {s.division}</span>
-                  </button>
-                ))}
-              </div>
-              <div className="dashboard-section-title">
-                <h2>{student.displayName}’s progress.</h2>
-              </div>
-              <StatsGrid stats={student} />
-            </section>
-            <AssignmentForm
-              key={`${student.id}-${student.division}`}
-              student={student}
-              onSaved={refresh}
+        </aside>
+        <div className="event-content instructor-content">
+          {tab === 'school' && <SchoolPanel />}
+          {tab === 'assignments' && (
+            <InstructorAssignments
+              students={data.students}
+              selections={selections}
+              assignments={data.assignments}
+              onAssigned={refresh}
             />
-          </div>
-          <div className="dashboard-section-title">
-            <h2>Assigned next steps.</h2>
-            <span className="tag">{student.displayName.toUpperCase()}</span>
-          </div>
-          {removeError && (
-            <p className="form-error" role="alert">
-              {removeError}
-            </p>
           )}
-          <AssignmentList
-            assignments={data.assignments.filter((a) => a.studentId === student.id)}
-            remove={remove}
-            pending={pending}
-          />
-          <div className="dashboard-section-title">
-            <h2>Progress by event.</h2>
-            <span className="tag">DIVISION {student.division} ONLY</span>
-          </div>
-          <ProgressTable progress={data.progress[student.id] || []} />
-          <p className="source-note">
-            Activity starts at zero. Lessons and test completion will be recorded when those tools
-            launch.
-          </p>
-        </>
-      )}
+          {tab === 'progress' && (
+            <>
+              <PracticeReviews />
+              {!student ? (
+                <div className="empty-state">
+                  <Users size={32} />
+                  <h2>Your team starts here.</h2>
+                  <p>
+                    Share your school password. Students will appear here after they create an
+                    account and join your school.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="dashboard-section-title">
+                    <h2>Your students.</h2>
+                    <span className="tag">{data.students.length} ON ROSTER</span>
+                  </div>
+                  <div className="student-list">
+                    {data.students.map((s) => (
+                      <button
+                        className="student-row"
+                        key={s.id}
+                        aria-pressed={s.id === student.id}
+                        onClick={() => setStudentId(s.id)}
+                      >
+                        <span className="student-avatar">
+                          {s.displayName.slice(0, 2).toUpperCase()}
+                        </span>
+                        <span>
+                          {s.displayName}
+                          <small>{s.points.toLocaleString('en-US')} points</small>
+                        </span>
+                        <span className="tag">DIV {s.division}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="dashboard-section-title">
+                    <h2>{student.displayName}’s progress.</h2>
+                  </div>
+                  <StatsGrid stats={student} />
+                  <div className="dashboard-section-title">
+                    <h2>Assigned next steps.</h2>
+                    <span className="tag">{student.displayName.toUpperCase()}</span>
+                  </div>
+                  {removeError && (
+                    <p className="form-error" role="alert">
+                      {removeError}
+                    </p>
+                  )}
+                  <AssignmentList
+                    assignments={data.assignments.filter((a) => a.studentId === student.id)}
+                    remove={remove}
+                    pending={pending}
+                  />
+                  <div className="dashboard-section-title">
+                    <h2>Progress by event.</h2>
+                    <span className="tag">DIVISION {student.division} ONLY</span>
+                  </div>
+                  <ProgressTable progress={data.progress[student.id] || []} />
+                  <p className="source-note">
+                    Activity starts at zero. Lessons and test completion will be recorded when
+                    those tools launch.
+                  </p>
+                </>
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </main>
   );
 }

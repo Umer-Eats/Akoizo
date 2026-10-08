@@ -207,12 +207,22 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
     instructor ? profile.schoolId : profile.id,
   );
   const students = rows.map((row) => ({ ...asProfile(row), ...asStats(row) })) as Student[];
-  const assignments = await db.all(
-    `SELECT a.id,a.student_id,u.display_name,a.event_id,e.name,e.division,a.type,a.due_date,a.completed_at
+  let assignments: Row[];
+  try {
+    assignments = await db.all(
+      `SELECT a.id,a.student_id,u.display_name,a.event_id,e.name,e.division,a.type,a.due_date,a.completed_at,a.test_id
     FROM assignments a JOIN users u ON u.id=a.student_id JOIN events e ON e.id=a.event_id
     WHERE ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY a.completed_at IS NOT NULL,a.due_date,a.created_at DESC`,
-    instructor ? profile.schoolId : profile.id,
-  );
+      instructor ? profile.schoolId : profile.id,
+    );
+  } catch {
+    assignments = await db.all(
+      `SELECT a.id,a.student_id,u.display_name,a.event_id,e.name,e.division,a.type,a.due_date,a.completed_at
+    FROM assignments a JOIN users u ON u.id=a.student_id JOIN events e ON e.id=a.event_id
+    WHERE ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY a.completed_at IS NOT NULL,a.due_date,a.created_at DESC`,
+      instructor ? profile.schoolId : profile.id,
+    );
+  }
   const progressRows = await db.all(
     `SELECT u.id AS student_id,e.id AS event_id,e.name,
     (SELECT COUNT(*) FROM lesson_progress l WHERE l.student_id=u.id AND l.event_id=e.id) AS lessons,
@@ -246,55 +256,129 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
       type: a.type,
       due: String(a.due_date),
       completedAt: a.completed_at,
+      testId: a.test_id ? String(a.test_id) : null,
     })) as Assignment[],
+    selections: instructor ? await selectionsForSchool(db, profile) : undefined,
   };
+}
+async function selectionsForSchool(
+  db: Database,
+  profile: Profile,
+): Promise<Record<string, string[]>> {
+  try {
+    const rows = await db.all(
+      `SELECT es.student_id AS student_id, es.division AS division, es.event_id AS event_id
+       FROM event_selections es JOIN users u ON u.id=es.student_id
+       WHERE u.school_id=? AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
+      profile.schoolId,
+    );
+    const selections: Record<string, string[]> = {};
+    for (const row of rows) {
+      const studentId = String(row.student_id);
+      const division = String(row.division);
+      const eventId = String(row.event_id).replace(`2027:${division}:`, '');
+      (selections[studentId] ||= []).push(eventId);
+    }
+    for (const list of Object.values(selections)) list.sort();
+    return selections;
+  } catch {
+    return {};
+  }
 }
 export async function createAssignment(
   db: Database,
   instructor: Profile,
   body: Record<string, unknown>,
 ) {
-  const row =
-    typeof body.studentId === 'string'
-      ? await db.get(
-          `SELECT ${profileColumns} FROM users u JOIN schools s ON s.id=u.school_id WHERE u.id=? AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
-          body.studentId,
-        )
-      : undefined;
-  const student = row ? asProfile(row) : null;
-  requireSchoolStudent(instructor, student);
-  const division = student!.division!;
-  const { eventId, type, due } = validateAssignment(
-    division,
-    body.eventId,
-    body.type,
-    body.due,
-    dateInZone(typeof body.timeZone === 'string' ? body.timeZone : 'UTC'),
-  );
-  const id = randomUUID();
-  // Recheck school and division at the write boundary, including concurrent division changes.
-  const results = await db.batch(
-    [
-      {
-        sql: `INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date)
-    SELECT ?,u.id,?,?,?,? FROM users u WHERE u.id=? AND u.school_id=? AND u.division=? AND u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
-        args: [
-          id,
-          instructor.id,
-          eventKey(division, eventId),
-          type,
-          due,
-          student!.id,
-          instructor.schoolId,
-          division,
+  const studentIds =
+    Array.isArray(body.studentIds) && body.studentIds.length
+      ? body.studentIds
+      : typeof body.studentId === 'string'
+        ? [body.studentId]
+        : [];
+  if (!studentIds.length || studentIds.length > 60)
+    throw new AppError(400, 'Choose between 1 and 60 students.');
+  if (!studentIds.every((id) => typeof id === 'string' && id))
+    throw new AppError(400, 'Choose valid students.');
+  const timeZone = typeof body.timeZone === 'string' ? body.timeZone : 'UTC';
+  const today = dateInZone(timeZone);
+  const created: string[] = [];
+  for (const studentId of new Set(studentIds)) {
+    const row = await db.get(
+      `SELECT ${profileColumns} FROM users u JOIN schools s ON s.id=u.school_id WHERE u.id=? AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
+      studentId,
+    );
+    const student = row ? asProfile(row) : null;
+    requireSchoolStudent(instructor, student);
+    const division = student!.division!;
+    const { eventId, type, due, testId } = validateAssignment(
+      division,
+      body.eventId,
+      body.type,
+      body.due,
+      today,
+      body.testId,
+    );
+    const id = randomUUID();
+    const insertWithTest = `INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date,test_id)
+    SELECT ?,u.id,?,?,?,?,? FROM users u WHERE u.id=? AND u.school_id=? AND u.division=? AND u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`;
+    const insertLegacy = `INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date)
+    SELECT ?,u.id,?,?,?,? FROM users u WHERE u.id=? AND u.school_id=? AND u.division=? AND u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`;
+    let results;
+    try {
+      results = await db.batch(
+        [
+          {
+            sql: insertWithTest,
+            args: [
+              id,
+              instructor.id,
+              eventKey(division, eventId),
+              type,
+              due,
+              testId,
+              student!.id,
+              instructor.schoolId,
+              division,
+            ],
+          },
         ],
-      },
-    ],
-    'immediate',
-  );
-  if (!results[0].rowsAffected)
-    throw new AppError(409, 'The student’s division changed. Refresh and try again.');
-  return { id };
+        'immediate',
+      );
+    } catch (error) {
+      if (
+        testId &&
+        error instanceof Error &&
+        /no such column: test_id|no column named test_id/i.test(error.message)
+      ) {
+        results = await db.batch(
+          [
+            {
+              sql: insertLegacy,
+              args: [
+                id,
+                instructor.id,
+                eventKey(division, eventId),
+                type,
+                due,
+                student!.id,
+                instructor.schoolId,
+                division,
+              ],
+            },
+          ],
+          'immediate',
+        );
+      } else {
+        throw error;
+      }
+    }
+    if (!results[0].rowsAffected)
+      throw new AppError(409, 'The student’s division changed. Refresh and try again.');
+    created.push(id);
+  }
+  if (created.length === 1) return { id: created[0] };
+  return { ids: created, id: created[0] };
 }
 export async function removeAssignment(db: Database, instructor: Profile, id: string) {
   if (instructor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');

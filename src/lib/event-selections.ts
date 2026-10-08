@@ -11,6 +11,27 @@ export async function selectedEvents(db: Database, profile: Profile, division: D
   return rows.map((row) => String(row.event_id).replace(`2027:${division}:`, ''));
 }
 
+export async function selectionsForSchool(
+  db: Database,
+  schoolId: string,
+): Promise<Record<string, string[]>> {
+  const rows = await db.all(
+    `SELECT es.student_id AS student_id, es.division AS division, es.event_id AS event_id
+     FROM event_selections es JOIN users u ON u.id=es.student_id
+     WHERE u.school_id=? AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
+    schoolId,
+  );
+  const selections: Record<string, string[]> = {};
+  for (const row of rows) {
+    const studentId = String(row.student_id);
+    const division = String(row.division);
+    const eventId = String(row.event_id).replace(`2027:${division}:`, '');
+    (selections[studentId] ||= []).push(eventId);
+  }
+  for (const list of Object.values(selections)) list.sort();
+  return selections;
+}
+
 export async function selectEvent(db: Database, profile: Profile, body: Record<string, unknown>) {
   if (profile.role !== 'student') throw new AppError(403, 'Student access is required.');
   const { division, eventId, selected } = body;

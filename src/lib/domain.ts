@@ -25,6 +25,8 @@ export type Assignment = {
   type: 'Practice' | 'Ranked';
   due: string;
   completedAt: string | null;
+  testId?: string | null;
+  testTitle?: string | null;
 };
 export type EventProgress = Stats & { eventId: string; eventName: string };
 export type DashboardData = {
@@ -33,6 +35,7 @@ export type DashboardData = {
   students: Student[];
   assignments: Assignment[];
   progress: Record<string, EventProgress[]>;
+  selections?: Record<string, string[]>;
 };
 export type Enrollment = {
   role: Role;
@@ -92,6 +95,7 @@ export function validateAssignment(
   type: unknown,
   due: unknown,
   today: string,
+  testId?: unknown,
 ) {
   if (!eventsForDivision(division).some((event) => event.id === eventId)) {
     throw new AppError(400, `Choose an event from this student's Division ${division} list.`);
@@ -104,7 +108,13 @@ export function validateAssignment(
   if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== due || due < today) {
     throw new AppError(400, 'Choose a valid due date on or after today.');
   }
-  return { eventId: eventId as string, type, due } as const;
+  let cleanTestId: string | null = null;
+  if (testId !== undefined && testId !== null && testId !== '') {
+    if (typeof testId !== 'string' || !testId.trim() || testId.length > 160)
+      throw new AppError(400, 'Choose a valid converted test.');
+    cleanTestId = testId.trim();
+  }
+  return { eventId: eventId as string, type, due, testId: cleanTestId } as const;
 }
 export function dateInZone(timeZone: string, date = new Date()) {
   try {

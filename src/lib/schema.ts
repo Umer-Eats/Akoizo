@@ -18,7 +18,7 @@ export const schema = [
     category TEXT NOT NULL, type TEXT NOT NULL, season TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS assignments (id TEXT PRIMARY KEY, student_id TEXT NOT NULL REFERENCES users(id),
     instructor_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
-    type TEXT NOT NULL CHECK(type IN ('Practice','Ranked')), due_date TEXT NOT NULL,
+    type TEXT NOT NULL CHECK(type IN ('Practice','Ranked')), due_date TEXT NOT NULL, test_id TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now')), completed_at TEXT)`,
   `CREATE TABLE IF NOT EXISTS test_attempts (id TEXT PRIMARY KEY, student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
     type TEXT NOT NULL CHECK(type IN ('Practice','Ranked')), score INTEGER NOT NULL, max_score INTEGER NOT NULL,
