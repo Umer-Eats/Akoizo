@@ -27,6 +27,7 @@ import {
   type Database,
 } from '../src/lib/school-service.ts';
 import type { Answers, PracticeTest, PracticeResult } from '../src/lib/practice-types.ts';
+import { matchesPracticeFilters, practiceDifficulties } from '../src/lib/practice-types.ts';
 import { reportedCompetitionLevel } from '../scripts/scioly-source.mjs';
 
 test('every archived paper has a complete rubric and coherent point total', () => {
@@ -35,6 +36,10 @@ test('every archived paper has a complete rubric and coherent point total', () =
     const answers: Answers = {};
     for (const q of paper.questions) {
       const key = paper.keys[q.id];
+      if (paper.gradingMode === 'ai-generated') {
+        answers[q.id] = q.type === 'mcq' ? q.options![0].id : 'Response for Auto Grade';
+        continue;
+      }
       if (q.type === 'mcq')
         answers[q.id] = q.multiple ? key.correctOptions!.join(',') : key.correctOption!;
       else {
@@ -56,6 +61,32 @@ test('every archived paper has a complete rubric and coherent point total', () =
   const broken = structuredClone(practiceTests);
   delete broken[0].keys[broken[0].questions[0].id];
   assert.throws(() => validatePracticeCatalog(broken), /Invalid practice catalog/);
+});
+
+test('difficulty is assessed independently of competition level and combines with every filter', () => {
+  const filters = { query: '', level: '', year: '', topic: '', difficulty: '' };
+  const paper = findPracticeTest('B', 'berkeley-2026-heredity-b');
+  assert.equal(paper.level, null);
+  assert.equal(paper.difficulty, 'Hard');
+  assert.equal(matchesPracticeFilters(paper, { ...filters, difficulty: 'Hard', level: 'unreported', year: '2026', topic: paper.topics[0], query: 'berkeley' }), true);
+  for (const mismatch of [{ difficulty: 'Easy' }, { level: 'Nationals' }, { year: '2014' }, { topic: 'unrelated' }, { query: 'absent' }])
+    assert.equal(matchesPracticeFilters(paper, { ...filters, ...mismatch }), false);
+  const source = {competition: 'Unconverted', level: null, year: 2026, topics: []};
+  assert.equal(matchesPracticeFilters(source, filters), true);
+  assert.equal(matchesPracticeFilters(source, { ...filters, difficulty: 'Easy' }), false);
+  for (const test of practiceTests) {
+    assert.ok(practiceDifficulties.includes(test.difficulty));
+    assert.ok(test.difficultyReason.trim().length > 20);
+    const publicPaper = publicPracticePaper(test);
+    assert.equal(publicPaper.difficulty, test.difficulty);
+    assert.equal(publicPaper.difficultyReason, test.difficultyReason);
+  }
+  const invalid = structuredClone(paper) as unknown as Record<string, unknown>;
+  invalid.difficulty = 'Nationals';
+  assert.throws(() => validatePracticeCatalog([invalid]), /Invalid practice catalog/);
+  invalid.difficulty = 'Hard';
+  invalid.difficultyReason = '';
+  assert.throws(() => validatePracticeCatalog([invalid]), /Invalid practice catalog/);
 });
 
 test('catalog enforces the current season, event and student division', () => {

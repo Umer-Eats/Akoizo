@@ -14,6 +14,7 @@ import { useAuth, authMessage } from './auth-context';
 import { eventsForDivision } from '@/lib/events';
 import {
   competitionLevels,
+  practiceDifficulties,
   practiceTitle,
   matchesPracticeFilters,
   PRACTICE_SEASON,
@@ -33,6 +34,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
   const [level, setLevel] = useState('');
   const [year, setYear] = useState('');
   const [topic, setTopic] = useState('');
+  const [difficulty, setDifficulty] = useState('');
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
   useEffect(() => {
@@ -43,6 +45,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
     setLevel('');
     setYear('');
     setTopic('');
+    setDifficulty('');
     setError('');
     request<{ tests: PracticeSummary[]; archive?: ArchiveSource[] }>(
       `/api/practice?eventId=${encodeURIComponent(eventId)}`,
@@ -60,7 +63,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
       active = false;
     };
   }, [request, eventId, profile?.division, retry]);
-  const filters = { query, level, year, topic };
+  const filters = { query, level, year, topic, difficulty };
   const matches = tests?.filter((test) => matchesPracticeFilters(test, filters)) ?? [];
   const archiveMatches = archive.filter((test) => matchesPracticeFilters(test, filters));
   const availableTopics = [
@@ -71,6 +74,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
     setLevel('');
     setYear('');
     setTopic('');
+    setDifficulty('');
   };
   return (
     <section className="practice-library" aria-label="Past competition tests">
@@ -96,6 +100,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
             {competitionLevels.map((value) => (
               <option key={value}>{value}</option>
             ))}
+            <option value="unreported">Level not reported</option>
           </select>
         </label>
         <label>
@@ -120,7 +125,14 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
             </select>
           </label>
         )}
-        {(query || level || year || topic) && (
+        <label>
+          Difficulty
+          <select aria-label="Difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+            <option value="">All difficulties</option>
+            {practiceDifficulties.map((value) => <option key={value}>{value}</option>)}
+          </select>
+        </label>
+        {(query || level || year || topic || difficulty) && (
           <button className="text-link" onClick={clearFilters}>
             Clear filters
           </button>
@@ -153,6 +165,9 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
                     </span>
                     <div>
                       <h2>{practiceTitle(test)}</h2>
+                      <span className={`practice-difficulty practice-difficulty-${test.difficulty.toLowerCase()}`} title={`Estimated difficulty: ${test.difficultyReason}`}>
+                        {test.difficulty}
+                      </span>
                       <p>{test.topics.join(' · ')}</p>
                       {test.gradingMode === 'ai-generated' && (
                         <p>Auto Grade · AI-generated reference answers</p>
@@ -182,12 +197,12 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
               <h2>
                 {tests.length
                   ? 'No tests match your search.'
-                  : 'No verified tests for this event yet.'}
+                  : 'No converted tests for this event yet.'}
               </h2>
               <p>
                 {tests.length
-                  ? 'Try a different competition, year, level, or topic.'
-                  : 'A complete paper and scoring key must be converted and checked before a test is ready to practice.'}
+                  ? 'Try a different competition, year, level, topic, or difficulty.'
+                  : 'The original questions must be converted before a test is ready to practice. Tests without a published key can use Auto Grade.'}
               </p>
             </div>
           )}
@@ -224,7 +239,10 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
             Use the topic filter to select the subjects you want to study. Older papers may cover a
             different rotation; check the Rules tab for {PRACTICE_SEASON} requirements. Levels
             follow the competition’s reported tier. An invitational without a stated tier is labeled
-            “Level not reported.” Gemini grades written explanations against the published rubric;
+            “Level not reported.” Difficulty is an estimate based on the questions, reasoning,
+            and calculations required for the test’s division, independently of its competition level.
+            Unconverted archive sources have no difficulty rating yet and are hidden when a difficulty is selected.
+            Auto Grade uses the published rubric when available;
             uncertain answers remain available for instructor review.
           </p>
         </>
@@ -579,6 +597,11 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
             <section className="practice-paper" aria-label="Complete competition paper">
               <div className="practice-paper-heading">
                 <h2>Original test</h2>
+                <span className="practice-timer" role="timer" aria-label="Time spent">
+                  <Clock3 size={16} aria-hidden="true" />
+                  <span>Time spent</span>
+                  <strong>{formatElapsed(elapsedSeconds)}</strong>
+                </span>
                 <a href={paper.paperUrl} target="_blank" rel="noreferrer">
                   Open paper <ArrowUpRight size={15} />
                 </a>
@@ -592,6 +615,13 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 Scroll through the entire original paper here. All diagrams and case studies are
                 included. If your browser cannot display it, use Open paper.
               </p>
+              {paper.supplementUrl && (
+                <details className="practice-supplement">
+                  <summary>Image sheet for this test</summary>
+                  <a href={paper.supplementUrl} target="_blank" rel="noreferrer">Open image sheet <ArrowUpRight size={15} /></a>
+                  <iframe title={`Image sheet: ${practiceTitle(paper)}`} src={paper.supplementUrl} />
+                </details>
+              )}
             </section>
             <form
               className="practice-answer-sheet"
@@ -601,14 +631,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               }}
             >
               <div className="practice-answer-heading">
-                <div className="practice-answer-title">
-                  <h2>{result ? 'Answer review' : 'Your answers'}</h2>
-                  <span className="practice-timer" role="timer" aria-label="Time spent">
-                    <Clock3 size={16} aria-hidden="true" />
-                    <span>Time spent</span>
-                    <strong>{formatElapsed(elapsedSeconds)}</strong>
-                  </span>
-                </div>
+                <h2>{result ? 'Answer review' : 'Your answers'}</h2>
                 <p>
                   {result
                     ? 'Question numbers follow the original paper.'
@@ -641,6 +664,7 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                       Paper page {question.page}
                       {question.prompt ? ` · ${question.prompt}` : ''}
                     </p>
+                    {question.context && <p className="practice-question-context">{question.context}</p>}
                     {question.type === 'mcq' ? (
                       <>
                         <p className="practice-question-reference">

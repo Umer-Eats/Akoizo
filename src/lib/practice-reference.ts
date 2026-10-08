@@ -60,6 +60,8 @@ export async function generatePracticeReferences(test: PracticeTest, config: Pra
         if (chunk.some((q) => !q.prompt?.trim())) throw new Error('Missing question content');
         const data = JSON.stringify({
           subject: test.eventId,
+          competitionYear: test.year,
+          instructions: test.instructions,
           questions: chunk.map((q) => ({
             questionId: q.id,
             type: q.type,

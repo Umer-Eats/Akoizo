@@ -7,6 +7,7 @@ import { eventsForDivision, slug, type Division } from './events.ts';
 import {
   PRACTICE_SEASON,
   competitionLevels,
+  practiceDifficulties,
   type PracticeTest,
   type PracticeSummary,
   type PracticePaper,
@@ -38,11 +39,15 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       test.year < 1984 ||
       test.year > PRACTICE_SEASON ||
       !test.competition ||
+      !practiceDifficulties.includes(test.difficulty) ||
+      typeof test.difficultyReason !== 'string' ||
+      !test.difficultyReason.trim() ||
       !test.alignment ||
       !test.scoringBasis ||
       !test.instructions ||
       !test.topics?.length ||
       !validAssetUrl(test.paperUrl) ||
+      (test.supplementUrl !== undefined && !validAssetUrl(test.supplementUrl)) ||
       (test.gradingMode !== undefined &&
         !['published-key', 'ai-generated'].includes(test.gradingMode)) ||
       (test.gradingMode === 'ai-generated' ? test.keyUrl !== null : !validAssetUrl(test.keyUrl)) ||
@@ -118,6 +123,9 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
               !c.answer ||
               !Number.isFinite(c.points) ||
               c.points < 0 ||
+              (c.cipher && (typeof c.cipher.solution !== 'string' || !/[A-Za-z0-9]/.test(c.cipher.solution) ||
+                !Number.isInteger(c.cipher.freeErrors) || c.cipher.freeErrors < 0 ||
+                !Number.isFinite(c.cipher.penaltyPerError) || c.cipher.penaltyPerError <= 0)) ||
               (c.numeric &&
                 (!Number.isFinite(c.numeric.value) ||
                   !Number.isFinite(c.numeric.tolerance) ||
@@ -144,6 +152,8 @@ export function practiceSummary(test: PracticeTest): PracticeSummary {
     eventId,
     division,
     competition,
+    difficulty,
+    difficultyReason,
     level,
     year,
     season,
@@ -163,6 +173,8 @@ export function practiceSummary(test: PracticeTest): PracticeSummary {
     eventId,
     division,
     competition,
+    difficulty,
+    difficultyReason,
     level,
     year,
     season,
@@ -216,6 +228,7 @@ export function publicPracticePaper(test: PracticeTest): PracticePaper {
     ...practiceSummary(test),
     sourceUrl: test.sourceUrl,
     paperUrl: test.paperUrl,
+    supplementUrl: test.supplementUrl,
     instructions: test.instructions,
     questions: test.questions,
   };

@@ -84,6 +84,18 @@ export function gradePractice(
       };
     }
     const criteria = key.criteria!.map((criterion) => {
+      if (criterion.cipher) {
+        // Cipher worksheets score character positions, not scientific meaning. Underscores
+        // preserve unanswered positions; spaces, punctuation, case and accents are ignored.
+        const letters = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9_]/g, '');
+        const actual = letters(answer);
+        const expected = letters(criterion.cipher.solution);
+        let errors = 0;
+        for (let i = 0; i < Math.max(actual.length, expected.length); i++)
+          if (actual[i] !== expected[i]) errors++;
+        const earned = actual.length ? Math.max(0, criterion.points - Math.max(0, errors - criterion.cipher.freeErrors) * criterion.cipher.penaltyPerError) : 0;
+        return {id: criterion.id, answer: criterion.answer, points: criterion.points, earned, needsReview: false};
+      }
       const accepted = criterion.accepted;
       const matches = criterion.anyNonEmpty
         ? !!answer.trim()

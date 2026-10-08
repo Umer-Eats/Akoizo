@@ -45,7 +45,8 @@ export async function gradeWrittenWithGemini(
     const question = test.questions.find((candidate) => candidate.id === q.id)!;
     if (question.type !== 'frq' || !q.answer.trim() || !test.keys[q.id]) return [];
     return q.criteria
-      .filter((c) => c.points > 0 && (c.needsReview || config.reviewAll))
+      .filter((c) => c.points > 0 && (c.needsReview || config.reviewAll) &&
+        !test.keys[q.id].criteria!.find(criterion => criterion.id === c.id)?.cipher)
       .map((c) => ({
         questionId: q.id,
         criterionId: c.id,

@@ -3,12 +3,17 @@
 import { writeFile } from 'node:fs/promises';
 import { format, resolveConfig } from 'prettier';
 import { addArchivePapers } from './practice-additions.mjs';
+import { reviewedDifficulty } from './practice-difficulty.mjs';
 
 const catalog = [];
 function make(meta) {
+  const assessment = reviewedDifficulty[meta.id];
+  if (!assessment) throw new Error(`Assess the questions before assigning difficulty: ${meta.id}`);
   const test = {
     scoringBasis: 'Published rubric',
     ...meta,
+    difficulty: assessment[0],
+    difficultyReason: assessment[1],
     // Invitational is a tournament format, not a reported rules tier.
     level: meta.level === 'Invitational' ? null : meta.level,
     levelEvidence:

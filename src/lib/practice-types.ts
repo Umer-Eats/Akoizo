@@ -3,6 +3,8 @@ import type { Division } from './events';
 export const PRACTICE_SEASON = 2027;
 export const competitionLevels = ['Regionals', 'States', 'Nationals'] as const;
 export type CompetitionLevel = (typeof competitionLevels)[number];
+export const practiceDifficulties = ['Easy', 'Medium', 'Hard'] as const;
+export type PracticeDifficulty = (typeof practiceDifficulties)[number];
 export type LevelEvidence = { sourceUrl: string; text: string; basis: string };
 export type PracticeQuestion = {
   id: string;
@@ -24,6 +26,7 @@ export type Criterion = {
   anyNonEmpty?: boolean;
   caseSensitive?: boolean;
   numeric?: { value: number; tolerance: number; units: string[]; unitRequired: boolean };
+  cipher?: { solution: string; freeErrors: number; penaltyPerError: number };
 };
 export type QuestionKey = {
   correctOption?: string;
@@ -36,6 +39,8 @@ export type PracticeSummary = {
   eventId: string;
   division: Division;
   competition: string;
+  difficulty: PracticeDifficulty;
+  difficultyReason: string;
   level: CompetitionLevel | null;
   levelEvidence?: LevelEvidence | null;
   sourceId?: string;
@@ -53,6 +58,7 @@ export type PracticeSummary = {
 export type PracticePaper = PracticeSummary & {
   sourceUrl: string;
   paperUrl: string;
+  supplementUrl?: string;
   instructions: string;
   questions: PracticeQuestion[];
 };
@@ -122,11 +128,14 @@ export type ArchiveSource = {
 };
 
 export function matchesPracticeFilters(
-  test: Pick<PracticeSummary, 'competition' | 'level' | 'year' | 'topics'>,
-  filters: { query: string; level: string; year: string; topic: string },
+  test: Pick<PracticeSummary, 'competition' | 'level' | 'year' | 'topics'> & {
+    difficulty?: PracticeDifficulty;
+  },
+  filters: { query: string; level: string; year: string; topic: string; difficulty?: string },
 ) {
   return (
-    (!filters.level || test.level === filters.level) &&
+    (!filters.level || (filters.level === 'unreported' ? test.level === null : test.level === filters.level)) &&
+    (!filters.difficulty || test.difficulty === filters.difficulty) &&
     (!filters.year || String(test.year) === filters.year) &&
     (!filters.topic || test.topics.includes(filters.topic)) &&
     `${practiceTitle(test)} ${test.topics.join(' ')}`

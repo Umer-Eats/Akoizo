@@ -214,6 +214,16 @@ try {
   const { page } = await account('student');
   await page.goto(base + '/dashboard/student/events/heredity/practice-tests');
   await expect(page.locator('.practice-test-list li')).toHaveCount(3);
+  await expect(page.locator('.practice-difficulty')).toHaveCount(3);
+  for (const difficulty of ['Easy', 'Medium', 'Hard']) {
+    await page.getByLabel('Difficulty', { exact: true }).selectOption(difficulty);
+    await expect(page.locator('.practice-test-list li')).toHaveCount(1);
+    await expect(page.locator('.practice-difficulty')).toHaveText(difficulty);
+  }
+  await page.getByLabel('Level', { exact: true }).selectOption('unreported');
+  await expect(page.locator('.practice-test-list li')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Clear filters' }).click();
+  await expect(page.getByLabel('Difficulty', { exact: true })).toHaveValue('');
   await page.getByLabel('Search practice tests').fill('BullSO');
   await expect(page.locator('.practice-test-list li')).toHaveCount(1);
   await page.getByRole('button', { name: 'Clear search' }).click();
@@ -289,9 +299,11 @@ try {
   await expect(written.nth(0)).toHaveValue(original);
   await page.getByRole('button', { name: 'Return to your draft' }).click();
   await expect(written.nth(0)).toHaveValue('New draft');
+  // Simulate an empty library without tying the check to a gap in the real catalog.
+  await page.route('**/api/practice?eventId=solar-system', route => route.fulfill({json:{tests:[],archive:[]}}));
   await page.goto(base + '/dashboard/student/events/solar-system/practice-tests');
   await expect(
-    page.getByRole('heading', { name: 'No verified tests for this event yet.' }),
+    page.getByRole('heading', { name: 'No converted tests for this event yet.' }),
   ).toBeVisible();
   const { page: instructor } = await account('instructor');
   await instructor.getByText(/Practice Learner · UT Austin/).click();
