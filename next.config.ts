@@ -18,6 +18,10 @@ const config: NextConfig = {
         source: '/rules/:path*',
         headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }],
       },
+      {
+        source: '/practice/:path*',
+        headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }],
+      },
     ];
   },
 };

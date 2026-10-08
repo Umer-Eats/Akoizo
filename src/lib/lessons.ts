@@ -12,33 +12,32 @@ export type LessonQuizQuestion = {
 
 export type LessonSim =
   | {
-      kind: 'slider';
+      kind: 'model';
+      model:
+        | 'feedback'
+        | 'airway'
+        | 'ventilation'
+        | 'diffusion'
+        | 'digestion'
+        | 'immune'
+        | 'density'
+        | 'chromatography'
+        | 'bloodstain'
+        | 'thermal';
       title: string;
       instructions: string;
-      min: number;
-      max: number;
-      step: number;
-      defaultValue: number;
-      unit: string;
-      scenarios: { value: number; label: string; outcome: string }[];
+      challenge: string;
+      takeaway: string;
     }
   | {
-      kind: 'flashcards';
+      kind: 'investigation';
       title: string;
       instructions: string;
-      cards: { front: string; back: string }[];
-    }
-  | {
-      kind: 'scenario';
-      title: string;
-      instructions: string;
-      steps: { prompt: string; options: string[]; correct: number; feedback: string }[];
-    }
-  | {
-      kind: 'checklist';
-      title: string;
-      instructions: string;
-      items: { label: string; detail: string }[];
+      observations: { label: string; result: string }[];
+      question: string;
+      options: string[];
+      correct: number;
+      explanation: string;
     };
 
 export type Lesson = {
@@ -46,13 +45,14 @@ export type Lesson = {
   unitId: string;
   title: string;
   durationMin: number;
-  kind: 'text' | 'video';
-  videoUrl?: string;
+  kind: 'text';
   objectives: string[];
   sections: { heading: string; body: string[] }[];
   keyTerms: { term: string; definition: string }[];
   simulation: LessonSim;
   practice: LessonQuizQuestion[];
+  workedExample: { title: string; problem: string; steps: string[]; conclusion: string };
+  extension?: boolean;
 };
 
 export type LessonUnit = {
@@ -65,7 +65,9 @@ export type LessonUnit = {
 export type EventLessons = {
   eventId: string;
   eventName: string;
-  instructor: string;
+  division: 'C';
+  syllabus: string;
+  references: { title: string; url: string }[];
   intro: string;
   units: LessonUnit[];
   lessons: Lesson[];

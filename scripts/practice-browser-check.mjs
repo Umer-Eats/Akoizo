@@ -7,6 +7,8 @@ import {
   publicPracticePaper,
 } from '../src/lib/practice-catalog.ts';
 import { gradePractice, validateAnswers } from '../src/lib/practice-grading.ts';
+import { eventsForDivision } from '../src/lib/events.ts';
+import { eventToolIds } from '../src/lib/event-rules.ts';
 
 // Browser-only account mocks. The app and its server authorization are unchanged.
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3002';
@@ -14,7 +16,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const errors = [];
 const attempts = [];
 await mkdir('documents/qa', { recursive: true });
-async function account(role) {
+async function account(role, division = 'B') {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
     reducedMotion: 'reduce',
@@ -22,14 +24,14 @@ async function account(role) {
   const page = await context.newPage();
   page.on('pageerror', (e) => errors.push(e.message));
   const profile = {
-    id: `qa-${role}`,
+    id: `qa-${role}-${division}`,
     role,
     displayName: 'Practice Learner',
     schoolId: 'qa-school',
     schoolName: 'School-QA',
     schoolCommunityId: 'ppchs',
     schoolCommunityName: 'Test school',
-    division: role === 'student' ? 'B' : null,
+    division: role === 'student' ? division : null,
   };
   const token =
     Buffer.from('{"alg":"none"}').toString('base64url') +
@@ -202,6 +204,18 @@ async function layout(page, name) {
 }
 try {
   const auth = await browser.newPage();
+  // Locally hosted test/key/image PDFs must be embeddable by Akoizo itself.
+  for (const file of ['test.pdf', 'key.pdf', 'images.pdf']) {
+    const asset = await auth.request.get(`${base}/practice/bullso-2026-astronomy-c/${file}`);
+    assert.equal(asset.status(), 200);
+    assert.match(asset.headers()['content-type'], /application\/pdf/);
+    assert.equal(asset.headers()['x-frame-options'], 'SAMEORIGIN');
+    assert.equal((await asset.body()).subarray(0, 5).toString(), '%PDF-');
+  }
+  assert.equal(
+    (await auth.request.get(base + '/login/student')).headers()['x-frame-options'],
+    'DENY',
+  );
   for (const path of ['/api/practice?eventId=heredity', '/api/practice/review'])
     assert.equal((await auth.request.get(base + path)).status(), 401);
   for (const path of ['/api/practice', '/api/practice/review', '/api/practice/auto-grade'])
@@ -235,6 +249,8 @@ try {
   await layout(page, 'library');
   await page.getByRole('link', { name: /UT Austin · Regionals · 2014/ }).click();
   await expect(page.locator('.practice-question')).toHaveCount(29);
+  const timer = page.getByRole('timer', { name: 'Time spent' }).locator('strong');
+  await expect(timer).not.toHaveText('00:00');
   await expect(page.locator('iframe[title^="Complete test:"]')).toHaveAttribute(
     'src',
     /Heredity_Test/,
@@ -246,8 +262,12 @@ try {
   const original = 'My own reasoning\n  with spaces intact.  ';
   await written.nth(0).fill(original);
   await written.nth(2).fill('  AUTOSOMAL   dominant\n');
+  const timerSeconds = async () =>
+    (await timer.innerText()).split(':').reduce((n, s) => n * 60 + Number(s), 0);
+  const beforeReload = await timerSeconds();
   await page.reload();
   await expect(written.nth(0)).toHaveValue(original);
+  assert.ok((await timerSeconds()) >= beforeReload, 'Timer survives a draft reload');
   await expect(question('1').getByRole('radio', { name: /A/ })).toBeChecked();
   await page.getByRole('button', { name: 'Submit test', exact: true }).click();
   await expect(page.locator('.practice-answer-sheet').getByRole('alert')).toHaveText(
@@ -257,6 +277,9 @@ try {
   await page.getByRole('button', { name: 'Submit test', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Test results' })).toContainText('5 / 80 points');
   await expect(page.getByRole('region', { name: 'Test results' })).toContainText('6.25%');
+  const stoppedAt = await timer.innerText();
+  await page.waitForTimeout(1200);
+  await expect(timer).toHaveText(stoppedAt);
   await expect(written.nth(0)).toHaveValue(original);
   await expect(question('1').locator('.practice-option.correct')).toContainText('E');
   await expect(question('1').locator('.practice-option.selected')).toContainText('A');
@@ -300,12 +323,15 @@ try {
   await page.getByRole('button', { name: 'Return to your draft' }).click();
   await expect(written.nth(0)).toHaveValue('New draft');
   // Simulate an empty library without tying the check to a gap in the real catalog.
-  await page.route('**/api/practice?eventId=solar-system', route => route.fulfill({json:{tests:[],archive:[]}}));
+  await page.route('**/api/practice?eventId=solar-system', (route) =>
+    route.fulfill({ json: { tests: [], archive: [] } }),
+  );
   await page.goto(base + '/dashboard/student/events/solar-system/practice-tests');
   await expect(
     page.getByRole('heading', { name: 'No converted tests for this event yet.' }),
   ).toBeVisible();
   const { page: instructor } = await account('instructor');
+  await instructor.getByRole('button', { name: 'Student Progress', exact: true }).click();
   await instructor.getByText(/Practice Learner · UT Austin/).click();
   await expect(instructor.locator('.practice-original-answer')).toHaveText(original);
   await instructor.getByRole('spinbutton').fill('3');
@@ -319,9 +345,80 @@ try {
   await expect(page.getByRole('region', { name: 'Test results' })).toContainText('8 / 80 points');
   await expect(page.getByRole('region', { name: 'Test results' })).toContainText('10%');
   await expect(page.getByRole('button', { name: 'Auto Grade', exact: true })).toBeDisabled();
+  // The same library/filter UI must work for every B/C event, including new conversions.
+  await page.unroute('**/api/practice?eventId=solar-system');
+  for (const division of ['B', 'C']) {
+    const eventPage = division === 'B' ? page : (await account('student', division)).page;
+    for (const event of eventsForDivision(division)) {
+      if (!eventToolIds(division, event).includes('practice-tests')) continue;
+      await eventPage.goto(`${base}/dashboard/student/events/${event.id}/practice-tests`);
+      const papers = listPracticeTests(division, event.id);
+      await expect(eventPage.locator('.practice-test-list li')).toHaveCount(papers.length);
+      await expect(eventPage.locator('.practice-difficulty')).toHaveCount(papers.length);
+      await expect(eventPage.getByLabel('Difficulty', { exact: true })).toBeVisible();
+    }
+    // Open the newly imported papers through the same event routes and verify their local assets.
+    for (const id of [
+      'west-ottawa-2026-remote-sensing-b',
+      'chem2000-2016-chemistry-lab-c',
+      'lake-erie-niagara-2018-circuit-lab-c',
+      'ut-austin-2019-protein-modeling-c',
+      'mit-2020-botany-c',
+    ]) {
+      const paper = practiceTests.find((t) => t.id === id);
+      if (paper.division !== division) continue;
+      await eventPage.goto(
+        `${base}/dashboard/student/events/${paper.eventId}/practice-tests/${id}`,
+      );
+      await expect(eventPage.locator('.practice-question')).toHaveCount(paper.questionCount);
+      await expect(eventPage.getByRole('timer', { name: 'Time spent' })).toBeVisible();
+      await expect(eventPage.locator('iframe[title^="Complete test:"]')).toHaveAttribute(
+        'src',
+        paper.paperUrl,
+      );
+      for (const path of [paper.paperUrl, paper.keyUrl, paper.supplementUrl].filter(Boolean)) {
+        const response = await eventPage.request.get(base + path);
+        assert.equal(response.status(), 200, path);
+        assert.equal(response.headers()['x-frame-options'], 'SAMEORIGIN', path);
+        assert.equal((await response.body()).subarray(0, 5).toString(), '%PDF-', path);
+      }
+      if (id === 'west-ottawa-2026-remote-sensing-b') {
+        await eventPage.locator('input[name="1"][value="B"]').check();
+        await eventPage.locator('input[name="1"][value="D"]').check();
+        await eventPage.reload();
+        await expect(eventPage.locator('input[name="1"][value="B"]')).toBeChecked();
+        await expect(eventPage.locator('input[name="1"][value="D"]')).toBeChecked();
+      }
+    }
+    if (division === 'B') {
+      await eventPage.goto(
+        `${base}/dashboard/student/events/botany/practice-tests/ut-austin-2020-botany-b`,
+      );
+      await expect(eventPage.locator('.practice-question')).toHaveCount(91);
+      await expect(eventPage.locator('input[name="27"][type="checkbox"]')).toHaveCount(6);
+      await eventPage.locator('input[name="27"][value="A"]').check();
+      await eventPage.locator('input[name="27"][value="C"]').check();
+      await eventPage.reload();
+      await expect(eventPage.locator('input[name="27"][value="A"]')).toBeChecked();
+      await expect(eventPage.locator('input[name="27"][value="C"]')).toBeChecked();
+      await layout(eventPage, 'botany');
+    } else {
+      await eventPage.goto(
+        `${base}/dashboard/student/events/astronomy/practice-tests/bullso-2026-astronomy-c`,
+      );
+      await expect(eventPage.locator('.practice-question')).toHaveCount(94);
+      await eventPage.getByText('Image sheet for this test', { exact: true }).click();
+      await expect(eventPage.locator('iframe[title^="Image sheet:"]')).toHaveAttribute(
+        'src',
+        '/practice/bullso-2026-astronomy-c/images.pdf',
+      );
+      await expect(eventPage.getByRole('timer', { name: 'Time spent' })).toBeVisible();
+      await layout(eventPage, 'astronomy');
+    }
+  }
   assert.deepEqual(errors, []);
   console.log(
-    'Practice browser checks passed: search, filters, drafts, retry, Auto Grade retry and saved results, grading colors, history, instructor review, mobile layouts, unauthenticated APIs.',
+    'Practice browser checks passed: all 30 B/C libraries, difficulty and topic filters, multi-select drafts, count-up timer, Auto Grade retry and saved results, grading colors, history, instructor review, mobile layouts, PDF embedding headers, unauthenticated APIs.',
   );
 } finally {
   await browser.close();

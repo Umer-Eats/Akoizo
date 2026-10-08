@@ -127,9 +127,15 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
         )}
         <label>
           Difficulty
-          <select aria-label="Difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+          <select
+            aria-label="Difficulty"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+          >
             <option value="">All difficulties</option>
-            {practiceDifficulties.map((value) => <option key={value}>{value}</option>)}
+            {practiceDifficulties.map((value) => (
+              <option key={value}>{value}</option>
+            ))}
           </select>
         </label>
         {(query || level || year || topic || difficulty) && (
@@ -165,7 +171,10 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
                     </span>
                     <div>
                       <h2>{practiceTitle(test)}</h2>
-                      <span className={`practice-difficulty practice-difficulty-${test.difficulty.toLowerCase()}`} title={`Estimated difficulty: ${test.difficultyReason}`}>
+                      <span
+                        className={`practice-difficulty practice-difficulty-${test.difficulty.toLowerCase()}`}
+                        title={`Estimated difficulty: ${test.difficultyReason}`}
+                      >
                         {test.difficulty}
                       </span>
                       <p>{test.topics.join(' · ')}</p>
@@ -239,11 +248,11 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
             Use the topic filter to select the subjects you want to study. Older papers may cover a
             different rotation; check the Rules tab for {PRACTICE_SEASON} requirements. Levels
             follow the competition’s reported tier. An invitational without a stated tier is labeled
-            “Level not reported.” Difficulty is an estimate based on the questions, reasoning,
-            and calculations required for the test’s division, independently of its competition level.
-            Unconverted archive sources have no difficulty rating yet and are hidden when a difficulty is selected.
-            Auto Grade uses the published rubric when available;
-            uncertain answers remain available for instructor review.
+            “Level not reported.” Difficulty is an estimate based on the questions, reasoning, and
+            calculations required for the test’s division, independently of its competition level.
+            Unconverted archive sources have no difficulty rating yet and are hidden when a
+            difficulty is selected. Auto Grade uses the published rubric when available; uncertain
+            answers remain available for instructor review.
           </p>
         </>
       )}
@@ -612,14 +621,19 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 allowFullScreen
               />
               <p>
-                Scroll through the entire original paper here. All diagrams and case studies are
-                included. If your browser cannot display it, use Open paper.
+                Scroll through the original paper here. Check the scoring notes for any excluded
+                questions. If your browser cannot display it, use Open paper.
               </p>
               {paper.supplementUrl && (
                 <details className="practice-supplement">
                   <summary>Image sheet for this test</summary>
-                  <a href={paper.supplementUrl} target="_blank" rel="noreferrer">Open image sheet <ArrowUpRight size={15} /></a>
-                  <iframe title={`Image sheet: ${practiceTitle(paper)}`} src={paper.supplementUrl} />
+                  <a href={paper.supplementUrl} target="_blank" rel="noreferrer">
+                    Open image sheet <ArrowUpRight size={15} />
+                  </a>
+                  <iframe
+                    title={`Image sheet: ${practiceTitle(paper)}`}
+                    src={paper.supplementUrl}
+                  />
                 </details>
               )}
             </section>
@@ -664,14 +678,16 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                       Paper page {question.page}
                       {question.prompt ? ` · ${question.prompt}` : ''}
                     </p>
-                    {question.context && <p className="practice-question-context">{question.context}</p>}
+                    {question.context && (
+                      <p className="practice-question-context">{question.context}</p>
+                    )}
                     {question.type === 'mcq' ? (
                       <>
                         <p className="practice-question-reference">
                           {question.multiple ? 'Select all that apply.' : 'Choose one answer.'}
                         </p>
                         <div
-                          className="practice-options"
+                          className={`practice-options${question.options!.some((option) => option.text.length > 20) ? ' practice-options-expanded' : ''}`}
                           role={question.multiple ? 'group' : 'radiogroup'}
                           aria-label={question.label}
                         >

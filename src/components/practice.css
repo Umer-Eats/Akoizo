@@ -172,12 +172,30 @@
     font-weight: 700;
     line-height: 1.5;
   }
-  .practice-difficulty-easy { color: #77dfab; background: #123529; }
-  .practice-difficulty-medium { color: #f4ce77; background: #382d14; }
-  .practice-difficulty-hard { color: #ffaaa5; background: #402022; }
-  [data-theme='light'] .practice-difficulty-easy { color: #176440; background: #e6f6ec; }
-  [data-theme='light'] .practice-difficulty-medium { color: #77540b; background: #fff3d0; }
-  [data-theme='light'] .practice-difficulty-hard { color: #a32732; background: #ffe9e7; }
+  .practice-difficulty-easy {
+    color: #77dfab;
+    background: #123529;
+  }
+  .practice-difficulty-medium {
+    color: #f4ce77;
+    background: #382d14;
+  }
+  .practice-difficulty-hard {
+    color: #ffaaa5;
+    background: #402022;
+  }
+  [data-theme='light'] .practice-difficulty-easy {
+    color: #176440;
+    background: #e6f6ec;
+  }
+  [data-theme='light'] .practice-difficulty-medium {
+    color: #77540b;
+    background: #fff3d0;
+  }
+  [data-theme='light'] .practice-difficulty-hard {
+    color: #a32732;
+    background: #ffe9e7;
+  }
   .practice-test-icon {
     display: grid;
     place-items: center;
@@ -268,6 +286,9 @@
     position: sticky;
     top: 88px;
     min-width: 0;
+    max-height: calc(100dvh - 104px);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
   }
   .practice-paper-heading {
     display: flex;
@@ -280,9 +301,21 @@
   .practice-supplement {
     margin-top: 16px;
   }
-  .practice-supplement summary { cursor: pointer; font-weight: 600; }
-  .practice-supplement a { display: inline-flex; margin: 12px 0; color: var(--accent); }
-  .practice-question-context { white-space: pre-wrap; overflow-wrap: anywhere; margin-bottom: 16px; font-size: 0.85rem; }
+  .practice-supplement summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .practice-supplement a {
+    display: inline-flex;
+    margin: 12px 0;
+    color: var(--accent);
+  }
+  .practice-question-context {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+  }
   .practice-paper-heading h2,
   .practice-answer-heading h2 {
     font-size: 1.2rem;
@@ -393,6 +426,15 @@
   .practice-option.selected {
     border-color: var(--accent);
     background: var(--accent-soft);
+  }
+  .practice-options-expanded .practice-option {
+    flex-basis: 100%;
+    align-items: flex-start;
+  }
+  .practice-options-expanded .practice-option > span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
   .practice-option input {
     accent-color: var(--accent);
@@ -529,6 +571,9 @@
     }
     .practice-paper {
       position: static;
+      max-height: none;
+      overflow-y: visible;
+      scrollbar-gutter: auto;
     }
     .practice-paper iframe {
       height: 70dvh;

@@ -830,8 +830,8 @@ export function InstructorDashboard() {
                   </div>
                   <ProgressTable progress={data.progress[student.id] || []} />
                   <p className="source-note">
-                    Activity starts at zero. Lessons and test completion will be recorded when
-                    those tools launch.
+                    Activity starts at zero. Lessons and test completion will be recorded when those
+                    tools launch.
                   </p>
                 </>
               )}
@@ -864,9 +864,12 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     );
   }
   const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
-  const course = toolId === 'lessons' ? lessonsForEvent(event.id) : null;
+  const course = toolId === 'lessons' ? lessonsForEvent(event.id, division) : null;
   return (
-    <main id="main" className="page-container event-workspace">
+    <main
+      id="main"
+      className={`page-container event-workspace${course ? ' event-with-lessons' : ''}`}
+    >
       <div className="event-workspace-grid">
         <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
           <Link className="back-link" href="/dashboard/student">
@@ -900,7 +903,11 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
           {toolId === 'practice-tests' ? (
             <PracticeLibrary eventId={event.id} />
           ) : toolId === 'lessons' && course ? (
-            <LessonsView course={course} />
+            <LessonsView
+              key={`${profile!.id}:${division}:${course.eventId}`}
+              course={course}
+              studentId={profile!.id}
+            />
           ) : (
             <section
               className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}

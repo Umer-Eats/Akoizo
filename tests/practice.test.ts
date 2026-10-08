@@ -29,6 +29,50 @@ import {
 import type { Answers, PracticeTest, PracticeResult } from '../src/lib/practice-types.ts';
 import { matchesPracticeFilters, practiceDifficulties } from '../src/lib/practice-types.ts';
 import { reportedCompetitionLevel } from '../scripts/scioly-source.mjs';
+import { eventsForDivision } from '../src/lib/events.ts';
+import { eventToolIds } from '../src/lib/event-rules.ts';
+
+test('every Division B and C event with a practice tab has a converted paper', () => {
+  for (const division of ['B', 'C'] as const) {
+    for (const event of eventsForDivision(division)) {
+      if (!eventToolIds(division, event).includes('practice-tests')) continue;
+      const papers = listPracticeTests(division, event.id);
+      assert.ok(papers.length > 0, `${division}/${event.id} has an empty practice tab`);
+      for (const paper of papers) {
+        assert.ok(practiceDifficulties.includes(paper.difficulty));
+        assert.ok(paper.difficultyReason.trim());
+      }
+    }
+  }
+});
+
+test('Codebusters honors letter penalties, keyword exceptions, and preserves exact input', async () => {
+  const paper = findPracticeTest('C', 'bullso-2026-codebusters-c');
+  const timed = paper.keys.Timed.criteria![0].cipher!;
+  const letters = timed.solution.replace(/[^A-Z0-9]/g, '');
+  const resultFor = (value: string) => gradePractice(paper, { Timed: value });
+  const answer = `  ${timed.solution.toLowerCase()}\n`;
+  assert.equal(resultFor(answer).score, 292);
+  assert.equal(resultFor(answer).questions.find((q) => q.id === 'Timed')!.answer, answer);
+  assert.equal(resultFor('__' + letters.slice(2)).score, 292);
+  assert.equal(resultFor('___' + letters.slice(3)).score, 192);
+  assert.equal(resultFor('______' + letters.slice(6)).score, 0);
+  assert.equal(resultFor('').score, 0);
+  assert.equal(resultFor('   !!!').score, 0);
+  assert.equal(gradePractice(paper, { '7': '_LASPHEMY' }).score, 269);
+  assert.equal(gradePractice(paper, { '8': '_ALD BOY' }).score, 92);
+  const partial = resultFor('___' + letters.slice(3));
+  const reviewed = await gradeWrittenWithGemini(paper, partial, {
+    apiKey: 'qa-only',
+    reviewAll: true,
+    fetcher: async () => {
+      throw new Error('Cipher points must not be sent for semantic grading');
+    },
+  });
+  assert.equal(reviewed.automaticGrading, 'complete');
+  assert.equal(reviewed.score, 192);
+  assert.equal(reviewed.pendingPoints, 0);
+});
 
 test('every archived paper has a complete rubric and coherent point total', () => {
   validatePracticeCatalog(practiceTests);
@@ -46,7 +90,7 @@ test('every archived paper has a complete rubric and coherent point total', () =
         const c = key.criteria![0];
         answers[q.id] = c.numeric
           ? `${c.numeric.value}${c.numeric.unitRequired ? ' ' + c.numeric.units[0] : ''}`
-          : (c.accepted?.[0] ?? 'Explanation for review');
+          : (c.cipher?.solution ?? c.accepted?.[0] ?? 'Explanation for review');
       }
     }
     const result = gradePractice(paper, validateAnswers(paper, answers));
@@ -68,10 +112,26 @@ test('difficulty is assessed independently of competition level and combines wit
   const paper = findPracticeTest('B', 'berkeley-2026-heredity-b');
   assert.equal(paper.level, null);
   assert.equal(paper.difficulty, 'Hard');
-  assert.equal(matchesPracticeFilters(paper, { ...filters, difficulty: 'Hard', level: 'unreported', year: '2026', topic: paper.topics[0], query: 'berkeley' }), true);
-  for (const mismatch of [{ difficulty: 'Easy' }, { level: 'Nationals' }, { year: '2014' }, { topic: 'unrelated' }, { query: 'absent' }])
+  assert.equal(
+    matchesPracticeFilters(paper, {
+      ...filters,
+      difficulty: 'Hard',
+      level: 'unreported',
+      year: '2026',
+      topic: paper.topics[0],
+      query: 'berkeley',
+    }),
+    true,
+  );
+  for (const mismatch of [
+    { difficulty: 'Easy' },
+    { level: 'Nationals' },
+    { year: '2014' },
+    { topic: 'unrelated' },
+    { query: 'absent' },
+  ])
     assert.equal(matchesPracticeFilters(paper, { ...filters, ...mismatch }), false);
-  const source = {competition: 'Unconverted', level: null, year: 2026, topics: []};
+  const source = { competition: 'Unconverted', level: null, year: 2026, topics: [] };
   assert.equal(matchesPracticeFilters(source, filters), true);
   assert.equal(matchesPracticeFilters(source, { ...filters, difficulty: 'Easy' }), false);
   for (const test of practiceTests) {
