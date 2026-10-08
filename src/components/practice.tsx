@@ -24,6 +24,7 @@ import {
   type PracticeResult,
   type ArchiveSource,
 } from '@/lib/practice-types';
+import { ChoiceOptions } from './choice-options';
 import './practice.css';
 
 export function PracticeLibrary({ eventId }: { eventId: string }) {
@@ -686,62 +687,25 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                         <p className="practice-question-reference">
                           {question.multiple ? 'Select all that apply.' : 'Choose one answer.'}
                         </p>
-                        <div
-                          className={`practice-options${question.options!.some((option) => option.text.length > 20) ? ' practice-options-expanded' : ''}`}
-                          role={question.multiple ? 'group' : 'radiogroup'}
-                          aria-label={question.label}
-                        >
-                          {question.options!.map((option) => {
-                            const selected = question.multiple
-                              ? value.split(',').includes(option.id)
-                              : value === option.id;
-                            const correct = (
-                              graded?.correctOptions ??
-                              graded?.acceptedOptions ?? [graded?.correctOption]
-                            ).includes(option.id);
-                            return (
-                              <label
-                                className={`practice-option${selected ? ' selected' : ''}${correct ? ' correct' : ''}`}
-                                key={option.id}
-                              >
-                                <input
-                                  type={question.multiple ? 'checkbox' : 'radio'}
-                                  name={question.id}
-                                  value={option.id}
-                                  checked={selected}
-                                  onChange={() =>
-                                    setAnswers((a) => {
-                                      const existing = (a[question.id] ?? '')
-                                        .split(',')
-                                        .filter(Boolean);
-                                      return {
-                                        ...a,
-                                        [question.id]: question.multiple
-                                          ? (selected
-                                              ? existing.filter((v) => v !== option.id)
-                                              : [...existing, option.id]
-                                            )
-                                              .sort()
-                                              .join(',')
-                                          : option.id,
-                                      };
-                                    })
-                                  }
-                                />
-                                <span>{option.text}</span>
-                                {selected && <small>Your answer</small>}
-                                {correct && (
-                                  <small>
-                                    <Check size={14} />{' '}
-                                    {result?.gradingBasis === 'ai-generated'
-                                      ? 'AI reference answer'
-                                      : 'Correct answer'}
-                                  </small>
-                                )}
-                              </label>
-                            );
-                          })}
-                        </div>
+                        <ChoiceOptions
+                          name={question.id}
+                          label={question.label}
+                          options={question.options!}
+                          value={value}
+                          multiple={question.multiple}
+                          correctOptions={
+                            graded?.correctOptions ??
+                            graded?.acceptedOptions ?? [graded?.correctOption]
+                          }
+                          correctLabel={
+                            result?.gradingBasis === 'ai-generated'
+                              ? 'AI reference answer'
+                              : 'Correct answer'
+                          }
+                          onChange={(answer) =>
+                            setAnswers((current) => ({ ...current, [question.id]: answer }))
+                          }
+                        />
                       </>
                     ) : (
                       <label className="practice-written">

@@ -28486,5 +28486,6404 @@
     },
     "questionCount": 58,
     "maxScore": 166
+  },
+  {
+    "id": "kenston-2018-anatomy-b",
+    "eventId": "anatomy-and-physiology",
+    "division": "B",
+    "competition": "Kenston Invitational",
+    "year": 2018,
+    "level": null,
+    "difficulty": "Medium",
+    "difficultyReason": "Combines system knowledge with lung-volume diagrams, digestive anatomy, immune mechanisms and nutrition calculations.",
+    "topics": ["Respiratory system", "Digestive system", "Immune system"],
+    "topicMatch": "current",
+    "alignment": "The paper covers the same three systems as the 2027 rotation. Some treatment and disease examples reflect the original 2018 competition.",
+    "scoringBasis": "Printed question weights are retained. Questions 17 and 49 are excluded because their key is inconsistent with the question; 56D (HPV) and 56E (GI) have no corresponding answers in the supplied key and are excluded. Question 12 refers to question 11; its printed reference to 34 is a typo. Question 34 awards up to five points for five distinct digestive cancers in the rubric. Multi-select questions use the complete correct set.",
+    "sourceUrl": "https://scioly.org/tests/vzXbkGPaqVM",
+    "sourceId": "vzXbkGPaqVM",
+    "paperUrl": "/practice/kenston-2018-anatomy-b/test.pdf",
+    "keyUrl": "/practice/kenston-2018-anatomy-b/key.pdf",
+    "season": 2027,
+    "minutes": 50,
+    "reviewedOn": "2026-10-08",
+    "rulesUrl": "https://www.soinc.org/rules-2027",
+    "gradingMode": "published-key",
+    "instructions": "Use the original PDF and its printed question numbers. Show your reasoning and calculations in each written response. Auto Grade reviews responses against the published rubric. Printed question weights are retained. Questions 17 and 49 are excluded because their key is inconsistent with the question; 56D (HPV) and 56E (GI) have no corresponding answers in the supplied key and are excluded. Question 12 refers to question 11; its printed reference to 34 is a typo. Question 34 awards up to five points for five distinct digestive cancers in the rubric. Multi-select questions use the complete correct set.",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "2",
+        "label": "2",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "3",
+        "label": "3",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "6",
+        "label": "6",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 2,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "9-21",
+        "label": "9-21",
+        "page": 3,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify diagram label 21."
+      },
+      {
+        "id": "9-22",
+        "label": "9-22",
+        "page": 3,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify diagram label 22."
+      },
+      {
+        "id": "9-23",
+        "label": "9-23",
+        "page": 3,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify diagram label 23."
+      },
+      {
+        "id": "9-24",
+        "label": "9-24",
+        "page": 3,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify diagram label 24."
+      },
+      {
+        "id": "9-25",
+        "label": "9-25",
+        "page": 3,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify diagram label 25."
+      },
+      {
+        "id": "10",
+        "label": "10",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "18",
+        "label": "18",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 5,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ],
+        "prompt": "The lungs have two blood supplies."
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 5,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" }
+        ]
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" }
+        ]
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "32",
+        "label": "32",
+        "page": 8,
+        "points": 3,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 8,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Name the disease illustrated by the pictured symptom."
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 8,
+        "points": 5,
+        "type": "frq",
+        "prompt": "List five distinct cancers affecting the digestive system."
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 8,
+        "points": 3,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 9,
+        "points": 3,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 9,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 9,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "39",
+        "label": "39",
+        "page": 9,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 9,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "41-1",
+        "label": "41-1",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name structure 1 on the stomach-wall diagram."
+      },
+      {
+        "id": "41-2",
+        "label": "41-2",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name structure 2 on the stomach-wall diagram."
+      },
+      {
+        "id": "41-3",
+        "label": "41-3",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name structure 3 on the stomach-wall diagram."
+      },
+      {
+        "id": "41-4",
+        "label": "41-4",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name structure 4 on the stomach-wall diagram."
+      },
+      {
+        "id": "41-5",
+        "label": "41-5",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name structure 5 on the stomach-wall diagram."
+      },
+      {
+        "id": "41-6",
+        "label": "41-6",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name structure 6 on the stomach-wall diagram."
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "47",
+        "label": "47",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "48",
+        "label": "48",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "50",
+        "label": "50",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "51",
+        "label": "51",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "52",
+        "label": "52",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "53",
+        "label": "53",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "54",
+        "label": "54",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "55",
+        "label": "55",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "56A",
+        "label": "56A",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Expand ART."
+      },
+      {
+        "id": "56B",
+        "label": "56B",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Expand BMI."
+      },
+      {
+        "id": "56C",
+        "label": "56C",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Expand AIDS."
+      },
+      {
+        "id": "56F",
+        "label": "56F",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Expand COPD."
+      },
+      {
+        "id": "57",
+        "label": "57",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "58",
+        "label": "58",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "59",
+        "label": "59",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "60",
+        "label": "60",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "D" },
+      "2": { "correctOption": "C" },
+      "3": { "correctOption": "D" },
+      "4": { "correctOption": "A" },
+      "5": { "correctOption": "C" },
+      "6": { "correctOption": "A" },
+      "7": { "correctOption": "D" },
+      "8": { "correctOption": "C" },
+      "10": { "correctOption": "D" },
+      "11": { "correctOption": "C" },
+      "12": { "correctOption": "C" },
+      "13": { "correctOption": "F" },
+      "14": { "correctOption": "B" },
+      "15": { "correctOption": "B" },
+      "16": { "correctOption": "A" },
+      "18": { "correctOption": "C" },
+      "19": { "correctOptions": ["D", "E"] },
+      "20": { "correctOption": "T" },
+      "21": { "correctOption": "A" },
+      "22": { "correctOption": "C" },
+      "23": { "correctOption": "E" },
+      "24": { "correctOption": "J" },
+      "25": { "correctOption": "C" },
+      "26": { "correctOption": "B" },
+      "27": { "correctOption": "E" },
+      "28": { "correctOption": "C" },
+      "29": { "correctOption": "C" },
+      "30": { "correctOption": "D" },
+      "31": { "correctOption": "C" },
+      "32": { "correctOption": "A" },
+      "33": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "Lupus",
+            "accepted": ["Lupus", "systemic lupus erythematosus", "SLE"]
+          }
+        ]
+      },
+      "34": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 5,
+            "answer": "Award one point per distinct digestive cancer, up to five: esophageal, gallbladder, liver, pancreatic, stomach, small-intestinal, bowel (colon/rectal), or anal cancer. Accept organ names in the context of cancer. Do not count synonymous names twice."
+          }
+        ]
+      },
+      "35": { "correctOptions": ["A", "B", "C"] },
+      "36": { "correctOptions": ["B", "C"] },
+      "37": { "correctOption": "A" },
+      "38": { "correctOption": "A" },
+      "39": { "correctOption": "A" },
+      "40": { "correctOption": "C" },
+      "42": { "correctOption": "A" },
+      "43": { "correctOption": "A" },
+      "44": { "correctOption": "A" },
+      "45": { "correctOption": "C" },
+      "46": { "correctOption": "C" },
+      "47": { "correctOption": "A" },
+      "48": { "correctOption": "A" },
+      "50": { "correctOption": "C" },
+      "51": { "correctOption": "B" },
+      "52": { "correctOption": "C" },
+      "53": { "correctOption": "A" },
+      "54": { "correctOption": "D" },
+      "55": { "correctOption": "A" },
+      "57": { "correctOption": "A" },
+      "58": { "correctOption": "C" },
+      "59": { "correctOption": "B" },
+      "60": { "correctOption": "A" },
+      "9-21": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Pulmonary vein",
+            "accepted": ["Pulmonary vein"]
+          }
+        ]
+      },
+      "9-22": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Capillary beds",
+            "accepted": ["Capillary beds"]
+          }
+        ]
+      },
+      "9-23": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Alveoli", "accepted": ["Alveoli"] }]
+      },
+      "9-24": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Alveolar sac", "accepted": ["Alveolar sac"] }
+        ]
+      },
+      "9-25": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Pleural cavity",
+            "accepted": ["Pleural cavity"]
+          }
+        ]
+      },
+      "41-1": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Gastric pit", "accepted": ["Gastric pit"] }
+        ]
+      },
+      "41-2": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Submucosa", "accepted": ["Submucosa"] }
+        ]
+      },
+      "41-3": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Oblique layer of muscularis externa",
+            "accepted": ["Oblique layer of muscularis externa"]
+          }
+        ]
+      },
+      "41-4": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Circular layer of muscularis externa",
+            "accepted": ["Circular layer of muscularis externa"]
+          }
+        ]
+      },
+      "41-5": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Longitudinal layer of muscularis externa",
+            "accepted": ["Longitudinal layer of muscularis externa"]
+          }
+        ]
+      },
+      "41-6": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Serosa", "accepted": ["Serosa"] }]
+      },
+      "56A": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Antiretroviral therapy",
+            "accepted": ["Antiretroviral therapy"]
+          }
+        ]
+      },
+      "56B": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Body mass index",
+            "accepted": ["Body mass index"]
+          }
+        ]
+      },
+      "56C": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Acquired immunodeficiency syndrome",
+            "accepted": ["Acquired immunodeficiency syndrome"]
+          }
+        ]
+      },
+      "56F": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Chronic obstructive pulmonary disease",
+            "accepted": ["Chronic obstructive pulmonary disease"]
+          }
+        ]
+      }
+    },
+    "questionCount": 70,
+    "maxScore": 86
+  },
+  {
+    "id": "kraemer-2017-anatomy-b",
+    "eventId": "anatomy-and-physiology",
+    "division": "B",
+    "competition": "Kraemer Middle School Scrimmage",
+    "year": 2017,
+    "level": null,
+    "difficulty": "Hard",
+    "difficultyReason": "Requires detailed explanations of respiratory control, gas transport, digestive physiology and immune memory, plus extensive anatomical identification.",
+    "topics": ["Respiratory system", "Digestive system", "Immune system"],
+    "topicMatch": "current",
+    "alignment": "Covers the same three systems as the 2027 rotation. The test date is November 4, 2017, although the archive groups it under the 2018 season.",
+    "scoringBasis": "One practice point per numbered question or diagram label; only the true/false section explicitly prints a one-point weight. Q32 is excluded because its abbreviated key does not adequately match all requested hormone targets/products. Q56 is corrected to D (extracellular pathogens). Digestive diagram N has no key entry, and O has an uncertain arrow/key match; both are excluded. Unweighted image tiebreakers are available in the PDF but excluded from the practice score. Multi-select cell questions require the complete correct set.",
+    "sourceUrl": "https://scioly.org/tests/nP2jK_oHRbQ",
+    "sourceId": "nP2jK_oHRbQ",
+    "paperUrl": "/practice/kraemer-2017-anatomy-b/test.pdf",
+    "keyUrl": "/practice/kraemer-2017-anatomy-b/key.pdf",
+    "season": 2027,
+    "minutes": 50,
+    "reviewedOn": "2026-10-08",
+    "rulesUrl": "https://www.soinc.org/rules-2027",
+    "gradingMode": "published-key",
+    "instructions": "Use the original PDF and its printed question numbers. Show your reasoning and calculations in each written response. Auto Grade reviews responses against the published rubric. One practice point per numbered question or diagram label; only the true/false section explicitly prints a one-point weight. Q32 is excluded because its abbreviated key does not adequately match all requested hormone targets/products. Q56 is corrected to D (extracellular pathogens). Digestive diagram N has no key entry, and O has an uncertain arrow/key match; both are excluded. Unweighted image tiebreakers are available in the PDF but excluded from the practice score. Multi-select cell questions require the complete correct set.",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "2",
+        "label": "2",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "3",
+        "label": "3",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "6",
+        "label": "6",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 1,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Explain the effects of increased carbon dioxide/hydrogen ions on breathing."
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 1,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How does perfusion respond to insufficient ventilation of an alveolus?"
+      },
+      {
+        "id": "9",
+        "label": "9",
+        "page": 1,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What shifts the oxygen-hemoglobin dissociation curve to the right?"
+      },
+      {
+        "id": "10",
+        "label": "10",
+        "page": 1,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Complete both blanks in the chemical equation and name the enzyme."
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 1,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Describe three forms of carbon dioxide transport."
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 1,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name the organ and hormone that increase erythrocyte production at altitude."
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "17",
+        "label": "17",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "18",
+        "label": "18",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which precise alimentary-canal layer contains MALT?"
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name four retroperitoneal digestive structures."
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How is acidic chyme neutralized after leaving the stomach?"
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What is the hardest substance in the human body?"
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Complete the three blanks describing deglutition."
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name the eight anterior teeth lost and explain the effect on eating."
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How is the stomach protected from self-digestion, and why is protection necessary?"
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How do small-intestinal nutrients reach the general circulation?"
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Why are some pancreatic enzymes secreted inactive, and where are they activated?"
+      },
+      {
+        "id": "39",
+        "label": "39",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "41",
+        "label": "41",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "47",
+        "label": "47",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "48",
+        "label": "48",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "49",
+        "label": "49",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "50",
+        "label": "50",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "51",
+        "label": "51",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "52",
+        "label": "52",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "53",
+        "label": "53",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "54",
+        "label": "54",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "55",
+        "label": "55",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "56",
+        "label": "56",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "57",
+        "label": "57",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "58",
+        "label": "58",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "59",
+        "label": "59",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "60",
+        "label": "60",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "61",
+        "label": "61",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "62",
+        "label": "62",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "63",
+        "label": "63",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "64",
+        "label": "64",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How does a secondary B-cell response develop?"
+      },
+      {
+        "id": "65",
+        "label": "65",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Contrast lymphatic and cardiovascular circulation."
+      },
+      {
+        "id": "66",
+        "label": "66",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 66."
+      },
+      {
+        "id": "67",
+        "label": "67",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 67."
+      },
+      {
+        "id": "68",
+        "label": "68",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 68."
+      },
+      {
+        "id": "69",
+        "label": "69",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 69."
+      },
+      {
+        "id": "70",
+        "label": "70",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 70."
+      },
+      {
+        "id": "71",
+        "label": "71",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 71."
+      },
+      {
+        "id": "72",
+        "label": "72",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 72."
+      },
+      {
+        "id": "73",
+        "label": "73",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 73."
+      },
+      {
+        "id": "74",
+        "label": "74",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 74."
+      },
+      {
+        "id": "75",
+        "label": "75",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 75."
+      },
+      {
+        "id": "76",
+        "label": "76",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 76."
+      },
+      {
+        "id": "77",
+        "label": "77",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 77."
+      },
+      {
+        "id": "78",
+        "label": "78",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 78."
+      },
+      {
+        "id": "79",
+        "label": "79",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 79."
+      },
+      {
+        "id": "80",
+        "label": "80",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 80."
+      },
+      {
+        "id": "81",
+        "label": "81",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 81."
+      },
+      {
+        "id": "82",
+        "label": "82",
+        "page": 9,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify the disease or breathing pattern described in question 82."
+      },
+      {
+        "id": "83",
+        "label": "83",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "84",
+        "label": "84",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "85",
+        "label": "85",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "86",
+        "label": "86",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "87",
+        "label": "87",
+        "page": 10,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "DIGESTIVE-A",
+        "label": "DIGESTIVE-A",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label A."
+      },
+      {
+        "id": "DIGESTIVE-B",
+        "label": "DIGESTIVE-B",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label B."
+      },
+      {
+        "id": "DIGESTIVE-C",
+        "label": "DIGESTIVE-C",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label C."
+      },
+      {
+        "id": "DIGESTIVE-D",
+        "label": "DIGESTIVE-D",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label D."
+      },
+      {
+        "id": "DIGESTIVE-E",
+        "label": "DIGESTIVE-E",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label E."
+      },
+      {
+        "id": "DIGESTIVE-F",
+        "label": "DIGESTIVE-F",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label F."
+      },
+      {
+        "id": "DIGESTIVE-G",
+        "label": "DIGESTIVE-G",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label G."
+      },
+      {
+        "id": "DIGESTIVE-H",
+        "label": "DIGESTIVE-H",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label H."
+      },
+      {
+        "id": "DIGESTIVE-I",
+        "label": "DIGESTIVE-I",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label I."
+      },
+      {
+        "id": "DIGESTIVE-J",
+        "label": "DIGESTIVE-J",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label J."
+      },
+      {
+        "id": "DIGESTIVE-K",
+        "label": "DIGESTIVE-K",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label K."
+      },
+      {
+        "id": "DIGESTIVE-L",
+        "label": "DIGESTIVE-L",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label L."
+      },
+      {
+        "id": "DIGESTIVE-M",
+        "label": "DIGESTIVE-M",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify digestive-system diagram label M."
+      },
+      {
+        "id": "RESPIRATORY-A",
+        "label": "RESPIRATORY-A",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label A."
+      },
+      {
+        "id": "RESPIRATORY-B",
+        "label": "RESPIRATORY-B",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label B."
+      },
+      {
+        "id": "RESPIRATORY-C",
+        "label": "RESPIRATORY-C",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label C."
+      },
+      {
+        "id": "RESPIRATORY-D",
+        "label": "RESPIRATORY-D",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label D."
+      },
+      {
+        "id": "RESPIRATORY-E",
+        "label": "RESPIRATORY-E",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label E."
+      },
+      {
+        "id": "RESPIRATORY-F",
+        "label": "RESPIRATORY-F",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label F."
+      },
+      {
+        "id": "RESPIRATORY-G",
+        "label": "RESPIRATORY-G",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label G."
+      },
+      {
+        "id": "RESPIRATORY-H",
+        "label": "RESPIRATORY-H",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label H."
+      },
+      {
+        "id": "RESPIRATORY-I",
+        "label": "RESPIRATORY-I",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label I."
+      },
+      {
+        "id": "RESPIRATORY-J",
+        "label": "RESPIRATORY-J",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Identify respiratory-system diagram label J."
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "T" },
+      "2": { "correctOption": "T" },
+      "3": { "correctOption": "F" },
+      "4": { "correctOption": "F" },
+      "5": { "correctOption": "F" },
+      "6": { "correctOption": "F" },
+      "7": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "CO2 raises H+ and lowers pH; central chemoreceptors stimulate respiratory centers, increasing breathing rate and depth to expel CO2. Award 0.25 each for CO2/pH, chemoreceptors, respiratory stimulation, and increased rate/depth."
+          }
+        ]
+      },
+      "8": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Low alveolar oxygen causes local pulmonary vasoconstriction, redirecting blood to better-ventilated alveoli. Award 0.5 for constriction and 0.5 for redistribution."
+          }
+        ]
+      },
+      "9": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Increased CO2/decreased pH, increased temperature, and increased 2,3-BPG. Award one third per distinct factor group."
+          }
+        ]
+      },
+      "10": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Water (H2O), carbonic acid (H2CO3), and carbonic anhydrase (CA). Award one third per blank."
+          }
+        ]
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Dissolved in plasma; as bicarbonate after CO2 reacts with water; and bound to hemoglobin as carbaminohemoglobin. Award one third per form."
+          }
+        ]
+      },
+      "12": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Kidneys produce erythropoietin (EPO). Award 0.5 for each."
+          }
+        ]
+      },
+      "13": { "correctOption": "C" },
+      "14": { "correctOption": "A" },
+      "15": { "correctOption": "D" },
+      "16": { "correctOption": "A" },
+      "17": { "correctOption": "B" },
+      "18": { "correctOption": "A" },
+      "19": { "correctOption": "C" },
+      "20": { "correctOption": "B" },
+      "21": { "correctOption": "A" },
+      "22": { "correctOption": "C" },
+      "23": { "correctOption": "A" },
+      "24": { "correctOption": "F" },
+      "25": { "correctOption": "F" },
+      "26": { "correctOption": "T" },
+      "27": { "correctOption": "F" },
+      "28": { "correctOption": "T" },
+      "29": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Lamina propria of the mucosa",
+            "accepted": ["Lamina propria of the mucosa", "lamina propria"]
+          }
+        ]
+      },
+      "30": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Any four of duodenum, pancreas, ascending colon, descending colon, and rectum, as in the source key. Accept appropriate qualification of retroperitoneal portions; 0.25 per distinct correct structure."
+          }
+        ]
+      },
+      "31": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "The pancreas supplies bicarbonate-rich juice to the duodenum, neutralizing acid and providing an appropriate pH for intestinal enzymes. Award 0.5 for pancreatic bicarbonate and 0.5 for neutralization."
+          }
+        ]
+      },
+      "33": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Enamel",
+            "accepted": ["Enamel", "tooth enamel", "dental enamel"]
+          }
+        ]
+      },
+      "34": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Soft palate and uvula rise to close the nasopharynx; the epiglottis covers the glottis. Award one third per blank."
+          }
+        ]
+      },
+      "35": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Incisors; they cut/bite food, so food must be precut or supplied in bite-sized pieces. Award 0.5 for incisors and 0.5 for function/effect."
+          }
+        ]
+      },
+      "36": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Bicarbonate-rich mucus protects against acid and enzymes; tight junctions prevent penetration into underlying tissue; rapid epithelial replacement repairs damage. Award up to 1 point proportionally for a coherent barrier explanation including the need to prevent acid/enzymatic injury."
+          }
+        ]
+      },
+      "37": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Carbohydrate/protein digestion products enter blood capillaries in villi; most dietary lipids enter lacteals and reach blood via lymph. Award 0.5 for each route."
+          }
+        ]
+      },
+      "38": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "To prevent pancreatic self-digestion; activated in the duodenum/small intestine. Award 0.5 each."
+          }
+        ]
+      },
+      "39": { "correctOption": "A" },
+      "40": { "correctOption": "D" },
+      "41": { "correctOption": "B" },
+      "42": { "correctOption": "C" },
+      "43": { "correctOption": "A" },
+      "44": { "correctOption": "A" },
+      "45": { "correctOption": "B" },
+      "46": { "correctOption": "B" },
+      "47": { "correctOption": "C" },
+      "48": { "correctOption": "D" },
+      "49": { "correctOption": "T" },
+      "50": { "correctOption": "F" },
+      "51": { "correctOption": "F" },
+      "52": { "correctOption": "T" },
+      "53": { "correctOption": "F" },
+      "54": { "correctOption": "B" },
+      "55": { "correctOption": "B" },
+      "56": { "correctOption": "D" },
+      "57": { "correctOption": "A" },
+      "58": { "correctOption": "B" },
+      "59": { "correctOption": "B" },
+      "60": { "correctOption": "D" },
+      "61": { "correctOption": "B" },
+      "62": { "correctOption": "B" },
+      "63": { "correctOption": "D" },
+      "64": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "The primary response produces plasma cells and memory B cells; memory B cells respond to a subsequent encounter with the antigen. Award 0.5 for memory-cell formation and 0.5 for their secondary response."
+          }
+        ]
+      },
+      "65": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "The heart actively pumps blood; lymph is propelled by skeletal muscle/body movements and breathing, with one-way valves preventing backflow. Award 0.5 for the blood pump and 0.5 for lymph transport."
+          }
+        ]
+      },
+      "66": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Cystic fibrosis",
+            "accepted": ["Cystic fibrosis"]
+          }
+        ]
+      },
+      "67": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Sleep apnea", "accepted": ["Sleep apnea"] }
+        ]
+      },
+      "68": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Pneumonia", "accepted": ["Pneumonia"] }
+        ]
+      },
+      "69": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Lung cancer", "accepted": ["Lung cancer"] }
+        ]
+      },
+      "70": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Asthma", "accepted": ["Asthma"] }]
+      },
+      "71": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Emphysema", "accepted": ["Emphysema"] }
+        ]
+      },
+      "72": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Type 1 diabetes mellitus",
+            "accepted": ["Type 1 diabetes mellitus"]
+          }
+        ]
+      },
+      "73": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Multiple sclerosis",
+            "accepted": ["Multiple sclerosis"]
+          }
+        ]
+      },
+      "74": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "AIDS", "accepted": ["AIDS"] }]
+      },
+      "75": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Graves disease",
+            "accepted": ["Graves disease"]
+          }
+        ]
+      },
+      "76": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Apnea", "accepted": ["Apnea"] }]
+      },
+      "77": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Eupnea", "accepted": ["Eupnea"] }]
+      },
+      "78": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Tachypnea", "accepted": ["Tachypnea"] }
+        ]
+      },
+      "79": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Dyspnea", "accepted": ["Dyspnea"] }]
+      },
+      "80": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Hyperpnea", "accepted": ["Hyperpnea"] }
+        ]
+      },
+      "81": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Orthopnea", "accepted": ["Orthopnea"] }
+        ]
+      },
+      "82": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Hyperventilation",
+            "accepted": ["Hyperventilation"]
+          }
+        ]
+      },
+      "83": { "correctOption": "E" },
+      "84": { "correctOptions": ["A", "B", "C"] },
+      "85": { "correctOptions": ["A", "D"] },
+      "86": { "correctOption": "D" },
+      "87": { "correctOption": "C" },
+      "DIGESTIVE-A": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Gallbladder", "accepted": ["Gallbladder"] }
+        ]
+      },
+      "DIGESTIVE-B": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Transverse colon",
+            "accepted": ["Transverse colon"]
+          }
+        ]
+      },
+      "DIGESTIVE-C": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Cecum", "accepted": ["Cecum"] }]
+      },
+      "DIGESTIVE-D": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Pancreas", "accepted": ["Pancreas"] }
+        ]
+      },
+      "DIGESTIVE-E": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Stomach", "accepted": ["Stomach"] }]
+      },
+      "DIGESTIVE-F": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Spleen", "accepted": ["Spleen"] }]
+      },
+      "DIGESTIVE-G": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Duodenum", "accepted": ["Duodenum"] }
+        ]
+      },
+      "DIGESTIVE-H": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Esophagus", "accepted": ["Esophagus"] }
+        ]
+      },
+      "DIGESTIVE-I": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Liver", "accepted": ["Liver"] }]
+      },
+      "DIGESTIVE-J": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Appendix", "accepted": ["Appendix"] }
+        ]
+      },
+      "DIGESTIVE-K": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Fundus", "accepted": ["Fundus"] }]
+      },
+      "DIGESTIVE-L": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Rugae", "accepted": ["Rugae"] }]
+      },
+      "DIGESTIVE-M": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Lesser curvature",
+            "accepted": ["Lesser curvature"]
+          }
+        ]
+      },
+      "RESPIRATORY-A": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Nasal conchae", "accepted": ["Nasal conchae"] }
+        ]
+      },
+      "RESPIRATORY-B": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Hard palate", "accepted": ["Hard palate"] }
+        ]
+      },
+      "RESPIRATORY-C": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Epiglottis", "accepted": ["Epiglottis"] }
+        ]
+      },
+      "RESPIRATORY-D": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Trachea", "accepted": ["Trachea"] }]
+      },
+      "RESPIRATORY-E": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Uvula", "accepted": ["Uvula"] }]
+      },
+      "RESPIRATORY-F": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Palatine tonsil",
+            "accepted": ["Palatine tonsil"]
+          }
+        ]
+      },
+      "RESPIRATORY-G": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Vocal cords", "accepted": ["Vocal cords"] }
+        ]
+      },
+      "RESPIRATORY-H": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Cardiac notch", "accepted": ["Cardiac notch"] }
+        ]
+      },
+      "RESPIRATORY-I": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Superior lobe of the right lung",
+            "accepted": ["Superior lobe of the right lung"]
+          }
+        ]
+      },
+      "RESPIRATORY-J": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Horizontal fissure",
+            "accepted": ["Horizontal fissure"]
+          }
+        ]
+      }
+    },
+    "questionCount": 109,
+    "maxScore": 109
+  },
+  {
+    "id": "phoenix-2012-disease-detectives-b",
+    "eventId": "disease-detectives",
+    "division": "B",
+    "competition": "Phoenix Invitational",
+    "year": 2012,
+    "level": null,
+    "difficulty": "Medium",
+    "difficultyReason": "Mixes outbreak-investigation sequencing, study design, epidemic-curve interpretation and relative-risk/odds-ratio calculations.",
+    "topics": ["Epidemiology", "Outbreak investigation", "Foodborne illness", "Study design"],
+    "topicMatch": "current",
+    "alignment": "Core epidemiology, study designs, disease transmission and outbreak calculations overlap the 2027 rules. The original paper focuses on foodborne illness, uses a historical ten-step investigation sequence and dates its outbreak examples to 2012.",
+    "scoringBasis": "One practice point per numbered response because the supplied paper and key do not specify weights. Question 31 is corrected from B to F to match the printed definition of contagious. Question 48 is excluded: the source marks its epidemic-curve statement false despite the supplied illness-onset histogram. Numeric rounding follows the key. Questions 52–59 use the complete party-attendee table as a cohort exercise; risk calculations would not in general be valid for a sampled case-control study.",
+    "sourceUrl": "https://scioly.org/wiki/Test_Exchange_Archive",
+    "paperUrl": "/practice/phoenix-2012-disease-detectives-b/test.pdf",
+    "keyUrl": "/practice/phoenix-2012-disease-detectives-b/key.pdf",
+    "season": 2027,
+    "minutes": 50,
+    "reviewedOn": "2026-10-08",
+    "rulesUrl": "https://www.soinc.org/rules-2027",
+    "gradingMode": "published-key",
+    "instructions": "Use the original PDF and its printed question numbers. Show your reasoning and calculations in each written response. Auto Grade reviews responses against the published rubric. One practice point per numbered response because the supplied paper and key do not specify weights. Question 31 is corrected from B to F to match the printed definition of contagious. Question 48 is excluded: the source marks its epidemic-curve statement false despite the supplied illness-onset histogram. Numeric rounding follows the key. Questions 52–59 use the complete party-attendee table as a cohort exercise; risk calculations would not in general be valid for a sampled case-control study.",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 1 from the original lettered list."
+      },
+      {
+        "id": "2",
+        "label": "2",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 2 from the original lettered list."
+      },
+      {
+        "id": "3",
+        "label": "3",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 3 from the original lettered list."
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 4 from the original lettered list."
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 5 from the original lettered list."
+      },
+      {
+        "id": "6",
+        "label": "6",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 6 from the original lettered list."
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 7 from the original lettered list."
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 8 from the original lettered list."
+      },
+      {
+        "id": "9",
+        "label": "9",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 9 from the original lettered list."
+      },
+      {
+        "id": "10",
+        "label": "10",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" },
+          { "id": "P", "text": "P" },
+          { "id": "Q", "text": "Q" },
+          { "id": "R", "text": "R" }
+        ],
+        "prompt": "Outbreak investigation: choose step 10 from the original lettered list."
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "17",
+        "label": "17",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "18",
+        "label": "18",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 1,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "32",
+        "label": "32",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" },
+          { "id": "G", "text": "G" },
+          { "id": "H", "text": "H" },
+          { "id": "I", "text": "I" },
+          { "id": "J", "text": "J" },
+          { "id": "K", "text": "K" },
+          { "id": "L", "text": "L" },
+          { "id": "M", "text": "M" },
+          { "id": "N", "text": "N" }
+        ]
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "39",
+        "label": "39",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "41",
+        "label": "41",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ],
+        "prompt": "Use the illness-onset chart for this statement."
+      },
+      {
+        "id": "47",
+        "label": "47",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ],
+        "prompt": "Use the illness-onset chart for this statement."
+      },
+      {
+        "id": "49",
+        "label": "49",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ],
+        "prompt": "Use the illness-onset chart for this statement."
+      },
+      {
+        "id": "50",
+        "label": "50",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ],
+        "prompt": "Use the illness-onset chart for this statement."
+      },
+      {
+        "id": "51",
+        "label": "51",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which food has the highest associated risk?"
+      },
+      {
+        "id": "52",
+        "label": "52",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Write the numeric expression for relative risk for the highest-risk food."
+      },
+      {
+        "id": "53",
+        "label": "53",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Evaluate the relative risk in question 52."
+      },
+      {
+        "id": "54",
+        "label": "54",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Write the expression for the percentage of party attendees who became ill."
+      },
+      {
+        "id": "55",
+        "label": "55",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Evaluate question 54 as a percentage."
+      },
+      {
+        "id": "56",
+        "label": "56",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Write the attack-rate expression for people who ate mashed potatoes."
+      },
+      {
+        "id": "57",
+        "label": "57",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Evaluate question 56 as a percentage."
+      },
+      {
+        "id": "58",
+        "label": "58",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Write the odds-ratio expression for ice cream."
+      },
+      {
+        "id": "59",
+        "label": "59",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Evaluate the odds ratio."
+      },
+      {
+        "id": "60",
+        "label": "60",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How many students ate at the party?"
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "M" },
+      "2": { "correctOption": "Q" },
+      "3": { "correctOption": "P" },
+      "4": { "correctOption": "F" },
+      "5": { "correctOption": "R" },
+      "6": { "correctOption": "A" },
+      "7": { "correctOption": "G" },
+      "8": { "correctOption": "E" },
+      "9": { "correctOption": "J" },
+      "10": { "correctOption": "C" },
+      "11": { "correctOption": "C" },
+      "12": { "correctOption": "D" },
+      "13": { "correctOption": "B" },
+      "14": { "correctOption": "A" },
+      "15": { "correctOption": "B" },
+      "16": { "correctOption": "D" },
+      "17": { "correctOption": "B" },
+      "18": { "correctOption": "D" },
+      "19": { "correctOption": "F" },
+      "20": { "correctOption": "T" },
+      "21": { "correctOption": "F" },
+      "22": { "correctOption": "F" },
+      "23": { "correctOption": "F" },
+      "24": { "correctOption": "T" },
+      "25": { "correctOption": "F" },
+      "26": { "correctOption": "E" },
+      "27": { "correctOption": "L" },
+      "28": { "correctOption": "H" },
+      "29": { "correctOption": "C" },
+      "30": { "correctOption": "D" },
+      "31": { "correctOption": "F" },
+      "32": { "correctOption": "A" },
+      "33": { "correctOption": "M" },
+      "34": { "correctOption": "N" },
+      "35": { "correctOption": "G" },
+      "36": { "correctOption": "J" },
+      "37": { "correctOption": "I" },
+      "38": { "correctOption": "E" },
+      "39": { "correctOption": "F" },
+      "40": { "correctOption": "C" },
+      "41": { "correctOption": "C" },
+      "42": { "correctOption": "B" },
+      "43": { "correctOption": "F" },
+      "44": { "correctOption": "C" },
+      "45": { "correctOption": "E" },
+      "46": { "correctOption": "T" },
+      "47": { "correctOption": "F" },
+      "49": { "correctOption": "F" },
+      "50": { "correctOption": "F" },
+      "51": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Ice cream", "accepted": ["Ice cream"] }
+        ]
+      },
+      "52": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "(43 / (43 + 11)) / (3 / (3 + 18)), or an algebraically equivalent expression."
+          }
+        ]
+      },
+      "53": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "5.574",
+            "numeric": { "value": 5.574, "units": [], "tolerance": 0.05, "unitRequired": false }
+          }
+        ]
+      },
+      "54": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "46 × 100 / (46 + 29) = 46/75 × 100." }
+        ]
+      },
+      "55": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "61.333 %",
+            "numeric": {
+              "value": 61.333,
+              "units": ["%", "percent"],
+              "tolerance": 0.5,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "56": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "23 × 100 / (23 + 14) = 23/37 × 100." }
+        ]
+      },
+      "57": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "62.162 %",
+            "numeric": {
+              "value": 62.162,
+              "units": ["%", "percent"],
+              "tolerance": 0.5,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "58": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "(43 / 3) / (11 / 18), equivalently (43 × 18) / (3 × 11)."
+          }
+        ]
+      },
+      "59": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "23.4545",
+            "numeric": { "value": 23.4545, "units": [], "tolerance": 0.5, "unitRequired": false }
+          }
+        ]
+      },
+      "60": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "75 students",
+            "numeric": {
+              "value": 75,
+              "units": ["students", "people"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      }
+    },
+    "questionCount": 59,
+    "maxScore": 59
+  },
+  {
+    "id": "menomonie-2021-heredity-b",
+    "eventId": "heredity",
+    "division": "B",
+    "competition": "Menomonie High Invitational",
+    "year": 2021,
+    "level": null,
+    "difficulty": "Hard",
+    "difficultyReason": "Includes multi-step genetic reasoning, karyotypes, molecular mechanisms, RNA processing and Sanger sequencing explanations.",
+    "topics": ["Inheritance", "DNA and RNA", "Cell division", "Protein synthesis"],
+    "topicMatch": "current",
+    "alignment": "Heredity fundamentals align with the 2027 event. Advanced molecular questions provide extension practice; this is not a claim of compliance with every current tier restriction.",
+    "scoringBasis": "All 72 printed points are included. Explicit source corrections: Q17 is A (incomplete dominance blends; codominance expresses both); Q34 uses multiple codons per amino acid, not multiple amino acids per codon; Q37/38 rubric entries are swapped to match the paper; Q42 prokaryotic DNA is in the nucleoid/cytoplasm, not a nucleus; Q46 concerns replication, not transcription. Q35 accepts genes encoding functional RNA as well as proteins. Q31 accepts the published percentage, with the square optional for practice.",
+    "sourceUrl": "https://scioly.org/wiki/Test_Exchange_Archive",
+    "paperUrl": "/practice/menomonie-2021-heredity-b/test.pdf",
+    "keyUrl": "/practice/menomonie-2021-heredity-b/key.pdf",
+    "season": 2027,
+    "minutes": 50,
+    "reviewedOn": "2026-10-08",
+    "rulesUrl": "https://www.soinc.org/rules-2027",
+    "gradingMode": "published-key",
+    "instructions": "Use the original PDF and its printed question numbers. Show your reasoning and calculations in each written response. Auto Grade reviews responses against the published rubric. All 72 printed points are included. Explicit source corrections: Q17 is A (incomplete dominance blends; codominance expresses both); Q34 uses multiple codons per amino acid, not multiple amino acids per codon; Q37/38 rubric entries are swapped to match the paper; Q42 prokaryotic DNA is in the nucleoid/cytoplasm, not a nucleus; Q46 concerns replication, not transcription. Q35 accepts genes encoding functional RNA as well as proteins. Q31 accepts the published percentage, with the square optional for practice.",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "2",
+        "label": "2",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "3",
+        "label": "3",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "6",
+        "label": "6",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "9",
+        "label": "9",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "10",
+        "label": "10",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "17",
+        "label": "17",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "18",
+        "label": "18",
+        "page": 5,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 6,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "T", "text": "True" },
+          { "id": "F", "text": "False" }
+        ]
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 6,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What bonds join complementary nitrogenous bases?"
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 6,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name the amino acid specified by the usual start codon."
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 6,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What does the t in tRNA stand for?"
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 6,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which sequence signals the end of transcription in this eukaryotic context?"
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 6,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name the bonds linking adjacent nucleotides in the DNA backbone."
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "For IA IB × IA i, what percentage of offspring have type B blood?"
+      },
+      {
+        "id": "32",
+        "label": "32",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Give the possible F1 genotypes for Qq × qq."
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Give the genotype of the true-breeding red panda described in the paper."
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 7,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Can a unique DNA sequence be determined from a protein amino-acid sequence? Explain."
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Define a gene."
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 8,
+        "points": 4,
+        "type": "frq",
+        "prompt": "Give two structural similarities and two differences between DNA and RNA."
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 8,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Identify the sex and any chromosomal abnormality in the karyotype."
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 8,
+        "points": 3,
+        "type": "frq",
+        "prompt": "Describe three types of mutations."
+      },
+      {
+        "id": "39",
+        "label": "39",
+        "page": 9,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Compare purine and pyrimidine structures."
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 9,
+        "points": 4,
+        "type": "frq",
+        "prompt": "Explain why purines pair with pyrimidines and predict the effect of like-with-like pairing."
+      },
+      {
+        "id": "41",
+        "label": "41",
+        "page": 9,
+        "points": 3,
+        "type": "frq",
+        "prompt": "Distinguish chromatid, chromatin and chromosome."
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 9,
+        "points": 3,
+        "type": "frq",
+        "prompt": "Give three differences between typical bacterial and eukaryotic nuclear DNA organization."
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 10,
+        "points": 4,
+        "type": "frq",
+        "prompt": "Name two modifications to mRNA after transcription and explain their purposes."
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 10,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What is the function of a TATA box?"
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 10,
+        "points": 2,
+        "type": "frq",
+        "prompt": "How can one gene produce multiple proteins?"
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 10,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Predict the effect of loss of DNA ligase function on replication and explain."
+      },
+      {
+        "id": "47",
+        "label": "47",
+        "page": 11,
+        "points": 2,
+        "type": "frq",
+        "prompt": "How do ddNTPs differ from normal nucleotides, and why are they used in Sanger sequencing?"
+      },
+      {
+        "id": "48",
+        "label": "48",
+        "page": 11,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Describe the four levels of protein structure."
+      },
+      {
+        "id": "49",
+        "label": "49",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What process forms Barr bodies?"
+      },
+      {
+        "id": "50",
+        "label": "50",
+        "page": 11,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What does a double horizontal mating line on a pedigree indicate?"
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "A" },
+      "2": { "correctOption": "B" },
+      "3": { "correctOption": "A" },
+      "4": { "correctOption": "C" },
+      "5": { "correctOption": "B" },
+      "6": { "correctOptions": ["A", "B", "D", "E"] },
+      "7": { "correctOption": "C" },
+      "8": { "correctOption": "C" },
+      "9": { "correctOption": "C" },
+      "10": { "correctOption": "D" },
+      "11": { "correctOption": "A" },
+      "12": { "correctOptions": ["B", "C"] },
+      "13": { "correctOption": "A" },
+      "14": { "correctOption": "D" },
+      "15": { "correctOption": "C" },
+      "16": { "correctOption": "A" },
+      "17": { "correctOption": "A" },
+      "18": { "correctOption": "A" },
+      "19": { "correctOption": "A" },
+      "20": { "correctOption": "F" },
+      "21": { "correctOption": "T" },
+      "22": { "correctOption": "F" },
+      "23": { "correctOption": "T" },
+      "24": { "correctOption": "F" },
+      "25": { "correctOption": "F" },
+      "26": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Hydrogen",
+            "accepted": ["Hydrogen", "Hydrogen bonds", "Hydrogen signal"]
+          }
+        ]
+      },
+      "27": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Methionine",
+            "accepted": ["Methionine", "Methionine bonds", "Methionine signal"]
+          }
+        ]
+      },
+      "28": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Transfer",
+            "accepted": ["Transfer", "Transfer bonds", "Transfer signal"]
+          }
+        ]
+      },
+      "29": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Polyadenylation",
+            "accepted": ["Polyadenylation", "Polyadenylation bonds", "Polyadenylation signal"]
+          }
+        ]
+      },
+      "30": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Phosphodiester",
+            "accepted": ["Phosphodiester", "Phosphodiester bonds", "Phosphodiester signal"]
+          }
+        ]
+      },
+      "31": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "25 %",
+            "numeric": {
+              "value": 25,
+              "units": ["%", "percent"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "32": {
+        "criteria": [
+          { "id": "part-1", "points": 0.5, "answer": "Qq (heterozygous)." },
+          { "id": "part-2", "points": 0.5, "answer": "qq (homozygous recessive)." }
+        ]
+      },
+      "33": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "TTFF.",
+            "accepted": ["TTFF"],
+            "caseSensitive": true
+          }
+        ]
+      },
+      "34": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "No; the sequence generally cannot be uniquely recovered."
+          },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "The genetic code is degenerate: multiple codons can specify the same amino acid."
+          }
+        ]
+      },
+      "35": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "A DNA sequence that specifies a functional product, such as an RNA or a protein. The source definition mentioning a protein is accepted but is not required to exclude noncoding RNA genes."
+          }
+        ]
+      },
+      "36": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "One point each for two distinct similarities, such as nucleotide polymers, sugar-phosphate backbone, or shared A/G/C bases."
+          },
+          {
+            "id": "part-2",
+            "points": 2,
+            "answer": "One point each for two distinct contrasts: deoxyribose/ribose, thymine/uracil, or typically double-/single-stranded."
+          }
+        ]
+      },
+      "37": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Male (XY)." },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "Normal karyotype; no chromosomal abnormality shown."
+          }
+        ]
+      },
+      "38": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 3,
+            "answer": "One point for each of three correctly described mutation types, e.g. substitution (base replacement), insertion (added bases), deletion (lost bases), or frameshift (reading-frame change). Do not award credit twice for the same description."
+          }
+        ]
+      },
+      "39": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Purines have two fused rings." },
+          { "id": "part-2", "points": 1, "answer": "Pyrimidines have one ring." }
+        ]
+      },
+      "40": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "One large purine plus one smaller pyrimidine maintains a consistent DNA helix width."
+          },
+          {
+            "id": "part-2",
+            "points": 2,
+            "answer": "Purine-purine and pyrimidine-pyrimidine pairs would produce wider and narrower regions, distorting the helix."
+          }
+        ]
+      },
+      "41": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "A chromatid is one copy/half of a replicated chromosome, containing one DNA double helix."
+          },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "Chromatin is DNA associated with proteins; it can be relatively loosely packed."
+          },
+          {
+            "id": "part-3",
+            "points": 1,
+            "answer": "A chromosome is an organized DNA-protein unit, condensed during division to aid segregation."
+          }
+        ]
+      },
+      "42": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 3,
+            "answer": "One point per accurate contrast, up to three: usually circular versus linear chromosomes; nucleoid/cytoplasm versus nucleus; one main chromosome versus multiple; typical bacterial DNA is not wrapped in canonical eukaryotic histone nucleosomes. Recognize biological exceptions; do not require the incorrect source phrase “in the nucleus” for bacteria."
+          }
+        ]
+      },
+      "43": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Poly-A tail." },
+          { "id": "part-2", "points": 1, "answer": "5′ cap." },
+          { "id": "part-3", "points": 1, "answer": "Help nuclear export." },
+          {
+            "id": "part-4",
+            "points": 1,
+            "answer": "Protect against degradation / stabilize the mRNA."
+          }
+        ]
+      },
+      "44": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "A core promoter sequence that binds transcription factors and helps position/initiate the transcription machinery."
+          }
+        ]
+      },
+      "45": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "Alternative splicing joins different combinations of exons from the same pre-mRNA, generating distinct mature mRNAs and protein isoforms."
+          }
+        ]
+      },
+      "46": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Replication cannot produce a fully joined DNA strand."
+          },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "DNA ligase normally seals nicks/joins Okazaki fragments; fragments remain unconnected."
+          }
+        ]
+      },
+      "47": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "They lack the 3′ hydroxyl required for further extension."
+          },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "Incorporation terminates the growing strand, producing fragments of different lengths for sequencing."
+          }
+        ]
+      },
+      "48": {
+        "criteria": [
+          { "id": "part-1", "points": 0.5, "answer": "Primary: amino-acid sequence." },
+          {
+            "id": "part-2",
+            "points": 0.5,
+            "answer": "Secondary: local structures such as alpha helices and beta sheets."
+          },
+          {
+            "id": "part-3",
+            "points": 0.5,
+            "answer": "Tertiary: overall three-dimensional folding of a polypeptide."
+          },
+          {
+            "id": "part-4",
+            "points": 0.5,
+            "answer": "Quaternary: association of multiple polypeptide subunits."
+          }
+        ]
+      },
+      "49": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Lyonization",
+            "accepted": [
+              "Lyonization",
+              "X inactivation",
+              "X-inactivation",
+              "X chromosome inactivation"
+            ]
+          }
+        ]
+      },
+      "50": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Consanguineous mating",
+            "accepted": [
+              "Consanguineous mating",
+              "consanguinity",
+              "related parents",
+              "mating between relatives",
+              "incest"
+            ]
+          }
+        ]
+      }
+    },
+    "questionCount": 50,
+    "maxScore": 72
+  },
+  {
+    "id": "gopher-2019-heredity-b",
+    "eventId": "heredity",
+    "division": "B",
+    "competition": "Gopher Invitational",
+    "year": 2019,
+    "level": null,
+    "difficulty": "Hard",
+    "difficultyReason": "An extended genetics paper with pedigrees, metabolic pathways, penetrance, DNA replication calculations and experimental interpretation.",
+    "topics": ["Inheritance", "DNA and RNA", "Cell division", "Protein synthesis"],
+    "topicMatch": "current",
+    "alignment": "Genetic crosses, DNA/RNA, mitosis, meiosis and protein synthesis overlap the 2027 Heredity event. Challenge questions extend beyond introductory study.",
+    "scoringBasis": "The source assigns one point per general/investigation item and two per challenge item. Part I Q5 is split into five yes/no choices at 0.2 each, retaining partial credit for each correct selection decision. Part II Q12/Q15 are corrected to 32% cytosine from the stated base composition. Part II Q21 is corrected to A,D,B,C; the printed two-point question weight is used, split equally over its four positions, instead of the inconsistent “1/3 per blank” key. Part II Q19–20 are excluded because their base-pair/nucleotide counts and reported calculations are inconsistent. Q17–18 retain the publisher’s effective rate of 100 base pairs/s. The original answer sheet supplies the codon chart.",
+    "sourceUrl": "https://scioly.org/wiki/Test_Exchange_Archive",
+    "paperUrl": "/practice/gopher-2019-heredity-b/test.pdf",
+    "keyUrl": "/practice/gopher-2019-heredity-b/key.pdf",
+    "season": 2027,
+    "minutes": 50,
+    "reviewedOn": "2026-10-08",
+    "rulesUrl": "https://www.soinc.org/rules-2027",
+    "gradingMode": "published-key",
+    "instructions": "Use the original PDF and its printed question numbers. Show your reasoning and calculations in each written response. Auto Grade reviews responses against the published rubric. The source assigns one point per general/investigation item and two per challenge item. Part I Q5 is split into five yes/no choices at 0.2 each, retaining partial credit for each correct selection decision. Part II Q12/Q15 are corrected to 32% cytosine from the stated base composition. Part II Q21 is corrected to A,D,B,C; the printed two-point question weight is used, split equally over its four positions, instead of the inconsistent “1/3 per blank” key. Part II Q19–20 are excluded because their base-pair/nucleotide counts and reported calculations are inconsistent. Q17–18 retain the publisher’s effective rate of 100 base pairs/s. The original answer sheet supplies the codon chart.",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "P1-1",
+        "label": "P1-1",
+        "page": 2,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What percentage of FF × ff offspring can fly?"
+      },
+      {
+        "id": "P1-2",
+        "label": "P1-2",
+        "page": 2,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What is the probability all three Ff × Ff offspring cannot fly?"
+      },
+      {
+        "id": "P1-3",
+        "label": "P1-3",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P1-4",
+        "label": "P1-4",
+        "page": 2,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P1-5A",
+        "label": "P1-5A",
+        "page": 2,
+        "points": 0.2,
+        "type": "mcq",
+        "options": [
+          { "id": "Y", "text": "Yes — select this option" },
+          { "id": "N", "text": "No — leave this option unselected" }
+        ],
+        "prompt": "Is Tay-Sachs disease a recessive genetic disorder? (Part I, question 5A)"
+      },
+      {
+        "id": "P1-5B",
+        "label": "P1-5B",
+        "page": 2,
+        "points": 0.2,
+        "type": "mcq",
+        "options": [
+          { "id": "Y", "text": "Yes — select this option" },
+          { "id": "N", "text": "No — leave this option unselected" }
+        ],
+        "prompt": "Is Down syndrome a recessive genetic disorder? (Part I, question 5B)"
+      },
+      {
+        "id": "P1-5C",
+        "label": "P1-5C",
+        "page": 2,
+        "points": 0.2,
+        "type": "mcq",
+        "options": [
+          { "id": "Y", "text": "Yes — select this option" },
+          { "id": "N", "text": "No — leave this option unselected" }
+        ],
+        "prompt": "Is Cystic fibrosis a recessive genetic disorder? (Part I, question 5C)"
+      },
+      {
+        "id": "P1-5D",
+        "label": "P1-5D",
+        "page": 2,
+        "points": 0.2,
+        "type": "mcq",
+        "options": [
+          { "id": "Y", "text": "Yes — select this option" },
+          { "id": "N", "text": "No — leave this option unselected" }
+        ],
+        "prompt": "Is Huntington disease a recessive genetic disorder? (Part I, question 5D)"
+      },
+      {
+        "id": "P1-5E",
+        "label": "P1-5E",
+        "page": 2,
+        "points": 0.2,
+        "type": "mcq",
+        "options": [
+          { "id": "Y", "text": "Yes — select this option" },
+          { "id": "N", "text": "No — leave this option unselected" }
+        ],
+        "prompt": "Is Polydactyly a recessive genetic disorder? (Part I, question 5E)"
+      },
+      {
+        "id": "P1-6",
+        "label": "P1-6",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P1-7",
+        "label": "P1-7",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P1-8",
+        "label": "P1-8",
+        "page": 3,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Give the genotype of individual I-2."
+      },
+      {
+        "id": "P1-9",
+        "label": "P1-9",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P1-10",
+        "label": "P1-10",
+        "page": 3,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P1-11",
+        "label": "P1-11",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Give the seed-color genotype of the original pea plant."
+      },
+      {
+        "id": "P1-12",
+        "label": "P1-12",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Of 384 offspring, how many have green seeds?"
+      },
+      {
+        "id": "P1-13",
+        "label": "P1-13",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Of 384 offspring, how many are heterozygous?"
+      },
+      {
+        "id": "P1-14",
+        "label": "P1-14",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which pigment colors remain when only enzyme B is nonfunctional?"
+      },
+      {
+        "id": "P1-15",
+        "label": "P1-15",
+        "page": 4,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P1-16",
+        "label": "P1-16",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which enzymes does the dominant inhibitor Y inhibit?"
+      },
+      {
+        "id": "P1-17",
+        "label": "P1-17",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Give the genotype needed for the testcross."
+      },
+      {
+        "id": "P1-18",
+        "label": "P1-18",
+        "page": 4,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Give the original plant’s flower-color genotype after the testcross."
+      },
+      {
+        "id": "P1-19",
+        "label": "P1-19",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What fraction have constricted green pods?"
+      },
+      {
+        "id": "P1-20",
+        "label": "P1-20",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How many have inflated yellow pods?"
+      },
+      {
+        "id": "P1-21",
+        "label": "P1-21",
+        "page": 5,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Calculate double-eye penetrance as a fraction, decimal or percentage."
+      },
+      {
+        "id": "P1-22",
+        "label": "P1-22",
+        "page": 5,
+        "points": 2,
+        "type": "frq",
+        "prompt": "How many different claw lengths are possible?"
+      },
+      {
+        "id": "P1-23",
+        "label": "P1-23",
+        "page": 5,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Give the ratio of living short-tailed to long-tailed offspring."
+      },
+      {
+        "id": "P1-24",
+        "label": "P1-24",
+        "page": 6,
+        "points": 2,
+        "type": "frq",
+        "prompt": "What is the probability Bonnie will grow a beard?"
+      },
+      {
+        "id": "P1-25",
+        "label": "P1-25",
+        "page": 6,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P2-1",
+        "label": "P2-1",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Expand DNA."
+      },
+      {
+        "id": "P2-2",
+        "label": "P2-2",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "P2-3",
+        "label": "P2-3",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P2-4",
+        "label": "P2-4",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which base occurs in RNA but not DNA?"
+      },
+      {
+        "id": "P2-5",
+        "label": "P2-5",
+        "page": 7,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P2-6",
+        "label": "P2-6",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which end does the green arrow identify?"
+      },
+      {
+        "id": "P2-7",
+        "label": "P2-7",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Name the red-boxed nitrogenous base."
+      },
+      {
+        "id": "P2-8",
+        "label": "P2-8",
+        "page": 7,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Classify that base as a purine or pyrimidine."
+      },
+      {
+        "id": "P2-9",
+        "label": "P2-9",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P2-10",
+        "label": "P2-10",
+        "page": 8,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P2-11",
+        "label": "P2-11",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What percentage of the original genome is thymine?"
+      },
+      {
+        "id": "P2-12",
+        "label": "P2-12",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "What percentage of the original genome is cytosine?"
+      },
+      {
+        "id": "P2-13",
+        "label": "P2-13",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Who discovered the base-composition rules?"
+      },
+      {
+        "id": "P2-14",
+        "label": "P2-14",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "After accounting for 4% urchinine, what percentage is adenine?"
+      },
+      {
+        "id": "P2-15",
+        "label": "P2-15",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "After accounting for seanine/urchinine, what percentage is cytosine?"
+      },
+      {
+        "id": "P2-16",
+        "label": "P2-16",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "How many base pairs are in one somatic cell?"
+      },
+      {
+        "id": "P2-17",
+        "label": "P2-17",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Using the source effective replication rate, how long does the shortest chromosome take (hours)?"
+      },
+      {
+        "id": "P2-18",
+        "label": "P2-18",
+        "page": 8,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Using the source effective rate and simultaneous chromosome duplication, how long does the cell take (hours)?"
+      },
+      {
+        "id": "P2-21-1",
+        "label": "P2-21-1",
+        "page": 9,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "prompt": "Melting-temperature order: choose sequence in position 1 (lowest to highest)."
+      },
+      {
+        "id": "P2-21-2",
+        "label": "P2-21-2",
+        "page": 9,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "prompt": "Melting-temperature order: choose sequence in position 2 (lowest to highest)."
+      },
+      {
+        "id": "P2-21-3",
+        "label": "P2-21-3",
+        "page": 9,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "prompt": "Melting-temperature order: choose sequence in position 3 (lowest to highest)."
+      },
+      {
+        "id": "P2-21-4",
+        "label": "P2-21-4",
+        "page": 9,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "prompt": "Melting-temperature order: choose sequence in position 4 (lowest to highest)."
+      },
+      {
+        "id": "P2-22-I",
+        "label": "P2-22-I",
+        "page": 9,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ],
+        "prompt": "Which sugar is found in DNA?"
+      },
+      {
+        "id": "P2-22-II",
+        "label": "P2-22-II",
+        "page": 9,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ],
+        "prompt": "Which bond occurs in the DNA backbone?"
+      },
+      {
+        "id": "P2-23",
+        "label": "P2-23",
+        "page": 10,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Which replication model is ruled out by test tube A?"
+      },
+      {
+        "id": "P2-24",
+        "label": "P2-24",
+        "page": 10,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Which tube shows the expected result after two rounds?"
+      },
+      {
+        "id": "P2-25",
+        "label": "P2-25",
+        "page": 10,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Which enzyme was omitted from the replication mixture?"
+      },
+      {
+        "id": "P3-1",
+        "label": "P3-1",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-2",
+        "label": "P3-2",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-3",
+        "label": "P3-3",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-4",
+        "label": "P3-4",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-5",
+        "label": "P3-5",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-6",
+        "label": "P3-6",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P3-7",
+        "label": "P3-7",
+        "page": 11,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-8",
+        "label": "P3-8",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-9",
+        "label": "P3-9",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P3-10",
+        "label": "P3-10",
+        "page": 12,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-11",
+        "label": "P3-11",
+        "page": 12,
+        "points": 2,
+        "type": "frq",
+        "prompt": "How many polar bodies accompany 300 ova in the illustrated process?"
+      },
+      {
+        "id": "P3-12-I",
+        "label": "P3-12-I",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which graph interval represents S phase?"
+      },
+      {
+        "id": "P3-12-II",
+        "label": "P3-12-II",
+        "page": 12,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Which graph interval represents mitosis?"
+      },
+      {
+        "id": "P3-13",
+        "label": "P3-13",
+        "page": 13,
+        "points": 2,
+        "type": "frq",
+        "prompt": "In which mitotic phase would colchicine arrest the cells?"
+      },
+      {
+        "id": "P3-14",
+        "label": "P3-14",
+        "page": 13,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P3-15",
+        "label": "P3-15",
+        "page": 13,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" }
+        ]
+      },
+      {
+        "id": "P4-1",
+        "label": "P4-1",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-2",
+        "label": "P4-2",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-3",
+        "label": "P4-3",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-4",
+        "label": "P4-4",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-5",
+        "label": "P4-5",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-6",
+        "label": "P4-6",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-7",
+        "label": "P4-7",
+        "page": 14,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "P4-8",
+        "label": "P4-8",
+        "page": 15,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-9",
+        "label": "P4-9",
+        "page": 15,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-10",
+        "label": "P4-10",
+        "page": 15,
+        "points": 1,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "P4-11",
+        "label": "P4-11",
+        "page": 15,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "P4-12",
+        "label": "P4-12",
+        "page": 15,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" }
+        ]
+      },
+      {
+        "id": "P4-13",
+        "label": "P4-13",
+        "page": 16,
+        "points": 2,
+        "type": "frq",
+        "prompt": "How many hemoglobin mRNAs are present at steady state?"
+      },
+      {
+        "id": "P4-14",
+        "label": "P4-14",
+        "page": 16,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Which amino acid does the pictured tRNA carry?"
+      },
+      {
+        "id": "P4-15",
+        "label": "P4-15",
+        "page": 16,
+        "points": 2,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      }
+    ],
+    "keys": {
+      "P1-3": { "correctOption": "C" },
+      "P1-4": { "correctOption": "B" },
+      "P1-6": { "correctOption": "A" },
+      "P1-7": { "correctOption": "D" },
+      "P1-9": { "correctOption": "A" },
+      "P1-10": { "correctOption": "B" },
+      "P1-15": { "correctOption": "C" },
+      "P1-25": { "correctOption": "C" },
+      "P2-2": { "correctOption": "B" },
+      "P2-3": { "correctOption": "A" },
+      "P2-5": { "correctOption": "B" },
+      "P2-9": { "correctOption": "D" },
+      "P2-10": { "correctOption": "B" },
+      "P3-1": { "correctOption": "A" },
+      "P3-2": { "correctOption": "C" },
+      "P3-3": { "correctOption": "C" },
+      "P3-4": { "correctOption": "A" },
+      "P3-5": { "correctOption": "D" },
+      "P3-6": { "correctOption": "C" },
+      "P3-7": { "correctOption": "A" },
+      "P3-8": { "correctOption": "C" },
+      "P3-9": { "correctOption": "B" },
+      "P3-10": { "correctOption": "A" },
+      "P3-14": { "correctOption": "A" },
+      "P3-15": { "correctOption": "B" },
+      "P4-1": { "correctOption": "D" },
+      "P4-2": { "correctOption": "C" },
+      "P4-3": { "correctOption": "A" },
+      "P4-4": { "correctOption": "A" },
+      "P4-5": { "correctOption": "B" },
+      "P4-6": { "correctOption": "B" },
+      "P4-7": { "correctOption": "A" },
+      "P4-8": { "correctOption": "C" },
+      "P4-9": { "correctOption": "C" },
+      "P4-10": { "correctOption": "B" },
+      "P4-11": { "correctOption": "E" },
+      "P4-12": { "correctOption": "C" },
+      "P4-15": { "correctOption": "D" },
+      "P1-5A": { "correctOption": "Y" },
+      "P1-5B": { "correctOption": "N" },
+      "P1-5C": { "correctOption": "Y" },
+      "P1-5D": { "correctOption": "N" },
+      "P1-5E": { "correctOption": "N" },
+      "P1-1": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "100 %",
+            "numeric": {
+              "value": 100,
+              "units": ["%", "percent"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P1-2": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "0.015625",
+            "numeric": {
+              "value": 0.015625,
+              "units": [],
+              "tolerance": 0.000001,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P1-12": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "96",
+            "numeric": { "value": 96, "units": [], "tolerance": 0, "unitRequired": false }
+          }
+        ]
+      },
+      "P1-13": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "192",
+            "numeric": { "value": 192, "units": [], "tolerance": 0, "unitRequired": false }
+          }
+        ]
+      },
+      "P1-19": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "0.1875",
+            "numeric": { "value": 0.1875, "units": [], "tolerance": 0, "unitRequired": false }
+          }
+        ]
+      },
+      "P1-20": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "72",
+            "numeric": { "value": 72, "units": [], "tolerance": 0, "unitRequired": false }
+          }
+        ]
+      },
+      "P1-22": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "7",
+            "numeric": { "value": 7, "units": [], "tolerance": 0, "unitRequired": false }
+          }
+        ]
+      },
+      "P1-24": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "0.5",
+            "numeric": { "value": 0.5, "units": [], "tolerance": 0, "unitRequired": false }
+          }
+        ]
+      },
+      "P2-11": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "18 %",
+            "numeric": {
+              "value": 18,
+              "units": ["%", "percent"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P2-12": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "32 %",
+            "numeric": {
+              "value": 32,
+              "units": ["%", "percent"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P2-14": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "14 %",
+            "numeric": {
+              "value": 14,
+              "units": ["%", "percent"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P2-15": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "32 %",
+            "numeric": {
+              "value": 32,
+              "units": ["%", "percent"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P2-16": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "16000000 bp",
+            "numeric": {
+              "value": 16000000,
+              "units": ["bp", "base pairs"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P2-17": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "2.78 hours",
+            "numeric": {
+              "value": 2.78,
+              "units": ["hours", "h", "hr"],
+              "tolerance": 0.02,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P2-18": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "11.11 hours",
+            "numeric": {
+              "value": 11.11,
+              "units": ["hours", "h", "hr"],
+              "tolerance": 0.02,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P3-11": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "900 polar bodies",
+            "numeric": {
+              "value": 900,
+              "units": ["polar bodies"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P4-13": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "2400 mRNAs",
+            "numeric": {
+              "value": 2400,
+              "units": ["mRNAs", "transcripts"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "P1-8": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "XAXa",
+            "accepted": ["XAXa", "X^AX^a", "X^A X^a", "XᴬXᵃ", "XAXa"],
+            "caseSensitive": true
+          }
+        ]
+      },
+      "P1-11": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "Yy", "accepted": ["Yy"], "caseSensitive": true }
+        ]
+      },
+      "P1-17": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "pp", "accepted": ["pp"], "caseSensitive": true }
+        ]
+      },
+      "P1-18": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "PP", "accepted": ["PP"], "caseSensitive": true }
+        ]
+      },
+      "P1-14": {
+        "criteria": [
+          { "id": "part-1", "points": 0.5, "answer": "Green." },
+          { "id": "part-2", "points": 0.5, "answer": "Blue." }
+        ]
+      },
+      "P1-16": {
+        "criteria": [
+          { "id": "part-1", "points": 0.5, "answer": "Enzyme D." },
+          { "id": "part-2", "points": 0.5, "answer": "Enzyme E." }
+        ]
+      },
+      "P1-21": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "0.72",
+            "accepted": ["0.72", "72%", "72 percent", "36/50"]
+          }
+        ]
+      },
+      "P1-23": {
+        "criteria": [
+          { "id": "part-1", "points": 2, "answer": "2:1", "accepted": ["2:1", "2 : 1", "2 to 1"] }
+        ]
+      },
+      "P2-1": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Deoxyribonucleic acid",
+            "accepted": ["Deoxyribonucleic acid"]
+          }
+        ]
+      },
+      "P2-4": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Uracil", "accepted": ["Uracil"] }]
+      },
+      "P2-6": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "5′ end",
+            "accepted": ["5′ end", "5' end", "5 prime", "5-prime end", "5"]
+          }
+        ]
+      },
+      "P2-7": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Guanine", "accepted": ["Guanine"] }]
+      },
+      "P2-8": {
+        "criteria": [{ "id": "part-1", "points": 1, "answer": "Purine", "accepted": ["Purine"] }]
+      },
+      "P2-13": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Chargaff",
+            "accepted": ["Chargaff", "Erwin Chargaff"]
+          }
+        ]
+      },
+      "P2-23": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "Conservative",
+            "accepted": ["Conservative", "conservative model"]
+          }
+        ]
+      },
+      "P2-24": {
+        "criteria": [
+          { "id": "part-1", "points": 2, "answer": "C", "accepted": ["C", "test tube C", "tube C"] }
+        ]
+      },
+      "P2-25": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 2,
+            "answer": "DNA ligase",
+            "accepted": ["DNA ligase", "ligase"]
+          }
+        ]
+      },
+      "P2-21-1": { "correctOption": "A" },
+      "P2-21-2": { "correctOption": "D" },
+      "P2-21-3": { "correctOption": "B" },
+      "P2-21-4": { "correctOption": "C" },
+      "P2-22-I": { "correctOption": "C" },
+      "P2-22-II": { "correctOption": "D" },
+      "P3-12-I": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "II", "accepted": ["II", "2", "interval II"] }
+        ]
+      },
+      "P3-12-II": {
+        "criteria": [
+          { "id": "part-1", "points": 1, "answer": "IV", "accepted": ["IV", "4", "interval IV"] }
+        ]
+      },
+      "P3-13": {
+        "criteria": [
+          { "id": "part-1", "points": 2, "answer": "Metaphase", "accepted": ["Metaphase"] }
+        ]
+      },
+      "P4-14": {
+        "criteria": [
+          { "id": "part-1", "points": 2, "answer": "Alanine", "accepted": ["Alanine", "Ala"] }
+        ]
+      }
+    },
+    "questionCount": 87,
+    "maxScore": 98,
+    "supplementUrl": "/practice/gopher-2019-heredity-b/images.pdf"
+  },
+  {
+    "id": "kraemer-2017-thermodynamics-b",
+    "eventId": "thermodynamics",
+    "division": "B",
+    "competition": "Kraemer / Ladera / Jeffrey Trail Scrimmage",
+    "year": 2017,
+    "level": null,
+    "difficulty": "Medium",
+    "difficultyReason": "Combines conceptual heat-transfer questions with pressure-volume diagrams, kinetic theory, calorimetry and first-law calculations.",
+    "topics": ["Heat transfer", "Thermodynamic laws", "Calorimetry", "Kinetic theory"],
+    "topicMatch": "current",
+    "alignment": "Written thermal physics overlaps the 2027 Thermodynamics event. The original date is November 4, 2017; the separate device trial uses older construction rules and is not part of this practice score.",
+    "scoringBasis": "The 16 MCQs retain their printed half-point weight. Written numbering 17–25 supplies nine practice points, split by subpart; the source does not print a separate written weighting scheme. The P–V diagram corrects source-key errors: Q12 E (both vertical paths), Q13 B (expansion), Q14 B (larger area). Q15 is excluded because the heat transferred along BC and DA is unspecified. The physical device trial is excluded. Original pages 1–5 form the student paper; answer pages 6–9 are separated.",
+    "sourceUrl": "https://scioly.org/wiki/Test_Exchange_Archive",
+    "paperUrl": "/practice/kraemer-2017-thermodynamics-b/test.pdf",
+    "keyUrl": "/practice/kraemer-2017-thermodynamics-b/key.pdf",
+    "season": 2027,
+    "minutes": 50,
+    "reviewedOn": "2026-10-08",
+    "rulesUrl": "https://www.soinc.org/rules-2027",
+    "gradingMode": "published-key",
+    "instructions": "Use the original PDF and its printed question numbers. Show your reasoning and calculations in each written response. Auto Grade reviews responses against the published rubric. The 16 MCQs retain their printed half-point weight. Written numbering 17–25 supplies nine practice points, split by subpart; the source does not print a separate written weighting scheme. The P–V diagram corrects source-key errors: Q12 E (both vertical paths), Q13 B (expansion), Q14 B (larger area). Q15 is excluded because the heat transferred along BC and DA is unspecified. The physical device trial is excluded. Original pages 1–5 form the student paper; answer pages 6–9 are separated.",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 2,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "2",
+        "label": "2",
+        "page": 2,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "3",
+        "label": "3",
+        "page": 2,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 2,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "6",
+        "label": "6",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "9",
+        "label": "9",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "10",
+        "label": "10",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 3,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 4,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 4,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 4,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" },
+          { "id": "E", "text": "E" },
+          { "id": "F", "text": "F" }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 4,
+        "points": 0.5,
+        "type": "mcq",
+        "options": [
+          { "id": "A", "text": "A" },
+          { "id": "B", "text": "B" },
+          { "id": "C", "text": "C" },
+          { "id": "D", "text": "D" }
+        ]
+      },
+      {
+        "id": "17-18",
+        "label": "17-18",
+        "page": 5,
+        "points": 2,
+        "type": "frq",
+        "prompt": "Calculate average translational kinetic energy at 20.0 °C. Show the formula and result."
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Convert 25 °C to °F."
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Convert 25 °C to K."
+      },
+      {
+        "id": "21-23",
+        "label": "21-23",
+        "page": 5,
+        "points": 3,
+        "type": "frq",
+        "prompt": "How much heat raises the aluminum pan and water from 20 °C to 80 °C? Show your calculation."
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Calculate net internal-energy change for part (a)."
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 5,
+        "points": 1,
+        "type": "frq",
+        "prompt": "Calculate net internal-energy change for part (b)."
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "C" },
+      "2": { "correctOption": "C" },
+      "3": { "correctOption": "D" },
+      "4": { "correctOption": "D" },
+      "5": { "correctOption": "C" },
+      "6": { "correctOption": "C" },
+      "7": { "correctOption": "D" },
+      "8": { "correctOption": "D" },
+      "9": { "correctOption": "B" },
+      "10": { "correctOption": "D" },
+      "11": { "correctOption": "C" },
+      "12": { "correctOption": "E" },
+      "13": { "correctOption": "B" },
+      "14": { "correctOption": "B" },
+      "16": { "correctOption": "B" },
+      "19": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "77 °F",
+            "numeric": {
+              "value": 77,
+              "units": ["°F", "F", "degrees F", "degrees Fahrenheit"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "298.15 K",
+            "numeric": {
+              "value": 298.15,
+              "units": ["K", "kelvin"],
+              "tolerance": 0.16,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "24": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "9 J",
+            "numeric": {
+              "value": 9,
+              "units": ["J", "joules"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "25": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "9 J",
+            "numeric": {
+              "value": 9,
+              "units": ["J", "joules"],
+              "tolerance": 0,
+              "unitRequired": false
+            }
+          }
+        ]
+      },
+      "17-18": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Use average kinetic energy = (3/2)kT with T ≈ 293 K."
+          },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "Approximately 6.07 × 10^-21 J. Accept 293.15 K and reasonable rounding."
+          }
+        ]
+      },
+      "21-23": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "points": 1,
+            "answer": "Temperature change is 60 °C and water mass is 0.250 kg; use Q = mcΔT for both substances."
+          },
+          {
+            "id": "part-2",
+            "points": 1,
+            "answer": "Water requires 62,790 J (about 62.8 kJ); pan requires 27,000 J (27 kJ)."
+          },
+          {
+            "id": "part-3",
+            "points": 1,
+            "answer": "Total heat is 89,790 J, approximately 89.8 kJ."
+          }
+        ]
+      }
+    },
+    "questionCount": 21,
+    "maxScore": 16.5
   }
 ]

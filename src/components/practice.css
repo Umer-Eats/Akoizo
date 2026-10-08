@@ -405,58 +405,6 @@
     margin-bottom: 14px;
     line-height: 1.65;
   }
-  .practice-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .practice-option {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    flex: 1 0 60px;
-    gap: 8px;
-    padding: 11px 13px;
-    border: 1px solid var(--line-strong);
-    border-radius: 6px;
-    cursor: pointer;
-    min-height: 46px;
-    font-size: 0.88rem;
-  }
-  .practice-option.selected {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-  }
-  .practice-options-expanded .practice-option {
-    flex-basis: 100%;
-    align-items: flex-start;
-  }
-  .practice-options-expanded .practice-option > span {
-    flex: 1;
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-  .practice-option input {
-    accent-color: var(--accent);
-    width: 18px;
-    height: 18px;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
-    flex: none;
-  }
-  .practice-option small {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    flex-basis: 100%;
-    font-size: 0.72rem;
-  }
-  .practice-option.correct {
-    color: #63e4a0;
-    border-color: #63e4a0;
-    background: #27975715;
-  }
   .practice-written {
     display: grid;
     gap: 8px;
@@ -557,10 +505,6 @@
     gap: 12px;
     flex-wrap: wrap;
     margin-top: 7px;
-  }
-  :root[data-theme='light'] .practice-option.correct {
-    color: #176536;
-    border-color: #27884d;
   }
   :root[data-theme='light'] .practice-rubric {
     color: #b52232;

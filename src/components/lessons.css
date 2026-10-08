@@ -321,7 +321,7 @@
 }
 .lab-workbench {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 1fr);
   gap: 20px;
   align-items: start;
 }
@@ -345,6 +345,7 @@
   accent-color: var(--accent);
 }
 .lab-readout {
+  grid-column: 1 / -1;
   display: grid;
   gap: 18px;
   padding: 18px;
@@ -354,6 +355,7 @@
 }
 .lab-metrics {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 12px;
 }
 .lab-metrics > div {
@@ -376,6 +378,7 @@
 }
 .lab-bars {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 .lab-bars span {
@@ -394,6 +397,11 @@
 .lab-bars > div:first-child .lab-bar-track > div {
   background: var(--lesson-pink);
 }
+@media (max-width: 1100px) {
+  .lab-workbench {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .lab-equation {
   padding: 12px;
   border: 1px solid var(--line);
@@ -403,16 +411,6 @@
 }
 .lab-assumptions {
   color: var(--muted);
-}
-.lab-diagram {
-  width: 100%;
-  height: auto;
-  max-height: 180px;
-  color: var(--lesson-pink);
-}
-.lab-diagram text {
-  font-family: var(--font-body);
-  font-size: 10px;
 }
 .lab-notebook {
   border-top: 1px solid var(--line);
@@ -517,29 +515,14 @@
   font-size: 0.7rem;
   margin-top: 4px;
 }
-.quiz-options {
-  display: grid;
-  gap: 8px;
-}
-.quiz-option {
-  border: 1px solid var(--line);
-  padding: 12px;
-  cursor: pointer;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-size: 0.85rem;
-  background: var(--surface-2);
-}
-.quiz-option[data-selected='true'] {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-}
-.quiz-option input,
 .quiz-self-review input {
-  margin-top: 5px;
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  margin: 3px 0 0;
   accent-color: var(--accent);
-  flex-shrink: 0;
+  flex: none;
 }
 .quiz-written {
   display: grid;

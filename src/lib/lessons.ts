@@ -31,6 +31,7 @@ export type LessonSim =
     }
   | {
       kind: 'investigation';
+      diagram?: 'tissue-section' | 'str' | 'glass';
       title: string;
       instructions: string;
       observations: { label: string; result: string }[];

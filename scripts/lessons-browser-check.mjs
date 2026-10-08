@@ -1,14 +1,13 @@
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
 import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
+import { modelControls } from '../src/lib/lesson-models.ts';
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
-import { mkdir, readFile } from 'node:fs/promises';
-const rulePages = JSON.parse(
-  await readFile(new URL('../src/lib/event-rule-pages.json', import.meta.url), 'utf8'),
-);
+import { mkdir } from 'node:fs/promises';
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-await mkdir('documents/qa/event-workspace', { recursive: true });
+await mkdir('documents/qa/lessons', { recursive: true });
+const checkedModels = new Set();
 const p = await browser.newPage({
   viewport: { width: 1440, height: 1000 },
   reducedMotion: 'reduce',
@@ -120,6 +119,43 @@ try {
         await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);
         await expect(p.locator('.quiz-question')).toHaveCount(7);
         await expect(p.locator('.lesson-sim h3')).toHaveText(lesson.simulation.title);
+        await expect(p.locator('.lab-figure')).toHaveCount(1);
+        await expect(p.locator('.lab-diagram')).toHaveAccessibleName(/.+/);
+        if (lesson.simulation.kind === 'model' && !checkedModels.has(lesson.simulation.model)) {
+          const model = lesson.simulation.model;
+          const initial = await p.locator('.lab-diagram').innerHTML();
+          for (const control of modelControls[model]) {
+            const slider = p.getByRole('slider', { name: control.label, exact: true });
+            for (const value of [control.min, control.max]) {
+              await slider.fill(String(value));
+              const diagram = await p.locator('.lab-diagram').innerHTML();
+              if (value !== control.initial)
+                assert.notEqual(diagram, initial, `${model}: ${control.key} updates diagram`);
+              assert(!/NaN|Infinity/.test(diagram), `${model}: finite SVG geometry at boundaries`);
+            }
+            await slider.fill(String(control.initial));
+          }
+          assert.equal(
+            await p.locator('.lab-diagram').innerHTML(),
+            initial,
+            `${model}: restores diagram`,
+          );
+          await p
+            .locator('.lab-figure')
+            .screenshot({ path: `documents/qa/lessons/diagram-${model}.png` });
+          checkedModels.add(model);
+        }
+        if (lesson.simulation.kind === 'investigation' && lesson.simulation.diagram) {
+          const initial = await p.locator('.lab-diagram').innerHTML();
+          for (const button of await p.locator('.investigation-tests button').all())
+            await button.click();
+          assert.notEqual(await p.locator('.lab-diagram').innerHTML(), initial);
+          await p
+            .locator('.lab-figure')
+            .screenshot({ path: `documents/qa/lessons/diagram-${lesson.simulation.diagram}.png` });
+          await p.getByRole('button', { name: 'Restart investigation' }).click();
+          assert.equal(await p.locator('.lab-diagram').innerHTML(), initial);
+        }
         await expect(p.locator('.lesson-example')).toBeVisible();
         await expect(
           p.getByRole('button', { name: 'Check my answers', exact: true }),
@@ -129,6 +165,7 @@ try {
     assert.equal(await p.getByRole('button', { name: 'Video lesson', exact: true }).count(), 0);
     assert(!/Yingling Yang/.test(await p.locator('.lessons-workspace').innerText()));
   }
+  assert.equal(checkedModels.size, 10);
   await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
   await p.locator('.unit-button').first().click();
   const first = anatomyLessons.lessons[0];
@@ -140,6 +177,14 @@ try {
   await p.getByRole('button', { name: 'Restart investigation' }).click();
   await expect(conclusion.first()).toBeDisabled();
   const check = p.getByRole('button', { name: 'Check my answers', exact: true });
+  const firstRadio = p.locator('.quiz-question input[type="radio"]').first();
+  await firstRadio.focus();
+  await firstRadio.press('ArrowDown');
+  await expect(p.locator('.quiz-question input[type="radio"]').nth(1)).toBeChecked();
+  await p
+    .locator('.quiz-question')
+    .first()
+    .screenshot({ path: 'documents/qa/lessons/mcq-selected.png' });
   for (let i = 0; i < first.practice.length; i++) {
     const q = first.practice[i],
       field = p.locator('.quiz-question').nth(i);
@@ -151,6 +196,12 @@ try {
   await expect(check).toBeDisabled();
   await lastWritten.fill(first.practice.at(-1).answer);
   await check.click();
+  await expect(p.locator('.quiz-question .practice-option.correct')).toHaveCount(3);
+  await expect(firstRadio).toBeDisabled();
+  await p
+    .locator('.quiz-question')
+    .first()
+    .screenshot({ path: 'documents/qa/lessons/mcq-reviewed.png' });
   await expect(p.locator('.quiz-result')).toContainText('Multiple choice: 3 / 3 points');
   await expect(p.locator('.course-progress label')).toHaveText('0 of 20 practices complete');
   for (const box of await p.locator('.quiz-self-review input').all()) await box.check();
@@ -189,6 +240,38 @@ try {
         false,
         `Overflow ${width} ${theme}`,
       );
+      for (const option of await p.locator('.quiz-question .practice-option').all()) {
+        const bounds = await option.evaluate((node) => {
+          const input = node.querySelector('input').getBoundingClientRect();
+          const text = node.querySelector('span').getBoundingClientRect();
+          const row = node.getBoundingClientRect();
+          return {
+            inputWidth: input.width,
+            inputHeight: input.height,
+            gap: text.left - input.right,
+            contained: text.right <= row.right,
+          };
+        });
+        assert.equal(bounds.inputWidth, 18, `Radio width ${width} ${theme}`);
+        assert.equal(bounds.inputHeight, 18, `Radio height ${width} ${theme}`);
+        assert.equal(bounds.gap, 8, `Answer sits beside radio ${width} ${theme}`);
+        assert(bounds.contained, `Answer stays in row ${width} ${theme}`);
+      }
+      if (width === 390) {
+        await p
+          .locator('.quiz-question')
+          .first()
+          .screenshot({ path: `documents/qa/lessons/mcq-${theme}-390.png` });
+        const viewer = p.locator('.lab-diagram-viewport');
+        await expect(p.locator('.lab-diagram-scroll-hint')).toBeVisible();
+        await viewer.focus();
+        await viewer.press('ArrowRight');
+        await expect.poll(() => viewer.evaluate((node) => node.scrollLeft)).toBeGreaterThan(0);
+        await viewer.evaluate((node) => {
+          node.scrollLeft = 0;
+          node.blur();
+        });
+      }
       await p.evaluate(() => window.scrollTo(0, 0));
       if (width !== 320)
         await p.screenshot({ path: `documents/qa/lessons/course-${theme}-${width}.png` });
@@ -232,7 +315,7 @@ try {
   await expect(p.locator('#current-lesson-title')).toHaveText(forensicsLessons.lessons[2].title);
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: 40 lessons; unit/lesson navigation; calculations; investigations; practice scoring/review; draft and selection restoration; student isolation; Division C/CAD scope; corrupted/blocked storage; 320/390/1440 layouts in both themes.',
+    'PASS: 40 lessons with diagrams; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; practice scoring/review; draft restoration; student isolation; Division C/CAD scope; corrupted/blocked storage.',
   );
 } finally {
   await browser.close();

@@ -10,6 +10,8 @@ import {
   scorePractice,
   type LessonAttempt,
 } from '@/lib/lesson-practice';
+import { ChoiceOptions } from './choice-options';
+import { ModelDiagram, InvestigationDiagram } from './lesson-diagrams';
 import './lessons.css';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
@@ -26,6 +28,7 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
         <p>{sim.challenge}</p>
       </div>
       <div className="lab-workbench">
+        <ModelDiagram model={sim.model} values={values} />
         <div className="lab-controls">
           {modelControls[sim.model].map((control) => (
             <label key={control.key}>
@@ -61,86 +64,6 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
               </div>
             ))}
           </div>
-          {sim.model === 'bloodstain' ? (
-            <svg
-              viewBox="0 0 300 170"
-              role="img"
-              aria-label={`Ideal stain with width to length ratio ${format(values.ratio)}`}
-              className="lab-diagram"
-            >
-              <ellipse
-                cx="150"
-                cy="75"
-                rx="65"
-                ry={65 * values.ratio}
-                fill="currentColor"
-                opacity="0.7"
-              />
-              <text x="150" y="160" textAnchor="middle" fill="currentColor">
-                Idealized ellipse · tails excluded
-              </text>
-            </svg>
-          ) : sim.model === 'chromatography' ? (
-            <svg
-              viewBox="0 0 300 170"
-              role="img"
-              aria-label={`Chromatogram: spot ${format(result.metrics[0].value)} cm, front ${values.front} cm from baseline`}
-              className="lab-diagram"
-            >
-              <rect
-                x="85"
-                y="5"
-                width="130"
-                height="145"
-                fill="none"
-                stroke="currentColor"
-                opacity="0.5"
-              />
-              <line x1="80" x2="220" y1="140" y2="140" stroke="currentColor" />
-              <line
-                x1="85"
-                x2="215"
-                y1={140 - values.front * 12}
-                y2={140 - values.front * 12}
-                stroke="currentColor"
-                strokeDasharray="5 4"
-              />
-              <circle cx="150" cy={140 - values.front * values.rf * 12} r="8" fill="currentColor" />
-              <text x="150" y="166" textAnchor="middle" fill="currentColor">
-                Origin baseline
-              </text>
-            </svg>
-          ) : sim.model === 'density' ? (
-            <svg
-              viewBox="0 0 300 150"
-              role="img"
-              aria-label={
-                values.sample > values.liquid
-                  ? 'Sample sinks in the liquid'
-                  : 'Sample floats or is neutrally buoyant'
-              }
-              className="lab-diagram"
-            >
-              <path d="M55 10 V135 H245 V10" fill="none" stroke="currentColor" strokeWidth="2" />
-              <rect x="56" y="55" width="188" height="79" fill="currentColor" opacity="0.15" />
-              <line x1="55" x2="245" y1="55" y2="55" stroke="currentColor" strokeDasharray="4 3" />
-              <rect
-                x="125"
-                y={
-                  values.sample > values.liquid
-                    ? 95
-                    : Math.abs(values.sample - values.liquid) < 0.0001
-                      ? 75
-                      : 55 - 35 * (1 - values.sample / values.liquid)
-                }
-                width="50"
-                height="35"
-                rx="4"
-                fill="currentColor"
-                opacity="0.8"
-              />
-            </svg>
-          ) : null}
           <div className="lab-bars" aria-label="Output comparison">
             {result.bars.map((bar) => (
               <div key={bar.label}>
@@ -217,6 +140,7 @@ function InvestigationLab({ sim }: { sim: Extract<LessonSim, { kind: 'investigat
   const [picked, setPicked] = useState<number | null>(null);
   return (
     <>
+      <InvestigationDiagram sim={sim} observed={observed} />
       <div className="investigation-tests">
         {sim.observations.map((observation, i) => (
           <div key={observation.label}>
@@ -334,24 +258,14 @@ function QuizView({
               </small>
             </legend>
             {q.type === 'mcq' && q.options ? (
-              <div className="quiz-options">
-                {q.options.map((option) => (
-                  <label
-                    key={option}
-                    className="quiz-option"
-                    data-selected={attempt.answers[q.id] === option}
-                  >
-                    <input
-                      type="radio"
-                      name={q.id}
-                      value={option}
-                      checked={attempt.answers[q.id] === option}
-                      onChange={() => updateAnswer(q.id, option)}
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
-              </div>
+              <ChoiceOptions
+                name={q.id}
+                label={q.prompt}
+                options={q.options.map((option) => ({ id: option, text: option }))}
+                value={attempt.answers[q.id] ?? ''}
+                correctOptions={attempt.submitted ? [q.answer] : []}
+                onChange={(answer) => updateAnswer(q.id, answer)}
+              />
             ) : (
               <label className="quiz-written">
                 <span>Your answer</span>

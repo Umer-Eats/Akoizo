@@ -1,0 +1,78 @@
+.lab-figure {
+  container: lesson-diagram / inline-size;
+  --diagram-primary: #91b7ff;
+  --diagram-secondary: #f09bbc;
+  --diagram-water: #70d4cf;
+  margin: 0;
+  min-width: 0;
+  padding: clamp(10px, 2vw, 20px);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
+}
+:root[data-theme='light'] .lab-figure {
+  --diagram-primary: #215ad3;
+  --diagram-secondary: #a93263;
+  --diagram-water: #126f70;
+}
+.lab-figure-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.lab-figure-heading > span {
+  color: var(--diagram-primary);
+  background: var(--accent-soft);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+.lab-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 720px;
+  margin: 16px auto;
+}
+.lab-diagram-viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border-radius: 4px;
+}
+.lesson-sim .lab-diagram-scroll-hint {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+@container lesson-diagram (max-width: 440px) {
+  .lab-diagram {
+    min-width: 440px;
+  }
+  .lesson-sim .lab-diagram-scroll-hint {
+    display: block;
+  }
+}
+.lab-diagram text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+}
+.lab-figure figcaption {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+@media (max-width: 700px) {
+  .lab-figure-heading {
+    font-size: 0.85rem;
+  }
+  .lab-figure {
+    padding: 10px;
+  }
+}

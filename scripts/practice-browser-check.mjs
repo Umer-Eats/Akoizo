@@ -196,6 +196,22 @@ async function layout(page, name) {
         false,
         `${name} ${theme} ${width}: overflow`,
       );
+      const misalignedOptions = await page.locator('.practice-option').evaluateAll((options) =>
+        options
+          .filter((option) => {
+            const input = option.querySelector('input').getBoundingClientRect();
+            const text = option.querySelector('span').getBoundingClientRect();
+            const row = option.getBoundingClientRect();
+            return (
+              input.width !== 18 ||
+              input.height !== 18 ||
+              text.left - input.right !== 8 ||
+              text.right > row.right
+            );
+          })
+          .map((option) => option.textContent),
+      );
+      assert.deepEqual(misalignedOptions, [], `${name} ${theme} ${width}: compact aligned choices`);
       if (width !== 320)
         await page.screenshot({ path: `documents/qa/practice-${name}-${theme}-${width}.png` });
     }
@@ -227,15 +243,19 @@ try {
   await auth.close();
   const { page } = await account('student');
   await page.goto(base + '/dashboard/student/events/heredity/practice-tests');
-  await expect(page.locator('.practice-test-list li')).toHaveCount(3);
-  await expect(page.locator('.practice-difficulty')).toHaveCount(3);
+  const heredityPapers = listPracticeTests('B', 'heredity');
+  await expect(page.locator('.practice-test-list li')).toHaveCount(heredityPapers.length);
+  await expect(page.locator('.practice-difficulty')).toHaveCount(heredityPapers.length);
   for (const difficulty of ['Easy', 'Medium', 'Hard']) {
     await page.getByLabel('Difficulty', { exact: true }).selectOption(difficulty);
-    await expect(page.locator('.practice-test-list li')).toHaveCount(1);
-    await expect(page.locator('.practice-difficulty')).toHaveText(difficulty);
+    const expected = heredityPapers.filter((paper) => paper.difficulty === difficulty);
+    await expect(page.locator('.practice-test-list li')).toHaveCount(expected.length);
+    await expect(page.locator('.practice-difficulty')).toHaveText(expected.map(() => difficulty));
   }
   await page.getByLabel('Level', { exact: true }).selectOption('unreported');
-  await expect(page.locator('.practice-test-list li')).toHaveCount(1);
+  await expect(page.locator('.practice-test-list li')).toHaveCount(
+    heredityPapers.filter((paper) => paper.difficulty === 'Hard' && paper.level === null).length,
+  );
   await page.getByRole('button', { name: 'Clear filters' }).click();
   await expect(page.getByLabel('Difficulty', { exact: true })).toHaveValue('');
   await page.getByLabel('Search practice tests').fill('BullSO');
@@ -364,6 +384,12 @@ try {
       'lake-erie-niagara-2018-circuit-lab-c',
       'ut-austin-2019-protein-modeling-c',
       'mit-2020-botany-c',
+      'kenston-2018-anatomy-b',
+      'kraemer-2017-anatomy-b',
+      'phoenix-2012-disease-detectives-b',
+      'menomonie-2021-heredity-b',
+      'gopher-2019-heredity-b',
+      'kraemer-2017-thermodynamics-b',
     ]) {
       const paper = practiceTests.find((t) => t.id === id);
       if (paper.division !== division) continue;

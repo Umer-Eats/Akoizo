@@ -150,7 +150,11 @@ test('difficulty is assessed independently of competition level and combines wit
 });
 
 test('catalog enforces the current season, event and student division', () => {
-  assert.equal(listPracticeTests('B', 'heredity').length, 3);
+  const heredity = listPracticeTests('B', 'heredity');
+  assert.ok(heredity.length >= 5);
+  assert.ok(heredity.every((paper) => paper.division === 'B' && paper.eventId === 'heredity'));
+  assert.ok(heredity.some((paper) => paper.id === 'menomonie-2021-heredity-b'));
+  assert.ok(heredity.some((paper) => paper.id === 'gopher-2019-heredity-b'));
   assert.equal(listPracticeTests('B', 'water-quality').length, 1);
   assert.ok(listPracticeTests('B', 'meteorology').length > 0);
   assert.throws(() => listPracticeTests('B', 'astronomy'), { status: 404 });

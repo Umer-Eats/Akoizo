@@ -171,6 +171,7 @@ export const anatomyLessons: EventLessons = {
       simulation: {
         kind: 'investigation',
         title: 'Identify an unknown tissue section',
+        diagram: 'tissue-section',
         instructions:
           'Open the observations, then decide which structure best explains all of them.',
         observations: [

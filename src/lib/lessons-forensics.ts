@@ -2590,6 +2590,7 @@ export const forensicsLessons: EventLessons = {
       simulation: {
         kind: 'investigation',
         title: 'STR comparison laboratory',
+        diagram: 'str',
         instructions: 'Reveal two loci and the quality statement before comparing candidates.',
         observations: [
           {
@@ -2986,6 +2987,7 @@ export const forensicsLessons: EventLessons = {
       simulation: {
         kind: 'investigation',
         title: 'Glass comparison laboratory',
+        diagram: 'glass',
         instructions: 'Open the measured intervals and compare the evidence fairly.',
         observations: [
           {
