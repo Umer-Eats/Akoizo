@@ -1,0 +1,51 @@
+.lessons-workspace { display: grid; gap: 18px; }
+.lessons-intro h2 { margin: 4px 0; }
+.lessons-units { display: flex; flex-wrap: wrap; gap: 8px; }
+.unit-button {
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.unit-button[aria-pressed='true'] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.lessons-unit-detail { border: 1px solid var(--line); padding: 14px; background: var(--surface); }
+.lessons-list { display: grid; gap: 8px; margin-top: 10px; }
+.lesson-button {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  border: 1px solid var(--line); background: var(--surface-2);
+  padding: 12px; cursor: pointer; text-align: left; color: var(--text);
+}
+.lesson-button[aria-pressed='true'] { border-color: var(--blue); outline: 2px solid var(--blue); }
+.lesson-button small { color: var(--muted); }
+.lesson-detail { border: 1px solid var(--line); padding: 16px; background: var(--surface); display: grid; gap: 14px; }
+.lesson-tabs { display: flex; gap: 8px; }
+.lesson-tabs button { border: 1px solid var(--line-strong); background: transparent; color: var(--text); padding: 8px 14px; cursor: pointer; }
+.lesson-tabs button[aria-pressed='true'] { background: var(--text); color: var(--bg); }
+.lesson-video iframe { width: 100%; min-height: 360px; border: 1px solid var(--line); }
+.lesson-video-placeholder { border: 1px dashed var(--line-strong); padding: 14px; }
+.lesson-objectives ul { margin: 6px 0 0 18px; }
+.lesson-section p { margin: 8px 0; line-height: 1.6; }
+.lesson-terms dl { display: grid; gap: 8px; }
+.lesson-terms div { border-left: 3px solid var(--blue); padding-left: 10px; }
+.lesson-terms dt { font-weight: 700; }
+.lesson-terms dd { margin: 2px 0 0; color: var(--muted); }
+.lesson-sim { border: 1px solid var(--line-strong); padding: 14px; background: var(--surface-2); display: grid; gap: 10px; }
+.sim-slider { display: grid; gap: 6px; }
+.sim-outcome { border: 1px solid var(--line); padding: 10px; }
+.sim-cards { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.sim-card { border: 1px solid var(--line-strong); padding: 12px; min-height: 110px; background: var(--surface); cursor: pointer; color: var(--text); display: grid; gap: 6px; text-align: left; }
+.sim-card[data-flipped='true'] { background: var(--accent-soft); }
+.sim-options, .sim-nav, .quiz-options { display: grid; gap: 8px; }
+.sim-option, .quiz-option { border: 1px solid var(--line-strong); padding: 10px; cursor: pointer; display: flex; gap: 8px; align-items: flex-start; }
+.sim-option[data-picked='true'] { outline: 2px solid var(--blue); }
+.quiz-option[data-selected='true'] { outline: 2px solid var(--blue); }
+.quiz-question { border: 1px solid var(--line); padding: 12px; display: grid; gap: 8px; }
+.quiz-written textarea { width: 100%; min-height: 80px; }
+.quiz-review { background: var(--surface-2); border: 1px solid var(--line); padding: 10px; }
+.lesson-quiz { border-top: 2px solid var(--line-strong); padding-top: 12px; display: grid; gap: 12px; }
+.quiz-result { border: 1px solid var(--line-strong); padding: 10px; }
+.sim-checklist { list-style: none; padding: 0; display: grid; gap: 8px; }
+.sim-checklist li label { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--line); padding: 10px; }

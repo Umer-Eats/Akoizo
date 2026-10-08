@@ -43,6 +43,8 @@ import {
 } from '@/lib/domain';
 import { useAuth, authMessage } from './auth-context';
 import { PracticeLibrary } from './practice';
+import { LessonsView } from './lessons';
+import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
 const icons = {
@@ -862,6 +864,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     );
   }
   const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
+  const course = toolId === 'lessons' ? lessonsForEvent(event.id) : null;
   return (
     <main id="main" className="page-container event-workspace">
       <div className="event-workspace-grid">
@@ -896,6 +899,8 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
           </div>
           {toolId === 'practice-tests' ? (
             <PracticeLibrary eventId={event.id} />
+          ) : toolId === 'lessons' && course ? (
+            <LessonsView course={course} />
           ) : (
             <section
               className={`empty-state tool-placeholder${toolId === 'rules' ? ' rules-panel' : ''}`}
