@@ -155,7 +155,17 @@ test('catalog enforces the current season, event and student division', () => {
   assert.ok(heredity.every((paper) => paper.division === 'B' && paper.eventId === 'heredity'));
   assert.ok(heredity.some((paper) => paper.id === 'menomonie-2021-heredity-b'));
   assert.ok(heredity.some((paper) => paper.id === 'gopher-2019-heredity-b'));
-  assert.equal(listPracticeTests('B', 'water-quality').length, 1);
+  const waterQualityB = listPracticeTests('B', 'water-quality');
+  assert.ok(
+    waterQualityB.every((paper) => paper.division === 'B' && paper.eventId === 'water-quality'),
+  );
+  for (const id of [
+    'greenbrier-2026-water-quality-b',
+    'milpitas-2026-water-quality-b',
+    'pembroke-2026-water-quality-b',
+  ]) {
+    assert.ok(waterQualityB.some((paper) => paper.id === id));
+  }
   assert.ok(listPracticeTests('B', 'meteorology').length > 0);
   assert.throws(() => listPracticeTests('B', 'astronomy'), { status: 404 });
   assert.throws(() => findPracticeTest('B', 'columbia-2023-anatomy-c'), { status: 404 });

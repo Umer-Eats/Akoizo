@@ -15491,1496 +15491,1665 @@
     "topics": ["Milk and dairy", "Nutrition", "Proteins and lipids", "Cheese and butter"],
     "alignment": "The 2016 milk-and-dairy rotation matches the 2027 Food Science B written topics. The paper also asks broader food comparisons and dairy history. Labels, health claims, and the published key are historical. This is the complete written paper; the practical lab and notebook are separate event components.",
     "instructions": "The paper gives 1 point for each question 1–27 and 25 points across written questions 42–54. It does not specify weights for questions 28–41: these receive 1 practice point each, all correct selections required. The two tiebreakers remain available for feedback but carry 0 points. Total practice scale: 66 points. Enter chemical structures as a condensed structural formula or describe the bonds in words. Question 53 requires working as well as the final mass.",
-    "sourceUrl": "https://scioly.org/wiki/Scioly.org:Test_Exchange#Food_Science",
-    "paperUrl": "https://scioly.org/w/images/e/ef/Wicklund_2016_Food_Science_Test.pdf",
-    "keyUrl": "https://scioly.org/w/images/d/dc/Wicklund_2016_Food_Science_Key.pdf",
+    "sourceUrl": "https://scioly.org/tests/oZdxPOZn3QY",
+    "paperUrl": "/practice/wicklund-2016-food-science-b/test.pdf",
+    "keyUrl": "/practice/wicklund-2016-food-science-b/key.pdf",
     "difficulty": "Medium",
     "difficultyReason": "Dairy chemistry recall is combined with lab-procedure explanations and food-science applications.",
     "levelEvidence": null,
     "topicMatch": "current",
     "season": 2027,
-    "reviewedOn": "2026-10-07",
+    "reviewedOn": "2026-10-09",
     "minutes": 50,
     "rulesUrl": "/rules/2027/b/food-science.pdf",
     "questions": [
       {
         "id": "1",
-        "label": "Question 1",
+        "label": "1",
         "page": 2,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "The process of modifying the molecular structure of a protein, or cooked protein, is called ____________.",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "esterification"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "fermentation"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "denaturation"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "pickling"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "coagulation"
           }
         ]
       },
       {
         "id": "2",
-        "label": "Question 2",
+        "label": "2",
         "page": 2,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following does not contain carbohydrates?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "wheat"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "apple"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "tomato"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "milk"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "corn oil"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "none of the above"
           }
         ]
       },
       {
         "id": "3",
-        "label": "Question 3",
+        "label": "3",
         "page": 2,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "The only animal-based carbohydrates is _____.",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "glucose"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "lactose"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "fructose"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "galactose"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "monosaccharides"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "disaccharides"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "maltose"
           },
           {
             "id": "H",
-            "text": "H"
+            "text": "honey"
           },
           {
             "id": "I",
-            "text": "I"
+            "text": "sucrose"
           }
         ]
       },
       {
         "id": "4",
-        "label": "Question 4",
+        "label": "4",
         "page": 2,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following is not a type of lipids?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "fat"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "wax"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "lecithin"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "oil"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "none of the above"
           }
         ]
       },
       {
         "id": "5",
-        "label": "Question 5",
+        "label": "5",
         "page": 2,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following is not true to trans fat?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Trans fat has been shown to both lower the good cholesterol in your body and raise the bad."
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Trans fats are easy to use, inexpensive to produce and last a long time."
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "When the Nutrition Facts label says a food contains \"0 g\" of trans fat, you are safe to eat as many servings as you like regarding trans fat intake per day."
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Trans fats give foods a desirable taste and texture."
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "A food generally contains artificial trans fat if its ingredient list contains any kind of partially hydrogenated vegetable oil, such as vegetable shortening or margarine."
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "None of the above."
           }
         ]
       },
       {
         "id": "6",
-        "label": "Question 6",
+        "label": "6",
         "page": 3,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which one of the following is not true about lactose intolerance?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Lactose intolerance is the same as milk allergy"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "People with lactose intolerance do not have enough of the enzyme lactase in their body."
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "People with lactose intolerance can consume lactose-free milk products."
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Lactose intolerance can cause uncomfortable symptoms such as nausea, cramping, bloating, abdominal pain, gas, and diarrhea."
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "None of the above"
           }
         ]
       },
       {
         "id": "7",
-        "label": "Question 7",
+        "label": "7",
         "page": 3,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "People with milk allergy are mainly allergic to _______ in milk?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "carbohydrates"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "protein"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "butterfat"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "vitamins"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "minerals"
           }
         ]
       },
       {
         "id": "8",
-        "label": "Question 8",
+        "label": "8",
         "page": 3,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "For those with lactose intolerance, ________ can be used as a source of calcium.",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "skimmed milk"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "sour cream"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "condensed milk"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "cheddar cheese"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "cottage cheese"
           }
         ]
       },
       {
         "id": "9",
-        "label": "Question 9",
+        "label": "9",
         "page": 3,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following cheese has higher calcium and low sodium compared to others?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Blue"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Brie"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Monterey Jack"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Process American"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Swiss"
           }
         ]
       },
       {
         "id": "10",
-        "label": "Question 10",
+        "label": "10",
         "page": 3,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Making which of the following food does not involve the process of fermentation?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Beer"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Bread"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Ice cream"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Yogurt"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Vinegar"
           }
         ]
       },
       {
         "id": "11",
-        "label": "Question 11",
+        "label": "11",
         "page": 4,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following factor does not affect milk composition including fat and solids-not-fat?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "individual cow"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "different breeds"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "underfeeding"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "age of cow"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "stage of lactation"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "none of the above"
           }
         ]
       },
       {
         "id": "12",
-        "label": "Question 12",
+        "label": "12",
         "page": 4,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following cheese milk yields the most amount of cheddar cheese using the same method?",
+        "context": "Refer to the table of milk composition by species:\n- Cow: water 87.3, fat 3.9, casein 2.6, whey protein 0.6, lactose 4.6, energy 66 kcal/100g\n- Dolphin: water 58.3, fat 33.0, casein 3.9, whey protein 2.9, lactose 1.1, energy 329 kcal/100g\n- Pig: water 81.2, fat 6.8, casein 2.8, whey protein 2.0, lactose 5.5, energy 102 kcal/100g\n- Rabbit: water 67.2, fat 15.3, casein 9.3, whey protein 4.6, lactose 2.1, energy 202 kcal/100g\n- Sheep: water 82.0, fat 7.2, casein 3.9, whey protein 0.7, lactose 4.8, energy 102 kcal/100g",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "cow’s milk"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "dolphin’s milk"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "pig’s milk"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "rabbit’s milk"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "sheep’s milk"
           }
         ]
       },
       {
         "id": "13",
-        "label": "Question 13",
+        "label": "13",
         "page": 4,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Saturated fats are ___________ .",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "single bonds"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "double bonds"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "triple bonds"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "3+ bonds"
           }
         ]
       },
       {
         "id": "14",
-        "label": "Question 14",
+        "label": "14",
         "page": 4,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "How many percentage of protein is contained in 2% cow’s milk?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "1.2%"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "2.0%"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "2.2%"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "3.4%"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "4.0%"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "5.5%"
           }
         ]
       },
       {
         "id": "15",
-        "label": "Question 15",
+        "label": "15",
         "page": 5,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "After milk mixed with water, milk’s density _________.",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "increases"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "decreases"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "stays the same"
           }
         ]
       },
       {
         "id": "16",
-        "label": "Question 16",
+        "label": "16",
         "page": 5,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Where will digested carbohydrates be absorbed in the human body?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "mouth"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "stomach"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "liver"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "small intestine"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "large intestine"
           }
         ]
       },
       {
         "id": "17",
-        "label": "Question 17",
+        "label": "17",
         "page": 5,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "In 1877 ________________ distinguished three proteins in milk: casein, lactalbumin and lactoglobulin.",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "O. Hammarsten"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "A. Fourcroy"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "G. J. Mulder"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "J. J. Berzelius"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "C. Voit"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "F. Sanger"
           }
         ]
       },
       {
         "id": "18",
-        "label": "Question 18",
+        "label": "18",
         "page": 5,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "The key enzyme in the regulation of fatty acid synthesis is",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Acetyl CoA carboxylase"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "AMP activated protein kinase"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Protein phosphatase"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Ribulase"
           }
         ]
       },
       {
         "id": "19",
-        "label": "Question 19",
+        "label": "19",
         "page": 5,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "The main purpose of homogeneous is",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "broken casein micelles"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "broken curd"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "crushing fat globules"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "sterilization"
           }
         ]
       },
       {
         "id": "20",
-        "label": "Question 20",
+        "label": "20",
         "page": 6,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Based on the Code of Federal Regulations by the U.S. Food and Drug Administration, the following product can,",
+        "context": "Refer to the Nutrition Facts label on page 6:\n- Serving Size 34 Pieces (40g)\n- Calories 170, Calories from Fat 60\n- Total Fat 7g (10% DV), Saturated Fat 6g (30% DV), Trans Fat 0g\n- Cholesterol 0mg (0% DV)\n- Sodium 20mg (1% DV)\n- Total Carbohydrate 29g (10% DV), Dietary Fiber less than 1g (2% DV), Sugars 25g\n- Protein 1g",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "claim to be cholesterol free"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "claim to be fat free"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "claim to be sugar free"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "claim to be energy free"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "none of the above"
           }
         ]
       },
       {
         "id": "21",
-        "label": "Question 21",
+        "label": "21",
         "page": 6,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "How much water is typically contained in ice cream (in percentage by weight)?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "10%"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "20%"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "30%"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "40%"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "50%"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "60%"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "70%"
           },
           {
             "id": "H",
-            "text": "H"
+            "text": "80%"
           }
         ]
       },
       {
         "id": "22",
-        "label": "Question 22",
+        "label": "22",
         "page": 6,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "What is the main purpose of adding polysaccharides when making ice cream?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "To complete the syneresis process"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "To increase the viscosity"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "To destabilize the fat globules"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "To soften the final product"
           }
         ]
       },
       {
         "id": "23",
-        "label": "Question 23",
+        "label": "23",
         "page": 6,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "For a fat-free cheese that contains 55% water, what type is it?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "extra hard"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Hard"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "semisolid"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "soft"
           }
         ]
       },
       {
         "id": "24",
-        "label": "Question 24",
+        "label": "24",
         "page": 7,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Vitamins A, D, E, and K are found within the milk __________ portion of the milk.",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "fat"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "protein"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "carbohydrate"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "water"
           }
         ]
       },
       {
         "id": "25",
-        "label": "Question 25",
+        "label": "25",
         "page": 7,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "A cheese that contains 55% of fat is:",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "double cream cheese"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "cream cheese"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "fat cheese"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "skim cheese"
           }
         ]
       },
       {
         "id": "26",
-        "label": "Question 26",
+        "label": "26",
         "page": 7,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Which of the following is describing the process of making cheddar?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "The curd is washed in warm water, lowering its acidity and making for a milder-tasting cheese"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "The cut curd is repeatedly piled up, pushing more moisture away. The curd is also mixed (or milled) for a long time, taking the sharp edges off the cut curd pieces and influencing the final product's texture."
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "The curd is stretched and kneaded in hot water, developing a stringy, fibrous body."
           }
         ]
       },
       {
         "id": "27",
-        "label": "Question 27",
+        "label": "27",
         "page": 7,
         "type": "mcq",
+        "multiple": false,
         "points": 1,
+        "prompt": "Folic acid is also known as what vitamin?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Vitamin A"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Vitamin B1"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Vitamin B2"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Vitamin B9"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Vitamin B12"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "Vitamin C"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "Vitamin D"
           },
           {
             "id": "H",
-            "text": "H"
+            "text": "Vitamin E"
           },
           {
             "id": "I",
-            "text": "I"
+            "text": "Vitamin K"
           }
         ]
       },
       {
         "id": "28",
-        "label": "Question 28",
+        "label": "28",
         "page": 7,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "What are true about amino acids,",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Amino acids having both the amine and the carboxylic acid groups attached to the first (alpha-) carbon atom are known as α-amino acids"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Protein is composed of twenty-one amino acids, among which eleven are made by your body."
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "The amino acids that can be made by your body are called essential."
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Milk contains all essential amino acids."
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "None of the above."
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "29",
-        "label": "Question 29",
+        "label": "29",
         "page": 8,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Salt has multiple roles in cheese besides adding a salty flavor, which of the follows are true?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "destabilizes the fat globules, favoring their aggregation during the ripening process"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "preserves cheese from spoiling"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "the action of the salt on the cheese causes it to (partially) melt, absorbing latent heat and bringing the mixture below the freezing point of pure water"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "draws moisture from the curd"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "firms cheese’s texture in an interaction with its proteins."
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "30",
-        "label": "Question 30",
+        "label": "30",
         "page": 8,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Which of the following are true about the role of protein,",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Protein builds and maintains muscles, organs, connective tissues, skin, bones, teeth, blood, and your DNA"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Protein contributes to the formation of enzymes"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "antibodies in your blood is a kind of protein"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Protein is found in hormones"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Protein is your body and brain's main source of fuel"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "None of the above"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "31",
-        "label": "Question 31",
+        "label": "31",
         "page": 8,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Which of the following contain saturated fat?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "fish oil"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "lard"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "butter"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "peanut oil"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "coconut oil"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "32",
-        "label": "Question 32",
+        "label": "32",
         "page": 8,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Milk is an outstanding source of what two elements important in bone growth?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Sodium"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Phosphorus"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Potassium"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Magnesium"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Chloride"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "Calcium"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "33",
-        "label": "Question 33",
+        "label": "33",
         "page": 8,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Which of the following must be listed in the ingredients list if they are used in the food in order for people with allergies be aware of?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "soy"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "milk"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "oil"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "rice"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "banana"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "caseinates"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "potato"
           },
           {
             "id": "H",
-            "text": "H"
+            "text": "cucumber"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "34",
-        "label": "Question 34",
+        "label": "34",
         "page": 9,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Which of the following foods make sense to buy organic?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "onion"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "sweet corn"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "pineapple"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "mango"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "watermelon"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "eggplant"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "cheese"
           },
           {
             "id": "H",
-            "text": "H"
+            "text": "milk"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "35",
-        "label": "Question 35",
+        "label": "35",
         "page": 9,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "What of the following are true about fat-soluble vitamins?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "All essential fat-soluble vitamins are found in milk."
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "They are stored in the body's fatty tissue and in the liver, and they can be stored for long periods of time."
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "They are absorbed through the small intestine."
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "They are more prone to toxicity than the water-soluble vitamins."
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "In food, they are easily lost as a result of poor storage or excessive cooking."
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "36",
-        "label": "Question 36",
+        "label": "36",
         "page": 9,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Which of the following are true about butter?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "The most common form of butter is made from cows' milk, but it can also be made from the milk of other mammals."
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Ghee has a lower content of butterfat than butter."
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Butter’s density is similar to that of ice."
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Butterfat consists of many moderate-sized, saturated hydrocarbon chain fatty acids, which are triglycerides."
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "None of the above."
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "37",
-        "label": "Question 37",
+        "label": "37",
         "page": 9,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "Which of the following cheese are unripened cheese?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Swiss"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "cottage cheese"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "blue cheese"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "cheddar"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "cream cheese"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "mozzarella"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "feta"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "38",
-        "label": "Question 38",
+        "label": "38",
         "page": 9,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "The milk of what two animals would most likely have been used to make the earliest butter?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Cow"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Sheep"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Goat"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Dog"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Horse"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "Pig"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "Rabbit"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "39",
-        "label": "Question 39",
+        "label": "39",
         "page": 9,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "What processes are used to kill bacteria and other microbes in dairy products?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Ultrafiltration"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Maturation"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Coagulation"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Pasteurization"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Homogenization"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "Microfiltration"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "40",
-        "label": "Question 40",
+        "label": "40",
         "page": 10,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "What are the two essential fatty acids that human must get from food?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Myristoleic acid"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Palmitoleic acid"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Sapienic acid"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Oleic acid"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Vaccenic acid"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "Elaidic acid"
           },
           {
             "id": "G",
-            "text": "G"
+            "text": "Linoleic acid"
           },
           {
             "id": "H",
-            "text": "H"
+            "text": "Linoelaidic acid"
           },
           {
             "id": "I",
-            "text": "I"
+            "text": "α-Linolenic acid"
           },
           {
             "id": "J",
-            "text": "J"
+            "text": "Arachidonic acid"
           },
           {
             "id": "K",
-            "text": "K"
+            "text": "Eicosapentaenoic acid"
           },
           {
             "id": "L",
-            "text": "L"
+            "text": "Erucic acid"
           },
           {
             "id": "M",
-            "text": "M"
+            "text": "Docosahexaenoic acid"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "41",
-        "label": "Question 41",
+        "label": "41",
         "page": 10,
         "type": "mcq",
+        "multiple": true,
         "points": 1,
+        "prompt": "What is the two main steps for manufacturing cheese?",
+        "context": "",
         "options": [
           {
             "id": "A",
-            "text": "A"
+            "text": "Pasteurization"
           },
           {
             "id": "B",
-            "text": "B"
+            "text": "Ultrafiltration"
           },
           {
             "id": "C",
-            "text": "C"
+            "text": "Maturation"
           },
           {
             "id": "D",
-            "text": "D"
+            "text": "Coagulation"
           },
           {
             "id": "E",
-            "text": "E"
+            "text": "Homogenization"
           },
           {
             "id": "F",
-            "text": "F"
+            "text": "Microfiltration"
           }
-        ],
-        "multiple": true
+        ]
       },
       {
         "id": "42",
-        "label": "Question 42",
+        "label": "42",
         "page": 10,
         "type": "frq",
-        "points": 1
-      },
-      {
-        "id": "43-1",
-        "label": "Question 43-1",
-        "page": 10,
-        "type": "frq",
-        "points": 1
-      },
-      {
-        "id": "43-2",
-        "label": "Question 43-2",
-        "page": 10,
-        "type": "frq",
+        "multiple": false,
         "points": 1,
-        "prompt": "General structural formula"
+        "prompt": "Other than acid, what else can be used in industry to make cheese?",
+        "context": ""
       },
       {
-        "id": "43-3",
-        "label": "Question 43-3",
+        "id": "43_1",
+        "label": "43.1",
         "page": 10,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fruity Co. is working on a new type of yogurt. Based on their research, orange flavor is the most popular. However, adding orange juice would destroy the texture. So they decide to use additives for orange flavor yogurt. \n1) What kind of compound should they use?",
+        "context": ""
+      },
+      {
+        "id": "43_2",
+        "label": "43.2",
+        "page": 10,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fruity Co. is working on a new type of yogurt. Based on their research, orange flavor is the most popular. However, adding orange juice would destroy the texture. So they decide to use additives for orange flavor yogurt. \n2) What is the general chemical formula for it?",
+        "context": ""
+      },
+      {
+        "id": "43_3",
+        "label": "43.3",
+        "page": 10,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fruity Co. is working on a new type of yogurt. Based on their research, orange flavor is the most popular. However, adding orange juice would destroy the texture. So they decide to use additives for orange flavor yogurt. \n3) Which specific one would bring in orange flavor?",
+        "context": ""
       },
       {
         "id": "44",
-        "label": "Question 44",
+        "label": "44",
         "page": 10,
         "type": "frq",
+        "multiple": false,
         "points": 1,
-        "prompt": "Feature shared by unsaturated lipids"
+        "prompt": "Chemically, what is common to all unsaturated lipids?",
+        "context": ""
       },
       {
         "id": "45",
-        "label": "Question 45",
+        "label": "45",
         "page": 10,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "Proteins are composed of what type of small molecules?",
+        "context": ""
       },
       {
         "id": "46",
-        "label": "Question 46",
+        "label": "46",
         "page": 11,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "What is missing from human body that made the two essential fatty acids essential?",
+        "context": ""
       },
       {
         "id": "47",
-        "label": "Question 47",
+        "label": "47",
         "page": 11,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "What is the type of the amino acid that contained the most in cow’s whole milk?",
+        "context": ""
       },
       {
-        "id": "48-1",
-        "label": "Question 48-1",
+        "id": "48_1",
+        "label": "48.1",
         "page": 11,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "Milk casein precipitates at pH value 1)________",
+        "context": ""
       },
       {
-        "id": "48-2",
-        "label": "Question 48-2",
+        "id": "48_2",
+        "label": "48.2",
         "page": 11,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "and this pH value is known as 2)______________ .",
+        "context": ""
       },
       {
         "id": "49",
-        "label": "Question 49",
+        "label": "49",
         "page": 11,
         "type": "frq",
+        "multiple": false,
         "points": 1,
-        "prompt": "Why cream is agitated to make butter"
+        "prompt": "Why must one shake or agitate heavy cream in able to create butter?",
+        "context": ""
       },
       {
         "id": "50",
-        "label": "Question 50",
+        "label": "50",
         "page": 11,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "What is the chemical formula for lactose?",
+        "context": ""
       },
       {
         "id": "51",
-        "label": "Question 51",
+        "label": "51",
         "page": 11,
         "type": "frq",
+        "multiple": false,
         "points": 3,
-        "prompt": "The three key butter aroma substances"
+        "prompt": "What three key aroma substances are contained in butter?",
+        "context": ""
       },
       {
         "id": "52",
-        "label": "Question 52",
+        "label": "52",
         "page": 11,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "When starter bacteria are added to milk, milk sugars are converted to a chemical called _____________________.",
+        "context": ""
       },
       {
         "id": "53",
-        "label": "Question 53",
+        "label": "53",
         "page": 11,
         "type": "frq",
+        "multiple": false,
         "points": 3,
-        "prompt": "Ideal cheese yield using the supplied milk label; include working"
+        "prompt": "If one container of the following milk is used to make cheese, how many grams of cheese can be made under ideal conditions? Assume the moisture level of the yield cheese is 60%. Please show your work.",
+        "context": "Refer to the Nutrition Facts label on page 11:\n- Serving Size 1 cup (236 mL)\n- Servings Per Container 16\n- Total Fat 0g\n- Sodium 190mg\n- Total Carbohydrate 18g, Sugars 18g\n- Protein 13g\n- Calcium 45%"
       },
       {
-        "id": "54-1a",
-        "label": "Question 54-1a",
+        "id": "54_1a",
+        "label": "54.1a",
         "page": 12,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "Based on the nutrition label, calculate the Calories in one serving of this product:\na) Calories from fat _______________.",
+        "context": "Refer to the Nutrition Facts label on page 12:\n- Serving Size 2 Tbsp. (30mL)\n- Servings Per Container 32\n- Total Fat 3g (5% DV), Saturated Fat 2g (10% DV), Trans Fat 0g\n- Cholesterol 15mg (4% DV)\n- Sodium 15mg (1% DV)\n- Total Carbohydrate 1g (0% DV), Dietary Fiber 0g (0% DV), Sugars 1g\n- Protein 1g\n- Vitamin A 2%, Vitamin C 0%, Calcium 4%, Iron 0%"
       },
       {
-        "id": "54-1b",
-        "label": "Question 54-1b",
+        "id": "54_1b",
+        "label": "54.1b",
         "page": 12,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "Based on the nutrition label, calculate the Calories in one serving of this product:\nb) Calories from protein ______________.",
+        "context": "Refer to the Nutrition Facts label on page 12."
       },
       {
-        "id": "54-1c",
-        "label": "Question 54-1c",
+        "id": "54_1c",
+        "label": "54.1c",
         "page": 12,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "Based on the nutrition label, calculate the Calories in one serving of this product:\nc) Total Calories in one serving ________________.",
+        "context": "Refer to the Nutrition Facts label on page 12."
       },
       {
-        "id": "54-2",
-        "label": "Question 54-2",
+        "id": "54_2",
+        "label": "54.2",
         "page": 12,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "If the daily value for Calcium is 1000 mg per day, calculate the amount (in mg) of Calcium contained in 2 servings of this product.",
+        "context": "Refer to the Nutrition Facts label on page 12."
       },
       {
-        "id": "54-3",
-        "label": "Question 54-3",
+        "id": "54_3",
+        "label": "54.3",
         "page": 12,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "If % Daily Values are based on a 2,500 Calories diet instead of 2000, what should the % Daily Values be for Saturated Fat?",
+        "context": "Refer to the Nutrition Facts label on page 12."
       },
       {
-        "id": "54-4",
-        "label": "Question 54-4",
+        "id": "54_4",
+        "label": "54.4",
         "page": 12,
         "type": "frq",
-        "points": 1
+        "multiple": false,
+        "points": 1,
+        "prompt": "For an adult on a 2000 calorie diet, what is the maximum amount (in ml) of this product that he can consume per day based on Recommended Daily Limits listed on the label?",
+        "context": "Refer to the Nutrition Facts label on page 12."
       },
       {
-        "id": "TB-1",
+        "id": "tb-1",
         "label": "Tiebreaker 1",
         "page": 12,
         "type": "frq",
         "points": 0,
-        "prompt": "Why milk appears white; unscored tiebreaker"
+        "prompt": "Why is milk white? (Tiebreaker; unscored.)",
+        "context": "Tiebreakers decide ties only and do not count toward the practice total."
       },
       {
-        "id": "TB-2",
+        "id": "tb-2",
         "label": "Tiebreaker 2",
         "page": 12,
         "type": "frq",
         "points": 0,
-        "prompt": "Vitamin C structure; unscored tiebreaker"
+        "prompt": "What is the chemical structure of Vitamin C? (Tiebreaker; unscored.)",
+        "context": "Tiebreakers decide ties only and do not count toward the practice total."
       }
     ],
     "keys": {
@@ -17110,53 +17279,47 @@
       "42": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Rennet",
-            "accepted": ["Rennet", "enzyme", "enzymes", "rennet enzyme", "chymosin"]
+            "answer": "enzyme (rennet)",
+            "accepted": ["enzyme", "rennet"]
           }
         ]
       },
       "44": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "At least one carbon-carbon double bond",
-            "accepted": [
-              "At least one carbon-carbon double bond",
-              "at least one double bond",
-              "one or more double bonds",
-              "a carbon-carbon double bond",
-              "C=C"
-            ]
+            "answer": "at least 1 double bond",
+            "accepted": ["at least 1 double bond", "double bond", "double bonds"]
           }
         ]
       },
       "45": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Amino acids",
-            "accepted": ["Amino acids", "amino acid"]
+            "answer": "Amino Acid",
+            "accepted": ["Amino Acid", "amino acids"]
           }
         ]
       },
       "46": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Desaturase enzymes",
-            "accepted": ["Desaturase enzymes", "desaturase", "desaturases", "desaturase enzyme"]
+            "answer": "desaturase enzymes",
+            "accepted": ["desaturase enzymes", "desaturase", "desaturases"]
           }
         ]
       },
       "47": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
             "answer": "Glutamic acid",
             "accepted": ["Glutamic acid", "glutamate"]
@@ -17166,216 +17329,193 @@
       "49": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Agitation breaks fat-globule membranes, allowing fat to join together."
+            "answer": "To break apart the membranes so the fat molecules can join",
+            "accepted": [
+              "To break apart the membranes so the fat molecules can join",
+              "break membranes",
+              "disrupt fat globule membrane"
+            ]
           }
         ]
       },
       "50": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
             "answer": "C12H22O11",
-            "accepted": ["C12H22O11", "C₁₂H₂₂O₁₁"]
+            "accepted": ["C12H22O11"]
           }
         ]
       },
       "51": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 3,
-            "answer": "1 point each: diacetyl; (R)-delta-decalactone; butyric acid."
+            "answer": "1) Diacetyl 2) (R)-δ-Decalactone 3) Butyric acid",
+            "accepted": [
+              "Diacetyl, (R)-δ-Decalactone, Butyric acid",
+              "diacetyl, decalactone, butyric acid"
+            ]
           }
         ]
       },
       "52": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Lactic acid",
-            "accepted": ["Lactic acid", "lactate"]
+            "answer": "lactic acid",
+            "accepted": ["lactic acid"]
           }
         ]
       },
       "53": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 3,
-            "answer": "426 g if using 82% casein, or 416 g if using 80% casein. Show the calculation using the container label, casein yield, and 60% cheese moisture; final mass alone does not demonstrate the requested work."
+            "answer": "426 grams (if 82% of protein is casein) or 416 grams (if 80% of protein is casein)",
+            "accepted": ["426", "416", "426g", "416g"]
           }
         ]
       },
-      "43-1": {
+      "43_1": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Ester",
-            "accepted": ["Ester", "esters"]
+            "answer": "ester",
+            "accepted": ["ester", "esters"]
           }
         ]
       },
-      "43-2": {
+      "43_2": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "RCO2R'",
-            "accepted": ["RCO2R'", "RCOOR'", "R-C(=O)-O-R'", "RCO₂R′"]
+            "answer": "RCO2R' or ester structure diagram",
+            "accepted": ["RCO2R'", "RCOOR'"]
           }
         ]
       },
-      "43-3": {
+      "43_3": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Octyl acetate",
-            "accepted": ["Octyl acetate", "octyl ethanoate"]
+            "answer": "octyl acetate",
+            "accepted": ["octyl acetate"]
           }
         ]
       },
-      "48-1": {
+      "48_1": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "pH 4.6",
-            "numeric": {
-              "value": 4.6,
-              "tolerance": 0,
-              "units": [],
-              "unitRequired": false
-            }
+            "answer": "4.6",
+            "accepted": ["4.6"]
           }
         ]
       },
-      "48-2": {
+      "48_2": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "Isoelectric point",
-            "accepted": ["Isoelectric point", "IEP", "pI"]
+            "answer": "isoelectric point (IEP)",
+            "accepted": ["isoelectric point", "IEP"]
           }
         ]
       },
-      "54-1a": {
+      "54_1a": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "27 Calories",
-            "numeric": {
-              "value": 27,
-              "tolerance": 0,
-              "units": ["Calories", "calories"],
-              "unitRequired": false
-            }
+            "answer": "27",
+            "accepted": ["27"]
           }
         ]
       },
-      "54-1b": {
+      "54_1b": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "4 Calories",
-            "numeric": {
-              "value": 4,
-              "tolerance": 0,
-              "units": ["Calories", "calories"],
-              "unitRequired": false
-            }
+            "answer": "4",
+            "accepted": ["4"]
           }
         ]
       },
-      "54-1c": {
+      "54_1c": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "35 Calories",
-            "numeric": {
-              "value": 35,
-              "tolerance": 0,
-              "units": ["Calories", "calories"],
-              "unitRequired": false
-            }
+            "answer": "35",
+            "accepted": ["35"]
           }
         ]
       },
-      "54-2": {
+      "54_2": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
             "answer": "80 mg",
-            "numeric": {
-              "value": 80,
-              "tolerance": 0,
-              "units": ["mg", "mg"],
-              "unitRequired": false
-            }
+            "accepted": ["80", "80 mg", "80mg"]
           }
         ]
       },
-      "54-3": {
+      "54_3": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "8 %",
-            "numeric": {
-              "value": 8,
-              "tolerance": 0,
-              "units": ["%", "%"],
-              "unitRequired": false
-            }
+            "answer": "8%",
+            "accepted": ["8%", "8"]
           }
         ]
       },
-      "54-4": {
+      "54_4": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 1,
-            "answer": "300 mL",
-            "numeric": {
-              "value": 300,
-              "tolerance": 0,
-              "units": ["mL", "ml"],
-              "unitRequired": false
-            }
+            "answer": "300 ml",
+            "accepted": ["300", "300 ml", "300ml"]
           }
         ]
       },
-      "TB-1": {
+      "tb-1": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 0,
-            "answer": "Milk fat globules and protein micelles scatter and absorb light."
+            "answer": "The color is influenced by scattering and absorption of light by milk fat globules and protein micelles."
           }
         ]
       },
-      "TB-2": {
+      "tb-2": {
         "criteria": [
           {
-            "id": "answer",
+            "id": "1",
             "points": 0,
-            "answer": "Vitamin C (ascorbic acid): C6H8O6. The published key prefers the full structural diagram over only the molecular formula."
+            "answer": "Ascorbic acid, C6H8O6.",
+            "accepted": ["C6H8O6", "ascorbic acid"]
           }
         ]
       }
     },
     "questionCount": 64,
-    "maxScore": 66
+    "maxScore": 66,
+    "sourceId": "oZdxPOZn3QY"
   },
   {
     "scoringBasis": "Published rubric",

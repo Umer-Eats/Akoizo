@@ -1,0 +1,176 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img "Scioly.org Logo" [ref=e6]
+    - generic [ref=e8] [cursor=pointer]
+  - generic [ref=e13]:
+    - generic [ref=e14]:
+      - text:  
+      - navigation [ref=e15]:
+        - generic [ref=e16]:
+          - menubar [ref=e17]:
+            - listitem [ref=e18]:
+              - link "Quick links" [ref=e19] [cursor=pointer]:
+                - /url: "#"
+                - generic [aria-hidden] [ref=e20]: 
+                - text: Quick links
+              - text:     
+            - listitem [ref=e21]:
+              - menuitem "FAQ" [ref=e22] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e23]: 
+                - text: FAQ
+            - listitem [ref=e24]:
+              - menuitem "Login" [ref=e25] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e26]: 
+                - text: Login
+            - listitem [ref=e27]:
+              - menuitem "Register" [ref=e28] [cursor=pointer]:
+                - generic [aria-hidden] [ref=e29]: 
+                - text: Register
+          - menubar [ref=e30]:
+            - listitem [ref=e31]:
+              - link "Scioly.org" [ref=e33] [cursor=pointer]:
+                - /url: https://scioly.org
+                - generic [aria-hidden] [ref=e34]: 
+                - text: Scioly.org
+              - generic [ref=e35]:
+                - text: ‹
+                - link "Forums" [ref=e36] [cursor=pointer]:
+                  - /url: ./index.php?sid=7b5ea182f6fb9e613c695cd69a3e9259
+            - text: 
+    - main [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e41]:
+          - heading "Login" [level=2] [ref=e42]
+          - group [ref=e43]:
+            - generic [ref=e44]:
+              - term [ref=e45]: "Username:"
+              - definition [ref=e46]:
+                - textbox "Username:" [active] [ref=e47]
+            - generic [ref=e48]:
+              - term [ref=e49]: "Password:"
+              - definition [ref=e50]:
+                - textbox "Password:" [ref=e51]
+              - definition [ref=e52]:
+                - link "I forgot my password" [ref=e53] [cursor=pointer]:
+                  - /url: /forums/app.php/user/forgot_password?sid=7b5ea182f6fb9e613c695cd69a3e9259
+              - definition [ref=e54]:
+                - link "Resend activation email" [ref=e55] [cursor=pointer]:
+                  - /url: ./ucp.php?mode=resend_act&sid=7b5ea182f6fb9e613c695cd69a3e9259
+            - generic [ref=e56]:
+              - definition [ref=e57]:
+                - generic [ref=e58]:
+                  - checkbox "Remember me" [ref=e59] [cursor=pointer]
+                  - text: Remember me
+              - definition [ref=e60]:
+                - generic [ref=e61]:
+                  - checkbox "Hide my online status this session" [ref=e62] [cursor=pointer]
+                  - text: Hide my online status this session
+            - generic [ref=e63]:
+              - term [ref=e64]
+              - definition [ref=e65]:
+                - button "Login" [ref=e66] [cursor=pointer]
+        - generic [ref=e69]:
+          - heading "Register" [level=3] [ref=e70]
+          - paragraph [ref=e71]: In order to login you must be registered. Registering takes only a few moments but gives you increased capabilities. The board administrator may also grant additional permissions to registered users. Before you register please ensure you are familiar with our terms of use and related policies. Please ensure you read any forum rules as you navigate around the board.
+          - paragraph [ref=e72]:
+            - strong [ref=e73]:
+              - link "Terms of use" [ref=e74] [cursor=pointer]:
+                - /url: ./ucp.php?mode=terms&sid=7b5ea182f6fb9e613c695cd69a3e9259
+              - text: "|"
+              - link "Privacy policy" [ref=e75] [cursor=pointer]:
+                - /url: ./ucp.php?mode=privacy&sid=7b5ea182f6fb9e613c695cd69a3e9259
+          - separator [ref=e76]
+          - paragraph [ref=e77]:
+            - link "Register" [ref=e78] [cursor=pointer]:
+              - /url: ./ucp.php?mode=register&sid=7b5ea182f6fb9e613c695cd69a3e9259
+    - contentinfo [ref=e79]:
+      - navigation [ref=e80]:
+        - menubar [ref=e82]:
+          - listitem [ref=e83]:
+            - link "Scioly.org" [ref=e85] [cursor=pointer]:
+              - /url: https://scioly.org
+              - generic [aria-hidden] [ref=e86]: 
+              - text: Scioly.org
+            - generic [ref=e87]:
+              - text: ‹
+              - link "Forums" [ref=e88] [cursor=pointer]:
+                - /url: ./index.php?sid=7b5ea182f6fb9e613c695cd69a3e9259
+          - text: 
+          - listitem [ref=e89]: All times are UTC-07:00
+          - listitem [ref=e90]:
+            - menuitem "Delete cookies" [ref=e91] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e92]: 
+              - text: Delete cookies
+          - listitem [ref=e93]:
+            - menuitem "Members" [ref=e94] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e95]: 
+              - text: Members
+          - listitem [ref=e96]:
+            - menuitem "The team" [ref=e97] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e98]: 
+              - text: The team
+      - text:  
+  - generic [ref=e101]:
+    - generic [ref=e102]:
+      - heading "Connect" [level=4] [ref=e103]
+      - paragraph [ref=e104]:
+        - link "Event Forums" [ref=e105] [cursor=pointer]:
+          - /url: /forums/viewforum.php?f=1
+      - paragraph [ref=e106]:
+        - link "Competition Forums" [ref=e107] [cursor=pointer]:
+          - /url: /forums/viewforum.php?f=6
+      - paragraph [ref=e108]:
+        - link "Online Chat" [ref=e109] [cursor=pointer]:
+          - /url: /chat
+    - generic [ref=e110]:
+      - heading "Learn" [level=4] [ref=e111]
+      - paragraph [ref=e112]:
+        - link "Wiki" [ref=e113] [cursor=pointer]:
+          - /url: /wiki
+      - paragraph [ref=e114]:
+        - link "Test Exchange" [ref=e115] [cursor=pointer]:
+          - /url: /tests
+      - paragraph [ref=e116]:
+        - link "Test Archive" [ref=e117] [cursor=pointer]:
+          - /url: /wiki/Test_Exchange_Archive
+      - paragraph [ref=e118]:
+        - link "Gallery" [ref=e119] [cursor=pointer]:
+          - /url: /gallery
+    - generic [ref=e120]:
+      - heading "Get Involved" [level=4] [ref=e121]
+      - paragraph [ref=e122]:
+        - link "Starting a Team" [ref=e123] [cursor=pointer]:
+          - /url: /wiki/Starting_A_Science_Olympiad_Team
+      - paragraph [ref=e124]:
+        - link "Test Writing Guide" [ref=e125] [cursor=pointer]:
+          - /url: /wiki/How_to_Write_a_Practice_Test
+      - paragraph [ref=e126]:
+        - 'link "Wiki: Needs Work" [ref=e127] [cursor=pointer]':
+          - /url: /wiki/Category:Needs_Work
+      - paragraph [ref=e128]:
+        - link "Volunteering" [ref=e129] [cursor=pointer]:
+          - /url: /wiki/Category:Student_Volunteer_Organizations
+    - generic [ref=e130]:
+      - heading "About" [level=4] [ref=e131]
+      - paragraph [ref=e132]:
+        - link "History" [ref=e133] [cursor=pointer]:
+          - /url: https://scioly.org/about
+      - paragraph [ref=e134]:
+        - link "Site Rules" [ref=e135] [cursor=pointer]:
+          - /url: https://scioly.org/rules
+      - paragraph [ref=e136]:
+        - link "Privacy Policy" [ref=e137] [cursor=pointer]:
+          - /url: https://scioly.org/rules#privacy-policy
+      - paragraph [ref=e138]:
+        - link "Facebook Page" [ref=e139] [cursor=pointer]:
+          - /url: https://www.facebook.com/scioly.org
+    - generic [ref=e140]:
+      - heading "Disclaimer" [level=4] [ref=e141]
+      - paragraph [ref=e142]:
+        - link "Scioly.org is a place to ask questions and share ideas. This site is not the place to get event rules, official rules changes, or official clarifications." [ref=e143] [cursor=pointer]:
+          - /url: https://scioly.org/rules
+      - paragraph [ref=e144]:
+        - link "Click me! Click me!" [ref=e145] [cursor=pointer]:
+          - /url: https://scioly.org/bernard

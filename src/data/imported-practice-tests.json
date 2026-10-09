@@ -54273,5 +54273,6174 @@
     },
     "questionCount": 21,
     "maxScore": 16.5
+  },
+  {
+    "id": "ssss-2021-dynamic-planet-b",
+    "eventId": "dynamic-planet",
+    "division": "B",
+    "competition": "SSSS",
+    "level": null,
+    "levelEvidence": null,
+    "sourceId": "eP389phsN2M",
+    "year": 2021,
+    "season": 2027,
+    "reviewedOn": "2026-10-08",
+    "difficulty": "Medium",
+    "difficultyReason": "The test contains a mix of direct recall questions (e.g., salinity limits, water cycle identification) and multi-step calculations (e.g., sediment flow speed, porosity, hydraulic gradient), alongside descriptive questions about geomorphology and hydrology.",
+    "topics": [
+      "Hydrologic cycle",
+      "Drainage basins and stream networks",
+      "Fluvial sediment processes and channel form",
+      "Fluvial geomorphology",
+      "Groundwater and karst",
+      "Lakes and wetlands",
+      "Human impacts and water quality"
+    ],
+    "topicMatch": "current",
+    "alignment": "Matches the 2027 fresh waters rotation topics very well, covering groundwater, lakes, wetlands, and fluvial processes.",
+    "instructions": "Points are scored based off what parts of the question you have answered correctly. Long answer problems are worth more in point value. List as much relevant information as possible. Question 39 (5 points, groundwater features in ecosystems) is excluded because its answer field is blank in the published key; the practice total uses the remaining available points. The cover claims 231 points but the itemized question values total 232. Question 8 prints Mayfly twice (choices A and D); the published key answers E.",
+    "scoringBasis": "Points are as published on the test paper, summing to 231 points. Question 39 (5 points, groundwater features in ecosystems) is excluded because its answer field is blank in the published key; the practice total uses the remaining available points. The cover claims 231 points but the itemized question values total 232. Question 8 prints Mayfly twice (choices A and D); the published key answers E.",
+    "gradingMode": "published-key",
+    "sourceUrl": "https://scioly.org/tests/eP389phsN2M",
+    "paperUrl": "/practice/ssss-2021-dynamic-planet-b/test.pdf",
+    "keyUrl": "/practice/ssss-2021-dynamic-planet-b/key.pdf",
+    "rulesUrl": "/rules/2027/b/dynamic-planet.pdf",
+    "minutes": 50,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Freshwater has the salinity of less than ____ ppm",
+        "context": ""
+      },
+      {
+        "id": "2a",
+        "label": "2a",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Explain how humans have contributed to an excess amount of sediment in watersheds.",
+        "context": "How has sediment transport been impacted by human activity? Explain."
+      },
+      {
+        "id": "2b",
+        "label": "2b",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain how this affects water quality (things such as factors that influence water quality, etc.)",
+        "context": "How has sediment transport been impacted by human activity? Explain."
+      },
+      {
+        "id": "3a",
+        "label": "3a",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Explain the things that change in watersheds when artificial dams are built.",
+        "context": "How do dams affect local watersheds? Explain."
+      },
+      {
+        "id": "3b",
+        "label": "3b",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Explain how this affects local ecosystems.",
+        "context": "How do dams affect local watersheds? Explain."
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What is the average speed of sediment flow (per hour) based off the diagram below if the speed it took for the sediment to get transported was 10 hours? Express in grams/hour",
+        "context": "Diagram shows: Volume = 283168 cm³, Height = 5 feet, Density ≈ 1.70 g/cm³ over a Riverbed."
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Below is a map of the Mississippi River drainage basin. What type of stream pattern does this follow?",
+        "context": "Map of the Mississippi River drainage basin is shown on page 3."
+      },
+      {
+        "id": "6a",
+        "label": "6a",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "Explain how watersheds get an excess of nutrients.",
+        "context": "List the steps of watershed eutrophication."
+      },
+      {
+        "id": "6b",
+        "label": "6b",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain how watersheds “die out” from the excess of nutrients.",
+        "context": "List the steps of watershed eutrophication."
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Lake Baikal’s depths were first majorly explored in 1989 by a group of scientists from National Geographic Society & the Soviet Academy of Sciences. The life found at the bottom of the lake most closely resembles what type of ecosystem?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Benthic life on the ocean floor (think benthic sediments)"
+          },
+          {
+            "id": "B",
+            "text": "Life in hydrothermal vents (black and white smokers)"
+          },
+          {
+            "id": "C",
+            "text": "Life in a coral reef (shallow waters, plenty of plant and animal life)"
+          },
+          {
+            "id": "D",
+            "text": "Life in heavily saline lakes (Dead Sea as reference)"
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of these organisms do not live in a freshwater ecosystem?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Mayfly"
+          },
+          {
+            "id": "B",
+            "text": "Asian Carp"
+          },
+          {
+            "id": "C",
+            "text": "Water hyacinth"
+          },
+          {
+            "id": "D",
+            "text": "Mayfly"
+          },
+          {
+            "id": "E",
+            "text": "Zooxanthellae"
+          },
+          {
+            "id": "F",
+            "text": "Water lettuce"
+          }
+        ]
+      },
+      {
+        "id": "9a",
+        "label": "9a",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Are watersheds like rivers and lakes part of the water table?",
+        "context": ""
+      },
+      {
+        "id": "9b",
+        "label": "9b",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Why or why not?",
+        "context": "Are watersheds like rivers and lakes part of the water table?"
+      },
+      {
+        "id": "10a",
+        "label": "10a",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What are the general steps of meander formation in streams?",
+        "context": ""
+      },
+      {
+        "id": "10b",
+        "label": "10b",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "How common are they?",
+        "context": "What are the general steps of meander formation in streams?"
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "What are the most common water pollutants in freshwater rivers worldwide?",
+        "context": ""
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Ox-bow lakes are formed from:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Meander scars"
+          },
+          {
+            "id": "B",
+            "text": "Floodplains"
+          },
+          {
+            "id": "C",
+            "text": "Meanders"
+          },
+          {
+            "id": "D",
+            "text": "Deltas"
+          }
+        ]
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Observe the photo below. Identify the type of wetland.",
+        "context": "Photo shows an aerial view of a river delta system."
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which drainage pattern is the most common?",
+        "context": ""
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which factor influences the quality of drinking water the most?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Temperature"
+          },
+          {
+            "id": "B",
+            "text": "pH"
+          },
+          {
+            "id": "C",
+            "text": "Dissolved oxygen"
+          },
+          {
+            "id": "D",
+            "text": "TDS"
+          }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What drainage pattern is the one pictured below? (The drainage pattern is in blue)",
+        "context": "The image on page 5 shows a hand-drawn blue line spelling 'Never gonna give you up' inside a dotted border."
+      },
+      {
+        "id": "17",
+        "label": "17",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "What is the main difference between a braided stream channel & an anastomose channel?",
+        "context": ""
+      },
+      {
+        "id": "18a",
+        "label": "18a",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Explain the main steps for lake formation.",
+        "context": ""
+      },
+      {
+        "id": "18b",
+        "label": "18b",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 8,
+        "prompt": "List out all 21 types of the lakes and explain how they form.",
+        "context": ""
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which cycle is being depicted below?",
+        "context": "Diagram shows USGS Water Cycle diagram with Precipitation, Evaporation, Condensation, etc."
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Peat bogs are a ____ sink over thousands of years",
+        "context": ""
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Glaciers and ice caps store ___% of all water on Earth",
+        "context": ""
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "How are waterfalls generally formed? Explain",
+        "context": ""
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "How did this lake below form? Explain",
+        "context": "Map shows Lake Tanganyika."
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Why is sediment budget so difficult to calculate properly?",
+        "context": ""
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "How has the Nile River’s ability to provide water for daily human life been threatened? Hint: Human activities have caused the river to have poor water quality.",
+        "context": ""
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Calculate the porosity of a cube of clay with the ratio of air to total volume as 4:16. Express as a percentage",
+        "context": ""
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What is considered a fast velocity of groundwater? (In centimeters/day)",
+        "context": ""
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "Order these materials from lowest to highest average porosity: salts, gravel, silt, clay, sand",
+        "context": ""
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "What does Darcy’s law state?",
+        "context": ""
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "__________ erodes from acid rainwater, forming karst formations. (Hint, usually in the form of calcite or aragonite.",
+        "context": ""
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "“Fried eggs” is a famous geological feature found in Luray Caverns. How did they form? (photo below)",
+        "context": "Photo shows a circular stalagmite cross-section resembling a fried egg."
+      },
+      {
+        "id": "32",
+        "label": "32",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Compare and contrast stalagmites and stalactites.",
+        "context": ""
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Find the vertical hydraulic gradient of a stream when the head difference taken from Point A to Point B is 13 meters, and the elevation difference is 7 meters. Round to the nearest thousandth (no fractions).",
+        "context": ""
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Is clay a common material found in calderas? Explain why or not.",
+        "context": ""
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "What is the process that water takes when it becomes surface runoff?",
+        "context": ""
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "Explain how karst formations form.",
+        "context": ""
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "A pH of _____ or lower generally indicates poor water quality",
+        "context": ""
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "How do sinkholes generally form?",
+        "context": ""
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "What type of watershed is pictured below? How does it form and where is it generally found? (Be specific)",
+        "context": "Photo shows a grassy wetland area."
+      },
+      {
+        "id": "41",
+        "label": "41",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "In what ways is groundwater filtered? Why is it generally cleaner than surface water? How much cleaner?",
+        "context": ""
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Is clay’s porosity higher than silt? Why or why not? Explain.",
+        "context": ""
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "How much arsenic in drinking water is safe? What is a “safe”, government-issued level of arsenic in drinking water? (Hint, EPA)",
+        "context": ""
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "Why is salt in seawater bad for drinking? What is a safe level of dissolved salt in drinking water?",
+        "context": ""
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Why are seasonal lakes named ephemeral lakes?",
+        "context": ""
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What color of Secchi disks are used to measure freshwater turbidity?",
+        "context": ""
+      },
+      {
+        "id": "47",
+        "label": "47",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "How does xeriscaping help watersheds?",
+        "context": ""
+      },
+      {
+        "id": "48",
+        "label": "48",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Why is Asian Carp so invasive to the Mississippi River and its tributaries?",
+        "context": ""
+      },
+      {
+        "id": "49",
+        "label": "49",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "What role does the Chesapeake Bay watershed play in its ecosystem and the surrounding states?",
+        "context": ""
+      },
+      {
+        "id": "50",
+        "label": "50",
+        "page": 8,
+        "type": "mcq",
+        "multiple": true,
+        "points": 4,
+        "prompt": "Why are cattails so important in preserving watersheds? Select all that apply",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "They provide a habitat for organisms like birds to live among"
+          },
+          {
+            "id": "B",
+            "text": "They soften heavy weather"
+          },
+          {
+            "id": "C",
+            "text": "They filter runoff water, keeping watersheds clean"
+          },
+          {
+            "id": "D",
+            "text": "They protect pond banks from erosion & reduce waves and winds hitting the shore"
+          }
+        ]
+      },
+      {
+        "id": "51",
+        "label": "51",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "How are droughts typically predicted? Does the water table change when an area undergoes drought?",
+        "context": ""
+      },
+      {
+        "id": "52",
+        "label": "52",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Explain the relationship between aquifers and groundwater",
+        "context": ""
+      },
+      {
+        "id": "53",
+        "label": "53",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "How does groundwater drilling affect the land and local water tables? Is this ethical for the environment?",
+        "context": ""
+      },
+      {
+        "id": "54",
+        "label": "54",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "An aquifer is usually found ______ the water table",
+        "context": ""
+      },
+      {
+        "id": "55",
+        "label": "55",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "How does land subsidence affect groundwater and the water table?",
+        "context": ""
+      },
+      {
+        "id": "56a",
+        "label": "56a",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain the actions of humans that impact groundwater",
+        "context": "What are some ways that humans impact groundwater quality?"
+      },
+      {
+        "id": "56b",
+        "label": "56b",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain the effects this has on groundwater quality",
+        "context": "What are some ways that humans impact groundwater quality?"
+      },
+      {
+        "id": "57",
+        "label": "57",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "How do pollutants such as arsenic and antimony get into drinking water?",
+        "context": ""
+      },
+      {
+        "id": "58",
+        "label": "58",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "On average, how many meters below ground is the unsaturated zone?",
+        "context": ""
+      },
+      {
+        "id": "59",
+        "label": "59",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "How is the water balance equation an important part of hydrology?",
+        "context": ""
+      },
+      {
+        "id": "60",
+        "label": "60",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 10,
+        "prompt": "Label the diagram below",
+        "context": "Diagram shows a cross-section of a river valley with groundwater zones."
+      }
+    ],
+    "keys": {
+      "1": {
+        "criteria": [
+          {
+            "id": "1a",
+            "points": 1,
+            "answer": "500 ppm",
+            "accepted": ["500"]
+          }
+        ]
+      },
+      "4": {
+        "criteria": [
+          {
+            "id": "4a",
+            "points": 2,
+            "answer": "48138.56 grams/hour",
+            "accepted": ["48138.56"]
+          }
+        ]
+      },
+      "5": {
+        "criteria": [
+          {
+            "id": "5a",
+            "points": 2,
+            "answer": "Dendritic",
+            "accepted": ["dendritic"]
+          }
+        ]
+      },
+      "7": {
+        "correctOption": "B"
+      },
+      "8": {
+        "correctOption": "E"
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "11a",
+            "points": 6,
+            "answer": "Phosphorus and nitrogen, as it comes from agricultural fertilizers and residential runoff. The nitrogen and phosphorus (especially) can lead to watershed eutrophication, eventually leading to “dead zones”.",
+            "accepted": []
+          }
+        ]
+      },
+      "12": {
+        "correctOption": "C"
+      },
+      "13": {
+        "criteria": [
+          {
+            "id": "13a",
+            "points": 2,
+            "answer": "an estuarine delta",
+            "accepted": ["estuarine delta", "delta"]
+          }
+        ]
+      },
+      "14": {
+        "criteria": [
+          {
+            "id": "14a",
+            "points": 2,
+            "answer": "Dendritic drainage patterns are the most common drainage pattern.",
+            "accepted": ["Dendritic", "dendritic"]
+          }
+        ]
+      },
+      "15": {
+        "correctOption": "D"
+      },
+      "16": {
+        "criteria": [
+          {
+            "id": "16a",
+            "points": 2,
+            "answer": "Rectangular drainage pattern.",
+            "accepted": ["Rectangular", "rectangular"]
+          }
+        ]
+      },
+      "17": {
+        "criteria": [
+          {
+            "id": "17a",
+            "points": 3,
+            "answer": "Anastomose channels are basically braided stream channels, but they don’t divide or reconnect as easily as braided stream channels.",
+            "accepted": []
+          }
+        ]
+      },
+      "19": {
+        "criteria": [
+          {
+            "id": "19a",
+            "points": 2,
+            "answer": "Hydrologic/water cycle",
+            "accepted": ["Hydrologic cycle", "water cycle", "Hydrologic", "water"]
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "20a",
+            "points": 2,
+            "answer": "Carbon",
+            "accepted": ["carbon"]
+          }
+        ]
+      },
+      "21": {
+        "criteria": [
+          {
+            "id": "21a",
+            "points": 2,
+            "answer": "2%",
+            "accepted": ["2", "68.7% of freshwater"]
+          }
+        ]
+      },
+      "22": {
+        "criteria": [
+          {
+            "id": "22a",
+            "points": 6,
+            "answer": "Waterfalls are usually formed when water flowing above harder rock erodes away at softer rock, downcutting it.",
+            "accepted": []
+          }
+        ]
+      },
+      "23": {
+        "criteria": [
+          {
+            "id": "23a",
+            "points": 6,
+            "answer": "Lake Tanganyika was formed as a part of the western branch of the East African Rift, thus making it a rift lake. As how other rift lakes are formed, Lake Tanganyika was most likely formed from the rifting and subsidence of parts of the African plate ~9-12 million years ago.",
+            "accepted": []
+          }
+        ]
+      },
+      "24": {
+        "criteria": [
+          {
+            "id": "24a",
+            "points": 3,
+            "answer": "sediment budget is difficult to calculate because it is difficult to calculate the exact amount of sediment added or subtracted from a certain area and all the sources and sinks of sediment must be taken into account.",
+            "accepted": []
+          }
+        ]
+      },
+      "25": {
+        "criteria": [
+          {
+            "id": "25a",
+            "points": 5,
+            "answer": "The rapidly growing population needed a dam to provide enough water. The construction of a high dam at Aswan tampered with the river’s delicate flow patterns, thus diminishing the seasonal flooding at the bank. The controlled outflow of water from the dam into Lake Nasser meant that it accumulated ~98% of the suspended sediment usually carried downstream. This is not good as agriculture required the rich sediment deposited when the river used to seasonally flood, leading to increased fertilizer use which leads to higher water pollution.",
+            "accepted": []
+          }
+        ]
+      },
+      "26": {
+        "criteria": [
+          {
+            "id": "26a",
+            "points": 2,
+            "answer": "25%",
+            "accepted": ["25"]
+          }
+        ]
+      },
+      "27": {
+        "criteria": [
+          {
+            "id": "27a",
+            "points": 2,
+            "answer": "30.48 cm/day or greater (source: USGS)",
+            "accepted": ["30.48"]
+          }
+        ]
+      },
+      "28": {
+        "criteria": [
+          {
+            "id": "28a",
+            "points": 4,
+            "answer": "gravel, sand, silt, clay, and salts",
+            "accepted": []
+          }
+        ]
+      },
+      "29": {
+        "criteria": [
+          {
+            "id": "29a",
+            "points": 6,
+            "answer": "Darcy’s law states that the negative of permeability/dynamic viscosity of the fluid multiplied by the pressure drop is equal to the instantaneous flow rate of a fluid.",
+            "accepted": []
+          }
+        ]
+      },
+      "30": {
+        "criteria": [
+          {
+            "id": "30a",
+            "points": 1,
+            "answer": "Limestone",
+            "accepted": ["limestone"]
+          }
+        ]
+      },
+      "31": {
+        "criteria": [
+          {
+            "id": "31a",
+            "points": 3,
+            "answer": "The “fried egg” formation was formed when workers accidentally snapped off two stalagmites, and tourists at Luray Caverns have eroded the stalagmites into the “fried egg” shape.",
+            "accepted": []
+          }
+        ]
+      },
+      "32": {
+        "criteria": [
+          {
+            "id": "32a",
+            "points": 5,
+            "answer": "Both stalagmites & stalactites are formed when calcite salts precipitates from groundwater on cave walls; stalagmites precipitate from the floor up, while stalactites precipitate from the roof of the cave and up, almost like icicles.",
+            "accepted": []
+          }
+        ]
+      },
+      "33": {
+        "criteria": [
+          {
+            "id": "33a",
+            "points": 2,
+            "answer": "1.857 meters",
+            "accepted": ["1.857"]
+          }
+        ]
+      },
+      "34": {
+        "criteria": [
+          {
+            "id": "34a",
+            "points": 3,
+            "answer": "Yes, as after the volcano erupts and the depression is formed, the lake forms and clay called hectorite can accumulate.",
+            "accepted": []
+          }
+        ]
+      },
+      "35": {
+        "criteria": [
+          {
+            "id": "35a",
+            "points": 4,
+            "answer": "The water flows back into watersheds, is absorbed into the ground as groundwater, and erodes Earth’s surfaces as it flows back into watersheds.",
+            "accepted": []
+          }
+        ]
+      },
+      "36": {
+        "criteria": [
+          {
+            "id": "36a",
+            "points": 4,
+            "answer": "Karst formations are formed when soft, water-soluble bedrock such as limestone, dolomite, gypsum, & marble gets dissolved by running water, forming distinct features such as sinkholes, springs, and streams.",
+            "accepted": []
+          }
+        ]
+      },
+      "37": {
+        "criteria": [
+          {
+            "id": "37a",
+            "points": 3,
+            "answer": "6.5",
+            "accepted": ["6.5"]
+          }
+        ]
+      },
+      "38": {
+        "criteria": [
+          {
+            "id": "38a",
+            "points": 4,
+            "answer": "Sinkholes can be from either the erosion or removal of soluble bedrock (i.e. limestone) from running water, collapse of a cave roof, lowering of a water table, or overwithdrawal of groundwater.",
+            "accepted": []
+          }
+        ]
+      },
+      "40": {
+        "criteria": [
+          {
+            "id": "40a",
+            "points": 3,
+            "answer": "The photo shows a tidal marsh. Tidal marshes form in areas that are sheltered from waves, and they drain and flood based off the tidal pattern of the adjacent watershed (i.e. rivers, estuaries, oceans). They are found along rivers, coasts, or seas, and can be freshwater or saline.",
+            "accepted": []
+          }
+        ]
+      },
+      "41": {
+        "criteria": [
+          {
+            "id": "41a",
+            "points": 5,
+            "answer": "Groundwater is naturally filtered as it passes through layers of material and porous soil--groundwater is generally cleaner than surface water since surface water has chemicals, pollutants, organisms, and other materials that aren’t filtered out like groundwater. Groundwater is usually safe to drink unlike surface water.",
+            "accepted": []
+          }
+        ]
+      },
+      "42": {
+        "criteria": [
+          {
+            "id": "42a",
+            "points": 5,
+            "answer": "No (generally), as the particles of silt are larger than clay, thus meaning silt has more pore space than clay, on average.",
+            "accepted": []
+          }
+        ]
+      },
+      "43": {
+        "criteria": [
+          {
+            "id": "43a",
+            "points": 3,
+            "answer": "0.010 mg/L or 10 ppb",
+            "accepted": ["0.010 mg/L", "10 ppb", "0.010", "10"]
+          }
+        ]
+      },
+      "44": {
+        "criteria": [
+          {
+            "id": "44a",
+            "points": 6,
+            "answer": "The salt levels in seawater is way too high for the human body as human kidneys cannot get rid of the excess salt, plus seawater is dehydrating; there is no overarching issued “safe” level of dissolved salt in drinking water, USGS says to not exceed levels above 500 mg/L to avoid the salty taste.",
+            "accepted": []
+          }
+        ]
+      },
+      "45": {
+        "criteria": [
+          {
+            "id": "45a",
+            "points": 2,
+            "answer": "Seasonal lakes are named ephemeral lakes since “ephemeral” means “lasting temporarily”, and seasonal lakes only hold water for short periods, thus ephemeral describes seasonal lakes well.",
+            "accepted": []
+          }
+        ]
+      },
+      "46": {
+        "criteria": [
+          {
+            "id": "46a",
+            "points": 2,
+            "answer": "A black-and-white Secchi disk is generally used to measure freshwater turbidity.",
+            "accepted": ["black-and-white", "black and white"]
+          }
+        ]
+      },
+      "47": {
+        "criteria": [
+          {
+            "id": "47a",
+            "points": 6,
+            "answer": "Xeriscaping, especially with native plants, reduces the amount of fertilizers and pesticides that get washed up into local watersheds, and, most importantly, conserves water.",
+            "accepted": []
+          }
+        ]
+      },
+      "48": {
+        "criteria": [
+          {
+            "id": "48a",
+            "points": 5,
+            "answer": "Asian Carp outcompetes native animals, disrupting the ecosystem. Plus, they can survive in lower quality water, killing off sensitive indicator organisms. Asian Carp also jump out of water to evade threats, which can injure people paddling in the Mississippi River and its tributaries. Lastly, they cost the Mississippi River area’s fishing industry $7 billion annually by outcompeting native fish (those that are usually caught and sold).",
+            "accepted": []
+          }
+        ]
+      },
+      "49": {
+        "criteria": [
+          {
+            "id": "49a",
+            "points": 5,
+            "answer": "The Chesapeake Bay supplies a lot of seafood and recreational spots that many states rely on for economy, and the wetlands and watersheds shelter diverse communities of life and soften coastal storms.",
+            "accepted": []
+          }
+        ]
+      },
+      "50": {
+        "correctOptions": ["A", "C", "D"]
+      },
+      "51": {
+        "criteria": [
+          {
+            "id": "51a",
+            "points": 4,
+            "answer": "The likelihood of droughts occurring are predicted by monitoring rainfall, river flow, and soil moisture. The water table changes, as the water table and aquifers rely on rainfall to replenish the levels of the water. The height of the water table drops as the rate water is pumped from the ground exceeds the rate the water can be replenished, thus the ground subsides and sinks.",
+            "accepted": []
+          }
+        ]
+      },
+      "52": {
+        "criteria": [
+          {
+            "id": "52a",
+            "points": 2,
+            "answer": "An aquifer is a layer of underground permeable rock that holds groundwater.",
+            "accepted": []
+          }
+        ]
+      },
+      "53": {
+        "criteria": [
+          {
+            "id": "53a",
+            "points": 5,
+            "answer": "Groundwater drilling, or groundwater extraction causes land subsidence, lack of surface water, and lowered water quality in aquifers. If there is too much extraction of groundwater, the water table lowers thus leading to wells not being able to reach groundwater; watersheds like rivers that connect to groundwater will also have the water supply diminished. Thus, no, groundwater extraction is not ethical for the environment.",
+            "accepted": []
+          }
+        ]
+      },
+      "54": {
+        "criteria": [
+          {
+            "id": "54a",
+            "points": 2,
+            "answer": "Below",
+            "accepted": ["below"]
+          }
+        ]
+      },
+      "55": {
+        "criteria": [
+          {
+            "id": "55a",
+            "points": 5,
+            "answer": "Land subsidence is sometimes due to the lowering of the water table or excess pumping of groundwater; the sediments that hold up the land with water now partially lowers due to the loss of groundwater, causing land to drop and changing the topographic gradient. Land subsidence also reduces aquifers’ abilities to store water, most likely changing the water quality and altering underground sediments.",
+            "accepted": []
+          }
+        ]
+      },
+      "57": {
+        "criteria": [
+          {
+            "id": "57a",
+            "points": 4,
+            "answer": "Arsenic gets into drinking water sources either naturally or artificially from industrial waste and agricultural pollution (certain fertilizers contain arsenic). Antimony gets into drinking water often from being dissolved in metal plumbing/fittings.",
+            "accepted": []
+          }
+        ]
+      },
+      "58": {
+        "criteria": [
+          {
+            "id": "58a",
+            "points": 2,
+            "answer": "the unsaturated zone is usually 0-100+ m underground, depending on climate and land type.",
+            "accepted": ["0-100+", "0-100"]
+          }
+        ]
+      },
+      "59": {
+        "criteria": [
+          {
+            "id": "59a",
+            "points": 3,
+            "answer": "The water balance equation is an important part of hydrology as it displays the system of hydrology as a whole using the conservation of mass.",
+            "accepted": []
+          }
+        ]
+      },
+      "60": {
+        "criteria": [
+          {
+            "id": "60a",
+            "points": 10,
+            "answer": "Labels: River, Perched water table, Unsaturated zone, Water table, Aquifer (labeled diagram in the published key; any order accepted).",
+            "accepted": []
+          }
+        ]
+      },
+      "2a": {
+        "criteria": [
+          {
+            "id": "2a_1",
+            "points": 5,
+            "answer": "Deforestation, poorly managed construction sites, winter road sanding, erosion/exposed soil, overgrazing/bad agricultural practice all lead up to excess weathering/erosion of surface sediments. The sediment eventually washes up into rivers and other watersheds, leading to excess sediments in watersheds. Dams also alter the patterns of sediment transport, adding on to the problem.",
+            "accepted": []
+          }
+        ]
+      },
+      "2b": {
+        "criteria": [
+          {
+            "id": "2b_1",
+            "points": 3,
+            "answer": "Excess sediment leads to altered water depth and altered water flow, thus making watersheds more difficult to navigate. Water quality also goes down, such as increased turbidity, TDS (total dissolved solids), and TSS (total suspended solids). The extra sediment also disrupts the balance of watershed ecosystems, harming delicate indicator species and others alike.",
+            "accepted": []
+          }
+        ]
+      },
+      "3a": {
+        "criteria": [
+          {
+            "id": "3a_1",
+            "points": 5,
+            "answer": "Firstly, flow patterns are disrupted, thus affecting habitats as sediment transport patterns change. Adding on, water quality factors such as dissolved oxygen levels and temperature are changed. Cold, oxygen-deprived water is released from the reservoir bottom, affecting water quality. Sediments, logs, gravel, etc. can be trapped in dams, creating pools downstream and burying the riverbeds where fish spawn.",
+            "accepted": []
+          }
+        ]
+      },
+      "3b": {
+        "criteria": [
+          {
+            "id": "3b_1",
+            "points": 5,
+            "answer": "Disrupted flow patterns affect migrating fish and disrupt the fragile ecosystem balance. Dissolved oxygen levels and temperatures are especially affected: surface water annual temperature variation increases while deep water annual temperature variation does the opposite; this is not good for sensitive species. Temperature also affects dissolved oxygen levels, thus leading to algal blooms and lower dissolved oxygen levels. Dams block rivers from migrating fish, disrupting the surrounding ecosystem once again.",
+            "accepted": []
+          }
+        ]
+      },
+      "6a": {
+        "criteria": [
+          {
+            "id": "6a_1",
+            "points": 4,
+            "answer": "1) Excess nutrients (ammonia/ammonium, nitrates, phosphates) and sediments are introduced to a watershed (mainly lakes), whether through human activity (i.e. an overabundance of fertilizer washing into a local lake) or naturally. 2) The introduction of abnormal levels of nutrients lead to algae rapidly blooming. This algal bloom; the water appears murky, covered in “scum” (the algae), and overall disgusting. Often, sediment washes in too, thus continuing the negative feedback loop of more algae growing.",
+            "accepted": []
+          }
+        ]
+      },
+      "6b": {
+        "criteria": [
+          {
+            "id": "6b_1",
+            "points": 3,
+            "answer": "3) Algae blocks sunlight from reaching the bottom of the affected area & uses up a lot of oxygen. 4) Eventually, the water becomes so depleted of oxygen organisms it becomes a “dead zone”.",
+            "accepted": []
+          }
+        ]
+      },
+      "9a": {
+        "criteria": [
+          {
+            "id": "9a_1",
+            "points": 2,
+            "answer": "Depends, but usually, yes.",
+            "accepted": ["Depends", "usually, yes", "yes"]
+          }
+        ]
+      },
+      "9b": {
+        "criteria": [
+          {
+            "id": "9b_1",
+            "points": 3,
+            "answer": "It is usually part of the water table as the part where water table that naturally meets the surface is considered still a water table but it could be a watershed such as a stream, river, or lake. If we look at it a different way, it is not considered part of a water table as a watershed is a drainage basin where all precipitation drains to an endorheic basin, while a water table is the horizontal depth of the top of the aquifer. Thus, no and yes.",
+            "accepted": []
+          }
+        ]
+      },
+      "10a": {
+        "criteria": [
+          {
+            "id": "10a_1",
+            "points": 2,
+            "answer": "Meanders are formed when water erodes sediment in the outer bank of a stream.",
+            "accepted": []
+          }
+        ]
+      },
+      "10b": {
+        "criteria": [
+          {
+            "id": "10b_1",
+            "points": 1,
+            "answer": "They are mildly common especially in the middle & lower course of a bridge.",
+            "accepted": []
+          }
+        ]
+      },
+      "18a": {
+        "criteria": [
+          {
+            "id": "18a_1",
+            "points": 2,
+            "answer": "Each natural lake is formed when a depression called a lake basin gets filled in with water, or from an existing body of water. The way the lake basin forms varies.",
+            "accepted": []
+          }
+        ]
+      },
+      "18b": {
+        "criteria": [
+          {
+            "id": "18b_1",
+            "points": 8,
+            "answer": "Cirque/tarn lakes, Glacial lakes, Rock hollow lakes, Volcanic lakes, Meteorite lakes, Solution lakes, Fluvial lakes, Oxbow lakes, Landslide lakes, Tectonic lakes, Aeolian lakes, Freshwater lakes, Organic/animal-made lakes, Saline lakes, Barrier lakes, Rift valley lakes, Karst lakes, Wind deflation lakes, Human-made/artificial lakes, Permanent lakes, Temporary lakes (and their respective formation mechanisms as detailed in the key).",
+            "accepted": []
+          }
+        ]
+      },
+      "56a": {
+        "criteria": [
+          {
+            "id": "56a_1",
+            "points": 3,
+            "answer": "Groundwater pumping for oil & gas extraction, groundwater extraction, contamination that seeps into the ground such as dumping toxic waste or landfill/waste disposal or agricultural contaminants, urban & industrial discharges all human activities that affects groundwater",
+            "accepted": []
+          }
+        ]
+      },
+      "56b": {
+        "criteria": [
+          {
+            "id": "56b_1",
+            "points": 3,
+            "answer": "Groundwater pumping contaminates groundwater and alters how water moves between a watershed, aquifer, and groundwater by intercepting groundwater flow that discharges into the surface-water body, or increasing the rate of water movement from the surface-watershed into an aquifer, leading to an aquifer holding too much water that discharges to surface watersheds that exacerbates erosion, altering aquatic life. Groundwater extraction leads to land subsidence and changes in topography; contaminants from things such as landfill waste can seep into the groundwater, again discharging to surrounding soil and watersheds, being toxic to life, decreasing ground- and surface- water quality; urban and industrial discharge might have similar effects to landfill waste.",
+            "accepted": []
+          }
+        ]
+      }
+    },
+    "questionCount": 66,
+    "maxScore": 227
+  },
+  {
+    "id": "ssss-2021-dynamic-planet-c",
+    "eventId": "dynamic-planet",
+    "division": "C",
+    "competition": "SSSS",
+    "level": null,
+    "levelEvidence": null,
+    "sourceId": "eP389phsN2M",
+    "year": 2021,
+    "season": 2027,
+    "reviewedOn": "2026-10-08",
+    "difficulty": "Medium",
+    "difficultyReason": "The test contains a mix of direct recall questions (e.g., salinity limits, water cycle identification) and multi-step calculations (e.g., sediment flow speed, porosity, hydraulic gradient), alongside descriptive questions about geomorphology and hydrology.",
+    "topics": [
+      "Hydrologic cycle",
+      "Drainage basins and stream networks",
+      "Fluvial sediment processes and channel form",
+      "Fluvial geomorphology",
+      "Groundwater and karst",
+      "Lakes and wetlands",
+      "Human impacts and water quality"
+    ],
+    "topicMatch": "current",
+    "alignment": "The test aligns very well with the 2027 Dynamic Planet C rules, covering fresh waters, groundwater, lakes, wetlands, and human impacts.",
+    "instructions": "Answer all questions as thoroughly as possible. For long-answer questions, points are awarded based on the completeness and relevance of your explanations. Question 39 (5 points, groundwater features in ecosystems) is excluded because its answer field is blank in the published key; the practice total uses the remaining available points. The cover claims 231 points but the itemized question values total 232. Question 8 prints Mayfly twice (choices A and D); the published key answers E.",
+    "scoringBasis": "Points are scored as indicated per question. Total points: 231. Question 39 (5 points, groundwater features in ecosystems) is excluded because its answer field is blank in the published key; the practice total uses the remaining available points. The cover claims 231 points but the itemized question values total 232. Question 8 prints Mayfly twice (choices A and D); the published key answers E.",
+    "gradingMode": "published-key",
+    "sourceUrl": "https://scioly.org/tests/eP389phsN2M",
+    "paperUrl": "/practice/ssss-2021-dynamic-planet-c/test.pdf",
+    "keyUrl": "/practice/ssss-2021-dynamic-planet-c/key.pdf",
+    "rulesUrl": "/rules/2027/c/dynamic-planet.pdf",
+    "minutes": 50,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Freshwater has the salinity of less than ____ ppm"
+      },
+      {
+        "id": "2a",
+        "label": "2a",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Explain how humans have contributed to an excess amount of sediment in watersheds."
+      },
+      {
+        "id": "2b",
+        "label": "2b",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain how this excess sediment affects water quality (things such as factors that influence water quality, etc.)."
+      },
+      {
+        "id": "3a",
+        "label": "3a",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Explain the things that change in watersheds when artificial dams are built."
+      },
+      {
+        "id": "3b",
+        "label": "3b",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Explain how this affects local ecosystems."
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What is the average speed of sediment flow (per hour) based off the diagram below if the speed it took for the sediment to get transported was 10 hours? Express in grams/hour",
+        "context": "Diagram shows a sediment block with Volume = 283168 cm³, 5 feet, and Density = 1.70 g/cm³."
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 2,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Below is a map of the Mississippi River drainage basin. What type of stream pattern does this follow?"
+      },
+      {
+        "id": "6a",
+        "label": "6a",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "Explain how watersheds get an excess of nutrients."
+      },
+      {
+        "id": "6b",
+        "label": "6b",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain how watersheds “die out” from the excess of nutrients."
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Lake Baikal’s depths were first majorly explored in 1989 by a group of scientists from National Geographic Society & the Soviet Academy of Sciences. The life found at the bottom of the lake most closely resembles what type of ecosystem?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Benthic life on the ocean floor (think benthic sediments)"
+          },
+          {
+            "id": "B",
+            "text": "Life in hydrothermal vents (black and white smokers)"
+          },
+          {
+            "id": "C",
+            "text": "Life in a coral reef (shallow waters, plenty of plant and animal life)"
+          },
+          {
+            "id": "D",
+            "text": "Life in heavily saline lakes (Dead Sea as reference)"
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of these organisms do not live in a freshwater ecosystem?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Mayfly"
+          },
+          {
+            "id": "B",
+            "text": "Asian Carp"
+          },
+          {
+            "id": "C",
+            "text": "Water hyacinth"
+          },
+          {
+            "id": "D",
+            "text": "Mayfly"
+          },
+          {
+            "id": "E",
+            "text": "Zooxanthellae"
+          },
+          {
+            "id": "F",
+            "text": "Water lettuce"
+          }
+        ]
+      },
+      {
+        "id": "9a",
+        "label": "9a",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Are watersheds like rivers and lakes part of the water table?"
+      },
+      {
+        "id": "9b",
+        "label": "9b",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Why or why not?"
+      },
+      {
+        "id": "10a",
+        "label": "10a",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What are the general steps of meander formation in streams?"
+      },
+      {
+        "id": "10b",
+        "label": "10b",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "How common are they?"
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 3,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "What are the most common water pollutants in freshwater rivers worldwide?"
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Ox-bow lakes are formed from:",
+        "options": [
+          {
+            "id": "A",
+            "text": "Meander scars"
+          },
+          {
+            "id": "B",
+            "text": "Floodplains"
+          },
+          {
+            "id": "C",
+            "text": "Meanders"
+          },
+          {
+            "id": "D",
+            "text": "Deltas"
+          }
+        ]
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Observe the photo below. Identify the type of wetland."
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which drainage pattern is the most common?"
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which factor influences the quality of drinking water the most?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Temperature"
+          },
+          {
+            "id": "B",
+            "text": "pH"
+          },
+          {
+            "id": "C",
+            "text": "Dissolved oxygen"
+          },
+          {
+            "id": "D",
+            "text": "TDS"
+          }
+        ]
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What drainage pattern is the one pictured below? (The drainage pattern is in blue)"
+      },
+      {
+        "id": "17",
+        "label": "17",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "What is the main difference between a braided stream channel & an anastomose channel?"
+      },
+      {
+        "id": "18a",
+        "label": "18a",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Explain the main steps for lake formation."
+      },
+      {
+        "id": "18b",
+        "label": "18b",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 8,
+        "prompt": "List out all 21 types of the lakes and explain how they form."
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which cycle is being depicted below?"
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Peat bogs are a ____ sink over thousands of years"
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Glaciers and ice caps store ___% of all water on Earth"
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "How are waterfalls generally formed? Explain"
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "How did this lake below form? Explain",
+        "context": "The image shows Lake Tanganyika."
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Why is sediment budget so difficult to calculate properly?"
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "How has the Nile River’s ability to provide water for daily human life been threatened? Hint: Human activities have caused the river to have poor water quality."
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Calculate the porosity of a cube of clay with the ratio of air to total volume as 4:16. Express as a percentage"
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What is considered a fast velocity of groundwater? (In centimeters/day)"
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "Order these materials from lowest to highest average porosity: salts, gravel, silt, clay, sand"
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "What does Darcy’s law state?"
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "__________ erodes from acid rainwater, forming karst formations. (Hint, usually in the form of calcite or aragonite."
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "“Fried eggs” is a famous geological feature found in Luray Caverns. How did they form? (photo below)"
+      },
+      {
+        "id": "32",
+        "label": "32",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Compare and contrast stalagmites and stalactites."
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Find the vertical hydraulic gradient of a stream when the head difference taken from Point A to Point B is 13 meters, and the elevation difference is 7 meters. Round to the nearest thousandth (no fractions)."
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Is clay a common material found in calderas? Explain why or not."
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "What is the process that water takes when it becomes surface runoff?"
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "Explain how karst formations form."
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "A pH of _____ or lower generally indicates poor water quality"
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "How do sinkholes generally form?"
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "What type of watershed is pictured below? How does it form and where is it generally found? (Be specific)"
+      },
+      {
+        "id": "41",
+        "label": "41",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "In what ways is groundwater filtered? Why is it generally cleaner than surface water? How much cleaner?"
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Is clay’s porosity higher than silt? Why or why not? Explain."
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "How much arsenic in drinking water is safe? What is a “safe”, government-issued level of arsenic in drinking water? (Hint, EPA)"
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "Why is salt in seawater bad for drinking? What is a safe level of dissolved salt in drinking water?"
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Why are seasonal lakes named ephemeral lakes?"
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What color of Secchi disks are used to measure freshwater turbidity?"
+      },
+      {
+        "id": "47",
+        "label": "47",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 6,
+        "prompt": "How does xeriscaping help watersheds?"
+      },
+      {
+        "id": "48",
+        "label": "48",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "Why is Asian Carp so invasive to the Mississippi River and its tributaries?"
+      },
+      {
+        "id": "49",
+        "label": "49",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "What role does the Chesapeake Bay watershed play in its ecosystem and the surrounding states?"
+      },
+      {
+        "id": "50",
+        "label": "50",
+        "page": 8,
+        "type": "mcq",
+        "multiple": true,
+        "points": 4,
+        "prompt": "Why are cattails so important in preserving watersheds? Select all that apply",
+        "options": [
+          {
+            "id": "A",
+            "text": "They provide a habitat for organisms like birds to live among"
+          },
+          {
+            "id": "B",
+            "text": "They soften heavy weather"
+          },
+          {
+            "id": "C",
+            "text": "They filter runoff water, keeping watersheds clean"
+          },
+          {
+            "id": "D",
+            "text": "They protect pond banks from erosion & reduce waves and winds hitting the shore"
+          }
+        ]
+      },
+      {
+        "id": "51",
+        "label": "51",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "How are droughts typically predicted? Does the water table change when an area undergoes drought?"
+      },
+      {
+        "id": "52",
+        "label": "52",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Explain the relationship between aquifers and groundwater"
+      },
+      {
+        "id": "53",
+        "label": "53",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "How does groundwater drilling affect the land and local water tables? Is this ethical for the environment?"
+      },
+      {
+        "id": "54",
+        "label": "54",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "An aquifer is usually found ______ the water table"
+      },
+      {
+        "id": "55",
+        "label": "55",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 5,
+        "prompt": "How does land subsidence affect groundwater and the water table?"
+      },
+      {
+        "id": "56a",
+        "label": "56a",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain the actions of humans that impact groundwater."
+      },
+      {
+        "id": "56b",
+        "label": "56b",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain the effects this has on groundwater quality."
+      },
+      {
+        "id": "57",
+        "label": "57",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 4,
+        "prompt": "How do pollutants such as arsenic and antimony get into drinking water?"
+      },
+      {
+        "id": "58",
+        "label": "58",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "On average, how many meters below ground is the unsaturated zone?"
+      },
+      {
+        "id": "59",
+        "label": "59",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "How is the water balance equation an important part of hydrology?"
+      },
+      {
+        "id": "60",
+        "label": "60",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 10,
+        "prompt": "Label the diagram below.",
+        "context": "The diagram shows a cross-section of groundwater features with five blank boxes to label."
+      }
+    ],
+    "keys": {
+      "1": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "500",
+            "accepted": ["500", "500 ppm"]
+          }
+        ]
+      },
+      "4": {
+        "criteria": [
+          {
+            "id": "4_crit",
+            "points": 2,
+            "answer": "48138.56 grams/hour",
+            "accepted": ["48138.56", "48138.56 grams/hour", "48138.6"]
+          }
+        ]
+      },
+      "5": {
+        "criteria": [
+          {
+            "id": "5_crit",
+            "points": 2,
+            "answer": "Dendritic",
+            "accepted": ["Dendritic", "dendritic"]
+          }
+        ]
+      },
+      "7": {
+        "correctOption": "B"
+      },
+      "8": {
+        "correctOption": "E"
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "11_crit",
+            "points": 6,
+            "answer": "Phosphorus and nitrogen, as it comes from agricultural fertilizers and residential runoff. The nitrogen and phosphorus (especially) can lead to watershed eutrophication, eventually leading to “dead zones”.",
+            "accepted": []
+          }
+        ]
+      },
+      "12": {
+        "correctOption": "C"
+      },
+      "13": {
+        "criteria": [
+          {
+            "id": "13_crit",
+            "points": 2,
+            "answer": "an estuarine delta",
+            "accepted": ["estuarine delta", "an estuarine delta"]
+          }
+        ]
+      },
+      "14": {
+        "criteria": [
+          {
+            "id": "14_crit",
+            "points": 2,
+            "answer": "Dendritic drainage patterns are the most common drainage pattern.",
+            "accepted": ["Dendritic", "dendritic"]
+          }
+        ]
+      },
+      "15": {
+        "correctOption": "D"
+      },
+      "16": {
+        "criteria": [
+          {
+            "id": "16_crit",
+            "points": 2,
+            "answer": "Rectangular drainage pattern.",
+            "accepted": ["Rectangular", "rectangular"]
+          }
+        ]
+      },
+      "17": {
+        "criteria": [
+          {
+            "id": "17_crit",
+            "points": 3,
+            "answer": "Anastomose channels are basically braided stream channels, but they don’t divide or reconnect as easily as braided stream channels.",
+            "accepted": []
+          }
+        ]
+      },
+      "19": {
+        "criteria": [
+          {
+            "id": "19_crit",
+            "points": 2,
+            "answer": "Hydrologic/water cycle",
+            "accepted": ["Hydrologic cycle", "water cycle", "Hydrologic", "water"]
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "20_crit",
+            "points": 2,
+            "answer": "Carbon",
+            "accepted": ["Carbon", "carbon"]
+          }
+        ]
+      },
+      "21": {
+        "criteria": [
+          {
+            "id": "21_crit",
+            "points": 2,
+            "answer": "2%",
+            "accepted": ["2", "2%"]
+          }
+        ]
+      },
+      "22": {
+        "criteria": [
+          {
+            "id": "22_crit",
+            "points": 6,
+            "answer": "Waterfalls are usually formed when water flowing above harder rock erodes away at softer rock, downcutting it.",
+            "accepted": []
+          }
+        ]
+      },
+      "23": {
+        "criteria": [
+          {
+            "id": "23_crit",
+            "points": 6,
+            "answer": "Lake Tanganyika was formed as a part of the western branch of the East African Rift, thus making it a rift lake. As how other rift lakes are formed, Lake Tanganyika was most likely formed from the rifting and subsidence of parts of the African plate ~9-12 million years ago.",
+            "accepted": []
+          }
+        ]
+      },
+      "24": {
+        "criteria": [
+          {
+            "id": "24_crit",
+            "points": 3,
+            "answer": "sediment budget is difficult to calculate because it is difficult to calculate the exact amount of sediment added or subtracted from a certain area and all the sources and sinks of sediment must be taken into account.",
+            "accepted": []
+          }
+        ]
+      },
+      "25": {
+        "criteria": [
+          {
+            "id": "25_crit",
+            "points": 5,
+            "answer": "The rapidly growing population needed a dam to provide enough water. The construction of a high dam at Aswan tampered with the river’s delicate flow patterns, thus diminishing the seasonal flooding at the bank. The controlled outflow of water from the dam into Lake Nasser meant that it accumulated ~98% of the suspended sediment usually carried downstream. This is not good as agriculture required the rich sediment deposited when the river used to seasonally flood, leading to increased fertilizer use which leads to higher water pollution.",
+            "accepted": []
+          }
+        ]
+      },
+      "26": {
+        "criteria": [
+          {
+            "id": "26_crit",
+            "points": 2,
+            "answer": "25%",
+            "accepted": ["25", "25%"]
+          }
+        ]
+      },
+      "27": {
+        "criteria": [
+          {
+            "id": "27_crit",
+            "points": 2,
+            "answer": "30.48 cm/day or greater (source: USGS)",
+            "accepted": ["30.48", "30.48 cm/day"]
+          }
+        ]
+      },
+      "28": {
+        "criteria": [
+          {
+            "id": "28_crit",
+            "points": 4,
+            "answer": "gravel, sand, silt, clay, and salts",
+            "accepted": []
+          }
+        ]
+      },
+      "29": {
+        "criteria": [
+          {
+            "id": "29_crit",
+            "points": 6,
+            "answer": "Darcy’s law states that the negative of permeability/dynamic viscosity of the fluid multiplied by the pressure drop is equal to the instantaneous flow rate of a fluid.",
+            "accepted": []
+          }
+        ]
+      },
+      "30": {
+        "criteria": [
+          {
+            "id": "30_crit",
+            "points": 1,
+            "answer": "Limestone",
+            "accepted": ["Limestone", "limestone"]
+          }
+        ]
+      },
+      "31": {
+        "criteria": [
+          {
+            "id": "31_crit",
+            "points": 3,
+            "answer": "The “fried egg” formation was formed when workers accidentally snapped off two stalagmites, and tourists at Luray Caverns have eroded the stalagmites into the “fried egg” shape.",
+            "accepted": []
+          }
+        ]
+      },
+      "32": {
+        "criteria": [
+          {
+            "id": "32_crit",
+            "points": 5,
+            "answer": "Both stalagmites & stalactites are formed when calcite salts precipitates from groundwater on cave walls; stalagmites precipitate from the floor up, while stalactites precipitate from the roof of the cave and up, almost like icicles.",
+            "accepted": []
+          }
+        ]
+      },
+      "33": {
+        "criteria": [
+          {
+            "id": "33_crit",
+            "points": 2,
+            "answer": "1.857 meters",
+            "accepted": ["1.857", "1.857 meters"]
+          }
+        ]
+      },
+      "34": {
+        "criteria": [
+          {
+            "id": "34_crit",
+            "points": 3,
+            "answer": "Yes, as after the volcano erupts and the depression is formed, the lake forms and clay called hectorite can accumulate.",
+            "accepted": []
+          }
+        ]
+      },
+      "35": {
+        "criteria": [
+          {
+            "id": "35_crit",
+            "points": 4,
+            "answer": "The water flows back into watersheds, is absorbed into the ground as groundwater, and erodes Earth’s surfaces as it flows back into watersheds.",
+            "accepted": []
+          }
+        ]
+      },
+      "36": {
+        "criteria": [
+          {
+            "id": "36_crit",
+            "points": 4,
+            "answer": "Karst formations are formed when soft, water-soluble bedrock such as limestone, dolomite, gypsum, & marble gets dissolved by running water, forming distinct features such as sinkholes, springs, and streams.",
+            "accepted": []
+          }
+        ]
+      },
+      "37": {
+        "criteria": [
+          {
+            "id": "37_crit",
+            "points": 3,
+            "answer": "6.5",
+            "accepted": ["6.5"]
+          }
+        ]
+      },
+      "38": {
+        "criteria": [
+          {
+            "id": "38_crit",
+            "points": 4,
+            "answer": "Sinkholes can be from either the erosion or removal of soluble bedrock (i.e. limestone) from running water, collapse of a cave roof, lowering of a water table, or overwithdrawal of groundwater.",
+            "accepted": []
+          }
+        ]
+      },
+      "40": {
+        "criteria": [
+          {
+            "id": "40_crit",
+            "points": 3,
+            "answer": "The photo shows a tidal marsh. Tidal marshes form in areas that are sheltered from waves, and they drain and flood based off the tidal pattern of the adjacent watershed (i.e. rivers, estuaries, oceans). They are found along rivers, coasts, or seas, and can be freshwater or saline.",
+            "accepted": []
+          }
+        ]
+      },
+      "41": {
+        "criteria": [
+          {
+            "id": "41_crit",
+            "points": 5,
+            "answer": "Groundwater is naturally filtered as it passes through layers of material and porous soil--groundwater is generally cleaner than surface water since surface water has chemicals, pollutants, organisms, and other materials that aren’t filtered out like groundwater. Groundwater is usually safe to drink unlike surface water.",
+            "accepted": []
+          }
+        ]
+      },
+      "42": {
+        "criteria": [
+          {
+            "id": "42_crit",
+            "points": 5,
+            "answer": "No (generally), as the particles of silt are larger than clay, thus meaning silt has more pore space than clay, on average.",
+            "accepted": []
+          }
+        ]
+      },
+      "43": {
+        "criteria": [
+          {
+            "id": "43_crit",
+            "points": 3,
+            "answer": "0.010 mg/L or 10 ppb",
+            "accepted": ["0.010 mg/L", "10 ppb", "0.010 mg/L or 10 ppb"]
+          }
+        ]
+      },
+      "44": {
+        "criteria": [
+          {
+            "id": "44_crit",
+            "points": 6,
+            "answer": "The salt levels in seawater is way too high for the human body as human kidneys cannot get rid of the excess salt, plus seawater is dehydrating; there is no overarching issued “safe” level of dissolved salt in drinking water, USGS says to not exceed levels above 500 mg/L to avoid the salty taste.",
+            "accepted": []
+          }
+        ]
+      },
+      "45": {
+        "criteria": [
+          {
+            "id": "45_crit",
+            "points": 2,
+            "answer": "Seasonal lakes are named ephemeral lakes since “ephemeral” means “lasting temporarily”, and seasonal lakes only hold water for short periods, thus ephemeral describes seasonal lakes well.",
+            "accepted": []
+          }
+        ]
+      },
+      "46": {
+        "criteria": [
+          {
+            "id": "46_crit",
+            "points": 2,
+            "answer": "A black-and-white Secchi disk is generally used to measure freshwater turbidity.",
+            "accepted": ["black-and-white", "black and white"]
+          }
+        ]
+      },
+      "47": {
+        "criteria": [
+          {
+            "id": "47_crit",
+            "points": 6,
+            "answer": "Xeriscaping, especially with native plants, reduces the amount of fertilizers and pesticides that get washed up into local watersheds, and, most importantly, conserves water.",
+            "accepted": []
+          }
+        ]
+      },
+      "48": {
+        "criteria": [
+          {
+            "id": "48_crit",
+            "points": 5,
+            "answer": "Asian Carp outcompetes native animals, disrupting the ecosystem. Plus, they can survive in lower quality water, killing off sensitive indicator organisms. Asian Carp also jump out of water to evade threats, which can injure people paddling in the Mississippi River and its tributaries. Lastly, they cost the Mississippi River area’s fishing industry $7 billion annually by outcompeting native fish (those that are usually caught and sold).",
+            "accepted": []
+          }
+        ]
+      },
+      "49": {
+        "criteria": [
+          {
+            "id": "49_crit",
+            "points": 5,
+            "answer": "The Chesapeake Bay supplies a lot of seafood and recreational spots that many states rely on for economy, and the wetlands and watersheds shelter diverse communities of life and soften coastal storms.",
+            "accepted": []
+          }
+        ]
+      },
+      "50": {
+        "correctOptions": ["A", "C", "D"]
+      },
+      "51": {
+        "criteria": [
+          {
+            "id": "51_crit",
+            "points": 4,
+            "answer": "The likelihood of droughts occurring are predicted by monitoring rainfall, river flow, and soil moisture. The water table changes, as the water table and aquifers rely on rainfall to replenish the levels of the water. The height of the water table drops as the rate water is pumped from the ground exceeds the rate the water can be replenished, thus the ground subsides and sinks.",
+            "accepted": []
+          }
+        ]
+      },
+      "52": {
+        "criteria": [
+          {
+            "id": "52_crit",
+            "points": 2,
+            "answer": "An aquifer is a layer of underground permeable rock that holds groundwater.",
+            "accepted": []
+          }
+        ]
+      },
+      "53": {
+        "criteria": [
+          {
+            "id": "53_crit",
+            "points": 5,
+            "answer": "Groundwater drilling, or groundwater extraction causes land subsidence, lack of surface water, and lowered water quality in aquifers. If there is too much extraction of groundwater, the water table lowers thus leading to wells not being able to reach groundwater; watersheds like rivers that connect to groundwater will also have the water supply diminished. Thus, no, groundwater extraction is not ethical for the environment.",
+            "accepted": []
+          }
+        ]
+      },
+      "54": {
+        "criteria": [
+          {
+            "id": "54_crit",
+            "points": 2,
+            "answer": "Below",
+            "accepted": ["Below", "below"]
+          }
+        ]
+      },
+      "55": {
+        "criteria": [
+          {
+            "id": "55_crit",
+            "points": 5,
+            "answer": "Land subsidence is sometimes due to the lowering of the water table or excess pumping of groundwater; the sediments that hold up the land with water now partially lowers due to the loss of groundwater, causing land to drop and changing the topographic gradient. Land subsidence also reduces aquifers’ abilities to store water, most likely changing the water quality and altering underground sediments.",
+            "accepted": []
+          }
+        ]
+      },
+      "57": {
+        "criteria": [
+          {
+            "id": "57_crit",
+            "points": 4,
+            "answer": "Arsenic gets into drinking water sources either naturally or artificially from industrial waste and agricultural pollution (certain fertilizers contain arsenic). Antimony gets into drinking water often from being dissolved in metal plumbing/fittings.",
+            "accepted": []
+          }
+        ]
+      },
+      "58": {
+        "criteria": [
+          {
+            "id": "58_crit",
+            "points": 2,
+            "answer": "the unsaturated zone is usually 0-100+ m underground, depending on climate and land type.",
+            "accepted": ["0-100+", "0-100"]
+          }
+        ]
+      },
+      "59": {
+        "criteria": [
+          {
+            "id": "59_crit",
+            "points": 3,
+            "answer": "The water balance equation is an important part of hydrology as it displays the system of hydrology as a whole using the conservation of mass.",
+            "accepted": []
+          }
+        ]
+      },
+      "60": {
+        "criteria": [
+          {
+            "id": "60_crit",
+            "points": 10,
+            "answer": "Labels: River, Perched water table, Unsaturated zone, Water table, Aquifer (labeled diagram in the published key; any order accepted).",
+            "accepted": []
+          }
+        ]
+      },
+      "2a": {
+        "criteria": [
+          {
+            "id": "2a_crit",
+            "points": 5,
+            "answer": "Deforestation, poorly managed construction sites, winter road sanding, erosion/exposed soil, overgrazing/bad agricultural practice all lead up to excess weathering/erosion of surface sediments. The sediment eventually washes up into rivers and other watersheds, leading to excess sediments in watersheds. Dams also alter the patterns of sediment transport, adding on to the problem.",
+            "accepted": []
+          }
+        ]
+      },
+      "2b": {
+        "criteria": [
+          {
+            "id": "2b_crit",
+            "points": 3,
+            "answer": "Excess sediment leads to altered water depth and altered water flow, thus making watersheds more difficult to navigate. Water quality also goes down, such as increased turbidity, TDS (total dissolved solids), and TSS (total suspended solids). The extra sediment also disrupts the balance of watershed ecosystems, harming delicate indicator species and others alike.",
+            "accepted": []
+          }
+        ]
+      },
+      "3a": {
+        "criteria": [
+          {
+            "id": "3a_crit",
+            "points": 5,
+            "answer": "Firstly, flow patterns are disrupted, thus affecting habitats as sediment transport patterns change. Adding on, water quality factors such as dissolved oxygen levels and temperature are changed. Cold, oxygen-deprived water is released from the reservoir bottom, affecting water quality. Sediments, logs, gravel, etc. can be trapped in dams, creating pools downstream and burying the riverbeds where fish spawn.",
+            "accepted": []
+          }
+        ]
+      },
+      "3b": {
+        "criteria": [
+          {
+            "id": "3b_crit",
+            "points": 5,
+            "answer": "Disrupted flow patterns affect migrating fish and disrupt the fragile ecosystem balance. Dissolved oxygen levels and temperatures are especially affected: surface water annual temperature variation increases while deep water annual temperature variation does the opposite; this is not good for sensitive species. Temperature also affects dissolved oxygen levels, thus leading to algal blooms and lower dissolved oxygen levels. Dams block rivers from migrating fish, disrupting the surrounding ecosystem once again.",
+            "accepted": []
+          }
+        ]
+      },
+      "6a": {
+        "criteria": [
+          {
+            "id": "6a_crit",
+            "points": 4,
+            "answer": "1) Excess nutrients (ammonia/ammonium, nitrates, phosphates) and sediments are introduced to a watershed (mainly lakes), whether through human activity (i.e. an overabundance of fertilizer washing into a local lake) or naturally. 2) The introduction of abnormal levels of nutrients lead to algae rapidly blooming. This algal bloom; the water appears murky, covered in “scum” (the algae), and overall disgusting. Often, sediment washes in too, thus continuing the negative feedback loop of more algae growing.",
+            "accepted": []
+          }
+        ]
+      },
+      "6b": {
+        "criteria": [
+          {
+            "id": "6b_crit",
+            "points": 3,
+            "answer": "3) Algae blocks sunlight from reaching the bottom of the affected area & uses up a lot of oxygen. 4) Eventually, the water becomes so depleted of oxygen organisms it becomes a “dead zone”.",
+            "accepted": []
+          }
+        ]
+      },
+      "9a": {
+        "criteria": [
+          {
+            "id": "9a_crit",
+            "points": 2,
+            "answer": "Depends, but usually, yes.",
+            "accepted": []
+          }
+        ]
+      },
+      "9b": {
+        "criteria": [
+          {
+            "id": "9b_crit",
+            "points": 3,
+            "answer": "It is usually part of the water table as the part where water table that naturally meets the surface is considered still a water table but it could be a watershed such as a stream, river, or lake. If we look at it a different way, it is not considered part of a water table as a watershed is a drainage basin where all precipitation drains to an endorheic basin, while a water table is the horizontal depth of the top of the aquifer. Thus, no and yes.",
+            "accepted": []
+          }
+        ]
+      },
+      "10a": {
+        "criteria": [
+          {
+            "id": "10a_crit",
+            "points": 2,
+            "answer": "Meanders are formed when water erodes sediment in the outer bank of a stream.",
+            "accepted": []
+          }
+        ]
+      },
+      "10b": {
+        "criteria": [
+          {
+            "id": "10b_crit",
+            "points": 1,
+            "answer": "They are mildly common especially in the middle & lower course of a bridge.",
+            "accepted": []
+          }
+        ]
+      },
+      "18a": {
+        "criteria": [
+          {
+            "id": "18a_crit",
+            "points": 2,
+            "answer": "Each natural lake is formed when a depression called a lake basin gets filled in with water, or from an existing body of water. The way the lake basin forms varies.",
+            "accepted": []
+          }
+        ]
+      },
+      "18b": {
+        "criteria": [
+          {
+            "id": "18b_crit",
+            "points": 8,
+            "answer": "Cirque/tarn lakes, Glacial lakes, Rock hollow lakes, Volcanic lakes, Meteorite lakes, Solution lakes, Fluvial lakes, Oxbow lakes, Landslide lakes, Tectonic lakes, Aeolian lakes, Freshwater lakes, Organic/animal-made lakes, Saline lakes, Barrier lakes, Rift valley lakes, Karst lakes, Wind deflation lakes, Human-made/artificial lakes, permanent lakes, temporary lakes (and their respective formation mechanisms as detailed in the key).",
+            "accepted": []
+          }
+        ]
+      },
+      "56a": {
+        "criteria": [
+          {
+            "id": "56a_crit",
+            "points": 3,
+            "answer": "Groundwater pumping for oil & gas extraction, groundwater extraction, contamination that seeps into the ground such as dumping toxic waste or landfill/waste disposal or agricultural contaminants, urban & industrial discharges all human activities that affects groundwater",
+            "accepted": []
+          }
+        ]
+      },
+      "56b": {
+        "criteria": [
+          {
+            "id": "56b_crit",
+            "points": 3,
+            "answer": "Groundwater pumping contaminates groundwater and alters how water moves between a watershed, aquifer, and groundwater by intercepting groundwater flow that discharges into the surface-water body, or increasing the rate of water movement from the surface-watershed into an aquifer, leading to an aquifer holding too much water that discharges to surface watersheds that exacerbates erosion, altering aquatic life. Groundwater extraction leads to land subsidence and changes in topography; contaminants from things such as landfill waste can seep into the groundwater, again discharging to surrounding soil and watersheds, being toxic to life, decreasing ground- and surface- water quality; urban and industrial discharge might have similar effects to landfill waste.",
+            "accepted": []
+          }
+        ]
+      }
+    },
+    "questionCount": 66,
+    "maxScore": 227
+  },
+  {
+    "id": "milpitas-2026-water-quality-b",
+    "eventId": "water-quality",
+    "division": "B",
+    "competition": "Milpitas Invitational",
+    "level": null,
+    "levelEvidence": null,
+    "year": 2026,
+    "season": 2027,
+    "reviewedOn": "2026-10-09",
+    "difficulty": "Easy",
+    "difficultyReason": "The questions are mostly direct recall of water quality parameters, basic ecology, and standard macroinvertebrate identification. The calculations are minimal, and the concepts are standard for Division B.",
+    "topics": [
+      "aquatic ecology",
+      "water cycle",
+      "nutrient cycling",
+      "potable water treatment",
+      "wastewater treatment",
+      "macroinvertebrates",
+      "water monitoring"
+    ],
+    "topicMatch": "current",
+    "alignment": "The test aligns well with the standard Water Quality B rules, covering ecology, water monitoring, and macroinvertebrate identification.",
+    "instructions": "Answer all questions on the test. For multiple-choice questions, select the best option. For short answer questions, provide a clear and concise explanation. For True/False questions, select True or False. The cover header scores /100: the 10-point hands-on salinometer testing station is excluded because physical device testing cannot be done online. The practice total is the 90 available written points. The Nitrogen Cycle and Speed ID questions use the attached original image sheet.",
+    "scoringBasis": "The test is scored out of 100 points. The salinometer testing portion (10 points) is excluded from the online written test as it is a physical performance task. The cover header scores /100: the 10-point hands-on salinometer testing station is excluded because physical device testing cannot be done online. The practice total is the 90 available written points. The Nitrogen Cycle and Speed ID questions use the attached original image sheet.",
+    "gradingMode": "published-key",
+    "sourceUrl": "https://scioly.org/tests/tz7K4ZTXxwA",
+    "paperUrl": "/practice/milpitas-2026-water-quality-b/test.pdf",
+    "keyUrl": "/practice/milpitas-2026-water-quality-b/key.pdf",
+    "rulesUrl": "/rules/2027/b/water-quality.pdf",
+    "minutes": 50,
+    "questions": [
+      {
+        "id": "mcq-1",
+        "label": "1",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Why does low dissolved oxygen often cause fish kills?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Fish overheat"
+          },
+          {
+            "id": "B",
+            "text": "Fish cannot breathe without oxygen in the water"
+          },
+          {
+            "id": "C",
+            "text": "It makes water too clear"
+          },
+          {
+            "id": "D",
+            "text": "Algae grow too fast"
+          }
+        ]
+      },
+      {
+        "id": "mcq-2",
+        "label": "2",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which organisms are at the base of most aquatic food chains?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Fish"
+          },
+          {
+            "id": "B",
+            "text": "Algae and phytoplankton"
+          },
+          {
+            "id": "C",
+            "text": "Zooplankton"
+          },
+          {
+            "id": "D",
+            "text": "Decomposers"
+          }
+        ]
+      },
+      {
+        "id": "mcq-3",
+        "label": "3",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The process by which water evaporates, condenses, and returns as precipitation is called the:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Carbon cycle"
+          },
+          {
+            "id": "B",
+            "text": "Nitrogen cycle"
+          },
+          {
+            "id": "C",
+            "text": "Water cycle"
+          },
+          {
+            "id": "D",
+            "text": "Oxygen cycle"
+          }
+        ]
+      },
+      {
+        "id": "mcq-4",
+        "label": "4",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A high BOD usually means:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Water is clean and has lots of oxygen"
+          },
+          {
+            "id": "B",
+            "text": "Water is polluted with organic waste"
+          },
+          {
+            "id": "C",
+            "text": "There is low bacterial activity"
+          },
+          {
+            "id": "D",
+            "text": "There are few nutrients"
+          }
+        ]
+      },
+      {
+        "id": "mcq-5",
+        "label": "5",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "If the pH of a lake changes from 7 to 5, the water has become:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "More basic"
+          },
+          {
+            "id": "B",
+            "text": "More neutral"
+          },
+          {
+            "id": "C",
+            "text": "More acidic"
+          },
+          {
+            "id": "D",
+            "text": "Cleaner"
+          }
+        ]
+      },
+      {
+        "id": "mcq-6",
+        "label": "6",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fecal coliform levels are used to measure:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Temperature of water"
+          },
+          {
+            "id": "B",
+            "text": "Bacteria contamination from animal waste"
+          },
+          {
+            "id": "C",
+            "text": "The number of algae in water"
+          },
+          {
+            "id": "D",
+            "text": "Salt content"
+          }
+        ]
+      },
+      {
+        "id": "mcq-7",
+        "label": "7",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A sudden increase in algae followed by a decrease in fish is an example of:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Eutrophication"
+          },
+          {
+            "id": "B",
+            "text": "Photosynthesis"
+          },
+          {
+            "id": "C",
+            "text": "Sedimentation"
+          },
+          {
+            "id": "D",
+            "text": "Filtration"
+          }
+        ]
+      },
+      {
+        "id": "mcq-8",
+        "label": "8",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "What role do decomposers play in aquatic food webs?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Eat large fish"
+          },
+          {
+            "id": "B",
+            "text": "Break down dead plants and animals"
+          },
+          {
+            "id": "C",
+            "text": "Produce oxygen"
+          },
+          {
+            "id": "D",
+            "text": "Filter pollutants"
+          }
+        ]
+      },
+      {
+        "id": "mcq-9",
+        "label": "9",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Biochemical Oxygen Demand (BOD) measures:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "How much oxygen bacteria need to decompose organic matter"
+          },
+          {
+            "id": "B",
+            "text": "How much oxygen fish use when swimming"
+          },
+          {
+            "id": "C",
+            "text": "The number of bacteria in the water"
+          },
+          {
+            "id": "D",
+            "text": "The temperature of the water"
+          }
+        ]
+      },
+      {
+        "id": "mcq-10",
+        "label": "10",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "When temperature increases, dissolved oxygen usually:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increases"
+          },
+          {
+            "id": "B",
+            "text": "Decreases"
+          },
+          {
+            "id": "C",
+            "text": "Stays the same"
+          },
+          {
+            "id": "D",
+            "text": "Doubles"
+          }
+        ]
+      },
+      {
+        "id": "mcq-11",
+        "label": "11",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which two parameters are most directly related to each other?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Turbidity and pH"
+          },
+          {
+            "id": "B",
+            "text": "Temperature and dissolved oxygen"
+          },
+          {
+            "id": "C",
+            "text": "Phosphate and salinity"
+          },
+          {
+            "id": "D",
+            "text": "Fecal coliform and total solids"
+          }
+        ]
+      },
+      {
+        "id": "mcq-12",
+        "label": "12",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "What nutrient causes algal blooms when present in excess?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Iron"
+          },
+          {
+            "id": "B",
+            "text": "Nitrates and phosphates"
+          },
+          {
+            "id": "C",
+            "text": "Chlorine"
+          },
+          {
+            "id": "D",
+            "text": "Calcium"
+          }
+        ]
+      },
+      {
+        "id": "mcq-13",
+        "label": "13",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A watershed is:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "A storage tank for water"
+          },
+          {
+            "id": "B",
+            "text": "The area of land that drains into a body of water"
+          },
+          {
+            "id": "C",
+            "text": "Another name for a river"
+          },
+          {
+            "id": "D",
+            "text": "A water treatment plant"
+          }
+        ]
+      },
+      {
+        "id": "mcq-14",
+        "label": "14",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of the following increases turbidity?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Algal growth"
+          },
+          {
+            "id": "B",
+            "text": "Sediment runoff"
+          },
+          {
+            "id": "C",
+            "text": "Erosion"
+          },
+          {
+            "id": "D",
+            "text": "All of the above"
+          }
+        ]
+      },
+      {
+        "id": "mcq-15",
+        "label": "15",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Plants take in nitrates mainly to:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Build proteins and DNA"
+          },
+          {
+            "id": "B",
+            "text": "Make sugar"
+          },
+          {
+            "id": "C",
+            "text": "Absorb water"
+          },
+          {
+            "id": "D",
+            "text": "Produce oxygen"
+          }
+        ]
+      },
+      {
+        "id": "mcq-16",
+        "label": "16",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "When sediment covers fish eggs or blocks sunlight for plants, this is called:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Oxygenation"
+          },
+          {
+            "id": "B",
+            "text": "Sedimentation pollution"
+          },
+          {
+            "id": "C",
+            "text": "Acidification"
+          },
+          {
+            "id": "D",
+            "text": "Runoff reduction"
+          }
+        ]
+      },
+      {
+        "id": "mcq-17",
+        "label": "17",
+        "page": 4,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Total solids include:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Only dissolved minerals"
+          },
+          {
+            "id": "B",
+            "text": "Suspended and dissolved particles"
+          },
+          {
+            "id": "C",
+            "text": "Only organic matter"
+          },
+          {
+            "id": "D",
+            "text": "None of the above"
+          }
+        ]
+      },
+      {
+        "id": "mcq-18",
+        "label": "18",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Dissolved oxygen (DO) is important because:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Fish need it to breathe"
+          },
+          {
+            "id": "B",
+            "text": "It keeps water warm"
+          },
+          {
+            "id": "C",
+            "text": "It makes water taste salty"
+          },
+          {
+            "id": "D",
+            "text": "It increases acidity"
+          }
+        ]
+      },
+      {
+        "id": "mcq-19",
+        "label": "19",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Harmful invasive species often affect ecosystems by:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increasing biodiversity"
+          },
+          {
+            "id": "B",
+            "text": "Outcompeting native species"
+          },
+          {
+            "id": "C",
+            "text": "Helping clean water"
+          },
+          {
+            "id": "D",
+            "text": "Fixing nitrogen"
+          }
+        ]
+      },
+      {
+        "id": "mcq-20",
+        "label": "20",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "High turbidity means:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "The water is very clear"
+          },
+          {
+            "id": "B",
+            "text": "There are many suspended particles blocking light"
+          },
+          {
+            "id": "C",
+            "text": "There is no sediment in the water"
+          },
+          {
+            "id": "D",
+            "text": "The water has a high pH"
+          }
+        ]
+      },
+      {
+        "id": "mcq-21",
+        "label": "21",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of the following best describes salinity?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "The amount of oxygen in water"
+          },
+          {
+            "id": "B",
+            "text": "The amount of salt dissolved in water"
+          },
+          {
+            "id": "C",
+            "text": "The number of bacteria in water"
+          },
+          {
+            "id": "D",
+            "text": "The temperature of the water"
+          }
+        ]
+      },
+      {
+        "id": "mcq-22",
+        "label": "22",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Why is sedimentation a problem in watersheds?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "It increases oxygen for fish"
+          },
+          {
+            "id": "B",
+            "text": "It clogs habitats and reduces light"
+          },
+          {
+            "id": "C",
+            "text": "It removes nutrients"
+          },
+          {
+            "id": "D",
+            "text": "It increases pH"
+          }
+        ]
+      },
+      {
+        "id": "mcq-23",
+        "label": "23",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The purpose of a primary treatment in wastewater plants is to:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Kill bacteria"
+          },
+          {
+            "id": "B",
+            "text": "Remove large solids and debris"
+          },
+          {
+            "id": "C",
+            "text": "Add chlorine"
+          },
+          {
+            "id": "D",
+            "text": "Filter dissolved minerals"
+          }
+        ]
+      },
+      {
+        "id": "mcq-24",
+        "label": "24",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Secondary wastewater treatment mainly removes:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Nutrients and bacteria"
+          },
+          {
+            "id": "B",
+            "text": "Metals and rocks"
+          },
+          {
+            "id": "C",
+            "text": "Sand and gravel"
+          },
+          {
+            "id": "D",
+            "text": "Salt"
+          }
+        ]
+      },
+      {
+        "id": "mcq-25",
+        "label": "25",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "What does pH measure?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Acidity or basicity of water"
+          },
+          {
+            "id": "B",
+            "text": "Amount of salt in water"
+          },
+          {
+            "id": "C",
+            "text": "Water clarity"
+          },
+          {
+            "id": "D",
+            "text": "Amount of nitrogen"
+          }
+        ]
+      },
+      {
+        "id": "mcq-26",
+        "label": "26",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "What is added during potable (drinking) water treatment to kill harmful bacteria?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Nitrogen"
+          },
+          {
+            "id": "B",
+            "text": "Fluoride"
+          },
+          {
+            "id": "C",
+            "text": "Chlorine or ozone"
+          },
+          {
+            "id": "D",
+            "text": "Phosphate"
+          }
+        ]
+      },
+      {
+        "id": "mcq-27",
+        "label": "27",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "If a population of small fish decreases, the population of large fish that eat them will likely:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increase"
+          },
+          {
+            "id": "B",
+            "text": "Decrease"
+          },
+          {
+            "id": "C",
+            "text": "Stay the same"
+          },
+          {
+            "id": "D",
+            "text": "Become extinct immediately"
+          }
+        ]
+      },
+      {
+        "id": "mcq-28",
+        "label": "28",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "When algae die and decompose, dissolved oxygen levels:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increase sharply"
+          },
+          {
+            "id": "B",
+            "text": "Decrease due to bacterial activity"
+          },
+          {
+            "id": "C",
+            "text": "Stay constant"
+          },
+          {
+            "id": "D",
+            "text": "Double"
+          }
+        ]
+      },
+      {
+        "id": "mcq-29",
+        "label": "29",
+        "page": 7,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of these provide the most nitrates in rivers and lakes?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Runoff from fertilizer"
+          },
+          {
+            "id": "B",
+            "text": "Tree roots"
+          },
+          {
+            "id": "C",
+            "text": "Rocks dissolving"
+          },
+          {
+            "id": "D",
+            "text": "Sunlight"
+          }
+        ]
+      },
+      {
+        "id": "mcq-30",
+        "label": "30",
+        "page": 7,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of the following is an example of a predator-prey relationship?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Fish eating algae"
+          },
+          {
+            "id": "B",
+            "text": "Algae using sunlight"
+          },
+          {
+            "id": "C",
+            "text": "Frogs eating insects"
+          },
+          {
+            "id": "D",
+            "text": "Decomposers breaking down waste"
+          }
+        ]
+      },
+      {
+        "id": "sa-1",
+        "label": "Short Answer 1",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Why are mayflies, caddisflies, and stoneflies considered good indicators of clean water?",
+        "context": ""
+      },
+      {
+        "id": "sa-2",
+        "label": "Short Answer 2",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "If a stream has mostly leeches, midges, and flatworms, what can you infer about the water quality? Explain your reasoning.",
+        "context": ""
+      },
+      {
+        "id": "sa-3",
+        "label": "Short Answer 3",
+        "page": 7,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "How can scientists use the diversity of macroinvertebrates (rather than just the total number) to judge water quality?",
+        "context": ""
+      },
+      {
+        "id": "sa-4",
+        "label": "Short Answer 4",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "What does the presence of aquatic sowbugs and scuds suggest about the condition of a stream?",
+        "context": ""
+      },
+      {
+        "id": "sa-5",
+        "label": "Short Answer 5",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Why might air-breathing insects like water striders and whirligig beetles survive even in very polluted water, while mayflies cannot?",
+        "context": ""
+      },
+      {
+        "id": "sa-6",
+        "label": "Short Answer 6",
+        "page": 8,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain how changes in pollution levels over time could shift the types of macroinvertebrates found in a wetland.",
+        "context": ""
+      },
+      {
+        "id": "tf-1",
+        "label": "True or False 1",
+        "page": 8,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "High water temperature increases the amount of dissolved oxygen available for aquatic organisms.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-2",
+        "label": "True or False 2",
+        "page": 8,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Phosphates can enter water bodies through soap, fertilizer, and wastewater runoff.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-3",
+        "label": "True or False 3",
+        "page": 8,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A neutral pH is 5.5 on the pH scale.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-4",
+        "label": "True or False 4",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Turbidity affects how much sunlight reaches underwater plants.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-5",
+        "label": "True or False 5",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "When algae die and decay, bacteria use oxygen, causing oxygen levels to drop.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-6",
+        "label": "True or False 6",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Dissolved oxygen and biochemical oxygen demand (BOD) usually increase together.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-7",
+        "label": "True or False 7",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Water with high total solids will always appear clear.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-8",
+        "label": "True or False 8",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Colder water generally holds more dissolved oxygen than warm water.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-9",
+        "label": "True or False 9",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Eutrophication is the process in which nutrient pollution leads to excessive algal growth and oxygen depletion.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-10",
+        "label": "True or False 10",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A watershed only includes rivers and lakes, not the surrounding land.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-11",
+        "label": "True or False 11",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Primary wastewater treatment removes most dissolved chemicals from the water.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-12",
+        "label": "True or False 12",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Secondary wastewater treatment uses biological processes to break down organic matter.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-13",
+        "label": "True or False 13",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The nitrogen cycle helps convert atmospheric nitrogen into forms usable by plants and aquatic life.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-14",
+        "label": "True or False 14",
+        "page": 10,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "An increase in turbidity can decrease photosynthesis in aquatic plants.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "tf-15",
+        "label": "True or False 15",
+        "page": 10,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Invasive species can alter entire food webs by reducing native populations.",
+        "context": "",
+        "options": [
+          {
+            "id": "TRUE",
+            "text": "TRUE"
+          },
+          {
+            "id": "FALSE",
+            "text": "FALSE"
+          }
+        ]
+      },
+      {
+        "id": "nc-1",
+        "label": "Nitrogen Cycle 1",
+        "page": 10,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fill in the missing space 1 in the Nitrogen Cycle diagram.",
+        "context": "Refer to the Nitrogen Cycle diagram on the Image Sheet."
+      },
+      {
+        "id": "nc-2",
+        "label": "Nitrogen Cycle 2",
+        "page": 10,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fill in the missing space 2 in the Nitrogen Cycle diagram.",
+        "context": "Refer to the Nitrogen Cycle diagram on the Image Sheet."
+      },
+      {
+        "id": "nc-3",
+        "label": "Nitrogen Cycle 3",
+        "page": 10,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fill in the missing space 3 in the Nitrogen Cycle diagram.",
+        "context": "Refer to the Nitrogen Cycle diagram on the Image Sheet."
+      },
+      {
+        "id": "nc-4",
+        "label": "Nitrogen Cycle 4",
+        "page": 10,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Fill in the missing space 4 in the Nitrogen Cycle diagram.",
+        "context": "Refer to the Nitrogen Cycle diagram on the Image Sheet."
+      },
+      {
+        "id": "table-1",
+        "label": "Table 1",
+        "page": 11,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Based on the data, which site likely has the highest biological oxygen demand (BOD)?",
+        "context": "Table: Water sample results from Oak Creek."
+      },
+      {
+        "id": "table-2",
+        "label": "Table 2",
+        "page": 11,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which site shows evidence of eutrophication?",
+        "context": "Table: Water sample results from Oak Creek."
+      },
+      {
+        "id": "table-3",
+        "label": "Table 3",
+        "page": 11,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What relationship do you observe between nutrient levels (nitrates/phosphates) and dissolved oxygen?",
+        "context": "Table: Water sample results from Oak Creek."
+      },
+      {
+        "id": "table-4",
+        "label": "Table 4",
+        "page": 11,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which site most likely has the least biodiversity?",
+        "context": "Table: Water sample results from Oak Creek."
+      },
+      {
+        "id": "table-5",
+        "label": "Table 5",
+        "page": 11,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Suggest one likely pollution source causing the downstream conditions",
+        "context": "Table: Water sample results from Oak Creek."
+      },
+      {
+        "id": "speed-1",
+        "label": "Speed ID 1",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 1.",
+        "context": "Refer to Image 1 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-2",
+        "label": "Speed ID 2",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 2.",
+        "context": "Refer to Image 2 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-3",
+        "label": "Speed ID 3",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 3.",
+        "context": "Refer to Image 3 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-4",
+        "label": "Speed ID 4",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 4.",
+        "context": "Refer to Image 4 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-5",
+        "label": "Speed ID 5",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 5.",
+        "context": "Refer to Image 5 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-6",
+        "label": "Speed ID 6",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 6.",
+        "context": "Refer to Image 6 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-7",
+        "label": "Speed ID 7",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 7.",
+        "context": "Refer to Image 7 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-8",
+        "label": "Speed ID 8",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 8.",
+        "context": "Refer to Image 8 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-9",
+        "label": "Speed ID 9",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 9.",
+        "context": "Refer to Image 9 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-10",
+        "label": "Speed ID 10",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 10.",
+        "context": "Refer to Image 10 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-11",
+        "label": "Speed ID 11",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 11.",
+        "context": "Refer to Image 11 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-12",
+        "label": "Speed ID 12",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 12.",
+        "context": "Refer to Image 12 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-13",
+        "label": "Speed ID 13",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 13.",
+        "context": "Refer to Image 13 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-14",
+        "label": "Speed ID 14",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 14.",
+        "context": "Refer to Image 14 on the Speed ID Image Sheet."
+      },
+      {
+        "id": "speed-15",
+        "label": "Speed ID 15",
+        "page": 12,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify the common name and class/status of organism 15.",
+        "context": "Refer to Image 15 on the Speed ID Image Sheet."
+      }
+    ],
+    "keys": {
+      "mcq-1": {
+        "correctOption": "B"
+      },
+      "mcq-2": {
+        "correctOption": "B"
+      },
+      "mcq-3": {
+        "correctOption": "C"
+      },
+      "mcq-4": {
+        "correctOption": "B"
+      },
+      "mcq-5": {
+        "correctOption": "C"
+      },
+      "mcq-6": {
+        "correctOption": "B"
+      },
+      "mcq-7": {
+        "correctOption": "A"
+      },
+      "mcq-8": {
+        "correctOption": "B"
+      },
+      "mcq-9": {
+        "correctOption": "A"
+      },
+      "mcq-10": {
+        "correctOption": "B"
+      },
+      "mcq-11": {
+        "correctOption": "B"
+      },
+      "mcq-12": {
+        "correctOption": "B"
+      },
+      "mcq-13": {
+        "correctOption": "B"
+      },
+      "mcq-14": {
+        "correctOption": "D"
+      },
+      "mcq-15": {
+        "correctOption": "A"
+      },
+      "mcq-16": {
+        "correctOption": "B"
+      },
+      "mcq-17": {
+        "correctOption": "B"
+      },
+      "mcq-18": {
+        "correctOption": "A"
+      },
+      "mcq-19": {
+        "correctOption": "B"
+      },
+      "mcq-20": {
+        "correctOption": "B"
+      },
+      "mcq-21": {
+        "correctOption": "B"
+      },
+      "mcq-22": {
+        "correctOption": "B"
+      },
+      "mcq-23": {
+        "correctOption": "B"
+      },
+      "mcq-24": {
+        "correctOption": "A"
+      },
+      "mcq-25": {
+        "correctOption": "A"
+      },
+      "mcq-26": {
+        "correctOption": "C"
+      },
+      "mcq-27": {
+        "correctOption": "B"
+      },
+      "mcq-28": {
+        "correctOption": "B"
+      },
+      "mcq-29": {
+        "correctOption": "A"
+      },
+      "mcq-30": {
+        "correctOption": "C"
+      },
+      "sa-1": {
+        "criteria": [
+          {
+            "id": "class",
+            "points": 1,
+            "answer": "Class 1 - Pollution Sensitive",
+            "accepted": ["Class 1", "Pollution Sensitive", "sensitive"]
+          },
+          {
+            "id": "meaning",
+            "points": 1,
+            "answer": "Their presence means clean, well-oxygenated water.",
+            "accepted": ["clean water", "high oxygen", "well-oxygenated"]
+          },
+          {
+            "id": "reasoning",
+            "points": 1,
+            "answer": "They die quickly if pollution or low oxygen occurs, so they indicate excellent water quality.",
+            "accepted": ["die quickly", "cannot tolerate pollution", "low tolerance"]
+          }
+        ]
+      },
+      "sa-2": {
+        "criteria": [
+          {
+            "id": "class",
+            "points": 1,
+            "answer": "Class 3 - Moderately Tolerant",
+            "accepted": ["Class 3", "Moderately Tolerant", "tolerant"]
+          },
+          {
+            "id": "meaning",
+            "points": 1,
+            "answer": "Their dominance suggests fair to poor water quality.",
+            "accepted": ["fair water quality", "poor water quality", "polluted"]
+          },
+          {
+            "id": "reasoning",
+            "points": 1,
+            "answer": "They can survive low oxygen or moderate pollution, showing that conditions are not ideal for sensitive species.",
+            "accepted": ["survive low oxygen", "survive moderate pollution"]
+          }
+        ]
+      },
+      "sa-3": {
+        "criteria": [
+          {
+            "id": "diversity",
+            "points": 3,
+            "answer": "High diversity across sensitivity levels indicates a healthier ecosystem. A stream with many species from Classes 1-2 has good water quality, whereas if mostly Class 4-5 species are present, the water is polluted or low in oxygen.",
+            "accepted": [
+              "High diversity equals healthier ecosystem",
+              "presence of sensitive species indicates good quality"
+            ]
+          }
+        ]
+      },
+      "sa-4": {
+        "criteria": [
+          {
+            "id": "class",
+            "points": 1,
+            "answer": "Class 2 - Moderately Sensitive",
+            "accepted": ["Class 2", "Moderately Sensitive"]
+          },
+          {
+            "id": "meaning",
+            "points": 1,
+            "answer": "Indicate fair/good quality water with some organic matter and moderate oxygen.",
+            "accepted": ["fair quality", "good quality", "moderate oxygen"]
+          },
+          {
+            "id": "reasoning",
+            "points": 1,
+            "answer": "They can tolerate slight pollution but not heavy contamination.",
+            "accepted": ["tolerate slight pollution", "not heavy contamination"]
+          }
+        ]
+      },
+      "sa-5": {
+        "criteria": [
+          {
+            "id": "class",
+            "points": 1,
+            "answer": "Class 5 - Air Breathing / Pollution Tolerant",
+            "accepted": ["Class 5", "Air Breathing", "Pollution Tolerant"]
+          },
+          {
+            "id": "reasoning",
+            "points": 2,
+            "answer": "They get oxygen directly from the air, so they can live in polluted or low-oxygen water, unlike mayflies that depend on dissolved oxygen.",
+            "accepted": ["get oxygen from air", "do not rely on dissolved oxygen"]
+          }
+        ]
+      },
+      "sa-6": {
+        "criteria": [
+          {
+            "id": "shift",
+            "points": 3,
+            "answer": "If pollution increases, Class 4-5 organisms (leeches, midges, air-breathers) increase and sensitive ones disappear. If pollution decreases and oxygen improves, Class 1-2 species return, showing recovery of water quality.",
+            "accepted": [
+              "pollution increases sensitive species disappear",
+              "pollution decreases sensitive species return"
+            ]
+          }
+        ]
+      },
+      "tf-1": {
+        "correctOption": "FALSE"
+      },
+      "tf-2": {
+        "correctOption": "TRUE"
+      },
+      "tf-3": {
+        "correctOption": "FALSE"
+      },
+      "tf-4": {
+        "correctOption": "TRUE"
+      },
+      "tf-5": {
+        "correctOption": "TRUE"
+      },
+      "tf-6": {
+        "correctOption": "FALSE"
+      },
+      "tf-7": {
+        "correctOption": "FALSE"
+      },
+      "tf-8": {
+        "correctOption": "TRUE"
+      },
+      "tf-9": {
+        "correctOption": "TRUE"
+      },
+      "tf-10": {
+        "correctOption": "FALSE"
+      },
+      "tf-11": {
+        "correctOption": "FALSE"
+      },
+      "tf-12": {
+        "correctOption": "TRUE"
+      },
+      "tf-13": {
+        "correctOption": "TRUE"
+      },
+      "tf-14": {
+        "correctOption": "TRUE"
+      },
+      "tf-15": {
+        "correctOption": "TRUE"
+      },
+      "nc-1": {
+        "criteria": [
+          {
+            "id": "assimilation",
+            "points": 1,
+            "answer": "Assimilation",
+            "accepted": ["assimilation"]
+          }
+        ]
+      },
+      "nc-2": {
+        "criteria": [
+          {
+            "id": "nitrates",
+            "points": 1,
+            "answer": "Nitrates (NO3-)",
+            "accepted": ["Nitrates", "NO3-", "NO3"]
+          }
+        ]
+      },
+      "nc-3": {
+        "criteria": [
+          {
+            "id": "decomposers",
+            "points": 1,
+            "answer": "Decomposers",
+            "accepted": ["decomposers", "fungi and bacteria"]
+          }
+        ]
+      },
+      "nc-4": {
+        "criteria": [
+          {
+            "id": "ammonium",
+            "points": 1,
+            "answer": "Ammonium (NH4+)",
+            "accepted": ["Ammonium", "NH4+", "NH4"]
+          }
+        ]
+      },
+      "table-1": {
+        "criteria": [
+          {
+            "id": "site",
+            "points": 2,
+            "answer": "Site 3 (downstream)",
+            "accepted": ["Site 3", "downstream", "3"]
+          }
+        ]
+      },
+      "table-2": {
+        "criteria": [
+          {
+            "id": "site",
+            "points": 2,
+            "answer": "Site 3 (downstream)",
+            "accepted": ["Site 3", "downstream", "3"]
+          }
+        ]
+      },
+      "table-3": {
+        "criteria": [
+          {
+            "id": "relationship",
+            "points": 2,
+            "answer": "As nitrates and phosphates increase, dissolved oxygen decreases.",
+            "accepted": [
+              "inverse relationship",
+              "higher nutrients lower oxygen",
+              "negative correlation"
+            ]
+          }
+        ]
+      },
+      "table-4": {
+        "criteria": [
+          {
+            "id": "site",
+            "points": 1,
+            "answer": "Site 3 (downstream)",
+            "accepted": ["Site 3", "downstream", "3"]
+          }
+        ]
+      },
+      "table-5": {
+        "criteria": [
+          {
+            "id": "source",
+            "points": 1,
+            "answer": "Agricultural runoff (fertilizers containing nitrate/phosphate), Urban stormwater runoff (oil, fertilizers, detergents), or Wastewater discharge (septic or treatment plant effluent)",
+            "accepted": ["agricultural runoff", "fertilizer", "wastewater", "sewage", "runoff"]
+          }
+        ]
+      },
+      "speed-1": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Mayfly - Pollution Sensitive (Class 1)",
+            "accepted": ["Mayfly", "Mayfly - Class 1", "Mayfly - Pollution Sensitive"]
+          }
+        ]
+      },
+      "speed-2": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Dobsonfly - Pollution Sensitive (Class 1)",
+            "accepted": ["Dobsonfly", "Dobsonfly - Class 1", "Dobsonfly - Pollution Sensitive"]
+          }
+        ]
+      },
+      "speed-3": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Purple Loosestrife - Aquatic Nuisance Plant",
+            "accepted": ["Purple Loosestrife", "Purple Loosestrife - Aquatic Nuisance Plant"]
+          }
+        ]
+      },
+      "speed-4": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Scud - Moderately Sensitive (Class 2)",
+            "accepted": ["Scud", "Scud - Class 2", "Scud - Moderately Sensitive"]
+          }
+        ]
+      },
+      "speed-5": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Giant Water Bug - Air Breathing (Class 5)",
+            "accepted": [
+              "Giant Water Bug",
+              "Giant Water Bug - Class 5",
+              "Giant Water Bug - Air Breathing"
+            ]
+          }
+        ]
+      },
+      "speed-6": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Zebra Mussel - Aquatic Nuisance Animal",
+            "accepted": ["Zebra Mussel", "Zebra Mussel - Aquatic Nuisance Animal"]
+          }
+        ]
+      },
+      "speed-7": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Midge - Moderately Tolerant (Class 3)",
+            "accepted": ["Midge", "Midge - Class 3", "Midge - Moderately Tolerant"]
+          }
+        ]
+      },
+      "speed-8": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Gilled Snail - Pollution Sensitive (Class 1)",
+            "accepted": [
+              "Gilled Snail",
+              "Gilled Snail - Class 1",
+              "Gilled Snail - Pollution Sensitive"
+            ]
+          }
+        ]
+      },
+      "speed-9": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Predaceous Diving Beetle - Air Breathing (Class 5)",
+            "accepted": [
+              "Predaceous Diving Beetle",
+              "Predaceous Diving Beetle - Class 5",
+              "Predaceous Diving Beetle - Air Breathing"
+            ]
+          }
+        ]
+      },
+      "speed-10": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Whirligig Beetle - Air Breathing (Class 5)",
+            "accepted": [
+              "Whirligig Beetle",
+              "Whirligig Beetle - Class 5",
+              "Whirligig Beetle - Air Breathing"
+            ]
+          }
+        ]
+      },
+      "speed-11": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Tubifex - Pollution Tolerant (Class 4)",
+            "accepted": ["Tubifex", "Tubifex - Class 4", "Tubifex - Pollution Tolerant"]
+          }
+        ]
+      },
+      "speed-12": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Eurasian Water Milfoil - Aquatic Nuisance Plant",
+            "accepted": [
+              "Eurasian Water Milfoil",
+              "Eurasian Water Milfoil - Aquatic Nuisance Plant"
+            ]
+          }
+        ]
+      },
+      "speed-13": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Damselfly - Moderately Sensitive (Class 2)",
+            "accepted": ["Damselfly", "Damselfly - Class 2", "Damselfly - Moderately Sensitive"]
+          }
+        ]
+      },
+      "speed-14": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Flatworm - Moderately Tolerant (Class 3)",
+            "accepted": ["Flatworm", "Flatworm - Class 3", "Flatworm - Moderately Tolerant"]
+          }
+        ]
+      },
+      "speed-15": {
+        "criteria": [
+          {
+            "id": "id",
+            "points": 1,
+            "answer": "Asian Carp - Aquatic Nuisance Animal",
+            "accepted": ["Asian Carp", "Asian Carp - Aquatic Nuisance Animal"]
+          }
+        ]
+      }
+    },
+    "questionCount": 75,
+    "maxScore": 90,
+    "supplementUrl": "/practice/milpitas-2026-water-quality-b/images.pdf"
+  },
+  {
+    "id": "pembroke-2026-water-quality-b",
+    "eventId": "water-quality",
+    "division": "B",
+    "competition": "Pembroke Hill Invitational",
+    "level": null,
+    "levelEvidence": null,
+    "year": 2026,
+    "season": 2027,
+    "reviewedOn": "2026-10-09",
+    "difficulty": "Medium",
+    "difficultyReason": "The test covers standard Division B Water Quality topics including aquatic ecology, macroinvertebrate identification, pollution tolerance classes, and water quality parameter data interpretation. Calculations are minimal, but interpretation of multi-parameter tables is required.",
+    "topics": [
+      "aquatic ecology",
+      "water cycle",
+      "lake stratification",
+      "food webs",
+      "wastewater treatment",
+      "macroinvertebrate identification",
+      "pollution tolerance",
+      "water quality parameters",
+      "data interpretation"
+    ],
+    "topicMatch": "current",
+    "alignment": "The test aligns well with the standard Water Quality event parameters, focusing on freshwater ecology, macroinvertebrates, and chemical/physical water testing parameters.",
+    "instructions": "Answer all questions on the provided answer sheet. Do not write on the test pages.",
+    "scoringBasis": "The test has a total of 80 points as published across the sections (Section 1: 25 points, Section 2: 25 points, Section 3: 30 points).",
+    "gradingMode": "published-key",
+    "sourceUrl": "https://scioly.org/tests/fGbwZcTJQRY",
+    "paperUrl": "/practice/pembroke-2026-water-quality-b/test.pdf",
+    "keyUrl": "/practice/pembroke-2026-water-quality-b/key.pdf",
+    "rulesUrl": "/rules/2027/b/water-quality.pdf",
+    "minutes": 50,
+    "questions": [
+      {
+        "id": "1",
+        "label": "1",
+        "page": 1,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "During thermal stratification in summer, which process causes oxygen depletion in the hypolimnion of a lake?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increased photosynthesis by algae"
+          },
+          {
+            "id": "B",
+            "text": "Decomposition of organic matter without mixing from surface waters"
+          },
+          {
+            "id": "C",
+            "text": "Excessive evaporation at the thermocline"
+          },
+          {
+            "id": "D",
+            "text": "Rising water temperature increasing oxygen solubility"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "label": "2",
+        "page": 1,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "In aquatic food webs, organisms that produce their own food through photosynthesis are called:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Primary consumers"
+          },
+          {
+            "id": "B",
+            "text": "Decomposers"
+          },
+          {
+            "id": "C",
+            "text": "Primary producers"
+          },
+          {
+            "id": "D",
+            "text": "Tertiary consumers"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "label": "3",
+        "page": 1,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A farmer's field borders a stream that is experiencing frequent algal blooms and low dissolved oxygen. Which is the most likely source of pollution causing eutrophication?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Thermal pollution from a nearby power plant"
+          },
+          {
+            "id": "B",
+            "text": "Sediment runoff from construction"
+          },
+          {
+            "id": "C",
+            "text": "Acid rain from industrial emissions"
+          },
+          {
+            "id": "D",
+            "text": "Agricultural fertilizer runoff containing nitrogen and phosphorus"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "label": "4",
+        "page": 1,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which type of community interaction occurs when zebra mussels outcompete native mussels for food and space?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Predation"
+          },
+          {
+            "id": "B",
+            "text": "Mutualism"
+          },
+          {
+            "id": "C",
+            "text": "Competition"
+          },
+          {
+            "id": "D",
+            "text": "Parasitism"
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "label": "5",
+        "page": 1,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "A town is experiencing increased flooding and poor water quality downstream. Which watershed management practice would most effectively address both problems?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Building a dam to store water"
+          },
+          {
+            "id": "B",
+            "text": "Installing riparian buffer zones with native vegetation"
+          },
+          {
+            "id": "C",
+            "text": "Dredging the stream channel to make it deeper"
+          },
+          {
+            "id": "D",
+            "text": "Paving areas near the stream to prevent erosion"
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "label": "6",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "In the water cycle diagram, which process is represented by box X showing water moving from the ocean surface into the atmosphere?",
+        "context": "Refer to the Water Cycle Diagram on page 2.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Condensation"
+          },
+          {
+            "id": "B",
+            "text": "Evaporation"
+          },
+          {
+            "id": "C",
+            "text": "Transpiration"
+          },
+          {
+            "id": "D",
+            "text": "Precipitation"
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "label": "7",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which letter on the diagram shows water infiltrating into groundwater?",
+        "context": "Refer to the Water Cycle Diagram on page 2.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Point A"
+          },
+          {
+            "id": "B",
+            "text": "Point B"
+          },
+          {
+            "id": "C",
+            "text": "Point C"
+          },
+          {
+            "id": "D",
+            "text": "Point D"
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "label": "8",
+        "page": 2,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Rooted aquatic plants would most likely be found in which zone?",
+        "context": "Refer to the Lake Zones Diagram on page 2.",
+        "options": [
+          {
+            "id": "A",
+            "text": "epilimion"
+          },
+          {
+            "id": "B",
+            "text": "thermocline"
+          },
+          {
+            "id": "C",
+            "text": "hypolimnion"
+          },
+          {
+            "id": "D",
+            "text": "Abyssal zone"
+          }
+        ]
+      },
+      {
+        "id": "9",
+        "label": "9",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "If a pollutant enters the food web at the algae level, which organism would likely have the highest concentration due to biomagnification?",
+        "context": "Refer to the Aquatic Food Web Diagram on page 3.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Freshwater shrimp"
+          },
+          {
+            "id": "B",
+            "text": "trout"
+          },
+          {
+            "id": "C",
+            "text": "kingfisher"
+          },
+          {
+            "id": "D",
+            "text": "All would have equal amounts"
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "label": "10",
+        "page": 3,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which of these pairs are competing for the same food source?",
+        "context": "Refer to the Aquatic Food Web Diagram on page 3.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Leech, limpet"
+          },
+          {
+            "id": "B",
+            "text": "Stonefly, dragonfly"
+          },
+          {
+            "id": "C",
+            "text": "Trout, kingfisher"
+          },
+          {
+            "id": "D",
+            "text": "Mayfly, worms"
+          }
+        ]
+      },
+      {
+        "id": "11",
+        "label": "11",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The _____________ zone of a lake is the shallow area where sunlight penetrates to the bottom, allowing rooted plants to grow.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "12",
+        "label": "12",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "In wastewater treatment, the _____________ treatment stage uses bacteria to break down organic matter.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "13",
+        "label": "13",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The nitrogen cycle converts atmospheric nitrogen into _____________ forms that plants can absorb.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "14",
+        "label": "14",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "When a species is introduced to a new ecosystem and causes harm, it is called an _____________ species.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "15",
+        "label": "15",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The process where excess nutrients lead to algal blooms and oxygen depletion is called _____________.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "16",
+        "label": "16",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "During water treatment, _____________ is the process where chemicals like alum cause particles to clump together.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "17",
+        "label": "17",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The buildup of toxins within a single organism over its lifetime is called _____________.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "18",
+        "label": "18",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Water that is safe for human consumption is called _____________ water.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "19",
+        "label": "19",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Bacteria and fungi that break down dead organic matter in aquatic ecosystems are called _____________.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "20",
+        "label": "20",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "The _____________ of particles is an important step in both natural water systems and water treatment plants.",
+        "context": "Word Bank: secondary, invasive, usable, littoral, eutrophication, coagulation, epilimnion, potable, decomposers, sedimentation, primary, native, profundal, bioaccumulation, filtration, biomagnification, primary"
+      },
+      {
+        "id": "21",
+        "label": "21",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 3,
+        "prompt": "Explain two specific ways excessive sedimentation pollution impacts aquatic ecosystems.",
+        "context": ""
+      },
+      {
+        "id": "22",
+        "label": "22",
+        "page": 4,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "As water temperature increases, dissolved oxygen levels (increase/decrease). Explain why.",
+        "context": ""
+      },
+      {
+        "id": "23",
+        "label": "23",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify which pollution tolerance class (1, 2, 3, 4, or 5) Stonefly belongs to:",
+        "context": ""
+      },
+      {
+        "id": "24",
+        "label": "24",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify which pollution tolerance class (1, 2, 3, 4, or 5) Dragonfly belongs to:",
+        "context": ""
+      },
+      {
+        "id": "25",
+        "label": "25",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify which pollution tolerance class (1, 2, 3, 4, or 5) Blood midge belongs to:",
+        "context": ""
+      },
+      {
+        "id": "26",
+        "label": "26",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify which pollution tolerance class (1, 2, 3, 4, or 5) Water strider belongs to:",
+        "context": ""
+      },
+      {
+        "id": "27",
+        "label": "27",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Identify which pollution tolerance class (1, 2, 3, 4, or 5) Dobsonfly belongs to:",
+        "context": ""
+      },
+      {
+        "id": "28",
+        "label": "28",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "If a stream sample contains mostly mayflies, stoneflies, and caddisflies, what does this indicate about water quality?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Poor water quality - these are pollution tolerant organisms"
+          },
+          {
+            "id": "B",
+            "text": "Excellent water quality - these are pollution sensitive organisms"
+          },
+          {
+            "id": "C",
+            "text": "Moderate water quality - these organisms tolerate some pollution"
+          },
+          {
+            "id": "D",
+            "text": "Cannot determine water quality from these organisms"
+          }
+        ]
+      },
+      {
+        "id": "29",
+        "label": "29",
+        "page": 5,
+        "type": "mcq",
+        "multiple": false,
+        "points": 1,
+        "prompt": "Which pollution tolerance class would you expect to find in the greatest numbers in a stream receiving untreated sewage discharge?",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Class 1"
+          },
+          {
+            "id": "B",
+            "text": "Class 2"
+          },
+          {
+            "id": "C",
+            "text": "Class 4"
+          },
+          {
+            "id": "D",
+            "text": "Class 5"
+          }
+        ]
+      },
+      {
+        "id": "30",
+        "label": "30",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify two specific ways purple loosestrife impacts native wetland ecosystems.",
+        "context": ""
+      },
+      {
+        "id": "31",
+        "label": "31",
+        "page": 5,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify two specific ways zebra mussels impact aquatic ecosystems.",
+        "context": ""
+      },
+      {
+        "id": "32_A",
+        "label": "32.A",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify organism A with its common name:",
+        "context": "Refer to the organism images A-F on page 6."
+      },
+      {
+        "id": "32_B",
+        "label": "32.B",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify organism B with its common name:",
+        "context": "Refer to the organism images A-F on page 6."
+      },
+      {
+        "id": "32_C",
+        "label": "32.C",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify organism C with its common name:",
+        "context": "Refer to the organism images A-F on page 6."
+      },
+      {
+        "id": "32_D",
+        "label": "32.D",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify organism D with its common name:",
+        "context": "Refer to the organism images A-F on page 6."
+      },
+      {
+        "id": "32_E",
+        "label": "32.E",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify organism E with its common name:",
+        "context": "Refer to the organism images A-F on page 6."
+      },
+      {
+        "id": "32_F",
+        "label": "32.F",
+        "page": 6,
+        "type": "frq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Identify organism F with its common name:",
+        "context": "Refer to the organism images A-F on page 6."
+      },
+      {
+        "id": "32",
+        "label": "32",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Normal pH range for most healthy aquatic ecosystems:",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "3.5-5.5"
+          },
+          {
+            "id": "b",
+            "text": "6.5-8.5"
+          },
+          {
+            "id": "c",
+            "text": "9.5-11.5"
+          },
+          {
+            "id": "d",
+            "text": "12.0-14.0"
+          }
+        ]
+      },
+      {
+        "id": "33",
+        "label": "33",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "High turbidity in water primarily blocks:",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sound waves"
+          },
+          {
+            "id": "b",
+            "text": "Wind"
+          },
+          {
+            "id": "c",
+            "text": "Sunlight"
+          },
+          {
+            "id": "d",
+            "text": "Evaporation"
+          }
+        ]
+      },
+      {
+        "id": "34",
+        "label": "34",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Dissolved oxygen levels below _____ mg/L are generally considered stressful for most fish:",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "10"
+          },
+          {
+            "id": "b",
+            "text": "8"
+          },
+          {
+            "id": "c",
+            "text": "5"
+          },
+          {
+            "id": "d",
+            "text": "15"
+          }
+        ]
+      },
+      {
+        "id": "35",
+        "label": "35",
+        "page": 6,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Salinity is a measure of:",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Water temperature"
+          },
+          {
+            "id": "b",
+            "text": "Oxygen content"
+          },
+          {
+            "id": "c",
+            "text": "Acidity"
+          },
+          {
+            "id": "d",
+            "text": "Dissolved salts"
+          }
+        ]
+      },
+      {
+        "id": "36",
+        "label": "36",
+        "page": 7,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "A Secchi disk is lowered into a lake and disappears from view at 2 meters depth. What does this measurement indicate?",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "The lake has high dissolved oxygen at 2 meters"
+          },
+          {
+            "id": "b",
+            "text": "The lake has low turbidity and excellent water clarity"
+          },
+          {
+            "id": "c",
+            "text": "The lake has high turbidity and poor water clarity"
+          },
+          {
+            "id": "d",
+            "text": "The lake temperature changes at 2 meters"
+          }
+        ]
+      },
+      {
+        "id": "37",
+        "label": "37",
+        "page": 7,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Fecal coliform bacteria in water indicate:",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "High oxygen levels"
+          },
+          {
+            "id": "b",
+            "text": "Low Temperature"
+          },
+          {
+            "id": "c",
+            "text": "Excessive plant growth"
+          },
+          {
+            "id": "d",
+            "text": "Sewage or animal waste contamination"
+          }
+        ]
+      },
+      {
+        "id": "38",
+        "label": "38",
+        "page": 7,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "High BOD indicates:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Clean, unpolluted water"
+          },
+          {
+            "id": "B",
+            "text": "High levels of organic matter requiring oxygen to decompose"
+          },
+          {
+            "id": "C",
+            "text": "Excessive salinity"
+          },
+          {
+            "id": "D",
+            "text": "Low turbidity"
+          }
+        ]
+      },
+      {
+        "id": "39",
+        "label": "39",
+        "page": 7,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "The presence of phosphates in high concentrations typically leads to:",
+        "context": "",
+        "options": [
+          {
+            "id": "A",
+            "text": "Decreased plant growth"
+          },
+          {
+            "id": "B",
+            "text": "Algal blooms"
+          },
+          {
+            "id": "C",
+            "text": "Increased water clarity"
+          },
+          {
+            "id": "D",
+            "text": "Higher dissolved oxygen"
+          }
+        ]
+      },
+      {
+        "id": "40",
+        "label": "40",
+        "page": 8,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Which site shows the best overall water quality?",
+        "context": "Scenario 1: A research team collected data from three stream sites over one month.\nSite A: pH 7.2, DO 9.5 mg/L, Turbidity 8 NTU, Nitrates 0.5 mg/L, Phosphate 0.02 mg/L, Temp 15 °C\nSite B: pH 6.8, DO 4.2 mg/L, Turbidity 45 NTU, Nitrates 8.5 mg/L, Phosphate 1.8 mg/L, Temp 22 °C\nSite C: pH 7.8, DO 7.8 mg/L, Turbidity 12 NTU, Nitrates 1.2 mg/L, Phosphate 0.15 mg/L, Temp 16 °C",
+        "options": [
+          {
+            "id": "A",
+            "text": "Site A"
+          },
+          {
+            "id": "B",
+            "text": "Site B"
+          },
+          {
+            "id": "C",
+            "text": "Site C"
+          }
+        ]
+      },
+      {
+        "id": "41",
+        "label": "41",
+        "page": 8,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What type of pollution is most likely affecting Site B’s nitrates and phosphates?",
+        "context": "Scenario 1: A research team collected data from three stream sites over one month.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Thermal pollution from power plants"
+          },
+          {
+            "id": "B",
+            "text": "Agricultural runoff or sewage"
+          },
+          {
+            "id": "C",
+            "text": "Acid rain"
+          },
+          {
+            "id": "D",
+            "text": "Heavy metal contamination"
+          }
+        ]
+      },
+      {
+        "id": "42",
+        "label": "42",
+        "page": 8,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Why are the high nitrate and phosphate levels at Site B concerning?",
+        "context": "Scenario 1: A research team collected data from three stream sites over one month.",
+        "options": [
+          {
+            "id": "A",
+            "text": "They make the water too acidic for fish"
+          },
+          {
+            "id": "B",
+            "text": "They cause eutrophication and algal blooms leading to oxygen depletion"
+          },
+          {
+            "id": "C",
+            "text": "They increase water temperature"
+          },
+          {
+            "id": "D",
+            "text": "They make the water unsafe to drink but don't harm aquatic life"
+          }
+        ]
+      },
+      {
+        "id": "43",
+        "label": "43",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What is happening to water quality from June to August?",
+        "context": "Scenario 2: A lake is tested monthly during the summer.\nJune: Temp 18 °C, DO 8.5 mg/L, Phosphate 0.08 mg/L, Turbidity 15 NTU, pH 7.4\nJuly: Temp 24 °C, DO 6.2 mg/L, Phosphate 0.35 mg/L, Turbidity 32 NTU, pH 8.1\nAugust: Temp 26 °C, DO 4.8 mg/L, Phosphate 0.52 mg/L, Turbidity 58 NTU, pH 8.6",
+        "options": [
+          {
+            "id": "A",
+            "text": "Improving - all parameters are moving toward optimal ranges"
+          },
+          {
+            "id": "B",
+            "text": "Declining - all parameters are moving toward sub-optimal ranges"
+          },
+          {
+            "id": "C",
+            "text": "Staying stable with normal seasonal changes"
+          },
+          {
+            "id": "D",
+            "text": "Cannot determine from this data"
+          }
+        ]
+      },
+      {
+        "id": "44",
+        "label": "44",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "What ecological process is responsible for these changes?",
+        "context": "Scenario 2: A lake is tested monthly during the summer.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Eutrophication"
+          },
+          {
+            "id": "B",
+            "text": "Thermal stratification"
+          },
+          {
+            "id": "C",
+            "text": "Denitrification"
+          },
+          {
+            "id": "D",
+            "text": "Biomagnification"
+          }
+        ]
+      },
+      {
+        "id": "45",
+        "label": "45",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "Based on the August data, would you expect to find mostly Class 1 or Class 4 macroinvertebrates?",
+        "context": "Scenario 2: A lake is tested monthly during the summer.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Class 1 - pollution sensitive organisms thrive in these conditions"
+          },
+          {
+            "id": "B",
+            "text": "Class 4 - pollution tolerant organisms because of low DO and poor water quality"
+          },
+          {
+            "id": "C",
+            "text": "Class 1 - pollution sensitive organisms need high oxygen levels like those shown"
+          },
+          {
+            "id": "D",
+            "text": "Class 4 - pollution tolerant organisms prefer warm temperatures"
+          }
+        ]
+      },
+      {
+        "id": "46",
+        "label": "46",
+        "page": 9,
+        "type": "mcq",
+        "multiple": false,
+        "points": 2,
+        "prompt": "If this lake were sampled in September after a cold front dropped temperatures to 16°C, what would likely happen to dissolved oxygen levels?",
+        "context": "Scenario 2: A lake is tested monthly during the summer.",
+        "options": [
+          {
+            "id": "A",
+            "text": "DO would increase"
+          },
+          {
+            "id": "B",
+            "text": "DO would decrease"
+          },
+          {
+            "id": "C",
+            "text": "DO would stay the same"
+          },
+          {
+            "id": "D",
+            "text": "DO would become zero"
+          }
+        ]
+      }
+    ],
+    "keys": {
+      "1": {
+        "correctOption": "B"
+      },
+      "2": {
+        "correctOption": "C"
+      },
+      "3": {
+        "correctOption": "D"
+      },
+      "4": {
+        "correctOption": "C"
+      },
+      "5": {
+        "correctOption": "B"
+      },
+      "6": {
+        "correctOption": "B"
+      },
+      "7": {
+        "correctOption": "C"
+      },
+      "8": {
+        "correctOption": "A"
+      },
+      "9": {
+        "correctOption": "C"
+      },
+      "10": {
+        "correctOption": "B"
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "littoral",
+            "accepted": ["littoral"]
+          }
+        ]
+      },
+      "12": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "secondary",
+            "accepted": ["secondary"]
+          }
+        ]
+      },
+      "13": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "usable",
+            "accepted": ["usable"]
+          }
+        ]
+      },
+      "14": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "invasive",
+            "accepted": ["invasive"]
+          }
+        ]
+      },
+      "15": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "eutrophication",
+            "accepted": ["eutrophication"]
+          }
+        ]
+      },
+      "16": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "coagulation",
+            "accepted": ["coagulation"]
+          }
+        ]
+      },
+      "17": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "bioaccumulation",
+            "accepted": ["bioaccumulation"]
+          }
+        ]
+      },
+      "18": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "potable",
+            "accepted": ["potable"]
+          }
+        ]
+      },
+      "19": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "decomposers",
+            "accepted": ["decomposers"]
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "sedimentation",
+            "accepted": ["sedimentation"]
+          }
+        ]
+      },
+      "21": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 3,
+            "answer": "Any two of: Smothers eggs/organisms on bottom, Blocks sunlight/reduces photosynthesis, Clogs fish gills, Fills in habitats/reduces depth, Reduces water clarity/increases turbidity (1.5 points each)",
+            "accepted": [
+              "Smothers eggs",
+              "Blocks sunlight",
+              "Clogs fish gills",
+              "Fills in habitats",
+              "Reduces water clarity",
+              "increases turbidity"
+            ]
+          }
+        ]
+      },
+      "22": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "decrease",
+            "accepted": ["decrease", "decreases"]
+          },
+          {
+            "id": "2",
+            "points": 1,
+            "answer": "Warm water holds less oxygen than cold water / gas particles move faster when they get warm and are able to escape the attraction to water particles",
+            "accepted": [
+              "Warm water holds less oxygen",
+              "solubility of oxygen decreases with temperature"
+            ]
+          }
+        ]
+      },
+      "23": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "Class 1",
+            "accepted": ["1", "Class 1"]
+          }
+        ]
+      },
+      "24": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "Class 2",
+            "accepted": ["2", "Class 2"]
+          }
+        ]
+      },
+      "25": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "Class 4",
+            "accepted": ["4", "Class 4"]
+          }
+        ]
+      },
+      "26": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "Class 5",
+            "accepted": ["5", "Class 5"]
+          }
+        ]
+      },
+      "27": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 1,
+            "answer": "Class 1",
+            "accepted": ["1", "Class 1"]
+          }
+        ]
+      },
+      "28": {
+        "correctOption": "B"
+      },
+      "29": {
+        "correctOption": "C"
+      },
+      "30": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "Any two of: Outcompetes/displaces native plants, Reduces food sources for wildlife, Eliminates/degrades nesting and feeding habitat, Reduces plant biodiversity, Alters wetland water flow, Blocks access to open water (1 point each)",
+            "accepted": [
+              "Outcompetes native plants",
+              "Reduces food sources",
+              "Eliminates nesting habitat",
+              "Reduces plant biodiversity",
+              "Alters wetland water flow",
+              "Blocks access to open water"
+            ]
+          }
+        ]
+      },
+      "31": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "Any two of: Filters excessive amounts of water removing food, Outcompetes native mussels, Clogs water intake pipes, Alters water clarity dramatically, Attaches to and smothers native mussels, Sharp shells cut and harm wildlife/humans (1 point each)",
+            "accepted": [
+              "Filters excessive amounts of water",
+              "Outcompetes native mussels",
+              "Clogs water intake pipes",
+              "Alters water clarity",
+              "Smothers native mussels",
+              "Sharp shells cut"
+            ]
+          }
+        ]
+      },
+      "32": {
+        "correctOption": "b"
+      },
+      "33": {
+        "correctOption": "c"
+      },
+      "34": {
+        "correctOption": "c"
+      },
+      "35": {
+        "correctOption": "d"
+      },
+      "36": {
+        "correctOption": "b"
+      },
+      "37": {
+        "correctOption": "d"
+      },
+      "38": {
+        "correctOption": "B"
+      },
+      "39": {
+        "correctOption": "B"
+      },
+      "40": {
+        "correctOption": "A"
+      },
+      "41": {
+        "correctOption": "B"
+      },
+      "42": {
+        "correctOption": "B"
+      },
+      "43": {
+        "correctOption": "B"
+      },
+      "44": {
+        "correctOption": "A"
+      },
+      "45": {
+        "correctOption": "B"
+      },
+      "46": {
+        "correctOption": "A"
+      },
+      "32_A": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "water boatman",
+            "accepted": ["water boatman"]
+          }
+        ]
+      },
+      "32_B": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "water penny",
+            "accepted": ["water penny"]
+          }
+        ]
+      },
+      "32_C": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "mayfly",
+            "accepted": ["mayfly"]
+          }
+        ]
+      },
+      "32_D": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "damselfly",
+            "accepted": ["damselfly"]
+          }
+        ]
+      },
+      "32_E": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "cranefly",
+            "accepted": ["cranefly"]
+          }
+        ]
+      },
+      "32_F": {
+        "criteria": [
+          {
+            "id": "1",
+            "points": 2,
+            "answer": "Dobsonfly",
+            "accepted": ["Dobsonfly"]
+          }
+        ]
+      }
+    },
+    "questionCount": 52,
+    "maxScore": 78
   }
 ]

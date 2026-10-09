@@ -1,0 +1,1868 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e4]:
+    - link [ref=f1e5] [cursor=pointer]:
+      - /url: /
+      - img "Scioly.org Logo" [ref=f1e6]
+    - generic [ref=f1e8] [cursor=pointer]
+  - generic [ref=f1e13]:
+    - generic [ref=f1e14]:
+      - text:  
+      - navigation [ref=f1e15]:
+        - generic [ref=f1e16]:
+          - menubar [ref=f1e17]:
+            - listitem [ref=f1e18]:
+              - link "Quick links" [ref=f1e19] [cursor=pointer]:
+                - /url: "#"
+                - generic [aria-hidden] [ref=f1e20]: 
+                - text: Quick links
+              - text:        
+            - listitem [ref=f1e21]:
+              - menuitem "FAQ" [ref=f1e22] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f1e23]: 
+                - text: FAQ
+            - listitem [ref=f1e24]:
+              - generic [ref=f1e25]:
+                - link "Umer-Eats " [ref=f1e26] [cursor=pointer]:
+                  - /url: ./ucp.php
+                - text:   
+            - listitem [ref=f1e27]:
+              - menuitem "Private messages" [ref=f1e28] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f1e29]: 
+                - text: Private messages
+            - listitem [ref=f1e30]:
+              - link "Notifications" [ref=f1e31] [cursor=pointer]:
+                - /url: ./ucp.php?i=ucp_notifications
+                - generic [aria-hidden] [ref=f1e32]: 
+                - text: Notifications
+          - menubar [ref=f1e33]:
+            - listitem [ref=f1e34]:
+              - link "Scioly.org" [ref=f1e36] [cursor=pointer]:
+                - /url: https://scioly.org
+                - generic [aria-hidden] [ref=f1e37]: 
+                - text: Scioly.org
+              - generic [ref=f1e38]:
+                - text: ‹
+                - link "Forums" [ref=f1e39] [cursor=pointer]:
+                  - /url: ./index.php
+            - text: 
+    - main [ref=f1e40]:
+      - paragraph [ref=f1e41]: "Last visit was: Yesterday, 9:01 pm"
+      - paragraph [ref=f1e42]: It is currently October 8th, 2026, 9:18 pm
+      - link "Mark forums read" [ref=f1e44] [cursor=pointer]:
+        - /url: ./index.php?hash=a51f75b6&mark=forums&mark_time=1791508727
+      - generic [ref=f1e46]:
+        - list [ref=f1e47]:
+          - listitem [ref=f1e48]:
+            - generic [ref=f1e49]:
+              - term [ref=f1e50]:
+                - generic [ref=f1e51]: Forum
+              - definition [ref=f1e52]: Topics
+              - definition [ref=f1e53]: Posts
+              - definition [ref=f1e54]:
+                - generic [ref=f1e55]: Last post
+        - list [ref=f1e56]:
+          - listitem [ref=f1e57]:
+            - generic [ref=f1e58]:
+              - term [ref=f1e59]:
+                - link "Welcome to the 2027 Season!" [ref=f1e61] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=278
+              - definition [ref=f1e62]:
+                - generic [ref=f1e63]: "Total redirects: 994902"
+      - generic [ref=f1e65]:
+        - list [ref=f1e66]:
+          - listitem [ref=f1e67]:
+            - generic [ref=f1e68]:
+              - term [ref=f1e69]:
+                - link "Event Forums" [ref=f1e71] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=1
+              - definition [ref=f1e72]: Topics
+              - definition [ref=f1e73]: Posts
+              - definition [ref=f1e74]:
+                - generic [ref=f1e75]: Last post
+        - list [ref=f1e76]:
+          - listitem [ref=f1e77]:
+            - generic [ref=f1e78]:
+              - term [ref=f1e79]:
+                - link [ref=f1e80] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=283
+                - generic [ref=f1e81]:
+                  - link "Build Events" [ref=f1e82] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=283
+                  - strong [ref=f1e83]: "Subforums:"
+                  - link "Boomilever B/C" [ref=f1e84] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=482
+                    - generic [aria-hidden] [ref=f1e85]: 
+                    - text: Boomilever B/C
+                  - text: ","
+                  - link "Elastic Launched Glider B" [ref=f1e86] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=483
+                    - generic [aria-hidden] [ref=f1e87]: 
+                    - text: Elastic Launched Glider B
+                  - text: ","
+                  - link "Electric Vehicle C" [ref=f1e88] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=484
+                    - generic [aria-hidden] [ref=f1e89]: 
+                    - text: Electric Vehicle C
+                  - text: ","
+                  - link "Hovercraft B/C" [ref=f1e90] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=491
+                    - generic [aria-hidden] [ref=f1e91]: 
+                    - text: Hovercraft B/C
+                  - text: ","
+                  - link "Mission Possible C" [ref=f1e92] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=489
+                    - generic [aria-hidden] [ref=f1e93]: 
+                    - text: Mission Possible C
+                  - text: ","
+                  - link "Ping Pong Parachute B/C" [ref=f1e94] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=492
+                    - generic [aria-hidden] [ref=f1e95]: 
+                    - text: Ping Pong Parachute B/C
+                  - text: ","
+                  - link "Roller Coaster B" [ref=f1e96] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=485
+                    - generic [aria-hidden] [ref=f1e97]: 
+                    - text: Roller Coaster B
+                  - text: ","
+                  - link "Scrambler B" [ref=f1e98] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=486
+                    - generic [aria-hidden] [ref=f1e99]: 
+                    - text: Scrambler B
+                  - text: ","
+                  - link "Wright Stuff C" [ref=f1e100] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=490
+                    - generic [aria-hidden] [ref=f1e101]: 
+                    - text: Wright Stuff C
+              - definition [ref=f1e102]:
+                - text: "36"
+                - term [ref=f1e103]: Topics
+              - definition [ref=f1e104]:
+                - text: "86"
+                - term [ref=f1e105]: Posts
+              - definition [ref=f1e106]:
+                - generic [ref=f1e107]:
+                  - term [ref=f1e108]: Last post
+                  - 'link "Re: type of wood" [ref=f1e109] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464761#p464761
+                  - text: by
+                  - link "middleschoolruinene" [ref=f1e110] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=143409
+                  - link "View the latest post" [ref=f1e111] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464761#p464761
+                    - generic [aria-hidden] [ref=f1e112]: 
+                  - time [ref=f1e114]: Today, 2:35 pm
+          - listitem [ref=f1e115]:
+            - generic [ref=f1e116]:
+              - term [ref=f1e117]:
+                - link [ref=f1e118] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=284
+                - generic [ref=f1e119]:
+                  - link "Lab Events" [ref=f1e120] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=284
+                  - strong [ref=f1e121]: "Subforums:"
+                  - link "Protein Modeling C" [ref=f1e122] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=488
+                    - generic [aria-hidden] [ref=f1e123]: 
+                    - text: Protein Modeling C
+                  - text: ","
+                  - link "Thermodynamics B/C" [ref=f1e124] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=487
+                    - generic [aria-hidden] [ref=f1e125]: 
+                    - text: Thermodynamics B/C
+              - definition [ref=f1e126]:
+                - text: "14"
+                - term [ref=f1e127]: Topics
+              - definition [ref=f1e128]:
+                - text: "70"
+                - term [ref=f1e129]: Posts
+              - definition [ref=f1e130]:
+                - generic [ref=f1e131]:
+                  - term [ref=f1e132]: Last post
+                  - 'link "Re: Food Science B “milk”" [ref=f1e133] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464748#p464748
+                  - text: by
+                  - link "TheSouthWooder" [ref=f1e134] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=158640
+                  - link "View the latest post" [ref=f1e135] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464748#p464748
+                    - generic [aria-hidden] [ref=f1e136]: 
+                  - time [ref=f1e138]: Today, 9:21 am
+          - listitem [ref=f1e139]:
+            - generic [ref=f1e140]:
+              - term [ref=f1e141]:
+                - link "Study Events" [ref=f1e143] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=285
+              - definition [ref=f1e144]:
+                - text: "13"
+                - term [ref=f1e145]: Topics
+              - definition [ref=f1e146]:
+                - text: "60"
+                - term [ref=f1e147]: Posts
+              - definition [ref=f1e148]:
+                - generic [ref=f1e149]:
+                  - term [ref=f1e150]: Last post
+                  - 'link "Re: Heredity B" [ref=f1e151] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464698#p464698
+                  - text: by
+                  - link "amiathyme" [ref=f1e152] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=171934
+                  - link "View the latest post" [ref=f1e153] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464698#p464698
+                    - generic [aria-hidden] [ref=f1e154]: 
+                  - time [ref=f1e156]: October 6th, 2026, 6:03 pm
+          - listitem [ref=f1e157]:
+            - generic [ref=f1e158]:
+              - term [ref=f1e159]:
+                - link "Trial Events" [ref=f1e161] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=251
+              - definition [ref=f1e162]:
+                - generic [ref=f1e163]: "Total redirects: 812582"
+      - generic [ref=f1e165]:
+        - list [ref=f1e166]:
+          - listitem [ref=f1e167]:
+            - generic [ref=f1e168]:
+              - term [ref=f1e169]:
+                - link "Competition Forums" [ref=f1e171] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=6
+              - definition [ref=f1e172]: Topics
+              - definition [ref=f1e173]: Posts
+              - definition [ref=f1e174]:
+                - generic [ref=f1e175]: Last post
+        - list [ref=f1e176]:
+          - listitem [ref=f1e177]:
+            - generic [ref=f1e178]:
+              - term [ref=f1e179]:
+                - link [ref=f1e180] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=334
+                - generic [ref=f1e181]:
+                  - link "General Competition" [ref=f1e182] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=334
+                  - text: For anything Science Olympiad-related that might not fall under a specific event or competition.
+                  - strong [ref=f1e183]: "Subforum:"
+                  - link "SSSS & SEC" [ref=f1e184] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=379
+                    - generic [aria-hidden] [ref=f1e185]: 
+                    - text: SSSS & SEC
+              - definition [ref=f1e186]:
+                - text: "922"
+                - term [ref=f1e187]: Topics
+              - definition [ref=f1e188]:
+                - text: "21649"
+                - term [ref=f1e189]: Posts
+              - definition [ref=f1e190]:
+                - generic [ref=f1e191]:
+                  - term [ref=f1e192]: Last post
+                  - 'link "Re: Motivation of Team" [ref=f1e193] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464759#p464759
+                  - text: by
+                  - link "TheSouthWooder" [ref=f1e194] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=158640
+                  - link "View the latest post" [ref=f1e195] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464759#p464759
+                    - generic [aria-hidden] [ref=f1e196]: 
+                  - time [ref=f1e198]: Today, 1:21 pm
+          - listitem [ref=f1e199]:
+            - generic [ref=f1e200]:
+              - term [ref=f1e201]:
+                - generic [ref=f1e202]:
+                  - link "Invitationals" [ref=f1e203] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=294
+                  - text: Area to advertise for your competitions!
+              - definition [ref=f1e204]:
+                - text: "13"
+                - term [ref=f1e205]: Topics
+              - definition [ref=f1e206]:
+                - text: "23"
+                - term [ref=f1e207]: Posts
+              - definition [ref=f1e208]:
+                - generic [ref=f1e209]:
+                  - term [ref=f1e210]: Last post
+                  - 'link "Re: Columbia University Scien…" [ref=f1e211] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464671#p464671
+                  - text: by
+                  - link "sc95837" [ref=f1e212] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=112930
+                  - link "View the latest post" [ref=f1e213] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464671#p464671
+                    - generic [aria-hidden] [ref=f1e214]: 
+                  - time [ref=f1e216]: October 5th, 2026, 2:56 pm
+          - listitem [ref=f1e217]:
+            - generic [ref=f1e218]:
+              - term [ref=f1e219]:
+                - link [ref=f1e220] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=295
+                - generic [ref=f1e221]:
+                  - link "Regionals & States" [ref=f1e222] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=295
+                  - text: Show your regional and state pride!
+              - definition [ref=f1e223]:
+                - text: "5"
+                - term [ref=f1e224]: Topics
+              - definition [ref=f1e225]:
+                - text: "53"
+                - term [ref=f1e226]: Posts
+              - definition [ref=f1e227]:
+                - generic [ref=f1e228]:
+                  - term [ref=f1e229]: Last post
+                  - 'link "Re: Texas 2027" [ref=f1e230] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464753#p464753
+                  - text: by
+                  - link "RZ2004" [ref=f1e231] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=113035
+                  - link "View the latest post" [ref=f1e232] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464753#p464753
+                    - generic [aria-hidden] [ref=f1e233]: 
+                  - time [ref=f1e235]: Today, 12:16 pm
+          - listitem [ref=f1e236]:
+            - generic [ref=f1e237]:
+              - term [ref=f1e238]:
+                - generic [ref=f1e239]:
+                  - link "Nationals" [ref=f1e240] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=296
+                  - text: We're looking forward to the tournament hosted by The Ohio State University!
+              - definition [ref=f1e241]:
+                - text: "1"
+                - term [ref=f1e242]: Topics
+              - definition [ref=f1e243]:
+                - text: "6"
+                - term [ref=f1e244]: Posts
+              - definition [ref=f1e245]:
+                - generic [ref=f1e246]:
+                  - term [ref=f1e247]: Last post
+                  - 'link "Re: 2027 National Tournament:…" [ref=f1e248] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464427#p464427
+                  - text: by
+                  - link "betafish" [ref=f1e249] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=167621
+                  - link "View the latest post" [ref=f1e250] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464427#p464427
+                    - generic [aria-hidden] [ref=f1e251]: 
+                  - time [ref=f1e253]: September 26th, 2026, 2:42 pm
+          - listitem [ref=f1e254]:
+            - generic [ref=f1e255]:
+              - term [ref=f1e256]:
+                - generic [ref=f1e257]:
+                  - link "Alumni" [ref=f1e258] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=333
+                  - text: Alumni make some of the best volunteers!
+              - definition [ref=f1e259]:
+                - text: "40"
+                - term [ref=f1e260]: Topics
+              - definition [ref=f1e261]:
+                - text: "354"
+                - term [ref=f1e262]: Posts
+              - definition [ref=f1e263]:
+                - generic [ref=f1e264]:
+                  - term [ref=f1e265]: Last post
+                  - 'link "Re: Alumni, why do you volunt…" [ref=f1e266] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464472#p464472
+                  - text: by
+                  - link "user890s" [ref=f1e267] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=161923
+                  - link "View the latest post" [ref=f1e268] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464472#p464472
+                    - generic [aria-hidden] [ref=f1e269]: 
+                  - time [ref=f1e271]: September 29th, 2026, 1:44 am
+      - generic [ref=f1e273]:
+        - list [ref=f1e274]:
+          - listitem [ref=f1e275]:
+            - generic [ref=f1e276]:
+              - term [ref=f1e277]:
+                - link "Off-Topic Forums" [ref=f1e279] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=4
+              - definition [ref=f1e280]: Topics
+              - definition [ref=f1e281]: Posts
+              - definition [ref=f1e282]:
+                - generic [ref=f1e283]: Last post
+        - list [ref=f1e284]:
+          - listitem [ref=f1e285]:
+            - generic [ref=f1e286]:
+              - term [ref=f1e287]:
+                - link [ref=f1e288] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=335
+                - generic [ref=f1e289]:
+                  - link "General Chat" [ref=f1e290] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=335
+                  - text: Shoot the breeze with other Olympians.
+              - definition [ref=f1e291]:
+                - text: "910"
+                - term [ref=f1e292]: Topics
+              - definition [ref=f1e293]:
+                - text: "53575"
+                - term [ref=f1e294]: Posts
+              - definition [ref=f1e295]:
+                - generic [ref=f1e296]:
+                  - term [ref=f1e297]: Last post
+                  - 'link "Re: Your Daily Random Comment" [ref=f1e298] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464760#p464760
+                  - text: by
+                  - link "middleschoolruinene" [ref=f1e299] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=143409
+                  - link "View the latest post" [ref=f1e300] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464760#p464760
+                    - generic [aria-hidden] [ref=f1e301]: 
+                  - time [ref=f1e303]: Today, 2:33 pm
+          - listitem [ref=f1e304]:
+            - generic [ref=f1e305]:
+              - term [ref=f1e306]:
+                - link [ref=f1e307] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=21
+                - generic [ref=f1e308]:
+                  - link "Posting Games" [ref=f1e309] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=21
+                  - text: A forum for those Word Games that plague the Earth.
+                  - strong [ref=f1e310]: "Subforum:"
+                  - link "Assassinator Games" [ref=f1e311] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=344
+                    - generic [aria-hidden] [ref=f1e312]: 
+                    - text: Assassinator Games
+              - definition [ref=f1e313]:
+                - text: "562"
+                - term [ref=f1e314]: Topics
+              - definition [ref=f1e315]:
+                - text: "117764"
+                - term [ref=f1e316]: Posts
+              - definition [ref=f1e317]:
+                - generic [ref=f1e318]:
+                  - term [ref=f1e319]: Last post
+                  - 'link "Re: Predict what the person b…" [ref=f1e320] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464767#p464767
+                  - text: by
+                  - link "betafish" [ref=f1e321] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=167621
+                  - link "View the latest post" [ref=f1e322] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464767#p464767
+                    - generic [aria-hidden] [ref=f1e323]: 
+                  - time [ref=f1e325]: Today, 7:52 pm
+          - listitem [ref=f1e326]:
+            - generic [ref=f1e327]:
+              - term [ref=f1e328]:
+                - generic [ref=f1e329]:
+                  - link "The Polling Place" [ref=f1e330] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=22
+                  - text: A home for moderator-approved, long term polls.
+              - definition [ref=f1e331]:
+                - text: "762"
+                - term [ref=f1e332]: Topics
+              - definition [ref=f1e333]:
+                - text: "762"
+                - term [ref=f1e334]: Posts
+              - definition [ref=f1e335]:
+                - generic [ref=f1e336]:
+                  - term [ref=f1e337]: Last post
+                  - link "Best mode? (music)" [ref=f1e338] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464094#p464094
+                  - text: by
+                  - link "Magmaroar" [ref=f1e339] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=157007
+                  - link "View the latest post" [ref=f1e340] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464094#p464094
+                    - generic [aria-hidden] [ref=f1e341]: 
+                  - time [ref=f1e343]: June 21st, 2026, 9:47 pm
+      - generic [ref=f1e345]:
+        - list [ref=f1e346]:
+          - listitem [ref=f1e347]:
+            - generic [ref=f1e348]:
+              - term [ref=f1e349]:
+                - link "Administrative" [ref=f1e351] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=7
+              - definition [ref=f1e352]: Topics
+              - definition [ref=f1e353]: Posts
+              - definition [ref=f1e354]:
+                - generic [ref=f1e355]: Last post
+        - list [ref=f1e356]:
+          - listitem [ref=f1e357]:
+            - generic [ref=f1e358]:
+              - term [ref=f1e359]:
+                - link "Announcements" [ref=f1e361] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=24
+              - definition [ref=f1e362]:
+                - text: "110"
+                - term [ref=f1e363]: Topics
+              - definition [ref=f1e364]:
+                - text: "676"
+                - term [ref=f1e365]: Posts
+              - definition [ref=f1e366]:
+                - generic [ref=f1e367]:
+                  - term [ref=f1e368]: Last post
+                  - 'link "New WikiProject: Event Updates" [ref=f1e369] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464276#p464276
+                  - text: by
+                  - link "Unome" [ref=f1e370] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=22319
+                  - link "View the latest post" [ref=f1e371] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464276#p464276
+                    - generic [aria-hidden] [ref=f1e372]: 
+                  - time [ref=f1e374]: September 13th, 2026, 10:17 pm
+          - listitem [ref=f1e375]:
+            - generic [ref=f1e376]:
+              - term [ref=f1e377]:
+                - link "Feedback" [ref=f1e379] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=25
+              - definition [ref=f1e380]:
+                - text: "207"
+                - term [ref=f1e381]: Topics
+              - definition [ref=f1e382]:
+                - text: "2890"
+                - term [ref=f1e383]: Posts
+              - definition [ref=f1e384]:
+                - generic [ref=f1e385]:
+                  - term [ref=f1e386]: Last post
+                  - 'link "Re: How Could We Improve Scio…" [ref=f1e387] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464347#p464347
+                  - text: by
+                  - link "middleschoolruinene" [ref=f1e388] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=143409
+                  - link "View the latest post" [ref=f1e389] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464347#p464347
+                    - generic [aria-hidden] [ref=f1e390]: 
+                  - time [ref=f1e392]: September 17th, 2026, 7:57 pm
+      - generic [ref=f1e394]:
+        - list [ref=f1e395]:
+          - listitem [ref=f1e396]:
+            - generic [ref=f1e397]:
+              - term [ref=f1e398]:
+                - link "Team Forums" [ref=f1e400] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=8
+              - definition [ref=f1e401]: Topics
+              - definition [ref=f1e402]: Posts
+              - definition [ref=f1e403]:
+                - generic [ref=f1e404]: Last post
+        - list [ref=f1e405]:
+          - listitem [ref=f1e406]:
+            - generic [ref=f1e407]:
+              - term [ref=f1e408]:
+                - link "How to get an (invisible) team forum" [ref=f1e410] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=28
+              - definition [ref=f1e411]:
+                - generic [ref=f1e412]: "Total redirects: 1036382"
+      - generic [ref=f1e414]:
+        - list [ref=f1e415]:
+          - listitem [ref=f1e416]:
+            - generic [ref=f1e417]:
+              - term [ref=f1e418]:
+                - link "Archives" [ref=f1e420] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=54
+              - definition [ref=f1e421]: Topics
+              - definition [ref=f1e422]: Posts
+              - definition [ref=f1e423]:
+                - generic [ref=f1e424]: Last post
+        - list [ref=f1e425]:
+          - listitem [ref=f1e426]:
+            - generic [ref=f1e427]:
+              - term [ref=f1e428]:
+                - link "Old Board - 2001-2008" [ref=f1e430] [cursor=pointer]:
+                  - /url: ./viewforum.php?f=70
+              - definition [ref=f1e431]:
+                - generic [ref=f1e432]: "Total redirects: 1082502"
+          - listitem [ref=f1e433]:
+            - generic [ref=f1e434]:
+              - term [ref=f1e435]:
+                - generic [ref=f1e436]:
+                  - link "2009" [ref=f1e437] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=88
+                  - strong [ref=f1e438]: "Subforums:"
+                  - link "2009 Build Events" [ref=f1e439] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=16
+                    - generic [aria-hidden] [ref=f1e440]: 
+                    - text: 2009 Build Events
+                  - text: ","
+                  - link "2009 Lab Events" [ref=f1e441] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=18
+                    - generic [aria-hidden] [ref=f1e442]: 
+                    - text: 2009 Lab Events
+                  - text: ","
+                  - link "2009 Study Events" [ref=f1e443] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=17
+                    - generic [aria-hidden] [ref=f1e444]: 
+                    - text: 2009 Study Events
+                  - text: ","
+                  - link "2009 Invitationals, Regionals, and States" [ref=f1e445] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=19
+                    - generic [aria-hidden] [ref=f1e446]: 
+                    - text: 2009 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2009 Nationals" [ref=f1e447] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=23
+                    - generic [aria-hidden] [ref=f1e448]: 
+                    - text: 2009 Nationals
+              - definition [ref=f1e449]:
+                - text: "205"
+                - term [ref=f1e450]: Topics
+              - definition [ref=f1e451]:
+                - text: "21786"
+                - term [ref=f1e452]: Posts
+              - definition [ref=f1e453]:
+                - generic [ref=f1e454]:
+                  - term [ref=f1e455]: Last post
+                  - 'link "Re: Anyone medaled at Nats?" [ref=f1e456] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=66444#p66444
+                  - text: by
+                  - link "Deeisenberg" [ref=f1e457] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=8717
+                  - link "View the latest post" [ref=f1e458] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=66444#p66444
+                    - generic [aria-hidden] [ref=f1e459]: 
+                  - time [ref=f1e461]: August 2nd, 2009, 8:55 pm
+          - listitem [ref=f1e462]:
+            - generic [ref=f1e463]:
+              - term [ref=f1e464]:
+                - generic [ref=f1e465]:
+                  - link "2010" [ref=f1e466] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=89
+                  - strong [ref=f1e467]: "Subforums:"
+                  - link "2010 Build Events" [ref=f1e468] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=66
+                    - generic [aria-hidden] [ref=f1e469]: 
+                    - text: 2010 Build Events
+                  - text: ","
+                  - link "2010 Lab Events" [ref=f1e470] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=65
+                    - generic [aria-hidden] [ref=f1e471]: 
+                    - text: 2010 Lab Events
+                  - text: ","
+                  - link "2010 Study Events" [ref=f1e472] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=67
+                    - generic [aria-hidden] [ref=f1e473]: 
+                    - text: 2010 Study Events
+                  - text: ","
+                  - link "2010 Invitationals, Regionals, and States" [ref=f1e474] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=72
+                    - generic [aria-hidden] [ref=f1e475]: 
+                    - text: 2010 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2010 Nationals" [ref=f1e476] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=73
+                    - generic [aria-hidden] [ref=f1e477]: 
+                    - text: 2010 Nationals
+              - definition [ref=f1e478]:
+                - text: "157"
+                - term [ref=f1e479]: Topics
+              - definition [ref=f1e480]:
+                - text: "16269"
+                - term [ref=f1e481]: Posts
+              - definition [ref=f1e482]:
+                - generic [ref=f1e483]:
+                  - term [ref=f1e484]: Last post
+                  - 'link "Re: Propellers" [ref=f1e485] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=126653#p126653
+                  - text: by
+                  - link "illusionist" [ref=f1e486] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=13303
+                  - link "View the latest post" [ref=f1e487] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=126653#p126653
+                    - generic [aria-hidden] [ref=f1e488]: 
+                  - time [ref=f1e490]: August 30th, 2010, 6:25 pm
+          - listitem [ref=f1e491]:
+            - generic [ref=f1e492]:
+              - term [ref=f1e493]:
+                - generic [ref=f1e494]:
+                  - link "2011" [ref=f1e495] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=90
+                  - strong [ref=f1e496]: "Subforums:"
+                  - link "2011 Build Events" [ref=f1e497] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=91
+                    - generic [aria-hidden] [ref=f1e498]: 
+                    - text: 2011 Build Events
+                  - text: ","
+                  - link "2011 Lab Events" [ref=f1e499] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=92
+                    - generic [aria-hidden] [ref=f1e500]: 
+                    - text: 2011 Lab Events
+                  - text: ","
+                  - link "2011 Study Events" [ref=f1e501] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=93
+                    - generic [aria-hidden] [ref=f1e502]: 
+                    - text: 2011 Study Events
+                  - text: ","
+                  - link "2011 Invitationals, Regionals, and States" [ref=f1e503] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=99
+                    - generic [aria-hidden] [ref=f1e504]: 
+                    - text: 2011 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2011 Nationals" [ref=f1e505] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=100
+                    - generic [aria-hidden] [ref=f1e506]: 
+                    - text: 2011 Nationals
+              - definition [ref=f1e507]:
+                - text: "199"
+                - term [ref=f1e508]: Topics
+              - definition [ref=f1e509]:
+                - text: "22427"
+                - term [ref=f1e510]: Posts
+              - definition [ref=f1e511]:
+                - generic [ref=f1e512]:
+                  - term [ref=f1e513]: Last post
+                  - 'link "Re: What are Invitationals?" [ref=f1e514] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=178370#p178370
+                  - text: by
+                  - link "EastStroudsburg13" [ref=f1e515] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=11259
+                  - link "View the latest post" [ref=f1e516] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=178370#p178370
+                    - generic [aria-hidden] [ref=f1e517]: 
+                  - time [ref=f1e519]: August 28th, 2011, 7:38 pm
+          - listitem [ref=f1e520]:
+            - generic [ref=f1e521]:
+              - term [ref=f1e522]:
+                - generic [ref=f1e523]:
+                  - link "2012" [ref=f1e524] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=118
+                  - strong [ref=f1e525]: "Subforums:"
+                  - link "2012 Build Events" [ref=f1e526] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=119
+                    - generic [aria-hidden] [ref=f1e527]: 
+                    - text: 2012 Build Events
+                  - text: ","
+                  - link "2012 Lab Events" [ref=f1e528] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=127
+                    - generic [aria-hidden] [ref=f1e529]: 
+                    - text: 2012 Lab Events
+                  - text: ","
+                  - link "2012 Study Events" [ref=f1e530] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=121
+                    - generic [aria-hidden] [ref=f1e531]: 
+                    - text: 2012 Study Events
+                  - text: ","
+                  - link "2012 Nationals" [ref=f1e532] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=126
+                    - generic [aria-hidden] [ref=f1e533]: 
+                    - text: 2012 Nationals
+              - definition [ref=f1e534]:
+                - text: "128"
+                - term [ref=f1e535]: Topics
+              - definition [ref=f1e536]:
+                - text: "14952"
+                - term [ref=f1e537]: Posts
+              - definition [ref=f1e538]:
+                - generic [ref=f1e539]:
+                  - term [ref=f1e540]: Last post
+                  - 'link "Re: Elastic Launch Glider C […" [ref=f1e541] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=213075#p213075
+                  - text: by
+                  - link "jander14indoor" [ref=f1e542] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=8722
+                  - link "View the latest post" [ref=f1e543] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=213075#p213075
+                    - generic [aria-hidden] [ref=f1e544]: 
+                  - time [ref=f1e546]: August 29th, 2012, 4:08 pm
+          - listitem [ref=f1e547]:
+            - generic [ref=f1e548]:
+              - term [ref=f1e549]:
+                - generic [ref=f1e550]:
+                  - link "2013" [ref=f1e551] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=141
+                  - strong [ref=f1e552]: "Subforums:"
+                  - link "2013 Build Events" [ref=f1e553] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=143
+                    - generic [aria-hidden] [ref=f1e554]: 
+                    - text: 2013 Build Events
+                  - text: ","
+                  - link "2013 Lab Events" [ref=f1e555] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=142
+                    - generic [aria-hidden] [ref=f1e556]: 
+                    - text: 2013 Lab Events
+                  - text: ","
+                  - link "2013 Study Events" [ref=f1e557] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=144
+                    - generic [aria-hidden] [ref=f1e558]: 
+                    - text: 2013 Study Events
+                  - text: ","
+                  - link "2013 Invitationals, Regionals, and States" [ref=f1e559] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=149
+                    - generic [aria-hidden] [ref=f1e560]: 
+                    - text: 2013 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2013 Nationals" [ref=f1e561] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=150
+                    - generic [aria-hidden] [ref=f1e562]: 
+                    - text: 2013 Nationals
+                  - text: ","
+                  - link "2013 News" [ref=f1e563] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=151
+                    - generic [aria-hidden] [ref=f1e564]: 
+                    - text: 2013 News
+              - definition [ref=f1e565]:
+                - text: "151"
+                - term [ref=f1e566]: Topics
+              - definition [ref=f1e567]:
+                - text: "14041"
+                - term [ref=f1e568]: Posts
+              - definition [ref=f1e569]:
+                - generic [ref=f1e570]:
+                  - term [ref=f1e571]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e572] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=245809#p245809
+                  - text: by
+                  - link "Skink" [ref=f1e573] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=11460
+                  - link "View the latest post" [ref=f1e574] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=245809#p245809
+                    - generic [aria-hidden] [ref=f1e575]: 
+                  - time [ref=f1e577]: August 28th, 2013, 10:00 pm
+          - listitem [ref=f1e578]:
+            - generic [ref=f1e579]:
+              - term [ref=f1e580]:
+                - generic [ref=f1e581]:
+                  - link "2014" [ref=f1e582] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=165
+                  - strong [ref=f1e583]: "Subforums:"
+                  - link "2014 Build Events" [ref=f1e584] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=168
+                    - generic [aria-hidden] [ref=f1e585]: 
+                    - text: 2014 Build Events
+                  - text: ","
+                  - link "2014 Lab Events" [ref=f1e586] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=166
+                    - generic [aria-hidden] [ref=f1e587]: 
+                    - text: 2014 Lab Events
+                  - text: ","
+                  - link "2014 Study Events" [ref=f1e588] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=167
+                    - generic [aria-hidden] [ref=f1e589]: 
+                    - text: 2014 Study Events
+                  - text: ","
+                  - link "2014 Question Marathons" [ref=f1e590] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=173
+                    - generic [aria-hidden] [ref=f1e591]: 
+                    - text: 2014 Question Marathons
+                  - text: ","
+                  - link "2014 Invitationals, Regionals, and States" [ref=f1e592] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=170
+                    - generic [aria-hidden] [ref=f1e593]: 
+                    - text: 2014 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2014 Nationals" [ref=f1e594] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=171
+                    - generic [aria-hidden] [ref=f1e595]: 
+                    - text: 2014 Nationals
+                  - text: ","
+                  - link "2014 News" [ref=f1e596] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=172
+                    - generic [aria-hidden] [ref=f1e597]: 
+                    - text: 2014 News
+              - definition [ref=f1e598]:
+                - text: "120"
+                - term [ref=f1e599]: Topics
+              - definition [ref=f1e600]:
+                - text: "10301"
+                - term [ref=f1e601]: Posts
+              - definition [ref=f1e602]:
+                - generic [ref=f1e603]:
+                  - term [ref=f1e604]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e605] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=262021#p262021
+                  - text: by
+                  - link "h2ogirl" [ref=f1e606] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=23662
+                  - link "View the latest post" [ref=f1e607] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=262021#p262021
+                    - generic [aria-hidden] [ref=f1e608]: 
+                  - time [ref=f1e610]: September 10th, 2014, 6:23 pm
+          - listitem [ref=f1e611]:
+            - generic [ref=f1e612]:
+              - term [ref=f1e613]:
+                - generic [ref=f1e614]:
+                  - link "2015" [ref=f1e615] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=185
+                  - strong [ref=f1e616]: "Subforums:"
+                  - link "2015 Build Events" [ref=f1e617] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=188
+                    - generic [aria-hidden] [ref=f1e618]: 
+                    - text: 2015 Build Events
+                  - text: ","
+                  - link "2015 Lab Events" [ref=f1e619] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=186
+                    - generic [aria-hidden] [ref=f1e620]: 
+                    - text: 2015 Lab Events
+                  - text: ","
+                  - link "2015 Study Events" [ref=f1e621] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=187
+                    - generic [aria-hidden] [ref=f1e622]: 
+                    - text: 2015 Study Events
+                  - text: ","
+                  - link "2015 Question Marathons" [ref=f1e623] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=193
+                    - generic [aria-hidden] [ref=f1e624]: 
+                    - text: 2015 Question Marathons
+                  - text: ","
+                  - link "2015 Invitationals, Regionals, and States" [ref=f1e625] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=195
+                    - generic [aria-hidden] [ref=f1e626]: 
+                    - text: 2015 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2015 Competition Advertising" [ref=f1e627] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=200
+                    - generic [aria-hidden] [ref=f1e628]: 
+                    - text: 2015 Competition Advertising
+                  - text: ","
+                  - link "2015 Nationals" [ref=f1e629] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=196
+                    - generic [aria-hidden] [ref=f1e630]: 
+                    - text: 2015 Nationals
+                  - text: ","
+                  - link "2015 News" [ref=f1e631] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=194
+                    - generic [aria-hidden] [ref=f1e632]: 
+                    - text: 2015 News
+              - definition [ref=f1e633]:
+                - text: "181"
+                - term [ref=f1e634]: Topics
+              - definition [ref=f1e635]:
+                - text: "9681"
+                - term [ref=f1e636]: Posts
+              - definition [ref=f1e637]:
+                - generic [ref=f1e638]:
+                  - term [ref=f1e639]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e640] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=279327#p279327
+                  - text: by
+                  - link "iwonder" [ref=f1e641] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=15406
+                  - link "View the latest post" [ref=f1e642] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=279327#p279327
+                    - generic [aria-hidden] [ref=f1e643]: 
+                  - time [ref=f1e645]: August 30th, 2015, 8:59 pm
+          - listitem [ref=f1e646]:
+            - generic [ref=f1e647]:
+              - term [ref=f1e648]:
+                - generic [ref=f1e649]:
+                  - link "2016" [ref=f1e650] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=213
+                  - strong [ref=f1e651]: "Subforums:"
+                  - link "2016 Build Events" [ref=f1e652] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=206
+                    - generic [aria-hidden] [ref=f1e653]: 
+                    - text: 2016 Build Events
+                  - text: ","
+                  - link "2016 Lab Events" [ref=f1e654] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=207
+                    - generic [aria-hidden] [ref=f1e655]: 
+                    - text: 2016 Lab Events
+                  - text: ","
+                  - link "2016 Study Events" [ref=f1e656] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=208
+                    - generic [aria-hidden] [ref=f1e657]: 
+                    - text: 2016 Study Events
+                  - text: ","
+                  - link "2016 Question Marathons" [ref=f1e658] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=217
+                    - generic [aria-hidden] [ref=f1e659]: 
+                    - text: 2016 Question Marathons
+                  - text: ","
+                  - link "2016 Invitationals, Regionals, and States" [ref=f1e660] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=214
+                    - generic [aria-hidden] [ref=f1e661]: 
+                    - text: 2016 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2016 Competition Advertising" [ref=f1e662] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=218
+                    - generic [aria-hidden] [ref=f1e663]: 
+                    - text: 2016 Competition Advertising
+                  - text: ","
+                  - link "2016 Nationals" [ref=f1e664] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=215
+                    - generic [aria-hidden] [ref=f1e665]: 
+                    - text: 2016 Nationals
+                  - text: ","
+                  - link "2016 News" [ref=f1e666] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=216
+                    - generic [aria-hidden] [ref=f1e667]: 
+                    - text: 2016 News
+              - definition [ref=f1e668]:
+                - text: "305"
+                - term [ref=f1e669]: Topics
+              - definition [ref=f1e670]:
+                - text: "9496"
+                - term [ref=f1e671]: Posts
+              - definition [ref=f1e672]:
+                - generic [ref=f1e673]:
+                  - term [ref=f1e674]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e675] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=309669#p309669
+                  - text: by
+                  - link "bernard" [ref=f1e676] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=22093
+                  - link "View the latest post" [ref=f1e677] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=309669#p309669
+                    - generic [aria-hidden] [ref=f1e678]: 
+                  - time [ref=f1e680]: March 14th, 2017, 3:09 pm
+          - listitem [ref=f1e681]:
+            - generic [ref=f1e682]:
+              - term [ref=f1e683]:
+                - generic [ref=f1e684]:
+                  - link "2017" [ref=f1e685] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=224
+                  - strong [ref=f1e686]: "Subforums:"
+                  - link "2017 Build Events" [ref=f1e687] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=225
+                    - generic [aria-hidden] [ref=f1e688]: 
+                    - text: 2017 Build Events
+                  - text: ","
+                  - link "2017 Lab Events" [ref=f1e689] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=226
+                    - generic [aria-hidden] [ref=f1e690]: 
+                    - text: 2017 Lab Events
+                  - text: ","
+                  - link "2017 Study Events" [ref=f1e691] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=227
+                    - generic [aria-hidden] [ref=f1e692]: 
+                    - text: 2017 Study Events
+                  - text: ","
+                  - link "2017 Question Marathons" [ref=f1e693] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=228
+                    - generic [aria-hidden] [ref=f1e694]: 
+                    - text: 2017 Question Marathons
+                  - text: ","
+                  - link "2017 Invitationals, Regionals, and States" [ref=f1e695] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=229
+                    - generic [aria-hidden] [ref=f1e696]: 
+                    - text: 2017 Invitationals, Regionals, and States
+                  - text: ","
+                  - link "2017 Competition Advertising" [ref=f1e697] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=230
+                    - generic [aria-hidden] [ref=f1e698]: 
+                    - text: 2017 Competition Advertising
+                  - text: ","
+                  - link "2017 Nationals" [ref=f1e699] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=231
+                    - generic [aria-hidden] [ref=f1e700]: 
+                    - text: 2017 Nationals
+              - definition [ref=f1e701]:
+                - text: "305"
+                - term [ref=f1e702]: Topics
+              - definition [ref=f1e703]:
+                - text: "11787"
+                - term [ref=f1e704]: Posts
+              - definition [ref=f1e705]:
+                - generic [ref=f1e706]:
+                  - term [ref=f1e707]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e708] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=318095#p318095
+                  - text: by
+                  - link "maxxxxx" [ref=f1e709] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=27856
+                  - link "View the latest post" [ref=f1e710] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=318095#p318095
+                    - generic [aria-hidden] [ref=f1e711]: 
+                  - time [ref=f1e713]: September 4th, 2017, 11:55 pm
+          - listitem [ref=f1e714]:
+            - generic [ref=f1e715]:
+              - term [ref=f1e716]:
+                - generic [ref=f1e717]:
+                  - link "2018" [ref=f1e718] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=236
+                  - strong [ref=f1e719]: "Subforums:"
+                  - link "2018 Build Events" [ref=f1e720] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=263
+                    - generic [aria-hidden] [ref=f1e721]: 
+                    - text: 2018 Build Events
+                  - text: ","
+                  - link "2018 Lab Events" [ref=f1e722] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=264
+                    - generic [aria-hidden] [ref=f1e723]: 
+                    - text: 2018 Lab Events
+                  - text: ","
+                  - link "2018 Study Events" [ref=f1e724] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=265
+                    - generic [aria-hidden] [ref=f1e725]: 
+                    - text: 2018 Study Events
+                  - text: ","
+                  - link "2018 Question Marathons" [ref=f1e726] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=266
+                    - generic [aria-hidden] [ref=f1e727]: 
+                    - text: 2018 Question Marathons
+                  - text: ","
+                  - link "2018 Invitationals" [ref=f1e728] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=267
+                    - generic [aria-hidden] [ref=f1e729]: 
+                    - text: 2018 Invitationals
+                  - text: ","
+                  - link "2018 Regionals & States" [ref=f1e730] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=268
+                    - generic [aria-hidden] [ref=f1e731]: 
+                    - text: 2018 Regionals & States
+                  - text: ","
+                  - link "2018 Nationals" [ref=f1e732] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=269
+                    - generic [aria-hidden] [ref=f1e733]: 
+                    - text: 2018 Nationals
+              - definition [ref=f1e734]:
+                - text: "382"
+                - term [ref=f1e735]: Topics
+              - definition [ref=f1e736]:
+                - text: "17581"
+                - term [ref=f1e737]: Posts
+              - definition [ref=f1e738]:
+                - generic [ref=f1e739]:
+                  - term [ref=f1e740]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e741] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=357571#p357571
+                  - text: by
+                  - link "Anomaly" [ref=f1e742] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=32375
+                  - link "View the latest post" [ref=f1e743] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=357571#p357571
+                    - generic [aria-hidden] [ref=f1e744]: 
+                  - time [ref=f1e746]: September 3rd, 2018, 9:40 pm
+          - listitem [ref=f1e747]:
+            - generic [ref=f1e748]:
+              - term [ref=f1e749]:
+                - generic [ref=f1e750]:
+                  - link "2019" [ref=f1e751] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=262
+                  - strong [ref=f1e752]: "Subforums:"
+                  - link "2019 Build Events" [ref=f1e753] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=326
+                    - generic [aria-hidden] [ref=f1e754]: 
+                    - text: 2019 Build Events
+                  - text: ","
+                  - link "2019 Lab Events" [ref=f1e755] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=327
+                    - generic [aria-hidden] [ref=f1e756]: 
+                    - text: 2019 Lab Events
+                  - text: ","
+                  - link "2019 Study Events" [ref=f1e757] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=328
+                    - generic [aria-hidden] [ref=f1e758]: 
+                    - text: 2019 Study Events
+                  - text: ","
+                  - link "2019 Question Marathons" [ref=f1e759] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=329
+                    - generic [aria-hidden] [ref=f1e760]: 
+                    - text: 2019 Question Marathons
+                  - text: ","
+                  - link "2019 Invitationals" [ref=f1e761] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=330
+                    - generic [aria-hidden] [ref=f1e762]: 
+                    - text: 2019 Invitationals
+                  - text: ","
+                  - link "2019 Regionals & States" [ref=f1e763] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=331
+                    - generic [aria-hidden] [ref=f1e764]: 
+                    - text: 2019 Regionals & States
+                  - text: ","
+                  - link "2019 Nationals" [ref=f1e765] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=332
+                    - generic [aria-hidden] [ref=f1e766]: 
+                    - text: 2019 Nationals
+              - definition [ref=f1e767]:
+                - text: "392"
+                - term [ref=f1e768]: Topics
+              - definition [ref=f1e769]:
+                - text: "17896"
+                - term [ref=f1e770]: Posts
+              - definition [ref=f1e771]:
+                - generic [ref=f1e772]:
+                  - term [ref=f1e773]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e774] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=397149#p397149
+                  - text: by
+                  - link "amk578" [ref=f1e775] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=42415
+                  - link "View the latest post" [ref=f1e776] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=397149#p397149
+                    - generic [aria-hidden] [ref=f1e777]: 
+                  - time [ref=f1e779]: September 2nd, 2019, 11:25 pm
+          - listitem [ref=f1e780]:
+            - generic [ref=f1e781]:
+              - term [ref=f1e782]:
+                - generic [ref=f1e783]:
+                  - link "2020" [ref=f1e784] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=310
+                  - strong [ref=f1e785]: "Subforums:"
+                  - link "2020 Build Events" [ref=f1e786] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=311
+                    - generic [aria-hidden] [ref=f1e787]: 
+                    - text: 2020 Build Events
+                  - text: ","
+                  - link "2020 Lab Events" [ref=f1e788] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=312
+                    - generic [aria-hidden] [ref=f1e789]: 
+                    - text: 2020 Lab Events
+                  - text: ","
+                  - link "2020 Study Events" [ref=f1e790] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=313
+                    - generic [aria-hidden] [ref=f1e791]: 
+                    - text: 2020 Study Events
+                  - text: ","
+                  - link "2020 Question Marathons" [ref=f1e792] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=324
+                    - generic [aria-hidden] [ref=f1e793]: 
+                    - text: 2020 Question Marathons
+                  - text: ","
+                  - link "2020 Invitationals" [ref=f1e794] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=336
+                    - generic [aria-hidden] [ref=f1e795]: 
+                    - text: 2020 Invitationals
+                  - text: ","
+                  - link "2020 Regionals & States" [ref=f1e796] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=337
+                    - generic [aria-hidden] [ref=f1e797]: 
+                    - text: 2020 Regionals & States
+                  - text: ","
+                  - link "2020 Nationals" [ref=f1e798] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=338
+                    - generic [aria-hidden] [ref=f1e799]: 
+                    - text: 2020 Nationals
+              - definition [ref=f1e800]:
+                - text: "358"
+                - term [ref=f1e801]: Topics
+              - definition [ref=f1e802]:
+                - text: "11065"
+                - term [ref=f1e803]: Posts
+              - definition [ref=f1e804]:
+                - generic [ref=f1e805]:
+                  - term [ref=f1e806]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e807] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=425847#p425847
+                  - text: by
+                  - link "CrayolaCrayon" [ref=f1e808] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=34613
+                  - link "View the latest post" [ref=f1e809] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=425847#p425847
+                    - generic [aria-hidden] [ref=f1e810]: 
+                  - time [ref=f1e812]: September 7th, 2020, 10:20 pm
+          - listitem [ref=f1e813]:
+            - generic [ref=f1e814]:
+              - term [ref=f1e815]:
+                - generic [ref=f1e816]:
+                  - link "2021" [ref=f1e817] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=345
+                  - strong [ref=f1e818]: "Subforums:"
+                  - link "2021 Build Events" [ref=f1e819] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=346
+                    - generic [aria-hidden] [ref=f1e820]: 
+                    - text: 2021 Build Events
+                  - text: ","
+                  - link "2021 Lab Events" [ref=f1e821] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=347
+                    - generic [aria-hidden] [ref=f1e822]: 
+                    - text: 2021 Lab Events
+                  - text: ","
+                  - link "2021 Study Events" [ref=f1e823] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=348
+                    - generic [aria-hidden] [ref=f1e824]: 
+                    - text: 2021 Study Events
+                  - text: ","
+                  - link "2021 Question Marathons" [ref=f1e825] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=349
+                    - generic [aria-hidden] [ref=f1e826]: 
+                    - text: 2021 Question Marathons
+                  - text: ","
+                  - link "2021 Invitationals" [ref=f1e827] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=350
+                    - generic [aria-hidden] [ref=f1e828]: 
+                    - text: 2021 Invitationals
+                  - text: ","
+                  - link "2021 Regionals & States" [ref=f1e829] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=351
+                    - generic [aria-hidden] [ref=f1e830]: 
+                    - text: 2021 Regionals & States
+                  - text: ","
+                  - link "2021 Nationals" [ref=f1e831] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=352
+                    - generic [aria-hidden] [ref=f1e832]: 
+                    - text: 2021 Nationals
+              - definition [ref=f1e833]:
+                - text: "194"
+                - term [ref=f1e834]: Topics
+              - definition [ref=f1e835]:
+                - text: "3503"
+                - term [ref=f1e836]: Posts
+              - definition [ref=f1e837]:
+                - generic [ref=f1e838]:
+                  - term [ref=f1e839]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e840] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=441051#p441051
+                  - text: by
+                  - link "builderguy135" [ref=f1e841] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=38984
+                  - link "View the latest post" [ref=f1e842] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=441051#p441051
+                    - generic [aria-hidden] [ref=f1e843]: 
+                  - time [ref=f1e845]: September 6th, 2021, 11:28 pm
+          - listitem [ref=f1e846]:
+            - generic [ref=f1e847]:
+              - term [ref=f1e848]:
+                - generic [ref=f1e849]:
+                  - link "2022" [ref=f1e850] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=383
+                  - strong [ref=f1e851]: "Subforums:"
+                  - link "2022 Build Events" [ref=f1e852] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=384
+                    - generic [aria-hidden] [ref=f1e853]: 
+                    - text: 2022 Build Events
+                  - text: ","
+                  - link "2022 Lab Events" [ref=f1e854] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=385
+                    - generic [aria-hidden] [ref=f1e855]: 
+                    - text: 2022 Lab Events
+                  - text: ","
+                  - link "2022 Study Events" [ref=f1e856] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=386
+                    - generic [aria-hidden] [ref=f1e857]: 
+                    - text: 2022 Study Events
+                  - text: ","
+                  - link "2022 Question Marathons" [ref=f1e858] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=387
+                    - generic [aria-hidden] [ref=f1e859]: 
+                    - text: 2022 Question Marathons
+                  - text: ","
+                  - link "2022 Invitationals" [ref=f1e860] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=388
+                    - generic [aria-hidden] [ref=f1e861]: 
+                    - text: 2022 Invitationals
+                  - text: ","
+                  - link "2022 Regionals & States" [ref=f1e862] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=389
+                    - generic [aria-hidden] [ref=f1e863]: 
+                    - text: 2022 Regionals & States
+                  - text: ","
+                  - link "2022 Nationals" [ref=f1e864] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=391
+                    - generic [aria-hidden] [ref=f1e865]: 
+                    - text: 2022 Nationals
+              - definition [ref=f1e866]:
+                - text: "201"
+                - term [ref=f1e867]: Topics
+              - definition [ref=f1e868]:
+                - text: "1412"
+                - term [ref=f1e869]: Posts
+              - definition [ref=f1e870]:
+                - generic [ref=f1e871]:
+                  - term [ref=f1e872]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e873] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=450865#p450865
+                  - text: by
+                  - link "coachchuckaahs" [ref=f1e874] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=33107
+                  - link "View the latest post" [ref=f1e875] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=450865#p450865
+                    - generic [aria-hidden] [ref=f1e876]: 
+                  - time [ref=f1e878]: August 16th, 2022, 10:30 pm
+          - listitem [ref=f1e879]:
+            - generic [ref=f1e880]:
+              - term [ref=f1e881]:
+                - generic [ref=f1e882]:
+                  - link "2023" [ref=f1e883] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=402
+                  - strong [ref=f1e884]: "Subforums:"
+                  - link "2023 Build Forums" [ref=f1e885] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=403
+                    - generic [aria-hidden] [ref=f1e886]: 
+                    - text: 2023 Build Forums
+                  - text: ","
+                  - link "2023 Lab Events" [ref=f1e887] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=404
+                    - generic [aria-hidden] [ref=f1e888]: 
+                    - text: 2023 Lab Events
+                  - text: ","
+                  - link "2023 Study Events" [ref=f1e889] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=405
+                    - generic [aria-hidden] [ref=f1e890]: 
+                    - text: 2023 Study Events
+                  - text: ","
+                  - link "2023 Question Marathons" [ref=f1e891] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=406
+                    - generic [aria-hidden] [ref=f1e892]: 
+                    - text: 2023 Question Marathons
+                  - text: ","
+                  - link "2023 Invitationals" [ref=f1e893] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=407
+                    - generic [aria-hidden] [ref=f1e894]: 
+                    - text: 2023 Invitationals
+                  - text: ","
+                  - link "2023 Regionals & States" [ref=f1e895] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=408
+                    - generic [aria-hidden] [ref=f1e896]: 
+                    - text: 2023 Regionals & States
+                  - text: ","
+                  - link "2023 Nationals" [ref=f1e897] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=409
+                    - generic [aria-hidden] [ref=f1e898]: 
+                    - text: 2023 Nationals
+              - definition [ref=f1e899]:
+                - text: "208"
+                - term [ref=f1e900]: Topics
+              - definition [ref=f1e901]:
+                - text: "1691"
+                - term [ref=f1e902]: Posts
+              - definition [ref=f1e903]:
+                - generic [ref=f1e904]:
+                  - term [ref=f1e905]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e906] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=458211#p458211
+                  - text: by
+                  - link "onshape" [ref=f1e907] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=128178
+                  - link "View the latest post" [ref=f1e908] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=458211#p458211
+                    - generic [aria-hidden] [ref=f1e909]: 
+                  - time [ref=f1e911]: September 4th, 2023, 11:31 pm
+          - listitem [ref=f1e912]:
+            - generic [ref=f1e913]:
+              - term [ref=f1e914]:
+                - generic [ref=f1e915]:
+                  - link "2024" [ref=f1e916] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=421
+                  - strong [ref=f1e917]: "Subforums:"
+                  - link "2024 Build Events" [ref=f1e918] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=422
+                    - generic [aria-hidden] [ref=f1e919]: 
+                    - text: 2024 Build Events
+                  - text: ","
+                  - link "2024 Lab Events" [ref=f1e920] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=423
+                    - generic [aria-hidden] [ref=f1e921]: 
+                    - text: 2024 Lab Events
+                  - text: ","
+                  - link "2024 Study Events" [ref=f1e922] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=424
+                    - generic [aria-hidden] [ref=f1e923]: 
+                    - text: 2024 Study Events
+                  - text: ","
+                  - link "2024 Question Marathons" [ref=f1e924] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=425
+                    - generic [aria-hidden] [ref=f1e925]: 
+                    - text: 2024 Question Marathons
+                  - text: ","
+                  - link "2024 Invitationals" [ref=f1e926] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=426
+                    - generic [aria-hidden] [ref=f1e927]: 
+                    - text: 2024 Invitationals
+                  - text: ","
+                  - link "2024 Regionals & States" [ref=f1e928] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=427
+                    - generic [aria-hidden] [ref=f1e929]: 
+                    - text: 2024 Regionals & States
+                  - text: ","
+                  - link "2024 Nationals" [ref=f1e930] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=428
+                    - generic [aria-hidden] [ref=f1e931]: 
+                    - text: 2024 Nationals
+              - definition [ref=f1e932]:
+                - text: "217"
+                - term [ref=f1e933]: Topics
+              - definition [ref=f1e934]:
+                - text: "1132"
+                - term [ref=f1e935]: Posts
+              - definition [ref=f1e936]:
+                - generic [ref=f1e937]:
+                  - term [ref=f1e938]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e939] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=461050#p461050
+                  - text: by
+                  - link "zedsfh" [ref=f1e940] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=136549
+                  - link "View the latest post" [ref=f1e941] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=461050#p461050
+                    - generic [aria-hidden] [ref=f1e942]: 
+                  - time [ref=f1e944]: September 2nd, 2024, 5:05 pm
+          - listitem [ref=f1e945]:
+            - generic [ref=f1e946]:
+              - term [ref=f1e947]:
+                - generic [ref=f1e948]:
+                  - link "2025" [ref=f1e949] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=441
+                  - strong [ref=f1e950]: "Subforums:"
+                  - link "2025 Build Events" [ref=f1e951] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=442
+                    - generic [aria-hidden] [ref=f1e952]: 
+                    - text: 2025 Build Events
+                  - text: ","
+                  - link "2025 Lab Events" [ref=f1e953] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=443
+                    - generic [aria-hidden] [ref=f1e954]: 
+                    - text: 2025 Lab Events
+                  - text: ","
+                  - link "2025 Study Events" [ref=f1e955] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=444
+                    - generic [aria-hidden] [ref=f1e956]: 
+                    - text: 2025 Study Events
+                  - text: ","
+                  - link "2025 Question Marathons" [ref=f1e957] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=445
+                    - generic [aria-hidden] [ref=f1e958]: 
+                    - text: 2025 Question Marathons
+                  - text: ","
+                  - link "2025 Invitationals" [ref=f1e959] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=446
+                    - generic [aria-hidden] [ref=f1e960]: 
+                    - text: 2025 Invitationals
+                  - text: ","
+                  - link "2025 Regionals & States" [ref=f1e961] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=447
+                    - generic [aria-hidden] [ref=f1e962]: 
+                    - text: 2025 Regionals & States
+                  - text: ","
+                  - link "2025 Nationals" [ref=f1e963] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=448
+                    - generic [aria-hidden] [ref=f1e964]: 
+                    - text: 2025 Nationals
+              - definition [ref=f1e965]:
+                - text: "159"
+                - term [ref=f1e966]: Topics
+              - definition [ref=f1e967]:
+                - text: "583"
+                - term [ref=f1e968]: Posts
+              - definition [ref=f1e969]:
+                - generic [ref=f1e970]:
+                  - term [ref=f1e971]: Last post
+                  - 'link "Re: Illinois 2014" [ref=f1e972] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=462737#p462737
+                  - text: by
+                  - link "Nydauron" [ref=f1e973] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=36547
+                  - link "View the latest post" [ref=f1e974] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=462737#p462737
+                    - generic [aria-hidden] [ref=f1e975]: 
+                  - time [ref=f1e977]: August 30th, 2025, 10:56 pm
+          - listitem [ref=f1e978]:
+            - generic [ref=f1e979]:
+              - term [ref=f1e980]:
+                - generic [ref=f1e981]:
+                  - link "2026" [ref=f1e982] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=459
+                  - strong [ref=f1e983]: "Subforums:"
+                  - link "2026 Build Events" [ref=f1e984] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=460
+                    - generic [aria-hidden] [ref=f1e985]: 
+                    - text: 2026 Build Events
+                  - text: ","
+                  - link "2026 Lab Events" [ref=f1e986] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=461
+                    - generic [aria-hidden] [ref=f1e987]: 
+                    - text: 2026 Lab Events
+                  - text: ","
+                  - link "2026 Study Events" [ref=f1e988] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=462
+                    - generic [aria-hidden] [ref=f1e989]: 
+                    - text: 2026 Study Events
+                  - text: ","
+                  - link "2026 Invitationals" [ref=f1e990] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=463
+                    - generic [aria-hidden] [ref=f1e991]: 
+                    - text: 2026 Invitationals
+                  - text: ","
+                  - link "2026 Regionals & States" [ref=f1e992] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=464
+                    - generic [aria-hidden] [ref=f1e993]: 
+                    - text: 2026 Regionals & States
+                  - text: ","
+                  - link "2026 Nationals" [ref=f1e994] [cursor=pointer]:
+                    - /url: ./viewforum.php?f=465
+                    - generic [aria-hidden] [ref=f1e995]: 
+                    - text: 2026 Nationals
+              - definition [ref=f1e996]:
+                - text: "185"
+                - term [ref=f1e997]: Topics
+              - definition [ref=f1e998]:
+                - text: "784"
+                - term [ref=f1e999]: Posts
+              - definition [ref=f1e1000]:
+                - generic [ref=f1e1001]:
+                  - term [ref=f1e1002]: Last post
+                  - 'link "Re: Water Quality B/C" [ref=f1e1003] [cursor=pointer]':
+                    - /url: ./viewtopic.php?p=464231#p464231
+                  - text: by
+                  - link "ecobio1253" [ref=f1e1004] [cursor=pointer]:
+                    - /url: ./memberlist.php?mode=viewprofile&u=169314
+                  - link "View the latest post" [ref=f1e1005] [cursor=pointer]:
+                    - /url: ./viewtopic.php?p=464231#p464231
+                    - generic [aria-hidden] [ref=f1e1006]: 
+                  - time [ref=f1e1008]: September 5th, 2026, 1:48 pm
+      - generic [ref=f1e1009]:
+        - heading [level=3] [ref=f1e1010]:
+          - link "Who is online" [ref=f1e1011] [cursor=pointer]:
+            - /url: ./viewonline.php
+        - paragraph [ref=f1e1012]:
+          - text: In total there are
+          - strong [ref=f1e1013]: "659"
+          - text: "users online :: 7 registered, 0 hidden and 652 guests (based on users active over the past 5 minutes)Most users ever online was"
+          - strong [ref=f1e1014]: "4244"
+          - text: "on November 12th, 2025, 12:39 am Registered users:"
+          - link "4Dimentional" [ref=f1e1015] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=172548
+          - text: ","
+          - link "AvocadosNumber" [ref=f1e1016] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=170251
+          - text: ", Bing [Bot], CCBot [Bot], FacebookExternalHit [Bot], Google [Bot],"
+          - link "Umer-Eats" [ref=f1e1017] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=172477
+          - emphasis [ref=f1e1018]:
+            - text: "Legend:"
+            - link "Administrators" [ref=f1e1019] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=group&g=5
+            - text: ","
+            - link "Global moderators" [ref=f1e1020] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=group&g=4
+            - text: ","
+            - link "Chat Moderators" [ref=f1e1021] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=group&g=151
+            - text: ","
+            - link "Gallery Moderators" [ref=f1e1022] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=group&g=52
+            - text: ","
+            - link "Wiki Moderators" [ref=f1e1023] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=group&g=7
+            - text: ","
+            - link "Exalted Member" [ref=f1e1024] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=group&g=9
+      - generic [ref=f1e1025]:
+        - heading "Statistics" [level=3] [ref=f1e1026]
+        - paragraph [ref=f1e1027]:
+          - text: Total posts
+          - strong [ref=f1e1028]: "415786"
+          - text: • Total topics
+          - strong [ref=f1e1029]: "8809"
+          - text: • Total members
+          - strong [ref=f1e1030]: "129713"
+          - text: • Our newest member
+          - strong [ref=f1e1031]:
+            - link "abhinay2015" [ref=f1e1032] [cursor=pointer]:
+              - /url: ./memberlist.php?mode=viewprofile&u=172606
+      - generic [ref=f1e1033]:
+        - heading [level=3] [ref=f1e1034]:
+          - link "Thanks Toplist — 50" [ref=f1e1035] [cursor=pointer]:
+            - /url: ""
+        - paragraph [ref=f1e1036]:
+          - link "bernard" [ref=f1e1037] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=22093
+          - text: (883),
+          - link "Assassinator" [ref=f1e1038] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=10640
+          - text: (811),
+          - link "sciolyperson1" [ref=f1e1039] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=37001
+          - text: (601),
+          - link "hmma" [ref=f1e1040] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=35776
+          - text: (515),
+          - link "gz839918" [ref=f1e1041] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=47584
+          - text: (381),
+          - link "pepperonipi" [ref=f1e1042] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=44614
+          - text: (337),
+          - link "Umaroth" [ref=f1e1043] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=36000
+          - text: (327),
+          - link "BennyTheJett" [ref=f1e1044] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=45800
+          - text: (298),
+          - link "SilverBreeze" [ref=f1e1045] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=59158
+          - text: (289),
+          - link "Pi-Bot" [ref=f1e1046] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=62443
+          - text: (232),
+          - link "EastStroudsburg13" [ref=f1e1047] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=11259
+          - text: (208),
+          - link "RiverWalker88" [ref=f1e1048] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=63182
+          - text: (207),
+          - link "sneepity" [ref=f1e1049] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=62577
+          - text: (204),
+          - link "Fyren" [ref=f1e1050] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=64162
+          - text: (186),
+          - link "Booknerd" [ref=f1e1051] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=62463
+          - text: (182),
+          - link "jaspattack" [ref=f1e1052] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=37098
+          - text: (169),
+          - link "pikachu4919" [ref=f1e1053] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=18648
+          - text: (167),
+          - link "Giantpants" [ref=f1e1054] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=45407
+          - text: (164),
+          - link "Nydauron" [ref=f1e1055] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=36547
+          - text: (155),
+          - link "Unome" [ref=f1e1056] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=22319
+          - text: (146),
+          - link "builderguy135" [ref=f1e1057] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=38984
+          - text: (143),
+          - link "coachchuckaahs" [ref=f1e1058] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=33107
+          - text: (139),
+          - link "kleinerPanzer" [ref=f1e1059] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=36820
+          - text: (134),
+          - link "k1208438" [ref=f1e1060] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=69605
+          - text: (127),
+          - link "knightmoves" [ref=f1e1061] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=37052
+          - text: (123),
+          - link "Tailsfan101" [ref=f1e1062] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=33048
+          - text: (118),
+          - link "bearasauras" [ref=f1e1063] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=1795
+          - text: (117),
+          - link "LittleMissNyan" [ref=f1e1064] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=41580
+          - text: (114),
+          - link "Adi1008" [ref=f1e1065] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=21843
+          - text: (109),
+          - link "stenopushispidus" [ref=f1e1066] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=72457
+          - text: (107),
+          - link "MorningCoffee" [ref=f1e1067] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=70449
+          - text: (97),
+          - link "CookiePie1" [ref=f1e1068] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=36058
+          - text: (94),
+          - link "CPScienceDude" [ref=f1e1069] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=42571
+          - text: (94),
+          - link "pumptato-cat" [ref=f1e1070] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=115697
+          - text: (89),
+          - link "EwwPhysics" [ref=f1e1071] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=63071
+          - text: (86),
+          - link "pb5754" [ref=f1e1072] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=32638
+          - text: (85),
+          - link "lumosityfan" [ref=f1e1073] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=17691
+          - text: (84),
+          - link "jaggie34" [ref=f1e1074] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=42303
+          - text: (78),
+          - link "bjt4888" [ref=f1e1075] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=20802
+          - text: (75),
+          - link "JoeyC" [ref=f1e1076] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=34783
+          - text: (74),
+          - link "RobertYL" [ref=f1e1077] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=37456
+          - text: (73),
+          - link "raytay" [ref=f1e1078] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=34531
+          - text: (72),
+          - link "foreverphysics" [ref=f1e1079] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=15440
+          - text: (69),
+          - link "Creationist127" [ref=f1e1080] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=38459
+          - text: (68),
+          - link "azboy1910" [ref=f1e1081] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=41788
+          - text: (62),
+          - link "Things2do" [ref=f1e1082] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=36014
+          - text: (60),
+          - link "MadCow2357" [ref=f1e1083] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=34942
+          - text: (58),
+          - link "chalker" [ref=f1e1084] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=11195
+          - text: (58),
+          - link "imaditi" [ref=f1e1085] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=50400
+          - text: (58),
+          - link "atxscioly" [ref=f1e1086] [cursor=pointer]:
+            - /url: ./memberlist.php?mode=viewprofile&u=69171
+          - text: (51)
+    - contentinfo [ref=f1e1087]:
+      - navigation [ref=f1e1088]:
+        - menubar [ref=f1e1090]:
+          - listitem [ref=f1e1091]:
+            - link "Scioly.org" [ref=f1e1093] [cursor=pointer]:
+              - /url: https://scioly.org
+              - generic [aria-hidden] [ref=f1e1094]: 
+              - text: Scioly.org
+            - generic [ref=f1e1095]:
+              - text: ‹
+              - link "Forums" [ref=f1e1096] [cursor=pointer]:
+                - /url: ./index.php
+          - text: 
+          - listitem [ref=f1e1097]: All times are UTC-04:00
+          - listitem [ref=f1e1098]:
+            - menuitem "Delete cookies" [ref=f1e1099] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e1100]: 
+              - text: Delete cookies
+          - listitem [ref=f1e1101]:
+            - menuitem "Members" [ref=f1e1102] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e1103]: 
+              - text: Members
+          - listitem [ref=f1e1104]:
+            - menuitem "The team" [ref=f1e1105] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e1106]: 
+              - text: The team
+      - text:  
+  - generic [ref=f1e1109]:
+    - generic [ref=f1e1110]:
+      - heading "Connect" [level=4] [ref=f1e1111]
+      - paragraph [ref=f1e1112]:
+        - link "Event Forums" [ref=f1e1113] [cursor=pointer]:
+          - /url: /forums/viewforum.php?f=1
+      - paragraph [ref=f1e1114]:
+        - link "Competition Forums" [ref=f1e1115] [cursor=pointer]:
+          - /url: /forums/viewforum.php?f=6
+      - paragraph [ref=f1e1116]:
+        - link "Online Chat" [ref=f1e1117] [cursor=pointer]:
+          - /url: /chat
+    - generic [ref=f1e1118]:
+      - heading "Learn" [level=4] [ref=f1e1119]
+      - paragraph [ref=f1e1120]:
+        - link "Wiki" [ref=f1e1121] [cursor=pointer]:
+          - /url: /wiki
+      - paragraph [ref=f1e1122]:
+        - link "Test Exchange" [ref=f1e1123] [cursor=pointer]:
+          - /url: /tests
+      - paragraph [ref=f1e1124]:
+        - link "Test Archive" [ref=f1e1125] [cursor=pointer]:
+          - /url: /wiki/Test_Exchange_Archive
+      - paragraph [ref=f1e1126]:
+        - link "Gallery" [ref=f1e1127] [cursor=pointer]:
+          - /url: /gallery
+    - generic [ref=f1e1128]:
+      - heading "Get Involved" [level=4] [ref=f1e1129]
+      - paragraph [ref=f1e1130]:
+        - link "Starting a Team" [ref=f1e1131] [cursor=pointer]:
+          - /url: /wiki/Starting_A_Science_Olympiad_Team
+      - paragraph [ref=f1e1132]:
+        - link "Test Writing Guide" [ref=f1e1133] [cursor=pointer]:
+          - /url: /wiki/How_to_Write_a_Practice_Test
+      - paragraph [ref=f1e1134]:
+        - 'link "Wiki: Needs Work" [ref=f1e1135] [cursor=pointer]':
+          - /url: /wiki/Category:Needs_Work
+      - paragraph [ref=f1e1136]:
+        - link "Volunteering" [ref=f1e1137] [cursor=pointer]:
+          - /url: /wiki/Category:Student_Volunteer_Organizations
+    - generic [ref=f1e1138]:
+      - heading "About" [level=4] [ref=f1e1139]
+      - paragraph [ref=f1e1140]:
+        - link "History" [ref=f1e1141] [cursor=pointer]:
+          - /url: https://scioly.org/about
+      - paragraph [ref=f1e1142]:
+        - link "Site Rules" [ref=f1e1143] [cursor=pointer]:
+          - /url: https://scioly.org/rules
+      - paragraph [ref=f1e1144]:
+        - link "Privacy Policy" [ref=f1e1145] [cursor=pointer]:
+          - /url: https://scioly.org/rules#privacy-policy
+      - paragraph [ref=f1e1146]:
+        - link "Facebook Page" [ref=f1e1147] [cursor=pointer]:
+          - /url: https://www.facebook.com/scioly.org
+    - generic [ref=f1e1148]:
+      - heading "Disclaimer" [level=4] [ref=f1e1149]
+      - paragraph [ref=f1e1150]:
+        - link "Scioly.org is a place to ask questions and share ideas. This site is not the place to get event rules, official rules changes, or official clarifications." [ref=f1e1151] [cursor=pointer]:
+          - /url: https://scioly.org/rules
+      - paragraph [ref=f1e1152]:
+        - link "Click me! Click me!" [ref=f1e1153] [cursor=pointer]:
+          - /url: https://scioly.org/bernard
