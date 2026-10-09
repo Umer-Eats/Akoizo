@@ -20,14 +20,21 @@ import {
   scorePractice,
 } from '../src/lib/lesson-practice.ts';
 
-test('only the requested pink Division C courses are available', () => {
+test('requested pink, yellow and purple Division C courses are available only in Division C', () => {
   const pink = eventSlots.find((slot) => slot.color === 'pink')!;
   for (const id of pink.events) {
     assert.equal(!!lessonsForEvent(id, 'C'), id !== 'engineering-cad');
     assert.equal(lessonsForEvent(id, 'B'), null);
     assert.equal(lessonsForEvent(id, 'A'), null);
   }
-  assert.equal(lessonsForEvent('astronomy', 'C'), null);
+  for (const slot of eventSlots.filter(
+    (slot) => slot.color === 'yellow' || slot.color === 'purple',
+  ))
+    for (const id of slot.events) {
+      assert.equal(lessonsForEvent(id, 'C')?.eventId, id);
+      assert.equal(lessonsForEvent(id, 'B'), null);
+      assert.equal(lessonsForEvent(id, 'A'), null);
+    }
 });
 
 test('all syllabus units have substantive lessons, worked examples, simulations, and answerable practice', () => {
@@ -77,7 +84,7 @@ test('all syllabus units have substantive lessons, worked examples, simulations,
         const sim = lesson.simulation;
         assert.ok(sim.observations.length >= 3);
         assert.ok(sim.correct >= 0 && sim.correct < sim.options.length);
-      } else {
+      } else if (lesson.simulation.kind === 'model') {
         assert.ok(modelControls[lesson.simulation.model]);
         assert.ok(lesson.simulation.challenge && lesson.simulation.takeaway);
       }

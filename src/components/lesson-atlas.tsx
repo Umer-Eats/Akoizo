@@ -307,7 +307,7 @@ export function RelationshipChart({ model }: { model: ModelId }) {
 }
 
 export function LessonSectionVisuals({ lesson, index }: { lesson: Lesson; index: number }) {
-  const atlas = lessonAtlas[lesson.id];
+  const atlas: AtlasEntry | undefined = lesson.visual ?? lessonAtlas[lesson.id];
   if (!atlas) return null;
   return (
     <>

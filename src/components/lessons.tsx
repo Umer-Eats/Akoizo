@@ -15,6 +15,8 @@ import { ModelDiagram } from './lesson-diagrams';
 import { LessonSectionVisuals } from './lesson-atlas';
 import { EvidenceWorkbench } from './evidence-workbench';
 import { ExperimentControls, TrialComparison, type LabTrial } from './lesson-experiments';
+import { SubjectExplorer } from './subject-explorer';
+import { slotForEvent } from '@/lib/event-slots';
 import './lessons.css';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
@@ -224,7 +226,9 @@ function SimView({ sim, lessonId }: { sim: LessonSim; lessonId: string }) {
         <ModelLab sim={sim} />
       ) : sim.kind === 'investigation' ? (
         <InvestigationLab sim={sim} lessonId={lessonId} />
-      ) : null}
+      ) : (
+        <SubjectExplorer sim={sim} />
+      )}
     </section>
   );
 }
@@ -400,6 +404,9 @@ function LessonDetail({
               <p key={i}>{paragraph}</p>
             ))}
             <LessonSectionVisuals lesson={lesson} index={index} />
+            {index === 3 && lesson.simulation.kind === 'explorer' && (
+              <SubjectExplorer sim={lesson.simulation} preview />
+            )}
           </section>
         ))}
       </div>
@@ -493,10 +500,15 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
       });
   }
   return (
-    <section className="lessons-workspace" aria-label={`${course.eventName} lessons`}>
+    <section
+      className="lessons-workspace"
+      data-lesson-slot={slotForEvent(course.eventId)?.color}
+      aria-label={`${course.eventName} lessons`}
+    >
       <div className="lessons-intro">
         <p className="eyebrow">
-          <span className="lesson-slot-dot" /> DIVISION C · PINK TIMESLOT
+          <span className="lesson-slot-dot" /> DIVISION C ·{' '}
+          {slotForEvent(course.eventId)?.label.toUpperCase()} TIMESLOT
         </p>
         <h2>{course.eventName}</h2>
         <p>{course.intro}</p>

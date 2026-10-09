@@ -1,4 +1,4 @@
-// Shared lesson model for Pink timeslot, Division C.
+// Shared lesson model for the supported Division C timeslots.
 // Event -> Units -> Lessons -> Simulation + Practice assignment.
 export type LessonQuizQuestion = {
   id: string;
@@ -11,6 +11,15 @@ export type LessonQuizQuestion = {
 };
 
 export type LessonSim =
+  | {
+      kind: 'explorer';
+      lab: 'cipher' | 'remote' | 'epidemiology' | 'astronomy' | 'botany' | 'experiment';
+      topic: number;
+      title: string;
+      instructions: string;
+      challenge: string;
+      takeaway: string;
+    }
   | {
       kind: 'model';
       model:
@@ -54,6 +63,12 @@ export type Lesson = {
   practice: LessonQuizQuestion[];
   workedExample: { title: string; problem: string; steps: string[]; conclusion: string };
   extension?: boolean;
+  visual?: {
+    section: number;
+    title: string;
+    steps: { label: string; detail: string }[];
+    contrasts: { label: string; mechanism: string; limit: string }[];
+  };
 };
 
 export type LessonUnit = {

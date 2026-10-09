@@ -1,9 +1,12 @@
-# Pink timeslot lessons
+# Division C lessons
 
-The lesson catalog currently serves Division C Anatomy and Physiology and Forensics. Engineering CAD and other divisions/events do not receive these courses.
+The lesson catalog serves the Pink, Yellow, and Purple timeslots in Division C, except Engineering CAD. Division B and A remain outside this lesson rollout.
 
 - Anatomy and Physiology: 10 units, 20 lessons, 140 practice questions.
 - Forensics: 9 units, 20 lessons, 140 practice questions. Includes the syllabus's integumentary-system, pollen/seed, and track topics.
+- Yellow: Codebusters (7 units), Remote Sensing (10), Disease Detectives (10).
+- Purple: Astronomy (8 units), Botany (10), Experimental Design (8).
+- The Yellow/Purple expansion adds 53 unit lessons and 371 practice questions, bringing the full catalog to 93 lessons and 651 practice questions. See [Yellow and Purple course coverage](YELLOW_PURPLE_LESSONS.md).
 - Every lesson has developed text, learning objectives, key terms, a worked example with a revealable solution, an interactive model or evidence investigation, and seven practice questions.
 - These courses follow the supplied 2026 SciConnect syllabi. Their scope is intentionally distinguished from the application's tournament-year rulebooks. Anatomy Unit 10 retains its extension status.
 - Course metadata and displayed lesson content omit teacher names. All current lessons are explicitly text lessons; no empty video tabs are offered.

@@ -1,0 +1,283 @@
+.subject-explorer {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.subject-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.subject-controls label,
+.subject-note,
+.subject-explorer details label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.84rem;
+  min-width: 0;
+}
+.subject-explorer input:not([type='range']):not([type='checkbox']),
+.subject-explorer select,
+.subject-explorer textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px;
+  font: inherit;
+}
+.subject-slider input {
+  width: 100%;
+  padding: 0;
+  min-height: 30px;
+  accent-color: var(--lesson-pink);
+}
+.subject-slider output {
+  color: var(--lesson-pink);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+.subject-explorer .subject-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.6;
+}
+.subject-check input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  padding: 0;
+  flex: 0 0 18px;
+  accent-color: var(--accent);
+}
+.subject-plot-scroll,
+.subject-table-scroll {
+  overflow: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.subject-figure {
+  min-width: 0;
+}
+.subject-explorer .subject-scroll-hint {
+  display: none;
+  font-size: 0.73rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+.subject-plot-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.subject-plot {
+  width: 100%;
+  min-width: 560px;
+  display: block;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+}
+.subject-plot text {
+  fill: currentColor;
+  font: 13px var(--font-body);
+}
+.subject-axis {
+  stroke: var(--muted);
+  fill: none;
+}
+.subject-grid {
+  stroke: var(--line-strong);
+  stroke-dasharray: 4 5;
+  fill: none;
+}
+.subject-line {
+  stroke: var(--accent);
+  stroke-width: 3;
+  fill: none;
+}
+.subject-guide {
+  stroke: var(--muted);
+  stroke-width: 12;
+  opacity: 0.2;
+  fill: none;
+}
+.subject-box {
+  fill: var(--surface);
+  stroke: var(--accent);
+}
+.subject-fill {
+  fill: var(--accent);
+}
+.subject-point {
+  fill: var(--lesson-pink);
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+.subject-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.subject-metrics > div {
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  display: grid;
+  gap: 8px;
+  background: var(--bg);
+}
+.subject-metrics span {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+.subject-metrics strong {
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+.subject-explorer .subject-model-note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--lesson-pink);
+  line-height: 1.6;
+}
+.subject-table {
+  min-width: 510px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.subject-table caption {
+  text-align: left;
+  color: var(--muted);
+  padding: 10px 0;
+}
+.subject-table th,
+.subject-table td {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+}
+.subject-table th {
+  background: var(--bg);
+}
+.cipher-alphabet {
+  display: grid;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  gap: 5px;
+}
+.cipher-alphabet button {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--text);
+  padding: 8px 2px;
+  cursor: pointer;
+  min-width: 0;
+}
+.cipher-alphabet button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.cipher-alphabet span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
+}
+.cipher-square {
+  max-width: 500px;
+  width: 100%;
+}
+.cipher-square > div {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.cipher-square span {
+  padding: 12px 5px;
+  border: 1px solid var(--line-strong);
+  text-align: center;
+}
+.cipher-result {
+  padding: 16px;
+  border-left: 3px solid var(--lesson-pink);
+  background: var(--bg);
+  overflow-wrap: anywhere;
+}
+.cipher-result p {
+  font-family: var(--font-mono);
+  white-space: pre-wrap;
+}
+.subject-focus,
+.cipher-focus {
+  padding: 12px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+}
+.subject-region-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.subject-region-controls p {
+  flex-basis: 100%;
+}
+.subject-cycle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.subject-cycle span {
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+}
+.subject-cycle strong {
+  color: var(--lesson-pink);
+  font-size: 0.8rem;
+}
+.subject-notebook {
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+}
+.subject-notebook li {
+  overflow-wrap: anywhere;
+  margin: 16px 0;
+}
+.subject-reset {
+  margin-top: 20px;
+}
+.subject-preview {
+  padding: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  margin-top: 18px;
+  background: var(--surface);
+}
+.subject-preview .subject-plot {
+  min-width: 560px;
+}
+@media (max-width: 700px) {
+  .subject-explorer .subject-scroll-hint {
+    display: block;
+  }
+  .subject-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cipher-alphabet {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .subject-preview {
+    padding: 12px;
+  }
+  .subject-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .subject-explorer {
+    gap: 14px;
+  }
+}
