@@ -4,6 +4,9 @@ import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
 import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { eventSlots } from '../src/lib/event-slots.ts';
+import { atlasImages, lessonAtlas } from '../src/lib/lesson-atlas.ts';
+import { experimentPresets } from '../src/lib/lesson-experiments.ts';
+import { existsSync } from 'node:fs';
 import {
   calculateModel,
   modelControls,
@@ -110,6 +113,48 @@ test('numerical models reproduce worked examples and preserve physical boundarie
       Object.fromEntries(modelControls[id].map((c) => [c.key, Infinity])),
     ]) {
       assert.ok(calculateModel(id, values).metrics.every((m) => Number.isFinite(m.value)));
+    }
+  }
+});
+
+test('each lesson has a contextual visual atlas and experiments stay within the teaching model ranges', () => {
+  const lessons = [...anatomyLessons.lessons, ...forensicsLessons.lessons];
+  assert.deepEqual(Object.keys(lessonAtlas).sort(), lessons.map((lesson) => lesson.id).sort());
+  for (const lesson of lessons) {
+    const atlas = lessonAtlas[lesson.id];
+    assert.ok(atlas.section >= 0 && atlas.section < lesson.sections.length);
+    assert.equal(atlas.steps.length, 3);
+    assert.equal(atlas.contrasts.length, 3);
+    assert.ok(atlas.steps.every((step) => step.label && step.detail));
+    assert.ok(atlas.contrasts.every((row) => row.label && row.mechanism && row.limit));
+    if (atlas.image) {
+      const image = atlasImages[atlas.image];
+      assert.ok(
+        image.alt &&
+          image.author &&
+          image.source.startsWith('https:') &&
+          image.licenseUrl.startsWith('https:'),
+      );
+      assert.ok(
+        existsSync(new URL(`../public/lesson-visuals/${atlas.image}.jpg`, import.meta.url)),
+      );
+    }
+    if (lesson.simulation.kind === 'model') {
+      const id = lesson.simulation.model;
+      for (const preset of experimentPresets[id]) {
+        for (const [key, value] of Object.entries(preset.inputs)) {
+          const control = modelControls[id].find((control) => control.key === key);
+          assert.ok(
+            control && value >= control.min && value <= control.max,
+            `${id}: ${key} is bounded`,
+          );
+        }
+        assert.ok(
+          calculateModel(id, { ...modelDefaults(id), ...preset.inputs }).metrics.every((metric) =>
+            Number.isFinite(metric.value),
+          ),
+        );
+      }
     }
   }
 });

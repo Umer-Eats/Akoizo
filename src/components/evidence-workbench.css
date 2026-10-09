@@ -1,0 +1,106 @@
+.evidence-workbench {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.evidence-workbench-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.evidence-hypothesis {
+  display: grid;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+.specimen-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+.specimen-tools label {
+  display: grid;
+  gap: 7px;
+  font-size: 0.78rem;
+}
+.specimen-tools output {
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+.specimen-tools input {
+  width: 100%;
+  min-height: 28px;
+  padding: 0;
+  accent-color: var(--accent);
+}
+.specimen-tools button {
+  align-self: end;
+}
+.specimen-inspector .specimen-drawing {
+  max-width: none;
+  min-width: 480px;
+}
+.specimen-drawing text {
+  fill: var(--text);
+  font-size: 15px;
+}
+.specimen-drawing [role='button'] {
+  cursor: pointer;
+  outline-offset: 3px;
+}
+.evidence-workbench .investigation-tests {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.evidence-workbench .investigation-tests > div {
+  border-radius: 8px;
+  min-width: 0;
+}
+.evidence-workbench .investigation-tests > div[data-active='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.evidence-workbench .investigation-tests button {
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+  white-space: normal;
+}
+.evidence-reasoning {
+  padding: 16px;
+  border-left: 3px solid var(--lesson-pink);
+  background: var(--surface);
+  display: grid;
+  gap: 10px;
+}
+.evidence-reasoning label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+.evidence-reasoning textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.7;
+  resize: vertical;
+}
+.evidence-reasoning small {
+  color: var(--muted);
+  font-size: 0.73rem;
+}
+@media (max-width: 700px) {
+  .evidence-workbench .investigation-tests {
+    grid-template-columns: 1fr;
+  }
+  .specimen-tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -28,7 +28,7 @@ function make(meta) {
       meta.level === 'Invitational' && !/invitational/i.test(meta.competition)
         ? `${meta.competition} Invitational`
         : meta.competition,
-    topicMatch: 'current',
+    topicMatch: meta.topicMatch ?? 'current',
     season: 2027,
     reviewedOn: '2026-10-07',
     minutes: 50,

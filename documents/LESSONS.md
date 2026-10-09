@@ -30,6 +30,8 @@ Lesson assignments and practice tests share `ChoiceOptions` and its stylesheet. 
 
 ## Verification
 
+The lessons also include contextual visual atlases and expanded experiment workbenches. See [lesson visuals and source credits](LESSON_VISUALS.md) for image licensing, placement, model-chart behavior, specimen-viewer assumptions, and additional browser coverage.
+
 - `npm run typecheck`
 - `npm test`
 - `node --experimental-strip-types scripts/lessons-browser-check.mjs`

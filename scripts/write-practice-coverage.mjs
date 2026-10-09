@@ -7,7 +7,7 @@ import { eventToolIds } from '../src/lib/event-rules.ts';
 const rows = [
   '# Practice coverage',
   '',
-  'Reviewed October 8, 2026 against the local 2027 rules.',
+  'Reviewed October 9, 2026 against the local 2027 rules.',
   '',
   `${practiceTests.length} converted papers, ${practiceTests.reduce((n, t) => n + t.questionCount, 0).toLocaleString('en-US')} answer fields. Every Division B and C event with a Practice Tests tab has at least one paper. This does not mean that all 909 indexed archive sources have been converted. Division A is outside this B/C import.`,
   '',
@@ -53,7 +53,7 @@ rows.push(
   '- Keyless Solar System B and Thermodynamics C use independent generated references through Auto Grade, labeled as AI-generated. They are not represented as possessing an official key.',
   '- MIT 2020 explicitly [reported national rules for all events](https://scioly.mit.edu/archives/2020/). Its Botany paper is labeled national guidelines while retaining the Invitational competition name. The conversion excludes conflicting source answers and discloses the reversed classification headings.',
   '- Chem2000 Chemistry Lab uses the archive’s Regional practice-paper designation. Its combined source is split at the published answer-key boundary; test pages 1–12 and key pages 13–14 retain their original contents. Lake Erie/Niagara and UT Austin Protein Modeling use their cover dates (2018 and 2019), not the following season year.',
-  '- A Gemini quota limit interrupted bulk conversion. The latest thirteen papers were converted from locally extracted text and manually reviewed keys, without additional model requests. Live Gemini grading was not revalidated after that provider limit.',
+  '- The October 9 batch adds 20 division-specific entries from 15 original public Scioly papers. Public wiki filenames and archive metadata establish mirror identity; compressed mirror bytes may differ. Nine drafts used model extraction and eleven used direct published-key transcription, followed by review. Historical freshwater-organism papers are separated from the 2027 coral-reef rotation. Source-key conflicts, unscored items and practice weighting are disclosed per paper. A daily Gemini quota interrupted extraction; live written Auto Grade was not revalidated after that limit.',
   '',
   'Regenerate this report with `node --experimental-strip-types scripts/write-practice-coverage.mjs`.',
   '',

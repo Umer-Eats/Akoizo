@@ -11,12 +11,16 @@ import {
   type LessonAttempt,
 } from '@/lib/lesson-practice';
 import { ChoiceOptions } from './choice-options';
-import { ModelDiagram, InvestigationDiagram } from './lesson-diagrams';
+import { ModelDiagram } from './lesson-diagrams';
+import { LessonSectionVisuals } from './lesson-atlas';
+import { EvidenceWorkbench } from './evidence-workbench';
+import { ExperimentControls, TrialComparison, type LabTrial } from './lesson-experiments';
 import './lessons.css';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
   const [values, setValues] = useState(() => modelDefaults(sim.model));
-  const [trials, setTrials] = useState<{ settings: string; result: string }[]>([]);
+  const [trials, setTrials] = useState<LabTrial[]>([]);
+  const [experimentKey, setExperimentKey] = useState(0);
   const result = calculateModel(sim.model, values);
   const maxBar = Math.max(1, ...result.bars.map((bar) => bar.value));
   const format = (value: number) =>
@@ -78,6 +82,12 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
           </div>
         </div>
       </div>
+      <ExperimentControls
+        key={experimentKey}
+        model={sim.model}
+        values={values}
+        setValues={setValues}
+      />
       <p className="lab-equation">{result.equation}</p>
       <p className="lab-assumptions">
         <strong>What the model means:</strong> {result.interpretation}
@@ -96,6 +106,7 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
                 result: result.metrics
                   .map((m) => `${m.label}: ${format(m.value)} ${m.unit}`)
                   .join('; '),
+                metrics: result.metrics,
               },
             ])
           }
@@ -107,6 +118,7 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
           onClick={() => {
             setValues(modelDefaults(sim.model));
             setTrials([]);
+            setExperimentKey((current) => current + 1);
           }}
         >
           <RotateCcw size={15} aria-hidden="true" /> Reset experiment
@@ -114,6 +126,7 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
       </div>
       {trials.length > 0 && (
         <div className="lab-notebook">
+          <TrialComparison trials={trials} model={sim.model} />
           <h4>Trial notebook</h4>
           <p>Compare your trials while this lesson is open.</p>
           <ol>
@@ -135,34 +148,27 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
   );
 }
 
-function InvestigationLab({ sim }: { sim: Extract<LessonSim, { kind: 'investigation' }> }) {
+function InvestigationLab({
+  sim,
+  lessonId,
+}: {
+  sim: Extract<LessonSim, { kind: 'investigation' }>;
+  lessonId: string;
+}) {
   const [observed, setObserved] = useState<number[]>([]);
   const [picked, setPicked] = useState<number | null>(null);
+  const [restartKey, setRestartKey] = useState(0);
   return (
     <>
-      <InvestigationDiagram sim={sim} observed={observed} />
-      <div className="investigation-tests">
-        {sim.observations.map((observation, i) => (
-          <div key={observation.label}>
-            <button
-              className="button button-small button-glass"
-              aria-expanded={observed.includes(i)}
-              aria-controls={`observation-${i}`}
-              onClick={() =>
-                setObserved((current) => (current.includes(i) ? current : [...current, i]))
-              }
-            >
-              {observed.includes(i) && <Check size={15} aria-hidden="true" />}
-              {observation.label}
-            </button>
-            {observed.includes(i) && (
-              <p id={`observation-${i}`} role="status">
-                {observation.result}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
+      <EvidenceWorkbench
+        key={restartKey}
+        lessonId={lessonId}
+        sim={sim}
+        observed={observed}
+        onObserve={(i) =>
+          setObserved((current) => (current.includes(i) ? current : [...current, i]))
+        }
+      />
       <p className="lab-observation-count">
         {observed.length} of {sim.observations.length} observations collected
       </p>
@@ -197,6 +203,7 @@ function InvestigationLab({ sim }: { sim: Extract<LessonSim, { kind: 'investigat
         onClick={() => {
           setObserved([]);
           setPicked(null);
+          setRestartKey((current) => current + 1);
         }}
       >
         <RotateCcw size={15} aria-hidden="true" /> Restart investigation
@@ -205,7 +212,7 @@ function InvestigationLab({ sim }: { sim: Extract<LessonSim, { kind: 'investigat
   );
 }
 
-function SimView({ sim }: { sim: LessonSim }) {
+function SimView({ sim, lessonId }: { sim: LessonSim; lessonId: string }) {
   return (
     <section id="lesson-lab" className="lesson-sim" aria-labelledby="lesson-lab-title">
       <p className="eyebrow">
@@ -216,7 +223,7 @@ function SimView({ sim }: { sim: LessonSim }) {
       {sim.kind === 'model' ? (
         <ModelLab sim={sim} />
       ) : sim.kind === 'investigation' ? (
-        <InvestigationLab sim={sim} />
+        <InvestigationLab sim={sim} lessonId={lessonId} />
       ) : null}
     </section>
   );
@@ -392,6 +399,7 @@ function LessonDetail({
             {section.body.map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
+            <LessonSectionVisuals lesson={lesson} index={index} />
           </section>
         ))}
       </div>
@@ -422,7 +430,7 @@ function LessonDetail({
           ))}
         </dl>
       </details>
-      <SimView sim={lesson.simulation} />
+      <SimView sim={lesson.simulation} lessonId={lesson.id} />
       <QuizView lesson={lesson} attempt={attempt} onChange={onChange} />
     </article>
   );

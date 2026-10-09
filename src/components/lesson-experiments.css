@@ -1,0 +1,83 @@
+.experiment-controls {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.experiment-controls .eyebrow {
+  color: var(--lesson-pink);
+  margin-bottom: 6px;
+}
+.experiment-presets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.experiment-preset {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  line-height: 1.6;
+  background: var(--surface-2);
+  font-size: 0.82rem;
+}
+.experiment-preset[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.experiment-scenario-inputs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.7;
+}
+.experiment-scenario-inputs span {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.experiment-prediction {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+}
+.experiment-prediction label {
+  flex: 1 1 180px;
+  display: grid;
+  gap: 8px;
+}
+.experiment-feedback {
+  padding: 12px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+}
+.experiment-sweep {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.trial-chart {
+  width: 100%;
+  min-width: 400px;
+  display: block;
+}
+.trial-chart text {
+  fill: var(--muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+@media (max-width: 700px) {
+  .experiment-presets {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .experiment-prediction > button {
+    width: 100%;
+  }
+}

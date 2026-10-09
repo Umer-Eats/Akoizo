@@ -46,6 +46,51 @@ test('every Division B and C event with a practice tab has a converted paper', (
   }
 });
 
+test('converted archive sources disappear from unconverted listings and disclose unavailable portions', () => {
+  for (const id of ['texas-am-2026-water-quality-b', 'greenbrier-2026-crime-busters-b']) {
+    const paper = findPracticeTest('B', id);
+    assert.ok(paper.sourceId);
+    assert.ok(
+      !listArchiveSources('B', paper.eventId).some((source) => source.sourceId === paper.sourceId),
+    );
+    assert.match(paper.scoringBasis, /excluded/i);
+  }
+  const water = findPracticeTest('B', 'texas-am-2026-water-quality-b');
+  assert.equal(water.topicMatch, 'different');
+  assert.equal(water.maxScore, 52);
+  assert.ok(!water.questions.some((q) => q.id === '10f'));
+  assert.equal(water.keys['35'].criteria!.length, 2);
+  const crime = findPracticeTest('B', 'greenbrier-2026-crime-busters-b');
+  assert.equal(crime.maxScore, 84);
+  assert.ok(!crime.questions.some((q) => ['q1', 'q37', 'q39'].includes(q.id)));
+});
+
+test('public Scioly conversions preserve source exclusions, partial credit and actual cover dates', () => {
+  const heredity = findPracticeTest('B', 'scioly-veyv8odzxa8-b');
+  const excluded = gradePractice(heredity, {
+    q60: 'Metaphase I',
+    q64: 'Metaphase II',
+    q67: '61, 62, 63, 64',
+  });
+  assert.equal(excluded.score, 0);
+  assert.equal(gradePractice(heredity, { q51: 'Cytokinesis' }).score, 0.5);
+  assert.equal(gradePractice(heredity, { q51: 'Telophase' }).score, 1);
+  const frankenmuth = findPracticeTest('C', 'scioly-rzshay9v4d8-c');
+  assert.equal(frankenmuth.questions.find((q) => q.id === 'A35')!.points, 0);
+  assert.equal(frankenmuth.questions.find((q) => q.id === 'A37')!.points, 0);
+  const boca = findPracticeTest('C', 'scioly-qxc52ync-qo-c');
+  assert.equal(boca.year, 2019);
+  assert.equal(boca.topicMatch, 'current');
+  assert.match(boca.alignment, /scientific names/);
+  for (const paper of [heredity, frankenmuth, boca]) {
+    assert.ok(paper.sourceId);
+    assert.ok(
+      !listArchiveSources(paper.division, paper.eventId).some((s) => s.sourceId === paper.sourceId),
+    );
+  }
+  assert.equal(findPracticeTest('B', 'scioly-h1c51pwvpm8-b').topicMatch, 'different');
+});
+
 test('Codebusters honors letter penalties, keyword exceptions, and preserves exact input', async () => {
   const paper = findPracticeTest('C', 'bullso-2026-codebusters-c');
   const timed = paper.keys.Timed.criteria![0].cipher!;

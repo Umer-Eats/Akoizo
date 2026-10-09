@@ -379,6 +379,7 @@ try {
     }
     // Open the newly imported papers through the same event routes and verify their local assets.
     for (const id of [
+      ...practiceTests.filter((t) => t.id.startsWith('scioly-')).map((t) => t.id),
       'west-ottawa-2026-remote-sensing-b',
       'chem2000-2016-chemistry-lab-c',
       'lake-erie-niagara-2018-circuit-lab-c',

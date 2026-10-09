@@ -280,8 +280,9 @@ export function addArchivePapers(make) {
       year: 2026,
       sourceId: '-DY8qjJU5hY',
       topics: ['Freshwater systems', 'Ecology', 'Human impacts', 'Macroinvertebrates'],
+      topicMatch: 'different',
       alignment:
-        'The 2026 paper covers freshwater systems, ecology, human impacts, and macroinvertebrate indicators. These subjects match the 2027 Water Quality B study areas; the historical tournament is labeled as an invitational because the source does not report a regional, state, or national tier.',
+        'Historical freshwater rotation. The local 2027 Division B rules focus on marine and estuary environments. Ecology, treatment, nutrient cycles and monitoring overlap, but freshwater organism identification is a different rotation.',
       instructions:
         'All 50 questions are multiple choice and worth one point. The original paper and published answer key are preserved locally so the entire test remains available while you answer.',
       sourceUrl: 'https://scioly.org/tests/-DY8qjJU5hY',

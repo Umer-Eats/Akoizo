@@ -1,6 +1,7 @@
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
 import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
 import { modelControls } from '../src/lib/lesson-models.ts';
+import { lessonAtlas } from '../src/lib/lesson-atlas.ts';
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
@@ -119,6 +120,31 @@ try {
         await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);
         await expect(p.locator('.quiz-question')).toHaveCount(7);
         await expect(p.locator('.lesson-sim h3')).toHaveText(lesson.simulation.title);
+        await expect(p.locator('.lesson-reading .process-atlas')).toHaveCount(1);
+        await expect(p.locator('.lesson-reading .comparison-atlas tbody tr')).toHaveCount(3);
+        const process = p.locator('.lesson-reading .process-atlas');
+        await process.locator('.process-path button').last().click();
+        await expect(process.locator('.process-focus strong')).toContainText('Step 3');
+        if (lessonAtlas[lesson.id].image) {
+          const figure = p.locator('.lesson-reading .source-image');
+          await figure.scrollIntoViewIfNeeded();
+          await expect
+            .poll(() =>
+              figure
+                .locator('.atlas-image-button img')
+                .evaluate((image) => image.complete && image.naturalWidth > 0),
+            )
+            .toBe(true);
+        }
+        if (lesson.simulation.kind === 'model') {
+          const chart = p.locator('.lesson-reading .relationship-chart');
+          await expect(chart).toHaveCount(1);
+          const initialLabel = await chart.locator('svg').getAttribute('aria-label');
+          const slider = chart.getByRole('slider');
+          await slider.fill(await slider.getAttribute('max'));
+          assert.notEqual(await chart.locator('svg').getAttribute('aria-label'), initialLabel);
+          await slider.fill(await slider.getAttribute('min'));
+        }
         await expect(p.locator('.lab-figure')).toHaveCount(1);
         await expect(p.locator('.lab-diagram')).toHaveAccessibleName(/.+/);
         if (lesson.simulation.kind === 'model' && !checkedModels.has(lesson.simulation.model)) {
@@ -166,6 +192,59 @@ try {
     assert(!/Yingling Yang/.test(await p.locator('.lessons-workspace').innerText()));
   }
   assert.equal(checkedModels.size, 10);
+  // Local source images enlarge without external network requests, and close with Escape.
+  await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
+  await p.locator('.unit-button').nth(1).click();
+  const imageFigure = p.locator('.lesson-reading .source-image');
+  await imageFigure.getByRole('button', { name: /^Enlarge/ }).click();
+  await expect(imageFigure.locator('dialog')).toBeVisible();
+  await imageFigure.getByRole('slider', { name: /Image zoom/ }).fill('200');
+  await expect(imageFigure.locator('.atlas-enlarged-scroll img')).toHaveCSS('width', /.+px/);
+  await p.keyboard.press('Escape');
+  await expect(imageFigure.locator('dialog')).not.toBeVisible();
+  // A scenario tests a prediction; a sweep can pause; reset clears its state and trials.
+  await p.locator('.unit-button').nth(2).click();
+  await p.getByLabel('Your prediction', { exact: true }).selectOption('decrease');
+  await p.getByRole('button', { name: 'Run scenario', exact: true }).click();
+  await expect(p.locator('.experiment-feedback')).toContainText('Prediction supported');
+  await expect(p.locator('.lab-metrics')).toContainText('2.4');
+  await p.getByRole('button', { name: 'Record trial (0/6)', exact: true }).click();
+  await expect(p.locator('.trial-chart')).toHaveAccessibleName(/2.4/);
+  await p.getByRole('button', { name: 'Run variable sweep', exact: true }).click();
+  await expect(p.getByRole('button', { name: 'Pause sweep', exact: true })).toBeVisible();
+  await expect
+    .poll(() => p.getByRole('slider', { name: 'Tidal volume', exact: true }).inputValue())
+    .not.toBe('150');
+  await p.getByRole('button', { name: 'Pause sweep', exact: true }).click();
+  await p.getByRole('button', { name: 'Reset experiment', exact: true }).click();
+  await expect(p.locator('.experiment-feedback')).toHaveCount(0);
+  await expect(p.locator('.lab-notebook')).toHaveCount(0);
+  // Specimen controls change the view; notes and findings reset with the investigation.
+  await p.goto(`${base}/dashboard/student/events/forensics/lessons`);
+  await p.locator('.unit-button').nth(3).click();
+  await p.getByLabel('Working hypothesis', { exact: true }).selectOption({ index: 1 });
+  await p.locator('.investigation-tests button').first().click();
+  const specimenBefore = await p.locator('.specimen-drawing').innerHTML();
+  await p.getByLabel('Reference comparison', { exact: true }).selectOption('2');
+  assert.notEqual(await p.locator('.specimen-drawing').innerHTML(), specimenBefore);
+  await p.getByRole('slider', { name: /Exhibit zoom/ }).fill('150');
+  await p.getByRole('slider', { name: /Viewing focus/ }).fill('2');
+  await p
+    .getByLabel('Evidence notebook', { exact: true })
+    .fill('Compare scales with the questioned ribbon and use the composition result.');
+  await p.locator('.investigation-tests button').nth(1).click();
+  await p.locator('.investigation-tests button').first().click();
+  await expect(p.getByLabel('Evidence notebook', { exact: true })).toHaveValue(/Compare scales/);
+  await p.getByRole('button', { name: 'Explore reference pathway', exact: true }).click();
+  await expect(p.locator('.evidence-workbench .process-atlas')).toBeVisible();
+  await p.getByRole('button', { name: 'Return to case exhibit', exact: true }).click();
+  await p
+    .locator('.evidence-workbench')
+    .screenshot({ path: 'documents/qa/lessons/fiber-workbench.png' });
+  await p.getByRole('button', { name: 'Restart investigation', exact: true }).click();
+  await expect(p.getByLabel('Working hypothesis', { exact: true })).toHaveValue('');
+  await expect(p.getByRole('slider', { name: /Exhibit zoom/ })).toHaveValue('100');
+  await expect(p.getByLabel('Evidence notebook', { exact: true })).toHaveCount(0);
   await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
   await p.locator('.unit-button').first().click();
   const first = anatomyLessons.lessons[0];
@@ -282,6 +361,61 @@ try {
     }
   }
   await p.setViewportSize({ width: 1440, height: 1000 });
+  for (const theme of ['dark', 'light']) {
+    for (const width of [320, 390]) {
+      await p.setViewportSize({ width, height: 1000 });
+      await p.goto(base + '/dashboard/student/events/forensics/lessons');
+      await p.evaluate((t) => (document.documentElement.dataset.theme = t), theme);
+      await p.locator('.unit-button').nth(3).click();
+      await p.locator('.investigation-tests button').first().click();
+      await p.getByRole('slider', { name: 'Exhibit zoom', exact: true }).fill('200');
+      assert.equal(
+        await p.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+        false,
+        `Specimen overflow ${theme} ${width}`,
+      );
+      if (width === 390)
+        await p
+          .locator('.evidence-workbench')
+          .screenshot({ path: `documents/qa/lessons/specimen-${theme}-390.png` });
+      await p.getByRole('button', { name: 'Explore reference pathway', exact: true }).click();
+      assert.equal(
+        await p.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+        false,
+        `Pathway overflow ${theme} ${width}`,
+      );
+      await p.goto(base + '/dashboard/student/events/anatomy-and-physiology/lessons');
+      await p.locator('.unit-button').nth(1).click();
+      const fig = p.locator('.lesson-reading .source-image');
+      await fig.getByRole('button', { name: /^Enlarge/ }).click();
+      await fig.getByRole('slider', { name: 'Image zoom', exact: true }).fill('250');
+      assert.equal(
+        await p.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+        false,
+        `Image overflow ${theme} ${width}`,
+      );
+      await p.keyboard.press('Escape');
+      await p.locator('.unit-button').nth(2).click();
+      if (width === 390)
+        await p
+          .locator('.relationship-chart')
+          .screenshot({ path: `documents/qa/lessons/chart-${theme}-390.png` });
+    }
+  }
+  await p.setViewportSize({ width: 1440, height: 1000 });
+  await p.goto(base + '/dashboard/student/events/anatomy-and-physiology/lessons');
+  await p.locator('.unit-button').nth(2).click();
+  await p.locator('.process-atlas').screenshot({ path: 'documents/qa/lessons/process-atlas.png' });
+  await p
+    .locator('.relationship-chart')
+    .screenshot({ path: 'documents/qa/lessons/relationship-chart.png' });
+  await p.goto(base + '/dashboard/student/events/forensics/lessons');
+  await p.locator('.unit-button').nth(4).click();
+  await p.locator('.lesson-button').nth(1).click();
+  await p.locator('.investigation-tests button').first().click();
+  await p.getByRole('button', { name: 'Inspect base peak m/z 91', exact: true }).press('Enter');
+  await expect(p.locator('.specimen-drawing')).toContainText('Base peak');
+  await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
   profile.id = 'qa-student-two';
   await p.reload();
   await expect(p.locator('#current-lesson-title')).toHaveText(first.title);
@@ -315,7 +449,7 @@ try {
   await expect(p.locator('#current-lesson-title')).toHaveText(forensicsLessons.lessons[2].title);
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: 40 lessons with diagrams; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; practice scoring/review; draft restoration; student isolation; Division C/CAD scope; corrupted/blocked storage.',
+    'PASS: 40 lesson atlases, source image zoom, interactive charts, prediction scenarios, sweep playback, trial plots, specimen controls and notebooks, spectrum keyboard annotation, phone layouts; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; practice scoring/review; draft restoration; student isolation; Division C/CAD scope; corrupted/blocked storage.',
   );
 } finally {
   await browser.close();

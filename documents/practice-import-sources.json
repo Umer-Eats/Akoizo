@@ -53,7 +53,8 @@
     "paperPath": "output/practice-research/expansion/660-0.pdf",
     "paperUrl": "https://scioly.org/w/images/4/4a/KMS_Rocks_Test.pdf",
     "keyPath": "output/practice-research/expansion/660-1.pdf",
-    "keyUrl": "https://scioly.org/w/images/7/72/KMS_Rocks_Answer_Key.pdf"
+    "keyUrl": "https://scioly.org/w/images/7/72/KMS_Rocks_Answer_Key.pdf",
+    "sourceId": "gjUuMTV_NJw"
   },
   {
     "id": "clio-2013-forensics-c",
@@ -552,5 +553,747 @@
     "sourceId": "oZdxPOZn3QY",
     "dateEvidence": "Science Olympiad Invitational, February 6, 2016 per the key header. Downloaded file hashes match the archive manifest.",
     "exclusions": "None. Two zero-point tiebreakers retained with published answers; the key's stray trailing '3' has no matching question."
+  },
+  {
+    "id": "texas-am-2026-water-quality-b",
+    "eventId": "water-quality",
+    "division": "B",
+    "competition": "Texas A&M Invitational",
+    "year": 2026,
+    "level": null,
+    "sourceUrl": "https://scioly.org/tests/6CIlxMS30JY",
+    "paperPath": "output/practice-research/expansion/texas-am-2026-water-quality-b-test.pdf",
+    "keyPath": "output/practice-research/expansion/texas-am-2026-water-quality-b-key.pdf",
+    "contextPath": "output/practice-research/expansion/texas-am-2026-water-quality-b-images.pdf",
+    "paperUrl": "https://scioly.org/tests/6CIlxMS30JY",
+    "keyUrl": "https://scioly.org/tests/6CIlxMS30JY",
+    "sourceId": "6CIlxMS30JY"
+  },
+  {
+    "id": "greenbrier-2026-crime-busters-b",
+    "sourceId": "_pzG4T1mnTM",
+    "sourceUrl": "https://scioly.org/tests/_pzG4T1mnTM",
+    "division": "B",
+    "eventId": "crime-busters",
+    "competition": "Greenbrier Invitational",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/_pzG4T1mnTM",
+    "keyUrl": "https://scioly.org/tests/_pzG4T1mnTM",
+    "paperPath": "output/practice-research/scioly/2026Greenbrier_CrimeBustersB_TestPacket.pdf",
+    "keyPath": "output/practice-research/scioly/2026Greenbrier_CrimeBustersB_Key.pdf",
+    "files": [
+      {
+        "name": "2026Greenbrier_CrimeBustersB_TestPacket.pdf",
+        "type": "test",
+        "size": 13694708,
+        "sha256": "fae1e424711c3120e9b3504425e78d196f0070d3453f78e457fd701762e83485"
+      },
+      {
+        "name": "2026Greenbrier_CrimeBustersB_Key.pdf",
+        "type": "answer_key",
+        "size": 14017702,
+        "sha256": "4f269d763ecd6b0c137ddac32575c9bc6f26065e9ebe1dc5cbcde0186b8ddc98"
+      }
+    ],
+    "state": "downloaded"
+  },
+  {
+    "id": "scioly-qxc52ync-qo-c",
+    "sourceId": "qXc52yNc-Qo",
+    "sourceUrl": "https://scioly.org/tests/qXc52yNc-Qo",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Boca Raton Placement Exam",
+    "year": 2019,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/8/80/Boca_Tryout_-_Water_Quality_Exam.pdf",
+    "keyUrl": "https://scioly.org/w/images/8/8c/Boca_Tryout_-_Water_Quality_Master_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/e270db3a815ad47179478c733e573cd9890a635b8bc6d166fb85eb4c8d5e75ec.pdf",
+    "keyPath": "output/practice-research/bulk/public/ae5a53bd5d014b526a3ae79bc47995bf818cd14a59b13eab962e954986c59057.pdf",
+    "contextPath": "output/practice-research/bulk/public/4f9b5cd815fc327d5b52425253320ce47663b67594b058b218824d0f2f3a1503.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Boca_Tryout_-_Water_Quality_Exam.pdf",
+          "type": "test",
+          "size": 7473604,
+          "sha256": "7129c96a28edea8a8948e31b346cc61249e63e5544f22079a8a75dbefd08aa11",
+          "url": "https://scioly.org/w/images/8/80/Boca_Tryout_-_Water_Quality_Exam.pdf"
+        },
+        {
+          "name": "Boca_Tryout_-_Water_Quality_Master_Key.pdf",
+          "type": "answer_key",
+          "size": 7820393,
+          "sha256": "c35bd8857f07322c5954195d90f00218c73b98e44fa38d7b245cbdaea4b8da1f",
+          "url": "https://scioly.org/w/images/8/8c/Boca_Tryout_-_Water_Quality_Master_Key.pdf"
+        },
+        {
+          "name": "Boca_Tryout_-_Water_Quality_Answer_Sheet.pdf",
+          "type": "answer_sheet",
+          "size": 272797,
+          "sha256": "7a95f6fd9fa24700104cebbabf40cdda80c63be5c79197ef18e8e549fbd9c12a",
+          "url": "https://scioly.org/w/images/4/41/Boca_Tryout_-_Water_Quality_Answer_Sheet.pdf"
+        }
+      ]
+    },
+    "archiveYear": 2020,
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "129 raw written points, summing the published item weights: Part I MCQ 30, harmful organisms 6 and short answer 31; Part II identification 24; Part III dry-lab blueprint 18, turbidity 6 and BOD 14. Practice percentages use these raw points rather than the original equal-part/90% exam and 10% dry-lab weighting. The cover and key printed totals are inconsistent with the item sum. There is no physical lab station to exclude."
+  },
+  {
+    "id": "scioly-1raf2m9eu24-b",
+    "sourceId": "1RAF2M9EU24",
+    "sourceUrl": "https://scioly.org/tests/1RAF2M9EU24",
+    "division": "B",
+    "eventId": "heredity",
+    "competition": "Davis Invitational",
+    "year": 2019,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/2/27/DISCO_Invitational_Heredity_Test.pdf",
+    "keyUrl": "https://scioly.org/w/images/3/3d/DISCO_Invitational_Heredity_Answer_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/0416af52e5cbbbea3504f46542206376565510be2fc86aa49620bae128274f24.pdf",
+    "keyPath": "output/practice-research/bulk/public/14b378aeb8f6ca1896edf8db92c66d6ee0674441407c6316138ffde00316cd6e.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "DISCO_Invitational_Heredity_Test.pdf",
+          "type": "test",
+          "size": 559736,
+          "sha256": "817870492a5509bbdea0da7fb5e89e394a001234b1203ca53f5c7dbe4caae983",
+          "url": "https://scioly.org/w/images/2/27/DISCO_Invitational_Heredity_Test.pdf"
+        },
+        {
+          "name": "DISCO_Invitational_Heredity_Answer_Key.pdf",
+          "type": "answer_key",
+          "size": 53762,
+          "sha256": "7e905e0d36bb16653ba72139b0cdfc928641da6439402bdc276bae398a0dd4ac",
+          "url": "https://scioly.org/w/images/3/3d/DISCO_Invitational_Heredity_Answer_Key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Points are as indicated on the test and key, summing to a total of 65 points."
+  },
+  {
+    "id": "scioly-xv62ffcma0a-b",
+    "sourceId": "xv62FFCMa0A",
+    "sourceUrl": "https://scioly.org/tests/xv62FFCMa0A",
+    "division": "B",
+    "eventId": "water-quality",
+    "competition": "John Richardsim Practice Test",
+    "year": 2019,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/4/43/Water_Quality_Practice_Test_12-16-18.pdf",
+    "keyUrl": "https://scioly.org/w/images/e/e1/Water_Quality_Answer_Key_12-16-18.pdf",
+    "paperPath": "output/practice-research/bulk/public/3502fda9e1e61a4de1ba047f0bb4c96e45eedb32d2516710d9e0f2bad03788f6.pdf",
+    "keyPath": "output/practice-research/bulk/public/650b23083fcd396a600a94edffbe7c645915707e1504823347fb28b7477cba5a.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Water_Quality_Practice_Test_12-16-18.pdf",
+          "type": "test",
+          "size": 2016583,
+          "sha256": "adefda5a4d591a356400cfb5ea28b06812ef332f42542d6ee82dbf6e6a569933",
+          "url": "https://scioly.org/w/images/4/43/Water_Quality_Practice_Test_12-16-18.pdf"
+        },
+        {
+          "name": "Water_Quality_Answer_Key_12-16-18.pdf",
+          "type": "answer_key",
+          "size": 22259,
+          "sha256": "a196e3005026cb05f6b2745cf0f7afef46f908ccc389bfd2d4963049160f5a0c",
+          "url": "https://scioly.org/w/images/e/e1/Water_Quality_Answer_Key_12-16-18.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "The test has a total of 71 points as specified by the key. The undated practice PDF is indexed in the archive under 2019; its filename carries 12-16-18."
+  },
+  {
+    "id": "scioly-xv62ffcma0a-c",
+    "sourceId": "xv62FFCMa0A",
+    "sourceUrl": "https://scioly.org/tests/xv62FFCMa0A",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "John Richardsim Practice Test",
+    "year": 2019,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/4/43/Water_Quality_Practice_Test_12-16-18.pdf",
+    "keyUrl": "https://scioly.org/w/images/e/e1/Water_Quality_Answer_Key_12-16-18.pdf",
+    "paperPath": "output/practice-research/bulk/public/3502fda9e1e61a4de1ba047f0bb4c96e45eedb32d2516710d9e0f2bad03788f6.pdf",
+    "keyPath": "output/practice-research/bulk/public/650b23083fcd396a600a94edffbe7c645915707e1504823347fb28b7477cba5a.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Water_Quality_Practice_Test_12-16-18.pdf",
+          "type": "test",
+          "size": 2016583,
+          "sha256": "adefda5a4d591a356400cfb5ea28b06812ef332f42542d6ee82dbf6e6a569933",
+          "url": "https://scioly.org/w/images/4/43/Water_Quality_Practice_Test_12-16-18.pdf"
+        },
+        {
+          "name": "Water_Quality_Answer_Key_12-16-18.pdf",
+          "type": "answer_key",
+          "size": 22259,
+          "sha256": "a196e3005026cb05f6b2745cf0f7afef46f908ccc389bfd2d4963049160f5a0c",
+          "url": "https://scioly.org/w/images/e/e1/Water_Quality_Answer_Key_12-16-18.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "The test has a total of 71 points as specified by the key. The undated practice PDF is indexed in the archive under 2019; its filename carries 12-16-18."
+  },
+  {
+    "id": "scioly-dzkdpryxe-c-b",
+    "sourceId": "DzkDpRyxe_c",
+    "sourceUrl": "https://scioly.org/tests/DzkDpRyxe_c",
+    "division": "B",
+    "eventId": "water-quality",
+    "competition": "Unreported competition",
+    "year": 2014,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/9/94/Scimich_WQ_test.pdf",
+    "keyUrl": "https://scioly.org/w/images/6/6e/Scimich_WQ_ans.pdf",
+    "paperPath": "output/practice-research/bulk/public/d09d294a1b30d1587d648ed3efb2e6a7bb28160e7c6d1f76770859d611fa6b79.pdf",
+    "keyPath": "output/practice-research/bulk/public/55841b845223096933343a0441b9cf85c94cf0ba917d8971e65c39363bb68258.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Scimich_WQ_test.pdf",
+          "type": "test",
+          "size": 2515318,
+          "sha256": "d71378302af35b1161d9b483dc6157db5cedbe686f2879839497057933ac9cee",
+          "url": "https://scioly.org/w/images/9/94/Scimich_WQ_test.pdf"
+        },
+        {
+          "name": "Scimich_WQ_ans.pdf",
+          "type": "answer_key",
+          "size": 62478,
+          "sha256": "059cd6317be354526d418379e995c1e31a2a32a70255b426424e13a47d5de091",
+          "url": "https://scioly.org/w/images/6/6e/Scimich_WQ_ans.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per response; original weights not specified."
+  },
+  {
+    "id": "scioly-dzkdpryxe-c-c",
+    "sourceId": "DzkDpRyxe_c",
+    "sourceUrl": "https://scioly.org/tests/DzkDpRyxe_c",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Unreported competition",
+    "year": 2014,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/9/94/Scimich_WQ_test.pdf",
+    "keyUrl": "https://scioly.org/w/images/6/6e/Scimich_WQ_ans.pdf",
+    "paperPath": "output/practice-research/bulk/public/d09d294a1b30d1587d648ed3efb2e6a7bb28160e7c6d1f76770859d611fa6b79.pdf",
+    "keyPath": "output/practice-research/bulk/public/55841b845223096933343a0441b9cf85c94cf0ba917d8971e65c39363bb68258.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Scimich_WQ_test.pdf",
+          "type": "test",
+          "size": 2515318,
+          "sha256": "d71378302af35b1161d9b483dc6157db5cedbe686f2879839497057933ac9cee",
+          "url": "https://scioly.org/w/images/9/94/Scimich_WQ_test.pdf"
+        },
+        {
+          "name": "Scimich_WQ_ans.pdf",
+          "type": "answer_key",
+          "size": 62478,
+          "sha256": "059cd6317be354526d418379e995c1e31a2a32a70255b426424e13a47d5de091",
+          "url": "https://scioly.org/w/images/6/6e/Scimich_WQ_ans.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per response; original weights not specified."
+  },
+  {
+    "id": "scioly-o67jov6zrhc-b",
+    "sourceId": "o67JOv6ZRHc",
+    "sourceUrl": "https://scioly.org/tests/o67JOv6ZRHc",
+    "division": "B",
+    "eventId": "water-quality",
+    "competition": "Wanttoget1st Practice Test",
+    "year": 2014,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/0/04/Scioly_test_1.pdf",
+    "keyUrl": "https://scioly.org/w/images/3/38/Scioly_test_1_key.pdf",
+    "paperPath": "output/practice-research/bulk/public/fb2fc5f03bdb1072506172dcd12be4b3310741c7a898d2ff0ed1f009b9fc949f.pdf",
+    "keyPath": "output/practice-research/bulk/public/80cb59c537d5c001b22c289106d05e5fa8e942dd9813d8e8d26d09a1e33776bc.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Scioly_test_1.pdf",
+          "type": "test",
+          "size": 3431236,
+          "sha256": "491228982c16921f9e7c0176be554464d1802180249ba5af5d0b9a947a17f8c1",
+          "url": "https://scioly.org/w/images/0/04/Scioly_test_1.pdf"
+        },
+        {
+          "name": "Scioly_test_1_key.pdf",
+          "type": "answer_key",
+          "size": 532814,
+          "sha256": "ad4c6da8f0b5bfc84ddc77a6a176709973d3162bf0e99237d39733462b02606c",
+          "url": "https://scioly.org/w/images/3/38/Scioly_test_1_key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Points are indicated on each question. For questions without specified points, 1 point per required element is assumed."
+  },
+  {
+    "id": "scioly-o67jov6zrhc-c",
+    "sourceId": "o67JOv6ZRHc",
+    "sourceUrl": "https://scioly.org/tests/o67JOv6ZRHc",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Wanttoget1st Practice Test",
+    "year": 2014,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/0/04/Scioly_test_1.pdf",
+    "keyUrl": "https://scioly.org/w/images/3/38/Scioly_test_1_key.pdf",
+    "paperPath": "output/practice-research/bulk/public/fb2fc5f03bdb1072506172dcd12be4b3310741c7a898d2ff0ed1f009b9fc949f.pdf",
+    "keyPath": "output/practice-research/bulk/public/80cb59c537d5c001b22c289106d05e5fa8e942dd9813d8e8d26d09a1e33776bc.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Scioly_test_1.pdf",
+          "type": "test",
+          "size": 3431236,
+          "sha256": "491228982c16921f9e7c0176be554464d1802180249ba5af5d0b9a947a17f8c1",
+          "url": "https://scioly.org/w/images/0/04/Scioly_test_1.pdf"
+        },
+        {
+          "name": "Scioly_test_1_key.pdf",
+          "type": "answer_key",
+          "size": 532814,
+          "sha256": "ad4c6da8f0b5bfc84ddc77a6a176709973d3162bf0e99237d39733462b02606c",
+          "url": "https://scioly.org/w/images/3/38/Scioly_test_1_key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Points are as indicated on the test paper for each question."
+  },
+  {
+    "id": "scioly-qelfgcs87uy-b",
+    "sourceId": "QelFgCs87UY",
+    "sourceUrl": "https://scioly.org/tests/QelFgCs87UY",
+    "division": "B",
+    "eventId": "heredity",
+    "competition": "Ladera Vista Invitational",
+    "year": 2014,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/d/d9/Heredity_2014.pdf",
+    "keyUrl": "https://scioly.org/w/images/f/f9/Heredity_2014_Answer_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/7f8526f37b39a028304bb1448e192340390ea1150677983902aec6363ae8720b.pdf",
+    "keyPath": "output/practice-research/bulk/public/eb64a5e91d206daa3cdb82639b67738fd4c508ee0b055d59f0160d3b4cfab708.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Heredity_2014.pdf",
+          "type": "test",
+          "size": 617117,
+          "sha256": "763ae8972f434a5b905b21463ff175b891219ba5623000877a8c5eeb8d392978",
+          "url": "https://scioly.org/w/images/d/d9/Heredity_2014.pdf"
+        },
+        {
+          "name": "Heredity_2014_Answer_Key.pdf",
+          "type": "answer_key",
+          "size": 184156,
+          "sha256": "95af56f550f66db881be17053cb06c15ef2d5ec4d8c94ca00157ee7a28f6e603",
+          "url": "https://scioly.org/w/images/f/f9/Heredity_2014_Answer_Key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Published item weights (one point unless otherwise stated). Question 51 and the separately numbered tiebreakers are excluded because the published key has no entries. Fractions 23–26 were transcribed from rendered key pages; each is 1/4. Punnett squares and stage diagrams accept their complete textual descriptions. Historical key terminology and scientific statements are retained; these are source rubric references."
+  },
+  {
+    "id": "scioly-s8u4tyqcfgc-b",
+    "sourceId": "s8u4TyQcfgc",
+    "sourceUrl": "https://scioly.org/tests/s8u4TyQcfgc",
+    "division": "B",
+    "eventId": "water-quality",
+    "competition": "Scioly Study Summer Session — Adit Ghosh",
+    "year": 2013,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/d/dc/Wanttoget_WQ_Test.pdf",
+    "keyUrl": "https://scioly.org/w/images/f/f7/Wanttoget_WQ_Ans.pdf",
+    "paperPath": "output/practice-research/bulk/public/cd87ef7af28cb10ca9eb205b6cd6870ae7b254fc782f91d17b476c56a2e6b2b3.pdf",
+    "keyPath": "output/practice-research/bulk/public/72c0b7b28fed02ff382b46d9b379416aff8b3fb57e68dd697937f8ecf982d5f8.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Wanttoget_WQ_Test.pdf",
+          "type": "test",
+          "size": 4615842,
+          "sha256": "7bc2ddbf42ca1422053be6bc8b3c221a4fbe084fdf0e37367622fd9c2889eab2",
+          "url": "https://scioly.org/w/images/d/dc/Wanttoget_WQ_Test.pdf"
+        },
+        {
+          "name": "Wanttoget_WQ_Ans.pdf",
+          "type": "answer_key",
+          "size": 133525,
+          "sha256": "7d0e580d7dd47d242137183ec94b91eb9f0e46929991760ad594650402f943a2",
+          "url": "https://scioly.org/w/images/f/f7/Wanttoget_WQ_Ans.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per independent answer; original item weights are not specified. Diagram 6 has 16 fields, matching 14 has six, organism 64–70 name/class answers are separate, and false statements require a separate correction. Key entries 97 and 98 are transposed in the source and have been placed against their corresponding prompts (Secchi depth multiplier, tannins). The cover dates the test 2013; the archive indexes it under 2014. Other historical reference wording is preserved."
+  },
+  {
+    "id": "scioly-s8u4tyqcfgc-c",
+    "sourceId": "s8u4TyQcfgc",
+    "sourceUrl": "https://scioly.org/tests/s8u4TyQcfgc",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Scioly Study Summer Session — Adit Ghosh",
+    "year": 2013,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/d/dc/Wanttoget_WQ_Test.pdf",
+    "keyUrl": "https://scioly.org/w/images/f/f7/Wanttoget_WQ_Ans.pdf",
+    "paperPath": "output/practice-research/bulk/public/cd87ef7af28cb10ca9eb205b6cd6870ae7b254fc782f91d17b476c56a2e6b2b3.pdf",
+    "keyPath": "output/practice-research/bulk/public/72c0b7b28fed02ff382b46d9b379416aff8b3fb57e68dd697937f8ecf982d5f8.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Wanttoget_WQ_Test.pdf",
+          "type": "test",
+          "size": 4615842,
+          "sha256": "7bc2ddbf42ca1422053be6bc8b3c221a4fbe084fdf0e37367622fd9c2889eab2",
+          "url": "https://scioly.org/w/images/d/dc/Wanttoget_WQ_Test.pdf"
+        },
+        {
+          "name": "Wanttoget_WQ_Ans.pdf",
+          "type": "answer_key",
+          "size": 133525,
+          "sha256": "7d0e580d7dd47d242137183ec94b91eb9f0e46929991760ad594650402f943a2",
+          "url": "https://scioly.org/w/images/f/f7/Wanttoget_WQ_Ans.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per independent answer; original item weights are not specified. Diagram 6 has 16 fields, matching 14 has six, organism 64–70 name/class answers are separate, and false statements require a separate correction. Key entries 97 and 98 are transposed in the source and have been placed against their corresponding prompts (Secchi depth multiplier, tannins). The cover dates the test 2013; the archive indexes it under 2014. Other historical reference wording is preserved."
+  },
+  {
+    "id": "scioly-hskzkf6pfpy-b",
+    "sourceId": "hSkZKf6PfpY",
+    "sourceUrl": "https://scioly.org/tests/hSkZKf6PfpY",
+    "division": "B",
+    "eventId": "water-quality",
+    "competition": "Unreported competition",
+    "year": 2013,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/c/c3/WQ_test_-NO_NAME-.pdf",
+    "keyUrl": "https://scioly.org/w/images/7/79/WQ_Ans_-NO_NAME-.pdf",
+    "paperPath": "output/practice-research/bulk/public/864c0217c5984e0b8b5687b3665c9ff8f72dc2b70566351f3334867e530d7d86.pdf",
+    "keyPath": "output/practice-research/bulk/public/f7640d3aade62041d343e43860d43d61aff674043811aadb2660fedd20be1c7c.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "WQ_test_-NO_NAME-.pdf",
+          "type": "test",
+          "size": 841468,
+          "sha256": "a4ad8621e4db90d4517ae7f97f4f351ea033d21c6a6552f2cdc10321c5fc36a2",
+          "url": "https://scioly.org/w/images/c/c3/WQ_test_-NO_NAME-.pdf"
+        },
+        {
+          "name": "WQ_Ans_-NO_NAME-.pdf",
+          "type": "answer_key",
+          "size": 97109,
+          "sha256": "9013e93b4a03c78e8b9fe56e1c6f5a38513c3263007446be39abc3489fdba5b0",
+          "url": "https://scioly.org/w/images/7/79/WQ_Ans_-NO_NAME-.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "94 practice points. Section 1: one point per answer (40); Section 2: equal two-point weighting per item (30); Section 3: one point per written item (24). Per-item weights are not printed, so these practice allocations do not reproduce the printed 100-point total. The five-point physical salinometer question S3.25 is excluded. Questions S1.37–38 share one two-point field requiring two distinct phenomena. The source key uses outdated classifications and contains apparent errors (including S1.7 and S3.10); its reference answers are preserved."
+  },
+  {
+    "id": "scioly-hskzkf6pfpy-c",
+    "sourceId": "hSkZKf6PfpY",
+    "sourceUrl": "https://scioly.org/tests/hSkZKf6PfpY",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Unreported competition",
+    "year": 2013,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/c/c3/WQ_test_-NO_NAME-.pdf",
+    "keyUrl": "https://scioly.org/w/images/7/79/WQ_Ans_-NO_NAME-.pdf",
+    "paperPath": "output/practice-research/bulk/public/864c0217c5984e0b8b5687b3665c9ff8f72dc2b70566351f3334867e530d7d86.pdf",
+    "keyPath": "output/practice-research/bulk/public/f7640d3aade62041d343e43860d43d61aff674043811aadb2660fedd20be1c7c.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "WQ_test_-NO_NAME-.pdf",
+          "type": "test",
+          "size": 841468,
+          "sha256": "a4ad8621e4db90d4517ae7f97f4f351ea033d21c6a6552f2cdc10321c5fc36a2",
+          "url": "https://scioly.org/w/images/c/c3/WQ_test_-NO_NAME-.pdf"
+        },
+        {
+          "name": "WQ_Ans_-NO_NAME-.pdf",
+          "type": "answer_key",
+          "size": 97109,
+          "sha256": "9013e93b4a03c78e8b9fe56e1c6f5a38513c3263007446be39abc3489fdba5b0",
+          "url": "https://scioly.org/w/images/7/79/WQ_Ans_-NO_NAME-.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "94 practice points. Section 1: one point per answer (40); Section 2: equal two-point weighting per item (30); Section 3: one point per written item (24). Per-item weights are not printed, so these practice allocations do not reproduce the printed 100-point total. The five-point physical salinometer question S3.25 is excluded. Questions S1.37–38 share one two-point field requiring two distinct phenomena. The source key uses outdated classifications and contains apparent errors (including S1.7 and S3.10); its reference answers are preserved."
+  },
+  {
+    "id": "scioly-rzshay9v4d8-c",
+    "sourceId": "RZsHaY9V4D8",
+    "sourceUrl": "https://scioly.org/tests/RZsHaY9V4D8",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Frankenmuth Invitational",
+    "year": 2013,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/6/67/Frankenmuth_Invitational_2013_water_quality.pdf",
+    "keyUrl": "https://scioly.org/w/images/e/e8/Frankenmuth_2013_Water_Quality_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/da260c4f4564181a7f306b9488000f5605a4b290d2c8c417a969d256f2aed369.pdf",
+    "keyPath": "output/practice-research/bulk/public/e54c2a8be21486b3bd69cbf6ab60b181eedd8a145c16f014047c78ae62556979.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Frankenmuth_Invitational_2013_water_quality.pdf",
+          "type": "test",
+          "size": 7080736,
+          "sha256": "164a44493469e5de171c591301e3c38625c49b1d0dbbca738d6a25f2fcd7e2ed",
+          "url": "https://scioly.org/w/images/6/67/Frankenmuth_Invitational_2013_water_quality.pdf"
+        },
+        {
+          "name": "Frankenmuth_2013_Water_Quality_Key.pdf",
+          "type": "answer_key",
+          "size": 2388415,
+          "sha256": "0c968992f73eae1ce026b5ac6612649fd09632836febc9ab10a9e175450d8c54",
+          "url": "https://scioly.org/w/images/e/e8/Frankenmuth_2013_Water_Quality_Key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "188 available written points from the 200-point paper. The ten-point physical salinometer station is excluded. Matching A35 and A37 have source-key/term-bank conflicts and remain visible as zero-point questions. All other printed weights are retained, including two points per Part A true/false item. Name/class pairs have separate one-point fields. Drawing B24 is answered as a textual life-cycle sequence. The handwritten key uses legacy classifications and terse reference explanations; those source references are preserved."
+  },
+  {
+    "id": "scioly-7zo0gqqt8fe-c",
+    "sourceId": "7Zo0gQqT8FE",
+    "sourceUrl": "https://scioly.org/tests/7Zo0gQqT8FE",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Albany Invitational (Capital District)",
+    "year": 2012,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/a/a6/Capital_District_Invitational_-_Water_Quality_C.pdf",
+    "keyUrl": "https://scioly.org/w/images/9/9a/Capital_District_Invitational_-_Water_Quality_C_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/118aff3101d1222ebd5560349b3b4beac5770a89049f15edf9764de67b099abc.pdf",
+    "keyPath": "output/practice-research/bulk/public/12d0e0e902c8702841d8c81186788d1d12ee562c03379dec0af35994f0cf4210.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Capital_District_Invitational_-_Water_Quality_C.pdf",
+          "type": "test",
+          "size": 324025,
+          "sha256": "0ec4ece24f399659223fcc6382171a70d38f4be883f05fbb784c258c1e87a95f",
+          "url": "https://scioly.org/w/images/a/a6/Capital_District_Invitational_-_Water_Quality_C.pdf"
+        },
+        {
+          "name": "Capital_District_Invitational_-_Water_Quality_C_Key.pdf",
+          "type": "answer_key",
+          "size": 25801,
+          "sha256": "aa2de8d462df29385bc73348883c01f7d7026f3aca6aa87d5902f41886b7f84f",
+          "url": "https://scioly.org/w/images/9/9a/Capital_District_Invitational_-_Water_Quality_C_Key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per written response (35 points); original per-item weights are not stated. The key includes an extra salinometer answer 36, which has no question in the uploaded test and is excluded. Key entry 34 contains a handwritten alternative “or Turbidity”; the printed answer Total solids is used for this definition."
+  },
+  {
+    "id": "scioly-ptotyqnngbw-c",
+    "sourceId": "ptotyqnngBw",
+    "sourceUrl": "https://scioly.org/tests/ptotyqnngBw",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Phoenix Invitational",
+    "year": 2012,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/1/1a/Water_Quality_Test_B_IAEAST.pdf",
+    "keyUrl": "https://scioly.org/w/images/3/3f/Water_Quality_Test_AnswerKey.pdf",
+    "paperPath": "output/practice-research/bulk/public/d401422592cde89b385b3405f32cdd48feef47bb3a7c5102ca7f8e330825743e.pdf",
+    "keyPath": "output/practice-research/bulk/public/51df5d2cb82f16e3343763391c7a0d9a47f87f3cdba20f47730d84be0e1f952c.pdf",
+    "mirrorEvidence": {
+      "basis": "Exact public wiki filenames and archive file metadata; public PDFs may have different container bytes.",
+      "publicFiles": [
+        {
+          "name": "Water_Quality_Test_B_IAEAST.pdf",
+          "type": "test",
+          "size": 776968,
+          "sha256": "71902a183788a8f59b68fa73b4fb0d91af270740f45618ab29f34f1b4da221c5",
+          "url": "https://scioly.org/w/images/1/1a/Water_Quality_Test_B_IAEAST.pdf"
+        },
+        {
+          "name": "Water_Quality_Test_AnswerKey.pdf",
+          "type": "answer_key",
+          "size": 783600,
+          "sha256": "e12238cf98a64683a38236866a08bc05ba485270e4b3dbfb1729ae6c856b66de",
+          "url": "https://scioly.org/w/images/3/3f/Water_Quality_Test_AnswerKey.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per independent written response (47 points); original per-item weights are unspecified. Names, tolerance values, calculation work and total have separate fields. The physical salinometer is excluded. The published key totals 37 but its listed ten index values sum to 35; either total is accepted with corresponding work."
+  },
+  {
+    "id": "scioly-uhagh2cy2g0-b",
+    "sourceId": "Uhagh2cY2G0",
+    "sourceUrl": "https://scioly.org/tests/Uhagh2cY2G0",
+    "division": "B",
+    "eventId": "dynamic-planet",
+    "competition": "Kraemer Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/d/d7/KMS_Dynamic_Test.pdf",
+    "keyUrl": "https://scioly.org/w/images/b/b9/KMS_Dynamic_Answer_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/6ea393253fcc1a204bfb6135c933f0d37e8c50b3fd29add2e303bac96cee3c8d.pdf",
+    "keyPath": "output/practice-research/bulk/public/b62506907e568673dcbf6f4885f2951011f9f548401df387e027c9b6a317410f.pdf",
+    "mirrorEvidence": {
+      "basis": "Public wiki tournament/event/year and source filenames; original byte hashes where available.",
+      "title": "2018 Kraemer Middle School Scrimmage Division B Test",
+      "publicFiles": [
+        {
+          "name": "Test",
+          "url": "https://scioly.org/w/images/d/d7/KMS_Dynamic_Test.pdf"
+        },
+        {
+          "name": "Key",
+          "url": "https://scioly.org/w/images/b/b9/KMS_Dynamic_Answer_Key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "76 available points from the published item weights; the printed 77-point total is one point higher. Question 37 has six one-point positions. Question 54 retains the printed nine-point item weight despite a more detailed subdivision in the key. Source prose references are retained verbatim."
+  },
+  {
+    "id": "scioly-h1c51pwvpm8-b",
+    "sourceId": "h1C51PWVpM8",
+    "sourceUrl": "https://scioly.org/tests/h1C51PWVpM8",
+    "division": "B",
+    "eventId": "solar-system",
+    "competition": "Kraemer Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/4/40/KMS_Solar_Test.pdf",
+    "keyUrl": "https://scioly.org/w/images/c/c8/KMS_Solar_Answer_Key.pdf",
+    "paperPath": "output/practice-research/bulk/public/fb72ccf26e3591196bb9d4eb6e2c8c1a1dd46b8041537459e0a12cf062f3b6e3.pdf",
+    "keyPath": "output/practice-research/bulk/public/c63c4b46c026fede31dc6183766027b447adff26daf3b3e6299be3e31cdc2b88.pdf",
+    "contextPath": "output/practice-research/bulk/public/bd7a83c7d73ce383ac65e31f5c8df50439485ab384eb7ce96713e8bf11003736.pdf",
+    "mirrorEvidence": {
+      "basis": "Public wiki tournament/event/year and source filenames; original byte hashes where available.",
+      "title": "2018  Kraemer Middle School  Scrimmage Test",
+      "publicFiles": [
+        {
+          "name": "Test",
+          "url": "https://scioly.org/w/images/4/40/KMS_Solar_Test.pdf"
+        },
+        {
+          "name": "Test Images",
+          "url": "https://scioly.org/w/images/f/f1/KMS_Solar_Images.pdf"
+        },
+        {
+          "name": "Answer Sheet",
+          "url": "https://scioly.org/w/images/3/30/KMS_Solar_Answer_Sheet_.pdf"
+        },
+        {
+          "name": "Key",
+          "url": "https://scioly.org/w/images/c/c8/KMS_Solar_Answer_Key.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "90 points, retaining every published subpart weight. The image sheet supplies the referenced planetary features; drawings can be described in text. Subparts with several required facts are evaluated against the complete published rubric. The archive/wikipedia source dates this scrimmage to the 2018 season; the undated paper itself does not confirm a calendar year."
+  },
+  {
+    "id": "scioly-ba1b-pycht0-b",
+    "sourceId": "Ba1b_pyCHT0",
+    "sourceUrl": "https://scioly.org/tests/Ba1b_pyCHT0",
+    "division": "B",
+    "eventId": "food-science",
+    "competition": "NeilMehta Practice Test",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/1/16/Food_Science_Carbohydrates_Test.pdf",
+    "keyUrl": "https://scioly.org/w/images/3/39/Food_Science_Carbohydrates_Answer_Key_Updated.pdf",
+    "paperPath": "output/practice-research/bulk/public/321674044ad87aa3e431d986092300082e8087497f506f9401e6275edb93e833.pdf",
+    "keyPath": "output/practice-research/bulk/public/c357e82c60c3009fae32624010f92bf02c2cc87696db65e50d9e718755ba23a0.pdf",
+    "mirrorEvidence": {
+      "basis": "Same named paper/key in public wiki and archive listing",
+      "title": "NeilMehta 's 2017 User-Submitted Test",
+      "publicFiles": [
+        {
+          "name": "Test",
+          "url": "https://scioly.org/w/images/1/16/Food_Science_Carbohydrates_Test.pdf"
+        },
+        {
+          "name": "Answer Key",
+          "url": "https://scioly.org/w/images/3/39/Food_Science_Carbohydrates_Answer_Key_Updated.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "Practice weighting: one point per response; original weights not specified."
+  },
+  {
+    "id": "scioly-veyv8odzxa8-b",
+    "sourceId": "VeyV8OdzxA8",
+    "sourceUrl": "https://scioly.org/tests/VeyV8OdzxA8",
+    "division": "B",
+    "eventId": "heredity",
+    "competition": "reesabp 's 2014 User-Submitted Test",
+    "year": 2014,
+    "level": null,
+    "paperUrl": "https://scioly.org/w/images/3/3b/Reese_Heredity_test.pdf",
+    "keyUrl": "https://scioly.org/w/images/1/13/Reese_Heredity_ans.pdf",
+    "paperPath": "output/practice-research/bulk/public/772c5bc3bf3bbbd51ad2fcda81c22ac0492f1e07eb0bb2b7e6a8d5cd67953bef.pdf",
+    "keyPath": "output/practice-research/bulk/public/bad7c2dd06d4c20584866885ff35c9170be0d6cc74ed491f6531e7e64f4cedb0.pdf",
+    "mirrorEvidence": {
+      "basis": "Distinctive public filenames also recorded in archive listing",
+      "title": "reesabp 's 2014 User-Submitted Test",
+      "publicFiles": [
+        {
+          "name": "Test",
+          "url": "https://scioly.org/w/images/3/3b/Reese_Heredity_test.pdf"
+        },
+        {
+          "name": "Key",
+          "url": "https://scioly.org/w/images/1/13/Reese_Heredity_ans.pdf"
+        }
+      ]
+    },
+    "reviewedOn": "2026-10-09",
+    "reviewNotes": "103 practice points: one per response unless stated otherwise, including the two ten-point essays. The published key counts only meiosis images 61, 62, 63 and 65: images 60 and 64 remain visible for unscored feedback; image 66 is unkeyed and excluded. Question 67 has no published answer and is unscored; redacted question 77 is excluded. Question 51 gives half credit for Cytokinesis and full credit for Telophase. Historical source explanations are preserved."
   }
 ]
