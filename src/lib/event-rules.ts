@@ -168,7 +168,8 @@ export function eventToolIds(division: Division, event: ScienceEvent): EventTool
   if (specialTools[key]) return specialTools[key];
   const ids: EventToolId[] = ['lessons'];
   if (testEvents[division].has(event.id)) {
-    ids.push('practice-tests', 'ranked-tests', 'question-bank', 'vocab-rush');
+    // Temporarily hidden: 'question-bank', 'vocab-rush'
+    ids.push('practice-tests', 'ranked-tests');
     if (binderEvents[division].has(event.id)) ids.push('binder-generator');
     else if (cheatsheetEvents[division].has(event.id)) ids.push('cheatsheet-generator');
   }
