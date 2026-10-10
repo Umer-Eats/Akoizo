@@ -17,7 +17,7 @@ const encouragement = [
   'Take a breath. Try the next tiny step.',
   'Progress takes practice. I’m cheering for you!',
   'Stay curious. Your next discovery is waiting.',
-  'A sip of water and a stretch? Even lab rats take breaks.',
+  'How about a sip of water and a stretch? Even lab rats take breaks.',
 ];
 type Scene = {
   position: Point;
@@ -115,7 +115,7 @@ export function AkoCompanion() {
     s.target = target;
     s.action = 'run';
     s.until = 0;
-    say('Cheese! A tiny snack, a big motivation.');
+    say('Cheese! This little snack gives me a big boost.');
     setMenu(false);
     publish();
   };
@@ -206,7 +206,7 @@ export function AkoCompanion() {
               s.cheese = null;
               s.action = 'happy';
               s.until = now + 3000;
-              say('That was grate! Ready for another small win?');
+              say('That was great! Are you ready for another small win?');
             } else {
               s.action = 'idle';
               s.until = 0;
