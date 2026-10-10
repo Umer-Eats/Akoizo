@@ -1,0 +1,252 @@
+import type { LessonReferenceFigure } from './lessons';
+
+// Unmodified remote figures; captions and study prompts are original.
+export const lessonReferenceFigures: (LessonReferenceFigure & {
+  lessonId: string;
+  section: number;
+})[] = [
+  {
+    lessonId: 'chem-u2-l1',
+    section: 2,
+    title: 'Electron domains and molecular geometry',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/e7e7a66f5f22327c8d3cfd3606594fff0ca383be',
+    source:
+      'https://chem.libretexts.org/Bookshelves/General_Chemistry/Chemistry_2e_(OpenStax)/07%3A_Chemical_Bonding_and_Molecular_Geometry/7.06%3A_Molecular_Structure_and_Polarity',
+    alt: 'Table comparing electron-region geometry, lone pairs, and molecular shapes.',
+    prompt:
+      'Use the two-bond/two-lone-pair and three-bond/one-lone-pair cells to classify water and ammonia. Explain why electron-domain geometry and molecular shape have different names.',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'rock-u1-l1',
+    section: 2,
+    title: 'Cleavage and fracture in feldspar',
+    src: 'https://opentextbc.ca/physicalgeology2ed/wp-content/uploads/sites/298/2019/08/k-feldspar-cleavage.png',
+    fallbackSrc: '/lesson-diagrams/cleavage.svg',
+    source: 'https://opentextbc.ca/physicalgeology2ed/chapter/2-6-mineral-properties/',
+    alt: 'Annotated potassium feldspar specimen showing cleavage surfaces and fracture.',
+    prompt:
+      'Distinguish a repeated cleavage direction from an irregular break. Why does one flat face not prove the mineral identity?',
+    author: 'Steven Earle, Physical Geology',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'rock-u2-l1',
+    section: 2,
+    title: 'Crystal form versus cleavage',
+    src: 'https://opentextbc.ca/physicalgeology2ed/wp-content/uploads/sites/298/2019/08/fluorite-crystal-cleavage.png',
+    fallbackSrc: '/lesson-diagrams/habit-cleavage.svg',
+    source: 'https://opentextbc.ca/physicalgeology2ed/chapter/2-6-mineral-properties/',
+    alt: 'Diagram comparing fluorite growth form with its cleavage directions.',
+    prompt: 'Explain why a cubic external habit need not mean cubic cleavage.',
+    author: 'Steven Earle, Physical Geology',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'rock-u3-l1',
+    section: 2,
+    title: 'Building a silicate tetrahedron',
+    src: 'https://opentextbc.ca/physicalgeology2ed/wp-content/uploads/sites/298/2019/08/Tetrahedron-e1560901154442-1024x585.png',
+    fallbackSrc: '/lesson-diagrams/tetrahedron.svg',
+    source: 'https://opentextbc.ca/physicalgeology2ed/chapter/2-4-silicate-minerals/',
+    alt: 'Tetrahedron construction reference with a schematic of silicon coordinated by four oxygen atoms.',
+    prompt: 'Count shared oxygen carefully when extending this unit into a chain or framework.',
+    author: 'Steven Earle, Physical Geology',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'circ-u3-l1',
+    section: 2,
+    title: 'Series and parallel connections',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/8400c81c0eced157cf64f4d5d9f584c48b38d8ad',
+    source:
+      'https://phys.libretexts.org/Courses/Kettering_University/Electricity_and_Magnetism_with_Applications_to_Amateur_Radio_and_Wireless_Technology/06%3A_Direct-Current_(DC)_Resistor_Circuits/6.04%3A_Resistors_in_Series_and_Parallel',
+    alt: 'Schematics comparing a series resistor path with parallel branches.',
+    prompt:
+      'Trace the nodes, then identify the quantity shared by the resistors in each arrangement.',
+    author: 'OpenStax / Rice University',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'circ-u6-l1',
+    section: 2,
+    title: 'Reducing a mixed resistor network',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/cead5c991d137e577a00716fba601164390286fb',
+    source:
+      'https://openstax.org/books/university-physics-volume-2/pages/10-2-resistors-in-series-and-parallel',
+    alt: 'A labeled resistor network requiring stepwise reduction.',
+    prompt: 'Identify reducible groups before calculating. Explain which branch currents differ.',
+    author: 'OpenStax / Rice University',
+    license: 'CC BY-NC-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+  },
+  {
+    lessonId: 'dyn-u3-l1',
+    section: 2,
+    title: 'Drainage patterns and geological structure',
+    src: 'https://opentextbc.ca/physicalgeology2ed/wp-content/uploads/sites/298/2019/08/dendritic.png',
+    fallbackSrc: '/lesson-diagrams/drainage.svg',
+    source: 'https://opentextbc.ca/physicalgeology2ed/chapter/13-2-drainage-basins/',
+    alt: 'Comparative drawings of branching drainage networks.',
+    prompt:
+      'Compare network patterns with geological controls. Explain why shape alone does not identify a unique history.',
+    author: 'Steven Earle, Physical Geology',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'dyn-u7-l1',
+    section: 2,
+    title: 'Water table and potentiometric surface',
+    src: 'https://opentextbc.ca/physicalgeology2ed/wp-content/uploads/sites/298/2019/08/water-table-and-the-potentiometric-surface.png',
+    fallbackSrc: '/lesson-diagrams/groundwater.svg',
+    source: 'https://opentextbc.ca/physicalgeology2ed/chapter/14-2-groundwater-flow/',
+    alt: 'Cross section distinguishing unconfined water table and confined-aquifer head.',
+    prompt:
+      'Identify pressure head and elevation. Why can a well level differ from the top of an aquifer?',
+    author: 'Steven Earle, Physical Geology',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'prot-u2-l1',
+    section: 2,
+    title: 'Peptide-bond formation',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/e124f13e55a40e274be0171a1aa5040c226bfadb',
+    source:
+      'https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_1e_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.4%3A_Proteins',
+    alt: 'Diagram of amino-acid linkage forming a peptide bond.',
+    prompt:
+      'Trace the backbone and distinguish amino-acid sequence from the later folded conformation.',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'prot-u3-l1',
+    section: 2,
+    title: 'Four levels of protein structure',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/fb4997cac700d686322c9930cf9abc5cfa187982',
+    source:
+      'https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_1e_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.4%3A_Proteins',
+    alt: 'Diagram connecting primary, secondary, tertiary, and quaternary structure.',
+    prompt:
+      'Name what each representation preserves and what it hides. Quaternary structure does not mean exactly four subunits.',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'prot-u4-l1',
+    section: 2,
+    title: 'Amino-acid side-chain chemistry',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/90448620a30b8e92f83d042f965513991ef14cc0',
+    source:
+      'https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_1e_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.4%3A_Proteins',
+    alt: 'Chart of common amino-acid structures grouped by side-chain properties.',
+    prompt:
+      'Compare nonpolar, polar, acidic, and basic groups. Explain why protonation and environment still matter.',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'gene-u3-l1',
+    section: 2,
+    title: 'Crossing over between homologs',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/8cc4db844fe92aabfacd0bee8c6053b7e8229d92',
+    source:
+      'https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_1e_(OpenStax)/3%3A_Genetics/11%3A_Meiosis_and_Sexual_Reproduction/11.1%3A_The_Process_of_Meiosis',
+    alt: 'Diagram showing reciprocal exchange between nonsister chromatids.',
+    prompt: 'Identify the recombinant chromatids and explain why phase matters in a testcross.',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'gene-u4-l1',
+    section: 2,
+    title: 'Mitosis and meiosis compared',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/5f200afaa82f847663eddf035cec63ee42940af2',
+    source:
+      'https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/General_Biology_1e_(OpenStax)/3%3A_Genetics/11%3A_Meiosis_and_Sexual_Reproduction/11.1%3A_The_Process_of_Meiosis',
+    alt: 'Diagram contrasting one mitotic division with two meiotic divisions.',
+    prompt:
+      'Track homologs, sisters, and chromosome sets separately. Which division reduces ploidy?',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'therm-u9-l1',
+    section: 2,
+    title: 'Four stages of a Carnot cycle',
+    src: 'https://openstax.org/apps/archive/20260604.144757/resources/b01fcc2bc93d1dc9e88e3c8a6fb15765d79b4b33',
+    source:
+      'https://phys.libretexts.org/Bookshelves/University_Physics/University_Physics_(OpenStax)/University_Physics_II_-_Thermodynamics_Electricity_and_Magnetism_(OpenStax)/04%3A_The_Second_Law_of_Thermodynamics/4.06%3A_The_Carnot_Cycle',
+    alt: 'Piston diagrams showing isothermal and adiabatic expansion and compression.',
+    prompt:
+      'Trace the complete cycle. Explain why an isolated expansion path is not itself a cycle.',
+    author: 'OpenStax / Rice University (earlier CC BY edition)',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'water-u5-l1',
+    section: 2,
+    title: 'Coral polyp and skeleton',
+    src: 'https://oceanservice.noaa.gov/education/tutorial_corals/media/coral01a_462-300.jpg',
+    source: 'https://oceanservice.noaa.gov/education/tutorial_corals/coral01_intro.html',
+    alt: 'Labeled anatomy of a coral polyp and supporting skeleton.',
+    prompt:
+      'Separate living tissue from the calcium-carbonate framework. Connect feeding structures with the organism’s niche.',
+    author: 'NOAA National Ocean Service',
+    license: 'Public information; NOAA reuse policy',
+    licenseUrl: 'https://oceanservice.noaa.gov/disclaimer.html',
+  },
+  {
+    lessonId: 'water-u6-l1',
+    section: 2,
+    title: 'Cnidarian stinging-cell mechanism',
+    src: 'https://oceanservice.noaa.gov/education/tutorial_corals/media/coral01b_960.jpg',
+    source: 'https://oceanservice.noaa.gov/education/tutorial_corals/coral01_intro.html',
+    alt: 'Diagram showing a nematocyst before and after discharge.',
+    prompt:
+      'Connect a diagnostic structure to feeding and defense; explain why branching shape alone cannot identify coral.',
+    author: 'NOAA National Ocean Service',
+    license: 'Public information; NOAA reuse policy',
+    licenseUrl: 'https://oceanservice.noaa.gov/disclaimer.html',
+  },
+  {
+    lessonId: 'prot-u6-l1',
+    section: 2,
+    title: 'Influenza hemagglutinin assembly',
+    src: 'https://cdn.rcsb.org/pdb101/motm/76/76_1ruz.gif',
+    source: 'https://pdb101.rcsb.org/motm/76',
+    alt: 'Hemagglutinin illustration based on PDB 1ruz, with membrane-spanning region shown schematically.',
+    prompt:
+      'Compare the real molecular illustration with the synthetic chain lab. Identify which region is schematic rather than included in the deposited structure.',
+    author: 'David S. Goodsell and RCSB PDB, Molecule of the Month',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+  {
+    lessonId: 'prot-u5-l1',
+    section: 2,
+    title: 'Hemagglutinin rearrangement and membrane fusion',
+    src: 'https://cdn.rcsb.org/pdb101/motm/76/76_HA-action.gif',
+    source: 'https://pdb101.rcsb.org/motm/76',
+    alt: 'Sequence of hemagglutinin conformational changes associated with membrane fusion.',
+    prompt:
+      'Distinguish receptor attachment from membrane fusion and explain why one static conformation is incomplete.',
+    author: 'David S. Goodsell and RCSB PDB, Molecule of the Month',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+  },
+];

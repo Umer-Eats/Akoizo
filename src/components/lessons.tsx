@@ -16,6 +16,7 @@ import { LessonSectionVisuals } from './lesson-atlas';
 import { EvidenceWorkbench } from './evidence-workbench';
 import { ExperimentControls, TrialComparison, type LabTrial } from './lesson-experiments';
 import { SubjectExplorer } from './subject-explorer';
+import { LessonReferenceFigure } from './lesson-reference-figure';
 import { slotForEvent } from '@/lib/event-slots';
 import './lessons.css';
 
@@ -404,6 +405,11 @@ function LessonDetail({
               <p key={i}>{paragraph}</p>
             ))}
             <LessonSectionVisuals lesson={lesson} index={index} />
+            {lesson.referenceFigures
+              ?.filter((figure) => figure.section === index)
+              .map((figure) => (
+                <LessonReferenceFigure key={figure.src} figure={figure} />
+              ))}
             {index === 3 && lesson.simulation.kind === 'explorer' && (
               <SubjectExplorer sim={lesson.simulation} preview />
             )}

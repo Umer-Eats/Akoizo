@@ -1,4 +1,5 @@
 import type { EventLessons, Lesson, LessonSim } from './lessons';
+import { lessonReferenceFigures } from './lesson-reference-figures.ts';
 
 // Authoring helper only: all scientific explanations and questions are supplied per unit.
 export type UnitChapter = {
@@ -79,6 +80,7 @@ export function buildCourse(config: {
           : {}),
       })),
       extension: c.extension,
+      referenceFigures: lessonReferenceFigures.filter((figure) => figure.lessonId === id),
     };
   });
   return {

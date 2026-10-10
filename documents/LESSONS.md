@@ -1,12 +1,16 @@
 # Division C lessons
 
-The lesson catalog serves the Pink, Yellow, and Purple timeslots in Division C, except Engineering CAD. Division B and A remain outside this lesson rollout.
+The lesson catalog serves the Pink, Yellow, Purple, Blue, Green, and Orange timeslots in Division C, except Engineering CAD. Division B and A remain outside this lesson rollout.
 
 - Anatomy and Physiology: 10 units, 20 lessons, 140 practice questions.
 - Forensics: 9 units, 20 lessons, 140 practice questions. Includes the syllabus's integumentary-system, pollen/seed, and track topics.
 - Yellow: Codebusters (7 units), Remote Sensing (10), Disease Detectives (10).
 - Purple: Astronomy (8 units), Botany (10), Experimental Design (8).
-- The Yellow/Purple expansion adds 53 unit lessons and 371 practice questions, bringing the full catalog to 93 lessons and 651 practice questions. See [Yellow and Purple course coverage](YELLOW_PURPLE_LESSONS.md).
+- The Yellow/Purple expansion adds 53 unit lessons and 371 practice questions, bringing that rollout to 93 lessons and 651 practice questions. See [Yellow and Purple course coverage](YELLOW_PURPLE_LESSONS.md).
+- Blue: Chemistry Lab (9 units), Rocks & Minerals (8).
+- Green: Circuit Lab (10), Water Quality (9), Protein Modeling (8).
+- Orange: Designer Genes (10), Dynamic Planet (10), Thermodynamics (10).
+- The Blue/Green/Orange expansion adds 74 lessons and 518 questions: the full catalog now has **167 lessons and 1,169 practice questions**. See [Blue, Green, and Orange coverage](BLUE_GREEN_ORANGE_LESSONS.md) for eight new labs and 18 credited online figures.
 - Every lesson has developed text, learning objectives, key terms, a worked example with a revealable solution, an interactive model or evidence investigation, and seven practice questions.
 - These courses follow the supplied 2026 SciConnect syllabi. Their scope is intentionally distinguished from the application's tournament-year rulebooks. Anatomy Unit 10 retains its extension status.
 - Course metadata and displayed lesson content omit teacher names. All current lessons are explicitly text lessons; no empty video tabs are offered.

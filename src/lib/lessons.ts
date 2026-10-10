@@ -13,7 +13,21 @@ export type LessonQuizQuestion = {
 export type LessonSim =
   | {
       kind: 'explorer';
-      lab: 'cipher' | 'remote' | 'epidemiology' | 'astronomy' | 'botany' | 'experiment';
+      lab:
+        | 'cipher'
+        | 'remote'
+        | 'epidemiology'
+        | 'astronomy'
+        | 'botany'
+        | 'experiment'
+        | 'chemistry'
+        | 'minerals'
+        | 'circuits'
+        | 'water'
+        | 'protein'
+        | 'genetics'
+        | 'hydrology'
+        | 'thermodynamics';
       topic: number;
       title: string;
       instructions: string;
@@ -50,6 +64,18 @@ export type LessonSim =
       explanation: string;
     };
 
+export type LessonReferenceFigure = {
+  fallbackSrc?: string;
+  title: string;
+  src: string;
+  source: string;
+  alt: string;
+  prompt: string;
+  author: string;
+  license: string;
+  licenseUrl: string;
+};
+
 export type Lesson = {
   id: string;
   unitId: string;
@@ -63,6 +89,7 @@ export type Lesson = {
   practice: LessonQuizQuestion[];
   workedExample: { title: string; problem: string; steps: string[]; conclusion: string };
   extension?: boolean;
+  referenceFigures?: (LessonReferenceFigure & { section: number })[];
   visual?: {
     section: number;
     title: string;

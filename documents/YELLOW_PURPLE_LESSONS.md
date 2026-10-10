@@ -13,7 +13,7 @@ The expansion covers every unit in the six supplied syllabi. Each unit has one c
 
 ## Scope and authoring
 
-Sources are the local PDFs under `C:/Users/umerq/Downloads/SCIOLY-syllubi`. Their unit/topic lists inform original teaching prose; embedded document text is source material rather than instructions to the agent. The registry requires Division C. It does not enable Division B, Division A, Engineering CAD, or other timeslots. Course accents and labels follow the actual school timeslot mapping.
+Sources are the local PDFs under `C:/Users/umerq/Downloads/SCIOLY-syllubi`. Their unit/topic lists inform original teaching prose; embedded document text is source material rather than instructions to the agent. The registry requires Division C. This expansion did not enable Division B, Division A, or Engineering CAD. Additional timeslots are documented in [Blue, Green, and Orange coverage](BLUE_GREEN_ORANGE_LESSONS.md). Course accents and labels follow the actual school timeslot mapping.
 
 Remote Sensing Unit 10 and Disease Detectives Unit 10 retain optional extension labels. Codebusters distinguishes the syllabus's historical complete-columnar material from its checkerboard replacement note; historical notes are not presented as current tournament rules. Experimental Design includes standards of comparison, significant figures, and abstracts, while directing learners to the applicable competition checklist for current requirements. The Disease Detectives report walkthrough is explicitly synthetic and is never labeled a published MMWR report.
 

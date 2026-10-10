@@ -13,6 +13,24 @@
 .lessons-workspace[data-lesson-slot='purple'] {
   --lesson-pink: #b678ff;
 }
+.lessons-workspace[data-lesson-slot='blue'] {
+  --lesson-pink: #81bcff;
+}
+.lessons-workspace[data-lesson-slot='green'] {
+  --lesson-pink: #72d6a0;
+}
+.lessons-workspace[data-lesson-slot='orange'] {
+  --lesson-pink: #ffb570;
+}
+:root[data-theme='light'] .lessons-workspace[data-lesson-slot='blue'] {
+  --lesson-pink: #235fa1;
+}
+:root[data-theme='light'] .lessons-workspace[data-lesson-slot='green'] {
+  --lesson-pink: #197443;
+}
+:root[data-theme='light'] .lessons-workspace[data-lesson-slot='orange'] {
+  --lesson-pink: #a4510a;
+}
 :root[data-theme='light'] .lessons-workspace[data-lesson-slot='yellow'] {
   --lesson-pink: #906800;
 }

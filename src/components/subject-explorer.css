@@ -16,6 +16,15 @@
   font-size: 0.84rem;
   min-width: 0;
 }
+.subject-region-controls button[aria-pressed='true'] {
+  border-color: var(--lesson-pink);
+  color: var(--lesson-pink);
+}
+.online-reference .atlas-image-button img {
+  background: white;
+  max-height: 650px;
+  object-fit: contain;
+}
 .subject-explorer input:not([type='range']):not([type='checkbox']),
 .subject-explorer select,
 .subject-explorer textarea {
