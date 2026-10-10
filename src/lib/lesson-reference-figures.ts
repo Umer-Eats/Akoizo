@@ -1,10 +1,14 @@
 import type { LessonReferenceFigure } from './lessons';
+import { additionalLessonFigures } from './lesson-reference-expansion.ts';
+import { furtherLessonFigures } from './lesson-reference-further.ts';
 
 // Unmodified remote figures; captions and study prompts are original.
 export const lessonReferenceFigures: (LessonReferenceFigure & {
   lessonId: string;
   section: number;
 })[] = [
+  ...additionalLessonFigures,
+  ...furtherLessonFigures,
   {
     lessonId: 'chem-u2-l1',
     section: 2,

@@ -17,6 +17,8 @@ The lesson catalog serves the Pink, Yellow, Purple, Blue, Green, and Orange time
 
 ## Implementation
 
+The [external figure expansion](LESSON_IMAGE_EXPANSION.md) and [further diagrams](MORE_LESSON_DIAGRAMS.md) add 72 images and diagrams discovered with Firecrawl, bringing the reference catalog to 90 figures across all 16 Division C courses. Each has a lesson-specific interpretation prompt, source credits, reuse terms, and an enlargement viewer.
+
 `src/lib/lessons-anatomy.ts` and `src/lib/lessons-forensics.ts` contain the complete authorable course data. `lessonsForEvent(eventId, division)` enforces Division C availability. The event dashboard passes the authenticated student ID to the lesson workspace.
 
 `src/lib/lesson-models.ts` contains ten bounded numerical teaching models: feedback correction, airway resistance, ventilation/dead space, diffusion, lactose substrate balance, illustrative immune memory, density/buoyancy, chromatography, ideal stain angle, and thermal accumulation. Each exposes its equation and assumptions. Model outputs are not clinical predictions or complete forensic reconstructions. A temporary six-trial notebook supports comparison within the open lesson.

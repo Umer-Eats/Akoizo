@@ -5,6 +5,8 @@ import { yellowPurpleCourses } from '../src/lib/lessons-yellow-purple.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { eventSlots } from '../src/lib/event-slots.ts';
 import { lessonReferenceFigures } from '../src/lib/lesson-reference-figures.ts';
+import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
+import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
 import {
   strongTitration,
   gasProcess,
@@ -102,16 +104,24 @@ test('all 74 blue/green/orange units are distinct, substantive Division C lesson
     assert(courses.find((c) => c.eventId === id)?.lessons.at(-1)?.extension);
 });
 test('online figures have verified source, credit, license, original reading prompt and valid lesson placement', () => {
-  assert.equal(lessonReferenceFigures.length, 18);
-  const ids = new Set(courses.flatMap((c) => c.lessons.map((l) => l.id)));
+  assert.equal(lessonReferenceFigures.length, 90);
+  const allCourses = [...courses, ...yellowPurpleCourses, anatomyLessons, forensicsLessons];
+  const lessons = new Map(allCourses.flatMap((c) => c.lessons.map((l) => [l.id, l] as const)));
+  for (const course of allCourses)
+    assert(
+      lessonReferenceFigures.some((f) => course.lessons.some((l) => l.id === f.lessonId)),
+      course.eventId,
+    );
   for (const f of lessonReferenceFigures) {
-    assert(ids.has(f.lessonId));
-    assert.equal(f.section, 2);
+    const lesson = lessons.get(f.lessonId);
+    assert(lesson, f.lessonId);
+    assert(Number.isInteger(f.section) && f.section >= 0 && f.section < lesson.sections.length);
     for (const key of ['src', 'source', 'licenseUrl'] as const)
       assert(new URL(f[key]).protocol === 'https:');
     assert(f.author && f.alt.length > 30 && f.prompt.length > 50);
   }
-  assert.equal(new Set(lessonReferenceFigures.map((f) => f.src)).size, 18);
+  assert.equal(new Set(lessonReferenceFigures.map((f) => f.src)).size, 90);
+  assert.equal(new Set(lessonReferenceFigures.map((f) => f.prompt)).size, 90);
 });
 test('titration covers acid, equivalence, base and finite concentrations without cancellation', () => {
   assert(Math.abs(strongTitration(0, 0.1).ph - 1) < 1e-10);

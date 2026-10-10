@@ -17,6 +17,7 @@ import { EvidenceWorkbench } from './evidence-workbench';
 import { ExperimentControls, TrialComparison, type LabTrial } from './lesson-experiments';
 import { SubjectExplorer } from './subject-explorer';
 import { LessonReferenceFigure } from './lesson-reference-figure';
+import { lessonReferenceFigures } from '@/lib/lesson-reference-figures';
 import { slotForEvent } from '@/lib/event-slots';
 import './lessons.css';
 
@@ -405,8 +406,11 @@ function LessonDetail({
               <p key={i}>{paragraph}</p>
             ))}
             <LessonSectionVisuals lesson={lesson} index={index} />
-            {lesson.referenceFigures
-              ?.filter((figure) => figure.section === index)
+            {(
+              lesson.referenceFigures ??
+              lessonReferenceFigures.filter((figure) => figure.lessonId === lesson.id)
+            )
+              .filter((figure) => figure.section === index)
               .map((figure) => (
                 <LessonReferenceFigure key={figure.src} figure={figure} />
               ))}
