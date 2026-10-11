@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import '@fontsource-variable/manrope';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource/ibm-plex-mono/400.css';
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
