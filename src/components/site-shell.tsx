@@ -44,6 +44,9 @@ export function Header() {
           </Link>
         ) : (
           <nav className="desktop-nav" aria-label="Main navigation">
+            <Link className={path === '/study-tools' ? 'active' : ''} href="/study-tools">
+              Study Tools
+            </Link>
             <Link className={path === '/rankings' ? 'active' : ''} href="/rankings">
               Global Rankings
             </Link>
@@ -96,6 +99,7 @@ export function Header() {
         </div>
         {open && (
           <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation">
+            <Link href="/study-tools">Study Tools</Link>
             <Link href="/rankings">Global Rankings</Link>
             <Link href="/mission">Mission</Link>
             {profile ? (
@@ -138,6 +142,7 @@ export function Footer() {
         </Link>
         <p>Free to learn. Room to grow.</p>
         <div>
+          <Link href="/study-tools">Science Olympiad study tools</Link>
           <Link href="/mission">Our mission</Link>
           <Link href="/rankings">Rankings</Link>
         </div>

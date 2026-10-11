@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { Orbit, Reveal } from '@/components/art';
-export const metadata: Metadata = { title: 'Our Mission' };
+export const metadata = pageMetadata('/mission');
 export default function Page() {
   const values = [
     [

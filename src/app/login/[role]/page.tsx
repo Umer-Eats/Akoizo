@@ -7,7 +7,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ role: string }> }) {
   const { role } = await params;
-  return { title: role === 'instructor' ? 'Instructor login' : 'Student login' };
+  return {
+    title: role === 'instructor' ? 'Instructor login' : 'Student login',
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function AuthPage({ params }: { params: Promise<{ role: string }> }) {

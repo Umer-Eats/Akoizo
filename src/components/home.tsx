@@ -34,16 +34,16 @@ export function Home() {
             <span>Go further.</span>
           </h2>
           <p>
-            Science Olympiad preparation. Built for focus.
-            <br className="desktop-only" /> Study with purpose. Practice with precision. Always
-            free.
+            Free Science Olympiad study tools from Akoizo.
+            <br className="desktop-only" /> Prepare with event lessons, practice tests, and your
+            school community.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="/login/student">
               Find your starting point <span aria-hidden="true">↗</span>
             </Link>
-            <Link className="hero-explore-link" href="/dashboard/student">
-              Explore the lab <span aria-hidden="true">↗</span>
+            <Link className="hero-explore-link" href="/study-tools">
+              Explore study tools <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <div className="hero-access">
@@ -137,8 +137,8 @@ export function Home() {
             of the science.
           </h2>
           <p>
-            From your first “why?” to your next “I get it.” Explore lessons built around your event,
-            at your pace.
+            From your first “why?” to your next “I get it.” Explore Science Olympiad lessons built
+            around your event, at your pace.
           </p>
           <Link href="/dashboard/student" className="text-link">
             Explore the study space <span>↗</span>

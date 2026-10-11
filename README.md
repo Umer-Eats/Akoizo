@@ -13,6 +13,8 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 - `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
 - `/rankings`: earned points only, using generated public learner names. Empty until ranked tests launch.
 - `/` and `/mission`: public landing and mission pages.
+- `/study-tools`: public Science Olympiad study-tools guide and division event catalog.
+- `/sitemap.xml` and `/robots.txt`: generated crawler files for Google Search Console; see [SEO setup](documents/SEO.md).
 
 Instructor enrollment checks the private invitation setting before creating school membership. Successful signup generates a random school name and joining password. Students must supply that password before accessing a dashboard. The instructor can generate a replacement password; existing students stay enrolled. School passwords are stored as salted hashes and only shown in the session that creates them.
 
