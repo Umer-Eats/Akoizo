@@ -1,10 +1,16 @@
 import type { EventExtras, LessonExtras } from '../lesson-extras.ts';
 import type { TopicLab } from '../topic-lab-kit.ts';
 import { astronomyExtras } from './astronomy.ts';
+import { chemistryLabExtras } from './chemistry-lab.ts';
+import { circuitLabExtras } from './circuit-lab.ts';
+import { designerGenesExtras } from './designer-genes.ts';
 import { thermodynamicsExtras } from './thermodynamics.ts';
 
 export const eventExtras: EventExtras[] = [
   astronomyExtras,
+  chemistryLabExtras,
+  circuitLabExtras,
+  designerGenesExtras,
   thermodynamicsExtras,
 ];
 export const topicLabs: Record<string, TopicLab> = Object.fromEntries(

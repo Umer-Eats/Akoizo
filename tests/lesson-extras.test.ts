@@ -50,7 +50,9 @@ function assertFinite(lab: TopicLab, values: LabValues, context: string) {
 test('every topic lab is finite across its control range and every goal is reachable but not pre-solved', () => {
   const labs = Object.values(topicLabs);
   assert.equal(labs.length, eventExtras.reduce((n, e) => n + e.labs.length, 0), 'lab ids are unique');
-  for (const lab of labs) {
+  // Report every faulty lab at once rather than stopping at the first.
+  const problems: string[] = [];
+  for (const lab of labs) try {
     assert(lab.title.length > 8 && lab.lead.length > 40 && lab.model.length > 60, lab.id);
     assert(lab.controls.length >= 1 && lab.controls.length <= 5, lab.id);
     assert.equal(new Set(lab.controls.map((c) => c.key)).size, lab.controls.length, lab.id);
@@ -77,7 +79,7 @@ test('every topic lab is finite across its control range and every goal is reach
     assertFinite(lab, extremes(() => Number.NaN), 'non-finite input');
     assert(lab.missions.length >= 2 && lab.missions.length <= 4, lab.id);
     for (const mission of lab.missions) {
-      assert(mission.goal.length > 25 && mission.hint.length > 15, `${lab.id} mission text`);
+      assert(mission.goal.length > 25 && mission.hint.length > 15, `${lab.id} mission text: ${mission.goal} / ${mission.hint}`);
       const start = runLab(lab, defaults);
       assert(!mission.done(start.o, defaults), `${lab.id}: "${mission.goal}" is already met at the defaults`);
       const solved = clampValues(lab, { ...defaults, ...mission.at });
@@ -95,7 +97,10 @@ test('every topic lab is finite across its control range and every goal is reach
     const { options, correct, q, why } = lab.predict;
     assert(options.length >= 3 && new Set(options).size === options.length && options[correct], lab.id);
     assert(q.length > 30 && why.length > 50, `${lab.id} prediction`);
+  } catch (error) {
+    problems.push((error as Error).message);
   }
+  assert.deepEqual(problems, []);
 });
 
 test('all sixteen Division C courses receive lesson-specific labs, activities, and checks', () => {

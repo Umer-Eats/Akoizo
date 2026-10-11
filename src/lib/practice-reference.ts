@@ -47,7 +47,7 @@ const schema = {
 
 export async function generatePracticeReferences(test: PracticeTest, config: PracticeAIConfig) {
   const apiKey = config.apiKey ?? process.env.GEMINI_API_KEY;
-  const model = config.model ?? process.env.GEMINI_MODEL ?? 'gemini-3.5-flash';
+  const model = config.model ?? process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite';
   if (!apiKey?.trim() || !/^gemini-[a-zA-Z0-9.-]+$/.test(model))
     throw new Error('Auto Grade unavailable');
   const keys: Record<string, QuestionKey> = {};

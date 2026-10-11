@@ -29,7 +29,7 @@ For clearly incorrect, irrelevant, or instruction-only answers return earned=0 a
 Return every supplied question/criterion pair exactly once, with a short explanation of the credit awarded or missing scientific detail.
 Never reproduce student personal information in feedback. This is practice feedback, not a school grade.`;
 
-/** Deterministic grading runs first; explicit Auto Grade can recheck all nonblank written answers. */
+/** Grade unresolved written criteria after the student explicitly requests Auto Grade. */
 export async function gradeWrittenWithGemini(
   test: PracticeTest,
   initial: GradedResult,
@@ -38,15 +38,19 @@ export async function gradeWrittenWithGemini(
   if (!initial.pendingPoints && !config.reviewAll) return initial;
   const apiKey = config.apiKey ?? process.env.GEMINI_API_KEY;
   if (!apiKey?.trim()) return { ...initial, automaticGrading: 'unavailable' };
-  const model = config.model ?? process.env.GEMINI_MODEL ?? 'gemini-3.5-flash';
+  const model = config.model ?? process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite';
   if (!/^gemini-[a-zA-Z0-9.-]+$/.test(model))
     return { ...initial, automaticGrading: 'unavailable' };
   const items = initial.questions.flatMap((q) => {
     const question = test.questions.find((candidate) => candidate.id === q.id)!;
     if (question.type !== 'frq' || !q.answer.trim() || !test.keys[q.id]) return [];
     return q.criteria
-      .filter((c) => c.points > 0 && (c.needsReview || config.reviewAll) &&
-        !test.keys[q.id].criteria!.find(criterion => criterion.id === c.id)?.cipher)
+      .filter(
+        (c) =>
+          c.points > 0 &&
+          (c.needsReview || config.reviewAll) &&
+          !test.keys[q.id].criteria!.find((criterion) => criterion.id === c.id)?.cipher,
+      )
       .map((c) => ({
         questionId: q.id,
         criterionId: c.id,
@@ -197,7 +201,8 @@ export async function autoGradePracticeResult(
 ): Promise<PracticeResult> {
   const options = {
     ...config,
-    reviewAll: true,
+    // Preserve free exact/numeric grades; send only unresolved written criteria.
+    reviewAll: false,
     signal: config.signal ?? AbortSignal.timeout(50_000),
   };
   try {

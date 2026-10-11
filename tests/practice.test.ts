@@ -443,6 +443,72 @@ function modelResponse(value: unknown) {
   );
 }
 
+test('submitting with Gemini configured uses only free grading until Auto Grade is clicked', async (t) => {
+  const { raw, db, student } = await setup();
+  const previousKey = process.env.GEMINI_API_KEY;
+  process.env.GEMINI_API_KEY = 'test-key';
+  let calls = 0;
+  t.mock.method(globalThis, 'fetch', async () => {
+    calls++;
+    throw new Error('Submitting must not call Gemini');
+  });
+  try {
+    const saved = await submitPractice(db, student, {
+      testId: 'ut-austin-2014-heredity-b',
+      submissionId: randomUUID(),
+      answers: {
+        '1': 'E',
+        '26': 'My explanation\nwith original spacing.  ',
+        '28': 'Autosomal dominant',
+      },
+    });
+    assert.equal(calls, 0);
+    assert.equal(saved.score, 7.5);
+    assert.equal(saved.pendingPoints, 5);
+    assert.equal(
+      saved.questions.find((q) => q.id === '26')!.answer,
+      'My explanation\nwith original spacing.  ',
+    );
+    assert.equal(saved.questions.find((q) => q.id === '28')!.earned, 5);
+    assert.equal(saved.autoGradedAt, undefined);
+  } finally {
+    if (previousKey === undefined) delete process.env.GEMINI_API_KEY;
+    else process.env.GEMINI_API_KEY = previousKey;
+    raw.close();
+  }
+});
+
+test('Auto Grade spends no tokens when the free grader has resolved every answer', async () => {
+  const { raw, db, student } = await setup();
+  try {
+    const saved = await submitPractice(db, student, {
+      testId: 'ut-austin-2014-heredity-b',
+      submissionId: randomUUID(),
+      answers: { '1': 'E', '28': 'Autosomal dominant' },
+    });
+    assert.equal(saved.pendingPoints, 0);
+    let calls = 0;
+    const graded = await autoGradePractice(
+      db,
+      student,
+      { id: saved.id },
+      {
+        apiKey: '',
+        fetcher: (async () => {
+          calls++;
+          throw new Error('Resolved answers must not call Gemini');
+        }) as typeof fetch,
+      },
+    );
+    assert.equal(calls, 0);
+    assert.equal(graded.score, saved.score);
+    assert.ok(graded.autoGradedAt);
+    assert.equal(graded.automaticGrading, 'complete');
+  } finally {
+    raw.close();
+  }
+});
+
 test('Auto Grade updates the owned saved attempt once without granting more credit', async () => {
   const { raw, db, teacher, student, peer } = await setup();
   try {
@@ -498,8 +564,8 @@ test('Auto Grade updates the owned saved attempt once without granting more cred
           original,
         );
         assert.ok(
-          data.criteria.some((q: { questionId: string }) => q.questionId === '28'),
-          'Auto Grade rechecks written answers, including earlier exact matches',
+          !data.criteria.some((q: { questionId: string }) => q.questionId === '28'),
+          'Auto Grade preserves exact matches without spending tokens to recheck them',
         );
         assert.doesNotMatch(String(options.body), /studentId|studentName|schoolId|forged/);
         return modelResponse({

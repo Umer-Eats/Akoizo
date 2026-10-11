@@ -2,11 +2,7 @@ import { createHash } from 'node:crypto';
 import { AppError, eventKey, type Profile } from './domain.ts';
 import { findPracticeTest, practiceTests } from './practice-catalog.ts';
 import { gradePractice, validateAnswers } from './practice-grading.ts';
-import {
-  autoGradePracticeResult,
-  gradeWrittenWithGemini,
-  type PracticeAIConfig,
-} from './practice-ai.ts';
+import { autoGradePracticeResult, type PracticeAIConfig } from './practice-ai.ts';
 import { practiceTitle, type PracticeResult, type PracticeReview } from './practice-types.ts';
 import type { Database } from './school-service.ts';
 
@@ -38,9 +34,7 @@ export async function submitPractice(
   const now = new Date().toISOString();
   const initial = gradePractice(test, answers);
   const result: PracticeResult = {
-    ...(test.gradingMode === 'ai-generated'
-      ? initial
-      : await gradeWrittenWithGemini(test, initial)),
+    ...initial,
     id,
     completedAt: now,
   };
