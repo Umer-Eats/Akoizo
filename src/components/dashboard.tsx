@@ -47,6 +47,7 @@ import { LessonsView } from './lessons';
 import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
+import { DivisionCLabs } from './division-c-labs';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -867,10 +868,12 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   }
   const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
   const course = toolId === 'lessons' ? lessonsForEvent(event.id, division) : null;
+  const hasDivisionCLabs =
+    division === 'C' && (toolId === 'lab-practice' || toolId === 'lab-generator');
   return (
     <main
       id="main"
-      className={`page-container event-workspace${course ? ' event-with-lessons' : ''}`}
+      className={`page-container event-workspace${course ? ' event-with-lessons' : ''}${hasDivisionCLabs ? ' event-with-archive-labs' : ''}`}
     >
       <div className="event-workspace-grid">
         <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
@@ -904,6 +907,13 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
           </div>
           {toolId === 'practice-tests' ? (
             <PracticeLibrary eventId={event.id} />
+          ) : hasDivisionCLabs ? (
+            <DivisionCLabs
+              key={`${profile!.id}:${division}:${event.id}`}
+              eventId={event.id}
+              eventName={event.name}
+              studentId={profile!.id}
+            />
           ) : toolId === 'lessons' && course ? (
             <LessonsView
               key={`${profile!.id}:${division}:${course.eventId}`}

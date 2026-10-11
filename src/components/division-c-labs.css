@@ -1,0 +1,476 @@
+.archive-labs {
+  --lesson-pink: var(--accent);
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+.archive-labs [hidden] {
+  display: none;
+}
+.archive-labs h2 {
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  margin: 8px 0 12px;
+}
+.archive-labs h3 {
+  font-size: 1.05rem;
+  margin: 6px 0 16px;
+}
+.archive-labs p,
+.archive-labs li {
+  line-height: 1.7;
+}
+.archive-labs p {
+  color: var(--muted);
+}
+.archive-labs .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.archive-overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--surface);
+}
+.archive-overview p {
+  margin-bottom: 0;
+  max-width: 700px;
+}
+.archive-lab-count {
+  display: grid;
+  text-align: center;
+  gap: 8px;
+  font-size: 3rem;
+  color: var(--accent);
+}
+.archive-lab-count small {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.archive-view-switch,
+.archive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.archive-view-switch {
+  border-bottom: 1px solid var(--line-strong);
+}
+.archive-view-switch button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+.archive-view-switch button[aria-pressed='true'] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.archive-lab-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.archive-lab-picker button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  padding: 20px;
+  text-align: left;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  font: inherit;
+  cursor: pointer;
+}
+.archive-lab-picker button[aria-pressed='true'] {
+  border-color: var(--accent);
+  box-shadow: inset 3px 0 var(--accent);
+}
+.archive-lab-picker span {
+  grid-row: span 2;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.archive-lab-picker small {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+.archive-lab-station {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+.archive-lab-heading,
+.archive-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.archive-lab-heading .tag {
+  white-space: nowrap;
+}
+.archive-source {
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.archive-labs summary {
+  cursor: pointer;
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+.archive-source summary svg {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.archive-source p {
+  font-size: 0.82rem;
+}
+.archive-source a,
+.archive-phet a {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+.archive-procedure {
+  padding: 22px;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.archive-procedure ol {
+  padding-left: 22px;
+  margin-bottom: 0;
+}
+.archive-procedure li {
+  padding-left: 6px;
+  margin-bottom: 10px;
+  font-size: 0.86rem;
+}
+.archive-writing {
+  display: grid;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+.archive-labs textarea,
+.archive-labs select,
+.archive-labs input:not([type='range']) {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--bg);
+  font: inherit;
+}
+.archive-labs textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+.archive-workbench {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.6fr);
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.archive-controls {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  padding: 24px;
+  background: var(--surface);
+  border-right: 1px solid var(--line-strong);
+}
+.archive-controls .eyebrow,
+.archive-controls h3 {
+  margin: 0;
+}
+.archive-controls .subject-slider {
+  display: grid;
+  gap: 6px;
+  font-size: 0.78rem;
+}
+.archive-instrument {
+  padding: 24px;
+  min-width: 0;
+}
+.archive-bench-diagram,
+.archive-response-plot svg {
+  width: 100%;
+  display: block;
+  color: var(--text);
+}
+.archive-bench-diagram text,
+.archive-response-plot text {
+  fill: currentColor;
+  font: 12px var(--font-body);
+}
+.bench-outline {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+}
+.bench-wire {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+}
+.bench-ray {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.bench-solid {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.bench-dashed {
+  fill: none;
+  stroke: var(--muted);
+  stroke-dasharray: 4 5;
+  opacity: 0.5;
+}
+.archive-readings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.archive-readings > div {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+}
+.archive-readings span {
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+.archive-readings strong {
+  font-size: 1.05rem;
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.archive-readings small {
+  font-size: 0.65rem;
+  font-weight: normal;
+}
+.archive-response-plot label {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 0.8rem;
+}
+.archive-response-plot select {
+  width: auto;
+}
+.archive-response-plot small,
+.archive-notebook > small {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.archive-labs .archive-model-note {
+  font-size: 0.75rem;
+  margin: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--line-strong);
+}
+.archive-notebook,
+.archive-analysis,
+.archive-phet {
+  padding: 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  min-width: 0;
+}
+.archive-section-heading h3 span {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: normal;
+}
+.archive-table-scroll {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+.archive-table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.78rem;
+}
+.archive-table-scroll caption {
+  text-align: left;
+  padding-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+.archive-table-scroll th,
+.archive-table-scroll td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line-strong);
+  min-width: 110px;
+}
+.archive-table-scroll thead {
+  background: var(--surface);
+}
+.archive-notebook > small {
+  margin-top: 16px;
+}
+.archive-analysis form {
+  display: flex;
+  align-items: end;
+  gap: 16px;
+  margin: 20px 0;
+}
+.archive-analysis form label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.8rem;
+  flex: 1;
+  max-width: 380px;
+}
+.archive-analysis .archive-writing {
+  margin-top: 24px;
+}
+.archive-labs .archive-feedback {
+  color: var(--text);
+  padding: 14px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+}
+.archive-phet iframe {
+  width: 100%;
+  height: min(700px, 75vh);
+  min-height: 420px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: white;
+  margin: 24px 0;
+}
+.archive-phet .archive-model-note {
+  margin-top: 24px;
+}
+.archive-labs button:focus-visible,
+.archive-labs a:focus-visible,
+.archive-labs summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+@media (max-width: 1100px) {
+  .archive-workbench {
+    grid-template-columns: 1fr;
+  }
+  .archive-controls {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .archive-controls .eyebrow,
+  .archive-controls h3,
+  .archive-controls .archive-actions {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  .event-with-archive-labs .event-workspace-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .event-with-archive-labs .event-sidebar {
+    position: static;
+    border-right: 0;
+    padding: 0 0 16px;
+    min-width: 0;
+  }
+  .event-with-archive-labs .event-sidebar h2,
+  .event-with-archive-labs .event-sidebar-note {
+    display: none;
+  }
+  .event-with-archive-labs .event-feature-nav {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+  .event-with-archive-labs .event-feature-link {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 12px;
+  }
+  .archive-overview {
+    padding: 20px;
+  }
+  .archive-lab-count {
+    display: none;
+  }
+  .archive-lab-picker {
+    grid-template-columns: 1fr;
+  }
+  .archive-lab-heading,
+  .archive-section-heading {
+    flex-direction: column;
+  }
+  .archive-controls {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+  .archive-instrument {
+    padding: 12px;
+  }
+  .archive-readings {
+    grid-template-columns: 1fr;
+  }
+  .archive-readings > div {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .archive-analysis,
+  .archive-notebook,
+  .archive-phet {
+    padding: 18px;
+  }
+  .archive-analysis form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .archive-bench-diagram,
+  .archive-response-plot svg {
+    min-width: 460px;
+  }
+  .archive-instrument {
+    overflow-x: auto;
+  }
+  .archive-view-switch button {
+    padding: 12px;
+    font-size: 0.82rem;
+  }
+}

@@ -6,7 +6,8 @@ import { validatePracticeCatalog } from '../src/lib/practice-catalog.ts';
 
 const [manifestPath, ...args] = process.argv.slice(2);
 const fromReview = args.includes('--from-review');
-const selected = args.filter(arg => arg !== '--from-review');
+const skipExisting = args.includes('--skip-existing');
+const selected = args.filter(arg => !['--from-review', '--skip-existing'].includes(arg));
 if (!manifestPath) throw new Error('Provide a reviewed source manifest.');
 const sources = JSON.parse(await readFile(manifestPath, 'utf8')).filter(s => !selected.length || selected.includes(s.id));
 const model = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
@@ -34,6 +35,10 @@ Compare topics with the supplied 2027 rules; current means same subject rotation
 async function convert(source) {
   if (!/^[a-z0-9-]+$/.test(source.id)) throw new Error('Invalid source ID');
   try {
+    if (skipExisting) {
+      const saved = await readFile(`${drafts}/${source.id}.json`, 'utf8').catch(() => null);
+      if (saved) { validatePracticeCatalog([JSON.parse(saved)]); return; }
+    }
     let draft;
     if (fromReview) {
       draft = JSON.parse(await readFile(`${drafts}/${source.id}.review.json`, 'utf8'));
@@ -47,7 +52,7 @@ async function convert(source) {
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
       body: JSON.stringify({ systemInstruction: { parts: [{ text: instruction }] }, contents: [{ role: 'user', parts }],
         generationConfig: { temperature: 0, maxOutputTokens: 50000, responseMimeType: 'application/json',
-          ...(model === 'gemini-3.5-flash' ? {thinkingConfig:{thinkingLevel:'low'}} : {}) } }),
+          ...(/^gemini-3[.-]/.test(model) ? {thinkingConfig:{thinkingLevel:'low'}} : {}) } }),
     });
     if (!response.ok) {
       if (response.status === 429) rateLimited = true;
@@ -81,4 +86,5 @@ async function convert(source) {
 }
 // Keep API usage and local draft writes bounded. No production records are touched.
 let rateLimited = false;
-for (let i=0;i<sources.length && !rateLimited;i+=2) await Promise.all(sources.slice(i,i+2).map(convert));
+const concurrency = Math.min(2, Math.max(1, Number(process.env.PRACTICE_BATCH_CONCURRENCY) || 2));
+for (let i=0;i<sources.length && !rateLimited;i+=concurrency) await Promise.all(sources.slice(i,i+concurrency).map(convert));

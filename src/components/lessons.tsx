@@ -19,6 +19,10 @@ import { SubjectExplorer } from './subject-explorer';
 import { LessonReferenceFigure } from './lesson-reference-figure';
 import { lessonReferenceFigures } from '@/lib/lesson-reference-figures';
 import { slotForEvent } from '@/lib/event-slots';
+import { extrasFor, topicLabs } from '@/lib/extras';
+import { LessonActivities, InlineCheck } from './lesson-activities';
+import { TopicLabPreview, TopicLabView } from './topic-lab';
+import { PhetSim } from './phet-sim';
 import './lessons.css';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
@@ -372,6 +376,10 @@ function LessonDetail({
   attempt: LessonAttempt;
   onChange: (attempt: LessonAttempt) => void;
 }) {
+  const extras = extrasFor(lesson.id);
+  const labs = (extras.labs ?? []).map((id) => topicLabs[id]).filter(Boolean);
+  const phetSims = extras.phet ?? [];
+  const hasLessonLabs = labs.length + phetSims.length > 0;
   return (
     <article className="lesson-detail" aria-labelledby="current-lesson-title">
       <header className="lesson-title-block">
@@ -385,7 +393,9 @@ function LessonDetail({
         <nav className="lesson-jumps" aria-label="Jump within this lesson">
           <a href="#lesson-reading">Read</a>
           <a href="#lesson-example">Worked example</a>
-          <a href="#lesson-lab">Interactive lab</a>
+          <a href="#lesson-activities">Activities</a>
+          {hasLessonLabs && <a href="#lesson-topic-labs">Lesson labs</a>}
+          <a href="#lesson-lab">{hasLessonLabs ? 'Course lab' : 'Interactive lab'}</a>
           <a href="#lesson-practice">Practice assignment</a>
         </nav>
       </header>
@@ -417,6 +427,12 @@ function LessonDetail({
             {index === 3 && lesson.simulation.kind === 'explorer' && (
               <SubjectExplorer sim={lesson.simulation} preview />
             )}
+            {index === 4 && labs[0] && <TopicLabPreview lab={labs[0]} />}
+            {(extras.checks ?? [])
+              .filter((item) => item.after === index)
+              .map((item) => (
+                <InlineCheck key={item.q} check={item} />
+              ))}
           </section>
         ))}
       </div>
@@ -447,6 +463,26 @@ function LessonDetail({
           ))}
         </dl>
       </details>
+      <LessonActivities lesson={lesson} sortActivity={extras.sort} />
+      {hasLessonLabs && (
+        <section id="lesson-topic-labs" className="lesson-labs" aria-labelledby="lesson-labs-title">
+          <p className="eyebrow">
+            <FlaskConical size={16} aria-hidden="true" /> LESSON LABS · {labs.length + phetSims.length}{' '}
+            FOR THIS UNIT
+          </p>
+          <h3 id="lesson-labs-title">Investigate this lesson’s ideas</h3>
+          <p>
+            Predict first, then test. Each lab tracks goals you reach by changing its variables;
+            nothing here is graded, and lab state resets when you leave the lesson.
+          </p>
+          {labs.map((lab) => (
+            <TopicLabView key={lab.id} lab={lab} />
+          ))}
+          {phetSims.map((embed) => (
+            <PhetSim key={embed.sim} embed={embed} lessonId={lesson.id} />
+          ))}
+        </section>
+      )}
       <SimView sim={lesson.simulation} lessonId={lesson.id} />
       <QuizView lesson={lesson} attempt={attempt} onChange={onChange} />
     </article>
