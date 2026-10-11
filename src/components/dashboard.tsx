@@ -649,7 +649,9 @@ export function SchoolPanel() {
               Student joining password
               <textarea readOnly value={credentials.joiningPassword} rows={2} />
             </label>
-            <p className="source-note">Save this password now. It is only shown in this session.</p>
+            <p className="source-note">
+              All instructors at your campus share this password and roster.
+            </p>
             <div className="account-actions">
               <button className="button button-small button-primary" onClick={copy}>
                 {copied ? <Check size={15} /> : <Copy size={15} />}
@@ -669,10 +671,10 @@ export function SchoolPanel() {
         ) : (
           <>
             <button className="button button-glass" disabled={busy} onClick={rotate}>
-              {busy ? 'Creating…' : 'Create new joining password'}
+              {busy ? 'Loading…' : 'Show student joining password'}
             </button>
             <p className="source-note">
-              Replaces the previous joining password. Existing students stay enrolled.
+              Shows your campus password. Existing students stay enrolled.
             </p>
           </>
         )}

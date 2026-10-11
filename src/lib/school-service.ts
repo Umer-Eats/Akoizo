@@ -18,6 +18,7 @@ import { type Division } from './events.ts';
 import { getSchoolCommunity } from './school-communities.ts';
 import {
   equalSecret,
+  campusFromPassword,
   hashSchoolPassword,
   makeSchoolPassword,
   schoolIdFromPassword,
@@ -83,12 +84,20 @@ export async function checkEnrollment(db: Database, data: Enrollment, invite: st
   }
   const password = data.schoolPassword?.trim() || '';
   const id = schoolIdFromPassword(password);
+  const campus = campusFromPassword(password);
   const school = id
     ? await db.get(
         'SELECT id,name,password_hash FROM schools WHERE id=? AND id NOT IN (SELECT school_id FROM closed_communities)',
         id,
       )
-    : undefined;
+    : campus
+      ? await db.get(
+          `SELECT s.id,s.name,s.password_hash FROM schools s JOIN school_communities sc ON sc.school_id=s.id
+          WHERE sc.community_id=? AND s.id NOT IN (SELECT school_id FROM closed_communities)
+          ORDER BY s.created_at,s.id LIMIT 1`,
+          campus,
+        )
+      : undefined;
   if (!school || !verifySchoolPassword(password, String(school.password_hash)))
     throw new AppError(
       403,
@@ -119,21 +128,30 @@ export async function registerMember(
   if (data.role === 'instructor') {
     const schoolId = randomUUID();
     const schoolName = `School-${randomBytes(5).toString('hex').toUpperCase()}`;
-    const joiningPassword = makeSchoolPassword(schoolId);
+    const joiningPassword = makeSchoolPassword(schoolId, data.schoolCommunityId);
     const created = await db.batch(
       [
         {
-          sql: 'INSERT INTO schools (id,name,password_hash) VALUES (?,?,?)',
-          args: [schoolId, schoolName, hashSchoolPassword(joiningPassword)],
+          sql: `INSERT INTO schools (id,name,password_hash) SELECT ?,?,? WHERE NOT EXISTS (
+            SELECT 1 FROM school_communities WHERE community_id=? AND school_id NOT IN (SELECT school_id FROM closed_communities))`,
+          args: [
+            schoolId,
+            schoolName,
+            hashSchoolPassword(joiningPassword),
+            data.schoolCommunityId!,
+          ],
         },
         {
-          sql: 'INSERT INTO school_communities (school_id,community_id) VALUES (?,?)',
-          args: [schoolId, data.schoolCommunityId!],
+          sql: 'INSERT INTO school_communities (school_id,community_id) SELECT id,? FROM schools WHERE id=?',
+          args: [data.schoolCommunityId!, schoolId],
         },
         {
-          sql: `INSERT INTO users (id,firebase_uid,email,display_name,role,school_id,division) VALUES (?,?,?,?,?,?,NULL) ON CONFLICT(firebase_uid) DO UPDATE SET school_id=excluded.school_id,display_name=excluded.display_name
+          sql: `INSERT INTO users (id,firebase_uid,email,display_name,role,school_id,division)
+            SELECT ?,?,?,?,'instructor',s.id,NULL FROM schools s JOIN school_communities sc ON sc.school_id=s.id
+            WHERE sc.community_id=? AND s.id NOT IN (SELECT school_id FROM closed_communities) ORDER BY s.created_at,s.id LIMIT 1
+            ON CONFLICT(firebase_uid) DO UPDATE SET school_id=excluded.school_id,display_name=excluded.display_name
             WHERE users.role=excluded.role AND (users.id IN (SELECT user_id FROM departed_members) OR users.school_id IN (SELECT school_id FROM closed_communities))`,
-          args: [id, identity.uid, identity.email, data.displayName, 'instructor', schoolId],
+          args: [id, identity.uid, identity.email, data.displayName, data.schoolCommunityId!],
         },
         { sql: 'DELETE FROM departed_members WHERE user_id=?', args: [id] },
         {
@@ -149,9 +167,10 @@ export async function registerMember(
     );
     if (!created[2].rowsAffected)
       throw new AppError(409, 'Your enrollment changed. Refresh to see your current community.');
+    const profile = (await profileForUid(db, identity.uid))!;
     return {
-      profile: (await profileForUid(db, identity.uid))!,
-      credentials: { schoolName, joiningPassword },
+      profile,
+      credentials: { schoolName: profile.schoolName, joiningPassword },
     };
   }
   const result = await db.batch(
@@ -410,7 +429,7 @@ export async function updateDivision(db: Database, profile: Profile, division: u
 }
 export async function rotateSchoolPassword(db: Database, instructor: Profile) {
   if (instructor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
-  const joiningPassword = makeSchoolPassword(instructor.schoolId);
+  const joiningPassword = makeSchoolPassword(instructor.schoolId, instructor.schoolCommunityId);
   await db.batch(
     [
       {

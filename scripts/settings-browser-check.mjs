@@ -161,7 +161,7 @@ try {
       await p.getByRole('checkbox', { name: 'Anchor in place' }).check();
       await expect(p.getByTestId('ako-companion')).toHaveAttribute('data-anchored', 'true');
     } else {
-      await p.getByRole('button', { name: 'Create new joining password' }).click();
+      await p.getByRole('button', { name: 'Show student joining password' }).click();
       await expect(p.getByLabel('Student joining password')).toHaveValue(
         'QA-ONLY-JOINING-PASSWORD',
       );

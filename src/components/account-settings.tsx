@@ -216,7 +216,7 @@ export function AccountSettings() {
         <p>
           {student
             ? 'Leaving removes you from this roster and clears its assignments. Your sign-in account and personal study progress are kept. You can join again with a community password.'
-            : 'Deleting this study group revokes access for all of its members, clears its assignments, and disables its joining password. Sign-in accounts and personal study progress are kept. This does not delete other study groups at the same school.'}
+            : 'Deleting this campus community revokes access for all of its students and instructors and clears its assignments. Sign-in accounts and personal study progress are kept. Other campuses are unaffected.'}
         </p>
         {!confirming ? (
           <button className="button button-glass" onClick={() => setConfirming(true)}>

@@ -16,7 +16,9 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 - `/study-tools`: public Science Olympiad study-tools guide and division event catalog.
 - `/sitemap.xml` and `/robots.txt`: generated crawler files for Google Search Console; see [SEO setup](documents/SEO.md).
 
-Instructor enrollment checks the private invitation setting before creating school membership. Successful signup generates a random school name and joining password. Students must supply that password before accessing a dashboard. The instructor can generate a replacement password; existing students stay enrolled. School passwords are stored as salted hashes and only shown in the session that creates them.
+Instructor enrollment checks the private invitation setting before creating school membership. Each campus shares one roster across its instructors. Student joining passwords are `ppchsscioly` (high school), `avmscioly` (Academic Village middle), `westscioly` (West middle), and `centralscioly` (Central middle). Students must supply their campus password before accessing a dashboard. Instructors can reveal the same campus password from their dashboard or settings. Verification uses salted hashes. Instructors can view and manage only their campus students.
+
+On the first service request after this update, a one-time migration merges existing active groups within each campus and sets its password. Student IDs, progress and assignments are preserved; previously closed groups remain closed. The migration does not run again after a campus is deleted or recreated.
 
 Practice Tests now has searchable past-paper lists, complete embedded papers with an answer sheet, saved attempts, points/percentage scores, green multiple-choice corrections and red written rubric answers. The initial catalog has six papers and 465 answer fields across four event subjects, reviewed against the 2027 subject rotations. Written explanations receive provisional scores pending instructor rubric review; exact short answers, numerical answers and multiple choice grade immediately. See [practice catalog and scoring](documents/PRACTICE_TESTS.md) for coverage, source differences and remaining work. Submissions complete one pending practice assignment for the event and increase practice totals without awarding ranked points. Other study engines remain unimplemented.
 
@@ -87,7 +89,7 @@ Run `node scripts/ako-browser-check.mjs` against the development server at port 
 
 ### Account settings and placement
 
-The signed-in header and mobile navigation link to `/settings/student` or `/settings/instructor`. Students can edit their full name, configure Ako, and leave a community. Instructors can rotate the joining password, rename students in their own roster, and close their own study group after typing its name.
+The signed-in header and mobile navigation link to `/settings/student` or `/settings/instructor`. Students can edit their full name, configure Ako, and leave a community. Instructors can reveal the campus joining password, rename students in their campus roster, and close the shared campus community after typing its group name. Closure affects every student and instructor in that campus.
 
 Community closure is a logical deletion: it invalidates joining passwords and memberships and removes assignments. Leaving also removes the student's assignments and roster access. Authentication accounts and individual learning records are retained so the same account can re-enroll without losing progress. Every authenticated request checks active membership; closed/departed members are excluded from rankings. The new membership tables are created by the existing idempotent schema initialization.
 

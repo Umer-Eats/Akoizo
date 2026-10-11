@@ -15,6 +15,8 @@ import {
 } from '../src/lib/school-service.ts';
 import { hashSchoolPassword, verifySchoolPassword } from '../src/lib/school-password.ts';
 import { eventKey, type Profile } from '../src/lib/domain.ts';
+import { migrateCampusRosters, migrateHighSchoolPassword } from '../src/lib/campus-migration.ts';
+import { schoolCommunities } from '../src/lib/school-communities.ts';
 function fixture() {
   const raw = new DatabaseSync(':memory:');
   raw.exec('PRAGMA foreign_keys=ON');
@@ -56,12 +58,47 @@ const teacherData = {
   schoolCommunityId: 'ppchs',
 };
 const identity = (uid: string) => ({ uid, email: `${uid}@example.test` });
+test('high school password migration upgrades existing rosters once without changing other campuses', async () => {
+  const { db, raw, first, second } = await setup();
+  raw.prepare('INSERT INTO app_migrations (id) VALUES (?)').run('shared-campus-rosters-v1');
+  raw
+    .prepare('UPDATE schools SET password_hash=? WHERE id=?')
+    .run(hashSchoolPassword('highschoolscioly'), first.profile.schoolId);
+  const otherHash = raw
+    .prepare('SELECT password_hash FROM schools WHERE id=?')
+    .get(second.profile.schoolId)!.password_hash;
+  await migrateCampusRosters(db);
+  await migrateHighSchoolPassword(db);
+  const hash = String(
+    raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(first.profile.schoolId)!
+      .password_hash,
+  );
+  assert.ok(verifySchoolPassword('ppchsscioly', hash));
+  assert.equal(verifySchoolPassword('highschoolscioly', hash), false);
+  assert.equal(
+    raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(second.profile.schoolId)!
+      .password_hash,
+    otherHash,
+  );
+  await migrateHighSchoolPassword(db);
+  assert.equal(
+    raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(first.profile.schoolId)!
+      .password_hash,
+    hash,
+  );
+  raw.close();
+});
 async function setup() {
   const { db, raw } = fixture();
   const first = await registerMember(db, identity('t1'), teacherData, 'test-invitation');
-  const second = await registerMember(db, identity('t2'), teacherData, 'test-invitation');
+  const second = await registerMember(
+    db,
+    identity('t2'),
+    { ...teacherData, schoolCommunityId: 'ppcms-central' },
+    'test-invitation',
+  );
   assert.notEqual(first.profile.schoolId, second.profile.schoolId);
-  assert.equal(first.profile.schoolCommunityId, second.profile.schoolCommunityId);
+  assert.notEqual(first.profile.schoolCommunityId, second.profile.schoolCommunityId);
   const students: Profile[] = [];
   for (const [uid, division, password] of [
     ['a', 'A', first.credentials!.joiningPassword],
@@ -82,7 +119,7 @@ async function setup() {
   }
   return { db, raw, first, second, students };
 }
-test('enrollment gates, hashing, duplicate recovery, and password rotation', async () => {
+test('enrollment gates, hashing, duplicate recovery, and fixed campus password reveal', async () => {
   const { db, raw } = fixture();
   await assert.rejects(registerMember(db, identity('wrong'), teacherData, undefined), {
     status: 503,
@@ -134,18 +171,127 @@ test('enrollment gates, hashing, duplicate recovery, and password rotation', asy
     status: 409,
   });
   const rotated = await rotateSchoolPassword(db, instructor.profile);
-  assert.notEqual(rotated.joiningPassword, password);
-  await assert.rejects(
-    registerMember(
-      db,
-      identity('new-student'),
-      { role: 'student', displayName: 'New', division: 'A', schoolPassword: password },
-      'test-invitation',
-    ),
-    { status: 403 },
+  assert.equal(rotated.joiningPassword, password);
+  assert.equal(password, 'ppchsscioly');
+  assert.equal(
+    (
+      await registerMember(
+        db,
+        identity('new-student'),
+        { role: 'student', displayName: 'New', division: 'A', schoolPassword: password },
+        'test-invitation',
+      )
+    ).profile.schoolId,
+    instructor.profile.schoolId,
   );
   assert.ok(await profileForUid(db, 'student'));
   await assert.rejects(rotateSchoolPassword(db, joined.profile), { status: 403 });
+  raw.close();
+});
+
+test('each campus password joins only its shared roster and instructors cannot access other campuses', async () => {
+  const { db, raw } = fixture();
+  const passwords = ['ppchsscioly', 'centralscioly', 'westscioly', 'avmscioly'];
+  const instructors: Profile[] = [];
+  const learners: Profile[] = [];
+  for (const [index, campus] of schoolCommunities.entries()) {
+    const data = { ...teacherData, schoolCommunityId: campus.id };
+    const first = await registerMember(db, identity(`teacher-${index}`), data, 'test-invitation');
+    const second = await registerMember(
+      db,
+      identity(`colleague-${index}`),
+      data,
+      'test-invitation',
+    );
+    assert.equal(first.credentials!.joiningPassword, passwords[index]);
+    assert.equal(second.profile.schoolId, first.profile.schoolId);
+    assert.equal(second.credentials!.schoolName, first.profile.schoolName);
+    const learner = await registerMember(
+      db,
+      identity(`learner-${index}`),
+      {
+        role: 'student',
+        displayName: 'Student',
+        division: 'B',
+        schoolPassword: passwords[index],
+      },
+      undefined,
+    );
+    assert.equal(learner.profile.schoolId, first.profile.schoolId);
+    assert.equal(learner.profile.schoolCommunityId, campus.id);
+    instructors.push(second.profile);
+    learners.push(learner.profile);
+  }
+  const { renameMember } = await import('../src/lib/school-service.ts');
+  for (const [index, instructor] of instructors.entries()) {
+    assert.deepEqual(
+      (await dashboardFor(db, instructor)).students.map((s) => s.id),
+      [learners[index].id],
+    );
+    for (const [other, learner] of learners.entries()) {
+      if (other === index) continue;
+      await assert.rejects(renameMember(db, instructor, learner.id, 'Wrong campus'), {
+        status: 404,
+      });
+      await assert.rejects(
+        createAssignment(db, instructor, {
+          studentId: learner.id,
+          eventId: 'anatomy-and-physiology',
+          type: 'Practice',
+          due: '2099-01-01',
+        }),
+        { status: 404 },
+      );
+    }
+  }
+  raw.close();
+});
+
+test('existing campus groups merge once while preserving assignments, progress and closed memberships', async () => {
+  const { db, raw, first, second, students } = await setup();
+  raw
+    .prepare('INSERT INTO schools (id,name,password_hash,created_at) VALUES (?,?,?,?)')
+    .run('legacy-group', 'Legacy group', hashSchoolPassword('old-password'), '2099-01-01');
+  raw.prepare('INSERT INTO school_communities VALUES (?,?)').run('legacy-group', 'ppchs');
+  raw.prepare('UPDATE users SET school_id=? WHERE id=?').run('legacy-group', students[1].id);
+  const event = raw.prepare("SELECT id FROM events WHERE division='B' LIMIT 1").get()!.id as string;
+  raw
+    .prepare('INSERT INTO lesson_progress VALUES (?,?,?,?)')
+    .run(students[1].id, event, 'lesson', '2026-10-01');
+  raw
+    .prepare(
+      'INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date) VALUES (?,?,?,?,?,?)',
+    )
+    .run('preserved', students[1].id, first.profile.id, event, 'Practice', '2099-01-01');
+  raw
+    .prepare('INSERT INTO schools (id,name,password_hash) VALUES (?,?,?)')
+    .run('closed-group', 'Closed group', hashSchoolPassword('closed'));
+  raw.prepare('INSERT INTO school_communities VALUES (?,?)').run('closed-group', 'ppchs');
+  raw.prepare('INSERT INTO closed_communities (school_id) VALUES (?)').run('closed-group');
+  await migrateCampusRosters(db);
+  assert.equal((await profileForUid(db, 'b'))!.schoolId, first.profile.schoolId);
+  assert.equal((await profileForUid(db, 't2'))!.schoolId, second.profile.schoolId);
+  assert.equal(
+    raw.prepare('SELECT COUNT(*) AS n FROM assignments WHERE id=?').get('preserved')!.n,
+    1,
+  );
+  assert.equal(raw.prepare('SELECT COUNT(*) AS n FROM lesson_progress').get()!.n, 1);
+  assert.ok(
+    raw.prepare('SELECT school_id FROM closed_communities WHERE school_id=?').get('legacy-group'),
+  );
+  assert.ok(
+    raw.prepare('SELECT school_id FROM closed_communities WHERE school_id=?').get('closed-group'),
+  );
+  const hash = raw
+    .prepare('SELECT password_hash FROM schools WHERE id=?')
+    .get(first.profile.schoolId)!.password_hash;
+  assert.ok(verifySchoolPassword('ppchsscioly', String(hash)));
+  await migrateCampusRosters(db);
+  assert.equal(
+    raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(first.profile.schoolId)!
+      .password_hash,
+    hash,
+  );
   raw.close();
 });
 test('real assignments are scoped by school, role, and current student division', async () => {

@@ -3,6 +3,7 @@ import { eventKey } from './domain.ts';
 import { schoolCommunities } from './school-communities.ts';
 
 export const schema = [
+  'CREATE TABLE IF NOT EXISTS app_migrations (id TEXT PRIMARY KEY)',
   `CREATE TABLE IF NOT EXISTS departed_members (user_id TEXT PRIMARY KEY, departed_at TEXT NOT NULL DEFAULT (datetime('now')))`,
   `CREATE TABLE IF NOT EXISTS closed_communities (school_id TEXT PRIMARY KEY, closed_at TEXT NOT NULL DEFAULT (datetime('now')))`,
   `CREATE TABLE IF NOT EXISTS schools (id TEXT PRIMARY KEY, name TEXT NOT NULL UNIQUE, password_hash TEXT NOT NULL,

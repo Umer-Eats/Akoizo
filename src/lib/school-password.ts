@@ -1,6 +1,23 @@
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
 
-export function makeSchoolPassword(schoolId: string) {
+const campusPasswords = {
+  ppchs: 'ppchsscioly',
+  'ppcms-academic-village': 'avmscioly',
+  'ppcms-west': 'westscioly',
+  'ppcms-central': 'centralscioly',
+} as const;
+
+export function campusPassword(communityId: string | null | undefined) {
+  return Object.entries(campusPasswords).find(([id]) => id === communityId)?.[1] ?? null;
+}
+export function campusFromPassword(password: string) {
+  return (
+    Object.entries(campusPasswords).find(([, value]) => equalSecret(password, value))?.[0] ?? null
+  );
+}
+export function makeSchoolPassword(schoolId: string, communityId?: string | null) {
+  const password = campusPassword(communityId);
+  if (password) return password;
   return `AKO-${schoolId}.${randomBytes(18).toString('base64url')}`;
 }
 export function schoolIdFromPassword(password: string) {

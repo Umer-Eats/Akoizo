@@ -399,7 +399,7 @@ async function setup() {
   const otherTeacher = await registerMember(
     db,
     { uid: 'other-teacher', email: 'other@example.test' },
-    teacherData,
+    { ...teacherData, schoolCommunityId: 'ppcms-west' },
     'invite',
   );
   const student = await registerMember(

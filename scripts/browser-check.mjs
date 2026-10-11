@@ -150,6 +150,13 @@ try {
       ),
     );
     db = connect({ url: process.env.TURSO_DATABASE_URL, authToken: process.env.TURSO_AUTH_TOKEN });
+    const existingCampus = await db.get(`SELECT sc.school_id FROM school_communities sc
+      WHERE sc.community_id='ppcms-west' AND sc.school_id NOT IN (SELECT school_id FROM closed_communities)`);
+    assert.equal(
+      existingCampus,
+      undefined,
+      'Live QA requires a staging database with an empty West campus.',
+    );
     const teacher = await newPage();
     await signUp(teacher, 'instructor', 'Teacher', {
       invite: process.env.INSTRUCTOR_INVITE_PASSWORD,
@@ -159,7 +166,7 @@ try {
       'West Campus Pembroke Pines Charter Middle School',
     );
     const schoolPassword = await teacher.getByLabel('Student joining password').inputValue();
-    assert.match(schoolPassword, /^AKO-/);
+    assert.equal(schoolPassword, 'westscioly');
     await expect(teacher.getByRole('heading', { name: 'Your team starts here.' })).toBeVisible();
     await teacher.getByRole('button', { name: 'I’ve saved it', exact: true }).click();
     await teacher.reload();

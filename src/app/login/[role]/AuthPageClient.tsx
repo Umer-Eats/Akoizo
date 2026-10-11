@@ -315,7 +315,8 @@ export function AuthPageClient({ role }: { role: Role }) {
                       </label>
                       <p className="enrollment-note">
                         Your school community will be saved with your account. A private study group
-                        and student joining password will be created for you.
+                        and campus student joining password will be available to you. Instructors at
+                        the same campus share a roster.
                       </p>
                     </>
                   ))}
