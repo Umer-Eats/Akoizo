@@ -170,7 +170,8 @@ const errors = [];
 async function account(profile) {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
-    reducedMotion: 'reduce',
+    // MOTION=1 runs with entrance animations on, as most visitors see the site.
+    reducedMotion: process.env.MOTION ? 'no-preference' : 'reduce',
   });
   const page = await context.newPage();
   page.on('pageerror', (e) => errors.push(e.message));
@@ -318,6 +319,9 @@ try {
     'Varsity: Amy Chen + Ben Ortiz',
     'Junior Varsity: Cal Reyes',
   ]);
+  // The dialog must sit inside the window so its Close button can be reached.
+  const closeBox = await assign.getByRole('button', { name: 'Close' }).boundingBox();
+  assert.ok(closeBox.y >= 0 && closeBox.y + closeBox.height <= 1000, 'assign dialog fits the window');
   await coach.screenshot({ path: `${shots}/assign-modal.png` });
   await assign.getByRole('button', { name: 'Assign to all 3 students' }).click();
   await expect(assign.getByText('Assigned to 3 students.')).toBeVisible();
