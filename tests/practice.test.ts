@@ -380,6 +380,34 @@ test('SSSS cipher grading applies the published error allowance without AI revie
   assert.equal(wrong.questions.find((q) => q.id === '1')!.answer, typed);
 });
 
+test('complete Brookwood extraction includes irregular and starred numbering; flawed chemistry items stay unscored', () => {
+  const brookwood = findPracticeTest('C', 'scioly-n2jyiwt4yya-c');
+  assert.equal(brookwood.questionCount, 75);
+  assert.equal(brookwood.maxScore, 75);
+  assert.equal(gradePractice(brookwood, { '47': 'A', '73': 'B', '74': 'A', '75': 'A' }).score, 4);
+  assert.equal(brookwood.questions.find((q) => q.id === '75')!.page, 13);
+  const chemistry = findPracticeTest('C', 'scioly-cvyp5-ionrm-c');
+  assert.equal(chemistry.questionCount, 26);
+  assert.equal(chemistry.maxScore, 52);
+  const answers = { '16': 'My reasoning', '18': '5.48 L', '19': '0.191 mol' };
+  const result = gradePractice(chemistry, answers);
+  assert.equal(result.score, 0);
+  assert.equal(result.pendingPoints, 0);
+  for (const id of Object.keys(answers))
+    assert.equal(chemistry.questions.find((q) => q.id === id)!.points, 0);
+  assert.match(chemistry.keys['23'].criteria![0].answer, /0.464 g/);
+});
+
+test('Clements cipher solutions use free full-solution checks and disclose the inconsistent Hill key', () => {
+  const paper = findPracticeTest('C', 'scioly-o2yccdutssw-c');
+  assert.equal(paper.questionCount, 14);
+  assert.equal(paper.maxScore, 56000);
+  assert.equal(gradePractice(paper, { '4': 'is you ready to commit treason' }).score, 4000);
+  assert.equal(gradePractice(paper, { '4': 'IS YOU READY TO COMMIT TREASONX' }).score, 0);
+  assert.equal(gradePractice(paper, { '8': 'A different padding convention' }).pendingPoints, 0);
+  assert.equal(paper.questions.find((q) => q.id === '8')!.points, 0);
+});
+
 test('Gemini rubric responses are bounded, validated, and applied without student identity data', async () => {
   const paper = findPracticeTest('B', 'michigan-regions-2024-meteorology-b');
   const initial = gradePractice(paper, { '58': 'Get low and cover the head and neck.' });

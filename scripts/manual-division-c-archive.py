@@ -667,6 +667,92 @@ if '8oUYzUzDJ8o' in SOURCES:
     p.finish()
 
 
+if 'n2jyiWT4yYA' in SOURCES:
+    p=Paper('n2jyiWT4yYA',competition='Brookwood High School Invitational',year=2017,reviewedOn='2026-10-12',
+        difficulty='Medium',difficultyReason='A broad plate-tectonics paper combines historical recall, tectonic settings, geological definitions and interpretation of cross-sections and maps.',
+        topics=['Plate tectonics','Earth structure','Volcanism','Earthquakes','Geological history'],topicMatch='different',
+        alignment='Historical plate-tectonics rotation differs from the 2027 freshwater focus.',
+        scoringBasis='The complete January 14, 2017 paper contains 75 MCQs, including the final three starred items. No item weights or separate tie-breaker weighting are specified, so all 75 receive one practice point each. All answers are transcribed from the published 75-item key. Original diagrams and maps remain available in the complete student paper; irregular spacing in question 47 and stars on questions 73–75 are normalized only for question extraction.')
+    text=Path(p.source['paperPath']).with_suffix('.layout.txt').read_text(encoding='utf-8').replace('\u00a0',' ')
+    text=re.sub(r'(?m)^\s*\*?(\d+)\s*\.',r'\1.',text)
+    text='\f'.join('\n'.join(line for line in page.splitlines() if not ('Invitational' in line and 'Tectonics' in line) and not re.fullmatch(r'\s*\d+\s*',line)) for page in text.split('\f'))
+    qs=numbered(text.split('\f'))
+    key=Path(p.source['keyPath']).with_suffix('.layout.txt').read_text(encoding='utf-8')
+    answers={int(n):a for n,a in re.findall(r'\b(\d+)\.\s*([A-D])\b',key)}
+    assert set(qs)==set(answers)==set(range(1,76))
+    for n,b in qs.items():
+        prompt,choices=options(b['text'].replace('\ufffd','-'))
+        assert len(choices)==4,n
+        p.mcq(str(n),prompt,choices,answers[n],page=b['page'])
+    p.finish()
+
+if 'CVYp5_ionrM' in SOURCES:
+    p=Paper('CVYp5_ionrM',competition='Captain’s Summer Exchange — Alabama School of Fine Arts',year=2025,reviewedOn='2026-10-12',
+        difficulty='Hard',difficultyReason='Stoichiometric redox calculations, integrated rate laws, Arrhenius analysis and steady-state mechanism derivation require multi-step reasoning.',
+        topics=['Stoichiometry','Kinetics','Reaction mechanisms','Redox reactions'],topicMatch='different',
+        alignment='Kinetics overlaps 2027; this older stoichiometry rotation differs from the current gases focus.',
+        scoringBasis='All 26 numbered problems are retained. Published weights total 55, but MCQs 16, 18 and 19 are unscored written practice fields because their choices omit the rigorous rate law, omit the calculated oxygen volume, or leave the product-water phase unspecified. The available score is 52. MCQ answers were visually transcribed from highlighted choices in the published key. Question 23’s reference to 18 is a source typo: its chromate/ethanol calculation uses the compound from 21; its rubric now includes the requested acetic-acid mass instead of stopping at moles. Question 24b retains its printed three-point maximum despite four bracketed points in the key. Cover dates July 19, 2025; archive season is 2026.')
+    qs=structure_helpers['sections'](structure_helpers['read_pages'](p.source['paperPath']))['1']
+    assert len(qs)==26
+    answers=['C','B','D','D','C','A','A','C','D','A','A','A','B','C','D','B','B','C','B','B']
+    corrections={
+        16:'Under the stated fast equilibrium, K=[NO2F][F]/([NO2][F2]), so rate=k2[NO2][F]=k2 K [NO2]^2[F2]/[NO2F]. The denominator is absent from every offered choice; the highlighted B is incomplete. Unscored practice.',
+        18:'25.0/122.55 mol KClO3 x 3/2 x 0.800 x 22.4 L/mol = approximately 5.48 L O2 at conventional STP. None of the choices matches; key C says 6.00 L. Unscored practice.',
+        19:'C3H8 + 5 O2 -> 3 CO2 + 4 H2O. With liquid water only CO2 is gaseous: approximately 0.0818 mol (key B). With vapor, total gaseous products are approximately 0.191 mol, absent from the choices. The source does not specify the product-water phase. Unscored practice.'}
+    for n in range(1,21):
+        b=qs[n]
+        if n in corrections:
+            p.frq(str(n),b['text'],corrections[n],points=0,page=b['page'])
+        else:
+            prompt,choices=options(b['text'])
+            assert len(choices)==4,n
+            p.mcq(str(n),prompt,choices,answers[n-1],page=b['page'])
+    rubrics={
+        21:(2,'Oxygen mass = 5.82 - 2.339 - 1.551 = 1.93 g. Moles K=0.0598, Cr=0.0298, O=0.1206 (1 point). Divide by 0.0298 to obtain 2:1:4; formula K2CrO4, potassium chromate (1 point).'),
+        22:(3,'Oxidation half-reaction: C2H5OH + H2O -> CH3COOH + 4 H+ + 4 e- (1). Reduction: CrO4^2- + 8 H+ + 3 e- -> Cr^3+ + 4 H2O (1). Overall: 4 CrO4^2- + 3 C2H5OH + 20 H+ -> 4 Cr^3+ + 3 CH3COOH + 13 H2O (1).'),
+        23:(3,'Interpret the source’s mistaken reference to question 18 as potassium chromate from question 21. K2CrO4 is limiting: 2.00/194.20 = 0.0103 mol versus 1.00/46.07 = 0.0217 mol ethanol; ratio chromate:ethanol=4:3 (1). Acetic acid yield=0.0103 x 3/4 = 0.00772 mol, corresponding to 0.464 g CH3COOH (1). Ethanol remaining=1.00 - (2.00/194.20 x 3/4 x 46.07)=0.644 g (1).'),
+        24:(7,'Part a, 2 points: table of time and ln[N2O5] (1); equal ln-concentration decreases per 100 seconds indicate first order (1). Part b, 3 points maximum: use ln[A]=ln[A]0-kt and obtain k approximately 0.00345 s^-1; distribute method/value/unit credit within the printed three-point maximum. Part c, 2 points: apply first-order law (1); [N2O5](750)=0.800 exp(-0.00345 x 750)=approximately 0.0602 M, accepting the key’s 0.0606 M and reasonable rounding (1). Carry-forward error from b allowed if remaining calculation is correct.'),
+        25:(9,'Part a, 2: cancel intermediates and give N2O5 -> NO2 + O2 + NO. Part b, 2: fast equilibrium gives [NO2][NO3]=K[N2O5] (1); slow rate=k[NO2][NO3]=kK[N2O5], consistent with the observed first-order rate law (1). Part c, 2: N/A, since consistent. Part d, 3: Arrhenius ratio equation (1); substitute k2/k1=20000, T1=318 K, T2=636 K, R=8.314 J/mol K (1); Ea approximately 52.4 kJ/mol (1).'),
+        26:(11,'Part a, 2: step 2 (1) because it is slow (1). Part b, 4: steady state d[I]/dt=k1[A][B]-k-1[I]-k2[I][A] approximately zero (2); [I]=k1[A][B]/(k-1+k2[A]) (2). Part c, 3: v=k2[I][A] (1); substitute to obtain k1 k2[A]^2[B]/(k-1+k2[A]) (1); when k-1 >> k2[A], v approximately (k1 k2/k-1)[A]^2[B] (1). Part d, 2: overall k=k1 k2/k-1 (1)=K k2 (1).')}
+    for n,(weight,answer) in rubrics.items():
+        p.frq(str(n),qs[n]['text'],answer,points=weight,page=qs[n]['page'])
+    assert sum(q['points'] for q in p.test['questions'])==52
+    p.finish()
+
+if 'o2ycCDuTsSw' in SOURCES:
+    p=Paper('o2ycCDuTsSw',competition='Clements Invitational',reviewedOn='2026-10-12',
+        difficulty='Hard',difficultyReason='Fourteen puzzles include Vigenère, affine, monoalphabetic, dancing-men and matrix-based Hill encryption and decryption.',
+        topics=['Vigenère','Affine','Monoalphabetic substitution','Hill cipher','Dancing men'],topicMatch='unverified',
+        alignment='Historical cipher families overlap general Codebusters practice; the complete 2027 cipher roster and tournament format are not certified for this older paper.',
+        scoringBasis='All 14 puzzles are retained with published weights. No error allowance or partial-credit formula is supplied, so scored puzzles require the complete solution, ignoring spaces, punctuation and case. Puzzle 8 is unscored: the published Hill ciphertext disagrees with direct column-vector multiplication using the printed matrix, and padding is unspecified. Its original answer and the independently calculated X-padded result are both disclosed. Available score is 56,000 of the original 60,000 points. Archive season 2018 is retained because the cover has no date. No timed bonus is invented.')
+    qs=numbered(structure_helpers['read_pages'](p.source['paperPath']))
+    assert len(qs)==14
+    solutions=[
+        'I COME TO BURY CAESAR, NOT TO PRAISE HIM.',
+        'DIPCHUGGETSINSPRITE',
+        'RATTLE THE STARS IF YOU DARE',
+        'IS YOU READY TO COMMIT TREASON?',
+        'THE PEN IS MIGHTIER THAN THE SWORD.',
+        'LOST IN THOUGHTS ALL ALONE.',
+        'NOT THAT I LOVED CAESAR LESS, BUT THAT I LOVED ROME MORE.',
+        None,
+        'WHAT IS A MAN, IF HIS CHIEF GOOD AND MARKET OF HIS TIME BE BUT TO SLEEP AND FEED? A BEAST, NO MORE.',
+        'EQMDA XH L KJTIG FLTHDMFV',
+        'DONT COUNT THE DAYS, MAKE THE DAYS COUNT.',
+        'AN OX AND A RED CAT.',
+        'TO BE OR NOT TO BE, THAT IS THE QUESTION.',
+        'ITS A HOLLY JOLLY CHRISTMAS!']
+    for n,b in qs.items():
+        weight=int(re.search(r'\((\d+)\s*pts\)',b['text'])[1])
+        if n==8:
+            p.frq(str(n),b['text'],'Unscored source discrepancy. Published key: ORL FYZZ WPM GFUHHNYCY WABTWYN JTYOHSJAV. Using A=0, column vectors, the printed matrix [[1,20,19],[22,7,24],[19,7,14]] and an X padding character gives ORLFYZZWPMGFUHHNYCYWATNMYNJTYOHSJALC. The source does not specify padding; discuss the convention used.',points=0,page=b['page'])
+        else:
+            answer=solutions[n-1]
+            criterion=dict(id='answer',answer=answer,points=weight,accepted=[],cipher=dict(solution=answer,freeErrors=0,penaltyPerError=weight))
+            p.frq(str(n),b['text'],answer,points=weight,page=b['page'],criteria=[criterion])
+    assert sum(q['points'] for q in p.test['questions'])==56000
+    p.finish()
+
 manifest = Path('documents/practice-import-sources.json')
 existing = json.loads(manifest.read_text(encoding='utf-8'))
 for source in reviewed:

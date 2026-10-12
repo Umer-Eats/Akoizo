@@ -17,7 +17,25 @@ export const publicPages = [
     path: '/mission',
     title: 'Our Mission: Free Science Olympiad Preparation',
     description:
-      'Akoizo makes Science Olympiad preparation accessible with free study tools, lessons, practice, and school communities for curious students.',
+      'Akoizo makes Science Olympiad preparation free for every student. Read the mission and meet Umer Qureshi, the high school student who built it.',
+  },
+  {
+    path: '/support',
+    title: 'Support Akoizo: Keep Science Olympiad Study Tools Free',
+    description:
+      'Akoizo is free for every Science Olympiad student. See what it costs to host the site, write lessons, and compile practice data, and how to help.',
+  },
+  {
+    path: '/donate',
+    title: 'Donate to Akoizo’s Free Science Olympiad Study Tools',
+    description:
+      'Donate with Zelle to help keep Akoizo online and free for Science Olympiad students. Donations go directly to the student who runs the site.',
+  },
+  {
+    path: '/contact',
+    title: 'Contact Akoizo: Add Your School’s Science Olympiad Team',
+    description:
+      'Teachers and schools: email Akoizo to add your school and give your Science Olympiad team free lessons, practice tests, and study groups.',
   },
   {
     path: '/rankings',

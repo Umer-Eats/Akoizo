@@ -7,7 +7,7 @@ import { eventToolIds } from '../src/lib/event-rules.ts';
 const rows = [
   '# Practice coverage',
   '',
-  'Reviewed October 11, 2026 against the local 2027 rules.',
+  'Reviewed October 12, 2026 against the local 2027 rules.',
   '',
   `${practiceTests.length} converted papers, ${practiceTests.reduce((n, t) => n + t.questionCount, 0).toLocaleString('en-US')} answer fields. Every Division B and C event with a Practice Tests tab has at least one paper. This does not mean that all 909 indexed archive sources have been converted. Division A is outside this B/C import.`,
   '',

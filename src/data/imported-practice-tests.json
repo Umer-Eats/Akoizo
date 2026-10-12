@@ -79407,5 +79407,2144 @@
     "alignment": "Historical stellar-evolution focus differs from the 2027 normal and starburst galaxy rotation; spectroscopy and astronomical calculations overlap.",
     "questionCount": 41,
     "maxScore": 116
+  },
+  {
+    "id": "scioly-n2jyiwt4yya-c",
+    "sourceId": "n2jyiWT4yYA",
+    "sourceUrl": "https://scioly.org/tests/n2jyiWT4yYA",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "competition": "Brookwood High School Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "/practice/scioly-n2jyiwt4yya-c/test.pdf",
+    "keyUrl": "/practice/scioly-n2jyiwt4yya-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-12",
+    "levelEvidence": null,
+    "minutes": 50,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/dynamic-planet.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "The complete January 14, 2017 paper contains 75 MCQs, including the final three starred items. No item weights or separate tie-breaker weighting are specified, so all 75 receive one practice point each. All answers are transcribed from the published 75-item key. Original diagrams and maps remain available in the complete student paper; irregular spacing in question 47 and stars on questions 73–75 are normalized only for question extraction.",
+    "questions": [
+      {
+        "id": "1",
+        "label": "Question 1",
+        "prompt": "The French Philosopher and naturalist _____________________was one of the first scientists to consider\nthe composition of the interior of the earth. In his Principles of Philosophy he proposed that the Earth contains a\ncore with a liquid similar to that of the sun and wrapped by layers of rock, metal, water, and air.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Rules for the Direction of the Mind" },
+          { "id": "B", "text": "Rene Descartes" },
+          { "id": "C", "text": "Meditations on First Philosophy" },
+          { "id": "D", "text": "Discourse on the Method" }
+        ],
+        "points": 1,
+        "page": 1
+      },
+      {
+        "id": "2",
+        "label": "Question 2",
+        "prompt": "The Danish naturalist __________________ in his Dissertationis prodromus of 1669 is credited with four of\nthe defining principles of the science of stratigraphy: The law of superposition, the principle of original horizontality,\nthe principle of lateral continuity, and the principle of cross-cutting relationships.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Nicolas Steno" },
+          { "id": "B", "text": "Hans Christian Ørsted" },
+          { "id": "C", "text": "Johan Theodor Holmskiold" },
+          { "id": "D", "text": "Søren Pedersen Abildgaard" }
+        ],
+        "points": 1,
+        "page": 1
+      },
+      {
+        "id": "3",
+        "label": "Question 3",
+        "prompt": "He originated the theory of uniformitarianism—a fundamental principle of geology—which explains the features\nof the Earth's crust by means of natural processes over geologic time. His work established geology as a proper\nscience, and thus he is often referred to as the \"Father of Modern Geology\". ___________________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Sir Patrick Geddes" },
+          { "id": "B", "text": "William Nicol" },
+          { "id": "C", "text": "James Hutton" },
+          { "id": "D", "text": "John Fleming" }
+        ],
+        "points": 1,
+        "page": 1
+      },
+      {
+        "id": "4",
+        "label": "Question 4",
+        "prompt": "He published ‘The History of Ocean Basins' in 1962, in which he outlined a theory that could explain how\nthe continents could actually drift. This theory later became known as ‘Sea Floor Spreading'.\n__________________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Alfred Wegener" },
+          { "id": "B", "text": "James Hutton" },
+          { "id": "C", "text": "Arthur Holmes" },
+          { "id": "D", "text": "Harry Hess" }
+        ],
+        "points": 1,
+        "page": 1
+      },
+      {
+        "id": "5",
+        "label": "Question 5",
+        "prompt": "During his lifetime he was primarily known for his achievements in meteorology and as a pioneer of polar\nresearch, but today he is most remembered as the originator of the theory of continental drift by hypothesizing in\n1912 that the continents are slowly drifting around the Earth.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Alfred Wegener" },
+          { "id": "B", "text": "James Hutton" },
+          { "id": "C", "text": "Arthur Holmes" },
+          { "id": "D", "text": "Harry Hess" }
+        ],
+        "points": 1,
+        "page": 1
+      },
+      {
+        "id": "6",
+        "label": "Question 6",
+        "prompt": "What is the plate tectonic theory?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "the belief that continents have moved slowly apart to their current locations on Earth"
+          },
+          {
+            "id": "B",
+            "text": "the belief that hot, less dense material is forced up through Earth's crust through mid-ocean ridges"
+          },
+          {
+            "id": "C",
+            "text": "the belief that Earth's crust and upper mantle is broken into sections"
+          },
+          {
+            "id": "D",
+            "text": "the belief that Earth is broken into sections that fit together into one sphere"
+          }
+        ],
+        "points": 1,
+        "page": 1
+      },
+      {
+        "id": "7",
+        "label": "Question 7",
+        "prompt": "What is the continental drift theory?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "the belief that continents have always been located at their current locations on Earth"
+          },
+          {
+            "id": "B",
+            "text": "the belief that continents have moved slowly apart to their current locations on Earth"
+          },
+          {
+            "id": "C",
+            "text": "the belief that continents have quickly moved apart to their current locations on Earth"
+          },
+          {
+            "id": "D",
+            "text": "the belief that continents are moving slowly together from their current locations on Earth"
+          }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "8",
+        "label": "Question 8",
+        "prompt": "One of the main objections to Wegener’s hypothesis was his inability to provide an acceptable\n________________ for continental drift.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Time" },
+          { "id": "B", "text": "Rate" },
+          { "id": "C", "text": "Direction" },
+          { "id": "D", "text": "Mechanism" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "9",
+        "label": "Question 9",
+        "prompt": "Mountains comparable in age and structure in the mountain belt that contains the Appalachians are found in\n_________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "The British Isles" },
+          { "id": "B", "text": "Africa" },
+          { "id": "C", "text": "South America" },
+          { "id": "D", "text": "Australia" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "10",
+        "label": "Question 10",
+        "prompt": "The inner core is ___________________________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Liquid and mostly consists of iron and nickel" },
+          { "id": "B", "text": "Solid and mostly consists of iron and nickel" },
+          { "id": "C", "text": "Liquid and mostly consists of silica" },
+          { "id": "D", "text": "Solid and mostly consists of silica" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "11",
+        "label": "Question 11",
+        "prompt": "Which layer of the earth's interior is the source of the earth's magnetic field?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "The mantle" },
+          { "id": "B", "text": "The asthenosphere" },
+          { "id": "C", "text": "The inner core" },
+          { "id": "D", "text": "The outer core" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "12",
+        "label": "Question 12",
+        "prompt": "The boundary between the inner and outer core is known as the ________________________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Asthenosphere" },
+          { "id": "B", "text": "Gutenberg discontinuity" },
+          { "id": "C", "text": "Lehmann discontinuity" },
+          { "id": "D", "text": "Mohorovicic discontinuity" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "13",
+        "label": "Question 13",
+        "prompt": "Between the outer core and the mantel is the _______________________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Asthenosphere" },
+          { "id": "B", "text": "Gutenberg discontinuity" },
+          { "id": "C", "text": "Lehmann discontinuity" },
+          { "id": "D", "text": "Mohorovicic discontinuity" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "14",
+        "label": "Question 14",
+        "prompt": "The ____________________ is the boundary between the crust and the mantle in the earth. This is a\ndepth where seismic waves change velocity and there is also a change in chemical composition.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Asthenosphere" },
+          { "id": "B", "text": "Gutenberg discontinuity" },
+          { "id": "C", "text": "Lehmann discontinuity" },
+          { "id": "D", "text": "Mohorovicic discontinuity" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "15",
+        "label": "Question 15",
+        "prompt": "The type of plate boundary where plates move together, causing one of the slabs of lithosphere to be\nconsumed into the mantle as it descends beneath the overriding plate, is called a _______________ boundary.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Divergent" },
+          { "id": "B", "text": "Transform" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Transitional" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "16",
+        "label": "Question 16",
+        "prompt": "The type of plate boundary where plates move apart, resulting in upwelling of material from the mantle to\ncreate new seafloor, is a ________________ boundary.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Divergent" },
+          { "id": "B", "text": "Transform" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Transitional" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "17",
+        "label": "Question 17",
+        "prompt": "________________________are places where plates slide sideways past each other. At this boundary\nlithosphere is neither created nor destroyed.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Divergent boundaries" },
+          { "id": "B", "text": "Transform boundaries" },
+          { "id": "C", "text": "Convergent boundaries" },
+          { "id": "D", "text": "Transitional boundaries" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "18",
+        "label": "Question 18",
+        "prompt": "The Mid-Atlantic Ridge is an example of a ___________________ boundary.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Transitional" },
+          { "id": "B", "text": "Divergent" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Transform" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "19",
+        "label": "Question 19",
+        "prompt": "The San Andreas fault is an example of a _________________ boundary.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Transitional" },
+          { "id": "B", "text": "Divergent" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Transform" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "20",
+        "label": "Question 20",
+        "prompt": "The African Rift Valley is an example of a _________________ boundary.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Transitional" },
+          { "id": "B", "text": "Divergent" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Transform" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "21",
+        "label": "Question 21",
+        "prompt": "The Mariana Trench is an example of a _________________ boundary.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Transitional" },
+          { "id": "B", "text": "Divergent" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Transform" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "22",
+        "label": "Question 22",
+        "prompt": "The type of tectonic setting for forearc and back arc basins is _______________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Diverging boundary" },
+          {
+            "id": "B",
+            "text": "Alluvial deposits from either subduction zone mountains or suture zone mountains"
+          },
+          { "id": "C", "text": "Section through ocean floor" },
+          {
+            "id": "D",
+            "text": "Marine sediments deposited in front of or (in ocean-ocean subduction) behind the volcanic arc in a\n subduction zone"
+          }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "23",
+        "label": "Question 23",
+        "prompt": "A large elongated depression with steep walls formed by the downward displacement of a block of the\nearth's surface between nearly parallel faults or fault systems ____________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Rift Valley" },
+          { "id": "B", "text": "Foreland basin" },
+          { "id": "C", "text": "Back arc basin" },
+          { "id": "D", "text": "Intracratonic" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "24",
+        "label": "Question 24",
+        "prompt": "A mass of sedimentary material scraped off a region of oceanic crust during subduction and piled up at the\nedge of the overriding plate. ________________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Foreland basin" },
+          { "id": "B", "text": "Forarc basin" },
+          { "id": "C", "text": "Accretionary wedge" },
+          { "id": "D", "text": "Ophiolite" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "25",
+        "label": "Question 25",
+        "prompt": "The illustration above depicts a _____________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Forearc basin" },
+          { "id": "B", "text": "Foreland basin" },
+          { "id": "C", "text": "Intermontane basin" },
+          { "id": "D", "text": "Backarc basin" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "26",
+        "label": "Question 26",
+        "prompt": "Forearc basins are basins that develop between a volcanic arc and an ___________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Foreland basin" },
+          { "id": "B", "text": "Cratonic basin" },
+          { "id": "C", "text": "Backarc basin" },
+          { "id": "D", "text": "Accretionary wedge" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "27",
+        "label": "Question 27",
+        "prompt": "A common type of basin that forms through cooling are _____________basins, which are circular basins\nin the interior of continents.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Cratonic" },
+          { "id": "B", "text": "Foreland" },
+          { "id": "C", "text": "Backarc" },
+          { "id": "D", "text": "Forarc" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "28",
+        "label": "Question 28",
+        "prompt": "A ________________basin is a structural basin that develops adjacent and parallel to a mountain belt.\nThey form because the immense mass created by crustal thickening associated with the evolution of a\nmountain belt causes the lithosphere to bend, by a process known as lithospheric flexure.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Cratonic" },
+          { "id": "B", "text": "Foreland" },
+          { "id": "C", "text": "Backarc" },
+          { "id": "D", "text": "Forearc" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "29",
+        "label": "Question 29",
+        "prompt": "A foreland basin system consists of four discrete depozones. They are labeled in the illustration above. Letter\nB depicts which zone?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "wedge-top" },
+          { "id": "B", "text": "back-bulge" },
+          { "id": "C", "text": "foredeep" },
+          { "id": "D", "text": "Forebulge" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "30",
+        "label": "Question 30",
+        "prompt": "_____________________is the slow creeping motion of Earth's solid silicate mantle caused by convection\ncurrents carrying heat from the interior of the Earth to the surface.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Mantle dislocation creep" },
+          { "id": "B", "text": "Mantle convection" },
+          { "id": "C", "text": "Crust boiling" },
+          { "id": "D", "text": "Lithospheric melting" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "31",
+        "label": "Question 31",
+        "prompt": "In 1963, J. Tuzo Wilson first proposed that volcanic chains like the Hawaiian Islands form when a tectonic\nplate drifts over a “hot spot” in the mantle. Eight years later, Princeton geophysicist W. Jason Morgan\nsuggested that such hot spots — he initially proposed about 20 around the world — were fueled by\n__________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "Gravity pulling the heavy lithosphere away from a mid ocean ridge"
+          },
+          {
+            "id": "B",
+            "text": "Convergence of two oceanic plates moving over over an extinct volcano"
+          },
+          {
+            "id": "C",
+            "text": "Narrow plumes of hot mantle rock rising from the core-mantle boundary"
+          },
+          { "id": "D", "text": "Divergence of two oceanic plates ripping apart the mantle" }
+        ],
+        "points": 1,
+        "page": 6
+      },
+      {
+        "id": "32",
+        "label": "Question 32",
+        "prompt": "The process of super-continent formation and destruction via repeated cycles of creation and destruction\nof oceanic crust is known as the_____________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Wilson Cycle" },
+          { "id": "B", "text": "Milankovitch cycle" },
+          { "id": "C", "text": "Calvin - Benson - Bassham Cycle" },
+          { "id": "D", "text": "CNO cycle" }
+        ],
+        "points": 1,
+        "page": 6
+      },
+      {
+        "id": "33",
+        "label": "Question 33",
+        "prompt": "A/an ____________________is a fragment of crustal material formed on, or broken off from, one tectonic\nplate and accreted or \"sutured\" to crust lying on another plate. The crustal block or fragment preserves its own\ndistinctive geologic history, which is different from that of the surrounding areas. The suture zone between it\nand the crust it attaches to is usually identifiable as a fault.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Terrane" },
+          { "id": "B", "text": "Aulacogen" },
+          { "id": "C", "text": "Craton" },
+          { "id": "D", "text": "Batholith" }
+        ],
+        "points": 1,
+        "page": 6
+      },
+      {
+        "id": "34",
+        "label": "Question 34",
+        "prompt": "Laurentia is a large continental ____________ that forms the ancient geological core of the North\nAmerican continent. In eastern and central Canada, much of it is exposed at the surface as the Canadian Shield;\nwhen subsurface extensions are considered, the wider term Laurentian Shield is more common, not least\nbecause large parts of the structure extend outside Canada",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Terrane" },
+          { "id": "B", "text": "Aulacogen" },
+          { "id": "C", "text": "Craton" },
+          { "id": "D", "text": "Batholith" }
+        ],
+        "points": 1,
+        "page": 6
+      },
+      {
+        "id": "35",
+        "label": "Question 35",
+        "prompt": "___________________ develop when a continental plate is crumpled and is pushed upwards to form\nmountain ranges.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Orogenic belts" },
+          { "id": "B", "text": "Continental shields" },
+          { "id": "C", "text": "Terranes" },
+          { "id": "D", "text": "Arc basins" }
+        ],
+        "points": 1,
+        "page": 6
+      },
+      {
+        "id": "36",
+        "label": "Question 36",
+        "prompt": "The sequence of repeated cycles of sedimentation, deposition and erosion, followed by burial and\nmetamorphism, and then by formation of granitic batholiths and tectonic uplift to form mountain chains, is called\nthe_______________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Wilson cycle" },
+          { "id": "B", "text": "Orogenic cycle" },
+          { "id": "C", "text": "Bradbury cycle" },
+          { "id": "D", "text": "Rock cycle" }
+        ],
+        "points": 1,
+        "page": 6
+      },
+      {
+        "id": "37",
+        "label": "Question 37",
+        "prompt": "____________________ often result from rifting, another indicator of tensional tectonic forces. These can be\nsmall or form extensive rift valley systems, such as the East African Rift zone. Death Valley in California is a smaller\nexample. There are two types - lifted and sloped.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Fold and thrust belts" },
+          { "id": "B", "text": "Batholits" },
+          { "id": "C", "text": "Kuppens" },
+          { "id": "D", "text": "Fault block mountains" }
+        ],
+        "points": 1,
+        "page": 7
+      },
+      {
+        "id": "38",
+        "label": "Question 38",
+        "prompt": "In the illustration above depicts a lifted fault block system. Letter B is should be labeled: _____________",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Graben" },
+          { "id": "B", "text": "Horst" },
+          { "id": "C", "text": "Rift" },
+          { "id": "D", "text": "Transform fault" }
+        ],
+        "points": 1,
+        "page": 7
+      },
+      {
+        "id": "39",
+        "label": "Question 39",
+        "prompt": "_________________________ was a supercontinent that existed during the late Paleozoic and early\nMesozoic eras.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Panthalassa" },
+          { "id": "B", "text": "Pangaea" },
+          { "id": "C", "text": "Gondwana" },
+          { "id": "D", "text": "Laurasia" }
+        ],
+        "points": 1,
+        "page": 7
+      },
+      {
+        "id": "40",
+        "label": "Question 40",
+        "prompt": "A failed graben system filled with extremely thick sediments is called a/an _____________________. The\nMississippi embayment with the associated New Madrid Seismic Zone is an example of an ancient one that dates\nback to the breakup of the ancient continent, Rodinia. This ancient rift was the site of extreme earthquakes in the\nearly 19th century in the region.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Arkose" },
+          { "id": "B", "text": "Diapir" },
+          { "id": "C", "text": "Pluton" },
+          { "id": "D", "text": "Aulacogen" }
+        ],
+        "points": 1,
+        "page": 7
+      },
+      {
+        "id": "41",
+        "label": "Question 41",
+        "prompt": "Hotspot volcanoes are considered to have a fundamentally different origin from island arc volcanoes. The\nlatter form ________________________________. It is this that fuels a chain of volcanoes, such as the Aleutian\nIslands, near Alaska.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "over subduction zones, at converging plate boundaries" },
+          { "id": "B", "text": "between divergent plates" },
+          { "id": "C", "text": "broken off continental crust at zones of divergence" },
+          { "id": "D", "text": "lowering levels of seawater" }
+        ],
+        "points": 1,
+        "page": 7
+      },
+      {
+        "id": "42",
+        "label": "Question 42",
+        "prompt": "T he lithosphere is composed of the crust, and some of the upper mantle. Mature oceanic plate is\napproximately ___________ km thick, of which, the upper 5-7 km is oceanic crust.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "20-80" },
+          { "id": "B", "text": "100-200" },
+          { "id": "C", "text": "80-100" },
+          { "id": "D", "text": "10-20" }
+        ],
+        "points": 1,
+        "page": 8
+      },
+      {
+        "id": "43",
+        "label": "Question 43",
+        "prompt": "C ontinental plate is about ____________km thick, and includes continental crust which varies from 5 to\n70 km in thickness.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "10-20" },
+          { "id": "B", "text": "28-80" },
+          { "id": "C", "text": "100-150" },
+          { "id": "D", "text": "150-200" }
+        ],
+        "points": 1,
+        "page": 8
+      },
+      {
+        "id": "44",
+        "label": "Question 44",
+        "prompt": "_____________is the state of gravitational equilibrium between Earth's crust and mantle such that the\ncrust \"floats\" at an elevation that depends on its thickness and density.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Isostasy" },
+          { "id": "B", "text": "Eustasy" },
+          { "id": "C", "text": "Staticotasy" },
+          { "id": "D", "text": "Glacioisostasy" }
+        ],
+        "points": 1,
+        "page": 8
+      },
+      {
+        "id": "45",
+        "label": "Question 45",
+        "prompt": "Clarence Edward Dutton, American geologist and pioneer seismologist who developed and named the\nprinciple of___________. According to this principle, the level of the Earth’s crust is determined by its density;\nlighter material rises, forming continents, mountains, and plateaus, and heavier material sinks, forming basins\nand ocean floors.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Eustasy" },
+          { "id": "B", "text": "Glacioisostasy" },
+          { "id": "C", "text": "staticotasy" },
+          { "id": "D", "text": "Isostasy" }
+        ],
+        "points": 1,
+        "page": 8
+      },
+      {
+        "id": "46",
+        "label": "Question 46",
+        "prompt": "Three principal models of isostasy are used. In the _____________ model different topographic heights are\naccommodated by changes in cr ustal thickness, in which the crust has a constant density.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Vening Meinesz" },
+          { "id": "B", "text": "Airy–Heiskanen" },
+          { "id": "C", "text": "flexural isostasy" },
+          { "id": "D", "text": "Pratt–Hayford" }
+        ],
+        "points": 1,
+        "page": 8
+      },
+      {
+        "id": "47",
+        "label": "Question 47",
+        "prompt": "_____________________________ is the sinking of large parts of the Earth's crust into the asthenosphere.\nThe sinking is caused by a heavy weight placed on the Earth's surface. Often this is caused by the heavy weight\nof glacial ice due to continental glaciation. This is a process in which permanent ice places pressure on the Earth's\ncrust, thereby depressing it with its weight.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Isostatic depression" },
+          { "id": "B", "text": "Eustatic compression" },
+          { "id": "C", "text": "Subsidence" },
+          { "id": "D", "text": "Upwelling" }
+        ],
+        "points": 1,
+        "page": 8
+      },
+      {
+        "id": "48",
+        "label": "Question 48",
+        "prompt": "___________________ is the measurement of land elevation relative to sea level.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Isometry" },
+          { "id": "B", "text": "Eustasy" },
+          { "id": "C", "text": "Hypsometry" },
+          { "id": "D", "text": "Bathymetry" }
+        ],
+        "points": 1,
+        "page": 9
+      },
+      {
+        "id": "49",
+        "label": "Question 49",
+        "prompt": "Using the hypsometric curve above, determine the minimum elevation of mountains that make up the\nhighest 10% of the Earth's surface.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "6 km" },
+          { "id": "B", "text": ".5 km" },
+          { "id": "C", "text": "2 km" },
+          { "id": "D", "text": "4 km" }
+        ],
+        "points": 1,
+        "page": 9
+      },
+      {
+        "id": "50",
+        "label": "Question 50",
+        "prompt": "Using the hypsometric curve above, determine what percentage of the Earth's surface is above sea level.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "29%" },
+          { "id": "B", "text": "71%" },
+          { "id": "C", "text": "40%" },
+          { "id": "D", "text": "8%" }
+        ],
+        "points": 1,
+        "page": 9
+      },
+      {
+        "id": "51",
+        "label": "Question 51",
+        "prompt": "What two factors control the explosiveness of an volcanic eruption?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "the amount of gases and pressure within Earth's crust" },
+          { "id": "B", "text": "the time of year and current weather conditions" },
+          { "id": "C", "text": "the amount of water vapor and silica in the magma" },
+          { "id": "D", "text": "the pressure within Earth and plate movement" }
+        ],
+        "points": 1,
+        "page": 9
+      },
+      {
+        "id": "52",
+        "label": "Question 52",
+        "prompt": "Of the three types of volcanoes, which is the least explosive?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "cinder volcanoes" },
+          { "id": "B", "text": "composite volcanoes" },
+          { "id": "C", "text": "They all have the same level of explosiveness" },
+          { "id": "D", "text": "shield volcanoes" }
+        ],
+        "points": 1,
+        "page": 9
+      },
+      {
+        "id": "53",
+        "label": "Question 53",
+        "prompt": "Composite volcanoes are found mostly where ________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "Earth's plates come together and one plate sinks beneath the other"
+          },
+          { "id": "B", "text": "rifts in Earth's surface occur" },
+          { "id": "C", "text": "hot spots in the mantle occur" },
+          { "id": "D", "text": "Earth's plates pull apart" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "54",
+        "label": "Question 54",
+        "prompt": "The difference between basaltic and granitic magma is __________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "the color" },
+          { "id": "B", "text": "the amount of silica" },
+          { "id": "C", "text": "the amount of water vapor" },
+          { "id": "D", "text": "the way it cools" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "55",
+        "label": "Question 55",
+        "prompt": "Which of the following describes the build up and release of stress during an earthquake?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "the Modified Mercalli Scale" },
+          { "id": "B", "text": "the elastic rebound theory" },
+          { "id": "C", "text": "the principle of superposition" },
+          { "id": "D", "text": "the travel time difference" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "56",
+        "label": "Question 56",
+        "prompt": "Approximately what percentage of earthquakes occur at plate boundaries?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "25%" },
+          { "id": "B", "text": "50%" },
+          { "id": "C", "text": "75%" },
+          { "id": "D", "text": "90%" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "57",
+        "label": "Question 57",
+        "prompt": "Which of the following did not occur at a plate boundary?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "New Madrid, Missouri, 1812" },
+          { "id": "B", "text": "San Francisco, 1906" },
+          { "id": "C", "text": "Anchorage, Alaska, 1964" },
+          { "id": "D", "text": "Loma Prieta, California, 1989" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "58",
+        "label": "Question 58",
+        "prompt": "_____________ lavas are volumetrically the most abundant type of lava because they are erupted at\nmid-ocean ridges and because they make up the submarine portion of seamounts and large intraplate\nvolcanoes, like the Hawaii-Emperor seamount chain.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Pahoehoe" },
+          { "id": "B", "text": "Pillow" },
+          { "id": "C", "text": "A'a" },
+          { "id": "D", "text": "Block" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "59",
+        "label": "Question 59",
+        "prompt": "____________ lava is characterized by a smooth, billowy, or ropy surface. Its flows tend to be relatively\nthin, from a few inches to a few feet thick.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Pahoehoe" },
+          { "id": "B", "text": "Pillow" },
+          { "id": "C", "text": "A’a" },
+          { "id": "D", "text": "Block" }
+        ],
+        "points": 1,
+        "page": 10
+      },
+      {
+        "id": "60",
+        "label": "Question 60",
+        "prompt": "______________, the most abundant element in magma, comprises a little less than half the total of its\ncomposition.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Silicon" },
+          { "id": "B", "text": "Aluminum" },
+          { "id": "C", "text": "Iron" },
+          { "id": "D", "text": "Oxygen" }
+        ],
+        "points": 1,
+        "page": 11
+      },
+      {
+        "id": "61",
+        "label": "Question 61",
+        "prompt": "There are two known processes by which magma ceases to exist: by volcanic eruption, or by\ncrystallization within the crust or mantle to form a_____________. In both cases the bulk of the magma\neventually cools and forms igneous rocks.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Pahoehoe" },
+          { "id": "B", "text": "Pluton" },
+          { "id": "C", "text": "Vent" },
+          { "id": "D", "text": "Gas" }
+        ],
+        "points": 1,
+        "page": 11
+      },
+      {
+        "id": "62",
+        "label": "Question 62",
+        "prompt": "The “North American” continent's brief Cambrian respite ended in the Ordovician, when an\n_____________ slammed into the East Coast, raising mountains from Greenland to Mississippi . At the time,\nthe Appalachians were as tall and stunning as the Himalayas are today.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "island chain" },
+          { "id": "B", "text": "ancient ocean" },
+          { "id": "C", "text": "batholith" },
+          { "id": "D", "text": "Pluton" }
+        ],
+        "points": 1,
+        "page": 11
+      },
+      {
+        "id": "63",
+        "label": "Question 63",
+        "prompt": "The ________________is a chain of mountain ranges that consists of an almost continuous sequence of\nmountain ranges that form the western \"backbone\" of North America, Central America, South America and\nAntarctica It is also the backbone of the volcanic arc that forms the eastern half of the Pacific Ring of Fire.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "North American Craton" },
+          { "id": "B", "text": "Canadian Shield" },
+          { "id": "C", "text": "American Cordillera" },
+          { "id": "D", "text": "Laurentia Craton" }
+        ],
+        "points": 1,
+        "page": 11
+      },
+      {
+        "id": "64",
+        "label": "Question 64",
+        "prompt": "There are several volcanic areas in the world considered to be supervolcanoes. Which of the following is a\nsupervolcano?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Yellowstone National Park" },
+          { "id": "B", "text": "Lake Superior" },
+          { "id": "C", "text": "Mount St. Helens" },
+          { "id": "D", "text": "Banff National Park" }
+        ],
+        "points": 1,
+        "page": 11
+      },
+      {
+        "id": "65",
+        "label": "Question 65",
+        "prompt": "How many large plates (Major plates) form the outer shell of the earth? (major plates only - do not include\nminor or micro plates in total)",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "1" },
+          { "id": "B", "text": "7" },
+          { "id": "C", "text": "15" },
+          { "id": "D", "text": "27" }
+        ],
+        "points": 1,
+        "page": 11
+      },
+      {
+        "id": "66",
+        "label": "Question 66",
+        "prompt": "Which plate is labeled with G?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "South American Plate" },
+          { "id": "B", "text": "Pacific Plate" },
+          { "id": "C", "text": "Nazca Plate" },
+          { "id": "D", "text": "Juan de Fuca Plate" }
+        ],
+        "points": 1,
+        "page": 12
+      },
+      {
+        "id": "67",
+        "label": "Question 67",
+        "prompt": "Which Plate is labeled with J?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Nazca Plate" },
+          { "id": "B", "text": "Scotia Plate" },
+          { "id": "C", "text": "Eurasian Plate" },
+          { "id": "D", "text": "Arabian Plate" }
+        ],
+        "points": 1,
+        "page": 12
+      },
+      {
+        "id": "68",
+        "label": "Question 68",
+        "prompt": "Which Plate is labeled with E?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "North American plate" },
+          { "id": "B", "text": "Juan de Fuca Plate" },
+          { "id": "C", "text": "Cocos Plate" },
+          { "id": "D", "text": "Caribbean Plate" }
+        ],
+        "points": 1,
+        "page": 12
+      },
+      {
+        "id": "69",
+        "label": "Question 69",
+        "prompt": "The Ring of Fire is a direct result of plate tectonics. The eastern section of the ring is the result of the Nazca\nPlate and the Cocos Plate being subducted beneath the westward-moving __________________________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Pacific Plate" },
+          { "id": "B", "text": "Caribbean Plate" },
+          { "id": "C", "text": "South American Plate" },
+          { "id": "D", "text": "North American Plate" }
+        ],
+        "points": 1,
+        "page": 12
+      },
+      {
+        "id": "70",
+        "label": "Question 70",
+        "prompt": "He was a Flemish cartographer and geographer, conventionally recognized as the creator of the first modern\natlas, the Theatrum Orbis Terrarum (Theatre of the World). He is also believed to be the first person to imagine that\nthe continents were joined together before drifting to their present positions.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Abraham Ortelius" },
+          { "id": "B", "text": "Nicolas Steno" },
+          { "id": "C", "text": "Dan Mckenzie" },
+          { "id": "D", "text": "Gerardus Mercator" }
+        ],
+        "points": 1,
+        "page": 12
+      },
+      {
+        "id": "71",
+        "label": "Question 71",
+        "prompt": "He is a Professor of Geophysics at the University of Cambridge, and one-time head of the Bullard\nLaboratories of the Cambridge Department of Earth Sciences. He wrote the first paper defining the principles of\nplate tectonics, and his early work on mantle convection created the modern discussion of planetary interiors.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Harry Hess" },
+          { "id": "B", "text": "Sydney Brenner" },
+          { "id": "C", "text": "Stephen William Hawking" },
+          { "id": "D", "text": "Dan McKenzie" }
+        ],
+        "points": 1,
+        "page": 13
+      },
+      {
+        "id": "72",
+        "label": "Question 72",
+        "prompt": "The expanding Earth hypothesis was first formulated in the 1950s by S. Warren Carey, an Australian\ngeologist. Though Professor Carey recognized sea floor spreading and the idea that the continents had once\nbeen assembled into the supercontinent of Pangaea, he did not recognize an important element of the modern\nday plate tectonic paradigm. What was that element ?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Convergence" },
+          { "id": "B", "text": "Convection currents" },
+          { "id": "C", "text": "Divergence" },
+          { "id": "D", "text": "Subduction" }
+        ],
+        "points": 1,
+        "page": 13
+      },
+      {
+        "id": "73",
+        "label": "Question 73",
+        "prompt": "The Mediterranean Ridge is a wide ridge in the bed of the Mediterranean Sea, running along a rough\nquarter circle from Calabria, south of Crete, to the southwest corner of Turkey, and from there eastwards south\nof Cyprus and Turkey. It is an _______________ caused by the African Plate subducting under the Eurasian\nand Anatolian plates.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Rift Valley" },
+          { "id": "B", "text": "Accretionary wedge" },
+          { "id": "C", "text": "Back arc basin" },
+          { "id": "D", "text": "Intracratonic" }
+        ],
+        "points": 1,
+        "page": 13
+      },
+      {
+        "id": "74",
+        "label": "Question 74",
+        "prompt": "An ________________ is a section of the Earth's oceanic crust and the underlying upper mantle that has\nbeen uplifted and exposed above sea level and often emplaced onto continental crustal rocks. Their great\nsignificance relates to their occurrence within mountain belts such as the Alps or the Himalayas, where they\ndocument the existence of former ocean basins that have now been consumed by subduction.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Ophiolite" },
+          { "id": "B", "text": "Accretionary wedge" },
+          { "id": "C", "text": "Back arc basin" },
+          { "id": "D", "text": "Intermontane basin" }
+        ],
+        "points": 1,
+        "page": 13
+      },
+      {
+        "id": "75",
+        "label": "Question 75",
+        "prompt": "The stratigraphic sequence observed in ophiolites corresponds to the lithosphere-forming processes at\nmid-oceanic ridges. The idealized stratigraphic sequence of an ophiolite is: ___________________ (top to\nbottom)",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "deep marine sediments, pillow lava, sheeted dykes, gabbro, peridotite"
+          },
+          {
+            "id": "B",
+            "text": "peridotite, gabbro, sheeted dykes, pillow lava, deep marine sediments"
+          },
+          {
+            "id": "C",
+            "text": "pillow lava, deep marine sediments, sheeted dykes, peridotite, gabbro"
+          },
+          {
+            "id": "D",
+            "text": "gabbro, peridotite, pillow lava, sheeted dykes, deep marine sediments"
+          }
+        ],
+        "points": 1,
+        "page": 13
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "B" },
+      "2": { "correctOption": "A" },
+      "3": { "correctOption": "C" },
+      "4": { "correctOption": "D" },
+      "5": { "correctOption": "A" },
+      "6": { "correctOption": "C" },
+      "7": { "correctOption": "B" },
+      "8": { "correctOption": "D" },
+      "9": { "correctOption": "A" },
+      "10": { "correctOption": "B" },
+      "11": { "correctOption": "D" },
+      "12": { "correctOption": "C" },
+      "13": { "correctOption": "B" },
+      "14": { "correctOption": "D" },
+      "15": { "correctOption": "C" },
+      "16": { "correctOption": "A" },
+      "17": { "correctOption": "B" },
+      "18": { "correctOption": "B" },
+      "19": { "correctOption": "D" },
+      "20": { "correctOption": "B" },
+      "21": { "correctOption": "C" },
+      "22": { "correctOption": "D" },
+      "23": { "correctOption": "A" },
+      "24": { "correctOption": "C" },
+      "25": { "correctOption": "A" },
+      "26": { "correctOption": "D" },
+      "27": { "correctOption": "A" },
+      "28": { "correctOption": "B" },
+      "29": { "correctOption": "C" },
+      "30": { "correctOption": "B" },
+      "31": { "correctOption": "C" },
+      "32": { "correctOption": "A" },
+      "33": { "correctOption": "A" },
+      "34": { "correctOption": "C" },
+      "35": { "correctOption": "A" },
+      "36": { "correctOption": "B" },
+      "37": { "correctOption": "D" },
+      "38": { "correctOption": "A" },
+      "39": { "correctOption": "B" },
+      "40": { "correctOption": "D" },
+      "41": { "correctOption": "A" },
+      "42": { "correctOption": "C" },
+      "43": { "correctOption": "D" },
+      "44": { "correctOption": "A" },
+      "45": { "correctOption": "D" },
+      "46": { "correctOption": "B" },
+      "47": { "correctOption": "A" },
+      "48": { "correctOption": "C" },
+      "49": { "correctOption": "B" },
+      "50": { "correctOption": "A" },
+      "51": { "correctOption": "C" },
+      "52": { "correctOption": "D" },
+      "53": { "correctOption": "A" },
+      "54": { "correctOption": "B" },
+      "55": { "correctOption": "B" },
+      "56": { "correctOption": "D" },
+      "57": { "correctOption": "A" },
+      "58": { "correctOption": "B" },
+      "59": { "correctOption": "A" },
+      "60": { "correctOption": "D" },
+      "61": { "correctOption": "B" },
+      "62": { "correctOption": "A" },
+      "63": { "correctOption": "C" },
+      "64": { "correctOption": "A" },
+      "65": { "correctOption": "B" },
+      "66": { "correctOption": "A" },
+      "67": { "correctOption": "C" },
+      "68": { "correctOption": "D" },
+      "69": { "correctOption": "C" },
+      "70": { "correctOption": "A" },
+      "71": { "correctOption": "D" },
+      "72": { "correctOption": "D" },
+      "73": { "correctOption": "B" },
+      "74": { "correctOption": "A" },
+      "75": { "correctOption": "A" }
+    },
+    "difficulty": "Medium",
+    "difficultyReason": "A broad plate-tectonics paper combines historical recall, tectonic settings, geological definitions and interpretation of cross-sections and maps.",
+    "topics": [
+      "Plate tectonics",
+      "Earth structure",
+      "Volcanism",
+      "Earthquakes",
+      "Geological history"
+    ],
+    "topicMatch": "different",
+    "alignment": "Historical plate-tectonics rotation differs from the 2027 freshwater focus.",
+    "questionCount": 75,
+    "maxScore": 75
+  },
+  {
+    "id": "scioly-cvyp5-ionrm-c",
+    "sourceId": "CVYp5_ionrM",
+    "sourceUrl": "https://scioly.org/tests/CVYp5_ionrM",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "competition": "Captain’s Summer Exchange — Alabama School of Fine Arts",
+    "year": 2025,
+    "level": null,
+    "paperUrl": "/practice/scioly-cvyp5-ionrm-c/test.pdf",
+    "keyUrl": "/practice/scioly-cvyp5-ionrm-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-12",
+    "levelEvidence": null,
+    "minutes": 50,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/chemistry-lab.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "All 26 numbered problems are retained. Published weights total 55, but MCQs 16, 18 and 19 are unscored written practice fields because their choices omit the rigorous rate law, omit the calculated oxygen volume, or leave the product-water phase unspecified. The available score is 52. MCQ answers were visually transcribed from highlighted choices in the published key. Question 23’s reference to 18 is a source typo: its chromate/ethanol calculation uses the compound from 21; its rubric now includes the requested acetic-acid mass instead of stopping at moles. Question 24b retains its printed three-point maximum despite four bracketed points in the key. Cover dates July 19, 2025; archive season is 2026.",
+    "questions": [
+      {
+        "id": "1",
+        "label": "Question 1",
+        "prompt": "[1 point] A 0.450 g sample of 𝑋 2 𝐶 𝑂 3 is titrated with 42.86 mL of 0.250 M 𝐻𝐶𝑙 . If the\n\n carbonate is the only basic component, what is the molar mass of the metal cation M?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "10.5 g/mol" },
+          { "id": "B", "text": "11.0 g/mol" },
+          { "id": "C", "text": "12.0 g/mol" },
+          { "id": "D", "text": "12.5 g/mol" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "2",
+        "label": "Question 2",
+        "prompt": "[1 point] Which of the following units is the rate constant k of a fifth-order reaction?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "𝑚𝑜 𝑙 − 3 𝐿 3 𝑠 − 1" },
+          { "id": "B", "text": "𝑚𝑜 𝑙 − 4 𝐿 4 𝑠 − 1" },
+          { "id": "C", "text": "𝑚𝑜 𝑙 − 5 𝐿 5 𝑠 − 1" },
+          { "id": "D", "text": "𝑚𝑜 𝑙 − 6 𝐿 6 𝑠 − 1" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "3",
+        "label": "Question 3",
+        "prompt": "[1 point] A sample of impure potassium chlorate ( 𝐾𝐶𝑙 𝑂 3 ) decomposes as follows:\n\n 2 𝐾𝐶𝑙 𝑂 3 → 2 𝐾𝐶𝑙 + 3 𝑂 2\n\n If heating 3.00 g of the sample produces 0.672 L of 𝑂 2 gas at STP, what is the mass percent\n\n of pure 𝐾𝐶𝑙 𝑂 3 in the sample?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "80.8%" },
+          { "id": "B", "text": "81.1%" },
+          { "id": "C", "text": "81.4%" },
+          { "id": "D", "text": "81.7%" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "4",
+        "label": "Question 4",
+        "prompt": "[1 point] The rate determining step of a reaction is:",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Step with lowest activation energy" },
+          { "id": "B", "text": "Step with highest activation energy" },
+          { "id": "C", "text": "Fastest step" },
+          { "id": "D", "text": "Slowest step" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "5",
+        "label": "Question 5",
+        "prompt": "[1 point] Hydrazine ( 𝑁 2 𝐻 4 ) is used as a rocket propellant. It reacts to oxygen according to:\n\n 𝑁 2 𝐻 4 + 𝑂 2 → 𝑁 2 + 2 𝐻 2 𝑂\n\n If 10.0 g of hydrazine reacts completely, what volume of water vapor is produced at 275 °C\n and 1.27 atm?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "11 L" },
+          { "id": "B", "text": "12 L" },
+          { "id": "C", "text": "22 L" },
+          { "id": "D", "text": "23 L" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "6",
+        "label": "Question 6",
+        "prompt": "[1 point] A reaction follows the rate law 𝑅𝑎𝑡𝑒 = 𝑘 [ 𝐴 ][ 𝐵 ] 2 . If the concentration of A is\n\n doubled and the concentration of B is halved, by what factor will the rate be multiplied by?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "1/2" },
+          { "id": "B", "text": "1" },
+          { "id": "C", "text": "2" },
+          { "id": "D", "text": "4\n\f\n 2025 Captain’s Summer Exchange Page 3 of 9" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "7",
+        "label": "Question 7",
+        "prompt": "[1 point] In acidic solution, potassium permanganate ( 𝐾𝑀𝑛 𝑂 4 ) reacts with sodium sulfite\n\n ( 𝑁 𝑎 2 𝑆 𝑂 3 ) to form manganese (II) sulfate ( 𝑀𝑛𝑆 𝑂 4 ) , sodium sulfate ( 𝑁 𝑎 2 𝑆 𝑂 4 ) , and water.\n\n What is the sum of the coefficients for the balanced net ionic equation?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "23" },
+          { "id": "B", "text": "25" },
+          { "id": "C", "text": "27" },
+          { "id": "D", "text": "29" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "8",
+        "label": "Question 8",
+        "prompt": "[1 point] Which of the following quantities affect the rate constant of a reaction?\n I) Concentration of the reactants\n II) Temperature\n III) Activation Energy",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "I and II" },
+          { "id": "B", "text": "I and III" },
+          { "id": "C", "text": "II and III" },
+          { "id": "D", "text": "I, II, and III" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "9",
+        "label": "Question 9",
+        "prompt": "[1 point] Acetylene is prepared by dropping water onto solid calcium carbide:\n 𝐶𝑎 𝐶 2 ( 𝑠 )+ 2 𝐻 2 𝑂 ( 𝑙 )→ 𝐶 2 𝐻 2 ( 𝑔 )+ 𝐶𝑎 ( 𝑂𝐻 ) 2 ( 𝑠 )\n\n A cylinder needs to be filled with 455 g of acetylene. What minimum mass of 𝐶𝑎 𝐶 2 (kg) is\n\n needed if the process operates at 85% of the theoretical yield?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "1.13 kg" },
+          { "id": "B", "text": "1.18 kg" },
+          { "id": "C", "text": "1.25 kg" },
+          { "id": "D", "text": "1.32 kg" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "10",
+        "label": "Question 10",
+        "prompt": "[1 point] What is the difference between an intermediate and transition state?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "An intermediate is a species that exists momentarily and is formed during the\n reaction, while a transition state is a high-energy, unstable configuration that exists\n only at the peak of the activation energy barrier."
+          },
+          {
+            "id": "B",
+            "text": "An intermediate is a high-energy, unstable species, while a transition state is a stable,\n isolable species."
+          },
+          {
+            "id": "C",
+            "text": "An intermediate is formed after the products are generated, while a transition state\n occurs only after the reactants are consumed."
+          },
+          {
+            "id": "D",
+            "text": "An intermediate is the final product of the reaction, while a transition state is the\n species that initiates the reaction.\n\f\n 2025 Captain’s Summer Exchange Page 4 of 9"
+          }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "11",
+        "label": "Question 11",
+        "prompt": "[1 point] A 4.18 g sample of a compound contains 0.80 g of carbon, 0.20 g of hydrogen, and\n the rest oxygen. What is the empirical formula?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "𝐶 𝐻 3 𝑂 3" },
+          { "id": "B", "text": "𝐶 2 𝐻 4 𝑂 3" },
+          { "id": "C", "text": "𝐶 3 𝐻 8 𝑂 4" },
+          { "id": "D", "text": "𝑁𝑂𝑇𝐴" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "12",
+        "label": "Question 12",
+        "prompt": "[1 point] What is the effect of increasing the concentration of a reactant on the rate of\n reaction for a first-order reaction?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Rate increases" },
+          { "id": "B", "text": "Rate decreases" },
+          { "id": "C", "text": "Rate stays the same" },
+          { "id": "D", "text": "Cannot be determined with information given" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "13",
+        "label": "Question 13",
+        "prompt": "[1 point] What principle in kinetics states that the transition state of a reaction resembles the\n structure of the reactants or products that are closest in energy?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Arrhenius Equation" },
+          { "id": "B", "text": "Hammond’s Postulate" },
+          { "id": "C", "text": "Collision Theory" },
+          { "id": "D", "text": "Transition State Theory" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "14",
+        "label": "Question 14",
+        "prompt": "[1 point] A plot of 𝑙𝑛 [ 𝐴 ] vs time yields a straight line with slope -0.00693. What is the\n half-life of this reaction?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "0.01 s" },
+          { "id": "B", "text": "10 s" },
+          { "id": "C", "text": "100 s" },
+          { "id": "D", "text": "1000 s" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "15",
+        "label": "Question 15",
+        "prompt": "[1 point] An unknown hydrate MgSO4xH2O is heated. The initial mass is 6.123 g, and after\n heating to remove water, the residue weighs 2.984 g. What is the value of x?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "4" },
+          { "id": "B", "text": "5" },
+          { "id": "C", "text": "6" },
+          { "id": "D", "text": "7" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "16",
+        "label": "Question 16",
+        "prompt": "[1 point] The following mechanism is proposed for a reaction:\n Step 1: 𝑁 𝑂 2 + 𝐹 2 ↔ 𝑁 𝑂 2 𝐹 + 𝐹 (fast equilibrium)\n\n Step 2: 𝐹 + 𝑁 𝑂 2 → 𝑁 𝑂 2 𝐹 (slow)\n\n What is the rate law for the overall reaction?\n a) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 ][ 𝐹 ] b) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 ] 2 [ 𝐹 ]\n 2 2 2 2\n c) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 ] 2 d) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 ][ 𝑁 𝑂 𝐹 }\n 2 2 2\n\f\n 2025 Captain’s Summer Exchange Page 5 of 9",
+        "type": "frq",
+        "points": 0,
+        "page": 4,
+        "context": "2025 Captain’s Summer Exchange Page 3 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 7) [1 point] In acidic solution, potassium permanganate reacts with sodium sulfite ( 𝐾𝑀𝑛 𝑂 4 )\n to form manganese (II) sulfate , sodium sulfate , and water. ( 𝑁 𝑎 2 𝑆 𝑂 3 ) ( 𝑀𝑛𝑆 𝑂 4 ) ( 𝑁 𝑎 2 𝑆 𝑂 4 )\n What is the sum of the coefficients for the balanced net ionic equation? \n a) 23 b) 25 c) 27 d) 29 \n 8) [1 point] Which of the following quantities affect the rate constant of a reaction? \n I) Concentration of the reactants \n II) Temperature \n III) Activation Energy \n a) I and II b) I and III c) II and III d) I, II, and III \n 9) [1 point] Acetylene is prepared by dropping water onto solid calcium carbide: \n 𝐶𝑎 𝐶 2 ( 𝑠 ) + 2 𝐻 2 𝑂 ( 𝑙 )→ 𝐶 2 𝐻 2 ( 𝑔 ) + 𝐶𝑎 ( 𝑂𝐻 ) 2 ( 𝑠 )\n A cylinder needs to be filled with 455 g of acetylene. What minimum mass of (kg) is 𝐶𝑎 𝐶 2 \n needed if the process operates at 85% of the theoretical yield? \n a) 1.13 kg b) 1.18 kg c) 1.25 kg d) 1.32 kg \n 10) [1 point] What is the difference between an intermediate and transition state? \n a) An intermediate is a species that exists momentarily and is formed during the \n reaction, while a transition state is a high-energy, unstable configuration that exists \n only at the peak of the activation energy barrier. \n b) An intermediate is a high-energy, unstable species, while a transition state is a stable, \n isolable species. \n c) An intermediate is formed after the products are generated, while a transition state \n occurs only after the reactants are consumed. \n d) An intermediate is the final product of the reaction, while a transition state is the \n species that initiates the reaction. \n 2025 Captain’s Summer Exchange Page 4 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 11) [1 point] A 4.18 g sample of a compound contains 0.80 g of carbon, 0.20 g of hydrogen, and \n the rest oxygen. What is the empirical formula? \n a) b) c) d) 𝐶 𝐻 3 𝑂 3 𝐶 2 𝐻 4 𝑂 3 𝐶 3 𝐻 8 𝑂 4 𝑁𝑂𝑇𝐴 \n 12) [1 point] What is the effect of increasing the concentration of a reactant on the rate of \n reaction for a first-order reaction? \n a) Rate increases b) Rate decreases \n c) Rate stays the same d) Cannot be determined with information given \n 13) [1 point] What principle in kinetics states that the transition state of a reaction resembles the \n structure of the reactants or products that are closest in energy? \n a) Arrhenius Equation b) Hammond’s Postulate \n c) Collision Theory d) Transition State Theory \n 14) [1 point] A plot of vs time yields a straight line with slope -0.00693. What is the 𝑙𝑛 [ 𝐴 ]\n half-life of this reaction? \n a) 0.01 s b) 10 s c) 100 s d) 1000 s \n 15) [1 point] An unknown hydrate MgSO4xH2O is heated. The initial mass is 6.123 g, and after \n heating to remove water, the residue weighs 2.984 g. What is the value of x? \n a) 4 b) 5 c) 6 d) 7 \n 16) [1 point] The following mechanism is proposed for a reaction: \n Step 1: (fast equilibrium) 𝑁 𝑂 2 + 𝐹 2 ↔ 𝑁 𝑂 2 𝐹 + 𝐹 \n Step 2: (slow) 𝐹 + 𝑁 𝑂 2 → 𝑁 𝑂 2 𝐹 \n What is the rate law for the overall reaction? \n a) b) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ][ 𝐹 2 ] 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ] 2 [ 𝐹 2 ]\n c) d) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ] 2 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ][ 𝑁 𝑂 2 𝐹 }\n 2025 Captain’s Summer Exchange Page 5 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 17) [1 point] Which of the following are oxidation-reduction reactions? \n I) 2 𝑀𝑔 ( 𝑠 ) + 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 )→ 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 ) + 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )\n a) I & II b) I & III c) II & IV d) III & IV \n 18) [1 point] A 25.0 g sample of potassium chlorate decomposes completely in heat: ( 𝐾𝐶𝑙 𝑂 3 )\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 ) + 3 𝑂 2 ( 𝑔 )\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected? \n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L \n 19) [1 point] A student combusts 1.20 g of pure propane gas in excess oxygen. What is ( 𝐶 3 𝐻 8 )\n the total number of moles of gaseous products formed? \n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol \n 20) [1 point] Consider the following reaction: \n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 ) + 𝑂 2 ( 𝑔 )\n How many of the following correctly describe this reaction? \n I. Decomposition Reaction \n II. Oxidation-Reduction Reaction \n III. Combustion Reaction \n IV. Acid-Base Reaction \n a) 1 b) 2 c) 3 d) 4"
+      },
+      {
+        "id": "17",
+        "label": "Question 17",
+        "prompt": "[1 point] Which of the following are oxidation-reduction reactions?\n I) 2 𝑀𝑔 ( 𝑠 )+ 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 ) → 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 )+ 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "I & II" },
+          { "id": "B", "text": "I & III" },
+          { "id": "C", "text": "II & IV" },
+          { "id": "D", "text": "III & IV" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "18",
+        "label": "Question 18",
+        "prompt": "[1 point] A 25.0 g sample of potassium chlorate ( 𝐾𝐶𝑙 𝑂 3 ) decomposes completely in heat:\n\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 )+ 3 𝑂 2 ( 𝑔 )\n\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected?\n\n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L",
+        "type": "frq",
+        "points": 0,
+        "page": 5,
+        "context": "2025 Captain’s Summer Exchange Page 4 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 11) [1 point] A 4.18 g sample of a compound contains 0.80 g of carbon, 0.20 g of hydrogen, and \n the rest oxygen. What is the empirical formula? \n a) b) c) d) 𝐶 𝐻 3 𝑂 3 𝐶 2 𝐻 4 𝑂 3 𝐶 3 𝐻 8 𝑂 4 𝑁𝑂𝑇𝐴 \n 12) [1 point] What is the effect of increasing the concentration of a reactant on the rate of \n reaction for a first-order reaction? \n a) Rate increases b) Rate decreases \n c) Rate stays the same d) Cannot be determined with information given \n 13) [1 point] What principle in kinetics states that the transition state of a reaction resembles the \n structure of the reactants or products that are closest in energy? \n a) Arrhenius Equation b) Hammond’s Postulate \n c) Collision Theory d) Transition State Theory \n 14) [1 point] A plot of vs time yields a straight line with slope -0.00693. What is the 𝑙𝑛 [ 𝐴 ]\n half-life of this reaction? \n a) 0.01 s b) 10 s c) 100 s d) 1000 s \n 15) [1 point] An unknown hydrate MgSO4xH2O is heated. The initial mass is 6.123 g, and after \n heating to remove water, the residue weighs 2.984 g. What is the value of x? \n a) 4 b) 5 c) 6 d) 7 \n 16) [1 point] The following mechanism is proposed for a reaction: \n Step 1: (fast equilibrium) 𝑁 𝑂 2 + 𝐹 2 ↔ 𝑁 𝑂 2 𝐹 + 𝐹 \n Step 2: (slow) 𝐹 + 𝑁 𝑂 2 → 𝑁 𝑂 2 𝐹 \n What is the rate law for the overall reaction? \n a) b) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ][ 𝐹 2 ] 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ] 2 [ 𝐹 2 ]\n c) d) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ] 2 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ][ 𝑁 𝑂 2 𝐹 }\n 2025 Captain’s Summer Exchange Page 5 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 17) [1 point] Which of the following are oxidation-reduction reactions? \n I) 2 𝑀𝑔 ( 𝑠 ) + 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 )→ 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 ) + 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )\n a) I & II b) I & III c) II & IV d) III & IV \n 18) [1 point] A 25.0 g sample of potassium chlorate decomposes completely in heat: ( 𝐾𝐶𝑙 𝑂 3 )\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 ) + 3 𝑂 2 ( 𝑔 )\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected? \n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L \n 19) [1 point] A student combusts 1.20 g of pure propane gas in excess oxygen. What is ( 𝐶 3 𝐻 8 )\n the total number of moles of gaseous products formed? \n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol \n 20) [1 point] Consider the following reaction: \n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 ) + 𝑂 2 ( 𝑔 )\n How many of the following correctly describe this reaction? \n I. Decomposition Reaction \n II. Oxidation-Reduction Reaction \n III. Combustion Reaction \n IV. Acid-Base Reaction \n a) 1 b) 2 c) 3 d) 4 \n 2025 Captain’s Summer Exchange Page 6 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 21) [2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to \n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen \n (O). What is the empirical formula of this compound? \n 22) [3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol \n . Ethanol is oxidized to acetic acid , and the anion from the ( 𝐶 2 𝐻 5 𝑂𝐻 ) ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n compound is reduced to Cr³ ⁺ . Write the balanced net ionic equation for this reaction: \n 23) [3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol are mixed in excess ( 𝐶 2 𝐻 5 𝑂𝐻 )\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid \n that can be produced from the limiting reagent, and find how many grams of ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n the excess reagent [1] remain after the reaction is complete."
+      },
+      {
+        "id": "19",
+        "label": "Question 19",
+        "prompt": "[1 point] A student combusts 1.20 g of pure propane gas ( 𝐶 3 𝐻 8 ) in excess oxygen. What is\n\n the total number of moles of gaseous products formed?\n\n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol",
+        "type": "frq",
+        "points": 0,
+        "page": 5,
+        "context": "2025 Captain’s Summer Exchange Page 4 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 11) [1 point] A 4.18 g sample of a compound contains 0.80 g of carbon, 0.20 g of hydrogen, and \n the rest oxygen. What is the empirical formula? \n a) b) c) d) 𝐶 𝐻 3 𝑂 3 𝐶 2 𝐻 4 𝑂 3 𝐶 3 𝐻 8 𝑂 4 𝑁𝑂𝑇𝐴 \n 12) [1 point] What is the effect of increasing the concentration of a reactant on the rate of \n reaction for a first-order reaction? \n a) Rate increases b) Rate decreases \n c) Rate stays the same d) Cannot be determined with information given \n 13) [1 point] What principle in kinetics states that the transition state of a reaction resembles the \n structure of the reactants or products that are closest in energy? \n a) Arrhenius Equation b) Hammond’s Postulate \n c) Collision Theory d) Transition State Theory \n 14) [1 point] A plot of vs time yields a straight line with slope -0.00693. What is the 𝑙𝑛 [ 𝐴 ]\n half-life of this reaction? \n a) 0.01 s b) 10 s c) 100 s d) 1000 s \n 15) [1 point] An unknown hydrate MgSO4xH2O is heated. The initial mass is 6.123 g, and after \n heating to remove water, the residue weighs 2.984 g. What is the value of x? \n a) 4 b) 5 c) 6 d) 7 \n 16) [1 point] The following mechanism is proposed for a reaction: \n Step 1: (fast equilibrium) 𝑁 𝑂 2 + 𝐹 2 ↔ 𝑁 𝑂 2 𝐹 + 𝐹 \n Step 2: (slow) 𝐹 + 𝑁 𝑂 2 → 𝑁 𝑂 2 𝐹 \n What is the rate law for the overall reaction? \n a) b) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ][ 𝐹 2 ] 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ] 2 [ 𝐹 2 ]\n c) d) 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ] 2 𝑟𝑎𝑡𝑒 = 𝑘 [ 𝑁 𝑂 2 ][ 𝑁 𝑂 2 𝐹 }\n 2025 Captain’s Summer Exchange Page 5 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 17) [1 point] Which of the following are oxidation-reduction reactions? \n I) 2 𝑀𝑔 ( 𝑠 ) + 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 )→ 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 ) + 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )\n a) I & II b) I & III c) II & IV d) III & IV \n 18) [1 point] A 25.0 g sample of potassium chlorate decomposes completely in heat: ( 𝐾𝐶𝑙 𝑂 3 )\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 ) + 3 𝑂 2 ( 𝑔 )\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected? \n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L \n 19) [1 point] A student combusts 1.20 g of pure propane gas in excess oxygen. What is ( 𝐶 3 𝐻 8 )\n the total number of moles of gaseous products formed? \n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol \n 20) [1 point] Consider the following reaction: \n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 ) + 𝑂 2 ( 𝑔 )\n How many of the following correctly describe this reaction? \n I. Decomposition Reaction \n II. Oxidation-Reduction Reaction \n III. Combustion Reaction \n IV. Acid-Base Reaction \n a) 1 b) 2 c) 3 d) 4 \n 2025 Captain’s Summer Exchange Page 6 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 21) [2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to \n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen \n (O). What is the empirical formula of this compound? \n 22) [3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol \n . Ethanol is oxidized to acetic acid , and the anion from the ( 𝐶 2 𝐻 5 𝑂𝐻 ) ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n compound is reduced to Cr³ ⁺ . Write the balanced net ionic equation for this reaction: \n 23) [3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol are mixed in excess ( 𝐶 2 𝐻 5 𝑂𝐻 )\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid \n that can be produced from the limiting reagent, and find how many grams of ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n the excess reagent [1] remain after the reaction is complete."
+      },
+      {
+        "id": "20",
+        "label": "Question 20",
+        "prompt": "[1 point] Consider the following reaction:\n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 )+ 𝑂 2 ( 𝑔 )\n\n How many of the following correctly describe this reaction?\n I. Decomposition Reaction\n II. Oxidation-Reduction Reaction\n III. Combustion Reaction\n IV. Acid-Base Reaction",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "1" },
+          { "id": "B", "text": "2" },
+          { "id": "C", "text": "3" },
+          { "id": "D", "text": "4\n\f\n 2025 Captain’s Summer Exchange Page 6 of 9" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "21",
+        "label": "Question 21",
+        "prompt": "[2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to\n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen\n (O). What is the empirical formula of this compound?",
+        "type": "frq",
+        "points": 2,
+        "page": 6,
+        "context": "2025 Captain’s Summer Exchange Page 5 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 17) [1 point] Which of the following are oxidation-reduction reactions? \n I) 2 𝑀𝑔 ( 𝑠 ) + 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 )→ 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 ) + 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )\n a) I & II b) I & III c) II & IV d) III & IV \n 18) [1 point] A 25.0 g sample of potassium chlorate decomposes completely in heat: ( 𝐾𝐶𝑙 𝑂 3 )\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 ) + 3 𝑂 2 ( 𝑔 )\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected? \n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L \n 19) [1 point] A student combusts 1.20 g of pure propane gas in excess oxygen. What is ( 𝐶 3 𝐻 8 )\n the total number of moles of gaseous products formed? \n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol \n 20) [1 point] Consider the following reaction: \n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 ) + 𝑂 2 ( 𝑔 )\n How many of the following correctly describe this reaction? \n I. Decomposition Reaction \n II. Oxidation-Reduction Reaction \n III. Combustion Reaction \n IV. Acid-Base Reaction \n a) 1 b) 2 c) 3 d) 4 \n 2025 Captain’s Summer Exchange Page 6 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 21) [2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to \n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen \n (O). What is the empirical formula of this compound? \n 22) [3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol \n . Ethanol is oxidized to acetic acid , and the anion from the ( 𝐶 2 𝐻 5 𝑂𝐻 ) ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n compound is reduced to Cr³ ⁺ . Write the balanced net ionic equation for this reaction: \n 23) [3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol are mixed in excess ( 𝐶 2 𝐻 5 𝑂𝐻 )\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid \n that can be produced from the limiting reagent, and find how many grams of ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n the excess reagent [1] remain after the reaction is complete. \n 2025 Captain’s Summer Exchange Page 7 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 24) The decomposition of dinitrogen pentoxide in a solution occurs as follows: \n 2 𝑁 2 𝑂 5 → 4 𝑁 𝑂 2 + 𝑂 2 \n A student conducts the decomposition reaction at and measures the concentration of 45 𝐶 ° \n at various times: 𝑁 2 𝑂 5 \n 𝑇𝑖𝑚𝑒 ( 𝑠 ) [ 𝑁 2 𝑂 5 ]\n 0 0.800 \n 100 0.567 \n 200 0.402 \n 300 0.285 \n 400 0.202 \n 500 0.143 \n a) [2 points] Using the data provided, determine the order of the reaction with respect to \n N2O5. Show all work and calculation. \n b) [3 points] Calculate rate constant k for this reaction and include appropriate units. \n c) [2 points] Use the integrated rate law for the reaction and predict the concentration of 𝑁 2 𝑂 5 \n at . 𝑡 = 750 𝑠"
+      },
+      {
+        "id": "22",
+        "label": "Question 22",
+        "prompt": "[3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol\n ( 𝐶 2 𝐻 5 𝑂𝐻 ) . Ethanol is oxidized to acetic acid ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 ) , and the anion from the\n\n compound is reduced to Cr³⁺. Write the balanced net ionic equation for this reaction:",
+        "type": "frq",
+        "points": 3,
+        "page": 6,
+        "context": "2025 Captain’s Summer Exchange Page 5 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 17) [1 point] Which of the following are oxidation-reduction reactions? \n I) 2 𝑀𝑔 ( 𝑠 ) + 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 )→ 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 ) + 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )\n a) I & II b) I & III c) II & IV d) III & IV \n 18) [1 point] A 25.0 g sample of potassium chlorate decomposes completely in heat: ( 𝐾𝐶𝑙 𝑂 3 )\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 ) + 3 𝑂 2 ( 𝑔 )\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected? \n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L \n 19) [1 point] A student combusts 1.20 g of pure propane gas in excess oxygen. What is ( 𝐶 3 𝐻 8 )\n the total number of moles of gaseous products formed? \n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol \n 20) [1 point] Consider the following reaction: \n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 ) + 𝑂 2 ( 𝑔 )\n How many of the following correctly describe this reaction? \n I. Decomposition Reaction \n II. Oxidation-Reduction Reaction \n III. Combustion Reaction \n IV. Acid-Base Reaction \n a) 1 b) 2 c) 3 d) 4 \n 2025 Captain’s Summer Exchange Page 6 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 21) [2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to \n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen \n (O). What is the empirical formula of this compound? \n 22) [3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol \n . Ethanol is oxidized to acetic acid , and the anion from the ( 𝐶 2 𝐻 5 𝑂𝐻 ) ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n compound is reduced to Cr³ ⁺ . Write the balanced net ionic equation for this reaction: \n 23) [3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol are mixed in excess ( 𝐶 2 𝐻 5 𝑂𝐻 )\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid \n that can be produced from the limiting reagent, and find how many grams of ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n the excess reagent [1] remain after the reaction is complete. \n 2025 Captain’s Summer Exchange Page 7 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 24) The decomposition of dinitrogen pentoxide in a solution occurs as follows: \n 2 𝑁 2 𝑂 5 → 4 𝑁 𝑂 2 + 𝑂 2 \n A student conducts the decomposition reaction at and measures the concentration of 45 𝐶 ° \n at various times: 𝑁 2 𝑂 5 \n 𝑇𝑖𝑚𝑒 ( 𝑠 ) [ 𝑁 2 𝑂 5 ]\n 0 0.800 \n 100 0.567 \n 200 0.402 \n 300 0.285 \n 400 0.202 \n 500 0.143 \n a) [2 points] Using the data provided, determine the order of the reaction with respect to \n N2O5. Show all work and calculation. \n b) [3 points] Calculate rate constant k for this reaction and include appropriate units. \n c) [2 points] Use the integrated rate law for the reaction and predict the concentration of 𝑁 2 𝑂 5 \n at . 𝑡 = 750 𝑠"
+      },
+      {
+        "id": "23",
+        "label": "Question 23",
+        "prompt": "[3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol ( 𝐶 2 𝐻 5 𝑂𝐻 ) are mixed in excess\n\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid\n ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 ) that can be produced from the limiting reagent, and find how many grams of\n\n the excess reagent [1] remain after the reaction is complete.\n\f\n 2025 Captain’s Summer Exchange Page 7 of 9",
+        "type": "frq",
+        "points": 3,
+        "page": 6,
+        "context": "2025 Captain’s Summer Exchange Page 5 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 17) [1 point] Which of the following are oxidation-reduction reactions? \n I) 2 𝑀𝑔 ( 𝑠 ) + 𝑂 2 ( 𝑔 )→ 2 𝑀𝑔𝑂 ( 𝑠 )\n II) 𝐻𝐶𝑙 ( 𝑎𝑞 ) + 𝑁𝑎𝑂𝐻 ( 𝑎𝑞 )→ 𝑁𝑎𝐶𝑙 ( 𝑎𝑞 ) + 𝐻 2 𝑂 ( 𝑙 )\n III) 𝑍𝑛 ( 𝑠 ) + 𝐶 𝑢 2 + ( 𝑎𝑞 )→ 𝑍 𝑛 2 + ( 𝑎𝑞 ) + 𝐶𝑢 ( 𝑠 )\n IV) 𝐶𝑎𝐶 𝑂 3 ( 𝑠 )→ 𝐶𝑎𝑂 ( 𝑠 ) + 𝐶 𝑂 2 ( 𝑔 )\n a) I & II b) I & III c) II & IV d) III & IV \n 18) [1 point] A 25.0 g sample of potassium chlorate decomposes completely in heat: ( 𝐾𝐶𝑙 𝑂 3 )\n 2 𝐾𝐶𝑙 𝑂 3 ( 𝑠 )→ 2 𝐾𝐶𝑙 ( 𝑠 ) + 3 𝑂 2 ( 𝑔 )\n If the decomposition is 80.0% efficient, how many liters of oxygen gas (at STP) is collected? \n a) 3.73 L b) 4.48 L c) 6.00 L d) 8.21 L \n 19) [1 point] A student combusts 1.20 g of pure propane gas in excess oxygen. What is ( 𝐶 3 𝐻 8 )\n the total number of moles of gaseous products formed? \n a) 0.0273 mol b) 0.0818 mol c) 0.1090 mol d) 0.136 mol \n 20) [1 point] Consider the following reaction: \n 2 𝐻 2 𝑂 2 ( 𝑎𝑞 )→ 2 𝐻 2 𝑂 ( 𝑙 ) + 𝑂 2 ( 𝑔 )\n How many of the following correctly describe this reaction? \n I. Decomposition Reaction \n II. Oxidation-Reduction Reaction \n III. Combustion Reaction \n IV. Acid-Base Reaction \n a) 1 b) 2 c) 3 d) 4 \n 2025 Captain’s Summer Exchange Page 6 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 21) [2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to \n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen \n (O). What is the empirical formula of this compound? \n 22) [3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol \n . Ethanol is oxidized to acetic acid , and the anion from the ( 𝐶 2 𝐻 5 𝑂𝐻 ) ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n compound is reduced to Cr³ ⁺ . Write the balanced net ionic equation for this reaction: \n 23) [3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol are mixed in excess ( 𝐶 2 𝐻 5 𝑂𝐻 )\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid \n that can be produced from the limiting reagent, and find how many grams of ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n the excess reagent [1] remain after the reaction is complete. \n 2025 Captain’s Summer Exchange Page 7 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 24) The decomposition of dinitrogen pentoxide in a solution occurs as follows: \n 2 𝑁 2 𝑂 5 → 4 𝑁 𝑂 2 + 𝑂 2 \n A student conducts the decomposition reaction at and measures the concentration of 45 𝐶 ° \n at various times: 𝑁 2 𝑂 5 \n 𝑇𝑖𝑚𝑒 ( 𝑠 ) [ 𝑁 2 𝑂 5 ]\n 0 0.800 \n 100 0.567 \n 200 0.402 \n 300 0.285 \n 400 0.202 \n 500 0.143 \n a) [2 points] Using the data provided, determine the order of the reaction with respect to \n N2O5. Show all work and calculation. \n b) [3 points] Calculate rate constant k for this reaction and include appropriate units. \n c) [2 points] Use the integrated rate law for the reaction and predict the concentration of 𝑁 2 𝑂 5 \n at . 𝑡 = 750 𝑠"
+      },
+      {
+        "id": "24",
+        "label": "Question 24",
+        "prompt": "The decomposition of dinitrogen pentoxide in a solution occurs as follows:\n 2 𝑁 2 𝑂 5 → 4 𝑁 𝑂 2 + 𝑂 2\n\n A student conducts the decomposition reaction at 45 𝐶 ° and measures the concentration of\n 𝑁 2 𝑂 5 at various times:\n\n\n 𝑇𝑖𝑚𝑒 ( 𝑠 ) [ 𝑁 2 𝑂 5 ]\n\n 0 0.800\n\n 100 0.567\n\n 200 0.402\n\n 300 0.285\n\n 400 0.202\n\n 500 0.143\n\n\n a) [2 points] Using the data provided, determine the order of the reaction with respect to\n N2O5. Show all work and calculation.\n\n\n\n\n\n\n\n\n\n b) [3 points] Calculate rate constant k for this reaction and include appropriate units.\n\n\n\n\n\n\n\n\n\n c) [2 points] Use the integrated rate law for the reaction and predict the concentration of 𝑁 2 𝑂 5\n\n at 𝑡 = 750 𝑠 .\n\f\n 2025 Captain’s Summer Exchange Page 8 of 9",
+        "type": "frq",
+        "points": 7,
+        "page": 7,
+        "context": "2025 Captain’s Summer Exchange Page 6 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 21) [2 points] A yellow compound with a total mass of 5.82 grams is analyzed and found to \n contain 2.339 grams of potassium (K), 1.551 grams of chromium (Cr) and the rest oxygen \n (O). What is the empirical formula of this compound? \n 22) [3 points] In acidic solution, the yellow compound from Question #21 reacts with ethanol \n . Ethanol is oxidized to acetic acid , and the anion from the ( 𝐶 2 𝐻 5 𝑂𝐻 ) ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n compound is reduced to Cr³ ⁺ . Write the balanced net ionic equation for this reaction: \n 23) [3 points] If 2.00 g of (Question #18) and 1.00 g of ethanol are mixed in excess ( 𝐶 2 𝐻 5 𝑂𝐻 )\n acid, determine the limiting reagent [1]. Calculate the maximum mass [1] of acetic acid \n that can be produced from the limiting reagent, and find how many grams of ( 𝐶 𝐻 3 𝐶𝑂𝑂𝐻 )\n the excess reagent [1] remain after the reaction is complete. \n 2025 Captain’s Summer Exchange Page 7 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 24) The decomposition of dinitrogen pentoxide in a solution occurs as follows: \n 2 𝑁 2 𝑂 5 → 4 𝑁 𝑂 2 + 𝑂 2 \n A student conducts the decomposition reaction at and measures the concentration of 45 𝐶 ° \n at various times: 𝑁 2 𝑂 5 \n 𝑇𝑖𝑚𝑒 ( 𝑠 ) [ 𝑁 2 𝑂 5 ]\n 0 0.800 \n 100 0.567 \n 200 0.402 \n 300 0.285 \n 400 0.202 \n 500 0.143 \n a) [2 points] Using the data provided, determine the order of the reaction with respect to \n N2O5. Show all work and calculation. \n b) [3 points] Calculate rate constant k for this reaction and include appropriate units. \n c) [2 points] Use the integrated rate law for the reaction and predict the concentration of 𝑁 2 𝑂 5 \n at . 𝑡 = 750 𝑠 \n 2025 Captain’s Summer Exchange Page 8 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 25) Another student proposes this two-step mechanism for the decomposition of : 𝑁 2 𝑂 5 \n 𝑆𝑡𝑒𝑝 1 ( 𝑓𝑎𝑠𝑡 𝑒𝑞𝑢𝑖𝑙𝑖𝑏𝑟𝑖𝑢𝑚 ): 𝑁 2 𝑂 5 ↔ 𝑁 𝑂 2 + 𝑁 𝑂 3 \n 𝑆𝑡𝑒𝑝 2 ( 𝑠𝑙𝑜𝑤 ): 𝑁 𝑂 2 + 𝑁 𝑂 3 → 𝑁 𝑂 2 + 𝑂 2 + 𝑁𝑂 \n a) [2 points] Write the overall reaction for this mechanism. \n b) [2 points] Is this mechanism consistent with the observed rate law? (points will only be given \n if a justification is provided). \n c) [2 points] If your answer to the previous question is no, propose a modification or \n alternate/extra step that would better align with the observed rate law. Put N/A if the \n mechanism is already consistent with the observed rate law. \n d) [3 points] A third student repeats the experiment at a double the original temperature in \n Kelvin and observes that the rate constant increases by a factor of 20000. Estimate the \n activation energy for the decomposition reaction."
+      },
+      {
+        "id": "25",
+        "label": "Question 25",
+        "prompt": "Another student proposes this two-step mechanism for the decomposition of 𝑁 2 𝑂 5 :\n\n 𝑆𝑡𝑒𝑝 1 ( 𝑓𝑎𝑠𝑡 𝑒𝑞𝑢𝑖𝑙𝑖𝑏𝑟𝑖𝑢𝑚 ): 𝑁 2 𝑂 5 ↔ 𝑁 𝑂 2 + 𝑁 𝑂 3\n\n 𝑆𝑡𝑒𝑝 2 ( 𝑠𝑙𝑜𝑤 ): 𝑁 𝑂 2 + 𝑁 𝑂 3 → 𝑁 𝑂 2 + 𝑂 2 + 𝑁𝑂\n\n\n a) [2 points] Write the overall reaction for this mechanism.\n\n\n\n\n\n\n\n\n\n b) [2 points] Is this mechanism consistent with the observed rate law? (points will only be given\n if a justification is provided).\n\n\n\n\n\n\n\n\n\n c) [2 points] If your answer to the previous question is no, propose a modification or\n alternate/extra step that would better align with the observed rate law. Put N/A if the\n mechanism is already consistent with the observed rate law.\n\n\n\n\n\n\n\n\n\n d) [3 points] A third student repeats the experiment at a double the original temperature in\n Kelvin and observes that the rate constant increases by a factor of 20000. Estimate the\n activation energy for the decomposition reaction.\n\f\n 2025 Captain’s Summer Exchange Page 9 of 9",
+        "type": "frq",
+        "points": 9,
+        "page": 8,
+        "context": "2025 Captain’s Summer Exchange Page 7 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 24) The decomposition of dinitrogen pentoxide in a solution occurs as follows: \n 2 𝑁 2 𝑂 5 → 4 𝑁 𝑂 2 + 𝑂 2 \n A student conducts the decomposition reaction at and measures the concentration of 45 𝐶 ° \n at various times: 𝑁 2 𝑂 5 \n 𝑇𝑖𝑚𝑒 ( 𝑠 ) [ 𝑁 2 𝑂 5 ]\n 0 0.800 \n 100 0.567 \n 200 0.402 \n 300 0.285 \n 400 0.202 \n 500 0.143 \n a) [2 points] Using the data provided, determine the order of the reaction with respect to \n N2O5. Show all work and calculation. \n b) [3 points] Calculate rate constant k for this reaction and include appropriate units. \n c) [2 points] Use the integrated rate law for the reaction and predict the concentration of 𝑁 2 𝑂 5 \n at . 𝑡 = 750 𝑠 \n 2025 Captain’s Summer Exchange Page 8 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 25) Another student proposes this two-step mechanism for the decomposition of : 𝑁 2 𝑂 5 \n 𝑆𝑡𝑒𝑝 1 ( 𝑓𝑎𝑠𝑡 𝑒𝑞𝑢𝑖𝑙𝑖𝑏𝑟𝑖𝑢𝑚 ): 𝑁 2 𝑂 5 ↔ 𝑁 𝑂 2 + 𝑁 𝑂 3 \n 𝑆𝑡𝑒𝑝 2 ( 𝑠𝑙𝑜𝑤 ): 𝑁 𝑂 2 + 𝑁 𝑂 3 → 𝑁 𝑂 2 + 𝑂 2 + 𝑁𝑂 \n a) [2 points] Write the overall reaction for this mechanism. \n b) [2 points] Is this mechanism consistent with the observed rate law? (points will only be given \n if a justification is provided). \n c) [2 points] If your answer to the previous question is no, propose a modification or \n alternate/extra step that would better align with the observed rate law. Put N/A if the \n mechanism is already consistent with the observed rate law. \n d) [3 points] A third student repeats the experiment at a double the original temperature in \n Kelvin and observes that the rate constant increases by a factor of 20000. Estimate the \n activation energy for the decomposition reaction. \n 2025 Captain’s Summer Exchange Page 9 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 26) I is an intermediate for the reaction below, and the rate law is . 𝑅𝑎𝑡𝑒 = 𝑘 [ 𝐴 ] 2 [ 𝐵 ]\n (fast, rate constants and ) 𝑆𝑡𝑒𝑝 1 : 𝐴 + 𝐵 ⇔ 𝐼 𝑘 1 𝑘 − 1 \n (slow, rate constant given by ) 𝑆𝑡𝑒𝑝 2 : 𝐼 + 𝐴 → 𝑃 + 𝐷 𝑘 2 \n a) [2 points] Which step is the rate determining step and why? \n b) [4 points] Write the steady state approximation for the intermediate I, and derive an \n expression for in terms of and the rate constants. [ 𝐼 ] [ 𝐴 }, [ 𝐵 },\n c) [3 points] Using your derived expression for , derive the overall rate law for the formation [ 𝐼 ]\n of the product , and show that it matches the experimentally determined rate law. Assume 𝑃 \n that is incredibly small compared to or . 𝑘 2 𝑘 1 𝑘 − 1 \n d) [2 points] If the equilibrium constant for step 1 of the reaction is given by , 𝐾 = 𝑘 1 / 𝑘 − 1 \n rewrite the overall rate constant in terms of and . 𝑘 𝐾 𝑘 2"
+      },
+      {
+        "id": "26",
+        "label": "Question 26",
+        "prompt": "I is an intermediate for the reaction below, and the rate law is 𝑅𝑎𝑡𝑒 = 𝑘 [ 𝐴 ] 2 [ 𝐵 ] .\n\n 𝑆𝑡𝑒𝑝 1 : 𝐴 + 𝐵 ⇔ 𝐼 (fast, rate constants 𝑘 1 and 𝑘 − 1 )\n\n 𝑆𝑡𝑒𝑝 2 : 𝐼 + 𝐴 → 𝑃 + 𝐷 (slow, rate constant given by 𝑘 2 )\n\n\n a) [2 points] Which step is the rate determining step and why?\n\n\n\n\n\n\n\n\n\n b) [4 points] Write the steady state approximation for the intermediate I, and derive an\n expression for [ 𝐼 ] in terms of [ 𝐴 }, [ 𝐵 }, and the rate constants.\n\n\n\n\n\n\n\n\n\n c) [3 points] Using your derived expression for [ 𝐼 ] , derive the overall rate law for the formation\n of the product 𝑃 , and show that it matches the experimentally determined rate law. Assume\n that 𝑘 2 is incredibly small compared to 𝑘 1 or 𝑘 − 1 .\n\n\n\n\n\n\n\n\n\n d) [2 points] If the equilibrium constant for step 1 of the reaction is given by 𝐾 = 𝑘 1 / 𝑘 − 1 ,\n\n rewrite the overall rate constant 𝑘 in terms of 𝐾 and 𝑘 2 .",
+        "type": "frq",
+        "points": 11,
+        "page": 9,
+        "context": "2025 Captain’s Summer Exchange Page 8 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 25) Another student proposes this two-step mechanism for the decomposition of : 𝑁 2 𝑂 5 \n 𝑆𝑡𝑒𝑝 1 ( 𝑓𝑎𝑠𝑡 𝑒𝑞𝑢𝑖𝑙𝑖𝑏𝑟𝑖𝑢𝑚 ): 𝑁 2 𝑂 5 ↔ 𝑁 𝑂 2 + 𝑁 𝑂 3 \n 𝑆𝑡𝑒𝑝 2 ( 𝑠𝑙𝑜𝑤 ): 𝑁 𝑂 2 + 𝑁 𝑂 3 → 𝑁 𝑂 2 + 𝑂 2 + 𝑁𝑂 \n a) [2 points] Write the overall reaction for this mechanism. \n b) [2 points] Is this mechanism consistent with the observed rate law? (points will only be given \n if a justification is provided). \n c) [2 points] If your answer to the previous question is no, propose a modification or \n alternate/extra step that would better align with the observed rate law. Put N/A if the \n mechanism is already consistent with the observed rate law. \n d) [3 points] A third student repeats the experiment at a double the original temperature in \n Kelvin and observes that the rate constant increases by a factor of 20000. Estimate the \n activation energy for the decomposition reaction. \n 2025 Captain’s Summer Exchange Page 9 of 9 \n Chemistry Lab: Stoichiometry & Kinetics \n 26) I is an intermediate for the reaction below, and the rate law is . 𝑅𝑎𝑡𝑒 = 𝑘 [ 𝐴 ] 2 [ 𝐵 ]\n (fast, rate constants and ) 𝑆𝑡𝑒𝑝 1 : 𝐴 + 𝐵 ⇔ 𝐼 𝑘 1 𝑘 − 1 \n (slow, rate constant given by ) 𝑆𝑡𝑒𝑝 2 : 𝐼 + 𝐴 → 𝑃 + 𝐷 𝑘 2 \n a) [2 points] Which step is the rate determining step and why? \n b) [4 points] Write the steady state approximation for the intermediate I, and derive an \n expression for in terms of and the rate constants. [ 𝐼 ] [ 𝐴 }, [ 𝐵 },\n c) [3 points] Using your derived expression for , derive the overall rate law for the formation [ 𝐼 ]\n of the product , and show that it matches the experimentally determined rate law. Assume 𝑃 \n that is incredibly small compared to or . 𝑘 2 𝑘 1 𝑘 − 1 \n d) [2 points] If the equilibrium constant for step 1 of the reaction is given by , 𝐾 = 𝑘 1 / 𝑘 − 1 \n rewrite the overall rate constant in terms of and . 𝑘 𝐾 𝑘 2"
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "C" },
+      "2": { "correctOption": "B" },
+      "3": { "correctOption": "D" },
+      "4": { "correctOption": "D" },
+      "5": { "correctOption": "C" },
+      "6": { "correctOption": "A" },
+      "7": { "correctOption": "A" },
+      "8": { "correctOption": "C" },
+      "9": { "correctOption": "D" },
+      "10": { "correctOption": "A" },
+      "11": { "correctOption": "A" },
+      "12": { "correctOption": "A" },
+      "13": { "correctOption": "B" },
+      "14": { "correctOption": "C" },
+      "15": { "correctOption": "D" },
+      "16": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Under the stated fast equilibrium, K=[NO2F][F]/([NO2][F2]), so rate=k2[NO2][F]=k2 K [NO2]^2[F2]/[NO2F]. The denominator is absent from every offered choice; the highlighted B is incomplete. Unscored practice.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "17": { "correctOption": "B" },
+      "18": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "25.0/122.55 mol KClO3 x 3/2 x 0.800 x 22.4 L/mol = approximately 5.48 L O2 at conventional STP. None of the choices matches; key C says 6.00 L. Unscored practice.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "19": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "C3H8 + 5 O2 -> 3 CO2 + 4 H2O. With liquid water only CO2 is gaseous: approximately 0.0818 mol (key B). With vapor, total gaseous products are approximately 0.191 mol, absent from the choices. The source does not specify the product-water phase. Unscored practice.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "20": { "correctOption": "B" },
+      "21": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Oxygen mass = 5.82 - 2.339 - 1.551 = 1.93 g. Moles K=0.0598, Cr=0.0298, O=0.1206 (1 point). Divide by 0.0298 to obtain 2:1:4; formula K2CrO4, potassium chromate (1 point).",
+            "points": 2,
+            "accepted": []
+          }
+        ]
+      },
+      "22": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Oxidation half-reaction: C2H5OH + H2O -> CH3COOH + 4 H+ + 4 e- (1). Reduction: CrO4^2- + 8 H+ + 3 e- -> Cr^3+ + 4 H2O (1). Overall: 4 CrO4^2- + 3 C2H5OH + 20 H+ -> 4 Cr^3+ + 3 CH3COOH + 13 H2O (1).",
+            "points": 3,
+            "accepted": []
+          }
+        ]
+      },
+      "23": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Interpret the source’s mistaken reference to question 18 as potassium chromate from question 21. K2CrO4 is limiting: 2.00/194.20 = 0.0103 mol versus 1.00/46.07 = 0.0217 mol ethanol; ratio chromate:ethanol=4:3 (1). Acetic acid yield=0.0103 x 3/4 = 0.00772 mol, corresponding to 0.464 g CH3COOH (1). Ethanol remaining=1.00 - (2.00/194.20 x 3/4 x 46.07)=0.644 g (1).",
+            "points": 3,
+            "accepted": []
+          }
+        ]
+      },
+      "24": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Part a, 2 points: table of time and ln[N2O5] (1); equal ln-concentration decreases per 100 seconds indicate first order (1). Part b, 3 points maximum: use ln[A]=ln[A]0-kt and obtain k approximately 0.00345 s^-1; distribute method/value/unit credit within the printed three-point maximum. Part c, 2 points: apply first-order law (1); [N2O5](750)=0.800 exp(-0.00345 x 750)=approximately 0.0602 M, accepting the key’s 0.0606 M and reasonable rounding (1). Carry-forward error from b allowed if remaining calculation is correct.",
+            "points": 7,
+            "accepted": []
+          }
+        ]
+      },
+      "25": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Part a, 2: cancel intermediates and give N2O5 -> NO2 + O2 + NO. Part b, 2: fast equilibrium gives [NO2][NO3]=K[N2O5] (1); slow rate=k[NO2][NO3]=kK[N2O5], consistent with the observed first-order rate law (1). Part c, 2: N/A, since consistent. Part d, 3: Arrhenius ratio equation (1); substitute k2/k1=20000, T1=318 K, T2=636 K, R=8.314 J/mol K (1); Ea approximately 52.4 kJ/mol (1).",
+            "points": 9,
+            "accepted": []
+          }
+        ]
+      },
+      "26": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Part a, 2: step 2 (1) because it is slow (1). Part b, 4: steady state d[I]/dt=k1[A][B]-k-1[I]-k2[I][A] approximately zero (2); [I]=k1[A][B]/(k-1+k2[A]) (2). Part c, 3: v=k2[I][A] (1); substitute to obtain k1 k2[A]^2[B]/(k-1+k2[A]) (1); when k-1 >> k2[A], v approximately (k1 k2/k-1)[A]^2[B] (1). Part d, 2: overall k=k1 k2/k-1 (1)=K k2 (1).",
+            "points": 11,
+            "accepted": []
+          }
+        ]
+      }
+    },
+    "difficulty": "Hard",
+    "difficultyReason": "Stoichiometric redox calculations, integrated rate laws, Arrhenius analysis and steady-state mechanism derivation require multi-step reasoning.",
+    "topics": ["Stoichiometry", "Kinetics", "Reaction mechanisms", "Redox reactions"],
+    "topicMatch": "different",
+    "alignment": "Kinetics overlaps 2027; this older stoichiometry rotation differs from the current gases focus.",
+    "questionCount": 26,
+    "maxScore": 52
+  },
+  {
+    "id": "scioly-o2yccdutssw-c",
+    "sourceId": "o2ycCDuTsSw",
+    "sourceUrl": "https://scioly.org/tests/o2ycCDuTsSw",
+    "division": "C",
+    "eventId": "codebusters",
+    "competition": "Clements Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "/practice/scioly-o2yccdutssw-c/test.pdf",
+    "keyUrl": "/practice/scioly-o2yccdutssw-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-12",
+    "levelEvidence": null,
+    "minutes": 50,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/codebusters.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "All 14 puzzles are retained with published weights. No error allowance or partial-credit formula is supplied, so scored puzzles require the complete solution, ignoring spaces, punctuation and case. Puzzle 8 is unscored: the published Hill ciphertext disagrees with direct column-vector multiplication using the printed matrix, and padding is unspecified. Its original answer and the independently calculated X-padded result are both disclosed. Available score is 56,000 of the original 60,000 points. Archive season 2018 is retained because the cover has no date. No timed bonus is invented.",
+    "questions": [
+      {
+        "id": "1",
+        "label": "Question 1",
+        "prompt": "(2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO\n ONFL AARLOE, LOG MC CPAVLS UGM.",
+        "type": "frq",
+        "points": 2000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "2",
+        "label": "Question 2",
+        "prompt": "(5000 pts) Decrypt the following message using mono-alphabetic substitution:\n PUBOTGSSQFEUZEBDUFQ",
+        "type": "frq",
+        "points": 5000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "3",
+        "label": "Question 3",
+        "prompt": "(4000 pts) Decrypt this dancing men cipher:",
+        "type": "frq",
+        "points": 4000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "4",
+        "label": "Question 4",
+        "prompt": "(4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK\n OQU FSYNO PQ IQGGMP PFSYKQL?",
+        "type": "frq",
+        "points": 4000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "5",
+        "label": "Question 5",
+        "prompt": "(2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE\n PLUMX.",
+        "type": "frq",
+        "points": 2000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "6",
+        "label": "Question 6",
+        "prompt": "(6000 pts) Given that the following matrix was used as the encryption matrix, decrypt:\n NGCH EH XBOIKBVS YRZ INGRS.",
+        "type": "frq",
+        "points": 6000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "7",
+        "label": "Question 7",
+        "prompt": "(4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B\n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX.",
+        "type": "frq",
+        "points": 4000,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "8",
+        "label": "Question 8",
+        "prompt": "(4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN\n CRITICIZE, CONDEMN, COMPLAIN",
+        "type": "frq",
+        "points": 0,
+        "page": 2,
+        "context": "CODE BUSTERS \n TEST \n Clements Invitational \n \n Name: _______________________ \n Team Name: _________________ \n Team #: _____ Score: _____ \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "9",
+        "label": "Question 9",
+        "prompt": "(6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO\n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV\n SLQ DXXQ? S WXSOM, LG YGNX.",
+        "type": "frq",
+        "points": 6000,
+        "page": 3,
+        "context": "1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "10",
+        "label": "Question 10",
+        "prompt": "(3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère\n cipher: PIZZA IS A GREAT BLESSING",
+        "type": "frq",
+        "points": 3000,
+        "page": 3,
+        "context": "1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "11",
+        "label": "Question 11",
+        "prompt": "(6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than\n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ.",
+        "type": "frq",
+        "points": 6000,
+        "page": 3,
+        "context": "1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "12",
+        "label": "Question 12",
+        "prompt": "(5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY.",
+        "type": "frq",
+        "points": 5000,
+        "page": 3,
+        "context": "1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "13",
+        "label": "Question 13",
+        "prompt": "(3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD\n IBE EB NK, EJSE HC EJK OQKCEHBI.",
+        "type": "frq",
+        "points": 3000,
+        "page": 3,
+        "context": "1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      },
+      {
+        "id": "14",
+        "label": "Question 14",
+        "prompt": "(6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!",
+        "type": "frq",
+        "points": 6000,
+        "page": 3,
+        "context": "1. (2000 pts) Decrypt the following Vigenere cipher using the key ANTONY: I PHAR RO \n ONFL AARLOE, LOG MC CPAVLS UGM. \n \n 2. (5000 pts) Decrypt the following message using mono-alphabetic substitution: \n PUBOTGSSQFEUZEBDUFQ \n \n 3. (4000 pts) Decrypt this dancing men cipher: \n \n \n 4. (4000 pts) Given the key of encryption is a= 5 and b= -2, decrypt this affine cipher: MK \n OQU FSYNO PQ IQGGMP PFSYKQL? \n \n 5. (2000 pts) Decrypt this monoalphabetic cipher: QHE CEG WP FWZHQWEM QHIG QHE \n PLUMX. \n \n 6. (6000 pts) Given that the following matrix was used as the encryption matrix, decrypt: \n NGCH EH XBOIKBVS YRZ INGRS. \n \n \n \n \n \n 7. (4000 pts) Given the key: ETTUBRUTE decrypt this Vigenère Cipher: RHM NIRN B \n PSOXX DRYLEV EXMT, SOM XLTM C MFPXH VHFY NFLX. \n \n 8. (4000 pts) Using the following matrix for Hill encryption, encrypt: ANY FOOL CAN \n CRITICIZE, CONDEMN, COMPLAIN \n \n \n\n9. (6000 pts) Decrypt the following message using mono-alphabetic substitution: TISM PO \n S YSL, PD IPO RIPXD UGGQ SLQ YSNZXM GD IPO MPYX WX WJM MG OAXXV \n SLQ DXXQ? S WXSOM, LG YGNX. \n \n 10. (3000 pts) Encode the following message using PINEAPPLES as the key for a Vigenère \n cipher: PIZZA IS A GREAT BLESSING \n \n 11. (6000 pts) Decrypt the following Affine cipher (hint a is a number divisible by 3 less than \n 20): KTEQ VTFEQ QSZ KRNB, PRLZ QSZ KRNB VTFEQ. \n \n 12. (5000 pts) Decrypt the following Affine cipher: TG JK TGC T SFC ZTY. \n \n 13. (3000 pts) Decrypt the following message using monoalphabetic substitution: EB NK BD \n IBE EB NK, EJSE HC EJK OQKCEHBI. \n \n 14. (6000 pts) Decrypt the following Affine cipher: IH’A E BYDDQ PYDDQ SBTIAHKEA!"
+      }
+    ],
+    "keys": {
+      "1": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "I COME TO BURY CAESAR, NOT TO PRAISE HIM.",
+            "points": 2000,
+            "accepted": [],
+            "cipher": {
+              "solution": "I COME TO BURY CAESAR, NOT TO PRAISE HIM.",
+              "freeErrors": 0,
+              "penaltyPerError": 2000
+            }
+          }
+        ]
+      },
+      "2": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "DIPCHUGGETSINSPRITE",
+            "points": 5000,
+            "accepted": [],
+            "cipher": {
+              "solution": "DIPCHUGGETSINSPRITE",
+              "freeErrors": 0,
+              "penaltyPerError": 5000
+            }
+          }
+        ]
+      },
+      "3": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "RATTLE THE STARS IF YOU DARE",
+            "points": 4000,
+            "accepted": [],
+            "cipher": {
+              "solution": "RATTLE THE STARS IF YOU DARE",
+              "freeErrors": 0,
+              "penaltyPerError": 4000
+            }
+          }
+        ]
+      },
+      "4": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "IS YOU READY TO COMMIT TREASON?",
+            "points": 4000,
+            "accepted": [],
+            "cipher": {
+              "solution": "IS YOU READY TO COMMIT TREASON?",
+              "freeErrors": 0,
+              "penaltyPerError": 4000
+            }
+          }
+        ]
+      },
+      "5": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "THE PEN IS MIGHTIER THAN THE SWORD.",
+            "points": 2000,
+            "accepted": [],
+            "cipher": {
+              "solution": "THE PEN IS MIGHTIER THAN THE SWORD.",
+              "freeErrors": 0,
+              "penaltyPerError": 2000
+            }
+          }
+        ]
+      },
+      "6": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "LOST IN THOUGHTS ALL ALONE.",
+            "points": 6000,
+            "accepted": [],
+            "cipher": {
+              "solution": "LOST IN THOUGHTS ALL ALONE.",
+              "freeErrors": 0,
+              "penaltyPerError": 6000
+            }
+          }
+        ]
+      },
+      "7": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "NOT THAT I LOVED CAESAR LESS, BUT THAT I LOVED ROME MORE.",
+            "points": 4000,
+            "accepted": [],
+            "cipher": {
+              "solution": "NOT THAT I LOVED CAESAR LESS, BUT THAT I LOVED ROME MORE.",
+              "freeErrors": 0,
+              "penaltyPerError": 4000
+            }
+          }
+        ]
+      },
+      "8": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Unscored source discrepancy. Published key: ORL FYZZ WPM GFUHHNYCY WABTWYN JTYOHSJAV. Using A=0, column vectors, the printed matrix [[1,20,19],[22,7,24],[19,7,14]] and an X padding character gives ORLFYZZWPMGFUHHNYCYWATNMYNJTYOHSJALC. The source does not specify padding; discuss the convention used.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "9": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "WHAT IS A MAN, IF HIS CHIEF GOOD AND MARKET OF HIS TIME BE BUT TO SLEEP AND FEED? A BEAST, NO MORE.",
+            "points": 6000,
+            "accepted": [],
+            "cipher": {
+              "solution": "WHAT IS A MAN, IF HIS CHIEF GOOD AND MARKET OF HIS TIME BE BUT TO SLEEP AND FEED? A BEAST, NO MORE.",
+              "freeErrors": 0,
+              "penaltyPerError": 6000
+            }
+          }
+        ]
+      },
+      "10": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "EQMDA XH L KJTIG FLTHDMFV",
+            "points": 3000,
+            "accepted": [],
+            "cipher": {
+              "solution": "EQMDA XH L KJTIG FLTHDMFV",
+              "freeErrors": 0,
+              "penaltyPerError": 3000
+            }
+          }
+        ]
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "DONT COUNT THE DAYS, MAKE THE DAYS COUNT.",
+            "points": 6000,
+            "accepted": [],
+            "cipher": {
+              "solution": "DONT COUNT THE DAYS, MAKE THE DAYS COUNT.",
+              "freeErrors": 0,
+              "penaltyPerError": 6000
+            }
+          }
+        ]
+      },
+      "12": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "AN OX AND A RED CAT.",
+            "points": 5000,
+            "accepted": [],
+            "cipher": {
+              "solution": "AN OX AND A RED CAT.",
+              "freeErrors": 0,
+              "penaltyPerError": 5000
+            }
+          }
+        ]
+      },
+      "13": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "TO BE OR NOT TO BE, THAT IS THE QUESTION.",
+            "points": 3000,
+            "accepted": [],
+            "cipher": {
+              "solution": "TO BE OR NOT TO BE, THAT IS THE QUESTION.",
+              "freeErrors": 0,
+              "penaltyPerError": 3000
+            }
+          }
+        ]
+      },
+      "14": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "ITS A HOLLY JOLLY CHRISTMAS!",
+            "points": 6000,
+            "accepted": [],
+            "cipher": {
+              "solution": "ITS A HOLLY JOLLY CHRISTMAS!",
+              "freeErrors": 0,
+              "penaltyPerError": 6000
+            }
+          }
+        ]
+      }
+    },
+    "difficulty": "Hard",
+    "difficultyReason": "Fourteen puzzles include Vigenère, affine, monoalphabetic, dancing-men and matrix-based Hill encryption and decryption.",
+    "topics": ["Vigenère", "Affine", "Monoalphabetic substitution", "Hill cipher", "Dancing men"],
+    "topicMatch": "unverified",
+    "alignment": "Historical cipher families overlap general Codebusters practice; the complete 2027 cipher roster and tournament format are not certified for this older paper.",
+    "questionCount": 14,
+    "maxScore": 56000
   }
 ]

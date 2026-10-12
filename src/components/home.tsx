@@ -319,6 +319,9 @@ export function Home() {
           <Link className="text-link" href="/mission">
             Get to know our mission <span>↗</span>
           </Link>
+          <Link className="text-link" href="/mission#who-we-are">
+            Meet who made Akoizo <span>↗</span>
+          </Link>
         </div>
         <PixelStar />
       </section>

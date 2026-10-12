@@ -13,6 +13,8 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 - `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
 - `/rankings`: earned points only, using generated public learner names. Empty until students earn points in ranked tests.
 - `/` and `/mission`: public landing and mission pages.
+- `/support`, `/donate`, `/contact`: what Akoizo costs to run, Zelle donations, school sign-up email
+  (set `NEXT_PUBLIC_ZELLE_RECIPIENT`).
 - `/study-tools`: public Science Olympiad study-tools guide and division event catalog.
 - `/sitemap.xml` and `/robots.txt`: generated crawler files for Google Search Console; see [SEO setup](documents/SEO.md).
 

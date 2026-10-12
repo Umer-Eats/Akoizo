@@ -1795,5 +1795,95 @@
     "paperPath": "output/practice-research/division-c/c829e82bf402c8603ec492b677f2dd4d62754618dcd7d01a83cf5e835dd6e33c.pdf",
     "keyPath": "output/practice-research/division-c/89e096d771c7f6cd94861a3229503891bf6b6c9c6ff354c5dd60acef6de230f1.pdf",
     "attachmentPaths": []
+  },
+  {
+    "id": "scioly-n2jyiwt4yya-c",
+    "sourceId": "n2jyiWT4yYA",
+    "sourceUrl": "https://scioly.org/tests/n2jyiWT4yYA",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "competition": "Brookwood Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/n2jyiWT4yYA",
+    "keyUrl": "https://scioly.org/tests/n2jyiWT4yYA",
+    "files": [
+      {
+        "name": "dynamicplanet_2017_c_brookwood_test.pdf",
+        "type": "test",
+        "size": 584529,
+        "sha256": "55aa2a279d3d08cd238a4650dcaef908bc1a0613593d217a7c4a059cb5416aaf"
+      },
+      {
+        "name": "dynamicplanet_2017_c_brookwood_key.pdf",
+        "type": "answer_key",
+        "size": 24916,
+        "sha256": "0fafc13f685fdeafd57094c6f480029952e2c544a2f1ca438e24031fb39a07fa"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/55aa2a279d3d08cd238a4650dcaef908bc1a0613593d217a7c4a059cb5416aaf.pdf",
+    "keyPath": "output/practice-research/division-c/0fafc13f685fdeafd57094c6f480029952e2c544a2f1ca438e24031fb39a07fa.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-cvyp5-ionrm-c",
+    "sourceId": "CVYp5_ionrM",
+    "sourceUrl": "https://scioly.org/tests/CVYp5_ionrM",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/CVYp5_ionrM",
+    "keyUrl": "https://scioly.org/tests/CVYp5_ionrM",
+    "files": [
+      {
+        "name": "REVISED2_TEST_ASFA_CHEMLAB_CSE_2025.pdf",
+        "type": "test",
+        "size": 327301,
+        "sha256": "b55c3280a83a2c5cd19dae218d8e2f0c3a643d04b5399cdd6b877850f7b4fa01"
+      },
+      {
+        "name": "REVISED2_KEY_ASFA_CHEMLAB_CSE_2025.pdf",
+        "type": "answer_key",
+        "size": 480247,
+        "sha256": "6a4f90e4b1403c2f56da6c559f4c0c2a4da305b3fd587e391fa6b062800624a0"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/b55c3280a83a2c5cd19dae218d8e2f0c3a643d04b5399cdd6b877850f7b4fa01.pdf",
+    "keyPath": "output/practice-research/division-c/6a4f90e4b1403c2f56da6c559f4c0c2a4da305b3fd587e391fa6b062800624a0.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-o2yccdutssw-c",
+    "sourceId": "o2ycCDuTsSw",
+    "sourceUrl": "https://scioly.org/tests/o2ycCDuTsSw",
+    "division": "C",
+    "eventId": "codebusters",
+    "competition": "Clements Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/o2ycCDuTsSw",
+    "keyUrl": "https://scioly.org/tests/o2ycCDuTsSw",
+    "files": [
+      {
+        "name": "Code Busters.pdf",
+        "type": "test",
+        "size": 298795,
+        "sha256": "0d6eb302f820c9eaf5546eb33423dac92d97e6104884be2132b80092744a7c15"
+      },
+      {
+        "name": "Code Busters KEY.pdf",
+        "type": "answer_key",
+        "size": 273026,
+        "sha256": "840fe229221b5a46ac1a0e970242e4edac16462efffa3acbf09e746ce9367f22"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/0d6eb302f820c9eaf5546eb33423dac92d97e6104884be2132b80092744a7c15.pdf",
+    "keyPath": "output/practice-research/division-c/840fe229221b5a46ac1a0e970242e4edac16462efffa3acbf09e746ce9367f22.pdf",
+    "attachmentPaths": []
   }
 ]
