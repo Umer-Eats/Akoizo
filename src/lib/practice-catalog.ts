@@ -102,11 +102,17 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       const key = test.keys[question.id];
       if (!key) return fail();
       if (question.type === 'mcq') {
-        if (key.optionPoints && (!question.multiple || !key.correctOptions ||
-          Object.keys(key.optionPoints).length !== key.correctOptions.length ||
-          Object.entries(key.optionPoints).some(([id, points]) => !key.correctOptions!.includes(id) || !Number.isFinite(points) || points <= 0) ||
-          Math.abs(Object.values(key.optionPoints).reduce((sum, points) => sum + points, 0) - question.points) > 1e-8)) return fail();
         const options = question.options?.map((o) => o.id);
+        if (key.optionPoints) {
+          if (Object.entries(key.optionPoints).some(([id, points]) =>
+            !options?.includes(id) || !Number.isFinite(points) || points <= 0 || points > question.points)) return fail();
+          if (question.multiple) {
+            if (!key.correctOptions || Object.keys(key.optionPoints).length !== key.correctOptions.length ||
+              Object.keys(key.optionPoints).some((id) => !key.correctOptions!.includes(id)) ||
+              Math.abs(Object.values(key.optionPoints).reduce((sum, points) => sum + points, 0) - question.points) > 1e-8) return fail();
+          } else if (!key.correctOption || key.optionPoints[key.correctOption] !== question.points ||
+            key.acceptedOptions?.some((id) => key.optionPoints![id] !== question.points)) return fail();
+        }
         const correct = question.multiple
           ? key.correctOptions
           : (key.acceptedOptions ?? [key.correctOption]);

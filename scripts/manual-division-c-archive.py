@@ -26,12 +26,16 @@ class Paper:
                          instructions='Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.',
                          scoringBasis='Published question weights.', questions=[], keys={})
         self.test.update(metadata)
+        if self.test['level'] and not self.test.get('levelEvidence'):
+            self.test['levelEvidence']={'sourceUrl':self.source['sourceUrl'], 'text':self.source.get('levelText',self.source['competition']), 'basis':'Competition reported by the Scioly archive; no inferred tournament tier.'}
 
     def mcq(self, id, prompt, choices, correct, points=1, page=1, accepted=None, option_points=None):
         selected = correct if isinstance(correct,list) else [correct]
         assert all(c in [o['id'] for o in choices] for c in selected), (id, choices, correct)
         self.test['questions'].append(dict(id=id, label=f'Question {id}', prompt=prompt, type='mcq', multiple=isinstance(correct,list), options=choices, points=points, page=page))
-        self.test['keys'][id] = ({'correctOptions':correct,'optionPoints':option_points} if isinstance(correct,list) else {'correctOption':correct})
+        self.test['keys'][id] = ({'correctOptions':correct} if isinstance(correct,list) else {'correctOption':correct})
+        if option_points:
+            self.test['keys'][id]['optionPoints']=option_points
         if accepted:
             self.test['keys'][id]['acceptedOptions']=accepted
 

@@ -32,7 +32,7 @@ const testColumns = `t.id AS test_id,t.event_id,t.title,t.minutes,t.question_cou
 const attemptColumns = `a.id AS assignment_id,a.student_id,a.due_date,a.started_at,a.submitted_at,a.released_at,a.violations,
   json_extract(a.result_json,'$.score') AS score, json_extract(a.result_json,'$.maxScore') AS result_max,
   json_extract(a.result_json,'$.percentage') AS percentage, json_extract(a.result_json,'$.pendingPoints') AS pending,
-  json_extract(a.result_json,'$.automaticGrading') AS grading`;
+  json_extract(a.result_json,'$.automaticGrading') AS grading, json_extract(a.result_json,'$.closedBy') AS closed_by`;
 
 function requireInstructor(profile: Profile) {
   if (profile.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
@@ -79,6 +79,7 @@ function attemptOf(row: Row): RankedAttempt {
     deadline: deadlineOf(row),
     submittedAt: row.submitted_at ? String(row.submitted_at) : null,
     violations: Number(row.violations || 0),
+    closedByExit: row.closed_by === 'exit',
     score: row.submitted_at
       ? {
           score: Number(row.score || 0),
@@ -555,6 +556,7 @@ async function finalize(
   answers: Answers,
   config: PracticeAIConfig,
   gradeWritten = true,
+  closedByExit = false,
 ) {
   const id = String(row.assignment_id);
   const paper = JSON.parse(String(row.paper_json)) as RankedPaper;
@@ -567,6 +569,7 @@ async function finalize(
     completedAt: now,
     // 'unavailable' marks written answers that still need the Gemini pass.
     automaticGrading: initial.pendingPoints ? 'unavailable' : 'complete',
+    ...(closedByExit ? { closedBy: 'exit' as const } : {}),
   };
   const studentId = String(row.student_id);
   await db.batch(
@@ -716,7 +719,7 @@ export async function submitRanked(
           gradablePaper(String(row.test_id), bareEvent(row.event_id), paper),
           body.answers,
         );
-    await finalize(db, row, answers, config);
+    await finalize(db, row, answers, config, true, body.reason === 'exit');
   }
   return rankedForStudent(db, student, body.testId);
 }
@@ -746,6 +749,39 @@ async function instructorAttempt(db: Database, instructor: Profile, assignmentId
       : undefined;
   if (!row) throw new AppError(404, 'That attempt is not in your school.');
   return row;
+}
+
+/**
+ * Reopen an attempt that closed because the student left full screen. The submission, its score
+ * and its points are withdrawn; saved answers stay, and the student gets back the time they had
+ * left when the test closed.
+ */
+export async function reopenRanked(db: Database, instructor: Profile, assignmentId: unknown) {
+  const row = await instructorAttempt(db, instructor, assignmentId);
+  if (!row.submitted_at || row.closed_by !== 'exit')
+    throw new AppError(
+      409,
+      'Only a test that closed when the student left full screen can be reopened.',
+    );
+  const id = String(row.assignment_id);
+  const used = Date.parse(String(row.submitted_at)) - Date.parse(String(row.started_at));
+  const result = await db.batch(
+    [
+      {
+        sql: `UPDATE ranked_assignments SET started_at=?,submitted_at=NULL,result_json=NULL,released_at=NULL
+          WHERE id=? AND submitted_at=?`,
+        args: [new Date(Date.now() - used).toISOString(), id, String(row.submitted_at)],
+      },
+      { sql: 'DELETE FROM points_ledger WHERE id=? AND changes()=1', args: [id] },
+      {
+        sql: 'DELETE FROM test_attempts WHERE id=? AND NOT EXISTS (SELECT 1 FROM points_ledger p WHERE p.test_attempt_id=?)',
+        args: [id, id],
+      },
+    ],
+    'immediate',
+  );
+  if (!result[0].rowsAffected)
+    throw new AppError(409, 'This attempt changed. Refresh the results.');
 }
 
 /** Collect an attempt whose time ran out before the student submitted. */

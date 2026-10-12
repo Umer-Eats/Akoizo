@@ -543,6 +543,7 @@ function RankedResults({
                     </th>
                     <td>
                       {expired(row) ? 'Time expired' : statusText[row.status]}
+                      {row.closedByExit && <small data-flag="true">Closed: left full screen</small>}
                       <small>Due {row.due}</small>
                     </td>
                     <td>
@@ -618,6 +619,24 @@ function RankedResults({
                             {busy === `collect-${row.assignmentId}`
                               ? 'Collecting…'
                               : 'Collect saved answers'}
+                          </button>
+                        )}
+                        {row.closedByExit && (
+                          <button
+                            disabled={!!busy}
+                            onClick={() => {
+                              if (
+                                window.confirm(
+                                  `Reopen this test for ${row.studentName}? Their score is withdrawn, their saved answers stay, and they continue with the time they had left.`,
+                                )
+                              )
+                                void act(`reopen-${row.assignmentId}`, {
+                                  action: 'reopen',
+                                  assignmentId: row.assignmentId,
+                                });
+                            }}
+                          >
+                            {busy === `reopen-${row.assignmentId}` ? 'Reopening…' : 'Reopen test'}
                           </button>
                         )}
                         {row.status === 'assigned' && (

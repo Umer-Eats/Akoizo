@@ -206,6 +206,12 @@ test('difficulty is assessed independently of competition level and combines wit
   assert.equal(union.questionCount, 37);
   assert.equal(union.maxScore, 93);
   assert.equal(union.questions.find((q) => q.id === 'MC-5')!.points, 0);
+  const unscored = gradePractice(union, { 'MC-5': 'Density changes, not pressure.' });
+  assert.equal(unscored.pendingPoints, 0);
+  assert.equal(unscored.questions.find((q) => q.id === 'MC-5')!.criteria[0].needsReview, false);
+  const ssssChemistry = findPracticeTest('C', 'scioly-2dvbw1ll-v0-c');
+  assert.equal(ssssChemistry.maxScore, 108);
+  assert.equal(ssssChemistry.questions.find((q) => q.id === 'II-5')!.points, 0);
 });
 
 test('catalog enforces the current season, event and student division', () => {

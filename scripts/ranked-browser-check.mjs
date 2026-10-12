@@ -120,6 +120,7 @@ async function api(route, profile) {
     assign: () => ranked.assignRanked(db, profile, body),
     unassign: () => ranked.unassignRanked(db, profile, body.assignmentId),
     release: () => ranked.releaseRanked(db, profile, body),
+    reopen: () => ranked.reopenRanked(db, profile, body.assignmentId),
     collect: () => ranked.collectRanked(db, profile, body.assignmentId, ai),
     regrade: () => ranked.regradeRanked(db, profile, body.assignmentId, ai),
     review: () => ranked.reviewRanked(db, profile, body),
@@ -382,33 +383,29 @@ try {
   }
   await amy.screenshot({ path: `${shots}/student-locked.png` });
 
-  // Leaving full screen hides the test and is recorded; the back button cannot leave it either.
-  await amy.evaluate(() => document.exitFullscreen());
-  const blocker = amy.getByRole('alertdialog', { name: 'Return to full screen' });
-  await expect(blocker).toBeVisible();
-  await expect(lock.locator('.ranked-lock-body')).toHaveAttribute('inert', '');
-  await amy.screenshot({ path: `${shots}/student-left-fullscreen.png` });
-  await blocker.getByRole('button', { name: 'Return to the test' }).click();
-  await expect(blocker).toBeHidden();
-  await expect(amy.getByText('You left the test 1 time.')).toBeVisible();
+  // The back button cannot leave the test, and Submit asks before handing in.
   await amy.goBack();
   await expect(lock).toBeVisible();
   await expect(amy).toHaveURL(/\/ranked-tests\/[\da-f-]{36}$/);
-  await expect
-    .poll(
-      () =>
-        raw.prepare('SELECT violations FROM ranked_assignments WHERE started_at IS NOT NULL').get()
-          .violations,
-    )
-    .toBeGreaterThanOrEqual(1);
 
-  // Submitting grades at once and shows the score, but none of the answers.
   await lock.getByRole('button', { name: 'Submit test' }).first().click();
   const confirm = amy.getByRole('alertdialog', { name: 'Submit your test?' });
-  await expect(confirm).toBeVisible();
-  await confirm.getByRole('button', { name: 'Submit for grading' }).click();
+  await confirm.getByRole('button', { name: 'Keep working' }).click();
+  await expect(confirm).toBeHidden();
+
+  // Leaving full screen closes the test: it is submitted and graded at once, with no way back.
+  await amy.evaluate(() => document.exitFullscreen());
   await expect(lock).toBeHidden();
+  await expect(amy.getByText('because you left full screen')).toBeVisible();
+  await expect(
+    amy.getByRole('button', { name: /Return to the test|Enter full screen/ }),
+  ).toHaveCount(0);
   assert.equal(await amy.evaluate(() => !!document.fullscreenElement), false);
+  const closed = raw
+    .prepare('SELECT violations,submitted_at FROM ranked_assignments WHERE started_at IS NOT NULL')
+    .get();
+  assert.ok(closed.submitted_at, 'leaving full screen submitted the attempt');
+  assert.ok(closed.violations >= 1, 'the exit is recorded for the instructor');
   const score = amy.getByRole('region', { name: 'Your score' });
   await expect(score).toBeVisible();
   await expect(score).toContainText('stay locked until your instructor releases results');
@@ -418,9 +415,27 @@ try {
   await expect(score.locator('h2')).toContainText(String(expected));
   await fits(amy, 'student-score');
 
-  // Instructor: sees the score and the exits, reviews the answers, and releases to one student.
+  // The instructor can reopen a test that closed on leaving full screen; answers and time carry on.
   await coach.getByRole('button', { name: 'Refresh' }).click();
   const amyResult = coach.locator('.ranked-results tbody tr', { hasText: 'Amy Chen' });
+  await expect(amyResult).toContainText('Closed: left full screen');
+  coach.once('dialog', (dialog) => dialog.accept());
+  await amyResult.getByRole('button', { name: 'Reopen test' }).click();
+  await expect(amyResult).toContainText('In progress');
+  await expect(amyResult.getByRole('button', { name: 'Reopen test' })).toHaveCount(0);
+  await amy.reload();
+  await expect(amy.getByText('Your test is still running.')).toBeVisible();
+  await amy.getByRole('button', { name: 'Return to the test' }).click();
+  await expect(lock).toBeVisible();
+  await expect(lock.locator('textarea').first()).toHaveValue('A complete written explanation.');
+  await lock.getByRole('button', { name: 'Submit test' }).first().click();
+  await confirm.getByRole('button', { name: 'Submit for grading' }).click();
+  await expect(lock).toBeHidden();
+  await expect(score.locator('h2')).toContainText(String(expected));
+  await expect(amy.getByText('because you left full screen')).toHaveCount(0);
+
+  // Instructor: sees the score and the exits, reviews the answers, and releases to one student.
+  await coach.getByRole('button', { name: 'Refresh' }).click();
   await expect(amyResult).toContainText('Submitted');
   await expect(amyResult).toContainText(`${expected} / ${detail.test.maxScore}`);
   await expect(amyResult.locator('[data-flag="true"]')).toBeVisible();

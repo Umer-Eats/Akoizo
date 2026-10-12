@@ -54,8 +54,11 @@ def main():
     sources=json.loads((ROOT/'authenticated-manifest.json').read_text(encoding='utf-8'))
     reports=[]
     for source in sources:
+        if not source.get('paperPath') or Path(source['paperPath']).suffix.lower()!='.pdf':
+            reports.append({'id':source['id'],'source':source,'fields':[], 'qSections':{}, 'keySections':{}, 'missingKeys':[], 'cover':'', 'issues':['Student PDF not downloaded.']})
+            continue
         qp=read_pages(source['paperPath'])
-        kp=read_pages(source['keyPath']) if source.get('keyPath') else []
+        kp=read_pages(source['keyPath']) if source.get('keyPath') and Path(source['keyPath']).suffix.lower()=='.pdf' else []
         qs,ks=sections(qp),sections(kp)
         rows=[]
         for label,items in qs.items():

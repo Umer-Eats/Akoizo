@@ -13,6 +13,7 @@ import {
   regradeRanked,
   releaseRanked,
   removeRankedQuestion,
+  reopenRanked,
   reviewRanked,
   unassignRanked,
 } from '@/lib/ranked-service';
@@ -64,6 +65,9 @@ export async function POST(request: Request) {
         break;
       case 'release':
         return json(await releaseRanked(db, profile, body));
+      case 'reopen':
+        await reopenRanked(db, profile, body.assignmentId);
+        break;
       case 'collect':
         await collectRanked(db, profile, body.assignmentId);
         break;

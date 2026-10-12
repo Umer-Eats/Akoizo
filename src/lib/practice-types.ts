@@ -29,7 +29,7 @@ export type Criterion = {
   cipher?: { solution: string; freeErrors: number; penaltyPerError: number };
 };
 export type QuestionKey = {
-  // Only when the published key explicitly awards points per selected correct option.
+  // Published per-choice credit: sum selections for multi-select, lookup for single-choice.
   optionPoints?: Record<string, number>;
   correctOption?: string;
   correctOptions?: string[];
@@ -105,6 +105,8 @@ export type PracticeResult = {
   autoGradedAt?: string;
   gradingBasis?: 'published-rubric' | 'ai-generated';
   automaticGrading?: 'complete' | 'unavailable';
+  // Ranked tests only: the attempt was submitted because the student left full screen.
+  closedBy?: 'exit';
 };
 export type PracticeReview = {
   studentName: string;

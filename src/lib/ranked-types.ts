@@ -31,6 +31,8 @@ export type RankedAttempt = {
   submittedAt: string | null;
   /** Times the student left full screen or the test tab. */
   violations: number;
+  /** The attempt was submitted because the student left full screen; the instructor may reopen it. */
+  closedByExit: boolean;
   score: RankedScore | null;
 };
 export type StudentRankedTest = RankedSummary & RankedAttempt;

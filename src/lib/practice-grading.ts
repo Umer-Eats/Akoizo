@@ -110,6 +110,7 @@ export function gradePractice(
             );
       // Open explanations cannot safely be graded by keyword occurrence. Keep them pending.
       const needsReview =
+        criterion.points > 0 &&
         !!answer.trim() &&
         !matches &&
         (!criterion.numeric || matches === null) &&

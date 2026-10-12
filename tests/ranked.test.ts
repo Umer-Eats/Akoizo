@@ -20,6 +20,7 @@ import {
   collectRanked,
   createRankedTest,
   deleteRankedTest,
+  reopenRanked,
   removeRankedQuestion,
   listRankedForInstructor,
   listRankedForStudent,
@@ -180,7 +181,9 @@ test('the builder combines standalone questions from several tests and repairs m
   // The converted Yale paper supplies standalone MCQs; the older letter-only paper still does not.
   const diseasePool = rankedQuestionPool('C', 'disease-detectives');
   assert.ok(diseasePool.some((candidate) => candidate.test.id === 'scioly-9idzuozwmxm-c'));
-  assert.ok(diseasePool.every((candidate) => candidate.test.id !== 'bullso-2026-disease-detectives-c'));
+  assert.ok(
+    diseasePool.every((candidate) => candidate.test.id !== 'bullso-2026-disease-detectives-c'),
+  );
 
   const paper = await buildRankedPaper('C', 'water-quality', 20, gemini(balanced).config);
   assert.equal(paper.questions.length, 20);
@@ -467,6 +470,42 @@ test('ranked tests reach every seated student, lock results until release, and a
   assert.equal((await rankedForStudent(db, eve, testId)).test.status, 'submitted');
   assert.equal((await dashboardFor(db, eve)).stats.ranked, 1);
 
+  // A test that closed because the student left full screen can be reopened by their instructor.
+  await assignRanked(db, home.teacher, { testId, studentIds: [dan.id], due });
+  await startRanked(db, dan, testId);
+  await saveRankedDraft(db, dan, { testId, answers: partial });
+  let danDetail = await submitRanked(
+    db,
+    dan,
+    { testId, answers: partial, reason: 'exit' },
+    ai.config,
+  );
+  assert.equal(danDetail.test.closedByExit, true);
+  assert.equal((await dashboardFor(db, dan)).stats.ranked, 1);
+  const danId = danDetail.test.assignmentId;
+  raw
+    .prepare('UPDATE ranked_assignments SET started_at=? WHERE id=?')
+    .run(new Date(Date.parse(danDetail.test.submittedAt!) - 10 * 60_000).toISOString(), danId);
+  await assert.rejects(reopenRanked(db, away.teacher, danId), { status: 404 });
+  await assert.rejects(reopenRanked(db, dan, danId), { status: 403 });
+  await assert.rejects(reopenRanked(db, home.teacher, calRow.assignmentId), { status: 409 });
+  await reopenRanked(db, home.teacher, danId);
+  await assert.rejects(reopenRanked(db, home.teacher, danId), { status: 409 });
+  danDetail = await rankedForStudent(db, dan, testId);
+  assert.equal(danDetail.test.status, 'in-progress');
+  assert.equal(danDetail.test.score, null);
+  assert.deepEqual(danDetail.paper!.answers, partial);
+  // Ten of thirty minutes were used, so about twenty remain.
+  const left = Date.parse(danDetail.test.deadline!) - Date.now();
+  assert.ok(left > 19 * 60_000 && left <= 20 * 60_000);
+  const danBoard = await dashboardFor(db, dan);
+  assert.equal(danBoard.stats.ranked, 0);
+  assert.equal(danBoard.stats.points, 0);
+  danDetail = await submitRanked(db, dan, { testId, answers }, ai.config);
+  assert.equal(danDetail.test.closedByExit, false);
+  assert.equal(danDetail.test.score!.percentage, 100);
+  assert.equal((await dashboardFor(db, dan)).stats.points, 100);
+
   // Leaving the school clears seats and unstarted work but keeps submitted attempts.
   await assignRanked(db, home.teacher, { testId, studentIds: [eve.id], due });
   await leaveCommunity(db, eve);
@@ -474,13 +513,13 @@ test('ranked tests reach every seated student, lock results until release, and a
   [listed] = await listRankedForInstructor(db, home.teacher);
   assert.deepEqual(
     listed.assignments.map((row) => row.studentName),
-    ['ben', 'cal'],
+    ['ben', 'cal', 'dan'],
   );
   assert.deepEqual(
     (await listTeams(db, home.teacher)).find((team) => team.id === one)!.slots['water-quality'],
     [null, ben.id],
   );
-  assert.equal(raw.prepare('SELECT COUNT(*) AS n FROM ranked_assignments').get()!.n, 4);
+  assert.equal(raw.prepare('SELECT COUNT(*) AS n FROM ranked_assignments').get()!.n, 5);
 
   const { id: unused } = await createRankedTest(
     db,

@@ -183,6 +183,8 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
   const [busy, setBusy] = useState(false);
   const [locked, setLocked] = useState(false);
   const [outside, setOutside] = useState(false);
+  // Set when leaving full screen ended the test, so the score page can say why.
+  const endedByExit = useRef(false);
   const [confirming, setConfirming] = useState(false);
   const [violations, setViolations] = useState(0);
   const [saveState, setSaveState] = useState<'saved' | 'saving' | 'error'>('saved');
@@ -275,7 +277,12 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
       if (unsentViolations.current) await save();
       const next = await request<StudentRankedDetail>(attempt, {
         method: 'POST',
-        body: JSON.stringify({ action: 'submit', testId, answers: answersRef.current }),
+        body: JSON.stringify({
+          action: 'submit',
+          testId,
+          answers: answersRef.current,
+          reason: endedByExit.current ? 'exit' : undefined,
+        }),
       });
       watching.current = false;
       setLocked(false);
@@ -337,9 +344,12 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
       void save();
     };
     const onFullscreen = () => {
-      const left = canFullscreen && !document.fullscreenElement;
-      setOutside(left);
-      if (left) flag();
+      // Leaving full screen ends the test: the answers so far are submitted and graded.
+      if (!watching.current || !canFullscreen || document.fullscreenElement) return;
+      setOutside(true);
+      endedByExit.current = true;
+      flag();
+      void submit();
     };
     const onVisibility = () => {
       if (document.hidden) flag();
@@ -375,7 +385,7 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
       for (const type of ['contextmenu', 'copy', 'cut', 'paste', 'dragstart'])
         document.removeEventListener(type, block);
     };
-  }, [locked, canFullscreen, save]);
+  }, [locked, canFullscreen, save, submit]);
   useEffect(() => leaveFullscreen, []);
 
   async function begin() {
@@ -580,23 +590,24 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
           </div>
         )}
         {outside && (
-          <div
-            className="ranked-lock-blocker"
-            role="alertdialog"
-            aria-label="Return to full screen"
-          >
+          <div className="ranked-lock-blocker" role="alertdialog" aria-label="Test closed">
             <Lock size={30} aria-hidden="true" />
-            <h2>Return to full screen to continue.</h2>
+            <h2>You left full screen, so your test is closed.</h2>
             <p>
-              Your test is hidden while you are outside full screen. Your timer is still running,
-              and this exit was recorded for your instructor.
+              {busy
+                ? 'Submitting your answers for grading…'
+                : 'Your answers could not be submitted yet. They are saved; submit them now.'}
             </p>
-            <button
-              className="button button-primary"
-              onClick={async () => setOutside(!(await enterFullscreen()))}
-            >
-              <Maximize size={16} aria-hidden="true" /> Return to the test
-            </button>
+            {error && (
+              <p className="form-error" role="alert">
+                {error}
+              </p>
+            )}
+            {!busy && (
+              <button className="button button-primary" onClick={() => void submit()}>
+                Submit my answers
+              </button>
+            )}
           </div>
         )}
         {timeUp && busy && (
@@ -646,9 +657,10 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
             <ul>
               <li>The test opens in full screen and stays there until you submit.</li>
               <li>
-                Leaving full screen or switching tabs hides the test and is reported to your
-                instructor.
+                <strong>Leaving full screen closes your test.</strong> Your answers so far are
+                submitted and graded at once, and you cannot return.
               </li>
+              <li>Switching tabs or windows is reported to your instructor.</li>
               <li>
                 You have {test.minutes} minutes. The timer starts when you begin, cannot be paused,
                 and submits your answers when it ends.
@@ -710,6 +722,12 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
             </p>
           ) : (
             <p>Your test is graded and your ranking points are saved.</p>
+          )}
+          {test.closedByExit && test.status === 'submitted' && (
+            <p role="status">
+              Your test closed and was submitted because you left full screen. Only your instructor
+              can reopen it.
+            </p>
           )}
           {test.status === 'submitted' && (
             <p>
