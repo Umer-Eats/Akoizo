@@ -1914,6 +1914,15 @@
     width: auto;
     min-width: 140px;
   }
+  .school-filter {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .school-filter select {
+    flex: 1;
+    min-width: 0;
+    text-overflow: ellipsis;
+  }
   .event-toolbar {
     margin-bottom: 26px;
     justify-content: space-between;
@@ -2488,7 +2497,7 @@
   }
   @media (prefers-reduced-motion: no-preference) {
     :root:not([data-motion='off']) .event-content {
-      animation: event-content-enter 300ms ease-out both;
+      animation: event-content-enter 300ms ease-out backwards;
     }
     :root:not([data-motion='off']) .event-sidebar {
       animation: event-content-enter 380ms ease-out both;

@@ -554,3 +554,42 @@ export async function deleteCommunity(db: Database, actor: Profile, confirmation
     'immediate',
   );
 }
+
+/** Public rankings show a first name and last initial, never the full name or email. */
+export function publicName(displayName: unknown) {
+  const parts = String(displayName || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!parts.length) return 'Learner';
+  const initial = parts.length > 1 ? Array.from(parts[parts.length - 1])[0].toUpperCase() : '';
+  return initial ? `${parts[0]} ${initial}.` : parts[0];
+}
+function publicSchoolName(row: Row) {
+  return getSchoolCommunity(row.community_id)?.name ?? String(row.school);
+}
+export async function publicRankings(db: Database) {
+  const rows =
+    await db.all(`SELECT u.id,u.display_name,u.division,s.id AS school_id,s.name AS school,
+      (SELECT sc.community_id FROM school_communities sc WHERE sc.school_id=s.id) AS community_id,SUM(p.points) AS points
+      FROM users u JOIN schools s ON s.id=u.school_id JOIN points_ledger p ON p.student_id=u.id
+      WHERE u.role='student' AND u.id NOT IN (SELECT user_id FROM departed_members) AND s.id NOT IN (SELECT school_id FROM closed_communities)
+      GROUP BY u.id,u.display_name,u.division,s.id,s.name HAVING SUM(p.points)>0
+      ORDER BY points DESC,u.id LIMIT 500`);
+  const schools = await db.all(`SELECT s.id AS school_id,s.name AS school,
+      (SELECT sc.community_id FROM school_communities sc WHERE sc.school_id=s.id) AS community_id
+      FROM schools s WHERE s.id NOT IN (SELECT school_id FROM closed_communities)`);
+  return {
+    rankings: rows.map((row) => ({
+      id: String(row.id),
+      name: publicName(row.display_name),
+      division: row.division as Division,
+      schoolId: String(row.school_id),
+      school: publicSchoolName(row),
+      points: Number(row.points),
+    })),
+    schools: schools
+      .map((row) => ({ id: String(row.school_id), name: publicSchoolName(row) }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  };
+}

@@ -76,7 +76,9 @@ export function gradePractice(
         id: question.id,
         answer,
         earned: key.optionPoints
-          ? [...new Set(answer.split(','))].reduce((sum, option) => sum + (key.optionPoints![option] ?? 0), 0)
+          ? question.multiple
+            ? [...new Set(answer.split(','))].reduce((sum, option) => sum + (key.optionPoints![option] ?? 0), 0)
+            : key.optionPoints[answer] ?? 0
           : correct ? question.points : 0,
         possible: question.points,
         correctOption: key.correctOption,

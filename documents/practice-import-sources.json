@@ -1686,5 +1686,114 @@
     "paperPath": "output/practice-research/division-c/d1b5fd20c44293fad32a4bdb1f895b859bbe9b6719254aee5aeb34eb2448797d.pdf",
     "keyPath": "output/practice-research/division-c/5ab01770acc50984db36e4956083502308f03b5beb1a9ac850c62fe97753ebec.pdf",
     "attachmentPaths": []
+  },
+  {
+    "id": "scioly-xgxmjpveibo-c",
+    "sourceId": "XgxmJpveiBo",
+    "sourceUrl": "https://scioly.org/tests/XgxmJpveiBo",
+    "division": "C",
+    "eventId": "astronomy",
+    "competition": "Northern Florida Regional",
+    "year": 2018,
+    "level": "Regionals",
+    "levelText": "Northern Florida Regional",
+    "paperUrl": "https://scioly.org/tests/XgxmJpveiBo",
+    "keyUrl": "https://scioly.org/tests/XgxmJpveiBo",
+    "files": [
+      {
+        "name": "astronomy_2018_c_uflorida_test.pdf",
+        "type": "test",
+        "size": 223578,
+        "sha256": "1cc218700ea01ceac021f3a3525cb31253f3c94bf786000dcc9b870c675c4fa4"
+      },
+      {
+        "name": "astronomy_2018_c_uflorida_key.pdf",
+        "type": "answer_key",
+        "size": 192576,
+        "sha256": "4d058b03fcd74677cd5a45f2219e8247679e2a72a38428ebc25f0b69274c0427"
+      },
+      {
+        "name": "astronomy_2018_c_uflorida_images.pdf",
+        "type": "images",
+        "size": 467284,
+        "sha256": "7fc6554023f3ca3ff657b6823b823395fb4953969d0674ab8530809b30cf56ad"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/1cc218700ea01ceac021f3a3525cb31253f3c94bf786000dcc9b870c675c4fa4.pdf",
+    "keyPath": "output/practice-research/division-c/4d058b03fcd74677cd5a45f2219e8247679e2a72a38428ebc25f0b69274c0427.pdf",
+    "contextPath": "output/practice-research/division-c/7fc6554023f3ca3ff657b6823b823395fb4953969d0674ab8530809b30cf56ad.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/7fc6554023f3ca3ff657b6823b823395fb4953969d0674ab8530809b30cf56ad.pdf"
+    ]
+  },
+  {
+    "id": "scioly-usvyop3nitg-c",
+    "sourceId": "uSVyOP3Nitg",
+    "sourceUrl": "https://scioly.org/tests/uSVyOP3Nitg",
+    "division": "C",
+    "eventId": "codebusters",
+    "competition": "SSSS",
+    "year": 2022,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/uSVyOP3Nitg",
+    "keyUrl": "https://scioly.org/tests/uSVyOP3Nitg",
+    "files": [
+      {
+        "name": "codebusters_2022_c_ssss-addridge_test.pdf",
+        "type": "test",
+        "size": 169547,
+        "sha256": "a223ebf6c97014ee55abb0a9b6a891f83b2861cf563fd83c225440c303b13fcb"
+      },
+      {
+        "name": "codebusters_2022_c_ssss-addridge_key.pdf",
+        "type": "answer_key",
+        "size": 184032,
+        "sha256": "b3760f99021eefe3b01901881b1acd59d1d37e3d85b308d2b84a781b79ef78f0"
+      },
+      {
+        "name": "codebusters_2022_c_ssss-addridge_notes.pdf",
+        "type": "notes",
+        "size": 207592,
+        "sha256": "2edfaf94e20ddef813aef9bb5eff54778ee043c299c06ceb864f5f864934aaa6"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/a223ebf6c97014ee55abb0a9b6a891f83b2861cf563fd83c225440c303b13fcb.pdf",
+    "keyPath": "output/practice-research/division-c/b3760f99021eefe3b01901881b1acd59d1d37e3d85b308d2b84a781b79ef78f0.pdf",
+    "contextPath": "output/practice-research/division-c/2edfaf94e20ddef813aef9bb5eff54778ee043c299c06ceb864f5f864934aaa6.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/2edfaf94e20ddef813aef9bb5eff54778ee043c299c06ceb864f5f864934aaa6.pdf"
+    ]
+  },
+  {
+    "id": "scioly-8ouyzuzdj8o-c",
+    "sourceId": "8oUYzUzDJ8o",
+    "sourceUrl": "https://scioly.org/tests/8oUYzUzDJ8o",
+    "division": "C",
+    "eventId": "astronomy",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/8oUYzUzDJ8o",
+    "keyUrl": "https://scioly.org/tests/8oUYzUzDJ8o",
+    "files": [
+      {
+        "name": "TEST_[Astronomy]_[FairfaxHS]_CSE2025.pdf",
+        "type": "test",
+        "size": 203401,
+        "sha256": "c829e82bf402c8603ec492b677f2dd4d62754618dcd7d01a83cf5e835dd6e33c"
+      },
+      {
+        "name": "KEY_[Astronomy]_[FairfaxHS]_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 241011,
+        "sha256": "89e096d771c7f6cd94861a3229503891bf6b6c9c6ff354c5dd60acef6de230f1"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/c829e82bf402c8603ec492b677f2dd4d62754618dcd7d01a83cf5e835dd6e33c.pdf",
+    "keyPath": "output/practice-research/division-c/89e096d771c7f6cd94861a3229503891bf6b6c9c6ff354c5dd60acef6de230f1.pdf",
+    "attachmentPaths": []
   }
 ]

@@ -4,10 +4,20 @@ import Link from 'next/link';
 import { Search, Trophy } from 'lucide-react';
 import type { Division } from '@/lib/events';
 import { Orbit } from './art';
-type Ranking = { id: string; handle: string; school: string; division: Division; points: number };
+type Ranking = {
+  id: string;
+  name: string;
+  schoolId: string;
+  school: string;
+  division: Division;
+  points: number;
+};
+type School = { id: string; name: string };
 export function Rankings() {
   const [rows, setRows] = useState<Ranking[]>([]);
+  const [schools, setSchools] = useState<School[]>([]);
   const [division, setDivision] = useState('All');
+  const [school, setSchool] = useState('All');
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -20,7 +30,8 @@ export function Rankings() {
       .then(async (response) => {
         const body = await response.json();
         if (!response.ok) throw new Error(body.error);
-        setRows(body);
+        setRows(body.rankings);
+        setSchools(body.schools);
       })
       .catch((error) => {
         if (!controller.signal.aborted) setError(error.message || 'Could not load rankings.');
@@ -31,10 +42,14 @@ export function Rankings() {
     return () => controller.abort();
   }, [retry]);
   const ranked = rows
-    .filter((row) => division === 'All' || row.division === division)
+    .filter(
+      (row) =>
+        (division === 'All' || row.division === division) &&
+        (school === 'All' || row.schoolId === school),
+    )
     .map((row, index) => ({ ...row, rank: index + 1 }));
   const results = ranked.filter((row) =>
-    `${row.handle} ${row.school}`.toLowerCase().includes(query.toLowerCase()),
+    `${row.name} ${row.school}`.toLowerCase().includes(query.toLowerCase()),
   );
   return (
     <main id="main" className="page-container">
@@ -60,6 +75,21 @@ export function Rankings() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
+        </label>
+        <label className="event-type-filter school-filter">
+          School
+          <select
+            aria-label="Filter rankings by school"
+            value={school}
+            onChange={(e) => setSchool(e.target.value)}
+          >
+            <option value="All">All schools</option>
+            {schools.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
         </label>
         <p>TOP 500 · ALL TIME</p>
       </div>
@@ -90,7 +120,7 @@ export function Rankings() {
               {results.map((row) => (
                 <tr key={row.id}>
                   <td>{row.rank}</td>
-                  <td>{row.handle}</td>
+                  <td>{row.name}</td>
                   <td>{row.school}</td>
                   <td>{row.division}</td>
                   <td>{row.points.toLocaleString('en-US')}</td>
@@ -105,7 +135,7 @@ export function Rankings() {
           <h2>{rows.length ? 'No matching rankings.' : 'The first chapter is still to come.'}</h2>
           <p>
             {rows.length
-              ? 'Try a different division or search.'
+              ? 'Try a different division, school, or search.'
               : 'Rankings will appear when students start earning points in ranked tests.'}
           </p>
           <Link className="button button-glass" href="/login/student">
@@ -114,8 +144,9 @@ export function Rankings() {
         </div>
       )}
       <p className="source-note">
-        Only earned points appear here. Public rankings use an assigned learner name. Each ranked
-        test is worth up to 100 points, matching the percentage score.
+        Only earned points appear here. Public rankings show each student’s first name, last
+        initial, and school. Each ranked test is worth up to 100 points, matching the percentage
+        score.
       </p>
     </main>
   );

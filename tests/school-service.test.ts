@@ -11,6 +11,8 @@ import {
   updateDivision,
   rotateSchoolPassword,
   limitEnrollment,
+  publicName,
+  publicRankings,
   type Database,
 } from '../src/lib/school-service.ts';
 import { hashSchoolPassword, verifySchoolPassword } from '../src/lib/school-password.ts';
@@ -500,5 +502,49 @@ test('competition selections persist per student and division, validate input, a
     await selectEvent(db, student, { division: 'C', eventId: 'astronomy', selected: false }),
     [],
   );
+  raw.close();
+});
+
+test('public rankings show first name, last initial, and the registered school', async () => {
+  assert.equal(publicName('Umer Qureshi'), 'Umer Q.');
+  assert.equal(publicName('  maria de la cruz '), 'maria C.');
+  assert.equal(publicName('Cher'), 'Cher');
+  assert.equal(publicName(''), 'Learner');
+  const { db, raw, students, first, second } = await setup();
+  const [, b, , outsider] = students;
+  raw.prepare('UPDATE users SET display_name=? WHERE id=?').run('Umer Qureshi', b.id);
+  raw.prepare('UPDATE users SET display_name=? WHERE id=?').run('Ada Lovelace', outsider.id);
+  const award = raw.prepare(
+    'INSERT INTO points_ledger (id,student_id,points,reason) VALUES (?,?,?,?)',
+  );
+  award.run('p1', b.id, 90, 'ranked');
+  award.run('p2', outsider.id, 40, 'ranked');
+  const result = await publicRankings(db);
+  assert.deepEqual(result.rankings, [
+    {
+      id: b.id,
+      name: 'Umer Q.',
+      division: 'B',
+      schoolId: first.profile.schoolId,
+      school: 'Pembroke Pines Charter High School',
+      points: 90,
+    },
+    {
+      id: outsider.id,
+      name: 'Ada L.',
+      division: 'C',
+      schoolId: second.profile.schoolId,
+      school: 'Central Campus Pembroke Pines Charter Middle School',
+      points: 40,
+    },
+  ]);
+  assert.deepEqual(result.schools, [
+    {
+      id: second.profile.schoolId,
+      name: 'Central Campus Pembroke Pines Charter Middle School',
+    },
+    { id: first.profile.schoolId, name: 'Pembroke Pines Charter High School' },
+  ]);
+  assert.ok(!JSON.stringify(result).includes('Qureshi'));
   raw.close();
 });

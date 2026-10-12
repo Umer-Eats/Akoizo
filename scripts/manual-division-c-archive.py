@@ -221,16 +221,18 @@ if 'aT4qRN55nYs' in SOURCES:
 structure_helpers=run_path('scripts/analyze-archive-structure.py')
 
 
-def font_answers(path):
+def font_answers(path, max_pages=None, stop_heading=None):
     import pymupdf
     answers={}
     section='1'
     number=None
-    for pg in pymupdf.open(path):
+    for pg in list(pymupdf.open(path))[:max_pages]:
         for block in pg.get_text('dict')['blocks']:
             for line in block.get('lines',[]):
                 spans=line['spans']
                 text=clean(''.join(span['text'] for span in spans))
+                if stop_heading and text == stop_heading:
+                    return answers
                 match=re.match(r'^(?:Section|Part)\s+(\d+)',text,re.I)
                 if match:
                     section=match[1]
@@ -547,6 +549,121 @@ if '2DVBw1Ll-v0' in SOURCES:
             prompt=b['text']+(' This original premise is incorrect; explain why. Unscored correction.' if id=='II-5' else '')
             p.frq(id,prompt,answer,points=weight,page=b['page'],accepted=accepted)
     assert len(p.test['questions'])==22 and sum(q['points'] for q in p.test['questions'])==108
+    p.finish()
+
+
+if 'XgxmJpveiBo' in SOURCES:
+    p=Paper('XgxmJpveiBo',difficulty='Hard',difficultyReason='Stellar evolution, supernova spectra, distance indicators and orbital calculations require detailed physical explanations and multi-step calculations.',
+        topics=['Stellar evolution','Supernovae','Variable stars','Distance measurements','Spectroscopy'],topicMatch='different',
+        alignment='Historical stellar-evolution and supernova focus differs from the 2027 normal and starburst galaxy rotation; distance and spectral-analysis skills overlap.',
+        scoringBasis='All 32 original questions and published point weights are retained, including the scored tiebreakers. MCQs 11 and 19 preserve explicit half credit for the individually correct choices. Question 19 repeats H/I/J option labels; the second occurrences use H2/I2/J2 while retaining their original combination text. The complete separate image sheet is included. The question 22 key’s negative recession velocity is corrected to positive for the redshift; its positive distance and rubric allocation are retained. Luminosity references use solar luminosities; the source’s “solar lumens” is not a distinct unit.')
+    qp=structure_helpers['read_pages'](p.source['paperPath'])
+    kp=structure_helpers['read_pages'](p.source['keyPath'])
+    qs,ks=numbered(qp),numbered(kp)
+    assert len(qs)==len(ks)==32
+    weights=[4,2,6,2,2,2,2,2,6,8,4,2,2,2,6,6,6,4,4,2,2,8,2,6,6,2,6,2,2,2,4,4]
+    for n,b in qs.items():
+        prompt=b['text'].split('ANSWER SHEET')[0].strip()
+        answer=ks[n]['text']
+        if n in [11,19]:
+            pattern=r'\b([A-M])[:.]\s+'
+            hits=list(re.finditer(pattern,prompt))
+            assert len(hits)==(8 if n==11 else 16)
+            seen={}
+            choices=[]
+            for i,m in enumerate(hits):
+                seen[m[1]]=seen.get(m[1],0)+1
+                choice_id=m[1]+(str(seen[m[1]]) if seen[m[1]]>1 else '')
+                choices.append({'id':choice_id,'text':prompt[m.end():hits[i+1].start() if i+1<len(hits) else len(prompt)].strip()})
+            p.mcq(str(n),prompt[:hits[0].start()].strip(),choices,'E' if n==11 else 'F',points=4,page=b['page'],option_points={'E':4,'A':2,'C':2} if n==11 else {'F':4,'A':2,'B':2})
+        else:
+            if n==22:
+                answer=answer.replace('v=-3*10^3','v=+3*10^3')
+                answer+=' This is a redshift: the recession velocity is positive, approximately +3000 km/s; the key’s negative sign is a typo. Distance ≈42.8 Mpc = 4.28×10^7 pc, using the source Hubble constant.'
+            if n in [4,25]:
+                answer+=' Here the source means solar luminosities (L_sun), not photometric lumens.'
+            accepted={2:['B A F K M','B, A, F, K, M'],6:['S Doradus variables','S Doradus variable'],12:['Red supergiants','Red supergiant'],28:['Luminous blue variables','LBVs','S Doradus variables']}.get(n,[])
+            p.frq(str(n),prompt,answer,points=weights[n-1],page=b['page'],accepted=accepted)
+    assert sum(q['points'] for q in p.test['questions'])==120
+    p.finish()
+
+
+if 'uSVyOP3Nitg' in SOURCES:
+    p=Paper('uSVyOP3Nitg',competition='SSSS — AddRidge',year=2021,
+        difficulty='Hard',difficultyReason='Aristocrats, patristocrats, a xenocrypt, affine/Hill/Vigenere ciphers, Morse-based ciphers, Baconian and modular inversion span advanced cipher families.',
+        topics=['Substitution ciphers','Affine ciphers','Hill ciphers','Vigenere','Morbit','Pollux','Baconian','RSA'],topicMatch='unverified',
+        alignment='Historical cipher practice includes overlapping families and older formats; the full combination is not certified to the 2027 competition format.',
+        scoringBasis='All 23 numbered puzzles plus the 200-point timed puzzle retain their printed base weights. Published scoring allows two incorrect character positions, then deducts 100 points per additional error, capped at zero; numeric question 23 requires the exact value. No Gemini request is needed. The original timed bonus requires a proctor-verified solve time and is excluded from this online percentage. The cover dates June 24, 2021 while the archive indexes 2022. The deliberately misspelled plaintext in question 6 is retained. Question 23 is graded as inversion modulo the supplied phi, not certification that its inconsistent displayed values form a valid RSA key.')
+    qp=structure_helpers['read_pages'](p.source['paperPath'])
+    qs=numbered(qp)
+    assert len(qs)==23
+    solutions=[
+        "EVERYBODY WANTED TO KNOW WHAT I WOULD DO IF I DIDN'T WIN. I GUESS WE'LL NEVER KNOW.",
+        "IF THE WORLD WAS ENDING, I THINK I WOULD GRAB SOME CINNAMON TOAST CRUNCH, SOME WATER, AND I'D PROBABLY GO CRAZY.",
+        'OUR VIRTUES AND OUR FAILINGS ARE INSEPARABLE, LIKE FORCE AND MATTER. WHEN THEY SEPARATE, MAN IS NO MORE.',
+        'INTERESTINGLY, A PENDULUM CONSISTING OF TWO RODS IS CONSIDERED A DYNAMIC SYSTEM WITH CHAOTIC SOLUTIONS.',
+        'BEFORE YOU CRITICIZE SOMEONE, YOU SHOULD WALK A MILE IN THEIR SHOES. THAT WAY WHEN YOU CRITICIZE THEM, YOU ARE A MILE AWAY FROM THEM AND YOU HAVE THEIR SHOES.',
+        'ENVEE OF OTHER PEEPUL SHOWS HOW THEY ARE UNHAPPEE. THEIR CONTINUAL ATTENSHUN TO OTHURS BEHAVIOR SHOS HOW THEY ARE BOWRING.',
+        'I THINK THE INSTITUTIONS OF OUR DEMOCRACY ARE WONDERFUL THINGS THAT RIGHT NOW ARE POPULATED BY SOME TERRIBLE PEOPLE.',
+        "EVERYBODY HAS TO BE ABLE TO PARTICIPATE IN A FUTURE THAT THEY WANT TO LIVE FOR. THAT'S WHAT TECHNOLOGY CAN DO.",
+        'SOME OF MY MOST IMPORTANT MUSICAL EXPERIENCES WERE FROM A BURNT CD WITH SONGS MY FRIEND DOWNLOADED FOR ME AT A TERRIBLE DIGITAL QUALITY.',
+        'APRENDIMOS HACE MUCHOS AÑOS QUE LOS RICOS PUEDEN TENER DINERO, PERO LOS POBRES TIENEN TIEMPO.',
+        "IF I COULD REMEMBER THE NAMES OF ALL THESE PARTICLES, I'D BE A BOTANIST.",
+        'HAVING CAESAR SALAD WITHOUT CROUTONS IS LIKE HAVING MAC AND CHEESE WITHOUT THE CHEESE.',
+        "YCJTCHFFXUT XR U'G HWJVG ZIHG DJV BUJZ; XG'R HWJVG ZIHG DJV LHU EXT VCP JVG",
+        "I'VE ALWAYS LIKED HOME-COOKED MEALS.",
+        'LTSDZBWRVPZIQNAJLM',
+        'AVALANCHES',
+        "IVE BEEN INVOLVED IN A NUMBER OF CULTS BOTH A LEADER AND A FOLLOWER YOU HAVE MORE FUN AS A FOLLOWER BUT YOU MAKE MORE MONEY AS A LEADER",
+        'LEARN FROM YESTERDAY LIVE FOR TODAY HOPE FOR TOMORROW THE IMPORTANT THING IS NOT TO STOP QUESTIONING',
+        'NUMEROUS ALGORITHMS CAN BE USED TO SOLVE THE TRAVELING SALESMAN PROBLEM',
+        'I WOULD IMAGINE THAT IF YOU COULD UNDERSTAND MORSE CODE A TAP DANCER WOULD DRIVE YOU CRAZY',
+        'I DONT HAVE A THERAPIST SO I USE ME AS MY OWN THERAPIST WHEN IM MAKING THE MUSIC',
+        'SIX SLEEK SWANS SWAM SWIFTLY SOUTHWARDS',
+        '263119',
+    ]
+    def cipher_field(id,prompt,solution,points,page):
+        p.frq(id,prompt,solution,points=points,page=page,criteria=[{'id':'answer','answer':solution,'points':points,'cipher':{'solution':solution,'freeErrors':2,'penaltyPerError':100}}])
+    timed_page=next(i+1 for i,page in enumerate(qp) if 'Timed Question [200 points]' in page)
+    timed_prompt=qp[timed_page-1]
+    cipher_field('T',clean(timed_prompt), 'DO COLLEGES CARE MORE ABOUT HOW ACCURATELY YOU CAN ANSWER QUESTIONS ABOUT RANDOM PASSAGES, OR WHAT YOU CAN TRULY DO?',200,timed_page)
+    for n,b in qs.items():
+        weight=int(re.match(r'\[(\d+) points\]',b['text'])[1])
+        if n==23:
+            p.frq(str(n),b['text'],solutions[n-1],points=weight,page=b['page'],numeric=numeric(263119))
+        else:
+            cipher_field(str(n),b['text'],solutions[n-1],weight,b['page'])
+    assert len(p.test['questions'])==24
+    p.finish()
+
+
+if '8oUYzUzDJ8o' in SOURCES:
+    p=Paper('8oUYzUzDJ8o',competition='Captain’s Summer Exchange — Fairfax Science Olympiad',year=2025,
+        difficulty='Hard',difficultyReason='Stellar evolution, telescope optics and variable stars lead into gravitational, luminosity, parallax and escape-velocity calculations.',
+        topics=['Stellar evolution','Variable stars','Telescope optics','Distance measurements','Binary stars','Black holes'],topicMatch='different',
+        alignment='Historical stellar-evolution focus differs from the 2027 normal and starburst galaxy rotation; spectroscopy and astronomical calculations overlap.',
+        scoringBasis='All 25 MCQs and 16 FRQs retain the published question weights, totaling the cover’s 116 points. Correct MCQ choices are recovered from the published key’s bold type, including both B and D for multi-select question 15; the key does not specify per-choice partial credit. Repeated FRQ numbers are prefixed separately. FRQ 12 accepts approximately white stellar color as well as the key’s white-blue description for its roughly 6040 K blackbody. The cover dates CSE 2025, while the archive indexes 2026.')
+    qt='\n\f\n'.join(structure_helpers['read_pages'](p.source['paperPath']))
+    kt='\n\f\n'.join(structure_helpers['read_pages'](p.source['keyPath']))
+    qm,qf=re.split(r'(?m)^\s*FRQ\s*$',qt,maxsplit=1)
+    km,kf=re.split(r'(?m)^\s*FRQ\s*$',kt,maxsplit=1)
+    mc,fr=numbered(qm.split('\f')),numbered(qf.split('\f'))
+    fk=numbered(kf.split('\f'))
+    bold=font_answers(p.source['keyPath'],stop_heading='FRQ')
+    assert len(mc)==25 and len(fr)==len(fk)==16
+    for n,b in mc.items():
+        prompt,choices=options(b['text'])
+        codes=bold[('1',n)]
+        assert len(codes)==(2 if n==15 else 1),(n,codes)
+        weight=int(re.search(r'\((\d+)pt\)',prompt)[1])
+        p.mcq(f'MC-{n}',prompt,choices,codes if n==15 else codes[0],points=weight,page=b['page'])
+    for n,b in fr.items():
+        weight=int(re.search(r'\((\d+)pt\)',b['text'])[1])
+        answer=fk[n]['text']
+        if n==12:
+            answer+=' Accept approximately white as a stellar color at roughly 6040 K, as well as the published white-blue description; a blackbody emits a broad spectrum rather than only its peak wavelength.'
+        p.frq(f'FR-{n}',b['text'],answer,points=weight,page=b['page']+qm.count('\f'))
+    assert len(p.test['questions'])==41 and sum(q['points'] for q in p.test['questions'])==116
     p.finish()
 
 
