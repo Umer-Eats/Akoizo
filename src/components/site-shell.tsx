@@ -7,6 +7,7 @@ import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
 import { eventsForDivision } from '@/lib/events';
 import { slotForEvent } from '@/lib/event-slots';
+import { donationsOpen } from '@/lib/donate';
 export function Header() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -53,12 +54,14 @@ export function Header() {
             <Link className={path === '/mission' ? 'active' : ''} href="/mission">
               Mission
             </Link>
-            <Link
-              className={path === '/support' || path === '/donate' ? 'active' : ''}
-              href="/support"
-            >
-              Donate
-            </Link>
+            {donationsOpen && (
+              <Link
+                className={path === '/support' || path === '/donate' ? 'active' : ''}
+                href="/support"
+              >
+                Donate
+              </Link>
+            )}
             <Link className={path === '/contact' ? 'active' : ''} href="/contact">
               Contact
             </Link>
@@ -114,7 +117,7 @@ export function Header() {
             <Link href="/study-tools">Study Tools</Link>
             <Link href="/rankings">Global Rankings</Link>
             <Link href="/mission">Mission</Link>
-            <Link href="/support">Donate</Link>
+            {donationsOpen && <Link href="/support">Donate</Link>}
             <Link href="/contact">Contact</Link>
             {profile ? (
               <>
@@ -159,7 +162,7 @@ export function Footer() {
         <div>
           <Link href="/study-tools">Science Olympiad study tools</Link>
           <Link href="/mission">Our mission</Link>
-          <Link href="/support">Donate</Link>
+          {donationsOpen && <Link href="/support">Donate</Link>}
           <Link href="/contact">Contact us</Link>
           <Link href="/rankings">Rankings</Link>
         </div>

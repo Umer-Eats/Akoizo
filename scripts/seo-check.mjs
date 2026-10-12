@@ -3,7 +3,9 @@ import { chromium } from '@playwright/test';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3002';
 const origin = 'https://akoizo.app';
-const paths = ['/', '/study-tools', '/mission', '/support', '/donate', '/contact', '/rankings'];
+// Support and donate pages only exist once a PayPal button ID is configured.
+const donations = process.env.NEXT_PUBLIC_PAYPAL_DONATE_ID ? ['/support', '/donate'] : [];
+const paths = ['/', '/study-tools', '/mission', ...donations, '/contact', '/rankings'];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
   const page = await browser.newPage();

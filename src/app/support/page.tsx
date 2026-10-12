@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { pageMetadata } from '@/lib/seo';
 import { Reveal } from '@/components/art';
+import { donationsOpen } from '@/lib/donate';
 
 export const metadata = pageMetadata('/support');
 
 export default function SupportPage() {
+  if (!donationsOpen) notFound();
   const costs = [
     [
       'Hosting on Vercel',

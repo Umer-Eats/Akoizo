@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { pageMetadata } from '@/lib/seo';
-import { paypalDonateUrl } from '@/lib/donate';
+import { donationsOpen, paypalDonateUrl } from '@/lib/donate';
 
 export const metadata = pageMetadata('/donate');
 
 export default function DonatePage() {
+  if (!donationsOpen) notFound();
   const steps = [
     [
       'Open the donation page',

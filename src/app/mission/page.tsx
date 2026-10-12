@@ -1,6 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { Orbit, Reveal } from '@/components/art';
+import { donationsOpen } from '@/lib/donate';
 export const metadata = pageMetadata('/mission');
 
 const personalSite = 'https://www.heyumerqureshi.com';
@@ -155,9 +156,11 @@ export default function Page() {
       <div className="mission-bottom">
         <p>Built for curious minds. Open to every school.</p>
         <div className="support-actions">
-          <Link className="text-link" href="/support">
-            Support Akoizo <span>↗</span>
-          </Link>
+          {donationsOpen && (
+            <Link className="text-link" href="/support">
+              Support Akoizo <span>↗</span>
+            </Link>
+          )}
           <Link className="button button-primary" href="/login/student">
             Start your journey
           </Link>
