@@ -50,6 +50,8 @@ import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
 import { DivisionCLabs } from './division-c-labs';
+import { CheatSheets } from './cheatsheets';
+import { Binders } from './binders';
 import { RankedTestList } from './ranked';
 import { InstructorRanked } from './instructor-ranked';
 import { InstructorTeams } from './instructor-teams';
@@ -932,6 +934,10 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
             <PracticeLibrary eventId={event.id} />
           ) : toolId === 'ranked-tests' ? (
             <RankedTestList key={`${profile!.id}:${division}:${event.id}`} eventId={event.id} />
+          ) : division === 'C' && toolId === 'cheatsheet-generator' ? (
+            <CheatSheets key={`${profile!.id}:${event.id}`} eventId={event.id} />
+          ) : division === 'C' && toolId === 'binder-generator' ? (
+            <Binders key={`${profile!.id}:${event.id}`} eventId={event.id} />
           ) : hasDivisionCLabs ? (
             <DivisionCLabs
               key={`${profile!.id}:${division}:${event.id}`}

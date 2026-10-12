@@ -3,6 +3,25 @@ import { eventKey } from './domain.ts';
 import { schoolCommunities } from './school-communities.ts';
 
 export const schema = [
+  `CREATE TABLE IF NOT EXISTS binders (
+    id TEXT PRIMARY KEY, creator_id TEXT NOT NULL, event_id TEXT NOT NULL,
+    title TEXT NOT NULL, level TEXT NOT NULL, page_count INTEGER NOT NULL CHECK(page_count BETWEEN 10 AND 400),
+    completed_pages INTEGER NOT NULL DEFAULT 0, status TEXT NOT NULL CHECK(status IN ('generating','ready','published','cancelled')),
+    school_name TEXT NOT NULL, created_at TEXT NOT NULL, generated_at TEXT,
+    input_json TEXT NOT NULL, plan_json TEXT NOT NULL, images_json TEXT NOT NULL,
+    lease_token TEXT, lease_until INTEGER, attempts INTEGER NOT NULL DEFAULT 0)`,
+  `CREATE TABLE IF NOT EXISTS binder_pages (binder_id TEXT NOT NULL REFERENCES binders(id) ON DELETE CASCADE,
+    page_index INTEGER NOT NULL, content_json TEXT NOT NULL, PRIMARY KEY(binder_id,page_index))`,
+  'CREATE INDEX IF NOT EXISTS idx_binders_library ON binders(status,event_id,generated_at,id)',
+  'CREATE INDEX IF NOT EXISTS idx_binders_creator ON binders(creator_id,created_at)',
+  `CREATE TABLE IF NOT EXISTS cheat_sheets (
+    id TEXT PRIMARY KEY, creator_id TEXT NOT NULL, event_id TEXT NOT NULL,
+    title TEXT NOT NULL, school_name TEXT NOT NULL, level TEXT NOT NULL CHECK(level IN ('regional','state','national')),
+    created_at TEXT NOT NULL, status TEXT NOT NULL CHECK(status IN ('generating','draft','published','failed')),
+    has_exclusions INTEGER NOT NULL, image_count INTEGER NOT NULL, exclusions TEXT NOT NULL,
+    content_json TEXT NOT NULL, images_json TEXT NOT NULL)`,
+  'CREATE INDEX IF NOT EXISTS idx_cheat_sheets_library ON cheat_sheets(status,event_id,created_at,id)',
+  'CREATE INDEX IF NOT EXISTS idx_cheat_sheets_creator ON cheat_sheets(creator_id,created_at)',
   'CREATE TABLE IF NOT EXISTS app_migrations (id TEXT PRIMARY KEY)',
   `CREATE TABLE IF NOT EXISTS departed_members (user_id TEXT PRIMARY KEY, departed_at TEXT NOT NULL DEFAULT (datetime('now')))`,
   `CREATE TABLE IF NOT EXISTS closed_communities (school_id TEXT PRIMARY KEY, closed_at TEXT NOT NULL DEFAULT (datetime('now')))`,

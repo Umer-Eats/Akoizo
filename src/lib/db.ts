@@ -22,6 +22,23 @@ export async function initializeDatabase() {
       await db.batch(eventSeeds, 'immediate');
       try {
         await db.batch(
+          [
+            {
+              sql: "ALTER TABLE cheat_sheets ADD COLUMN school_name TEXT NOT NULL DEFAULT 'School unavailable'",
+              args: [],
+            },
+          ],
+          'immediate',
+        );
+      } catch (error) {
+        if (
+          !(error instanceof Error) ||
+          !/duplicate column name|already exists/i.test(error.message)
+        )
+          throw error;
+      }
+      try {
+        await db.batch(
           [{ sql: 'ALTER TABLE assignments ADD COLUMN test_id TEXT', args: [] }],
           'immediate',
         );

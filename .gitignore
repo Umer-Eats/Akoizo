@@ -12,3 +12,4 @@ playwright-report/
 .preview.err
 documents/qa/
 output/practice-research/
+tmp/cheatsheets/
