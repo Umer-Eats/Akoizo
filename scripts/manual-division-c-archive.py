@@ -11,6 +11,10 @@ clean, numbered, options, pages = (helpers[name] for name in ['clean', 'numbered
 
 ROOT = Path('output/practice-research/division-c')
 SOURCES = {s['sourceId']: s for s in json.loads((ROOT / 'authenticated-manifest.json').read_text(encoding='utf-8'))}
+if len(sys.argv) > 1:
+    requested = set(sys.argv[1:])
+    assert requested <= SOURCES.keys(), requested - SOURCES.keys()
+    SOURCES = {id: source for id, source in SOURCES.items() if id in requested}
 DRAFTS = Path('output/practice-research/converted')
 DRAFTS.mkdir(parents=True, exist_ok=True)
 reviewed = []
@@ -815,6 +819,205 @@ if 'KGVD6o10HOU' in SOURCES:
     prompt=clean('\n'.join(pages(hands)))+'\nFor online practice, describe every connection, component value, sequence and timing calculation in text. Physical construction is replaced by your circuit design.'
     p.frq('Lab',prompt,'LED arrangement: independently driven parallel branches, each with current limiting (1 point). Working sequence/design (10 points): a valid arrangement yielding Green -> Yellow -> Red -> Green, with 2–3 s per stage and labeled components. One valid design is a 555 astable clock feeding a decade counter, Q0/Q1/Q2 driving individually current-limited green/yellow/red LEDs and Q3 resetting the counter. Explain power/ground and pin connections, reset/enable and clock wiring, LED branches and timing. T=0.693(R1+2R2)C; for example R1=47 kΩ, R2=100 kΩ, C=15 µF gives approximately 2.57 s. The key’s R1=10 kΩ,R2=100 kΩ,C=10 µF gives 1.46 s and does not meet the requested timing. Other demonstrably working circuits receive full credit. The original key explicitly accepts a switch-clocked counter if the operator waits 2–3 s per press; explain that timing procedure. Merely copying a named solution without workable connections/timing is insufficient.',points=11,page=5)
     assert len(p.test['questions'])==26 and sum(q['points'] for q in p.test['questions'])==67
+    p.finish()
+
+
+
+def reviewed_sections(source):
+    text='\n\f\n'.join(structure_helpers['read_pages'](source['paperPath']))
+    text=text.replace('1-3. Name the process that is blanked out (1 Pt for each blank)', '1. Name process 1 in the original diagram (1 point).\n2. Name process 2 in the original diagram (1 point).\n3. Name process 3 in the original diagram (1 point).')
+    headings=list(re.finditer(r'(?im)^[ \t]*Section[ \t]+(\d+)[ \t]*:',text))
+    result={}
+    for i,h in enumerate(headings):
+        body=text[h.end():headings[i+1].start() if i+1<len(headings) else len(text)]
+        result[h[1]]=numbered(body.split('\f'))
+        for b in result[h[1]].values(): b['page']+=text[:h.start()].count('\f')
+    return result
+
+
+if 'aPArfcgZ998' in SOURCES:
+    p=Paper('aPArfcgZ998',competition='Captain’s Summer Exchange — Rancho Bernardo High School',year=2025,reviewedOn='2026-10-12',
+        difficulty='Easy',difficultyReason='Foundational freshwater ecology, illustrated organism identification, wastewater treatment and one-step pH/salinity questions.',
+        topics=['Freshwater ecology','Freshwater organisms','Wastewater treatment','Water monitoring'],topicMatch='different',
+        alignment='The source freshwater rotation differs from the 2027 marine/estuary and coral-reef organism focus. Monitoring and treatment concepts overlap.',
+        scoringBasis='All 36 numbered fields across three sections are retained, including the three treatment-diagram blanks. Printed item weights sum to 41 rather than the 40-point cover. Ecology 3 is unscored because its freshwater heading normally calls for phosphorus, which is absent from the choices; the source key instead chooses nitrogen. Available score is 40. Water boatman feeding accepts algae/detritus/omnivory rather than only the key’s zoophagy; mating answers accept correct species-specific stridulation. Analysis 6 corrects the claim that pH 5.8 cannot support any life. Warm-water benefits require a defensible example, not the source’s cold-water brook-trout example. All organism photos and treatment diagrams remain in the student PDF. Cover dates 2025; archive season is 2026.')
+    qs=reviewed_sections(p.source)
+    assert [len(qs[x]) for x in ['1','2','3']]==[11,17,8]
+    mc={1:'A',5:'D',6:'B',7:'A',9:'A'}
+    written={
+        2:(2,'Any two distinct factors, one point each: water temperature, salinity, atmospheric pressure, biological photosynthesis/respiration/decomposition, or mixing/aeration. Explain direction if discussed; cooler water and lower salinity generally allow more dissolved oxygen.'),
+        3:(0,'Unscored source ambiguity: key C is nitrogen, often limiting in marine systems, but this section is explicitly freshwater, where phosphorus is commonly the limiting nutrient. Phosphorus is absent from the choices. Explain the relevant ecosystem and limiting nutrient.'),
+        4:(1,'A human source of suspended material that increases turbidity, such as construction/erosion runoff, urban stormwater, industrial discharge or disturbed sediment. The source also lists oil and wastes; accept these when the response explains their effect on clarity.'),
+        8:(1,'A disease associated with fecally contaminated drinking water, for example dysentery, typhoid fever, gastroenteritis, hepatitis A, cholera or giardiasis. Fecal coliforms are indicators; they do not necessarily cause each named disease.'),
+        10:(1,'Biochemical (or biological) oxygen demand: dissolved oxygen consumed by microorganisms while decomposing organic matter over the specified incubation period. Both the expansion and meaning are required within one point.'),
+        11:(3,'Any three distinct effects, one point each: reduced light/photosynthesis, impaired plant growth, increased water heating, gill interference, reduced visual feeding, aesthetic impairment, or protection/transport of microbes or pollutants. Avoid duplicate descriptions of the same effect.')}
+    for n,b in qs['1'].items():
+        if n in mc:
+            prompt,choices=options(b['text']);p.mcq(f'1-{n}',prompt,choices,mc[n],page=b['page'])
+        else:
+            weight,answer=written[n];p.frq(f'1-{n}',b['text'],answer,points=weight,page=b['page'])
+    answers={
+        1:'Stonefly.',2:'Plecoptera.',3:'Females release eggs over water or attach egg masses to rocks/vegetation by water; accept a biologically valid stonefly oviposition method.',
+        4:'Diapause, delayed development or hatching until suitable conditions.',5:'Molting/moulting, also called ecdysis.',6:'Crane fly (cranefly).',
+        7:'Moist or wet habitats, including stream margins, wetlands or damp soil/vegetation; many occur in humid or high-elevation/northern settings. Do not require all habitats listed in the key for every species.',
+        8:'The key describes moderately clean water. Crane-fly tolerance varies by species; accept a qualified intermediate-tolerance indicator interpretation rather than a universal claim of pristine water.',
+        9:'Adult life is typically a few days to roughly two weeks; the aquatic/soil larval stage is longer.',10:'Water boatman (Corixidae).',
+        11:'Many water boatmen graze algae/plant material and detritus; some also consume small invertebrates, so herbivory, detritivory or omnivory is acceptable. The source’s zoophagy-only answer is too restrictive; accept a correct explanation of species-dependent animal feeding.',
+        12:'They carry a trapped air supply under the wings/around the body and obtain oxygen from it while submerged, replenishing at the surface.',
+        13:'Males attract mates with sound/stridulation, produced by rubbing specialized body structures. The key describes forelegs against the head; accept other correctly explained species-specific stridulatory structures.',
+        14:'Water hyacinth.',15:'Vegetative reproduction by runners/stolons producing daughter plants; accept equivalent clonal offshoot description.',
+        16:'Azotobacter chroococcum (published key’s nitrogen-fixing bacterium).',
+        17:'Dense invasive mats shade submerged plants, restrict flow, outcompete native species and may lower oxygen during respiration/decomposition. Any valid harmful water-quality effect earns the point.'}
+    aliases={1:['stonefly'],2:['Plecoptera'],4:['diapause'],5:['molting','moulting','ecdysis'],6:['cranefly','crane fly'],10:['water boatman','Corixidae'],14:['water hyacinth','Eichhornia crassipes','Pontederia crassipes'],16:['Azotobacter chroococcum']}
+    for n,b in qs['2'].items():
+        p.frq(f'2-{n}',b['text'],answers[n],points=2 if n==16 else 1,page=b['page'],accepted=aliases.get(n))
+    diagram={1:('Primary treatment: name blank 1 in the original diagram.','Sedimentation.',['sedimentation','settling']),2:('Secondary treatment: name the biological process/system in blank 2.','Filter beds or activated sludge.',['filter beds','activated sludge','filter beds or activated sludge']),3:('Tertiary treatment: name blank 3 in the original diagram.','Nutrient stripping/removal.',['nutrient stripping','nutrient removal'])}
+    for n,(prompt,answer,aliases) in diagram.items():p.frq(f'3-{n}',prompt,answer,page=5,accepted=aliases)
+    for n in range(4,9):
+        b=qs['3'][n]
+        if n in [7,8]:
+            prompt,choices=options(b['text']);p.mcq(f'3-{n}',prompt,choices,'B' if n==7 else 'C',page=b['page'])
+        elif n==4:p.frq('3-4',b['text'],'Warming can initially increase growth of tolerant plants/algae, but excessive heat can stress or kill sensitive plants, reduce oxygen availability and alter community composition. Accept a scientifically sound effect with appropriate qualification.',page=b['page'])
+        elif n==5:p.frq('3-5',b['text'],'An appropriate example is a manatee using warm-water refuges during cold weather, or a warm-tolerant aquatic plant such as Egeria densa or parrot’s feather where local conditions favor it. Do not treat thermal pollution as universally beneficial. Brook trout are cold-water fish and do not automatically benefit from warming.',page=b['page'])
+        else:p.frq('3-6',b['text'],'pH=-log10(10^-5.8)=5.8 (1 point). This is acidic and may harm sensitive species, but can support acid-tolerant organisms; pH alone does not establish that no life can survive (1 point). The key’s blanket no-life claim is corrected.',points=2,page=b['page'])
+    assert len(p.test['questions'])==36 and sum(q['points'] for q in p.test['questions'])==40
+    p.finish()
+
+
+if '9zQMxc7ScpQ' in SOURCES:
+    from pypdf import PdfWriter
+    source=SOURCES['9zQMxc7ScpQ']
+    first=ROOT/'4431fcb70fd73c4e5d359b8a7797741374496d343ef761707ce403ed2408f94e.pdf'
+    second=ROOT/'7bef4c80ffde4a2cb86ec536bfad8d3236c57f7ef318a2c7a3d9ee243237b0e0.pdf'
+    writer=PdfWriter();writer.append(str(first));writer.append(str(second));writer.write(str(ROOT/'yale-2017-remote-complete-key.pdf'))
+    source['keyPath']=(ROOT/'yale-2017-remote-complete-key.pdf').as_posix()
+    source['contextPath']=(ROOT/'30880165cef391ffb87f4be62f118b122a547a7faaf4a495ae7838e25e671782.pdf').as_posix()
+    source.pop('attachmentPaths',None)
+    p=Paper('9zQMxc7ScpQ',reviewedOn='2026-10-12',difficulty='Medium',
+        difficultyReason='Sensor classification, historical satellite instrumentation and sea-surface-temperature imagery lead to three quantitative planetary energy-balance models.',
+        topics=['Remote sensing technology','Satellite instruments','Sea surface temperature','Energy balance','Climate processes'],topicMatch='different',
+        alignment='Historical 2017 climate-process and A-Train material is retained as dated practice, rather than presented as a current satellite roster or fully matched 2027 rotation.',
+        scoringBasis='All 34 numbered questions and the separate image sheet are included; both original answer-key files are combined. Only question 28 specifies a weight (two points). Other questions use one practice point each, with compound answers assessed within that cap. Question 1 is unscored because its natural reflected/scattered-radiation wording describes passive sensing while the key says active. Available practice score is 34. Question 5 accepts both absorption and scattering as attenuation. Question 25 distinguishes ozone depletion from tropospheric ozone increases and also accepts cooling aerosols with an explanation. Question 30 accepts surface roughness (A), correcting the key’s cloud-cover alternative (D); microwave SST measurements penetrate ordinary cloud. Satellite dates/order are historical answers for 2017. Visually missing extracted words were transcribed from the rendered original.')
+    text='\n\f\n'.join(structure_helpers['read_pages'](p.source['paperPath']))
+    marks=list(re.finditer(r'(?m)^[ \t]*([1-9]\d?)\.[ \t]*',text))
+    assert [int(m[1]) for m in marks]==list(range(1,35))
+    qs={int(m[1]):dict(text=clean(text[m.end():marks[i+1].start() if i+1<len(marks) else len(text)]),page=text[:m.start()].count('\f')+1) for i,m in enumerate(marks)}
+    corrections={1:'For questions 1–2 choose active or passive sensing. Receives signals reflected, refracted or scattered by Earth’s surface and atmosphere.',12:'Match Planck’s law to the descriptions a–f in the original paper.',13:'Match Wien’s law to the descriptions a–f in the original paper.',19:'From what is the name “A-Train” derived?',20:'In what type of orbit are the A-Train satellites? By what is this type of orbit characterized? What major advantage does this type of orbit offer for remote sensing?',21:'Which of the A-Train satellites is primarily designed to study atmospheric carbon dioxide concentrations? In what spectral bands does it take measurements, and for what is each band used? What type of instrument does it use to take measurements of spectral bands? Of what type is its main telescope?'}
+    answers={
+        1:'The key says active, but the description does not specify sensor-emitted illumination and naturally reflected/scattered signals are received by passive instruments. Active sensing requires an emitted probe and return. Unscored ambiguity.',
+        2:'Passive.',3:'Light Detection and Ranging; laser/light pulses.',4:'Both atmospheric absorption and scattering.',5:'Absorption attenuates reflected radiance, as does scattering out of the line of sight. Accept absorption (published answer) or both.',6:'Scattering.',7:'Scattering.',8:'Absorption.',
+        14:'Three valid thermal-imagery climate measurements, such as sea surface temperature, land surface temperature, cloud temperature/height, or water-vapor information from appropriate thermal absorption bands. The original key allows other reasonable examples.',15:'Doppler radar.',
+        16:'Historical list with launch dates: OCO-2 July 2, 2014; GCOM-W1 May 18, 2012; Aqua May 4, 2002; CloudSat April 28, 2006; CALIPSO April 28, 2006; Aura July 15, 2004; PARASOL December 18, 2004. PARASOL was no longer in the train in 2017. Assess names and dates together within one practice point.',
+        17:'Historical key order: OCO-2 leads; GCOM-W1 11 minutes behind OCO-2; Aqua 4 minutes behind GCOM-W1; CloudSat 2 minutes 30 seconds behind Aqua; CALIPSO at most 15 seconds behind CloudSat; Aura 15 minutes behind Aqua. Do not substitute a present-day roster.',
+        18:'NASA: National Aeronautics and Space Administration, United States; CSA/ASC: Canadian Space Agency/Agence spatiale canadienne, Canada; CNES: Centre national d’études spatiales/National Centre for Space Studies, France; JAXA: Japan Aerospace Exploration Agency, Japan. Accept the source’s Japanese Aerospace wording.',
+        19:'Afternoon Train: the satellites cross the equator at about 1:30 pm local solar time.',
+        20:'Sun-synchronous/heliosynchronous orbit: the orbital plane precesses with Earth’s annual motion, maintaining nearly fixed local solar crossing time and similar illumination for repeated observations. Do not require the incorrect claim that the satellite is always in sunlight.',
+        21:'OCO-2 (Orbiting Carbon Observatory 2). Bands approximately 0.765 μm for oxygen A-band, 1.61 μm for weak CO2, 2.06 μm for strong CO2. Three grating spectrometers; f/1.8 near-infrared Cassegrain telescope. The source allows spectrometer. Assess the complete response within one practice point.',
+        22:'CALIPSO: Cloud-Aerosol Lidar with Orthogonal Polarization (CALIOP), profiling aerosols and clouds. Its imaging infrared radiometer (IIR) supplies cirrus emissivity and particle-size information.',
+        23:'Watts per square metre, W/m².',24:'Methane, CH4 (historical greenhouse-gas context of the source).',
+        25:'The key says ozone. Accept stratospheric ozone depletion with its cooling/negative-forcing explanation; do not claim that increased tropospheric ozone cools the climate. Also accept scattering aerosols such as sulfate with an explanation of negative radiative forcing, since the question does not identify a unique substance.',
+        26:'Cloud cover and snow/ice cover.',
+        28:'Give two distinct advantages, one point each. Thermal IR: generally finer resolution, a longer historical record, or less sensitivity to surface roughness. Microwave: ordinary-cloud penetration/better coverage or sensing slightly deeper than the IR skin layer. Microwave retrievals still require corrections for atmospheric and surface effects; neither instrument measures a deep-ocean bulk profile.',
+        29:'Passive microwave.',31:'Any suitable microwave radiometer used by the service, e.g. TMI, AMSR-E, AMSR2, WindSat or GMI. Strictly these are instruments; accept the instrument names explicitly allowed by the published key or their correctly associated satellite.',
+        32:'Balance intercepted solar power πR² S0 with emitted 4πR² σ T⁴. T=(1366/(4×5.67×10^-8))^(1/4)=278.6 K. Use the stated S0=1366; the auxiliary key’s printed 1376.6 is inconsistent with its correct numerical result. Method credit within one practice point.',
+        33:'T=(1366×(1-0.3)/(4×5.67×10^-8))^(1/4)=254.8 K. This is less accurate relative to 288 K (about 33.2 K low versus 9.4 K low), despite including albedo; it still omits greenhouse warming. Assess calculation and comparison within one practice point.',
+        34:'S0(1-alpha)/4=epsilon sigma T⁴, hence epsilon=1366×0.7/(4×5.67×10^-8×288⁴)=0.6128, rounded 0.61. Increasing epsilon lowers the equilibrium temperature; decreasing epsilon raises it. Here epsilon is an effective emissivity factor, not electrical permittivity. Assess value and explanation within one practice point.'}
+    matching=[{'id':c,'text':t} for c,t in zip('ABCDEF',['Black-body peak wavelength is inversely proportional to temperature.','Black-body spectral radiance as a function of wavelength at a given temperature.','Black-body emitted energy flux is proportional to the fourth power of temperature.','Effectiveness of a surface in emitting thermal radiation.','Radiant flux reflected by a surface.','Perfect absorption of electromagnetic radiation.'])]
+    aliases={2:['passive','passive sensor'],4:['both','absorption and scattering'],5:['absorption','both','absorption and scattering'],6:['scattering'],7:['scattering'],8:['absorption'],15:['Doppler','Doppler radar'],23:['W/m2','W/m²','W m^-2','watts per square meter','watts per square metre'],24:['methane','CH4'],29:['passive microwave','microwave']}
+    for n,b in qs.items():
+        prompt=corrections.get(n,b['text'])
+        if 9<=n<=13:p.mcq(str(n),{9:'Match black body.',10:'Match emissivity.',11:'Match Stefan–Boltzmann law.',12:'Match Planck’s law.',13:'Match Wien’s law.'}[n],matching,{9:'F',10:'D',11:'C',12:'B',13:'A'}[n],page=b['page'])
+        elif n==27:p.mcq('27','Which composite image on the original image sheet was collated using thermal IR remote sensing data?',[{'id':'A','text':'Image A'},{'id':'B','text':'Image B'}],'B',page=b['page'])
+        elif n==30:
+            prompt,choices=options(b['text']);assert len(choices)==4;p.mcq('30',prompt,choices,'A',page=b['page'])
+        else:
+            if n in [4,5,6,7,8]:prompt='Choose absorption, scattering, or both. '+prompt
+            kwargs={}
+            if n==32:kwargs['numeric']=numeric(278.6,0.1,['K','kelvin'],True)
+            p.frq(str(n),prompt,answers[n],points=0 if n==1 else 2 if n==28 else 1,page=b['page'],accepted=aliases.get(n),**kwargs)
+    assert len(p.test['questions'])==34 and sum(q['points'] for q in p.test['questions'])==34
+    p.finish()
+
+
+if 'pwDImCe2Vt4' in SOURCES:
+    p=Paper('pwDImCe2Vt4',competition='Scioly archive practice — silentsage (competition not reported)',reviewedOn='2026-10-12',
+        difficulty='Easy',difficultyReason='Basic ecology, an energy pyramid, illustrated aquatic-organism recognition and foundational water-quality definitions.',
+        topics=['Freshwater ecology','Freshwater organisms','Water monitoring','Wastewater treatment'],topicMatch='different',
+        alignment='Historical freshwater organisms and tolerance classes differ from the 2027 marine/estuary rotation. The paper is credited to silentsage; no tournament is named and 2012 is the archive season, not a verified cover date.',
+        scoringBasis='All three sections are converted: eight ecology questions, eight organism IDs plus their eight historical tolerance classes, and 15 analysis questions (39 fields). Published weights total 51. Analysis 9 is unscored because TDS is confused with suspended material/turbidity; Analysis 12 is unscored because the wording confuses alkalinity with pH-dependent ammonia toxicity. Available score is 49. The energy-pyramid answer is corrected to 124.2 J as requested to the nearest tenth, rather than the rounded 124 J in the key. The 1–5 organism classes are the paper’s historical water-quality tolerance groups, not taxonomic classes or the current rules roster. No named competition or tier is inferred.')
+    qs=reviewed_sections(p.source)
+    assert len(qs['1'])==8 and len(qs['3'])==15
+    answers={5:'Biomagnification: an increase in persistent pollutant concentration at successive trophic levels.',6:'Assuming the standard 10% energy-transfer model shown in the pyramid: 12420×0.1²=124.2 J in predators. The key rounds this to 124 J, but the prompt asks to the nearest tenth.',7:'Plants decrease: removing predators allows herbivores to increase and consume more plants.',8:'Top predators: tertiary consumers (fourth trophic level); predators: secondary consumers (third); herbivores: primary consumers (second); plants: primary producers (first).'}
+    for n,b in qs['1'].items():
+        if n<=4:
+            prompt,choices=options(b['text']);p.mcq(f'1-{n}',prompt,choices,{1:'B',2:'A',3:'C',4:'A'}[n],page=b['page'])
+        else:
+            kwargs={'numeric':numeric(124.2,0.05,['J','joules'],True)} if n==6 else {}
+            p.frq(f'1-{n}',b['text'],answers[n],points=2,page=b['page'],**kwargs)
+    organisms=[('Stonefly',['stonefly'],1),('Crane fly',['cranefly','crane fly'],2),('Tubifex worm',['Tubifex','Tubifex worm'],4),('Dobsonfly',['dobsonfly','hellgrammite'],1),('Backswimmer',['backswimmer'],5),('Water mite',['water mite'],3),('Water boatman',['water boatman'],5),('Deer/horse fly',['deer fly','horse fly','deer/horse fly'],4)]
+    for n,(name,aliases,group) in enumerate(organisms,1):
+        page=2 if n<=4 else 3
+        p.frq(f'2-{n}-id',f'Identify organism {n} pictured in Section 2 of the original paper.',name,points=2,page=page,accepted=aliases)
+        p.frq(f'2-{n}-class',f'Give organism {n}’s historical pollution-tolerance class (1–5), using this source’s classification. This is not its taxonomic class.',f'Published historical tolerance class: {group}.',page=page,numeric=numeric(group))
+    answers={1:'The source key expects about 110% oxygen saturation. This is a historical screening threshold; supersaturation risk depends on species, exposure and total dissolved-gas conditions rather than a universal exact oxygen threshold.',2:'Methemoglobinemia, commonly called blue baby syndrome.',3:'Fecal contamination and possible associated pathogens; fecal coliforms are indicators rather than proof of a specific pathogen.',4:'Secondary treatment, including biological sludge processing; anaerobic digestion stabilizes sludge and may occur as a separate sludge-treatment stage.',5:'pH is -log10 of hydrogen-ion activity (approximately concentration in dilute solution), measuring acidity/basicity. Do not define it merely as all dissolved ions.',6:'6 degrees Celsius: colder water generally holds more dissolved oxygen at equal salinity/pressure.',7:'Eutrophication.',8:'About 4 degrees Celsius (approximately 3.98°C for pure freshwater at atmospheric pressure).',9:'Unscored source wording: the key says turbidity, but turbidity is primarily related to suspended particles, not total dissolved solids. TDS alone does not determine visibility.',10:'Nephelometric Turbidity Units (NTU), following the key’s intended turbidity answer to question 9.',11:'0.17, the dissolved-oxygen weighting factor used in the source’s NSF-style water-quality index.',12:'Unscored source wording: the key says ammonia, but alkalinity is acid-neutralizing capacity, not conversion of a substance to a toxic form. Increasing pH shifts ammonium toward more toxic unionized ammonia; distinguish pH from alkalinity.',13:'Parts per thousand (ppt), the source’s salinity unit.',14:'States set applicable water-quality standards subject to federal Clean Water Act requirements and EPA oversight; do not interpret this as excluding tribal or federal roles.',15:'Biochemical (or biological) oxygen demand.'}
+    aliases={2:['blue baby syndrome','methemoglobinemia','methaemoglobinaemia'],7:['eutrophication'],10:['NTU','nephelometric turbidity units'],13:['ppt','parts per thousand'],15:['biochemical oxygen demand','biological oxygen demand']}
+    numbers={1:numeric(110,0,['%','percent'],False),6:numeric(6,0,['C','°C','degrees C'],False),8:numeric(4,0.03,['C','°C','degrees C'],False),11:numeric(0.17,0.0001)}
+    for n,b in qs['3'].items():
+        kwargs={'numeric':numbers[n]} if n in numbers else {}
+        p.frq(f'3-{n}',b['text'],answers[n],points=0 if n in [9,12] else 1,page=b['page'],accepted=aliases.get(n),**kwargs)
+    assert len(p.test['questions'])==39 and sum(q['points'] for q in p.test['questions'])==49
+    p.finish()
+
+
+
+if 'cWRaaI1CGA4' in SOURCES:
+    p=Paper('cWRaaI1CGA4',year=2017,competition='Scioly Summer Study Session — fuzzylogic',reviewedOn='2026-10-12',
+        difficulty='Hard',difficultyReason='Stellar-evolution diagrams, supernova light curves, binary velocities and pulsar/black-hole physics require several linked calculations and explanations.',
+        topics=['Stellar evolution','Type II supernovae','Compact objects','Binary stars','Gamma ray bursts'],topicMatch='different',
+        alignment='The cover’s 2017 stellar-evolution/Type II-supernova rotation is historical; the archive lists season 2018. It is not represented as a fully matched 2027 paper.',
+        scoringBasis='All 67 lettered parts, including four Miscellaneous items, are retained. Published weights come from the separate three-page answer sheet and sum to 100. Parts 1a–b are unscored because mass and distance alone do not uniquely establish Population III or prove massive-star formation has never been observed. Available score is 97. Other 2017 assumptions are identified in the rubric: metallicity, luminosity-to-magnitude conventions, neutron-star mass/radius modeling and approximate black-hole progenitor thresholds. The Milky Way/Andromeda scale comparison uses a distance-to-diameter ratio, correcting the key’s collision argument. No current JWST launch claim is made. Original graphs, cover image, complete key and weighted answer sheet are available.')
+    main=numbered(structure_helpers['read_pages'](p.source['paperPath']))
+    assert len(main)==9
+    all_text='\n\f\n'.join(structure_helpers['read_pages'](p.source['paperPath']))
+    misc=all_text.split('Miscellaneous:',1)[1]
+    main[9]['text']=main[9]['text'].split('Miscellaneous:',1)[0]
+    weights={1:[0,0,1,1,3,2],2:[1,1,1,1,2,1,1,1,2],3:[1,2,2,1,2,2,1],4:[1,1,2,1,1,1,1,2,1],5:[1,1,2,2,1,1,2],6:[1,2,2,1,1,1,2],7:[3,1,1,1,1,1,2],8:[1,1,2,2,1,1],9:[1,2,1,3,1],'Misc':[4,1,3,3]}
+    answers={
+        1:[
+            'Unscored: the key says Population III, but a 150-solar-mass star at the stated distance need not be metal-free Population III. Classification requires metallicity/formation evidence; Population II or other massive low-metallicity stars are possible.',
+            'Unscored premise: the source says massive stars form quickly. That alone does not establish that formation at this mass has never been observed. Observational difficulty involves obscuration, rarity, distance and short evolutionary times; do not require the false blanket premise.',
+            'The historical key expects metallicity lower than the Sun. Accept a qualified early-Universe/low-metallicity interpretation rather than claiming that distance uniquely specifies a metallicity.',
+            'CNO-cycle hydrogen fusion in a massive main-sequence star. Extremely metal-poor initial conditions can require self-enrichment before efficient CNO cycling; accept an appropriate qualification.',
+            'L_Edd approximately 1.26×10^31(M/Msun) W, hence 1.89×10^33 W for 150 solar masses. Award method, substitution and result within three points.',
+            'At the Eddington limit outward radiative acceleration balances inward gravity for the assumed opacity. Exceeding it can drive strong winds/mass loss and make the atmosphere unstable; it need not instantly destroy the entire star (source exaggeration).'],
+        2:['Color–magnitude diagram (a form of HR diagram).','d=1/0.0067=149.25 pc, approximately 149 pc.','Gamma marks the main-sequence turnoff.','Hertzsprung gap (accept source misspelling Herzsprung).','Stars cross this evolutionary phase rapidly, so few are observed there.','Open cluster.','In the galactic disk/plane, commonly spiral-arm regions.','Reflection nebula.','Gamma, the turnoff star; its mass/lifetime constrains the cluster age.'],
+        3:['L/Lsun=10^((Msun-M)/2.5). Using source convention Msun about 4.77 gives 2032; using 4.83 gives about 2148. Both are reasonable because no solar magnitude is specified.','The plotted peak is about 75 nm. Wien’s law gives T=2.9×10^6/75 approximately 38,667 K.','From L=4πR²σT⁴, R/Rsun=sqrt(L/Lsun)(Tsun/T)², about 1.01 solar radii under the key’s constants. Accept consistent reasonable solar constants and carry-forward luminosity.','P Cygni emission plus blueshifted absorption indicates outward flow/strong stellar wind and mass loss.','The hydrogen-rich outer envelope has been stripped by strong winds or binary interaction.','The similar distribution suggests evolution from young, massive O-type progenitors.','A stripped-envelope core-collapse supernova, Type Ib or Ic (depending on retained helium); acknowledge that direct collapse can occur in some models.'],
+        4:['Zero-age main sequence (ZAMS).','Instability strip.','Pulsational variability/instability.','Blue supergiant (as labeled in the source track).','Luminous blue variable (LBV).','Wolf–Rayet star.','C.','D, the source’s luminous-blue-variable mass-loss phase.','Core-collapse supernova.'],
+        5:['Type II-L: the curve has a roughly linear decline rather than a pronounced plateau.','Iron/iron-group core.','Iron-group nuclei are near the maximum binding energy per nucleon; further fusion does not provide net energy to support the core and can consume energy.','Electron capture/neutronization and photodisintegration, one point each.','Neutrinos. These are particles carrying most of the collapse energy, despite the question’s loose radiation wording.','Using peak apparent magnitude about 6.5 from the graph and M=-17.5: d=10^((6.5+17.5+5)/5)=630,957 pc. Accept appropriate graph-reading tolerance.','C: Andromeda Galaxy, the closest offered distance-scale match to this approximate result.'],
+        6:['12 days from a full radial-velocity cycle.','M_A/M_B=K_B/K_A=50/30=5/3, about 1.667.','Use a³=(M_A+M_B)P² in solar-mass/year/AU units: a=(4.8×(12/365.25)²)^(1/3), approximately 0.173 AU.','The source expects star A under its assumed neutron-star mass/radius relation. Neutron-star radii depend on the equation of state, so accept a correct qualification that mass ratio alone does not universally determine radius.','Gravitational waves carry away orbital energy and angular momentum.','D: General relativity.','A short gamma-ray burst (possibly accompanied by a kilonova and gravitational waves).'],
+        7:['Rotational energy loss L=-d(½Iω²)/dt=4π²I Pdot/P³, assuming I=(2/5)MR². With M=1.9 Msun, R=12 km, P=0.040 s and L=2.2×10^32 W, Pdot approximately 1.639×10^-12 s/s. State the moment-of-inertia assumption; award method credit within three points.','Conservation of angular momentum during collapse.','Neutron degeneracy pressure together with nuclear interactions supports the neutron star; source answer is neutron degeneracy pressure.','Tolman–Oppenheimer–Volkoff (TOV) limit.','Synchrotron/magnetospheric radiation from accelerated charged particles in the strong magnetic field; source expects synchrotron radiation.','Pulsar glitch.','Thorne–Żytkow object (TZO), a neutron star embedded inside a giant/supergiant envelope.'],
+        8:['Swift or Fermi; source also accepts Chandra for follow-up/afterglow detection. Name a NASA telescope capable of observing the relevant burst or afterglow.','Long gamma-ray burst: the illustrated emission persists for several seconds, longer than the conventional ~2-second boundary.','Collapse of a massive star (collapsar/core-collapse progenitor).','Association with young star-forming regions and, in many cases, broad-lined Type Ic supernovae supports massive-star progenitors. Do not insist on the key’s absolute exclusively wording.','Mass extinctions have been proposed as a possible effect; this is a hypothesis rather than a confirmed cause of a specific extinction.','An appropriately qualified candidate such as WR 104, WR 124 or Eta Carinae; candidate status is uncertain, not a prediction of an Earth-directed burst.'],
+        9:['The historical key gives approximately 15–25 solar masses as a progenitor threshold. Actual black-hole production is model-dependent and depends on mass loss, metallicity, binary interaction and explosion dynamics; accept a qualified reasonable massive-star range.','r_s=2GM/c² approximately 103 km for 35 solar masses.','Hawking radiation (the theoretical quantum emission).','Assuming radial alignment and a centre-to-centre distance r=1000 km, tidal force difference ΔF approximately 2GMmℓ/r³=3.035×10^12 N for M=35 Msun, m=2.97×10^6 kg and ℓ=110 m. Award formula, consistent SI substitution and result.','Spaghettification.'],
+        'Misc':['A: the Moon is the nearest scale choice. Andromeda is roughly 25 Milky-Way diameters away; scaling a ~100,000-ly Milky Way to Earth’s ~12,700-km diameter gives ~320,000 km, of the same order as lunar distance. Award one for the selection and three for a defensible scale argument. The key’s claim that Earth-sized objects at lunar distance must collide is incorrect.','Wolf–Rayet star WR 124 (surrounded by M1-67), as shown on the cover.','One woman (1 point) and a correct substantive contribution (2), e.g. Jocelyn Bell Burnell and pulsar discovery; Annie Jump Cannon and spectral classification; Cecilia Payne-Gaposchkin and stellar composition; Vera Rubin and galaxy-rotation evidence for dark matter.','Infrared (1 point), which penetrates obscuring dust more effectively than visible light for star formation (1) and receives redshifted light from distant early galaxies (1). The source’s planned 2018 launch is historical wording; do not grade a modern launch date.']}
+    numeric_parts={'1-e':numeric(1.89e33,0.04e33,['W','watts'],True),'2-b':numeric(149.25,1,['pc','parsecs'],True),'3-b':numeric(38667,1500,['K','kelvin'],True),'3-c':numeric(1.01,0.08,['Rsun','solar radii'],False),'5-f':numeric(630957,50000,['pc','parsecs'],True),'6-a':numeric(12,0.1,['days','day','d'],True),'6-c':numeric(0.173,0.005,['AU'],True),'7-a':numeric(1.639e-12,0.05e-12,['s/s','sec/sec'],False),'9-b':numeric(103,2,['km','kilometers','kilometres'],True),'9-d':numeric(3.035e12,0.05e12,['N','newtons'],True)}
+    aliases={'2-a':['color-magnitude diagram','colour-magnitude diagram','HR diagram','Hertzsprung-Russell diagram'],'2-c':['main sequence turnoff','main-sequence turnoff'],'2-d':['Hertzsprung gap','Herzsprung gap'],'2-f':['open cluster'],'2-g':['galactic plane','galactic disk','galactic disc'],'2-h':['reflection nebula'],'2-i':['gamma','γ'],'4-a':['zero age main sequence','ZAMS'],'4-b':['instability strip'],'4-d':['blue supergiant'],'4-e':['luminous blue variable','LBV'],'4-f':['Wolf Rayet','Wolf-Rayet'],'4-g':['C'],'4-h':['D'],'5-a':['Type II-L','II-L','Type IIL'],'5-b':['iron','Fe','iron group'],'5-e':['neutrinos'],'6-e':['gravitational waves'],'6-g':['short gamma ray burst','short GRB'],'7-b':['conservation of angular momentum'],'7-d':['Tolman Oppenheimer Volkoff limit','TOV limit'],'7-f':['pulsar glitch','glitch'],'7-g':['Thorne Zytkow object','TZO'],'8-a':['Swift','Fermi','Chandra'],'8-b':['long GRB','long gamma ray burst'],'8-e':['mass extinction','mass extinctions'],'9-c':['Hawking radiation'],'9-e':['spaghettification'],'Misc-b':['WR 124','Wolf Rayet 124']}
+    for section in [1,2,3,4,5,6,7,8,9,'Misc']:
+        text=misc if section=='Misc' else main[section]['text']
+        page=6 if section=='Misc' else main[section]['page']
+        parts=list(re.finditer(r'(?m)^[ \t]*([a-i])\)[ \t]*',text))
+        assert [m[1] for m in parts]==list('abcdefghi'[:len(weights[section])]),(section,[m[1] for m in parts])
+        stem=clean(text[:parts[0].start()])
+        for i,m in enumerate(parts):
+            id=f'{section}-{m[1]}'
+            prompt=clean(stem+'\n'+text[m.end():parts[i+1].start() if i+1<len(parts) else len(text)])
+            weight=weights[section][i]
+            if id in ['5-g','6-f']:
+                choices=([('A','Milky Way'),('B','Large Magellanic Cloud'),('C','Andromeda Galaxy'),('D','Outside the Virgo Supercluster')] if id=='5-g' else [('A','Neutron degeneracy'),('B','Vogt–Russell theorem'),('C','Special relativity'),('D','General relativity')])
+                p.mcq(id,prompt,[{'id':a,'text':b} for a,b in choices],'C' if id=='5-g' else 'D',points=weight,page=page)
+            else:
+                kwargs={'numeric':numeric_parts[id]} if id in numeric_parts else {}
+                p.frq(id,prompt,answers[section][i],points=weight,page=page,accepted=aliases.get(id),**kwargs)
+    assert len(p.test['questions'])==67 and sum(q['points'] for q in p.test['questions'])==97
     p.finish()
 
 manifest = Path('documents/practice-import-sources.json')

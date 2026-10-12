@@ -50,7 +50,9 @@ export default function DonatePage() {
           <>
             <p className="eyebrow">PAYPAL · DEBIT · CREDIT</p>
             <h2>Donations are on the way.</h2>
-            <p>Donations are not open just yet. Please check back soon, and thank you for asking.</p>
+            <p>
+              Donations are not open just yet. Please check back soon, and thank you for asking.
+            </p>
           </>
         )}
       </div>

@@ -1933,5 +1933,146 @@
     "paperPath": "output/practice-research/division-c/greenbrier-circuit-student.pdf",
     "keyPath": "output/practice-research/division-c/greenbrier-circuit-key.pdf",
     "originalPaperPath": "output/practice-research/division-c/a83681763e54a98d8f66a9fe4af18964a042b8316026fa48aaa7501318cac323.pdf"
+  },
+  {
+    "id": "scioly-aparfcgz998-c",
+    "sourceId": "aPArfcgZ998",
+    "sourceUrl": "https://scioly.org/tests/aPArfcgZ998",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/aPArfcgZ998",
+    "keyUrl": "https://scioly.org/tests/aPArfcgZ998",
+    "files": [
+      {
+        "name": "TEST_WaterQuality_RanchoBernardoHighSchoolCSE2025 (1).pdf",
+        "type": "test",
+        "size": 4214201,
+        "sha256": "454c4daae82d9db66331cdb182c4a4f5dce445a490ede325083d38a93ec54e8a"
+      },
+      {
+        "name": "KEY_WaterQuality_RanchoBernardoHighSchoolCSE2025 (1).pdf",
+        "type": "answer_key",
+        "size": 79135,
+        "sha256": "a83dfa0483f35ea0b8b78654761c2542ab411fcab77ce8be89b3f829acb0de0c"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/454c4daae82d9db66331cdb182c4a4f5dce445a490ede325083d38a93ec54e8a.pdf",
+    "keyPath": "output/practice-research/division-c/a83dfa0483f35ea0b8b78654761c2542ab411fcab77ce8be89b3f829acb0de0c.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-9zqmxc7scpq-c",
+    "sourceId": "9zQMxc7ScpQ",
+    "sourceUrl": "https://scioly.org/tests/9zQMxc7ScpQ",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "competition": "Yale Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/9zQMxc7ScpQ",
+    "keyUrl": "https://scioly.org/tests/9zQMxc7ScpQ",
+    "files": [
+      {
+        "name": "remotesensing_2017_c_yale_test.pdf",
+        "type": "test",
+        "size": 306141,
+        "sha256": "bb3f9ddba1cf3d42c1238bedeb4c2c833366a424659f2bf69bf9cfe82a2d6844"
+      },
+      {
+        "name": "remotesensing_2017_c_yale_key1.pdf",
+        "type": "answer_key",
+        "size": 130353,
+        "sha256": "4431fcb70fd73c4e5d359b8a7797741374496d343ef761707ce403ed2408f94e"
+      },
+      {
+        "name": "remotesensing_2017_c_yale_key2.pdf",
+        "type": "answer_key",
+        "size": 107635,
+        "sha256": "7bef4c80ffde4a2cb86ec536bfad8d3236c57f7ef318a2c7a3d9ee243237b0e0"
+      },
+      {
+        "name": "remotesensing_2017_c_yale_img.pdf",
+        "type": "images",
+        "size": 64206,
+        "sha256": "30880165cef391ffb87f4be62f118b122a547a7faaf4a495ae7838e25e671782"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/bb3f9ddba1cf3d42c1238bedeb4c2c833366a424659f2bf69bf9cfe82a2d6844.pdf",
+    "keyPath": "output/practice-research/division-c/yale-2017-remote-complete-key.pdf",
+    "contextPath": "output/practice-research/division-c/30880165cef391ffb87f4be62f118b122a547a7faaf4a495ae7838e25e671782.pdf"
+  },
+  {
+    "id": "scioly-pwdimce2vt4-c",
+    "sourceId": "pwDImCe2Vt4",
+    "sourceUrl": "https://scioly.org/tests/pwDImCe2Vt4",
+    "division": "C",
+    "eventId": "water-quality",
+    "competition": "Unknown",
+    "year": 2012,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/pwDImCe2Vt4",
+    "keyUrl": "https://scioly.org/tests/pwDImCe2Vt4",
+    "files": [
+      {
+        "name": "WQtest(1).pdf",
+        "type": "test",
+        "size": 281579,
+        "sha256": "dbebd49c280c098020ecccbd88c416945d45a36ac9232477a902894621e5db77"
+      },
+      {
+        "name": "WQtestanswers.pdf",
+        "type": "answer_key",
+        "size": 151918,
+        "sha256": "e1c6125bbecfb993b5e553755536c8dd380f7f202a9535f297f1db7cef8ffabe"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/dbebd49c280c098020ecccbd88c416945d45a36ac9232477a902894621e5db77.pdf",
+    "keyPath": "output/practice-research/division-c/e1c6125bbecfb993b5e553755536c8dd380f7f202a9535f297f1db7cef8ffabe.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-cwraai1cga4-c",
+    "sourceId": "cWRaaI1CGA4",
+    "sourceUrl": "https://scioly.org/tests/cWRaaI1CGA4",
+    "division": "C",
+    "eventId": "astronomy",
+    "competition": "SSSS",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/cWRaaI1CGA4",
+    "keyUrl": "https://scioly.org/tests/cWRaaI1CGA4",
+    "files": [
+      {
+        "name": "astronomy_2018_c_ssss-fuzzylogic_test.pdf",
+        "type": "test",
+        "size": 188079,
+        "sha256": "196cb2231ff39d7c44010fc5aabc2fda55cd37faf3c5cbc19226909434032a64"
+      },
+      {
+        "name": "astronomy_2018_c_ssss-fuzzylogic_key.pdf",
+        "type": "answer_key",
+        "size": 356065,
+        "sha256": "06fc042643afa0dc1b4b44ba7d4ae131e5ca1524271ad05c1d3922bb6484d7b0"
+      },
+      {
+        "name": "astronomy_2018_c_ssss-fuzzylogic_sheet.pdf",
+        "type": "answer_sheet",
+        "size": 53314,
+        "sha256": "26bffefa1bece2e8bc9126ffa0431c104b921d44757703b4d95a5ff61e33e47a"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/196cb2231ff39d7c44010fc5aabc2fda55cd37faf3c5cbc19226909434032a64.pdf",
+    "keyPath": "output/practice-research/division-c/06fc042643afa0dc1b4b44ba7d4ae131e5ca1524271ad05c1d3922bb6484d7b0.pdf",
+    "contextPath": "output/practice-research/division-c/26bffefa1bece2e8bc9126ffa0431c104b921d44757703b4d95a5ff61e33e47a.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/26bffefa1bece2e8bc9126ffa0431c104b921d44757703b4d95a5ff61e33e47a.pdf"
+    ]
   }
 ]

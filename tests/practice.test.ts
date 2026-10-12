@@ -432,6 +432,76 @@ test('Greenbrier Circuit Lab includes its separate hands-on packet and keeps amb
   assert.match(paper.keys.Lab.criteria![0].answer, /2.57 s/);
 });
 
+test('October 12 conversions preserve complete sections, restored prompts, and corrected free checks', () => {
+  const rancho = findPracticeTest('C', 'scioly-aparfcgz998-c');
+  assert.equal(rancho.questionCount, 36);
+  assert.equal(rancho.maxScore, 40);
+  assert.equal(rancho.questions.find((q) => q.id === '1-1')!.page, 2);
+  assert.equal(rancho.questions.find((q) => q.id === '3-3')!.page, 5);
+  assert.equal(
+    gradePractice(rancho, {
+      '3-1': 'sedimentation',
+      '3-2': 'activated sludge',
+      '3-3': 'nutrient removal',
+    }).score,
+    3,
+  );
+  assert.equal(gradePractice(rancho, { '1-3': 'phosphorus' }).pendingPoints, 0);
+  assert.match(rancho.keys['3-6'].criteria![0].answer, /acid-tolerant/);
+
+  const yale = findPracticeTest('C', 'scioly-9zqmxc7scpq-c');
+  assert.equal(yale.questionCount, 34);
+  assert.equal(yale.maxScore, 34);
+  assert.ok(yale.supplementUrl);
+  assert.match(yale.questions.find((q) => q.id === '21')!.prompt!, /carbon dioxide/);
+  assert.match(yale.questions.find((q) => q.id === '19')!.prompt!, /A-Train/);
+  assert.equal(
+    gradePractice(yale, { '5': 'both', '12': 'B', '13': 'A', '30': 'A', '32': '278.6 K' }).score,
+    5,
+  );
+  assert.equal(gradePractice(yale, { '30': 'D' }).score, 0);
+  assert.equal(gradePractice(yale, { '1': 'passive' }).pendingPoints, 0);
+
+  const silentsage = findPracticeTest('C', 'scioly-pwdimce2vt4-c');
+  assert.equal(silentsage.questionCount, 39);
+  assert.equal(silentsage.maxScore, 49);
+  assert.equal(silentsage.level, null);
+  assert.match(silentsage.competition, /competition not reported/);
+  const typed = '124.2 J';
+  const grade = gradePractice(silentsage, {
+    '1-6': typed,
+    '2-4-id': 'hellgrammite',
+    '2-4-class': '1',
+    '3-9': 'turbidity',
+    '3-12': 'ammonia',
+  });
+  assert.equal(grade.score, 5);
+  assert.equal(grade.pendingPoints, 0);
+  assert.equal(grade.questions.find((q) => q.id === '1-6')!.answer, typed);
+});
+
+test('SSSS Astronomy retains all 67 weighted parts and the actual cover year', () => {
+  const paper = findPracticeTest('C', 'scioly-cwraai1cga4-c');
+  assert.equal(paper.year, 2017);
+  assert.equal(paper.questionCount, 67);
+  assert.equal(paper.maxScore, 97);
+  assert.ok(paper.supplementUrl);
+  assert.equal(paper.questions.find((q) => q.id === 'Misc-d')!.page, 6);
+  assert.equal(paper.questions.find((q) => q.id === 'Misc-a')!.points, 4);
+  const result = gradePractice(paper, {
+    '1-a': 'Population III',
+    '1-b': 'Rapid formation',
+    '2-b': '149 pc',
+    '5-g': 'C',
+    '6-f': 'D',
+    '9-b': '103 km',
+    'Misc-b': 'WR 124',
+  });
+  assert.equal(result.score, 7);
+  assert.equal(result.pendingPoints, 0);
+  assert.match(paper.keys['Misc-a'].criteria![0].answer, /scale argument/);
+});
+
 test('Gemini rubric responses are bounded, validated, and applied without student identity data', async () => {
   const paper = findPracticeTest('B', 'michigan-regions-2024-meteorology-b');
   const initial = gradePractice(paper, { '58': 'Get low and cover the head and neck.' });
