@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, type CSSProperties } from 'react';
 import { ChevronDown, Check, BookOpen, Zap, FolderOpen } from 'lucide-react';
 import { PixelStar, Reveal } from './art';
+import { HomeShowcase } from './home-showcase';
 export function Home() {
   const [answer, setAnswer] = useState('');
   return (
@@ -126,6 +127,7 @@ export function Home() {
           </a>
         </nav>
       </section>
+      <HomeShowcase />
       <section id="learn" className="feature-section container">
         <Reveal className="feature-copy">
           <p className="eyebrow">

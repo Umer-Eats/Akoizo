@@ -1,0 +1,173 @@
+@layer theme {
+  .showcase {
+    padding-top: 40px;
+    padding-bottom: 130px;
+  }
+  .showcase-heading h2 {
+    margin: 25px 0;
+    font-size: clamp(2.5rem, 4.2vw, 4rem);
+    line-height: 1.13;
+  }
+  .showcase-heading p:not(.eyebrow) {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+  .showcase-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 48px 0 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .showcase-tabs button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    background: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .showcase-tabs button:hover {
+    color: var(--text);
+  }
+  .showcase-tabs button.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  .showcase-tabs button.active svg {
+    color: var(--accent);
+  }
+  .showcase-frame {
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: 0 30px 80px var(--shadow);
+  }
+  .showcase-bar {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel-top);
+  }
+  .showcase-address {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .showcase-shot {
+    width: 100%;
+    height: auto;
+  }
+  .showcase-shot-light,
+  :root[data-theme='light'] .showcase-shot-dark {
+    display: none;
+  }
+  :root[data-theme='light'] .showcase-shot-light {
+    display: block;
+  }
+  .showcase-details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 64px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .showcase-copy h3 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  .showcase-copy p {
+    margin: 16px 0 28px;
+    max-width: 460px;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+  .showcase-thumbs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .showcase-thumbs button {
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    text-align: left;
+    opacity: 0.7;
+  }
+  .showcase-thumbs button:hover,
+  .showcase-thumbs button.active {
+    opacity: 1;
+  }
+  .showcase-thumbs button.active {
+    border-color: var(--accent);
+  }
+  .showcase-thumbs img {
+    width: 100%;
+    height: auto;
+  }
+  .showcase-thumbs span {
+    display: block;
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .showcase-thumbs button.active span {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .showcase {
+      padding-bottom: 90px;
+    }
+    .showcase-details {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+  @media (max-width: 680px) {
+    .showcase-tabs {
+      margin-top: 32px;
+      overflow-x: auto;
+    }
+    .showcase-tabs button {
+      padding: 12px 12px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .showcase-frame {
+      border-radius: 10px;
+    }
+    /* Keeps app text readable on phones: the screen is shown larger and pans sideways. */
+    .showcase-viewport {
+      overflow-x: auto;
+    }
+    .showcase-shot {
+      width: 220%;
+      max-width: none;
+    }
+    .showcase-thumbs {
+      gap: 8px;
+    }
+    .showcase-thumbs span {
+      padding: 8px;
+      font-size: 0.55rem;
+    }
+  }
+}

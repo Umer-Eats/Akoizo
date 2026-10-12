@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "3005"],
       "port": 3005
+    },
+    {
+      "name": "akoizo-dev-3006",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3006"],
+      "port": 3006
     }
   ]
 }
