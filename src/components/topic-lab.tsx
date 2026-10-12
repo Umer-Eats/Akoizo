@@ -43,6 +43,7 @@ function ShapeNode({ s }: { s: Shape }) {
           height={s.h}
           rx={s.rx}
           opacity={s.o}
+          style={s.color ? { fill: s.color } : undefined}
           className={`${s.fill ? 'tl-fill' : 'tl-stroke'} ${tone}`}
         />
       );
@@ -115,10 +116,22 @@ function PlotView({ plot }: { plot: LabPlot }) {
       {ticks.map((t) => (
         <g key={t}>
           <line x1="74" x2="610" y1={286 - t * 244} y2={286 - t * 244} className="tl-grid" />
-          <text x="66" y={290 - t * 244} textAnchor="end" className="tl-text tl-muted" fontSize="11">
+          <text
+            x="66"
+            y={290 - t * 244}
+            textAnchor="end"
+            className="tl-text tl-muted"
+            fontSize="11"
+          >
             {fmt(y0 + t * (y1 - y0))}
           </text>
-          <text x={74 + t * 536} y="304" textAnchor="middle" className="tl-text tl-muted" fontSize="11">
+          <text
+            x={74 + t * 536}
+            y="304"
+            textAnchor="middle"
+            className="tl-text tl-muted"
+            fontSize="11"
+          >
             {fmt(x0 + t * (x1 - x0))}
           </text>
         </g>
@@ -132,9 +145,22 @@ function PlotView({ plot }: { plot: LabPlot }) {
       </text>
       {(plot.hlines ?? []).map((h) => (
         <g key={`h${h.y}`}>
-          <line x1="74" x2="610" y1={py(h.y)} y2={py(h.y)} className="tl-stroke tl-gold" strokeDasharray="6 5" />
+          <line
+            x1="74"
+            x2="610"
+            y1={py(h.y)}
+            y2={py(h.y)}
+            className="tl-stroke tl-gold"
+            strokeDasharray="6 5"
+          />
           {h.label && (
-            <text x="606" y={py(h.y) - 5} textAnchor="end" className="tl-text tl-gold" fontSize="11">
+            <text
+              x="606"
+              y={py(h.y) - 5}
+              textAnchor="end"
+              className="tl-text tl-gold"
+              fontSize="11"
+            >
               {h.label}
             </text>
           )}
@@ -142,7 +168,14 @@ function PlotView({ plot }: { plot: LabPlot }) {
       ))}
       {(plot.vlines ?? []).map((v) => (
         <g key={`v${v.x}`}>
-          <line x1={px(v.x)} x2={px(v.x)} y1="42" y2="286" className="tl-stroke tl-gold" strokeDasharray="6 5" />
+          <line
+            x1={px(v.x)}
+            x2={px(v.x)}
+            y1="42"
+            y2="286"
+            className="tl-stroke tl-gold"
+            strokeDasharray="6 5"
+          />
           {v.label && (
             <text x={px(v.x) + 5} y="54" className="tl-text tl-gold" fontSize="11">
               {v.label}
@@ -186,7 +219,12 @@ function PlotView({ plot }: { plot: LabPlot }) {
       )}
       {(plot.points ?? []).map((p, n) => (
         <g key={n}>
-          <circle cx={px(p.x)} cy={py(p.y)} r="7" className={`tl-fill tl-${p.tone ?? 'slot'} tl-marker`} />
+          <circle
+            cx={px(p.x)}
+            cy={py(p.y)}
+            r="7"
+            className={`tl-fill tl-${p.tone ?? 'slot'} tl-marker`}
+          />
           {p.label && (
             <text
               x={px(p.x) + (px(p.x) > 480 ? -11 : 11)}
@@ -253,8 +291,7 @@ export function TopicLabPreview({ lab }: { lab: TopicLab }) {
       </figcaption>
       <LabFigure result={result} title={lab.title} />
       <p>
-        {lab.lead}{' '}
-        <a href={`#topic-lab-${lab.id}`}>Open this lab and change the variables ↓</a>
+        {lab.lead} <a href={`#topic-lab-${lab.id}`}>Open this lab and change the variables ↓</a>
       </p>
     </figure>
   );
@@ -278,7 +315,8 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
       .filter((i) => i >= 0 && !done.includes(i));
     if (reached.length) setDone((current) => [...current, ...reached]);
   }, [lab, result.o, values, done]);
-  const set = (key: string, value: number) => setValues((current) => ({ ...current, [key]: value }));
+  const set = (key: string, value: number) =>
+    setValues((current) => ({ ...current, [key]: value }));
   return (
     <section className="tl-lab" id={`topic-lab-${lab.id}`} aria-labelledby={`${uid}-title`}>
       <header>
@@ -389,7 +427,9 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
               <div>
                 <p>
                   {m.goal}
-                  <span className="sr-only">{done.includes(i) ? ' — reached' : ' — not yet reached'}</span>
+                  <span className="sr-only">
+                    {done.includes(i) ? ' — reached' : ' — not yet reached'}
+                  </span>
                 </p>
                 {!done.includes(i) &&
                   (hints.includes(i) ? (

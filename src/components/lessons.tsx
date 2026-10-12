@@ -467,8 +467,8 @@ function LessonDetail({
       {hasLessonLabs && (
         <section id="lesson-topic-labs" className="lesson-labs" aria-labelledby="lesson-labs-title">
           <p className="eyebrow">
-            <FlaskConical size={16} aria-hidden="true" /> LESSON LABS · {labs.length + phetSims.length}{' '}
-            FOR THIS UNIT
+            <FlaskConical size={16} aria-hidden="true" /> LESSON LABS ·{' '}
+            {labs.length + phetSims.length} FOR THIS UNIT
           </p>
           <h3 id="lesson-labs-title">Investigate this lesson’s ideas</h3>
           <p>

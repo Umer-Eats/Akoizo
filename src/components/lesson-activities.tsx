@@ -25,7 +25,15 @@ export function InlineCheck({ check }: { check: QuickCheck }) {
             type="button"
             className="tl-option"
             aria-pressed={picked === i}
-            data-state={picked === null ? undefined : i === check.correct ? 'right' : picked === i ? 'wrong' : undefined}
+            data-state={
+              picked === null
+                ? undefined
+                : i === check.correct
+                  ? 'right'
+                  : picked === i
+                    ? 'wrong'
+                    : undefined
+            }
             onClick={() => setPicked(i)}
           >
             {option}
@@ -34,7 +42,9 @@ export function InlineCheck({ check }: { check: QuickCheck }) {
       </div>
       {picked !== null && (
         <div className="tl-feedback" role="status" data-correct={picked === check.correct}>
-          <strong>{picked === check.correct ? 'Correct.' : 'Not quite — compare with the marked answer.'}</strong>
+          <strong>
+            {picked === check.correct ? 'Correct.' : 'Not quite — compare with the marked answer.'}
+          </strong>
           <p>{check.why}</p>
         </div>
       )}
@@ -182,7 +192,10 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
       <p className="tl-quiet">{lesson.workedExample.problem}</p>
       <ol className="la-order">
         {order.map((step, i) => (
-          <li key={step} data-state={checked ? (step === sequence.answer[i] ? 'right' : 'wrong') : undefined}>
+          <li
+            key={step}
+            data-state={checked ? (step === sequence.answer[i] ? 'right' : 'wrong') : undefined}
+          >
             <span>{step}</span>
             <div>
               <button
@@ -238,7 +251,11 @@ export function LessonActivities({
   sortActivity?: SortActivity;
 }) {
   return (
-    <section id="lesson-activities" className="lesson-activities" aria-labelledby="lesson-activities-title">
+    <section
+      id="lesson-activities"
+      className="lesson-activities"
+      aria-labelledby="lesson-activities-title"
+    >
       <p className="eyebrow">ACTIVE RECALL · NOT GRADED</p>
       <h3 id="lesson-activities-title">Practice the ideas before the lab</h3>
       <p>

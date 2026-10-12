@@ -40,7 +40,11 @@ const inverseSquare: TopicLab = {
         line(60, 120, x, 120 + side / 2, 'gold', 1.5, true),
         rect(x - 3, 120 - side / 2, 6, side, 'slot', true, Math.min(1, 0.25 + flux)),
         text(x, 120 + side / 2 + 20, `d = ${v.dist}`, 'middle'),
-        text(60, 230, `The same light now crosses ${v.dist ** 2} unit squares, so each square receives`),
+        text(
+          60,
+          230,
+          `The same light now crosses ${v.dist ** 2} unit squares, so each square receives`,
+        ),
         text(60, 250, `1/${v.dist ** 2} of what it would receive at 1 unit.`),
         ...Array.from({ length: Math.min(100, v.dist ** 2) }, (_, i) =>
           rect(60 + (i % 25) * 20, 270 + Math.floor(i / 25) * 14, 16, 10, 'accent', true, 0.7),
@@ -59,9 +63,24 @@ const inverseSquare: TopicLab = {
     };
   },
   missions: [
-    goal('Hold luminosity at 1 L☉. The flux at 2 units is 0.25 — find the distance where it is one quarter of that.', 'One quarter of the flux needs four times the area, which means twice the distance.', { dist: 4 }, (o, v) => v.lum === 1 && near(o.flux, 0.0625, 0.002)),
-    goal('Make a 4 L☉ source deliver exactly the flux (0.25) that the 1 L☉ source gave at 2 units.', 'Four times the power must be spread over four times the area.', { lum: 4, dist: 4 }, (o, v) => v.lum === 4 && near(o.flux, 0.25, 0.004)),
-    goal('Produce a flux of exactly 1.00 from a source that is not 1 L☉.', 'Pick a luminosity that is a perfect square, then set distance to its square root.', { lum: 4, dist: 2 }, (o, v) => v.lum !== 1 && near(o.flux, 1, 0.001)),
+    goal(
+      'Hold luminosity at 1 L☉. The flux at 2 units is 0.25 — find the distance where it is one quarter of that.',
+      'One quarter of the flux needs four times the area, which means twice the distance.',
+      { dist: 4 },
+      (o, v) => v.lum === 1 && near(o.flux, 0.0625, 0.002),
+    ),
+    goal(
+      'Make a 4 L☉ source deliver exactly the flux (0.25) that the 1 L☉ source gave at 2 units.',
+      'Four times the power must be spread over four times the area.',
+      { lum: 4, dist: 4 },
+      (o, v) => v.lum === 4 && near(o.flux, 0.25, 0.004),
+    ),
+    goal(
+      'Produce a flux of exactly 1.00 from a source that is not 1 L☉.',
+      'Pick a luminosity that is a perfect square, then set distance to its square root.',
+      { lum: 4, dist: 2 },
+      (o, v) => v.lum !== 1 && near(o.flux, 1, 0.001),
+    ),
   ],
   predict: {
     q: 'A star’s distance triples while its luminosity stays fixed. The measured flux becomes…',
@@ -114,7 +133,13 @@ const parallax: TopicLab = {
         circle(610, 170 + shift, 4, 'warm'),
         circle(610, 170 - shift, 4, 'warm'),
         text(600, 50, 'distant background', 'end', 'muted'),
-        text(320, 320, 'Angles are exaggerated; real parallaxes are below one arcsecond.', 'middle', 'muted'),
+        text(
+          320,
+          320,
+          'Angles are exaggerated; real parallaxes are below one arcsecond.',
+          'middle',
+          'muted',
+        ),
       ],
       plot: {
         title: 'Parallax shrinks as 1/d',
@@ -127,9 +152,24 @@ const parallax: TopicLab = {
     };
   },
   missions: [
-    goal('Find the distance of a star whose parallax is 0.050 arcsec.', 'd in parsecs is the reciprocal of p in arcseconds.', { dist: 20 }, (o) => near(o.parallax, 0.05, 0.0005)),
-    goal('Set the floor to 0.005 arcsec and find the largest distance with uncertainty no more than 20%.', '20% means the parallax is five times the floor.', { floor: 0.005, dist: 40 }, (o, v) => near(v.floor, 0.005, 1e-6) && v.dist === 40),
-    goal('Show a star whose parallax is below the instrument floor.', 'Raise the floor or push the star farther away until p < floor.', { dist: 100, floor: 0.02 }, (o, v) => o.parallax < v.floor),
+    goal(
+      'Find the distance of a star whose parallax is 0.050 arcsec.',
+      'd in parsecs is the reciprocal of p in arcseconds.',
+      { dist: 20 },
+      (o) => near(o.parallax, 0.05, 0.0005),
+    ),
+    goal(
+      'Set the floor to 0.005 arcsec and find the largest distance with uncertainty no more than 20%.',
+      '20% means the parallax is five times the floor.',
+      { floor: 0.005, dist: 40 },
+      (o, v) => near(v.floor, 0.005, 1e-6) && v.dist === 40,
+    ),
+    goal(
+      'Show a star whose parallax is below the instrument floor.',
+      'Raise the floor or push the star farther away until p < floor.',
+      { dist: 100, floor: 0.02 },
+      (o, v) => o.parallax < v.floor,
+    ),
   ],
   predict: {
     q: 'A star is moved to twice its original distance. Its parallax angle…',
@@ -175,9 +215,24 @@ const massLifetime: TopicLab = {
     };
   },
   missions: [
-    goal('Find a star whose main-sequence lifetime is about 1 Gyr.', 'You need M⁻²·⁵ ≈ 0.1, so the mass is a little above 2 M☉.', { mass: 2.5 }, (o) => near(o.life, 1, 0.06)),
-    goal('Set the cluster age to 100 Myr (log age 8.0) and select the most massive star still on the main sequence.', 'Raise the mass until the status flips, then step back one notch.', { age: 8, mass: 6.3 }, (o, v) => near(v.age, 8, 1e-6) && o.on === 1 && v.mass >= 6.2),
-    goal('Find a star roughly 10,000 times as luminous as the Sun and read its lifetime.', 'M³·⁵ = 10⁴ gives a mass near 14 M☉.', { mass: 13.9 }, (o) => near(o.lum, 10000, 1500)),
+    goal(
+      'Find a star whose main-sequence lifetime is about 1 Gyr.',
+      'You need M⁻²·⁵ ≈ 0.1, so the mass is a little above 2 M☉.',
+      { mass: 2.5 },
+      (o) => near(o.life, 1, 0.06),
+    ),
+    goal(
+      'Set the cluster age to 100 Myr (log age 8.0) and select the most massive star still on the main sequence.',
+      'Raise the mass until the status flips, then step back one notch.',
+      { age: 8, mass: 6.3 },
+      (o, v) => near(v.age, 8, 1e-6) && o.on === 1 && v.mass >= 6.2,
+    ),
+    goal(
+      'Find a star roughly 10,000 times as luminous as the Sun and read its lifetime.',
+      'M³·⁵ = 10⁴ gives a mass near 14 M☉.',
+      { mass: 13.9 },
+      (o) => near(o.lum, 10000, 1500),
+    ),
   ],
   predict: {
     q: 'Compared with the Sun, a 10 M☉ star stays on the main sequence for…',
@@ -213,7 +268,11 @@ const compact: TopicLab = {
         { label: 'Schwarzschild radius for this mass', value: horizon, unit: 'km' },
         {
           label: 'Support against gravity',
-          value: ['Electron degeneracy pressure', 'Neutron degeneracy + nuclear forces', 'None — collapse'][kind],
+          value: [
+            'Electron degeneracy pressure',
+            'Neutron degeneracy + nuclear forces',
+            'None — collapse',
+          ][kind],
         },
       ],
       sceneLabel: `${name} of ${v.mass} solar masses with radius ${Math.round(radius)} kilometres, compared with Earth on a logarithmic scale`,
@@ -224,7 +283,9 @@ const compact: TopicLab = {
         circle(450, 170, drawn, kind === 2 ? 'ink' : kind === 1 ? 'accent' : 'gold'),
         text(450, 290, `${name} · ${Math.round(radius).toLocaleString('en-US')} km`, 'middle'),
         line(40, 316, 600, 316, 'muted', 1),
-        ...[1.4, 2.5].map((m) => line(40 + (m / 10) * 560, 308, 40 + (m / 10) * 560, 324, 'warm', 2)),
+        ...[1.4, 2.5].map((m) =>
+          line(40 + (m / 10) * 560, 308, 40 + (m / 10) * 560, 324, 'warm', 2),
+        ),
         circle(40 + (v.mass / 10) * 560, 316, 5, 'slot'),
         text(40 + (1.4 / 10) * 560, 304, '1.4', 'middle', 'warm', 11),
         text(40 + (2.5 / 10) * 560, 304, '≈2.5', 'middle', 'warm', 11),
@@ -233,9 +294,24 @@ const compact: TopicLab = {
     };
   },
   missions: [
-    goal('Find a white dwarf with a radius below 6,000 km.', 'Degenerate matter shrinks as mass is added: go toward the limit.', { mass: 1.3 }, (o) => o.kind === 0 && o.radius < 6000),
-    goal('Cross the Chandrasekhar limit and land on a neutron star.', 'Just above 1.4 M☉ electron degeneracy can no longer hold.', { mass: 1.8 }, (o) => o.kind === 1),
-    goal('Make a black hole whose event horizon is about 30 km in radius.', 'The horizon radius is about 3 km per solar mass.', { mass: 10 }, (o) => o.kind === 2 && near(o.radius, 30, 1)),
+    goal(
+      'Find a white dwarf with a radius below 6,000 km.',
+      'Degenerate matter shrinks as mass is added: go toward the limit.',
+      { mass: 1.3 },
+      (o) => o.kind === 0 && o.radius < 6000,
+    ),
+    goal(
+      'Cross the Chandrasekhar limit and land on a neutron star.',
+      'Just above 1.4 M☉ electron degeneracy can no longer hold.',
+      { mass: 1.8 },
+      (o) => o.kind === 1,
+    ),
+    goal(
+      'Make a black hole whose event horizon is about 30 km in radius.',
+      'The horizon radius is about 3 km per solar mass.',
+      { mass: 10 },
+      (o) => o.kind === 2 && near(o.radius, 30, 1),
+    ),
   ],
   predict: {
     q: 'Mass is added to a white dwarf that is still below the Chandrasekhar limit. Its radius…',
@@ -276,14 +352,31 @@ const extinction: TopicLab = {
           { x: 440, label: 'B' },
           { x: 550, label: 'V' },
         ],
-        points: [{ x: v.wave, y: through(v.wave), label: `${(through(v.wave) * 100).toFixed(0)}%` }],
+        points: [
+          { x: v.wave, y: through(v.wave), label: `${(through(v.wave) * 100).toFixed(0)}%` },
+        ],
       },
     };
   },
   missions: [
-    goal('With A_V = 1.0, confirm how much visible (550 nm) light gets through.', 'One magnitude is a factor of 2.512, so about 40% survives.', { av: 1, wave: 550 }, (o, v) => near(v.av, 1, 1e-6) && v.wave === 550),
-    goal('Hold A_V = 2.0 and find an infrared wavelength where more than 60% is transmitted.', 'Extinction falls roughly as 1/λ: go to about 2 micrometres.', { av: 2, wave: 2100 }, (o, v) => near(v.av, 2, 1e-6) && o.transmitted > 0.6),
-    goal('Find the dust column that produces a reddening E(B−V) of 1.0.', 'A_V ≈ 3.1 × E(B−V) for typical Milky Way dust.', { av: 3.1 }, (o) => near(o.ebv, 1, 0.005)),
+    goal(
+      'With A_V = 1.0, confirm how much visible (550 nm) light gets through.',
+      'One magnitude is a factor of 2.512, so about 40% survives.',
+      { av: 1, wave: 550 },
+      (o, v) => near(v.av, 1, 1e-6) && v.wave === 550,
+    ),
+    goal(
+      'Hold A_V = 2.0 and find an infrared wavelength where more than 60% is transmitted.',
+      'Extinction falls roughly as 1/λ: go to about 2 micrometres.',
+      { av: 2, wave: 2100 },
+      (o, v) => near(v.av, 2, 1e-6) && o.transmitted > 0.6,
+    ),
+    goal(
+      'Find the dust column that produces a reddening E(B−V) of 1.0.',
+      'A_V ≈ 3.1 × E(B−V) for typical Milky Way dust.',
+      { av: 3.1 },
+      (o) => near(o.ebv, 1, 0.005),
+    ),
   ],
   predict: {
     q: 'A star seen through a dust lane appears dimmer and…',
@@ -311,7 +404,10 @@ function radiusLine(r: number): Shape[] {
   }
   if (inside.length < 2) return [];
   const [lx, ly] = inside[Math.floor(inside.length / 2)].split(',').map(Number);
-  return [path(`M${inside.join('L')}`, 'muted', false, 1.2, 1, true), text(lx + 4, ly - 4, `${r} R☉`, 'start', 'muted', 11)];
+  return [
+    path(`M${inside.join('L')}`, 'muted', false, 1.2, 1, true),
+    text(lx + 4, ly - 4, `${r} R☉`, 'start', 'muted', 11),
+  ];
 }
 const radiusLines: TopicLab = {
   id: 'astro-radius-lines',
@@ -346,9 +442,24 @@ const radiusLines: TopicLab = {
     };
   },
   missions: [
-    goal('Find a supergiant: Sun-like temperature (5,800 K) but about 100 R☉.', 'At fixed temperature L ∝ R², so 100 R☉ needs 10⁴ L☉.', { temp: 5800, logl: 4 }, (o, v) => v.temp === 5800 && near(o.radius, 100, 8)),
-    goal('Find a white-dwarf-like object: hotter than 15,000 K and smaller than 0.02 R☉.', 'Hot but faint: move to the lower left.', { temp: 20000, logl: -2 }, (o, v) => v.temp > 15000 && o.radius < 0.02),
-    goal('Hold L = 1 L☉ (log L = 0) and cool the star to 3,600 K or below. Note how its radius must change.', 'At fixed luminosity R ∝ 1/T².', { logl: 0, temp: 3500 }, (o, v) => near(v.logl, 0, 1e-6) && v.temp <= 3600),
+    goal(
+      'Find a supergiant: Sun-like temperature (5,800 K) but about 100 R☉.',
+      'At fixed temperature L ∝ R², so 100 R☉ needs 10⁴ L☉.',
+      { temp: 5800, logl: 4 },
+      (o, v) => v.temp === 5800 && near(o.radius, 100, 8),
+    ),
+    goal(
+      'Find a white-dwarf-like object: hotter than 15,000 K and smaller than 0.02 R☉.',
+      'Hot but faint: move to the lower left.',
+      { temp: 20000, logl: -2 },
+      (o, v) => v.temp > 15000 && o.radius < 0.02,
+    ),
+    goal(
+      'Hold L = 1 L☉ (log L = 0) and cool the star to 3,600 K or below. Note how its radius must change.',
+      'At fixed luminosity R ∝ 1/T².',
+      { logl: 0, temp: 3500 },
+      (o, v) => near(v.logl, 0, 1e-6) && v.temp <= 3600,
+    ),
   ],
   predict: {
     q: 'With hot stars on the left, lines of constant radius on an H–R diagram run…',
@@ -384,7 +495,11 @@ const distanceModulus: TopicLab = {
         { label: 'True distance modulus m − M − A', value: mu, unit: 'mag' },
         { label: 'Distance', value: d, unit: 'pc' },
         { label: 'Distance in light-years', value: d * 3.2616, unit: 'ly' },
-        { label: 'Flux relative to the same star at 10 pc', value: 10 ** (-0.4 * (v.m - v.M)), unit: '×' },
+        {
+          label: 'Flux relative to the same star at 10 pc',
+          value: 10 ** (-0.4 * (v.m - v.M)),
+          unit: '×',
+        },
       ],
       note:
         v.A > 0
@@ -400,9 +515,24 @@ const distanceModulus: TopicLab = {
     };
   },
   missions: [
-    goal('Place the star at exactly 10 pc with no dust.', 'At 10 pc the apparent and absolute magnitudes are equal.', { m: 5, M: 5 }, (o, v) => v.A === 0 && near(o.d, 10, 0.01)),
-    goal('A Type Ia supernova (M = −19.3) is observed at m = 15.7 with no dust. Find its distance.', 'The modulus is 35, so log d = 8: one hundred million parsecs.', { M: -19.3, m: 15.7 }, (o, v) => near(v.M, -19.3, 1e-6) && near(v.m, 15.7, 1e-6) && v.A === 0),
-    goal('Keep that supernova and add 1.0 mag of dust. Read how much closer it really is.', 'One magnitude of extinction changes distance by 10^(1/5) ≈ 1.58.', { M: -19.3, m: 15.7, A: 1 }, (o, v) => near(v.M, -19.3, 1e-6) && near(v.m, 15.7, 1e-6) && near(v.A, 1, 1e-6)),
+    goal(
+      'Place the star at exactly 10 pc with no dust.',
+      'At 10 pc the apparent and absolute magnitudes are equal.',
+      { m: 5, M: 5 },
+      (o, v) => v.A === 0 && near(o.d, 10, 0.01),
+    ),
+    goal(
+      'A Type Ia supernova (M = −19.3) is observed at m = 15.7 with no dust. Find its distance.',
+      'The modulus is 35, so log d = 8: one hundred million parsecs.',
+      { M: -19.3, m: 15.7 },
+      (o, v) => near(v.M, -19.3, 1e-6) && near(v.m, 15.7, 1e-6) && v.A === 0,
+    ),
+    goal(
+      'Keep that supernova and add 1.0 mag of dust. Read how much closer it really is.',
+      'One magnitude of extinction changes distance by 10^(1/5) ≈ 1.58.',
+      { M: -19.3, m: 15.7, A: 1 },
+      (o, v) => near(v.M, -19.3, 1e-6) && near(v.m, 15.7, 1e-6) && near(v.A, 1, 1e-6),
+    ),
   ],
   predict: {
     q: 'Two identical stars differ by 5 magnitudes in apparent brightness. The fainter one is…',
@@ -420,21 +550,30 @@ export const astronomyExtras: EventExtras = {
   lessons: {
     'astro-u1-l1': {
       labs: ['astro-inverse-square'],
-      sort: sort('Property of the source, or of what we measure here?', ['Intrinsic to the source', 'Depends on the observer'], [
-        ['Luminosity', 0],
-        ['Flux received at Earth', 1],
-        ['Absolute magnitude', 0],
-        ['Apparent magnitude', 1],
-        ['Stellar radius', 0],
-        ['Angular size', 1],
-      ]),
+      sort: sort(
+        'Property of the source, or of what we measure here?',
+        ['Intrinsic to the source', 'Depends on the observer'],
+        [
+          ['Luminosity', 0],
+          ['Flux received at Earth', 1],
+          ['Absolute magnitude', 0],
+          ['Apparent magnitude', 1],
+          ['Stellar radius', 0],
+          ['Angular size', 1],
+        ],
+      ),
       checks: [
-        check(2, 'A result says a star’s flux went up when it was moved farther away at fixed luminosity. What should you do first?', [
-          'Recheck the inverse-square step — the trend is physically backwards',
-          'Report it with more significant figures',
-          'Assume the star’s luminosity changed',
-          'Convert the distance to light-years and try again',
-        ], 'A limiting-case check catches the error before any arithmetic is trusted: farther at fixed luminosity must mean less flux.'),
+        check(
+          2,
+          'A result says a star’s flux went up when it was moved farther away at fixed luminosity. What should you do first?',
+          [
+            'Recheck the inverse-square step — the trend is physically backwards',
+            'Report it with more significant figures',
+            'Assume the star’s luminosity changed',
+            'Convert the distance to light-years and try again',
+          ],
+          'A limiting-case check catches the error before any arithmetic is trusted: farther at fixed luminosity must mean less flux.',
+        ),
       ],
     },
     'astro-u2-l1': {
@@ -449,16 +588,25 @@ export const astronomyExtras: EventExtras = {
           'Explain why the same atom produces an emission line in a hot thin gas and an absorption line in front of a hotter continuous source.',
         ),
       ],
-      sort: sort('Which kind of spectrum would you observe?', ['Continuous', 'Emission lines', 'Absorption lines'], [
-        ['Hot, dense stellar interior seen directly', 0],
-        ['Thin glowing nebular gas against dark sky', 1],
-        ['Starlight passing through a cooler outer atmosphere', 2],
-        ['An incandescent filament', 0],
-        ['A planetary nebula shell', 1],
-        ['Sunlight showing Fraunhofer lines', 2],
-      ]),
+      sort: sort(
+        'Which kind of spectrum would you observe?',
+        ['Continuous', 'Emission lines', 'Absorption lines'],
+        [
+          ['Hot, dense stellar interior seen directly', 0],
+          ['Thin glowing nebular gas against dark sky', 1],
+          ['Starlight passing through a cooler outer atmosphere', 2],
+          ['An incandescent filament', 0],
+          ['A planetary nebula shell', 1],
+          ['Sunlight showing Fraunhofer lines', 2],
+        ],
+      ),
       checks: [
-        check(4, 'A star has a parallax of 0.25 arcsec. How far away is it?', ['4 pc', '0.25 pc', '25 pc', '40 pc'], 'd (pc) = 1 / p (arcsec) = 1 / 0.25 = 4 pc — about 13 light-years.'),
+        check(
+          4,
+          'A star has a parallax of 0.25 arcsec. How far away is it?',
+          ['4 pc', '0.25 pc', '25 pc', '40 pc'],
+          'd (pc) = 1 / p (arcsec) = 1 / 0.25 = 4 pc — about 13 light-years.',
+        ),
       ],
     },
     'astro-u3-l1': {
@@ -472,72 +620,132 @@ export const astronomyExtras: EventExtras = {
           'Use the intensity readout to test Stefan–Boltzmann: when temperature doubles, by what factor does the total power per area grow?',
         ),
       ],
-      sort: sort('Where on the H–R diagram?', ['Main sequence', 'Giants / supergiants', 'White dwarfs'], [
-        ['Core hydrogen fusion in hydrostatic equilibrium', 0],
-        ['Cool surface yet very high luminosity', 1],
-        ['Hot surface yet very low luminosity', 2],
-        ['The Sun today', 0],
-        ['Earth-sized, supported by electron degeneracy', 2],
-        ['Radius hundreds of times the Sun’s', 1],
-      ]),
+      sort: sort(
+        'Where on the H–R diagram?',
+        ['Main sequence', 'Giants / supergiants', 'White dwarfs'],
+        [
+          ['Core hydrogen fusion in hydrostatic equilibrium', 0],
+          ['Cool surface yet very high luminosity', 1],
+          ['Hot surface yet very low luminosity', 2],
+          ['The Sun today', 0],
+          ['Earth-sized, supported by electron degeneracy', 2],
+          ['Radius hundreds of times the Sun’s', 1],
+        ],
+      ),
       checks: [
-        check(2, 'Two stars have the same surface temperature, but star A is 100 times more luminous. Star A’s radius is…', ['10 times larger', '100 times larger', 'The same', '10,000 times larger'], 'At fixed temperature L ∝ R², so a factor of 100 in luminosity is a factor of 10 in radius.'),
+        check(
+          2,
+          'Two stars have the same surface temperature, but star A is 100 times more luminous. Star A’s radius is…',
+          ['10 times larger', '100 times larger', 'The same', '10,000 times larger'],
+          'At fixed temperature L ∝ R², so a factor of 100 in luminosity is a factor of 10 in radius.',
+        ),
       ],
     },
     'astro-u4-l1': {
       labs: ['astro-mass-lifetime'],
-      sort: sort('Which mass range follows this path?', ['Low / intermediate mass', 'High mass'], [
-        ['Ends as a carbon–oxygen white dwarf', 0],
-        ['Ejects a planetary nebula', 0],
-        ['Fuses elements up to iron-group nuclei in its core', 1],
-        ['Core collapses to a neutron star or black hole', 1],
-        ['Main-sequence lifetime of billions of years', 0],
-        ['Leaves the main sequence within a few million years', 1],
-      ]),
+      sort: sort(
+        'Which mass range follows this path?',
+        ['Low / intermediate mass', 'High mass'],
+        [
+          ['Ends as a carbon–oxygen white dwarf', 0],
+          ['Ejects a planetary nebula', 0],
+          ['Fuses elements up to iron-group nuclei in its core', 1],
+          ['Core collapses to a neutron star or black hole', 1],
+          ['Main-sequence lifetime of billions of years', 0],
+          ['Leaves the main sequence within a few million years', 1],
+        ],
+      ),
       checks: [
-        check(5, 'In a star cluster, the main-sequence turnoff sits at a lower mass than in a second cluster. The first cluster is…', ['Older', 'Younger', 'More distant', 'More metal-rich, with age unknown'], 'Stars leave the main sequence in order of decreasing mass, so a lower turnoff mass means more time has passed.'),
+        check(
+          5,
+          'In a star cluster, the main-sequence turnoff sits at a lower mass than in a second cluster. The first cluster is…',
+          ['Older', 'Younger', 'More distant', 'More metal-rich, with age unknown'],
+          'Stars leave the main sequence in order of decreasing mass, so a lower turnoff mass means more time has passed.',
+        ),
       ],
     },
     'astro-u5-l1': {
       labs: ['astro-compact'],
-      sort: sort('Core collapse or thermonuclear?', ['Core-collapse supernova', 'Type Ia (thermonuclear)'], [
-        ['Massive star with an iron core', 0],
-        ['White dwarf approaching the Chandrasekhar limit', 1],
-        ['Can leave a neutron star behind', 0],
-        ['No hydrogen lines; strong silicon absorption', 1],
-        ['Occurs in a binary with mass transfer or a merger', 1],
-        ['Found in regions of recent star formation', 0],
-      ]),
+      sort: sort(
+        'Core collapse or thermonuclear?',
+        ['Core-collapse supernova', 'Type Ia (thermonuclear)'],
+        [
+          ['Massive star with an iron core', 0],
+          ['White dwarf approaching the Chandrasekhar limit', 1],
+          ['Can leave a neutron star behind', 0],
+          ['No hydrogen lines; strong silicon absorption', 1],
+          ['Occurs in a binary with mass transfer or a merger', 1],
+          ['Found in regions of recent star formation', 0],
+        ],
+      ),
       checks: [
-        check(1, 'What holds up a white dwarf against gravity?', ['Electron degeneracy pressure', 'Ongoing hydrogen fusion', 'Thermal gas pressure alone', 'Neutron degeneracy pressure'], 'No fusion occurs in a white dwarf. The Pauli exclusion principle for electrons supplies pressure that does not depend on temperature.'),
+        check(
+          1,
+          'What holds up a white dwarf against gravity?',
+          [
+            'Electron degeneracy pressure',
+            'Ongoing hydrogen fusion',
+            'Thermal gas pressure alone',
+            'Neutron degeneracy pressure',
+          ],
+          'No fusion occurs in a white dwarf. The Pauli exclusion principle for electrons supplies pressure that does not depend on temperature.',
+        ),
       ],
     },
     'astro-u6-l1': {
       labs: ['astro-extinction'],
-      sort: sort('Which nebula type explains the observation?', ['Emission nebula', 'Reflection nebula', 'Dark nebula'], [
-        ['Red Hα glow around hot O and B stars', 0],
-        ['Blue haze of starlight scattered by dust', 1],
-        ['A starless patch silhouetted against a bright field', 2],
-        ['Gas ionised by ultraviolet photons', 0],
-        ['Dense dust blocking background light', 2],
-        ['Spectrum resembles the illuminating star', 1],
-      ]),
+      sort: sort(
+        'Which nebula type explains the observation?',
+        ['Emission nebula', 'Reflection nebula', 'Dark nebula'],
+        [
+          ['Red Hα glow around hot O and B stars', 0],
+          ['Blue haze of starlight scattered by dust', 1],
+          ['A starless patch silhouetted against a bright field', 2],
+          ['Gas ionised by ultraviolet photons', 0],
+          ['Dense dust blocking background light', 2],
+          ['Spectrum resembles the illuminating star', 1],
+        ],
+      ),
       checks: [
-        check(4, 'A star looks both fainter and redder than its spectral lines predict. The best first explanation is…', ['Dust extinction and reddening along the sightline', 'The star is cooler than its lines indicate', 'The star is moving away at high speed', 'The detector is saturated'], 'Lines fix the temperature class; a colour that is too red for that class is the signature of dust removing blue light.'),
+        check(
+          4,
+          'A star looks both fainter and redder than its spectral lines predict. The best first explanation is…',
+          [
+            'Dust extinction and reddening along the sightline',
+            'The star is cooler than its lines indicate',
+            'The star is moving away at high speed',
+            'The detector is saturated',
+          ],
+          'Lines fix the temperature class; a colour that is too red for that class is the signature of dust removing blue light.',
+        ),
       ],
     },
     'astro-u7-l1': {
       labs: ['astro-radius-lines'],
-      sort: sort('Real trend, or a selection effect?', ['Physical relationship', 'Selection effect'], [
-        ['Hotter main-sequence stars are more luminous', 0],
-        ['A magnitude-limited survey contains mostly luminous stars at large distances', 1],
-        ['Nearby star lists are dominated by faint red dwarfs', 0],
-        ['Only bright quasars appear in the highest-redshift bin', 1],
-        ['Cluster turnoff moves to lower mass with age', 0],
-        ['Short-period planets dominate transit discoveries', 1],
-      ]),
+      sort: sort(
+        'Real trend, or a selection effect?',
+        ['Physical relationship', 'Selection effect'],
+        [
+          ['Hotter main-sequence stars are more luminous', 0],
+          ['A magnitude-limited survey contains mostly luminous stars at large distances', 1],
+          ['Nearby star lists are dominated by faint red dwarfs', 0],
+          ['Only bright quasars appear in the highest-redshift bin', 1],
+          ['Cluster turnoff moves to lower mass with age', 0],
+          ['Short-period planets dominate transit discoveries', 1],
+        ],
+      ),
       checks: [
-        check(0, 'Before interpreting any astronomical graph, the first thing to establish is…', ['What each axis measures, its units, and its direction', 'The name of the brightest object plotted', 'Which point is the Sun', 'Whether the colours look realistic'], 'H–R temperature axes run backwards and many axes are logarithmic; reading the pattern before the axes produces confident wrong answers.'),
+        check(
+          0,
+          'Before interpreting any astronomical graph, the first thing to establish is…',
+          [
+            'What each axis measures, its units, and its direction',
+            'The name of the brightest object plotted',
+            'Which point is the Sun',
+            'Whether the colours look realistic',
+          ],
+          'H–R temperature axes run backwards and many axes are logarithmic; reading the pattern before the axes produces confident wrong answers.',
+        ),
       ],
     },
     'astro-u8-l1': {
@@ -559,16 +767,25 @@ export const astronomyExtras: EventExtras = {
           'Turn gravity off mid-orbit. Describe the path and connect it to Newton’s first law.',
         ),
       ],
-      sort: sort('Which relation solves it?', ['Inverse-square flux', 'Distance modulus', 'Stefan–Boltzmann', 'Kepler’s third law'], [
-        ['Flux at 3× the distance for a fixed source', 0],
-        ['Distance from m and M', 1],
-        ['Luminosity from radius and temperature', 2],
-        ['Total mass of a binary from period and separation', 3],
-        ['Radius from luminosity and temperature', 2],
-        ['Brightness ratio of two identical stars at different distances', 0],
-      ]),
+      sort: sort(
+        'Which relation solves it?',
+        ['Inverse-square flux', 'Distance modulus', 'Stefan–Boltzmann', 'Kepler’s third law'],
+        [
+          ['Flux at 3× the distance for a fixed source', 0],
+          ['Distance from m and M', 1],
+          ['Luminosity from radius and temperature', 2],
+          ['Total mass of a binary from period and separation', 3],
+          ['Radius from luminosity and temperature', 2],
+          ['Brightness ratio of two identical stars at different distances', 0],
+        ],
+      ),
       checks: [
-        check(1, 'Star X is 5 magnitudes brighter than star Y. The flux ratio F_X / F_Y is…', ['100', '5', '2.512', '25'], 'Each magnitude is a factor of 100^(1/5) ≈ 2.512, so five magnitudes is exactly 100.'),
+        check(
+          1,
+          'Star X is 5 magnitudes brighter than star Y. The flux ratio F_X / F_Y is…',
+          ['100', '5', '2.512', '25'],
+          'Each magnitude is a factor of 100^(1/5) ≈ 2.512, so five magnitudes is exactly 100.',
+        ),
       ],
     },
   },

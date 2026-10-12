@@ -104,7 +104,7 @@ test('all 74 blue/green/orange units are distinct, substantive Division C lesson
     assert(courses.find((c) => c.eventId === id)?.lessons.at(-1)?.extension);
 });
 test('online figures have verified source, credit, license, original reading prompt and valid lesson placement', () => {
-  assert.equal(lessonReferenceFigures.length, 90);
+  assert.equal(lessonReferenceFigures.length, 180);
   const allCourses = [...courses, ...yellowPurpleCourses, anatomyLessons, forensicsLessons];
   const lessons = new Map(allCourses.flatMap((c) => c.lessons.map((l) => [l.id, l] as const)));
   for (const course of allCourses)
@@ -120,8 +120,8 @@ test('online figures have verified source, credit, license, original reading pro
       assert(new URL(f[key]).protocol === 'https:');
     assert(f.author && f.alt.length > 30 && f.prompt.length > 50);
   }
-  assert.equal(new Set(lessonReferenceFigures.map((f) => f.src)).size, 90);
-  assert.equal(new Set(lessonReferenceFigures.map((f) => f.prompt)).size, 90);
+  assert.equal(new Set(lessonReferenceFigures.map((f) => f.src)).size, 180);
+  assert.equal(new Set(lessonReferenceFigures.map((f) => f.prompt)).size, 180);
 });
 test('titration covers acid, equivalence, base and finite concentrations without cancellation', () => {
   assert(Math.abs(strongTitration(0, 0.1).ph - 1) < 1e-10);

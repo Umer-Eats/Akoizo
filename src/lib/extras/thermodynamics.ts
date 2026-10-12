@@ -45,9 +45,24 @@ const cooling: TopicLab = {
     };
   },
   missions: [
-    goal('Let the object come within 1 K of its surroundings.', 'Advance time; equilibrium is approached, never overshot.', { t: 120 }, (o, v) => v.t > 0 && Math.abs(o.gap) < 1),
-    goal('With the starting settings, find the time at which the temperature difference has halved.', 'Half-time = ln 2 / k ≈ 0.693 / 0.05.', { t: 14 }, (o, v) => v.t0 === 90 && v.env === 20 && near(v.k, 0.05, 1e-6) && near(o.gap, 35, 1.2)),
-    goal('Start the object colder than the room and watch which way energy flows.', 'Set the starting temperature below the surroundings, then advance time.', { t0: 5, env: 30, t: 20 }, (o, v) => v.t0 < v.env && v.t > 0),
+    goal(
+      'Let the object come within 1 K of its surroundings.',
+      'Advance time; equilibrium is approached, never overshot.',
+      { t: 120 },
+      (o, v) => v.t > 0 && Math.abs(o.gap) < 1,
+    ),
+    goal(
+      'With the starting settings, find the time at which the temperature difference has halved.',
+      'Half-time = ln 2 / k ≈ 0.693 / 0.05.',
+      { t: 14 },
+      (o, v) => v.t0 === 90 && v.env === 20 && near(v.k, 0.05, 1e-6) && near(o.gap, 35, 1.2),
+    ),
+    goal(
+      'Start the object colder than the room and watch which way energy flows.',
+      'Set the starting temperature below the surroundings, then advance time.',
+      { t0: 5, env: 30, t: 20 },
+      (o, v) => v.t0 < v.env && v.t > 0,
+    ),
   ],
   predict: {
     q: 'A cup cools from 60 K above room temperature to 30 K above in 14 minutes. Cooling from 30 K above to 15 K above takes about…',
@@ -72,7 +87,12 @@ const conduction: TopicLab = {
   title: 'Conduction through a wall',
   lead: 'Steady conduction depends on four things: what the wall is made of, its area, its thickness, and the temperature difference across it.',
   controls: [
-    choice('mat', 'Wall material', materials.map(([name, k]) => `${name} · k = ${k} W/(m·K)`), 3),
+    choice(
+      'mat',
+      'Wall material',
+      materials.map(([name, k]) => `${name} · k = ${k} W/(m·K)`),
+      3,
+    ),
     slider('area', 'Wall area', 0.5, 10, 0.5, 2, 'm²'),
     slider('thick', 'Thickness', 1, 30, 1, 10, 'cm'),
     slider('dt', 'Temperature difference', 5, 50, 5, 20, 'K'),
@@ -97,14 +117,35 @@ const conduction: TopicLab = {
         text(580, 90, 'Cool side', 'end'),
         text(270, 50, `${materials[v.mat][0]} · ${v.thick} cm`, 'middle'),
         ...arrow(120, 170, 420, 170, 'slot', Math.min(14, 1.5 + Math.log10(power + 1) * 2.2)),
-        text(270, 310, `Arrow width tracks log(power): ${power.toPrecision(3)} W`, 'middle', 'muted'),
+        text(
+          270,
+          310,
+          `Arrow width tracks log(power): ${power.toPrecision(3)} W`,
+          'middle',
+          'muted',
+        ),
       ],
     };
   },
   missions: [
-    goal('Starting from the brick wall, halve the heat flow by changing only the thickness.', 'Power is inversely proportional to thickness.', { thick: 20 }, (o, v) => v.mat === 3 && v.area === 2 && v.dt === 20 && near(o.power, 120, 1)),
-    goal('Design a 2 m² wall that loses less than 10 W across a 20 K difference.', 'Choose the lowest-conductivity material and make it thick enough.', { mat: 5, thick: 17 }, (o, v) => v.area === 2 && v.dt === 20 && o.power < 10),
-    goal('Show a metal wall conducting more than 100 kW.', 'Metals conduct hundreds of times better than masonry.', { mat: 0 }, (o) => o.power > 100000),
+    goal(
+      'Starting from the brick wall, halve the heat flow by changing only the thickness.',
+      'Power is inversely proportional to thickness.',
+      { thick: 20 },
+      (o, v) => v.mat === 3 && v.area === 2 && v.dt === 20 && near(o.power, 120, 1),
+    ),
+    goal(
+      'Design a 2 m² wall that loses less than 10 W across a 20 K difference.',
+      'Choose the lowest-conductivity material and make it thick enough.',
+      { mat: 5, thick: 17 },
+      (o, v) => v.area === 2 && v.dt === 20 && o.power < 10,
+    ),
+    goal(
+      'Show a metal wall conducting more than 100 kW.',
+      'Metals conduct hundreds of times better than masonry.',
+      { mat: 0 },
+      (o) => o.power > 100000,
+    ),
   ],
   predict: {
     q: 'A wall’s thickness is doubled; material, area, and both surface temperatures stay the same. The conducted power…',
@@ -145,7 +186,11 @@ const phase: TopicLab = {
       metrics: [
         { label: 'Stable phase', value: name },
         { label: 'Pressure', value: p, unit: 'atm' },
-        { label: 'Boiling point at this pressure', value: p >= 0.006 && p <= 218 ? boilingPoint(p) : 'None (outside liquid range)', unit: p >= 0.006 && p <= 218 ? '°C' : undefined },
+        {
+          label: 'Boiling point at this pressure',
+          value: p >= 0.006 && p <= 218 ? boilingPoint(p) : 'None (outside liquid range)',
+          unit: p >= 0.006 && p <= 218 ? '°C' : undefined,
+        },
       ],
       sceneLabel: `Water phase diagram with the state point at ${v.t} degrees Celsius and ${p.toPrecision(3)} atmospheres: ${name}`,
       scene: [
@@ -169,10 +214,30 @@ const phase: TopicLab = {
     };
   },
   missions: [
-    goal('Boil water at exactly 70 °C by changing only the pressure.', 'Lower the pressure until the point drops below the liquid–gas curve (about 0.3 atm).', { t: 70, logp: -0.6 }, (o, v) => v.t === 70 && o.state === 2),
-    goal('Find conditions where ice turns directly into vapour — no liquid in between.', 'Go below the triple-point pressure (0.006 atm) and stay under 0 °C.', { t: -20, logp: -3.5 }, (o, v) => o.state === 2 && v.t < 0),
-    goal('Keep water liquid at 150 °C.', 'Raise the pressure above the vapour pressure at 150 °C (nearly 5 atm).', { t: 150, logp: 1 }, (o, v) => v.t === 150 && o.state === 1),
-    goal('Pass beyond the critical point into the supercritical region.', 'You need more than 374 °C and more than 218 atm.', { t: 400, logp: 2.4 }, (o) => o.state === 3),
+    goal(
+      'Boil water at exactly 70 °C by changing only the pressure.',
+      'Lower the pressure until the point drops below the liquid–gas curve (about 0.3 atm).',
+      { t: 70, logp: -0.6 },
+      (o, v) => v.t === 70 && o.state === 2,
+    ),
+    goal(
+      'Find conditions where ice turns directly into vapour — no liquid in between.',
+      'Go below the triple-point pressure (0.006 atm) and stay under 0 °C.',
+      { t: -20, logp: -3.5 },
+      (o, v) => o.state === 2 && v.t < 0,
+    ),
+    goal(
+      'Keep water liquid at 150 °C.',
+      'Raise the pressure above the vapour pressure at 150 °C (nearly 5 atm).',
+      { t: 150, logp: 1 },
+      (o, v) => v.t === 150 && o.state === 1,
+    ),
+    goal(
+      'Pass beyond the critical point into the supercritical region.',
+      'You need more than 374 °C and more than 218 atm.',
+      { t: 400, logp: 2.4 },
+      (o) => o.state === 3,
+    ),
   ],
   predict: {
     q: 'Ice is warmed slowly at a pressure below water’s triple point. It will…',
@@ -234,9 +299,24 @@ const iceBath: TopicLab = {
     };
   },
   missions: [
-    goal('Find a setup in which some ice is still left at the end.', 'Make the melting cost exceed what the water can supply on its way to 0 °C.', { ice: 200, water: 100 }, (o) => o.left > 0),
-    goal('Melt 100 g of ice completely and finish between 9 and 11 °C.', 'Try 300 g of water; adjust its starting temperature.', { ice: 100, water: 300, tw: 40 }, (o, v) => v.ice === 100 && o.left === 0 && o.final >= 9 && o.final <= 11),
-    goal('With 50 g of ice, reach a final temperature above 74 °C.', 'Use the most and hottest water available.', { water: 500, tw: 90 }, (o, v) => v.ice === 50 && o.final > 74),
+    goal(
+      'Find a setup in which some ice is still left at the end.',
+      'Make the melting cost exceed what the water can supply on its way to 0 °C.',
+      { ice: 200, water: 100 },
+      (o) => o.left > 0,
+    ),
+    goal(
+      'Melt 100 g of ice completely and finish between 9 and 11 °C.',
+      'Try 300 g of water; adjust its starting temperature.',
+      { ice: 100, water: 300, tw: 40 },
+      (o, v) => v.ice === 100 && o.left === 0 && o.final >= 9 && o.final <= 11,
+    ),
+    goal(
+      'With 50 g of ice, reach a final temperature above 74 °C.',
+      'Use the most and hottest water available.',
+      { water: 500, tw: 90 },
+      (o, v) => v.ice === 50 && o.final > 74,
+    ),
   ],
   predict: {
     q: 'Which cools a warm drink more: 50 g of ice at 0 °C or 50 g of liquid water at 0 °C?',
@@ -266,13 +346,25 @@ const kmt: TopicLab = {
   title: 'Molecular speed distribution',
   lead: 'Temperature fixes the average kinetic energy of the molecules. Their speeds also depend on how massive they are.',
   controls: [
-    choice('gas', 'Gas', gases.map(([name, m]) => `${name} · ${m} g/mol`), 3),
+    choice(
+      'gas',
+      'Gas',
+      gases.map(([name, m]) => `${name} · ${m} g/mol`),
+      3,
+    ),
     slider('temp', 'Temperature', 100, 1000, 25, 250, 'K'),
   ],
   run: (v) => {
     const m = gases[v.gas][1] / 1000,
       rt = 8.314 * v.temp;
-    const f = (s: number) => 4 * Math.PI * (m / (2 * Math.PI * rt)) ** 1.5 * s * s * Math.exp((-m * s * s) / (2 * rt)) * 1000;
+    const f = (s: number) =>
+      4 *
+      Math.PI *
+      (m / (2 * Math.PI * rt)) ** 1.5 *
+      s *
+      s *
+      Math.exp((-m * s * s) / (2 * rt)) *
+      1000;
     const vrms = Math.sqrt((3 * rt) / m),
       vmp = Math.sqrt((2 * rt) / m);
     return {
@@ -281,7 +373,11 @@ const kmt: TopicLab = {
         { label: 'Root-mean-square speed', value: vrms, unit: 'm/s' },
         { label: 'Most probable speed', value: vmp, unit: 'm/s' },
         { label: 'Mean speed', value: Math.sqrt((8 * rt) / (Math.PI * m)), unit: 'm/s' },
-        { label: 'Mean translational KE per molecule', value: 1.5 * 1.380649e-23 * v.temp * 1e21, unit: '× 10⁻²¹ J' },
+        {
+          label: 'Mean translational KE per molecule',
+          value: 1.5 * 1.380649e-23 * v.temp * 1e21,
+          unit: '× 10⁻²¹ J',
+        },
       ],
       plot: {
         title: `${gases[v.gas][0]} at ${v.temp} K`,
@@ -294,9 +390,24 @@ const kmt: TopicLab = {
     };
   },
   missions: [
-    goal('Find a gas whose rms speed exceeds 1,900 m/s at 300 K.', 'The lightest molecule moves fastest at a given temperature.', { gas: 0, temp: 300 }, (o, v) => v.temp === 300 && o.vrms > 1900),
-    goal('Double the starting rms speed of O₂ by changing only the temperature.', 'Speed scales with √T, so the temperature must quadruple.', { temp: 1000 }, (o, v) => v.gas === 3 && near(o.vrms, 882.9, 5)),
-    goal('Find the temperature at which helium atoms have that same rms speed of about 883 m/s.', 'T = M v² / 3R; helium is one eighth the mass of O₂.', { gas: 1, temp: 125 }, (o, v) => v.gas === 1 && near(o.vrms, 883, 6)),
+    goal(
+      'Find a gas whose rms speed exceeds 1,900 m/s at 300 K.',
+      'The lightest molecule moves fastest at a given temperature.',
+      { gas: 0, temp: 300 },
+      (o, v) => v.temp === 300 && o.vrms > 1900,
+    ),
+    goal(
+      'Double the starting rms speed of O₂ by changing only the temperature.',
+      'Speed scales with √T, so the temperature must quadruple.',
+      { temp: 1000 },
+      (o, v) => v.gas === 3 && near(o.vrms, 882.9, 5),
+    ),
+    goal(
+      'Find the temperature at which helium atoms have that same rms speed of about 883 m/s.',
+      'T = M v² / 3R; helium is one eighth the mass of O₂.',
+      { gas: 1, temp: 125 },
+      (o, v) => v.gas === 1 && near(o.vrms, 883, 6),
+    ),
   ],
   predict: {
     q: 'At the same temperature, H₂ molecules compared with O₂ molecules have…',
@@ -330,12 +441,30 @@ const firstLaw: TopicLab = {
       metrics: [
         { label: 'Change in internal energy ΔU', value: du, unit: 'J' },
         { label: 'Temperature change (1 mol monatomic)', value: dT, unit: 'K' },
-        { label: 'Process clue', value: v.q === 0 ? 'Adiabatic (Q = 0)' : du === 0 ? 'Isothermal for an ideal gas (ΔU = 0)' : v.w === 0 ? 'Constant volume (W = 0)' : 'General process' },
+        {
+          label: 'Process clue',
+          value:
+            v.q === 0
+              ? 'Adiabatic (Q = 0)'
+              : du === 0
+                ? 'Isothermal for an ideal gas (ΔU = 0)'
+                : v.w === 0
+                  ? 'Constant volume (W = 0)'
+                  : 'General process',
+        },
       ],
       sceneLabel: `Gas cylinder: heat ${v.q} joules in, work ${v.w} joules out, internal energy change ${du} joules`,
       scene: [
         path('M200 60V300H440V60', 'ink', false, 3),
-        rect(203, top + 12, 234, 288 - top - 12, du > 0 ? 'warm' : du < 0 ? 'cool' : 'muted', true, 0.35),
+        rect(
+          203,
+          top + 12,
+          234,
+          288 - top - 12,
+          du > 0 ? 'warm' : du < 0 ? 'cool' : 'muted',
+          true,
+          0.35,
+        ),
         rect(203, top, 234, 12, 'ink', true),
         line(320, top, 320, top - 50, 'ink', 4),
         text(320, 250, `ΔU = ${du} J`, 'middle'),
@@ -343,7 +472,14 @@ const firstLaw: TopicLab = {
         text(130, 215, `Q = ${v.q} J`, 'middle', 'warm'),
         ...(v.w !== 0 ? arrow(540, v.w > 0 ? 150 : 90, 540, v.w > 0 ? 90 : 150, 'green', 3) : []),
         text(540, 180, `W = ${v.w} J`, 'middle', 'green'),
-        text(540, 200, v.w > 0 ? 'gas expands' : v.w < 0 ? 'gas is compressed' : 'no volume change', 'middle', 'muted', 11),
+        text(
+          540,
+          200,
+          v.w > 0 ? 'gas expands' : v.w < 0 ? 'gas is compressed' : 'no volume change',
+          'middle',
+          'muted',
+          11,
+        ),
       ],
       bars: {
         max: 1200,
@@ -356,9 +492,24 @@ const firstLaw: TopicLab = {
     };
   },
   missions: [
-    goal('Heat the gas without adding any heat.', 'Compress it adiabatically: Q = 0 and work done on the gas (negative W).', { q: 0, w: -300 }, (o, v) => v.q === 0 && o.du > 0),
-    goal('Make the gas expand and do work while its temperature stays constant.', 'For an ideal gas ΔU = 0 means every joule of heat leaves as work.', { q: 300, w: 300 }, (o, v) => o.du === 0 && v.w > 0),
-    goal('Cool the gas by at least 20 K even though it is absorbing heat.', 'Let it do far more work than the heat it takes in.', { q: 100, w: 400 }, (o, v) => v.q > 0 && o.dT <= -20),
+    goal(
+      'Heat the gas without adding any heat.',
+      'Compress it adiabatically: Q = 0 and work done on the gas (negative W).',
+      { q: 0, w: -300 },
+      (o, v) => v.q === 0 && o.du > 0,
+    ),
+    goal(
+      'Make the gas expand and do work while its temperature stays constant.',
+      'For an ideal gas ΔU = 0 means every joule of heat leaves as work.',
+      { q: 300, w: 300 },
+      (o, v) => o.du === 0 && v.w > 0,
+    ),
+    goal(
+      'Cool the gas by at least 20 K even though it is absorbing heat.',
+      'Let it do far more work than the heat it takes in.',
+      { q: 100, w: 400 },
+      (o, v) => v.q > 0 && o.dT <= -20,
+    ),
   ],
   predict: {
     q: 'An ideal gas absorbs 200 J of heat while doing 200 J of work on a piston. Its temperature…',
@@ -389,7 +540,11 @@ const entropy: TopicLab = {
         { label: 'ΔS of the reservoir losing heat', value: out, unit: 'J/K' },
         { label: 'ΔS of the reservoir gaining heat', value: into, unit: 'J/K' },
         { label: 'Total entropy change', value: total, unit: 'J/K' },
-        { label: 'Work a reversible engine could have extracted', value: Math.max(0, v.q * (1 - v.tc / v.th)), unit: 'J' },
+        {
+          label: 'Work a reversible engine could have extracted',
+          value: Math.max(0, v.q * (1 - v.tc / v.th)),
+          unit: 'J',
+        },
       ],
       note:
         total < 0
@@ -407,13 +562,33 @@ const entropy: TopicLab = {
     };
   },
   missions: [
-    goal('Make the transfer nearly reversible: total entropy change positive but below 0.2 J/K.', 'Bring the two temperatures close together.', { th: 310, tc: 300 }, (o, v) => v.th > v.tc && o.total > 0 && o.total < 0.2),
-    goal('Set up a transfer the second law forbids and read the sign of the total.', 'Send heat from the colder reservoir to the hotter one.', { th: 300, tc: 400 }, (o) => o.total < 0),
-    goal('Generate more than 5 J/K in a single transfer.', 'Use a large Q and the widest temperature gap.', { q: 2000, th: 900, tc: 200 }, (o) => o.total > 5),
+    goal(
+      'Make the transfer nearly reversible: total entropy change positive but below 0.2 J/K.',
+      'Bring the two temperatures close together.',
+      { th: 310, tc: 300 },
+      (o, v) => v.th > v.tc && o.total > 0 && o.total < 0.2,
+    ),
+    goal(
+      'Set up a transfer the second law forbids and read the sign of the total.',
+      'Send heat from the colder reservoir to the hotter one.',
+      { th: 300, tc: 400 },
+      (o) => o.total < 0,
+    ),
+    goal(
+      'Generate more than 5 J/K in a single transfer.',
+      'Use a large Q and the widest temperature gap.',
+      { q: 2000, th: 900, tc: 200 },
+      (o) => o.total > 5,
+    ),
   ],
   predict: {
     q: '1,000 J flows from a 600 K reservoir to a 300 K reservoir. The hot reservoir’s entropy changes by −1.67 J/K. The cold reservoir’s changes by…',
-    options: ['+3.33 J/K, so the total rises', '+1.67 J/K, so the total is zero', '−3.33 J/K', '+0.83 J/K'],
+    options: [
+      '+3.33 J/K, so the total rises',
+      '+1.67 J/K, so the total is zero',
+      '−3.33 J/K',
+      '+0.83 J/K',
+    ],
     correct: 0,
     why: 'ΔS = Q/T. The same heat divided by a lower temperature gives a larger entropy gain than the loss on the hot side.',
   },
@@ -428,7 +603,12 @@ const otto: TopicLab = {
   lead: 'An idealised petrol engine: its efficiency depends on how much the gas is compressed and on the gas itself — not on how much fuel is burned.',
   controls: [
     slider('r', 'Compression ratio', 2, 20, 0.5, 8, ': 1'),
-    choice('gamma', 'Working gas', ['Air, γ = 1.40', 'Hot fuel–air mixture, γ ≈ 1.30', 'Monatomic gas, γ = 1.67'], 0),
+    choice(
+      'gamma',
+      'Working gas',
+      ['Air, γ = 1.40', 'Hot fuel–air mixture, γ ≈ 1.30', 'Monatomic gas, γ = 1.67'],
+      0,
+    ),
     slider('qh', 'Heat released per cycle', 500, 3000, 100, 1000, 'J'),
   ],
   run: (v) => {
@@ -454,9 +634,24 @@ const otto: TopicLab = {
     };
   },
   missions: [
-    goal('With air, find the smallest compression ratio that reaches 60% efficiency.', 'Solve r^(−0.4) = 0.4.', { r: 10 }, (o, v) => v.gamma === 0 && v.r === 10),
-    goal('Keep that ratio of 10 and switch to the hot fuel–air mixture. Note the efficiency you lose.', 'A lower γ means less temperature change per compression.', { r: 10, gamma: 1 }, (o, v) => v.gamma === 1 && v.r === 10),
-    goal('With air and 1,000 J released, reject less than 350 J.', 'You need more than 65% efficiency: a ratio of about 14.', { r: 14 }, (o, v) => v.gamma === 0 && v.qh === 1000 && o.qc < 350),
+    goal(
+      'With air, find the smallest compression ratio that reaches 60% efficiency.',
+      'Solve r^(−0.4) = 0.4.',
+      { r: 10 },
+      (o, v) => v.gamma === 0 && v.r === 10,
+    ),
+    goal(
+      'Keep that ratio of 10 and switch to the hot fuel–air mixture. Note the efficiency you lose.',
+      'A lower γ means less temperature change per compression.',
+      { r: 10, gamma: 1 },
+      (o, v) => v.gamma === 1 && v.r === 10,
+    ),
+    goal(
+      'With air and 1,000 J released, reject less than 350 J.',
+      'You need more than 65% efficiency: a ratio of about 14.',
+      { r: 14 },
+      (o, v) => v.gamma === 0 && v.qh === 1000 && o.qc < 350,
+    ),
   ],
   predict: {
     q: 'As an ideal Otto engine’s compression ratio is raised from 4 to 8 to 16, its efficiency…',
@@ -513,9 +708,24 @@ const joule: TopicLab = {
     };
   },
   missions: [
-    goal('Warm the 1 kg of water by at least 1.0 K.', 'About 4,186 J is needed; add drops, mass, or height.', { n: 25 }, (o, v) => near(v.water, 1, 1e-6) && o.dT >= 1),
-    goal('Deliver almost exactly one kilocalorie (4,186 J) of mechanical work.', 'Try 17 kg falling 2.5 m ten times.', { m: 17, h: 2.5 }, (o) => near(o.energy, 4186, 60)),
-    goal('Starting from the original settings, show that halving the water doubles the temperature rise.', 'Change only the water mass to 0.5 kg.', { water: 0.5 }, (o, v) => near(v.water, 0.5, 1e-6) && near(o.dT, 0.937, 0.02)),
+    goal(
+      'Warm the 1 kg of water by at least 1.0 K.',
+      'About 4,186 J is needed; add drops, mass, or height.',
+      { n: 25 },
+      (o, v) => near(v.water, 1, 1e-6) && o.dT >= 1,
+    ),
+    goal(
+      'Deliver almost exactly one kilocalorie (4,186 J) of mechanical work.',
+      'Try 17 kg falling 2.5 m ten times.',
+      { m: 17, h: 2.5 },
+      (o) => near(o.energy, 4186, 60),
+    ),
+    goal(
+      'Starting from the original settings, show that halving the water doubles the temperature rise.',
+      'Change only the water mass to 0.5 kg.',
+      { water: 0.5 },
+      (o, v) => near(v.water, 0.5, 1e-6) && near(o.dT, 0.937, 0.02),
+    ),
   ],
   predict: {
     q: 'Joule needed many drops of a heavy weight to warm his water measurably because…',
@@ -538,21 +748,30 @@ export const thermodynamicsExtras: EventExtras = {
   lessons: {
     'therm-u1-l1': {
       labs: ['therm-cooling'],
-      sort: sort('State variable or process quantity?', ['State variable', 'Process (path) quantity'], [
-        ['Temperature', 0],
-        ['Pressure', 0],
-        ['Heat transferred', 1],
-        ['Work done', 1],
-        ['Internal energy', 0],
-        ['Volume', 0],
-      ]),
+      sort: sort(
+        'State variable or process quantity?',
+        ['State variable', 'Process (path) quantity'],
+        [
+          ['Temperature', 0],
+          ['Pressure', 0],
+          ['Heat transferred', 1],
+          ['Work done', 1],
+          ['Internal energy', 0],
+          ['Volume', 0],
+        ],
+      ),
       checks: [
-        check(3, 'Thermometer A reads the same as body B, and A also reads the same as body C. Without touching B to C, you can conclude…', [
-          'B and C are in thermal equilibrium with each other',
-          'B and C contain the same amount of heat',
-          'B and C have the same internal energy',
-          'Nothing, until B and C are placed in contact',
-        ], 'That is the zeroth law, and it is what makes a thermometer meaningful. Equal temperature does not imply equal energy content.'),
+        check(
+          3,
+          'Thermometer A reads the same as body B, and A also reads the same as body C. Without touching B to C, you can conclude…',
+          [
+            'B and C are in thermal equilibrium with each other',
+            'B and C contain the same amount of heat',
+            'B and C have the same internal energy',
+            'Nothing, until B and C are placed in contact',
+          ],
+          'That is the zeroth law, and it is what makes a thermometer meaningful. Equal temperature does not imply equal energy content.',
+        ),
       ],
     },
     'therm-u2-l1': {
@@ -567,16 +786,30 @@ export const thermodynamicsExtras: EventExtras = {
           'Use the Link Heaters option to give water and olive oil identical energy. Explain the temperature difference using c = Q / (mΔT).',
         ),
       ],
-      sort: sort('Which transfer mechanism dominates?', ['Conduction', 'Convection', 'Radiation'], [
-        ['A metal spoon handle warming in hot soup', 0],
-        ['Warm air rising above a radiator', 1],
-        ['Sunlight warming your face through vacuum', 2],
-        ['Heat crossing a solid window pane', 0],
-        ['A sea breeze driven by land–ocean temperature contrast', 1],
-        ['Glowing coals felt from across the room', 2],
-      ]),
+      sort: sort(
+        'Which transfer mechanism dominates?',
+        ['Conduction', 'Convection', 'Radiation'],
+        [
+          ['A metal spoon handle warming in hot soup', 0],
+          ['Warm air rising above a radiator', 1],
+          ['Sunlight warming your face through vacuum', 2],
+          ['Heat crossing a solid window pane', 0],
+          ['A sea breeze driven by land–ocean temperature contrast', 1],
+          ['Glowing coals felt from across the room', 2],
+        ],
+      ),
       checks: [
-        check(3, 'Equal masses of water and iron absorb the same heat. The iron’s temperature rises far more because iron has…', ['A lower specific heat capacity', 'A higher thermal conductivity', 'A higher density', 'More internal energy'], 'ΔT = Q / (mc). With c about one ninth of water’s, the same energy produces roughly nine times the temperature rise.'),
+        check(
+          3,
+          'Equal masses of water and iron absorb the same heat. The iron’s temperature rises far more because iron has…',
+          [
+            'A lower specific heat capacity',
+            'A higher thermal conductivity',
+            'A higher density',
+            'More internal energy',
+          ],
+          'ΔT = Q / (mc). With c about one ninth of water’s, the same energy produces roughly nine times the temperature rise.',
+        ),
       ],
     },
     'therm-u3-l1': {
@@ -591,30 +824,58 @@ export const thermodynamicsExtras: EventExtras = {
           'Push the lid down to raise the pressure on a gas. Can you make it condense without removing heat?',
         ),
       ],
-      sort: sort('Name the transition', ['Absorbs energy', 'Releases energy'], [
-        ['Melting', 0],
-        ['Vaporisation', 0],
-        ['Sublimation', 0],
-        ['Freezing', 1],
-        ['Condensation', 1],
-        ['Deposition', 1],
-      ]),
+      sort: sort(
+        'Name the transition',
+        ['Absorbs energy', 'Releases energy'],
+        [
+          ['Melting', 0],
+          ['Vaporisation', 0],
+          ['Sublimation', 0],
+          ['Freezing', 1],
+          ['Condensation', 1],
+          ['Deposition', 1],
+        ],
+      ),
       checks: [
-        check(2, 'Above its critical temperature, a substance…', ['Cannot be liquefied by pressure alone', 'Must be a solid', 'Boils at a fixed pressure', 'Has three phases in equilibrium'], 'Beyond the critical point the liquid–gas boundary ends; compressing the fluid changes its density smoothly with no phase transition.'),
+        check(
+          2,
+          'Above its critical temperature, a substance…',
+          [
+            'Cannot be liquefied by pressure alone',
+            'Must be a solid',
+            'Boils at a fixed pressure',
+            'Has three phases in equilibrium',
+          ],
+          'Beyond the critical point the liquid–gas boundary ends; compressing the fluid changes its density smoothly with no phase transition.',
+        ),
       ],
     },
     'therm-u4-l1': {
       labs: ['therm-ice'],
-      sort: sort('Sensible or latent heat?', ['Temperature changes (sensible)', 'Phase changes at constant temperature (latent)'], [
-        ['Warming liquid water from 20 °C to 80 °C', 0],
-        ['Ice melting at 0 °C', 1],
-        ['Water boiling at 100 °C', 1],
-        ['Steam heating from 100 °C to 120 °C', 0],
-        ['Sweat evaporating from skin', 1],
-        ['An iron block cooling in air', 0],
-      ]),
+      sort: sort(
+        'Sensible or latent heat?',
+        ['Temperature changes (sensible)', 'Phase changes at constant temperature (latent)'],
+        [
+          ['Warming liquid water from 20 °C to 80 °C', 0],
+          ['Ice melting at 0 °C', 1],
+          ['Water boiling at 100 °C', 1],
+          ['Steam heating from 100 °C to 120 °C', 0],
+          ['Sweat evaporating from skin', 1],
+          ['An iron block cooling in air', 0],
+        ],
+      ),
       checks: [
-        check(2, 'On a heating curve for water at 1 atm, the boiling plateau is much longer than the melting plateau because…', ['The latent heat of vaporisation is far larger than that of fusion', 'Steam has a higher specific heat than ice', 'The heater slows down at 100 °C', 'Boiling happens at a higher temperature'], 'About 2,260 J/g is needed to vaporise water but only 334 J/g to melt ice, so at constant power boiling takes nearly seven times as long.'),
+        check(
+          2,
+          'On a heating curve for water at 1 atm, the boiling plateau is much longer than the melting plateau because…',
+          [
+            'The latent heat of vaporisation is far larger than that of fusion',
+            'Steam has a higher specific heat than ice',
+            'The heater slows down at 100 °C',
+            'Boiling happens at a higher temperature',
+          ],
+          'About 2,260 J/g is needed to vaporise water but only 334 J/g to melt ice, so at constant power boiling takes nearly seven times as long.',
+        ),
       ],
     },
     'therm-u5-l1': {
@@ -629,16 +890,25 @@ export const thermodynamicsExtras: EventExtras = {
           'Add a second pump stroke of the same gas at fixed volume and temperature. Relate the change in pressure to the change in particle number.',
         ),
       ],
-      sort: sort('Which variable is held constant?', ['Temperature (Boyle)', 'Pressure (Charles)', 'Volume (Gay-Lussac)'], [
-        ['PV = constant', 0],
-        ['V / T = constant', 1],
-        ['P / T = constant', 2],
-        ['A sealed rigid can heated in a fire', 2],
-        ['A balloon shrinking in a freezer', 1],
-        ['A syringe compressed slowly in a water bath', 0],
-      ]),
+      sort: sort(
+        'Which variable is held constant?',
+        ['Temperature (Boyle)', 'Pressure (Charles)', 'Volume (Gay-Lussac)'],
+        [
+          ['PV = constant', 0],
+          ['V / T = constant', 1],
+          ['P / T = constant', 2],
+          ['A sealed rigid can heated in a fire', 2],
+          ['A balloon shrinking in a freezer', 1],
+          ['A syringe compressed slowly in a water bath', 0],
+        ],
+      ),
       checks: [
-        check(2, 'The absolute temperature of an ideal gas is doubled. The average translational kinetic energy per molecule…', ['Doubles', 'Quadruples', 'Increases by √2', 'Stays the same'], 'Mean KE = (3/2)kT, directly proportional to T. It is the rms speed that grows by √2.'),
+        check(
+          2,
+          'The absolute temperature of an ideal gas is doubled. The average translational kinetic energy per molecule…',
+          ['Doubles', 'Quadruples', 'Increases by √2', 'Stays the same'],
+          'Mean KE = (3/2)kT, directly proportional to T. It is the rms speed that grows by √2.',
+        ),
       ],
     },
     'therm-u6-l1': {
@@ -653,31 +923,54 @@ export const thermodynamicsExtras: EventExtras = {
           'On the Energy screen, compare the speed histograms before and after a rapid compression with no thermostat.',
         ),
       ],
-      sort: sort('Identify the process', ['Isothermal', 'Isobaric', 'Isochoric', 'Adiabatic'], [
-        ['ΔU = 0 for an ideal gas', 0],
-        ['W = PΔV', 1],
-        ['W = 0', 2],
-        ['Q = 0', 3],
-        ['A vertical line on a P–V diagram', 2],
-        ['A horizontal line on a P–V diagram', 1],
-        ['PV^γ = constant', 3],
-      ]),
+      sort: sort(
+        'Identify the process',
+        ['Isothermal', 'Isobaric', 'Isochoric', 'Adiabatic'],
+        [
+          ['ΔU = 0 for an ideal gas', 0],
+          ['W = PΔV', 1],
+          ['W = 0', 2],
+          ['Q = 0', 3],
+          ['A vertical line on a P–V diagram', 2],
+          ['A horizontal line on a P–V diagram', 1],
+          ['PV^γ = constant', 3],
+        ],
+      ),
       checks: [
-        check(4, 'A gas expands adiabatically and does 150 J of work. Its internal energy changes by…', ['−150 J', '+150 J', '0 J', 'It depends on the heat added'], 'Q = 0, so ΔU = Q − W = −150 J: the work is paid for out of internal energy and the gas cools.'),
+        check(
+          4,
+          'A gas expands adiabatically and does 150 J of work. Its internal energy changes by…',
+          ['−150 J', '+150 J', '0 J', 'It depends on the heat added'],
+          'Q = 0, so ΔU = Q − W = −150 J: the work is paid for out of internal energy and the gas cools.',
+        ),
       ],
     },
     'therm-u7-l1': {
       labs: ['therm-first-law'],
-      sort: sort('Sign of the energy term (physics convention, W by the gas)', ['Positive', 'Negative', 'Zero'], [
-        ['Q when the gas is heated by a flame', 0],
-        ['W when the gas pushes a piston outward', 0],
-        ['W when the gas is compressed', 1],
-        ['Q when the gas warms the room', 1],
-        ['ΔU for one complete cycle', 2],
-        ['Q in an adiabatic step', 2],
-      ]),
+      sort: sort(
+        'Sign of the energy term (physics convention, W by the gas)',
+        ['Positive', 'Negative', 'Zero'],
+        [
+          ['Q when the gas is heated by a flame', 0],
+          ['W when the gas pushes a piston outward', 0],
+          ['W when the gas is compressed', 1],
+          ['Q when the gas warms the room', 1],
+          ['ΔU for one complete cycle', 2],
+          ['Q in an adiabatic step', 2],
+        ],
+      ),
       checks: [
-        check(2, 'A gas goes from state A to state B by two different paths. Which quantity must be the same for both?', ['The change in internal energy', 'The heat absorbed', 'The work done', 'Both heat and work'], 'Internal energy is a state function. Heat and work each depend on the path, but their difference Q − W does not.'),
+        check(
+          2,
+          'A gas goes from state A to state B by two different paths. Which quantity must be the same for both?',
+          [
+            'The change in internal energy',
+            'The heat absorbed',
+            'The work done',
+            'Both heat and work',
+          ],
+          'Internal energy is a state function. Heat and work each depend on the path, but their difference Q − W does not.',
+        ),
       ],
     },
     'therm-u8-l1': {
@@ -692,30 +985,53 @@ export const thermodynamicsExtras: EventExtras = {
           'Connect the two runs to entropy: why does the number of particles decide whether “irreversible” is a good description?',
         ),
       ],
-      sort: sort('Reversible ideal or irreversible in practice?', ['Reversible (idealised limit)', 'Irreversible'], [
-        ['Quasi-static isothermal expansion against a matched pressure', 0],
-        ['Heat flowing across a finite temperature difference', 1],
-        ['Free expansion of a gas into vacuum', 1],
-        ['Friction warming a brake disc', 1],
-        ['Frictionless adiabatic compression done infinitely slowly', 0],
-        ['Two gases mixing after a partition is removed', 1],
-      ]),
+      sort: sort(
+        'Reversible ideal or irreversible in practice?',
+        ['Reversible (idealised limit)', 'Irreversible'],
+        [
+          ['Quasi-static isothermal expansion against a matched pressure', 0],
+          ['Heat flowing across a finite temperature difference', 1],
+          ['Free expansion of a gas into vacuum', 1],
+          ['Friction warming a brake disc', 1],
+          ['Frictionless adiabatic compression done infinitely slowly', 0],
+          ['Two gases mixing after a partition is removed', 1],
+        ],
+      ),
       checks: [
-        check(2, 'Heat Q leaves a hot reservoir at T_h and enters a cold one at T_c. The total entropy change is…', ['Q/T_c − Q/T_h, which is positive', 'Zero, because energy is conserved', 'Q/T_h − Q/T_c, which is negative', 'Q × (T_h − T_c)'], 'The cold reservoir gains more entropy than the hot one loses because the same Q is divided by a smaller temperature.'),
+        check(
+          2,
+          'Heat Q leaves a hot reservoir at T_h and enters a cold one at T_c. The total entropy change is…',
+          [
+            'Q/T_c − Q/T_h, which is positive',
+            'Zero, because energy is conserved',
+            'Q/T_h − Q/T_c, which is negative',
+            'Q × (T_h − T_c)',
+          ],
+          'The cold reservoir gains more entropy than the hot one loses because the same Q is divided by a smaller temperature.',
+        ),
       ],
     },
     'therm-u9-l1': {
       labs: ['therm-otto'],
-      sort: sort('Engine, refrigerator, or heat pump?', ['Heat engine', 'Refrigerator', 'Heat pump'], [
-        ['Takes in heat at high temperature and delivers work', 0],
-        ['Uses work to remove heat from a cold interior', 1],
-        ['Uses work to deliver heat into a warm building', 2],
-        ['Performance measured as W / Q_h', 0],
-        ['Performance measured as Q_c / W', 1],
-        ['Performance measured as Q_h / W', 2],
-      ]),
+      sort: sort(
+        'Engine, refrigerator, or heat pump?',
+        ['Heat engine', 'Refrigerator', 'Heat pump'],
+        [
+          ['Takes in heat at high temperature and delivers work', 0],
+          ['Uses work to remove heat from a cold interior', 1],
+          ['Uses work to deliver heat into a warm building', 2],
+          ['Performance measured as W / Q_h', 0],
+          ['Performance measured as Q_c / W', 1],
+          ['Performance measured as Q_h / W', 2],
+        ],
+      ),
       checks: [
-        check(1, 'An engine runs between 500 K and 300 K. The largest efficiency any engine could have is…', ['40%', '60%', '100%', '67%'], 'Carnot limit: 1 − T_c/T_h = 1 − 300/500 = 0.40. Temperatures must be in kelvin.'),
+        check(
+          1,
+          'An engine runs between 500 K and 300 K. The largest efficiency any engine could have is…',
+          ['40%', '60%', '100%', '67%'],
+          'Carnot limit: 1 − T_c/T_h = 1 − 300/500 = 0.40. Temperatures must be in kelvin.',
+        ),
       ],
     },
     'therm-u10-l1': {
@@ -736,16 +1052,30 @@ export const thermodynamicsExtras: EventExtras = {
           'Compare the area under the curve at 3,000 K and 6,000 K. By what factor does total emitted power change?',
         ),
       ],
-      sort: sort('Who established what?', ['Joule', 'Clausius / Kelvin', 'Boltzmann / Maxwell', 'Planck'], [
-        ['Mechanical equivalent of heat', 0],
-        ['Statements of the second law', 1],
-        ['Entropy from counting microstates', 2],
-        ['Quantised energy to explain blackbody radiation', 3],
-        ['Distribution of molecular speeds', 2],
-        ['An absolute temperature scale', 1],
-      ]),
+      sort: sort(
+        'Who established what?',
+        ['Joule', 'Clausius / Kelvin', 'Boltzmann / Maxwell', 'Planck'],
+        [
+          ['Mechanical equivalent of heat', 0],
+          ['Statements of the second law', 1],
+          ['Entropy from counting microstates', 2],
+          ['Quantised energy to explain blackbody radiation', 3],
+          ['Distribution of molecular speeds', 2],
+          ['An absolute temperature scale', 1],
+        ],
+      ),
       checks: [
-        check(1, 'Joule’s paddle-wheel result was decisive evidence that heat is…', ['A form of energy transfer, interconvertible with work', 'A weightless fluid that flows from hot to cold', 'A property only of gases', 'Created in proportion to temperature'], 'A fixed amount of mechanical work always produced the same warming, which a conserved “caloric” fluid could not explain.'),
+        check(
+          1,
+          'Joule’s paddle-wheel result was decisive evidence that heat is…',
+          [
+            'A form of energy transfer, interconvertible with work',
+            'A weightless fluid that flows from hot to cold',
+            'A property only of gases',
+            'Created in proportion to temperature',
+          ],
+          'A fixed amount of mechanical work always produced the same warming, which a conserved “caloric” fluid could not explain.',
+        ),
       ],
     },
   },

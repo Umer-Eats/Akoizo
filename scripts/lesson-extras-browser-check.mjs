@@ -14,7 +14,10 @@ const shots = process.env.SHOTS === '1';
 const out = 'documents/qa/lesson-extras';
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const p = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+const p = await browser.newPage({
+  viewport: { width: 1440, height: 1000 },
+  reducedMotion: 'reduce',
+});
 const errors = [];
 p.on('pageerror', (error) => errors.push(error.message));
 p.on('console', (message) => {
@@ -68,7 +71,11 @@ await p.route('https://identitytoolkit.googleapis.com/**', (route) =>
               email: 'qa@example.test',
               emailVerified: true,
               providerUserInfo: [
-                { providerId: 'password', email: 'qa@example.test', federatedId: 'qa@example.test' },
+                {
+                  providerId: 'password',
+                  email: 'qa@example.test',
+                  federatedId: 'qa@example.test',
+                },
               ],
             },
           ],
@@ -91,8 +98,9 @@ await p.route('**/api/**', async (route) => {
   return route.fulfill({ json: [] });
 });
 // Remote figures and PhET content are not needed to verify structure; keep the run offline.
-await p.route(/phet\.colorado\.edu|wikimedia\.org|openstax\.org|opentextbc\.ca|rcsb\.org|noaa\.gov|nasa\.gov|usgs\.gov|cdc\.gov|libretexts\.org/, (route) =>
-  route.abort(),
+await p.route(
+  /phet\.colorado\.edu|wikimedia\.org|openstax\.org|opentextbc\.ca|rcsb\.org|noaa\.gov|nasa\.gov|usgs\.gov|cdc\.gov|libretexts\.org/,
+  (route) => route.abort(),
 );
 
 let labsSeen = 0,
@@ -126,7 +134,9 @@ try {
         if (sequence) {
           await expect(activities.locator('.la-order > li')).toHaveCount(sequence.answer.length);
           await activities.getByRole('button', { name: 'Check order' }).click();
-          await expect(activities.locator('.la-order > li[data-state]')).toHaveCount(sequence.answer.length);
+          await expect(activities.locator('.la-order > li[data-state]')).toHaveCount(
+            sequence.answer.length,
+          );
         }
         if (extras.sort) {
           sortsSeen++;
@@ -139,7 +149,9 @@ try {
               .getByRole('button', { name: extras.sort.bins[bin], exact: true })
               .click();
           await board.getByRole('button', { name: 'Check classification' }).click();
-          await expect(board.locator('.la-sort > li[data-state="right"]')).toHaveCount(extras.sort.items.length);
+          await expect(board.locator('.la-sort > li[data-state="right"]')).toHaveCount(
+            extras.sort.items.length,
+          );
         }
         for (const check of extras.checks ?? []) {
           checksSeen++;
@@ -158,8 +170,14 @@ try {
             const input = view.getByLabel(control.label, { exact: true });
             for (const value of [control.min, control.max, control.initial]) {
               await input.fill(String(value));
-              assert(!/NaN|Infinity|undefined/.test(await view.locator('.tl-bench').innerHTML()), `${id} ${control.key}=${value}`);
-              assert(!/NaN|Infinity/.test(await view.locator('.tl-metrics').innerText()), `${id} metrics`);
+              assert(
+                !/NaN|Infinity|undefined/.test(await view.locator('.tl-bench').innerHTML()),
+                `${id} ${control.key}=${value}`,
+              );
+              assert(
+                !/NaN|Infinity/.test(await view.locator('.tl-metrics').innerText()),
+                `${id} metrics`,
+              );
             }
           }
           await view.locator('.tl-predict .tl-option').nth(lab.predict.correct).click();
@@ -169,7 +187,8 @@ try {
           await expect(view.locator('.tl-table tbody tr')).toHaveCount(1);
           await view.getByRole('button', { name: 'Reset lab' }).click();
           await expect(view.locator('.tl-table')).toHaveCount(0);
-          if (extras.labs[0] === id) await expect(p.locator('.lesson-reading .tl-preview')).toHaveCount(1);
+          if (extras.labs[0] === id)
+            await expect(p.locator('.lesson-reading .tl-preview')).toHaveCount(1);
         }
         for (const embed of extras.phet ?? []) {
           phetSeen++;
@@ -181,12 +200,16 @@ try {
           await expect(sim.locator('iframe')).toHaveAttribute('src', phetUrl(embed.sim));
           await sim.getByRole('button', { name: 'Close simulation' }).click();
           await expect(sim.locator('iframe')).toHaveCount(0);
-          await expect(sim.locator('.phet-credit')).toContainText('PhET Interactive Simulations, University of Colorado Boulder');
+          await expect(sim.locator('.phet-credit')).toContainText(
+            'PhET Interactive Simulations, University of Colorado Boulder',
+          );
         }
         // The page must never scroll sideways, at desktop or phone width.
         for (const width of [1440, 390]) {
           await p.setViewportSize({ width, height: 900 });
-          const overflow = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+          const overflow = await p.evaluate(
+            () => document.documentElement.scrollWidth - window.innerWidth,
+          );
           assert(overflow <= 1, `${lessonId} overflows by ${overflow}px at ${width}`);
         }
         await p.setViewportSize({ width: 1440, height: 1000 });

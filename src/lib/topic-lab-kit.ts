@@ -16,12 +16,49 @@ export type LabControl = {
 };
 export type Tone = 'ink' | 'accent' | 'slot' | 'warm' | 'cool' | 'green' | 'gold' | 'muted';
 export type Shape =
-  | { k: 'line'; x1: number; y1: number; x2: number; y2: number; tone: Tone; w: number; dash: boolean }
-  | { k: 'rect'; x: number; y: number; w: number; h: number; tone: Tone; fill: boolean; o: number; rx: number }
+  | {
+      k: 'line';
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      tone: Tone;
+      w: number;
+      dash: boolean;
+    }
+  | {
+      k: 'rect';
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+      tone: Tone;
+      fill: boolean;
+      o: number;
+      rx: number;
+      color?: string;
+    }
   | { k: 'circle'; x: number; y: number; r: number; tone: Tone; fill: boolean; o: number }
-  | { k: 'ellipse'; x: number; y: number; rx: number; ry: number; tone: Tone; fill: boolean; o: number }
+  | {
+      k: 'ellipse';
+      x: number;
+      y: number;
+      rx: number;
+      ry: number;
+      tone: Tone;
+      fill: boolean;
+      o: number;
+    }
   | { k: 'path'; d: string; tone: Tone; fill: boolean; w: number; o: number; dash: boolean }
-  | { k: 'text'; x: number; y: number; s: string; anchor: 'start' | 'middle' | 'end'; tone: Tone; size: number };
+  | {
+      k: 'text';
+      x: number;
+      y: number;
+      s: string;
+      anchor: 'start' | 'middle' | 'end';
+      tone: Tone;
+      size: number;
+    };
 
 export const line = (
   x1: number,
@@ -42,6 +79,26 @@ export const rect = (
   o = 1,
   rx = 0,
 ): Shape => ({ k: 'rect', x, y, w: Math.max(0, w), h: Math.max(0, h), tone, fill, o, rx });
+// A filled rectangle in an explicit display colour, for labs whose subject is colour itself.
+export const swatch = (
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  color: string,
+  rx = 0,
+): Shape => ({
+  k: 'rect',
+  x,
+  y,
+  w,
+  h,
+  tone: 'ink',
+  fill: true,
+  o: 1,
+  rx,
+  color,
+});
 export const circle = (
   x: number,
   y: number,
@@ -86,7 +143,10 @@ export function arrow(
   const a = Math.atan2(y2 - y1, x2 - x1),
     h = 9;
   const p = (t: number) => `${x2 - h * Math.cos(a + t)},${y2 - h * Math.sin(a + t)}`;
-  return [line(x1, y1, x2, y2, tone, w), path(`M${p(0.45)}L${x2},${y2}L${p(-0.45)}Z`, tone, true, 1)];
+  return [
+    line(x1, y1, x2, y2, tone, w),
+    path(`M${p(0.45)}L${x2},${y2}L${p(-0.45)}Z`, tone, true, 1),
+  ];
 }
 // Sampled polyline for scenes that need a curve outside the standard plot.
 export function trace(

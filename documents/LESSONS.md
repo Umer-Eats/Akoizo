@@ -11,6 +11,7 @@ The lesson catalog serves the Pink, Yellow, Purple, Blue, Green, and Orange time
 - Green: Circuit Lab (10), Water Quality (9), Protein Modeling (8).
 - Orange: Designer Genes (10), Dynamic Planet (10), Thermodynamics (10).
 - The Blue/Green/Orange expansion adds 74 lessons and 518 questions: the full catalog now has **167 lessons and 1,169 practice questions**. See [Blue, Green, and Orange coverage](BLUE_GREEN_ORANGE_LESSONS.md) for eight new labs and 18 credited online figures.
+- Every lesson also has material written for it alone: 168 lesson-specific virtual labs, 55 guided PhET investigations, a classification board, an inline check, and generated ordering and vocabulary activities, plus 90 further credited figures (180 in total). See [lesson-specific labs, PhET investigations, and activities](LESSON_INTERACTIVES.md).
 - Every lesson has developed text, learning objectives, key terms, a worked example with a revealable solution, an interactive model or evidence investigation, and seven practice questions.
 - These courses follow the supplied 2026 SciConnect syllabi. Their scope is intentionally distinguished from the application's tournament-year rulebooks. Anatomy Unit 10 retains its extension status.
 - Course metadata and displayed lesson content omit teacher names. All current lessons are explicitly text lessons; no empty video tabs are offered.

@@ -1,6 +1,7 @@
 import type { LessonReferenceFigure } from './lessons';
 import { additionalLessonFigures } from './lesson-reference-expansion.ts';
 import { furtherLessonFigures } from './lesson-reference-further.ts';
+import { commonsLessonFigures } from './lesson-reference-commons.ts';
 
 // Unmodified remote figures; captions and study prompts are original.
 export const lessonReferenceFigures: (LessonReferenceFigure & {
@@ -9,6 +10,7 @@ export const lessonReferenceFigures: (LessonReferenceFigure & {
 })[] = [
   ...additionalLessonFigures,
   ...furtherLessonFigures,
+  ...commonsLessonFigures,
   {
     lessonId: 'chem-u2-l1',
     section: 2,
