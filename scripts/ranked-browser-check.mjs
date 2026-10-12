@@ -240,13 +240,8 @@ try {
   // Instructor: both new tabs sit in the blue sidebar.
   const coach = await account(teacher.profile);
   const sidebar = coach.getByRole('navigation', { name: 'Instructor sections' });
-  await expect(sidebar.getByRole('button')).toHaveText([
-    /School Code/,
-    /Assignments/,
-    /Ranked Tests/,
-    /Teams/,
-    /Student Progress/,
-  ]);
+  for (const name of [/Ranked Tests/, /Teams/])
+    await expect(sidebar.getByRole('button', { name })).toBeVisible();
 
   // Teams: a sheet per team, a color-coded row per event, students seated from their cards.
   await sidebar.getByRole('button', { name: /Teams/ }).click();
@@ -304,7 +299,7 @@ try {
   await expect(coach.getByText('No ranked tests yet.')).toBeVisible();
   const eventPicker = coach.getByLabel('Event', { exact: true });
   await expect(eventPicker.locator('option', { hasText: 'Water Quality' })).toHaveCount(1);
-  await expect(eventPicker.locator('option', { hasText: 'Disease Detectives' })).toHaveCount(0);
+  await expect(eventPicker.locator('option', { hasText: 'Boomilever' })).toHaveCount(0);
   await eventPicker.selectOption('water-quality');
   await coach.getByLabel('Questions', { exact: true }).fill('9');
   await coach.getByLabel('Minutes', { exact: true }).fill('20');

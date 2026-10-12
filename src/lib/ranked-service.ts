@@ -195,8 +195,10 @@ export async function createRankedTest(
 export async function listRankedForInstructor(
   db: Database,
   instructor: Profile,
+  config: PracticeAIConfig = {},
 ): Promise<InstructorRankedTest[]> {
   requireInstructor(instructor);
+  await closeExpired(db, instructor.schoolId, config);
   const tests = await db.all(
     `SELECT ${testColumns},t.sources_json FROM ranked_tests t JOIN events e ON e.id=t.event_id
      WHERE t.school_id=? ORDER BY t.created_at DESC,t.id`,
@@ -442,8 +444,10 @@ function studentTest(row: Row): StudentRankedTest {
 export async function listRankedForStudent(
   db: Database,
   student: Profile,
+  config: PracticeAIConfig = {},
 ): Promise<StudentRankedTest[]> {
   requireStudent(student);
+  await closeExpired(db, student.schoolId, config, student.id);
   const rows = await db.all(
     `SELECT ${testColumns},${attemptColumns} FROM ranked_assignments a
      JOIN ranked_tests t ON t.id=a.test_id JOIN events e ON e.id=t.event_id
@@ -459,8 +463,10 @@ export async function rankedForStudent(
   db: Database,
   student: Profile,
   testId: unknown,
+  config: PracticeAIConfig = {},
 ): Promise<StudentRankedDetail> {
   requireStudent(student);
+  await closeExpired(db, student.schoolId, config, student.id);
   const row =
     typeof testId === 'string'
       ? await attemptFor(db, student.schoolId, 'a.test_id=? AND a.student_id=?', testId, student.id)
@@ -543,7 +549,13 @@ export async function saveRankedDraft(
 }
 
 /** Save the attempt with its objective score first, so a slow grading pass can never lose it. */
-async function finalize(db: Database, row: Row, answers: Answers, config: PracticeAIConfig) {
+async function finalize(
+  db: Database,
+  row: Row,
+  answers: Answers,
+  config: PracticeAIConfig,
+  gradeWritten = true,
+) {
   const id = String(row.assignment_id);
   const paper = JSON.parse(String(row.paper_json)) as RankedPaper;
   const gradable = gradablePaper(String(row.test_id), bareEvent(row.event_id), paper);
@@ -590,7 +602,42 @@ async function finalize(db: Database, row: Row, answers: Answers, config: Practi
     ],
     'immediate',
   );
-  if (result.pendingPoints) await gradeRankedWritten(db, id, config);
+  if (result.pendingPoints && gradeWritten) await gradeRankedWritten(db, id, config);
+}
+
+/**
+ * Close and grade attempts whose time ran out without a submission, from their last autosave.
+ * No scheduler runs here, so every read of ranked tests does this first. The grace period lets a
+ * browser that is still open hand in its own final answers.
+ */
+async function closeExpired(
+  db: Database,
+  schoolId: string,
+  config: PracticeAIConfig,
+  studentId?: string,
+) {
+  const open = await db.all(
+    `SELECT ${testColumns},${attemptColumns},t.paper_json,a.draft_json FROM ranked_assignments a
+     JOIN ranked_tests t ON t.id=a.test_id JOIN events e ON e.id=t.event_id
+     WHERE t.school_id=? AND a.started_at IS NOT NULL AND a.submitted_at IS NULL
+     ${studentId ? 'AND a.student_id=?' : ''}`,
+    ...(studentId ? [schoolId, studentId] : [schoolId]),
+  );
+  const expired = open.filter((row) => Date.now() > Date.parse(deadlineOf(row)!) + GRACE_MS);
+  for (const [index, row] of expired.entries()) {
+    try {
+      await finalize(
+        db,
+        row,
+        row.draft_json ? (JSON.parse(String(row.draft_json)) as Answers) : {},
+        { ...config, signal: config.signal ?? AbortSignal.timeout(20_000) },
+        // Keep the page responsive: written answers of further attempts wait for "Grade written answers".
+        index < 2,
+      );
+    } catch {
+      // A failed close is retried on the next read; it must never block the page.
+    }
+  }
 }
 
 async function saveResult(db: Database, id: string, result: PracticeResult, previous: string) {

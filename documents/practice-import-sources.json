@@ -1596,5 +1596,95 @@
     "paperPath": "output/practice-research/division-c/cfff05e3e22f202958a4209cd0a0af047e67873708e411dec8880dd48964b7a4.pdf",
     "keyPath": "output/practice-research/division-c/44609d9161970e1e03b5c14c783019a7f13bbd8d562e2ddb7101f9611bfd7d85.pdf",
     "attachmentPaths": []
+  },
+  {
+    "id": "scioly-g5jcu2kgktg-c",
+    "sourceId": "G5jCu2kGkTg",
+    "sourceUrl": "https://scioly.org/tests/G5jCu2kGkTg",
+    "division": "C",
+    "eventId": "thermodynamics",
+    "competition": "Aviation Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/G5jCu2kGkTg",
+    "keyUrl": "https://scioly.org/tests/G5jCu2kGkTg",
+    "files": [
+      {
+        "name": "thermodynamics_2018_c_aviation_test.pdf",
+        "type": "test",
+        "size": 71476,
+        "sha256": "2219825bb1301d050044b92a7a197db6f327982b5313fa3df08ba841ce58f818"
+      },
+      {
+        "name": "thermodynamics_2018_c_aviation_key.pdf",
+        "type": "answer_key",
+        "size": 115837,
+        "sha256": "b79daacb410e0e67e6395719e505da533b35cb7ba581a418507e09c806337d02"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/2219825bb1301d050044b92a7a197db6f327982b5313fa3df08ba841ce58f818.pdf",
+    "keyPath": "output/practice-research/division-c/b79daacb410e0e67e6395719e505da533b35cb7ba581a418507e09c806337d02.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-najkggc-oem-c",
+    "sourceId": "NAJKGgC-OeM",
+    "sourceUrl": "https://scioly.org/tests/NAJKGgC-OeM",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/NAJKGgC-OeM",
+    "keyUrl": "https://scioly.org/tests/NAJKGgC-OeM",
+    "files": [
+      {
+        "name": "TEST_Dynamic_Planet_UCVTS_CSE2025.pdf",
+        "type": "test",
+        "size": 308710,
+        "sha256": "96fc6e73823fe98c550594794d1045f2bc351a7b49218b915866fe4ef3e6b705"
+      },
+      {
+        "name": "KEY_Dynamic_Planet_UCVTS_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 276744,
+        "sha256": "16cd6a6eeebb16aad4d4d42d7a09aa267e6f9712dfd4b29d594a85f71be7ed3b"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/96fc6e73823fe98c550594794d1045f2bc351a7b49218b915866fe4ef3e6b705.pdf",
+    "keyPath": "output/practice-research/division-c/16cd6a6eeebb16aad4d4d42d7a09aa267e6f9712dfd4b29d594a85f71be7ed3b.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-2dvbw1ll-v0-c",
+    "sourceId": "2DVBw1Ll-v0",
+    "sourceUrl": "https://scioly.org/tests/2DVBw1Ll-v0",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "competition": "SSSS",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/2DVBw1Ll-v0",
+    "keyUrl": "https://scioly.org/tests/2DVBw1Ll-v0",
+    "files": [
+      {
+        "name": "chemistrylab_2018_c_ssss-kenniky_test.pdf",
+        "type": "test",
+        "size": 179780,
+        "sha256": "d1b5fd20c44293fad32a4bdb1f895b859bbe9b6719254aee5aeb34eb2448797d"
+      },
+      {
+        "name": "chemistrylab_2018_c_ssss-kenniky_key.pdf",
+        "type": "answer_key",
+        "size": 223210,
+        "sha256": "5ab01770acc50984db36e4956083502308f03b5beb1a9ac850c62fe97753ebec"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/d1b5fd20c44293fad32a4bdb1f895b859bbe9b6719254aee5aeb34eb2448797d.pdf",
+    "keyPath": "output/practice-research/division-c/5ab01770acc50984db36e4956083502308f03b5beb1a9ac850c62fe97753ebec.pdf",
+    "attachmentPaths": []
   }
 ]

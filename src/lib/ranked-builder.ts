@@ -266,7 +266,7 @@ export async function buildRankedPaper(
     // Do not log provider payloads or credentials.
     throw new AppError(
       503,
-      'Gemini could not build the test just now. Nothing was saved. Please try again.',
+      'Akoizo could not build the test just now. Nothing was saved. Please try again.',
     );
   }
   // One source may supply most of a paper only when the others cannot fill it.

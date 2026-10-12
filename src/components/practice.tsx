@@ -583,8 +583,8 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                   : result.autoGradedAt
                     ? 'Auto Grade is saved for this attempt. Any unresolved answers need instructor review.'
                     : result.gradingBasis === 'ai-generated'
-                      ? 'Auto Grade generates reference answers for this paper, then checks your saved responses. Gemini is used only after you click. No additional practice credit is awarded.'
-                      : 'Multiple-choice, numerical, and recognized short answers are checked for free. Only after you click Auto Grade are unresolved written responses and their rubric sent to Gemini. No additional practice credit is awarded.'}
+                      ? 'Auto Grade generates reference answers for this paper, then checks your saved responses. Akoizo grades only after you click. No additional practice credit is awarded.'
+                      : 'Multiple-choice, numerical, and recognized short answers are checked for free. Only after you click Auto Grade does Akoizo grade unresolved written responses against their rubric. No additional practice credit is awarded.'}
               </p>
               {autoGradeError && (
                 <p className="form-error" role="alert">
@@ -762,8 +762,8 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               {!result && (
                 <div className="practice-submit">
                   <p>
-                    Written answers may be sent to Gemini with the test rubric for automatic
-                    grading. Avoid including personal information in your answers.
+                    Akoizo grades written answers automatically against the test rubric. Avoid
+                    including personal information in your answers.
                   </p>
                   <p>
                     {paper.questionCount - answered > 0

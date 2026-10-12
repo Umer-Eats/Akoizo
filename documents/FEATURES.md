@@ -26,6 +26,8 @@ Assigning reaches every student seated in that event on any team in one step, or
 
 Submission grades objective answers at once and written answers with Gemini against the rubric; anything Gemini cannot settle waits for the instructor. The student sees the score immediately. Their answers, the correct answers and feedback stay hidden, and are not sent to the browser, until the instructor releases results for that student. Each ranked test awards up to 100 ranking points (the rounded percentage) exactly once and counts toward dashboard totals. Verified by `tests/ranked.test.ts` and `scripts/ranked-browser-check.mjs`.
 
+**Analytics** is a further instructor tab. It compares every team in the school (and students not yet on a team) by accuracy, points, tests completed and assigned work done, charts weekly accuracy per team, and grids accuracy by event and team. Opening a team shows the same for its students: each student’s points, a weekly trend against the division, accuracy by event and student with seated students outlined, and a per-student breakdown (overall, multiple choice, written, practice, ranked, lessons, assigned work) for all events or one. Accuracy is points earned out of points graded; written answers awaiting review are excluded until scored. Data comes from `/api/analytics`, scoped to the instructor’s school. Verified by `tests/analytics.test.ts` and `scripts/analytics-browser-check.mjs`.
+
 The public rankings page displays only actual earned points with generated public learner names. It has an empty state until points exist. Practice submission does not award ranked points; ranked tests do. No fictional ranking remains.
 
 ## Catalog and sources

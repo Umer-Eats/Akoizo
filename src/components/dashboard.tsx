@@ -22,6 +22,7 @@ import {
   Copy,
   Check,
   Table,
+  ChartColumn,
 } from 'lucide-react';
 import {
   elementaryManualUrl,
@@ -52,6 +53,7 @@ import { DivisionCLabs } from './division-c-labs';
 import { RankedTestList } from './ranked';
 import { InstructorRanked } from './instructor-ranked';
 import { InstructorTeams } from './instructor-teams';
+import { InstructorAnalytics } from './instructor-analytics';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -699,9 +701,9 @@ export function SchoolPanel() {
 export function InstructorDashboard() {
   const { profile, request } = useAuth();
   const { data, error, loading, refresh } = useDashboard();
-  const [tab, setTab] = useState<'school' | 'assignments' | 'ranked' | 'teams' | 'progress'>(
-    'assignments',
-  );
+  const [tab, setTab] = useState<
+    'school' | 'assignments' | 'ranked' | 'teams' | 'analytics' | 'progress'
+  >('assignments');
   const [studentId, setStudentId] = useState('');
   const [pending, setPending] = useState('');
   const [removeError, setRemoveError] = useState('');
@@ -750,6 +752,7 @@ export function InstructorDashboard() {
                 ['assignments', 'Assignments', FileText],
                 ['ranked', 'Ranked Tests', Trophy],
                 ['teams', 'Teams', Table],
+                ['analytics', 'Analytics', ChartColumn],
                 ['progress', 'Student Progress', Users],
               ] as const
             ).map(([id, label, Icon]) => (
@@ -772,8 +775,10 @@ export function InstructorDashboard() {
             {tab === 'assignments' &&
               'Pick an event, open a converted test, and assign it to students.'}
             {tab === 'ranked' &&
-              'Build a ranked test with Gemini, assign it by event, and release results.'}
+              'Let Akoizo build a ranked test, assign it by event, and release results.'}
             {tab === 'teams' && 'Name your teams and seat students and partners in each event.'}
+            {tab === 'analytics' &&
+              'Compare accuracy, progress and points across teams, then open a team.'}
             {tab === 'progress' && 'Review each student’s next steps and event progress.'}
           </p>
         </aside>
@@ -789,6 +794,7 @@ export function InstructorDashboard() {
           )}
           {tab === 'ranked' && <InstructorRanked students={data.students} onChanged={refresh} />}
           {tab === 'teams' && <InstructorTeams students={data.students} selections={selections} />}
+          {tab === 'analytics' && <InstructorAnalytics />}
           {tab === 'progress' && (
             <>
               <PracticeReviews />

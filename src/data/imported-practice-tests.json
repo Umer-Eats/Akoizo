@@ -75819,5 +75819,1620 @@
     "alignment": "The written thermodynamics core overlaps the 2027 rules; this historical written paper does not replace construction or device testing.",
     "questionCount": 21,
     "maxScore": 120
+  },
+  {
+    "id": "scioly-g5jcu2kgktg-c",
+    "sourceId": "G5jCu2kGkTg",
+    "sourceUrl": "https://scioly.org/tests/G5jCu2kGkTg",
+    "division": "C",
+    "eventId": "thermodynamics",
+    "competition": "Raisbeck Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "/practice/scioly-g5jcu2kgktg-c/test.pdf",
+    "keyUrl": "/practice/scioly-g5jcu2kgktg-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-11",
+    "levelEvidence": null,
+    "minutes": 25,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/thermodynamics.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "Published section weights: temperature 13, thermal calculations 14, laws/processes 10 and history matching 8, totaling 45 written points. History repeats question numbers 15–17; these eight items receive H-prefixed identifiers. The cover dates December 2, 2017; the archive indexes 2018. Laws question 15 is corrected from the key’s incomplete B (“Only when energy is”) to the complete C (work or other organized energy input). Physical water-run scoring is excluded.",
+    "questions": [
+      {
+        "id": "1",
+        "label": "Question 1",
+        "prompt": "What are the units of specific heat capacity (1 POINT)",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "J/g° C" },
+          { "id": "B", "text": "J g/°C" },
+          { "id": "C", "text": "J g °C" },
+          { "id": "D", "text": "1/J g °C" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "2",
+        "label": "Question 2",
+        "prompt": "Find Celsius equivalent of 41.2°F (2 POINTS)",
+        "type": "frq",
+        "points": 2,
+        "page": 2,
+        "context": "Thermodynamics C Division Raisbeck Invitational December 2, 2017 Team Number: __________ School Name: _________________________________________ Team Name: _________________________________________ Team Members: ________________________________________ ____________________________________________ \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ Read each question carefully. Be sure to show work, include proper units and remember to report answer with proper significant figures. Part i. Temperature (13 POINTS) 1. ________What are the units of specific heat capacity (1 POINT) A. J/g° C B. J g/°C C. J g °C D. 1/J g °C Convert the following temperatures: 2. Find Celsius equivalent of 41.2°F (2 POINTS) 3. Convert 36.60°C to Fahrenheit. (2 POINTS) 4. Convert 26°F to Kelvin. (4 POINTS) 5. A new temperature scale is to be used where freezing and boiling temperature of water is at -100° N and 100° N respectively. Calculate Absolute Zero in °N (4 POINTS) \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ ii. Thermal calculations (2 POINTS EACH = 14 POINTS): 6. ________ A 15.75 g piece of iron absorbs 1086.75 joules of heat energy, and its temperature changes from 25°C to 175°C. Calculate the specific heat capacity of iron. A. 0.46 J/g°C B. 1.65 J/g°C C. 2.59 J/g°C D. 3.39 J/g°C 7. ________A 12.5 gram piece of iron (c = 0.450 J/g°C) has an initial temperature of 1.0 x 102°C. When the iron loses exactly 25.0 J of energy, its final temperature is _________, and is an ___________ process. A. -4.4 °C, exothermic B. -4.4 °C, endothermic C. 95.6 °C, exothermic D. 95.6 °C, endothermic 8. ________How much heat is needed to raise the temperature of 10.0 g of aluminum from 22.0°C to 55.0°C, if the specific heat of aluminum is 0.900 J/g °C? A. 297 J B. 0.003 J C. 297 J/g°C D. 0.003 J/g°C 9. ________Entropy will generally increase when I. A molecule is broken into two or more smaller molecules. II. A reaction occurs that results in an increase in the number of moles of gas. III. A solid changes to a liquid. IV. A liquid changes to a gas. A. I only B. II only C. III only D. IV only E. I, II, III, and IV Predict whether condition would be spontaneous. 10. Formation of H2O2: 2H2O(l) + O2(g) à 2H2O2(l) SPONTANEOUS NOT SPONTANEOUS 11. Formation of a salt water solution SPONTANEOUS NOT SPONTANEOUS 12. Formation of starch by bonding glucose molecules. SPONTANEOUS NOT SPONTANEOUS"
+      },
+      {
+        "id": "3",
+        "label": "Question 3",
+        "prompt": "Convert 36.60°C to Fahrenheit. (2 POINTS)",
+        "type": "frq",
+        "points": 2,
+        "page": 2,
+        "context": "Thermodynamics C Division Raisbeck Invitational December 2, 2017 Team Number: __________ School Name: _________________________________________ Team Name: _________________________________________ Team Members: ________________________________________ ____________________________________________ \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ Read each question carefully. Be sure to show work, include proper units and remember to report answer with proper significant figures. Part i. Temperature (13 POINTS) 1. ________What are the units of specific heat capacity (1 POINT) A. J/g° C B. J g/°C C. J g °C D. 1/J g °C Convert the following temperatures: 2. Find Celsius equivalent of 41.2°F (2 POINTS) 3. Convert 36.60°C to Fahrenheit. (2 POINTS) 4. Convert 26°F to Kelvin. (4 POINTS) 5. A new temperature scale is to be used where freezing and boiling temperature of water is at -100° N and 100° N respectively. Calculate Absolute Zero in °N (4 POINTS) \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ ii. Thermal calculations (2 POINTS EACH = 14 POINTS): 6. ________ A 15.75 g piece of iron absorbs 1086.75 joules of heat energy, and its temperature changes from 25°C to 175°C. Calculate the specific heat capacity of iron. A. 0.46 J/g°C B. 1.65 J/g°C C. 2.59 J/g°C D. 3.39 J/g°C 7. ________A 12.5 gram piece of iron (c = 0.450 J/g°C) has an initial temperature of 1.0 x 102°C. When the iron loses exactly 25.0 J of energy, its final temperature is _________, and is an ___________ process. A. -4.4 °C, exothermic B. -4.4 °C, endothermic C. 95.6 °C, exothermic D. 95.6 °C, endothermic 8. ________How much heat is needed to raise the temperature of 10.0 g of aluminum from 22.0°C to 55.0°C, if the specific heat of aluminum is 0.900 J/g °C? A. 297 J B. 0.003 J C. 297 J/g°C D. 0.003 J/g°C 9. ________Entropy will generally increase when I. A molecule is broken into two or more smaller molecules. II. A reaction occurs that results in an increase in the number of moles of gas. III. A solid changes to a liquid. IV. A liquid changes to a gas. A. I only B. II only C. III only D. IV only E. I, II, III, and IV Predict whether condition would be spontaneous. 10. Formation of H2O2: 2H2O(l) + O2(g) à 2H2O2(l) SPONTANEOUS NOT SPONTANEOUS 11. Formation of a salt water solution SPONTANEOUS NOT SPONTANEOUS 12. Formation of starch by bonding glucose molecules. SPONTANEOUS NOT SPONTANEOUS"
+      },
+      {
+        "id": "4",
+        "label": "Question 4",
+        "prompt": "Convert 26°F to Kelvin. (4 POINTS)",
+        "type": "frq",
+        "points": 4,
+        "page": 2,
+        "context": "Thermodynamics C Division Raisbeck Invitational December 2, 2017 Team Number: __________ School Name: _________________________________________ Team Name: _________________________________________ Team Members: ________________________________________ ____________________________________________ \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ Read each question carefully. Be sure to show work, include proper units and remember to report answer with proper significant figures. Part i. Temperature (13 POINTS) 1. ________What are the units of specific heat capacity (1 POINT) A. J/g° C B. J g/°C C. J g °C D. 1/J g °C Convert the following temperatures: 2. Find Celsius equivalent of 41.2°F (2 POINTS) 3. Convert 36.60°C to Fahrenheit. (2 POINTS) 4. Convert 26°F to Kelvin. (4 POINTS) 5. A new temperature scale is to be used where freezing and boiling temperature of water is at -100° N and 100° N respectively. Calculate Absolute Zero in °N (4 POINTS) \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ ii. Thermal calculations (2 POINTS EACH = 14 POINTS): 6. ________ A 15.75 g piece of iron absorbs 1086.75 joules of heat energy, and its temperature changes from 25°C to 175°C. Calculate the specific heat capacity of iron. A. 0.46 J/g°C B. 1.65 J/g°C C. 2.59 J/g°C D. 3.39 J/g°C 7. ________A 12.5 gram piece of iron (c = 0.450 J/g°C) has an initial temperature of 1.0 x 102°C. When the iron loses exactly 25.0 J of energy, its final temperature is _________, and is an ___________ process. A. -4.4 °C, exothermic B. -4.4 °C, endothermic C. 95.6 °C, exothermic D. 95.6 °C, endothermic 8. ________How much heat is needed to raise the temperature of 10.0 g of aluminum from 22.0°C to 55.0°C, if the specific heat of aluminum is 0.900 J/g °C? A. 297 J B. 0.003 J C. 297 J/g°C D. 0.003 J/g°C 9. ________Entropy will generally increase when I. A molecule is broken into two or more smaller molecules. II. A reaction occurs that results in an increase in the number of moles of gas. III. A solid changes to a liquid. IV. A liquid changes to a gas. A. I only B. II only C. III only D. IV only E. I, II, III, and IV Predict whether condition would be spontaneous. 10. Formation of H2O2: 2H2O(l) + O2(g) à 2H2O2(l) SPONTANEOUS NOT SPONTANEOUS 11. Formation of a salt water solution SPONTANEOUS NOT SPONTANEOUS 12. Formation of starch by bonding glucose molecules. SPONTANEOUS NOT SPONTANEOUS"
+      },
+      {
+        "id": "5",
+        "label": "Question 5",
+        "prompt": "A new temperature scale is to be used where freezing and boiling temperature of water is at -100° N\n and 100° N respectively. Calculate Absolute Zero in °N (4 POINTS)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\f\n\nThermodynamics, Written Test TEAM#: C-_______________\n\nii. Thermal calculations (2 POINTS EACH = 14 POINTS):",
+        "type": "frq",
+        "points": 4,
+        "page": 2,
+        "context": "Thermodynamics C Division Raisbeck Invitational December 2, 2017 Team Number: __________ School Name: _________________________________________ Team Name: _________________________________________ Team Members: ________________________________________ ____________________________________________ \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ Read each question carefully. Be sure to show work, include proper units and remember to report answer with proper significant figures. Part i. Temperature (13 POINTS) 1. ________What are the units of specific heat capacity (1 POINT) A. J/g° C B. J g/°C C. J g °C D. 1/J g °C Convert the following temperatures: 2. Find Celsius equivalent of 41.2°F (2 POINTS) 3. Convert 36.60°C to Fahrenheit. (2 POINTS) 4. Convert 26°F to Kelvin. (4 POINTS) 5. A new temperature scale is to be used where freezing and boiling temperature of water is at -100° N and 100° N respectively. Calculate Absolute Zero in °N (4 POINTS) \nThermodynamics, Written Test TEAM#: C-_______________ Raisbeck Invitational, Dec 2, 2017 Student names: __________________________ _____________________ ii. Thermal calculations (2 POINTS EACH = 14 POINTS): 6. ________ A 15.75 g piece of iron absorbs 1086.75 joules of heat energy, and its temperature changes from 25°C to 175°C. Calculate the specific heat capacity of iron. A. 0.46 J/g°C B. 1.65 J/g°C C. 2.59 J/g°C D. 3.39 J/g°C 7. ________A 12.5 gram piece of iron (c = 0.450 J/g°C) has an initial temperature of 1.0 x 102°C. When the iron loses exactly 25.0 J of energy, its final temperature is _________, and is an ___________ process. A. -4.4 °C, exothermic B. -4.4 °C, endothermic C. 95.6 °C, exothermic D. 95.6 °C, endothermic 8. ________How much heat is needed to raise the temperature of 10.0 g of aluminum from 22.0°C to 55.0°C, if the specific heat of aluminum is 0.900 J/g °C? A. 297 J B. 0.003 J C. 297 J/g°C D. 0.003 J/g°C 9. ________Entropy will generally increase when I. A molecule is broken into two or more smaller molecules. II. A reaction occurs that results in an increase in the number of moles of gas. III. A solid changes to a liquid. IV. A liquid changes to a gas. A. I only B. II only C. III only D. IV only E. I, II, III, and IV Predict whether condition would be spontaneous. 10. Formation of H2O2: 2H2O(l) + O2(g) à 2H2O2(l) SPONTANEOUS NOT SPONTANEOUS 11. Formation of a salt water solution SPONTANEOUS NOT SPONTANEOUS 12. Formation of starch by bonding glucose molecules. SPONTANEOUS NOT SPONTANEOUS"
+      },
+      {
+        "id": "6",
+        "label": "Question 6",
+        "prompt": "A 15.75 g piece of iron absorbs 1086.75 joules of heat energy, and its temperature changes from\n 25°C to 175°C. Calculate the specific heat capacity of iron.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "0.46 J/g°C" },
+          { "id": "B", "text": "1.65 J/g°C" },
+          { "id": "C", "text": "2.59 J/g°C" },
+          { "id": "D", "text": "3.39 J/g°C" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "7",
+        "label": "Question 7",
+        "prompt": "A 12.5 gram piece of iron (c = 0.450 J/g°C) has an initial temperature of 1.0 x 102°C. When the\n iron loses exactly 25.0 J of energy, its final temperature is _________, and is an ___________ process.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "-4.4 °C, exothermic" },
+          { "id": "B", "text": "-4.4 °C, endothermic" },
+          { "id": "C", "text": "95.6 °C, exothermic" },
+          { "id": "D", "text": "95.6 °C, endothermic" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "8",
+        "label": "Question 8",
+        "prompt": "How much heat is needed to raise the temperature of 10.0 g of aluminum from 22.0°C to 55.0°C,\n if the specific heat of aluminum is 0.900 J/g °C?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "297 J" },
+          { "id": "B", "text": "0.003 J" },
+          { "id": "C", "text": "297 J/g°C" },
+          { "id": "D", "text": "0.003 J/g°C" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "9",
+        "label": "Question 9",
+        "prompt": "Entropy will generally increase when\n I. A molecule is broken into two or more smaller molecules.\n II. A reaction occurs that results in an increase in the number of moles of gas.\n III. A solid changes to a liquid.\n IV. A liquid changes to a gas.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "I only" },
+          { "id": "B", "text": "II only" },
+          { "id": "C", "text": "III only" },
+          { "id": "D", "text": "IV only" },
+          { "id": "E", "text": "I, II, III, and IV" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "10",
+        "label": "Question 10",
+        "prompt": "Formation of H2O2: 2H2O(l) + O2(g) à 2H2O2(l)",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "S", "text": "Spontaneous" },
+          { "id": "N", "text": "Not spontaneous" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "11",
+        "label": "Question 11",
+        "prompt": "Formation of a salt water solution",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "S", "text": "Spontaneous" },
+          { "id": "N", "text": "Not spontaneous" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "12",
+        "label": "Question 12",
+        "prompt": "Formation of starch by bonding glucose molecules.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "S", "text": "Spontaneous" },
+          { "id": "N", "text": "Not spontaneous" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "13",
+        "label": "Question 13",
+        "prompt": "What condition is necessary for a process to be adiabatic?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Heat enters, but doesn’t leave while process occurs." },
+          { "id": "B", "text": "Heat doesn’t enter, but leaves while the process occurs." },
+          { "id": "C", "text": "Heat enters and leaves while process occurs." },
+          { "id": "D", "text": "No heat enters or eaves while the process occurs." }
+        ],
+        "points": 2,
+        "page": 4
+      },
+      {
+        "id": "14",
+        "label": "Question 14",
+        "prompt": "How does the Second Law of Thermodynamics relate to the direction of heat flow?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "It defines that heat flow direction in a system is constant." },
+          { "id": "B", "text": "It defines that heat flow direction is conserved." },
+          {
+            "id": "C",
+            "text": "It defines that heat flow direction moves from areas with more heat to areas with less heat."
+          },
+          {
+            "id": "D",
+            "text": "It defines that heat flow direction moves from areas with less heat to areas with more heat."
+          }
+        ],
+        "points": 2,
+        "page": 4
+      },
+      {
+        "id": "15",
+        "label": "Question 15",
+        "prompt": "Under what circumstances can entropy decrease in a system?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Only when NO work is done on a system." },
+          { "id": "B", "text": "Only when energy is" },
+          { "id": "C", "text": "Only with work or other organized energy input" },
+          { "id": "D", "text": "Entropy can never decrease in a system." }
+        ],
+        "points": 2,
+        "page": 4
+      },
+      {
+        "id": "16",
+        "label": "Question 16",
+        "prompt": "When work is done on a system, internal energy __________________ a nd temperature _______________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "increases, increases" },
+          { "id": "B", "text": "decreases, decreases" },
+          { "id": "C", "text": "increases, decreases" },
+          { "id": "D", "text": "decreases, increases" }
+        ],
+        "points": 2,
+        "page": 4
+      },
+      {
+        "id": "17",
+        "label": "Question 17",
+        "prompt": "When air is adiabatically compressed, temperature ___________. When air adiabatically expands,\n temperature _____________.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "increases, increases" },
+          { "id": "B", "text": "decreases, decreases" },
+          { "id": "C", "text": "increases, decreases" },
+          { "id": "D", "text": "decreases, increases" }
+        ],
+        "points": 2,
+        "page": 4
+      },
+      {
+        "id": "H-15",
+        "label": "Question H-15",
+        "prompt": "Match Sir John Leslie to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-16",
+        "label": "Question H-16",
+        "prompt": "Match Robert Boyle to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-17",
+        "label": "Question H-17",
+        "prompt": "Match Thomas Savery to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-18",
+        "label": "Question H-18",
+        "prompt": "Match Joseph Black to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-19",
+        "label": "Question H-19",
+        "prompt": "Match Emile Clapeyron to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-20",
+        "label": "Question H-20",
+        "prompt": "Match Walter Nernst to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-21",
+        "label": "Question H-21",
+        "prompt": "Match Stephen Hawking to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "H-22",
+        "label": "Question H-22",
+        "prompt": "Match Nicolas Sadi Carnot to a thermodynamic contribution.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Invented the first commercial steam engine" },
+          { "id": "B", "text": "Introduced latent heat and specific heat" },
+          { "id": "C", "text": "Recognized the importance of blackbody radiation" },
+          { "id": "D", "text": "Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws" },
+          { "id": "E", "text": "Connected electrochemical cell voltage to thermodynamics" },
+          {
+            "id": "F",
+            "text": "Gas volume is inversely proportional to pressure in a closed system at constant temperature"
+          },
+          { "id": "G", "text": "Considered the father of thermodynamics" },
+          { "id": "H", "text": "Used thermodynamics to predict black-hole behavior" }
+        ],
+        "points": 1,
+        "page": 4
+      }
+    ],
+    "keys": {
+      "1": { "correctOption": "A" },
+      "2": {
+        "criteria": [
+          { "id": "answer", "answer": "(41.2−32)×5/9 = 5.11 °C.", "points": 2, "accepted": [] }
+        ]
+      },
+      "3": {
+        "criteria": [
+          { "id": "answer", "answer": "36.60×9/5+32 = 97.88 °F.", "points": 2, "accepted": [] }
+        ]
+      },
+      "4": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "26 °F = −3.33 °C; adding 273.15 gives approximately 269.82 K (the key rounds to 269.9 K).",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "5": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The linear relation is N=2C−100; at −273.15 °C, absolute zero is −646.3 °N.",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "6": { "correctOption": "A" },
+      "7": { "correctOption": "C" },
+      "8": { "correctOption": "A" },
+      "9": { "correctOption": "E" },
+      "10": { "correctOption": "N" },
+      "11": { "correctOption": "S" },
+      "12": { "correctOption": "N" },
+      "13": { "correctOption": "D" },
+      "14": { "correctOption": "C" },
+      "15": { "correctOption": "C" },
+      "16": { "correctOption": "A" },
+      "17": { "correctOption": "C" },
+      "H-15": { "correctOption": "C" },
+      "H-16": { "correctOption": "F" },
+      "H-17": { "correctOption": "A" },
+      "H-18": { "correctOption": "B" },
+      "H-19": { "correctOption": "D" },
+      "H-20": { "correctOption": "E" },
+      "H-21": { "correctOption": "H" },
+      "H-22": { "correctOption": "G" }
+    },
+    "difficulty": "Medium",
+    "difficultyReason": "Temperature conversions, specific heat, spontaneity and thermodynamic processes combine routine calculations with conceptual recall.",
+    "topics": [
+      "Temperature scales",
+      "Specific heat",
+      "Entropy",
+      "Thermodynamic processes",
+      "History of thermodynamics"
+    ],
+    "topicMatch": "current",
+    "alignment": "The written thermodynamics core overlaps the 2027 rules; the original device run is not scored in this online paper.",
+    "questionCount": 25,
+    "maxScore": 45
+  },
+  {
+    "id": "scioly-najkggc-oem-c",
+    "sourceId": "NAJKGgC-OeM",
+    "sourceUrl": "https://scioly.org/tests/NAJKGgC-OeM",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "competition": "Captain’s Summer Exchange — Union County Vocational Technical Schools",
+    "year": 2025,
+    "level": null,
+    "paperUrl": "/practice/scioly-najkggc-oem-c/test.pdf",
+    "keyUrl": "/practice/scioly-najkggc-oem-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-11",
+    "levelEvidence": null,
+    "minutes": 50,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/dynamic-planet.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "Thirty one-point MCQs and seven written problems with published subpart weights would total 94. MCQ 5 incorrectly asks about rapid pressure change while keying the density-defined pycnocline; it is retained as an unscored correction, leaving 93 points. Written question 7’s six diagram labels are transcribed from the published key image. The cover dates CSE 2025 while the archive indexes 2026.",
+    "questions": [
+      {
+        "id": "MC-1",
+        "label": "Question MC-1",
+        "prompt": "What is the boundary called when plates slide next to each other in opposite directions?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Convergent boundary" },
+          { "id": "B", "text": "Divergent boundary" },
+          { "id": "C", "text": "Transform boundary" },
+          { "id": "D", "text": "Oscillating boundary" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-2",
+        "label": "Question MC-2",
+        "prompt": "The mid-atlantic ridge is an example of ocean-continent divergence.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "True" },
+          { "id": "B", "text": "False" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-3",
+        "label": "Question MC-3",
+        "prompt": "Which of these convergent boundaries cause earthquakes?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Ocean-continent convergence" },
+          { "id": "B", "text": "Ocean-ocean convergence" },
+          { "id": "C", "text": "Continent-continent convergence" },
+          { "id": "D", "text": "All of the above" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-4",
+        "label": "Question MC-4",
+        "prompt": "What kind of reef typically will form after a volcanic island subsides below the sea level?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Fringing reef" },
+          { "id": "B", "text": "Barrier reef" },
+          { "id": "C", "text": "Atoll reef" },
+          { "id": "D", "text": "Patch reef" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-5",
+        "label": "Question MC-5",
+        "prompt": "Which layer structure of the ocean is associated with rapid pressure change? Explain the terminology error. Unscored correction.",
+        "type": "frq",
+        "points": 0,
+        "page": 2,
+        "context": "Dynamic Planet Practice Test CSE 2025 Union County Vocational Technical Schools (NJ) \n \nOceanography \nMultiple Choice Section \n Choose the correct answer for each of the following questions. Each question is worth 1 point. 1. What is the boundary called when plates slide next to each other in opposite directions? a. Convergent boundary b. Divergent boundary c. Transform boundary d. Oscillating boundary 2. The mid-atlantic ridge is an example of ocean-continent divergence. a. True b. False 3. Which of these convergent boundaries cause earthquakes? a. Ocean-continent convergence b. Ocean-ocean convergence c. Continent-continent convergence d. All of the above 4. What kind of reef typically will form after a volcanic island subsides below the sea level? a. Fringing reef b. Barrier reef c. Atoll reef d. Patch reef 5. Which layer structure of the ocean is associated with rapid pressure change? a. Thermocline b. Deep ocean c. Surface mixed layer d. Pycnocline 6. What type of tide occurs when the sun and moon make right angles with each other? a. Neap tides b. Spring tides c. Diurnal tides d. Mixed semidiurnal 7. Which water collection method is ideal for collecting water in discrete amounts at a programmed \ndepth\n \nand\n \nfor\n \nobserving\n \nsalinity\n \nand\n \nnutrient\n \nconcentrations?\n a. CTD profilers b. Niskin bottles c. Stand-alone pump systems (SAPS) d. Surface water sampling 8. When defining wave characteristics, which of the following terms refers to the point where the \nwave\n \nbreaks?\n \na. Surf b. Swell c. Fetch d. Tsunami 9. What causes the gravitational pull for tides? a. Moon b. Sun c. Sun and moon d. Mars and the moon 10. Which ion is most abundant in seawater? a. Magnesium b. Chloride c. Potassium d. Sulfate 11. What type of radiation primarily heats the ocean’s surface? a. Longwave infrared b. Ultraviolet c. Shortwave solar d. Gamma rays 12. Which of the following describes the typical three-layer structure of ocean water? a. Thermocline, halocline, pycnocline b. Mixed layer, thermocline, deep layer c. Epipelagic, mesopelagic, bathypelagic d. Surface zone, oxygen minimum zone, deep sea 13. Which type of plate boundary is associated with deep ocean trenches? a. Transform b. Divergent c. Convergent d. Passive 14. Nitrate concentrations are usually higher: a. At the surface b. In the deep ocean c. Near coral reefs d. Around hydrothermal vents 15. Which of these factors do not affect wave size? a. Wind Speed b. Fetch c. Salinity d. Duration of wind 16. Which direction does the Coriolis effect deflect surface currents in the Northern Hemisphere? a. Left b. Downward c. Right d. Westward"
+      },
+      {
+        "id": "MC-6",
+        "label": "Question MC-6",
+        "prompt": "What type of tide occurs when the sun and moon make right angles with each other?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Neap tides" },
+          { "id": "B", "text": "Spring tides" },
+          { "id": "C", "text": "Diurnal tides" },
+          { "id": "D", "text": "Mixed semidiurnal" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-7",
+        "label": "Question MC-7",
+        "prompt": "Which water collection method is ideal for collecting water in discrete amounts at a programmed\n depth and for observing salinity and nutrient concentrations?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "CTD profilers" },
+          { "id": "B", "text": "Niskin bottles" },
+          { "id": "C", "text": "Stand-alone pump systems (SAPS)" },
+          { "id": "D", "text": "Surface water sampling" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-8",
+        "label": "Question MC-8",
+        "prompt": "When defining wave characteristics, which of the following terms refers to the point where the\n wave breaks?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Surf" },
+          { "id": "B", "text": "Swell" },
+          { "id": "C", "text": "Fetch" },
+          { "id": "D", "text": "Tsunami" }
+        ],
+        "points": 1,
+        "page": 2
+      },
+      {
+        "id": "MC-9",
+        "label": "Question MC-9",
+        "prompt": "What causes the gravitational pull for tides?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Moon" },
+          { "id": "B", "text": "Sun" },
+          { "id": "C", "text": "Sun and moon" },
+          { "id": "D", "text": "Mars and the moon" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-10",
+        "label": "Question MC-10",
+        "prompt": "Which ion is most abundant in seawater?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Magnesium" },
+          { "id": "B", "text": "Chloride" },
+          { "id": "C", "text": "Potassium" },
+          { "id": "D", "text": "Sulfate" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-11",
+        "label": "Question MC-11",
+        "prompt": "What type of radiation primarily heats the ocean’s surface?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Longwave infrared" },
+          { "id": "B", "text": "Ultraviolet" },
+          { "id": "C", "text": "Shortwave solar" },
+          { "id": "D", "text": "Gamma rays" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-12",
+        "label": "Question MC-12",
+        "prompt": "Which of the following describes the typical three-layer structure of ocean water?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Thermocline, halocline, pycnocline" },
+          { "id": "B", "text": "Mixed layer, thermocline, deep layer" },
+          { "id": "C", "text": "Epipelagic, mesopelagic, bathypelagic" },
+          { "id": "D", "text": "Surface zone, oxygen minimum zone, deep sea" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-13",
+        "label": "Question MC-13",
+        "prompt": "Which type of plate boundary is associated with deep ocean trenches?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Transform" },
+          { "id": "B", "text": "Divergent" },
+          { "id": "C", "text": "Convergent" },
+          { "id": "D", "text": "Passive" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-14",
+        "label": "Question MC-14",
+        "prompt": "Nitrate concentrations are usually higher:",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "At the surface" },
+          { "id": "B", "text": "In the deep ocean" },
+          { "id": "C", "text": "Near coral reefs" },
+          { "id": "D", "text": "Around hydrothermal vents" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-15",
+        "label": "Question MC-15",
+        "prompt": "Which of these factors do not affect wave size?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Wind Speed" },
+          { "id": "B", "text": "Fetch" },
+          { "id": "C", "text": "Salinity" },
+          { "id": "D", "text": "Duration of wind" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-16",
+        "label": "Question MC-16",
+        "prompt": "Which direction does the Coriolis effect deflect surface currents in the Northern Hemisphere?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Left" },
+          { "id": "B", "text": "Downward" },
+          { "id": "C", "text": "Right" },
+          { "id": "D", "text": "Westward" }
+        ],
+        "points": 1,
+        "page": 3
+      },
+      {
+        "id": "MC-17",
+        "label": "Question MC-17",
+        "prompt": "Which of the following are not one of the five major gyres?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Indian Ocean Gyre (Majid Gyre)" },
+          { "id": "B", "text": "North Atlantic Gyre (Columbus Gyre)" },
+          { "id": "C", "text": "South Pacific Gyre (Heyerdahl Gyre)" },
+          { "id": "D", "text": "All of the above are part of the five major gyres" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-18",
+        "label": "Question MC-18",
+        "prompt": "What causes the formation of atolls?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Coral growing over subsiding volcanic islands" },
+          { "id": "B", "text": "Earthquakes that raise coral reefs" },
+          { "id": "C", "text": "Coral reefs merging with each other" },
+          { "id": "D", "text": "Tectonic uplift exposing reef systems" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-19",
+        "label": "Question MC-19",
+        "prompt": "Tsunamis are caused primarily by:",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Seismic activity" },
+          { "id": "B", "text": "Wind" },
+          { "id": "C", "text": "Tidal current" },
+          { "id": "D", "text": "Longshore drift" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-20",
+        "label": "Question MC-20",
+        "prompt": "Rip currents flow:",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Out to sea perpendicular to shore" },
+          { "id": "B", "text": "Along the shore" },
+          { "id": "C", "text": "Parallel to wave crests" },
+          { "id": "D", "text": "In circular gyres" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-21",
+        "label": "Question MC-21",
+        "prompt": "The Atlantic Meridional Overturning Circulation does which of the following?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Brings cold water east and warm water west" },
+          { "id": "B", "text": "Brings cold water west and warm water east" },
+          { "id": "C", "text": "Brings cold water north and warm water south" },
+          { "id": "D", "text": "Brings cold water south and warm water north" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-22",
+        "label": "Question MC-22",
+        "prompt": "A geostrophic balance is when which forces are in equilibrium?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Pressure gradient force and coriolis force" },
+          { "id": "B", "text": "Pressure gradient force and Geostrophic wind force" },
+          { "id": "C", "text": "Coriolis force and centripetal force" },
+          { "id": "D", "text": "Centripetal force and Geostrophic wind force" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-23",
+        "label": "Question MC-23",
+        "prompt": "Seawater density is affected by which of the following factors?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Temperature and potassium ions and coriolis forces" },
+          { "id": "B", "text": "Temperature and salinity and pressure" },
+          { "id": "C", "text": "Salinity and geostrophic force and sodium bicarbonate ions" },
+          { "id": "D", "text": "Coriolis forces and temperature and potassium ions" }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-24",
+        "label": "Question MC-24",
+        "prompt": "Which of the following best distinguishes an active continental margin from a passive continental\n margin?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "Active margins are found in the middle of tectonic plates, while passive margins are at\n plate boundaries."
+          },
+          {
+            "id": "B",
+            "text": "Active margins are characterized by broad, flat shelves, while passive margins are deep\n trenches."
+          },
+          {
+            "id": "C",
+            "text": "Active margins are associated with tectonic activity like earthquakes and volcanism,\n while passive margins are geologically stable."
+          },
+          {
+            "id": "D",
+            "text": "Passive margins typically associated with tectonic activity like earthquakes and\n volcanism, while active margins are geologically stable."
+          }
+        ],
+        "points": 1,
+        "page": 4
+      },
+      {
+        "id": "MC-25",
+        "label": "Question MC-25",
+        "prompt": "Which of the following has a horizontal pattern of distribution, increasing in concentration near\n the coastline?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Metals" },
+          { "id": "B", "text": "Sodium bicarbonate" },
+          { "id": "C", "text": "Oxygen" },
+          { "id": "D", "text": "Nutrients" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "MC-26",
+        "label": "Question MC-26",
+        "prompt": "Tidal resonance is affected by which of the following factors?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Centrifugal force" },
+          { "id": "B", "text": "Deep ocean trenches" },
+          { "id": "C", "text": "Basin geometry" },
+          { "id": "D", "text": "Coriolis force" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "MC-27",
+        "label": "Question MC-27",
+        "prompt": "Which corer tool is ideal for studying benthic organisms?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Box corer" },
+          { "id": "B", "text": "Piston corer" },
+          { "id": "C", "text": "Multicorer" },
+          { "id": "D", "text": "Gravity corer" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "MC-28",
+        "label": "Question MC-28",
+        "prompt": "What do tidal bores do?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Create estuaries" },
+          { "id": "B", "text": "Decrease salinity" },
+          { "id": "C", "text": "Form barrier reefs" },
+          { "id": "D", "text": "Reverses the direction of a river" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "MC-29",
+        "label": "Question MC-29",
+        "prompt": "Which ocean circulation pattern fuels the growth of phytoplankton?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Atlantic Meridional Overturning Circulation" },
+          { "id": "B", "text": "Upwelling" },
+          { "id": "C", "text": "El Nino" },
+          { "id": "D", "text": "Pacific Decadal Oscillation" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "MC-30",
+        "label": "Question MC-30",
+        "prompt": "Which water tracking tool detects ancient water courses?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Ground penetrating radar" },
+          { "id": "B", "text": "Piezometers" },
+          { "id": "C", "text": "Flow meters" },
+          { "id": "D", "text": "Radar sensors" }
+        ],
+        "points": 1,
+        "page": 5
+      },
+      {
+        "id": "FR-1",
+        "label": "Question FR-1",
+        "prompt": "Natural Disasters\n a. What is the main cause of an El Niño? (2 point)\n b. What is the difference between an El Niño episode and El Niño conditions? (2 point)\n c. What effect do warm water currents have on cold water currents? How does this affect\n the ecosystem? (2 points)\n d. What is the difference between an El Niño and a La Niña? (2 points)\n e. Explain how El Niño and La Niña events impact marine ecosystems, specifically the\n impacts on upwelling and marine biodiversity? (2 points)",
+        "type": "frq",
+        "points": 10,
+        "page": 6,
+        "context": "d. Passive margins typically associated with tectonic activity like earthquakes and \nvolcanism,\n \nwhile\n \nactive\n \nmargins\n \nare\n \ngeologically\n \nstable.\n 25. Which of the following has a horizontal pattern of distribution, increasing in concentration near \nthe\n \ncoastline?\n a. Metals b. Sodium bicarbonate c. Oxygen d. Nutrients 26. Tidal resonance is affected by which of the following factors? a. Centrifugal force b. Deep ocean trenches c. Basin geometry d. Coriolis force 27. Which corer tool is ideal for studying benthic organisms? a. Box corer b. Piston corer c. Multicorer d. Gravity corer 28. What do tidal bores do? a. Create estuaries b. Decrease salinity c. Form barrier reefs d. Reverses the direction of a river 29. Which ocean circulation pattern fuels the growth of phytoplankton? a. Atlantic Meridional Overturning Circulation b. Upwelling c. El Nino d. Pacific Decadal Oscillation 30. Which water tracking tool detects ancient water courses? a. Ground penetrating radar b. Piezometers c. Flow meters d. Radar sensors \n \nOpen Ended Section \n Answers should be 1-2 sentences per part. 1. Natural Disasters a. What is the main cause of an El Niño? (2 point) b. What is the difference between an El Niño episode and El Niño conditions? (2 point) c. What effect do warm water currents have on cold water currents? How does this affect \nthe\n \necosystem?\n \n(2\n \npoints)\n d. What is the difference between an El Niño and a La Niña? (2 points) e. Explain how El Niño and La Niña events impact marine ecosystems, specifically the \nimpacts\n \non\n \nupwelling\n \nand\n \nmarine\n \nbiodiversity?\n \n(2\n \npoints)\n \n2. Divergent Boundaries a. How do divergent boundaries occur? (2 points) b. In ocean-ocean divergence, what happens after fissures occur? (2 points) c. Name a famous plate boundary that occurred from ocean-ocean divergence? (2 points) d. What kind of structure is formed through continent-continent divergence? (2 points) e. What happens when continent-continent divergence occurs below the sea level? (2 \npoints)"
+      },
+      {
+        "id": "FR-2",
+        "label": "Question FR-2",
+        "prompt": "Divergent Boundaries\n a. How do divergent boundaries occur? (2 points)\n b. In ocean-ocean divergence, what happens after fissures occur? (2 points)\n c. Name a famous plate boundary that occurred from ocean-ocean divergence? (2 points)\n d. What kind of structure is formed through continent-continent divergence? (2 points)\n e. What happens when continent-continent divergence occurs below the sea level? (2\n points)",
+        "type": "frq",
+        "points": 10,
+        "page": 7,
+        "context": "Open Ended Section \n Answers should be 1-2 sentences per part. 1. Natural Disasters a. What is the main cause of an El Niño? (2 point) b. What is the difference between an El Niño episode and El Niño conditions? (2 point) c. What effect do warm water currents have on cold water currents? How does this affect \nthe\n \necosystem?\n \n(2\n \npoints)\n d. What is the difference between an El Niño and a La Niña? (2 points) e. Explain how El Niño and La Niña events impact marine ecosystems, specifically the \nimpacts\n \non\n \nupwelling\n \nand\n \nmarine\n \nbiodiversity?\n \n(2\n \npoints)\n \n2. Divergent Boundaries a. How do divergent boundaries occur? (2 points) b. In ocean-ocean divergence, what happens after fissures occur? (2 points) c. Name a famous plate boundary that occurred from ocean-ocean divergence? (2 points) d. What kind of structure is formed through continent-continent divergence? (2 points) e. What happens when continent-continent divergence occurs below the sea level? (2 \npoints)\n \n3. Waves a. What is the highest part of a wave called? (1 point) b. What is the lowest part of a wave called? (1 point) c. Describe what the wave amplitude is? (2 points) d. What is the distinguishing characteristic for a capillary wave? (2 points) e. What are ripples caused by? (2 points) f. What is a standing wave? Describe it. (2 points)"
+      },
+      {
+        "id": "FR-3",
+        "label": "Question FR-3",
+        "prompt": "Waves\n a. What is the highest part of a wave called? (1 point)\n b. What is the lowest part of a wave called? (1 point)\n c. Describe what the wave amplitude is? (2 points)\n d. What is the distinguishing characteristic for a capillary wave? (2 points)\n e. What are ripples caused by? (2 points)\n f. What is a standing wave? Describe it. (2 points)",
+        "type": "frq",
+        "points": 10,
+        "page": 8,
+        "context": "2. Divergent Boundaries a. How do divergent boundaries occur? (2 points) b. In ocean-ocean divergence, what happens after fissures occur? (2 points) c. Name a famous plate boundary that occurred from ocean-ocean divergence? (2 points) d. What kind of structure is formed through continent-continent divergence? (2 points) e. What happens when continent-continent divergence occurs below the sea level? (2 \npoints)\n \n3. Waves a. What is the highest part of a wave called? (1 point) b. What is the lowest part of a wave called? (1 point) c. Describe what the wave amplitude is? (2 points) d. What is the distinguishing characteristic for a capillary wave? (2 points) e. What are ripples caused by? (2 points) f. What is a standing wave? Describe it. (2 points) \n4. Ocean sediments a. What type of sediment is derived from a land-based origin? (1 point) b. Where are these sediments found? (1 point) c. What is the sediment from biological processes called? (1 points) d. Give an example of this sediment? (1 point) e. How do hydrogenous sediments form? (2 points) f. Which sediments make up most of the Earth’s sediments? (2 points) g. What are ocean sediments which are derived from space called, such as meteorites or \nasteroids\n \nfalling\n \ninto\n \nthe\n \nocean?\n \n(2\n \npoints)"
+      },
+      {
+        "id": "FR-4",
+        "label": "Question FR-4",
+        "prompt": "Ocean sediments\n a. What type of sediment is derived from a land-based origin? (1 point)\n b. Where are these sediments found? (1 point)\n c. What is the sediment from biological processes called? (1 points)\n d. Give an example of this sediment? (1 point)\n e. How do hydrogenous sediments form? (2 points)\n f. Which sediments make up most of the Earth’s sediments? (2 points)\n g. What are ocean sediments which are derived from space called, such as meteorites or\n asteroids falling into the ocean? (2 points)",
+        "type": "frq",
+        "points": 10,
+        "page": 9,
+        "context": "3. Waves a. What is the highest part of a wave called? (1 point) b. What is the lowest part of a wave called? (1 point) c. Describe what the wave amplitude is? (2 points) d. What is the distinguishing characteristic for a capillary wave? (2 points) e. What are ripples caused by? (2 points) f. What is a standing wave? Describe it. (2 points) \n4. Ocean sediments a. What type of sediment is derived from a land-based origin? (1 point) b. Where are these sediments found? (1 point) c. What is the sediment from biological processes called? (1 points) d. Give an example of this sediment? (1 point) e. How do hydrogenous sediments form? (2 points) f. Which sediments make up most of the Earth’s sediments? (2 points) g. What are ocean sediments which are derived from space called, such as meteorites or \nasteroids\n \nfalling\n \ninto\n \nthe\n \nocean?\n \n(2\n \npoints)\n \n5. Surface currents a. Which direction are surface currents deflected to in the Southern Hemisphere? (1 point) b. What type of surface currents are generally found on the eastern side of ocean basins? (1 \npoint)\n c. Describe the differences between eastern boundary and western boundary currents? (2 \npoints)\n d. What western boundary current flows north along the east coast of the US? (2 points) e. What is a gyre and how are they formed? (2 points) f. Other than temperature, what can surface currents help regulate? (2 points)"
+      },
+      {
+        "id": "FR-5",
+        "label": "Question FR-5",
+        "prompt": "Surface currents\n a. Which direction are surface currents deflected to in the Southern Hemisphere? (1 point)\n b. What type of surface currents are generally found on the eastern side of ocean basins? (1\n point)\n c. Describe the differences between eastern boundary and western boundary currents? (2\n points)\n d. What western boundary current flows north along the east coast of the US? (2 points)\n e. What is a gyre and how are they formed? (2 points)\n f. Other than temperature, what can surface currents help regulate? (2 points)",
+        "type": "frq",
+        "points": 10,
+        "page": 10,
+        "context": "4. Ocean sediments a. What type of sediment is derived from a land-based origin? (1 point) b. Where are these sediments found? (1 point) c. What is the sediment from biological processes called? (1 points) d. Give an example of this sediment? (1 point) e. How do hydrogenous sediments form? (2 points) f. Which sediments make up most of the Earth’s sediments? (2 points) g. What are ocean sediments which are derived from space called, such as meteorites or \nasteroids\n \nfalling\n \ninto\n \nthe\n \nocean?\n \n(2\n \npoints)\n \n5. Surface currents a. Which direction are surface currents deflected to in the Southern Hemisphere? (1 point) b. What type of surface currents are generally found on the eastern side of ocean basins? (1 \npoint)\n c. Describe the differences between eastern boundary and western boundary currents? (2 \npoints)\n d. What western boundary current flows north along the east coast of the US? (2 points) e. What is a gyre and how are they formed? (2 points) f. Other than temperature, what can surface currents help regulate? (2 points) \n 6. Geostrophic and Ekman balances a. What causes the pressure gradient force? (1 points) b. Which direction does the pressure gradient force always act? (1 point) c. Why is the Ekman layer typically angled at forty five degrees? (2 points) d. What are the differences between an Ekman balance and a geostrophic balance? Provide \nthree\n \ndifferences.\n \n(3\n \npoints)"
+      },
+      {
+        "id": "FR-6",
+        "label": "Question FR-6",
+        "prompt": "Geostrophic and Ekman balances\n a. What causes the pressure gradient force? (1 points)\n b. Which direction does the pressure gradient force always act? (1 point)\n c. Why is the Ekman layer typically angled at forty five degrees? (2 points)\n d. What are the differences between an Ekman balance and a geostrophic balance? Provide\n three differences. (3 points)",
+        "type": "frq",
+        "points": 7,
+        "page": 11,
+        "context": "5. Surface currents a. Which direction are surface currents deflected to in the Southern Hemisphere? (1 point) b. What type of surface currents are generally found on the eastern side of ocean basins? (1 \npoint)\n c. Describe the differences between eastern boundary and western boundary currents? (2 \npoints)\n d. What western boundary current flows north along the east coast of the US? (2 points) e. What is a gyre and how are they formed? (2 points) f. Other than temperature, what can surface currents help regulate? (2 points) \n 6. Geostrophic and Ekman balances a. What causes the pressure gradient force? (1 points) b. Which direction does the pressure gradient force always act? (1 point) c. Why is the Ekman layer typically angled at forty five degrees? (2 points) d. What are the differences between an Ekman balance and a geostrophic balance? Provide \nthree\n \ndifferences.\n \n(3\n \npoints)\n \n 7. Topographical features a. Label each blank of the diagram with the correct term. (6 points) \n b. Which area in the diagram supports a diverse marine habitat? (1 point)"
+      },
+      {
+        "id": "FR-7",
+        "label": "Question FR-7",
+        "prompt": "Topographical features\n a. Label each blank of the diagram with the correct term. (6 points)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n b. Which area in the diagram supports a diverse marine habitat? (1 point)",
+        "type": "frq",
+        "points": 7,
+        "page": 12,
+        "context": "6. Geostrophic and Ekman balances a. What causes the pressure gradient force? (1 points) b. Which direction does the pressure gradient force always act? (1 point) c. Why is the Ekman layer typically angled at forty five degrees? (2 points) d. What are the differences between an Ekman balance and a geostrophic balance? Provide \nthree\n \ndifferences.\n \n(3\n \npoints)\n \n 7. Topographical features a. Label each blank of the diagram with the correct term. (6 points) \n b. Which area in the diagram supports a diverse marine habitat? (1 point)"
+      }
+    ],
+    "keys": {
+      "MC-1": { "correctOption": "C" },
+      "MC-2": { "correctOption": "B" },
+      "MC-3": { "correctOption": "D" },
+      "MC-4": { "correctOption": "C" },
+      "MC-5": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The published key selects pycnocline, which means a layer of rapid density change, not rapid pressure change. Thermocline describes rapid temperature change. Pressure generally increases with depth rather than defining the pycnocline.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "MC-6": { "correctOption": "A" },
+      "MC-7": { "correctOption": "B" },
+      "MC-8": { "correctOption": "A" },
+      "MC-9": { "correctOption": "C" },
+      "MC-10": { "correctOption": "B" },
+      "MC-11": { "correctOption": "C" },
+      "MC-12": { "correctOption": "B" },
+      "MC-13": { "correctOption": "C" },
+      "MC-14": { "correctOption": "B" },
+      "MC-15": { "correctOption": "C" },
+      "MC-16": { "correctOption": "C" },
+      "MC-17": { "correctOption": "D" },
+      "MC-18": { "correctOption": "A" },
+      "MC-19": { "correctOption": "A" },
+      "MC-20": { "correctOption": "A" },
+      "MC-21": { "correctOption": "D" },
+      "MC-22": { "correctOption": "A" },
+      "MC-23": { "correctOption": "B" },
+      "MC-24": { "correctOption": "C" },
+      "MC-25": { "correctOption": "D" },
+      "MC-26": { "correctOption": "C" },
+      "MC-27": { "correctOption": "A" },
+      "MC-28": { "correctOption": "D" },
+      "MC-29": { "correctOption": "B" },
+      "MC-30": { "correctOption": "A" },
+      "FR-1": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Natural disasters\n a. El Niño happens when there are sea surface anomalies greater than 0.5 deg. C across the\n central tropical Pacific ocean.\n b. El Niño Conditions are temporary signs that the tropical Pacific Ocean is starting to warm\n abnormally in a period of less than five months. An El Niño episode is a fully developed\n and sustained climate pattern characterized by significant and widespread warming of sea\n surface temperatures (SSTs) in the tropical Pacific which lasts for 5 months or longer.\n c. Warm tropical water replaces the cold water used to support populations of fish.\n d. El niño occurs when there is an abnormal amount of warm water, whereas la niña occurs\n when there is an abnormal amount of cold water.\n e. Upwelling is when cold, nutrient-rich water rises up to the surface to support marine\n ecosystems. El Niño weakens upwelling along eastern boundaries, while La Niña\n strengthens upwelling. El Niño causes phytoplankton decline and impacts zooplankton,\n fish, seabirds, and marine mammals, while La Niña increases plankton populations and\n increases the populations of these animal populations.",
+            "points": 10,
+            "accepted": []
+          }
+        ]
+      },
+      "FR-2": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Boundary types\n a. Plates move away from each other. rift zones, mid-ocean ridges, and expanding ocean\n basins\n b. Pressure is reduced on the mantle below and magma flows out.\n c. Many answers apply. The most common answer should be mid-atlantic ridge.\n d. Rift-structure\n e. Ocean-water flows in and can cause rivers to form or affect bodies of water.",
+            "points": 10,
+            "accepted": []
+          }
+        ]
+      },
+      "FR-3": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Waves\n a. Wave crest\n b. Wave trough\n c. One half the distance between the crest and the trough.\n d. Very small waves with very small wavelengths.\n e. Wind pressures on the water.\n f. Waves that move back and forth (oscillate) vertically. The wave appears like it’s moving\n forwards when it’s not.",
+            "points": 10,
+            "accepted": []
+          }
+        ]
+      },
+      "FR-4": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Ocean sediments\n a. Lithogenous/terrigenous sediment\n b. Near continental margins\n c. Biogenous sediment\n d. Calcareous deposits from shells of marine organisms. Answers vary, though.\n e. Precipitating from the ocean water.\n f. Lithogenous and biogenous\n g. Cosmogenous sediment.",
+            "points": 10,
+            "accepted": []
+          }
+        ]
+      },
+      "FR-5": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Surface currents\n a. Deflected to the left in the southern hemisphere or counter-clockwise direction\n b. Eastern boundary currents\n\f\n\n c. Western boundary currents are faster, narrower, warmer and deeper than Eastern currents.\n Eastern boundary currents are relatively slower, broader, colder, and shallower than\n Western currents.\n d. The Gulf Stream is the Western boundary current that flows north along the eastern coast\n of the US.\n e. A gyre is classified as a big system of rotating ocean currents formed through the coriolis\n force, landmasses, and global wind circulation.\n f. Surface currents help regulate marine ecosystems through nutrient cycling and weather\n patterns such as precipitation.",
+            "points": 10,
+            "accepted": []
+          }
+        ]
+      },
+      "FR-6": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Geostrophic and ekman balances\n a. Differences in the water’s height and therefore pressure across a horizontal region.\n Factors like variations in water density (due to temperature and salinity differences)\n create these pressure differences. This is because a higher density would result in a\n greater pressure gradient, whereas a smaller density results in a smaller pressure gradient.\n These pressure gradients determine the strength of a current.\n b. The pressure gradient always acts perpendicular to the isobars and from areas of high\n pressure to low pressure.\n c. The wind stress and coriolis effect produce the forty five degree angle in the ekman layer.\n d. The ekman balance is comprised of wind stress frictional forces and the coriolis force\n while the geostrophic balance is comprised of the pressure gradient force and the coriolis\n force.the ekman balance describes a smaller scale of water flow while geostrophic\n balances describe larger scale flows. Geostrophic balances have more effect in the deep\n ocean whereas ekman balances are more prevalent near the surface. Answers may vary.",
+            "points": 7,
+            "accepted": []
+          }
+        ]
+      },
+      "FR-7": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Topographical features\n a. This is what the diagram should look like if filled in correctly:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n b. Continental shelf Diagram labels by location: continental shelf (shallow nearshore platform); continental slope (steep drop); continental rise (base of slope); abyssal plain (flat deep floor); continental crust (beneath shelf/slope); oceanic crust (beneath deep ocean floor). One point per diagram label, plus one for continental shelf as the diverse marine habitat.",
+            "points": 7,
+            "accepted": []
+          }
+        ]
+      }
+    },
+    "difficulty": "Medium",
+    "difficultyReason": "Oceanography recall is followed by written explanations of ENSO, sediments, currents, Ekman balance and continental-margin diagrams.",
+    "topics": [
+      "Oceanography",
+      "ENSO",
+      "Waves",
+      "Ocean currents",
+      "Marine sediments",
+      "Plate tectonics"
+    ],
+    "topicMatch": "different",
+    "alignment": "Historical oceanography rotation differs from the 2027 freshwater focus; water circulation and hydrology concepts overlap.",
+    "questionCount": 37,
+    "maxScore": 93
+  },
+  {
+    "id": "scioly-2dvbw1ll-v0-c",
+    "sourceId": "2DVBw1Ll-v0",
+    "sourceUrl": "https://scioly.org/tests/2DVBw1Ll-v0",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "competition": "SSSS",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "/practice/scioly-2dvbw1ll-v0-c/test.pdf",
+    "keyUrl": "/practice/scioly-2dvbw1ll-v0-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-11",
+    "levelEvidence": null,
+    "minutes": 50,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/chemistry-lab.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "Published item weights sum to 112 rather than the cover’s 110. Part II question 5 incorrectly asserts that sugar is insoluble and nonpolar; retain it as an unscored correction, leaving 108 points. Part I questions 10 and 11 correct the key’s van’t Hoff sign and inconsistent-temperature Gibbs calculation. Part II question 7 uses the student paper’s diameter and correct SI forces, retaining its seven rubric steps and final length. Periodic-table marking accepts named elements or a verbal location in the text interface, with the highest electron affinity identified as chlorine rather than the key’s overly broad top-right location.",
+    "questions": [
+      {
+        "id": "I-1",
+        "label": "Question I-1",
+        "prompt": "What are the four laws of thermodynamics? (6 pt)\n\n (0)\n\n\n (1)\n\n\n (2)\n\n\n (3)",
+        "type": "frq",
+        "points": 6,
+        "page": 1,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt)"
+      },
+      {
+        "id": "I-2",
+        "label": "Question I-2",
+        "prompt": "A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure\n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt)\n\n\n\n\n\n\n 3",
+        "type": "frq",
+        "points": 5,
+        "page": 1,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt)"
+      },
+      {
+        "id": "I-3",
+        "label": "Question I-3",
+        "prompt": "What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm = 0.1 J) (3 pt)",
+        "type": "frq",
+        "points": 3,
+        "page": 1,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt)"
+      },
+      {
+        "id": "I-4",
+        "label": "Question I-4",
+        "prompt": "From questions 2 and 3, is the system endothermic or exothermic? (1 pt)\n\n\n o",
+        "type": "frq",
+        "points": 1,
+        "page": 1,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt)"
+      },
+      {
+        "id": "I-5",
+        "label": "Question I-5",
+        "prompt": "Find ΔH for the reaction\n\n 2CO (g) + HO (g) → CH (g) + 5/2 O (g),\n 2 2 2 2 2\n\n o\n given the following reactions and subsequent ΔH values:\n CH (g) + 2H (g) → CH (g) ΔH = -94.5 kJ\n 2 2 2 2 6\n HO (g) → H (g) + ½ O (g) ΔH = +71.2 kJ\n 2 2 2\n CH (g) + 7/2 O (g) → 2CO (g) + 3HO (g) ΔH = -283 kJ (4 pt)\n 2 6 2 2 2",
+        "type": "frq",
+        "points": 4,
+        "page": 1,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt)"
+      },
+      {
+        "id": "I-6",
+        "label": "Question I-6",
+        "prompt": "For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the\n reaction spontaneous? (3 pt)\n\n\n\n\n\n o o",
+        "type": "frq",
+        "points": 3,
+        "page": 2,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt)"
+      },
+      {
+        "id": "I-7",
+        "label": "Question I-7",
+        "prompt": "A 10.00 mL container of water is at 10.0 C. A 2.23 g piece of zinc at 121 C is dropped into the\n o\n container. What is the final temperature of the system? (c = 0.384 J/g C) (5 pt)\n Zn",
+        "type": "frq",
+        "points": 5,
+        "page": 2,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt)"
+      },
+      {
+        "id": "I-8",
+        "label": "Question I-8",
+        "prompt": "After the temperature of the system in question 7 has settled, the zinc is removed and heated to\n o\n 98.6 C along with a 0.441 g piece of titanium. Both metals are then released back into the water\n o\n simultaneously. What is the final temperature of this new system? (c = 0.523 J/g C) (8 pt)\n Ti",
+        "type": "frq",
+        "points": 8,
+        "page": 2,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt)"
+      },
+      {
+        "id": "I-9",
+        "label": "Question I-9",
+        "prompt": "At 273 K, the reaction\n\n A (aq) ⇔ 2B (aq)\n\n o\n has an equilibrium constant of 375. What is ΔG for the reaction? (4 pt)\n\n\n\n\n\n\n o o",
+        "type": "frq",
+        "points": 4,
+        "page": 2,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt)"
+      },
+      {
+        "id": "I-10",
+        "label": "Question I-10",
+        "prompt": "At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH and ΔS for\n the reaction? (6 pt)",
+        "type": "frq",
+        "points": 6,
+        "page": 2,
+        "context": "Names _______________________________ School _________________________________ \n \n _______________________________ Team # ________ Score: _____ / 110 \n \n Chemistry Lab Test \n created by kenniky \n \nPart I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt)"
+      },
+      {
+        "id": "I-11",
+        "label": "Question I-11",
+        "prompt": "The reaction in question 9 is in equilibrium when half the amount of existing B is removed from\n the system. If the temperature is 400.0 K, what is ΔG? (7 pt)\n\n\n\n\n\n\n\n o",
+        "type": "frq",
+        "points": 7,
+        "page": 3,
+        "context": "Part I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y:"
+      },
+      {
+        "id": "I-12",
+        "label": "Question I-12",
+        "prompt": "You have a 1.00 mol sample of water at -30.0 C and you heat it until you have gaseous water at\n o\n 140.0 C. Calculate q for the entire process. Use the following data:\n\n o\n c 2.03 J/g C\n ice\n o\n c 4.18 J/g C\n water\n o\n c 2.02 J/g C\n steam\n HO (s) → HO (l) ΔH = 6.02 kJ/mol\n 2 2 fusion\n HO (l) → HO (g) ΔH = 40.7 kJ/mol (5 pt)\n 2 2 vaporization",
+        "type": "frq",
+        "points": 5,
+        "page": 3,
+        "context": "Part I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y:"
+      },
+      {
+        "id": "I-13",
+        "label": "Question I-13",
+        "prompt": "Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase\n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt)\n\n X:\n\n Y:",
+        "type": "frq",
+        "points": 5,
+        "page": 3,
+        "context": "Part I. Thermodynamics [60 pt] \n \n 1. What are the four laws of thermodynamics? (6 pt) \n \n (0) \n \n \n (1) \n \n \n (2) \n \n \n (3) \n \n \n 2. A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure \n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt) \n \n \n \n \n \n \n 3. What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm 3 = 0.1 J) (3 pt) \n \n \n \n 4. From questions 2 and 3, is the system endothermic or exothermic? (1 pt) \n \n \n 5. Find ΔH o for the reaction \n \n 2CO 2 (g) + H 2 O (g) → C 2 H 2 (g) + 5/2 O 2 (g), \n \n given the following reactions and subsequent ΔH o values: \n C 2 H 2 (g) + 2H 2 (g) → C 2 H 6 (g) ΔH = -94.5 kJ \n H 2 O (g) → H 2 (g) + ½ O 2 (g) ΔH = +71.2 kJ \n C 2 H 6 (g) + 7/2 O 2 (g) → 2CO 2 (g) + 3H 2 O (g) ΔH = -283 kJ (4 pt) \n \n \n \n \n6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y:"
+      },
+      {
+        "id": "II-1",
+        "label": "Question II-1",
+        "prompt": "At what temperature is water the most dense? (2 pt)",
+        "type": "frq",
+        "points": 2,
+        "page": 4,
+        "context": "6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt)"
+      },
+      {
+        "id": "II-2",
+        "label": "Question II-2",
+        "prompt": "Which two elements are liquid at room temperature? (2 pt)",
+        "type": "frq",
+        "points": 2,
+        "page": 4,
+        "context": "6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt)"
+      },
+      {
+        "id": "II-3",
+        "label": "Question II-3",
+        "prompt": "Graphite and diamond are both made of pure carbon; however, graphite is very soft while\n diamond is one of the hardest substances known. Explain. (4 pt)",
+        "type": "frq",
+        "points": 4,
+        "page": 4,
+        "context": "6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt)"
+      },
+      {
+        "id": "II-4",
+        "label": "Question II-4",
+        "prompt": "Explain the difference between an intensive and an extensive property, and give an example of\n each. (3 pt)",
+        "type": "frq",
+        "points": 3,
+        "page": 4,
+        "context": "6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt)"
+      },
+      {
+        "id": "II-5",
+        "label": "Question II-5",
+        "prompt": "Why is salt soluble in water, but sugar not? (4 pt) This original premise is incorrect; explain why. Unscored correction.",
+        "type": "frq",
+        "points": 0,
+        "page": 4,
+        "context": "6. For a particular reaction, ΔH = +145 kJ. If the temperature is 273 K, for what values of ΔS is the \n reaction spontaneous? (3 pt) \n \n \n \n \n \n 7. A 10.00 mL container of water is at 10.0 o C. A 2.23 g piece of zinc at 121 o C is dropped into the \n container. What is the final temperature of the system? (c Zn = 0.384 J/g o C) (5 pt) \n \n \n \n \n 8. After the temperature of the system in question 7 has settled, the zinc is removed and heated to \n 98.6 o C along with a 0.441 g piece of titanium. Both metals are then released back into the water \n simultaneously. What is the final temperature of this new system? (c Ti = 0.523 J/g o C) (8 pt) \n \n \n \n \n \n 9. At 273 K, the reaction \n \n A (aq) ⇔ 2B (aq) \n \n has an equilibrium constant of 375. What is ΔG o for the reaction? (4 pt) \n \n \n \n \n \n \n 10. At 298 K, the equilibrium constant of the reaction in question 9 is 525. What are ΔH o and ΔS o for \n the reaction? (6 pt) \n \n \n \n \n \n \n \n \n \n11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt)"
+      },
+      {
+        "id": "II-6",
+        "label": "Question II-6",
+        "prompt": "You are given samples of two unknown liquids, A and B. Create a quantifiable experiment to\n determine their relative viscosities. (4 pt)",
+        "type": "frq",
+        "points": 4,
+        "page": 5,
+        "context": "11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt) \n \n \n \n \n \n \n \n \n \n \n \n \n6. You are given samples of two unknown liquids, A and B. Create a quantifiable experiment to \n determine their relative viscosities. (4 pt) \n \n \n \n \n \n \n \n \n \n \n 7. In the event Bungee Drop, a weight, attached to an elastic cord, is dropped from a certain height. \n Say a 10 m cord with a 3 cm diameter is used with a 400 g weight. After the weight is released, it \n hangs 10.01 m below the release point. If a 600 g weight was used instead, how low would it \n hang? (7 pt)"
+      },
+      {
+        "id": "II-7",
+        "label": "Question II-7",
+        "prompt": "In the event Bungee Drop, a weight, attached to an elastic cord, is dropped from a certain height.\n Say a 10 m cord with a 3 cm diameter is used with a 400 g weight. After the weight is released, it\n hangs 10.01 m below the release point. If a 600 g weight was used instead, how low would it\n hang? (7 pt)",
+        "type": "frq",
+        "points": 7,
+        "page": 5,
+        "context": "11. The reaction in question 9 is in equilibrium when half the amount of existing B is removed from \n the system. If the temperature is 400.0 K, what is ΔG? (7 pt) \n \n \n \n \n \n \n \n 12. You have a 1.00 mol sample of water at -30.0 o C and you heat it until you have gaseous water at \n 140.0 o C. Calculate q for the entire process. Use the following data: \n \n c ice 2.03 J/g o C \n c water 4.18 J/g o C \n c steam 2.02 J/g o C \n H 2 O (s) → H 2 O (l) ΔH fusion = 6.02 kJ/mol \n H 2 O (l) → H 2 O (g) ΔH vaporization = 40.7 kJ/mol (5 pt) \n \n \n \n \n \n \n \n \n 13. Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase \n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) \n \n X: \n \n Y: \nPart II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt) \n \n \n \n \n \n \n \n \n \n \n \n \n6. You are given samples of two unknown liquids, A and B. Create a quantifiable experiment to \n determine their relative viscosities. (4 pt) \n \n \n \n \n \n \n \n \n \n \n 7. In the event Bungee Drop, a weight, attached to an elastic cord, is dropped from a certain height. \n Say a 10 m cord with a 3 cm diameter is used with a 400 g weight. After the weight is released, it \n hangs 10.01 m below the release point. If a 600 g weight was used instead, how low would it \n hang? (7 pt)"
+      },
+      {
+        "id": "II-8",
+        "label": "Question II-8",
+        "prompt": "On the blank periodic table below, use the letters below to mark where the elements are that have:\n (8 pt)\n A. the largest atomic radius\n B. the highest ionization energy\n C. the highest electron affinity\n D. the largest molar mass",
+        "type": "frq",
+        "points": 8,
+        "page": 6,
+        "context": "Part II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt) \n \n \n \n \n \n \n \n \n \n \n \n \n6. You are given samples of two unknown liquids, A and B. Create a quantifiable experiment to \n determine their relative viscosities. (4 pt) \n \n \n \n \n \n \n \n \n \n \n 7. In the event Bungee Drop, a weight, attached to an elastic cord, is dropped from a certain height. \n Say a 10 m cord with a 3 cm diameter is used with a 400 g weight. After the weight is released, it \n hangs 10.01 m below the release point. If a 600 g weight was used instead, how low would it \n hang? (7 pt) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n8. On the blank periodic table below, use the letters below to mark where the elements are that have: \n (8 pt) \n A. the largest atomic radius \n B. the highest ionization energy \n C. the highest electron affinity \n D. the largest molar mass \n \n 9. Explain why each of the trends that you described above exists. (16 pt) \n a. Atomic radius \n \n \n \n \n \n b. Ionization energy \n \n \n \n \n \n c. Electron affinity \n \n \n \n \n \n d. Molar mass"
+      },
+      {
+        "id": "II-9",
+        "label": "Question II-9",
+        "prompt": "Explain why each of the trends that you described above exists. (16 pt)\n a. Atomic radius\n\n\n\n\n\n b. Ionization energy\n\n\n\n\n\n c. Electron affinity\n\n\n\n\n\n d. Molar mass",
+        "type": "frq",
+        "points": 16,
+        "page": 6,
+        "context": "Part II. Physical Properties [50 pt] \n \n 1. At what temperature is water the most dense? (2 pt) \n \n \n 2. Which two elements are liquid at room temperature? (2 pt) \n \n \n \n 3. Graphite and diamond are both made of pure carbon; however, graphite is very soft while \n diamond is one of the hardest substances known. Explain. (4 pt) \n \n \n \n \n \n \n \n \n 4. Explain the difference between an intensive and an extensive property, and give an example of \n each. (3 pt) \n \n \n \n \n \n \n \n \n 5. Why is salt soluble in water, but sugar not? (4 pt) \n \n \n \n \n \n \n \n \n \n \n \n \n6. You are given samples of two unknown liquids, A and B. Create a quantifiable experiment to \n determine their relative viscosities. (4 pt) \n \n \n \n \n \n \n \n \n \n \n 7. In the event Bungee Drop, a weight, attached to an elastic cord, is dropped from a certain height. \n Say a 10 m cord with a 3 cm diameter is used with a 400 g weight. After the weight is released, it \n hangs 10.01 m below the release point. If a 600 g weight was used instead, how low would it \n hang? (7 pt) \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n8. On the blank periodic table below, use the letters below to mark where the elements are that have: \n (8 pt) \n A. the largest atomic radius \n B. the highest ionization energy \n C. the highest electron affinity \n D. the largest molar mass \n \n 9. Explain why each of the trends that you described above exists. (16 pt) \n a. Atomic radius \n \n \n \n \n \n b. Ionization energy \n \n \n \n \n \n c. Electron affinity \n \n \n \n \n \n d. Molar mass"
+      }
+    ],
+    "keys": {
+      "I-1": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "What are the four laws of thermodynamics? (6 pt) [1.5 pt each]\n\n (0) If two systems are in thermal equilibrium with a third, they are in thermal equilibrium with\neach other\n\n (1) energy cannot be created or destroyed\n\n\n (2) entropy increases\n\n\n (3) entropy approaches constancy as temperature approaches absolute 0",
+            "points": 6,
+            "accepted": []
+          }
+        ]
+      },
+      "I-2": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "A spherical balloon 30.0 cm in diameter is expanded until its diameter is 40.0 cm. If the pressure\n on the balloon is 1.00 atm, how much work was done on the balloon? (5 pt)\nW =− PΔV V = 4π(20.0)3 = 33500 cm3 V = 4π(15.0)3 = 14100 cm3\n f 3 i 3\nW =− (1.00 atm)(33500 − 14100) cm3 =− 19400 atm cm3\n\n1 pt for each of the volumes [half credit if didn’t convert into radius], 3 pt for W = -PΔV\n\n 3",
+            "points": 5,
+            "accepted": []
+          }
+        ]
+      },
+      "I-3": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "What is ΔH for the system in question 2 if ΔE is +4.00 J? (1 atm cm = 0.1 J) (3 pt)\n\nΔH = ΔE + PΔV = ΔE − W = 4.00J − (− 19400 atm cm3 0.1 J ) =+ 1944 J\n atm cm3",
+            "points": 3,
+            "accepted": []
+          }
+        ]
+      },
+      "I-4": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "From questions 2 and 3, is the system endothermic or exothermic? (1 pt)\nendothermic\n\n o",
+            "points": 1,
+            "accepted": ["endothermic"]
+          }
+        ]
+      },
+      "I-5": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Find ΔH for the reaction\n\n 2CO (g) + HO (g) → CH (g) + 5/2 O (g),\n 2 2 2 2 2\n\n o\n given the following reactions and subsequent ΔH values:\n (1) CH (g) + 2H (g) → CH (g) ΔH = -94.5 kJ\n 2 2 2 2 6\n (2) HO (g) → H (g) + ½ O (g) ΔH = +71.2 kJ\n 2 2 2\n (3) CH (g) + 7/2 O (g) → 2CO (g) + 3HO (g) ΔH = -283 kJ (4 pt)\n 2 6 2 2 2\n\n- (3) - 2 (2) - (1) = 283 kJ - 142.4 kJ + 94.5 kJ = 235.9 kJ",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "I-6": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "For a particular reaction, ΔH = +145 kJ/mol. If the temperature is 273 K, for what values of ΔS is\n the reaction spontaneous? (3 pt)\n\nΔH − T ΔS = ΔG < 0 [2 pt] 145 kJ/mol − 273K ΔS < 0 [1 pt for substituting these in]\n273K ΔS > 145 kJ /mol ΔS >+ 0.531 kJ/mol K\n -1 if they didn’t switch the inequality\n\n o o",
+            "points": 3,
+            "accepted": []
+          }
+        ]
+      },
+      "I-7": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "A 10.00 mL container of water is at 10.0 C. A 2.23 g piece of zinc at 121 C is dropped into the\n o\n container. What is the final temperature of the system? (c = 0.384 J/g C) (5 pt)\n Zn\n\n 1g J o J o\n10.00mL ·mL · 4.184g oC (T − 10.0 C) = 2.23g · 0.384g oC (121 C − T)\n\nT = 12.2oC",
+            "points": 5,
+            "accepted": []
+          }
+        ]
+      },
+      "I-8": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "After the temperature of the system in question 7 has settled, the zinc is removed and heated to\n o\n 98.6 C along with a 0.441 g piece of titanium. Both metals are then released back into the water\n o\n simultaneously. What is the final temperature of this new system? (c = 0.523 J/g C) (8 pt)\n Ti\n\n 1g J o J o J o\n10.00 mL · mL · 4.184g oC (T − 12.2 C) = 2.23g · 0.384g oC (98.6 C − T ) + 0.441g · 0.523g oC (98.6 C − T )\n (water) (zinc) (titanium)\n o\nT = 14.4C\n\n o o\n-1 pt if they used 10.0C instead of 12.2C. -3 pt if they put any of the values on the wrong side of\nthe equals sign (i.e. used ΔE + ΔE = ΔE or something similar)\n water zinc titanium",
+            "points": 8,
+            "accepted": []
+          }
+        ]
+      },
+      "I-9": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "At 273 K, the reaction\n\n A (aq) ⇔ 2B (aq)\n\n o\n has an equilibrium constant of 375. What is ΔG for the reaction? (4 pt)\n\nΔGo =− RT ln K =− 8.3145 J · 273K · ln 375 -1 if they use the wrong value for R\n mol K\nΔGo =− 13500 J =− 13.5 kJ\n mol mol\n\n o o",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "I-10": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The equilibrium constant increases with temperature, so the forward reaction is endothermic. ln(525/375)=−Delta H/R × (1/298−1/273), yielding Delta H≈+9.10 kJ/mol (3 points). Delta G at 273 K = −RT ln375≈−13.45 kJ/mol, so Delta S=(Delta H−Delta G)/273≈+82.6 J/(mol K) (3 points). Accept rounding consistent with the given constants. The printed key has the wrong sign for Delta H and consequently the wrong Delta S.",
+            "points": 6,
+            "accepted": []
+          }
+        ]
+      },
+      "I-11": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "At equilibrium Q=K. Removing half of B for A⇌2B reduces Q to K/4 (2 points for establishing equilibrium K, 2 for Q=K/4). Delta G=RT ln(Q/K)=−RT ln4 = −8.3145×400.0×ln4≈−4610.6 J/mol, or −4.61 kJ/mol (3 points). The printed key reuses Delta G° from a different temperature and gives an inconsistent result.",
+            "points": 7,
+            "accepted": []
+          }
+        ]
+      },
+      "I-12": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "You have a 1.00 mol sample of water at -30.0 C and you heat it until you have gaseous water at\n o\n 140.0 C. Calculate q for the entire process. Use the following data:\n\n o\n c 2.03 J/g C\n ice\n o\n c 4.18 J/g C\n water\n o\n c 2.02 J/g C\n steam\n HO (s) → HO (l) ΔH = 6.02 kJ/mol\n 2 2 fusion\n HO (l) → HO (g) ΔH = 40.7 kJ/mol (5 pt)\n 2 2 vaporization\n\nq = 1.00mol18.015g ·2.0o3J(0 − (− 30.0oC)) 1kJ + 1.00mol · 6.02 kJ + 1.00mol18.015g · 4.1o8J(100 − 0oC) 1kJ\n mol g C 1000J mol mol g C 1000J\n + 1.00mol · 40.7 kJ + 1.00mol 18.015g · 2.0o2J(140 − 100oC) 1kJ\n mol mol g C 1000J\n = 56.8 kJ [1 pt for each of the different energy parts]",
+            "points": 5,
+            "accepted": []
+          }
+        ]
+      },
+      "I-13": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Above is my expertly drawn phase diagram. Label the three regions with the appropriate phase\n (solid, liquid, or gas), and below name and define the points X and Y. (5 pt) 1 pt per item\nleft: solid, top right: liquid, bottom right: gas\n X: triple point, all three phases coexist\n\n Y: critical point, only supercritical fluid exists beyond this temperature",
+            "points": 5,
+            "accepted": []
+          }
+        ]
+      },
+      "II-1": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "At what temperature is water the most dense? (2 pt)\n\n o\n 4C",
+            "points": 2,
+            "accepted": []
+          }
+        ]
+      },
+      "II-2": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Which two elements are liquid at room temperature? (2 pt)\n\n Mercury and bromine (1 pt each)",
+            "points": 2,
+            "accepted": []
+          }
+        ]
+      },
+      "II-3": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Graphite and diamond are both made of pure carbon; however, graphite is very soft while\n diamond is one of the hardest substances known. Explain. (4 pt)\n\nGraphite is in layers: the layers do not have very strong bonds between them so graphite can separate into\nseveral layers\n\nDiamond is a lattice and has no “weak points” (2 pt each)",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "II-4": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Explain the difference between an intensive and an extensive property, and give an example of\n each. (3 pt)\n\n\nIntensive: doesn’t depend on how much there is. Density, hardness, color, melting/boiling point, specific\nheat capacity, etc\nExtensive: does depend on how much there is. Mass, volume, energy, enthalpy, entropy, etc.\n(1 pt for each explanation, 0.5 pt for each example)",
+            "points": 3,
+            "accepted": []
+          }
+        ]
+      },
+      "II-5": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The premise is incorrect: both table salt and sugar dissolve in water. Salt dissociates into ions stabilized by ion–dipole interactions. Sugar has polar hydroxyl groups that hydrogen-bond with water. This correction is unscored; the published assertion that sugar is nonpolar and insoluble is not used for grading.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "II-6": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "You are given samples of two unknown liquids, A and B. Create a quantifiable experiment to\n determine their relative viscosities. (4 pt)\n\n\nPossible answers:\n fill graduated cylinder → put ball bearing in → see how long it takes to sink\n pour at one end of a container → see how long it takes to spread a certain distance",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "II-7": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Use the student paper’s 3 cm diameter: radius 0.015 m and area pi(0.015)^2≈7.07×10^-4 m² (1 point). Initial force 0.400×9.8=3.92 N and stress≈5546 Pa (1). Initial strain=0.01/10=0.001 (1). Young’s modulus≈5.55×10^6 Pa (1). New force=0.600×9.8=5.88 N and stress≈8318 Pa (1). New extension is 0.015 m, also obtained directly by scaling the force by 1.5 (1). Final length=10.015 m (1). The key mistakenly uses circumference and inconsistent forces; the final length agrees because the area cancels.",
+            "points": 7,
+            "accepted": []
+          }
+        ]
+      },
+      "II-8": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Two points per trend: largest atomic radius toward the bottom left (francium in the simplified school trend); highest ionization energy is helium at the top right; highest electron affinity is chlorine among the halogens, not the noble gases; largest molar mass toward the bottom right of the supplied periodic table. Accept verbal locations where appropriate instead of marking the PDF.",
+            "points": 8,
+            "accepted": []
+          }
+        ]
+      },
+      "II-9": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Four points per explanation: atomic radius increases down groups as shells are added and generally decreases across a period as effective nuclear charge rises; ionization energy generally rises across a period and upward as electrons are more tightly held, with helium highest; electron affinity reflects the energetics of adding an electron, generally strongest for halogens, with chlorine exceeding fluorine because of fluorine’s compact-shell repulsion and noble gases being unfavorable; molar mass generally increases with increasing proton and neutron count down and across the table, with exceptions. Do not require the source key’s incorrect implication that noble gases have the highest electron affinity.",
+            "points": 16,
+            "accepted": []
+          }
+        ]
+      }
+    },
+    "difficulty": "Hard",
+    "difficultyReason": "Multi-step calorimetry, Gibbs energy, equilibrium, Hess’s law and material-property explanations require sustained mathematical reasoning.",
+    "topics": [
+      "Thermodynamics",
+      "Calorimetry",
+      "Chemical equilibrium",
+      "Physical properties",
+      "Periodic trends"
+    ],
+    "topicMatch": "different",
+    "alignment": "Historical thermodynamics and physical-properties rotation differs from the 2027 kinetics and gases focus; gas work and energy concepts overlap.",
+    "questionCount": 22,
+    "maxScore": 108
   }
 ]

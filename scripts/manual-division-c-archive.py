@@ -445,6 +445,107 @@ if 'K0d3cUjlmuw' in SOURCES:
     p.finish()
 
 
+if 'G5jCu2kGkTg' in SOURCES:
+    p=Paper('G5jCu2kGkTg',competition='Raisbeck Invitational',year=2017,minutes=25,
+        difficulty='Medium',difficultyReason='Temperature conversions, specific heat, spontaneity and thermodynamic processes combine routine calculations with conceptual recall.',
+        topics=['Temperature scales','Specific heat','Entropy','Thermodynamic processes','History of thermodynamics'],topicMatch='current',
+        alignment='The written thermodynamics core overlaps the 2027 rules; the original device run is not scored in this online paper.',
+        scoringBasis='Published section weights: temperature 13, thermal calculations 14, laws/processes 10 and history matching 8, totaling 45 written points. History repeats question numbers 15–17; these eight items receive H-prefixed identifiers. The cover dates December 2, 2017; the archive indexes 2018. Laws question 15 is corrected from the key’s incomplete B (“Only when energy is”) to the complete C (work or other organized energy input). Physical water-run scoring is excluded.')
+    source='\n\f\n'.join(structure_helpers['read_pages'](p.source['paperPath']))
+    main,history=re.split(r'(?im)^\s*iv\.\s*History',source,maxsplit=1)
+    qs=numbered(main.split('\f'))
+    assert len(qs)==17
+    codes={1:'A',6:'A',7:'C',8:'A',9:'E',13:'D',14:'C',15:'C',16:'A',17:'C'}
+    for n,b in qs.items():
+        prompt=re.sub(r'^_+\s*','',b['text']).split('Convert the following temperatures:')[0].split('Predict whether condition')[0].strip()
+        weight=({1:1,2:2,3:2,4:4,5:4}.get(n,2))
+        if n in codes:
+            parsed=options(prompt)
+            assert parsed,n
+            # Instructions for the next section are not part of the final option.
+            if n==9:
+                parsed[1][-1]['text']=parsed[1][-1]['text'].split('Predict whether')[0].strip()
+            p.mcq(str(n),parsed[0],parsed[1],codes[n],points=weight,page=b['page'])
+        elif n in [10,11,12]:
+            text=re.split(r'\s+SPONTANEOUS',prompt)[0].strip()
+            p.mcq(str(n),text,[{'id':'S','text':'Spontaneous'},{'id':'N','text':'Not spontaneous'}], 'S' if n==11 else 'N',points=2,page=b['page'])
+        else:
+            answer={2:'(41.2−32)×5/9 = 5.11 °C.',3:'36.60×9/5+32 = 97.88 °F.',4:'26 °F = −3.33 °C; adding 273.15 gives approximately 269.82 K (the key rounds to 269.9 K).',5:'The linear relation is N=2C−100; at −273.15 °C, absolute zero is −646.3 °N.'}[n]
+            p.frq(str(n),prompt,answer,points=weight,page=b['page'])
+    contributions=['Invented the first commercial steam engine','Introduced latent heat and specific heat','Recognized the importance of blackbody radiation',
+        'Combined Charles’s, Boyle’s and Gay-Lussac’s gas laws','Connected electrochemical cell voltage to thermodynamics',
+        'Gas volume is inversely proportional to pressure in a closed system at constant temperature','Considered the father of thermodynamics','Used thermodynamics to predict black-hole behavior']
+    choices=[{'id':c,'text':t} for c,t in zip('ABCDEFGH',contributions)]
+    for n,name,code in zip(range(15,23),['Sir John Leslie','Robert Boyle','Thomas Savery','Joseph Black','Emile Clapeyron','Walter Nernst','Stephen Hawking','Nicolas Sadi Carnot'],'CFABDEHG'):
+        p.mcq(f'H-{n}',f'Match {name} to a thermodynamic contribution.',choices,code,page=4)
+    assert len(p.test['questions'])==25 and sum(q['points'] for q in p.test['questions'])==45
+    p.finish()
+
+
+if 'NAJKGgC-OeM' in SOURCES:
+    p=Paper('NAJKGgC-OeM',competition='Captain’s Summer Exchange — Union County Vocational Technical Schools',year=2025,
+        difficulty='Medium',difficultyReason='Oceanography recall is followed by written explanations of ENSO, sediments, currents, Ekman balance and continental-margin diagrams.',
+        topics=['Oceanography','ENSO','Waves','Ocean currents','Marine sediments','Plate tectonics'],topicMatch='different',
+        alignment='Historical oceanography rotation differs from the 2027 freshwater focus; water circulation and hydrology concepts overlap.',
+        scoringBasis='Thirty one-point MCQs and seven written problems with published subpart weights would total 94. MCQ 5 incorrectly asks about rapid pressure change while keying the density-defined pycnocline; it is retained as an unscored correction, leaving 93 points. Written question 7’s six diagram labels are transcribed from the published key image. The cover dates CSE 2025 while the archive indexes 2026.')
+    qt='\n\f\n'.join(structure_helpers['read_pages'](p.source['paperPath']))
+    kt='\n\f\n'.join(structure_helpers['read_pages'](p.source['keyPath']))
+    qm,qf=re.split(r'Open\s+Ended\s+Section',qt,maxsplit=1)
+    km,kf=re.split(r'Open\s+Ended\s+Question\s+Answer\s+Key:',kt,maxsplit=1)
+    mc,fr=numbered(qm.split('\f')),numbered(qf.split('\f'))
+    mk,fk=numbered(km.split('\f')),numbered(kf.split('\f'))
+    assert len(mc)==len(mk)==30 and len(fr)==len(fk)==7
+    for n,b in mc.items():
+        prompt,choices=options(b['text'])
+        if n==5:
+            p.frq('MC-5',prompt+' Explain the terminology error. Unscored correction.',
+                'The published key selects pycnocline, which means a layer of rapid density change, not rapid pressure change. Thermocline describes rapid temperature change. Pressure generally increases with depth rather than defining the pycnocline.',points=0,page=b['page'])
+        else:
+            code=mk[n]['text'].strip()
+            assert re.fullmatch('[A-D]',code),n
+            p.mcq(f'MC-{n}',prompt,choices,code,page=b['page'])
+    offset=qm.count('\f')
+    for n,b in fr.items():
+        answer=fk[n]['text']
+        if n==7:
+            answer+=' Diagram labels by location: continental shelf (shallow nearshore platform); continental slope (steep drop); continental rise (base of slope); abyssal plain (flat deep floor); continental crust (beneath shelf/slope); oceanic crust (beneath deep ocean floor). One point per diagram label, plus one for continental shelf as the diverse marine habitat.'
+        p.frq(f'FR-{n}',b['text'],answer,points=10 if n<=5 else 7,page=b['page']+offset)
+    assert len(p.test['questions'])==37 and sum(q['points'] for q in p.test['questions'])==93
+    p.finish()
+
+
+if '2DVBw1Ll-v0' in SOURCES:
+    p=Paper('2DVBw1Ll-v0',difficulty='Hard',difficultyReason='Multi-step calorimetry, Gibbs energy, equilibrium, Hess’s law and material-property explanations require sustained mathematical reasoning.',
+        topics=['Thermodynamics','Calorimetry','Chemical equilibrium','Physical properties','Periodic trends'],topicMatch='different',
+        alignment='Historical thermodynamics and physical-properties rotation differs from the 2027 kinetics and gases focus; gas work and energy concepts overlap.',
+        scoringBasis='Published item weights sum to 112 rather than the cover’s 110. Part II question 5 incorrectly asserts that sugar is insoluble and nonpolar; retain it as an unscored correction, leaving 108 points. Part I questions 10 and 11 correct the key’s van’t Hoff sign and inconsistent-temperature Gibbs calculation. Part II question 7 uses the student paper’s diameter and correct SI forces, retaining its seven rubric steps and final length. Periodic-table marking accepts named elements or a verbal location in the text interface, with the highest electron affinity identified as chlorine rather than the key’s overly broad top-right location.')
+    qs=structure_helpers['sections'](structure_helpers['read_pages'](p.source['paperPath']))
+    ks=structure_helpers['sections'](structure_helpers['read_pages'](p.source['keyPath']))
+    assert {s:len(v) for s,v in qs.items()}=={'I':13,'II':9}
+    fixes={
+        'I-10':'The equilibrium constant increases with temperature, so the forward reaction is endothermic. ln(525/375)=−Delta H/R × (1/298−1/273), yielding Delta H≈+9.10 kJ/mol (3 points). Delta G at 273 K = −RT ln375≈−13.45 kJ/mol, so Delta S=(Delta H−Delta G)/273≈+82.6 J/(mol K) (3 points). Accept rounding consistent with the given constants. The printed key has the wrong sign for Delta H and consequently the wrong Delta S.',
+        'I-11':'At equilibrium Q=K. Removing half of B for A⇌2B reduces Q to K/4 (2 points for establishing equilibrium K, 2 for Q=K/4). Delta G=RT ln(Q/K)=−RT ln4 = −8.3145×400.0×ln4≈−4610.6 J/mol, or −4.61 kJ/mol (3 points). The printed key reuses Delta G° from a different temperature and gives an inconsistent result.',
+        'II-5':'The premise is incorrect: both table salt and sugar dissolve in water. Salt dissociates into ions stabilized by ion–dipole interactions. Sugar has polar hydroxyl groups that hydrogen-bond with water. This correction is unscored; the published assertion that sugar is nonpolar and insoluble is not used for grading.',
+        'II-7':'Use the student paper’s 3 cm diameter: radius 0.015 m and area pi(0.015)^2≈7.07×10^-4 m² (1 point). Initial force 0.400×9.8=3.92 N and stress≈5546 Pa (1). Initial strain=0.01/10=0.001 (1). Young’s modulus≈5.55×10^6 Pa (1). New force=0.600×9.8=5.88 N and stress≈8318 Pa (1). New extension is 0.015 m, also obtained directly by scaling the force by 1.5 (1). Final length=10.015 m (1). The key mistakenly uses circumference and inconsistent forces; the final length agrees because the area cancels.',
+        'II-8':'Two points per trend: largest atomic radius toward the bottom left (francium in the simplified school trend); highest ionization energy is helium at the top right; highest electron affinity is chlorine among the halogens, not the noble gases; largest molar mass toward the bottom right of the supplied periodic table. Accept verbal locations where appropriate instead of marking the PDF.',
+        'II-9':'Four points per explanation: atomic radius increases down groups as shells are added and generally decreases across a period as effective nuclear charge rises; ionization energy generally rises across a period and upward as electrons are more tightly held, with helium highest; electron affinity reflects the energetics of adding an electron, generally strongest for halogens, with chlorine exceeding fluorine because of fluorine’s compact-shell repulsion and noble gases being unfavorable; molar mass generally increases with increasing proton and neutron count down and across the table, with exceptions. Do not require the source key’s incorrect implication that noble gases have the highest electron affinity.',
+    }
+    for section,items in qs.items():
+        for n,b in items.items():
+            id=f'{section}-{n}'
+            marks=re.findall(r'\((\d+)\s*pt\)',b['text'])
+            assert len(marks)==1,id
+            weight=0 if id=='II-5' else int(marks[0])
+            answer=ks[section][n]['text']
+            if id in fixes:
+                answer=fixes[id]
+            accepted=['endothermic'] if id=='I-4' else []
+            prompt=b['text']+(' This original premise is incorrect; explain why. Unscored correction.' if id=='II-5' else '')
+            p.frq(id,prompt,answer,points=weight,page=b['page'],accepted=accepted)
+    assert len(p.test['questions'])==22 and sum(q['points'] for q in p.test['questions'])==108
+    p.finish()
+
+
 manifest = Path('documents/practice-import-sources.json')
 existing = json.loads(manifest.read_text(encoding='utf-8'))
 for source in reviewed:

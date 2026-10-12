@@ -177,8 +177,10 @@ test('the builder combines standalone questions from several tests and repairs m
   assert.ok(new Set(pool.map((c) => c.test.id)).size >= 3);
   assert.ok(pool.every((c) => c.question.points > 0 && c.question.prompt!.trim().length >= 12));
   assert.ok(rankedPoolSummary('C').some((event) => event.eventId === 'water-quality'));
-  // Division C Disease Detectives has only letter-coded answer fields, which need the paper.
-  assert.equal(rankedQuestionPool('C', 'disease-detectives').length, 0);
+  // The converted Yale paper supplies standalone MCQs; the older letter-only paper still does not.
+  const diseasePool = rankedQuestionPool('C', 'disease-detectives');
+  assert.ok(diseasePool.some((candidate) => candidate.test.id === 'scioly-9idzuozwmxm-c'));
+  assert.ok(diseasePool.every((candidate) => candidate.test.id !== 'bullso-2026-disease-detectives-c'));
 
   const paper = await buildRankedPaper('C', 'water-quality', 20, gemini(balanced).config);
   assert.equal(paper.questions.length, 20);
@@ -228,7 +230,8 @@ test('the builder combines standalone questions from several tests and repairs m
   };
   await assert.rejects(buildRankedPaper('C', 'water-quality', 10, down), { status: 503 });
   await assert.rejects(buildRankedPaper('C', 'water-quality', 10, { apiKey: '' }), { status: 503 });
-  await assert.rejects(buildRankedPaper('C', 'disease-detectives', 10, gemini(balanced).config), {
+  // A build event has no written tests at all, whatever the catalog later gains.
+  await assert.rejects(buildRankedPaper('C', 'boomilever', 10, gemini(balanced).config), {
     status: 409,
   });
 });
@@ -446,6 +449,24 @@ test('ranked tests reach every seated student, lock results until release, and a
   const late = await submitRanked(db, cal, { testId, answers }, offline);
   assert.equal(late.test.score!.score, key.questions[0].points);
 
+  // An abandoned attempt closes and grades itself once its time is up, without any click.
+  await assignRanked(db, home.teacher, { testId, studentIds: [eve.id], due });
+  await startRanked(db, eve, testId);
+  await saveRankedDraft(db, eve, { testId, answers: partial });
+  [listed] = await listRankedForInstructor(db, home.teacher, ai.config);
+  const eveOpen = listed.assignments.find((row) => row.studentId === eve.id)!;
+  assert.equal(eveOpen.status, 'in-progress');
+  raw
+    .prepare('UPDATE ranked_assignments SET started_at=? WHERE id=?')
+    .run(new Date(Date.now() - 3 * 3600_000).toISOString(), eveOpen.assignmentId);
+  [listed] = await listRankedForInstructor(db, home.teacher, ai.config);
+  const eveClosed = listed.assignments.find((row) => row.studentId === eve.id)!;
+  assert.equal(eveClosed.status, 'submitted');
+  assert.equal(eveClosed.score!.score, key.questions[0].points);
+  assert.equal(eveClosed.score!.grading, 'complete');
+  assert.equal((await rankedForStudent(db, eve, testId)).test.status, 'submitted');
+  assert.equal((await dashboardFor(db, eve)).stats.ranked, 1);
+
   // Leaving the school clears seats and unstarted work but keeps submitted attempts.
   await assignRanked(db, home.teacher, { testId, studentIds: [eve.id], due });
   await leaveCommunity(db, eve);
@@ -459,7 +480,7 @@ test('ranked tests reach every seated student, lock results until release, and a
     (await listTeams(db, home.teacher)).find((team) => team.id === one)!.slots['water-quality'],
     [null, ben.id],
   );
-  assert.equal(raw.prepare('SELECT COUNT(*) AS n FROM ranked_assignments').get()!.n, 3);
+  assert.equal(raw.prepare('SELECT COUNT(*) AS n FROM ranked_assignments').get()!.n, 4);
 
   const { id: unused } = await createRankedTest(
     db,

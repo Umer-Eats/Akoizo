@@ -192,6 +192,20 @@ test('difficulty is assessed independently of competition level and combines wit
   invalid.difficulty = 'Hard';
   invalid.difficultyReason = '';
   assert.throws(() => validatePracticeCatalog([invalid]), /Invalid practice catalog/);
+  const evergreen = findPracticeTest('C', 'scioly-golgkcarvyw-c');
+  assert.equal(evergreen.maxScore, 86);
+  assert.equal(evergreen.questions.find((q) => q.id === '1-1')!.points, 0);
+  assert.equal(gradePractice(evergreen, { '1-2': 'E', '3-1-1': 'DNA' }).score, 1.5);
+  const yale = findPracticeTest('C', 'scioly-9idzuozwmxm-c');
+  assert.equal(yale.maxScore, 55);
+  assert.equal(yale.questions.find((q) => q.id === '4')!.points, 0);
+  assert.equal(yale.questions.filter((q) => q.id.startsWith('TB-')).length, 8);
+  assert.equal(findPracticeTest('C', 'scioly-k0d3cujlmuw-c').maxScore, 120);
+  assert.equal(findPracticeTest('C', 'scioly-g5jcu2kgktg-c').maxScore, 45);
+  const union = findPracticeTest('C', 'scioly-najkggc-oem-c');
+  assert.equal(union.questionCount, 37);
+  assert.equal(union.maxScore, 93);
+  assert.equal(union.questions.find((q) => q.id === 'MC-5')!.points, 0);
 });
 
 test('catalog enforces the current season, event and student division', () => {

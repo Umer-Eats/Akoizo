@@ -104,10 +104,10 @@ function CreateRankedTest({
   return (
     <form className="ranked-create" onSubmit={create}>
       <h3>
-        <Sparkles size={18} aria-hidden="true" /> Build a ranked test with Gemini
+        <Sparkles size={18} aria-hidden="true" /> Build a ranked test with Akoizo
       </h3>
       <p>
-        Gemini picks questions from several converted tests of one event and combines them into a
+        Akoizo picks questions from several converted tests of one event and combines them into a
         single new test. The original questions and answer keys are used unchanged.
       </p>
       <div className="ranked-create-fields">
@@ -188,7 +188,7 @@ function CreateRankedTest({
       )}
       <div>
         <button className="button button-primary" type="submit" disabled={busy || !chosen}>
-          {busy ? 'Gemini is choosing questions…' : 'Build ranked test'}
+          {busy ? 'Akoizo is choosing questions…' : 'Build ranked test'}
         </button>
       </div>
     </form>
