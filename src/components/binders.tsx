@@ -333,7 +333,7 @@ export function Binders({ eventId }: { eventId?: string }) {
               <h2>Your {event.name} study binder.</h2>
               <p>
                 In-depth explanations, worked examples, a labeled diagram and a real photograph on
-                nearly every page, and a full table of contents—written by Gemini around the 2027
+                nearly every page, and a full table of contents—written by Akoizo around the 2027
                 Division C rules.
               </p>
             </div>
@@ -441,7 +441,7 @@ export function Binders({ eventId }: { eventId?: string }) {
                 </label>
                 <p>
                   Up to 6 PDFs or images, 2 MB each and 3 MB total. Use readable, unlocked PDFs.
-                  Gemini works their information into the matching sections and can place your
+                  Akoizo works their information into the matching sections and can place your
                   images on the page.
                 </p>
               </div>
@@ -464,7 +464,7 @@ export function Binders({ eventId }: { eventId?: string }) {
               )}
               <p className="sheet-sharing">
                 <Globe2 size={18} /> Generated binders are shared with all signed-in members across
-                every school. Notes and uploads go to Gemini; included content and images become
+                every school. Notes and uploads go to Akoizo; included content and images become
                 part of the shared binder. Only upload material you can share.
               </p>
               <button className="button button-primary" type="submit">
@@ -494,9 +494,9 @@ export function Binders({ eventId }: { eventId?: string }) {
                   : 'Planning the sections and table of contents'}{' '}
               ·{' '}
               {retrying
-                ? `Gemini was slow to answer; retrying (${retrying} of 4)`
+                ? `Akoizo was slow to answer; retrying (${retrying} of 4)`
                 : busy
-                  ? 'Generating with Gemini'
+                  ? 'Generating with Akoizo'
                   : job.status === 'ready'
                     ? 'Ready for layout check'
                     : 'Paused; progress saved'}

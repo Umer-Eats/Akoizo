@@ -151,7 +151,7 @@ export async function advanceBinder(db: Database, profile: Profile, id: string, 
         if (!merged.added)
           throw new AppError(
             502,
-            'Gemini repeated topics that are already planned. Your outline is saved; resume to retry.',
+            'Akoizo repeated topics that are already planned. Your outline is saved; resume to retry.',
           );
         plan = merged.plan;
       }

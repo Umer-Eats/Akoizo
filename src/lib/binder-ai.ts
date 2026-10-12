@@ -120,7 +120,7 @@ async function call(
   } catch {
     throw new AppError(
       502,
-      'Gemini could not finish this batch. Your progress is saved; use Resume to try again.',
+      'Akoizo could not finish this batch. Your progress is saved; use Resume to try again.',
     );
   }
 }
@@ -142,7 +142,7 @@ export async function outlineBinder(input: BinderInput, config: BinderAIConfig =
   } catch {
     throw new AppError(
       502,
-      'Gemini returned an incomplete outline. Your binder is saved; resume to retry.',
+      'Akoizo returned an incomplete outline. Your binder is saved; resume to retry.',
     );
   }
 }
@@ -204,7 +204,7 @@ sources: 1–4 short entries (<=150 characters) naming the rule section and any 
   } catch {
     throw new AppError(
       502,
-      'Gemini returned a page that did not meet the content requirements. Saved pages are safe; resume to retry this batch.',
+      'Akoizo returned a page that did not meet the content requirements. Saved pages are safe; resume to retry this batch.',
     );
   }
   // Uploaded images take the photo slot; otherwise look for a licensed Commons file.

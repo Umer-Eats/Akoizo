@@ -171,7 +171,7 @@ export async function generateSheet(
   } catch {
     throw new AppError(
       502,
-      'Gemini could not finish a complete, dense sheet. Try again, or narrow your exclusions if they remove most of the event.',
+      'Akoizo could not finish a complete, dense sheet. Try again, or narrow your exclusions if they remove most of the event.',
     );
   }
 }

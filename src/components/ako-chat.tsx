@@ -214,7 +214,7 @@ export function AkoChat({
         </button>
       </form>
       <p className="ako-chat-note">
-        Ako’s replies come from Google Gemini and can be wrong. Don’t share personal information.
+        Ako’s replies come from Akoizo and can be wrong. Don’t share personal information.
       </p>
     </section>
   );

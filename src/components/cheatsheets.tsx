@@ -325,7 +325,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
             <span className="eyebrow">ONE SHEET. BOTH SIDES.</span>
             <h2 id="sheet-create-title">Your event, condensed.</h2>
             <p>
-              Build a dense {event.name} reference with Gemini, grounded in the 2027 Division C
+              Build a dense {event.name} reference with Akoizo, grounded in the 2027 Division C
               rules.
             </p>
           </div>
@@ -376,7 +376,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
               placeholder="For example: basic definitions, parts of the microscope, or formulas I know by heart. Be specific about the topics to exclude."
             />
             <small>
-              Gemini will skip these topics and use the space for other material.{' '}
+              Akoizo will skip these topics and use the space for other material.{' '}
               {exclusions.length.toLocaleString()} / 4,000
             </small>
           </label>
@@ -396,7 +396,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
             </label>
             <p>
               Up to 4 files, 2 MB total. Images/PDFs: 900 KB each. TXT/CSV: 100 KB each. Images
-              appear on the sheet; Gemini condenses PDF and text content.
+              appear on the sheet; Akoizo condenses PDF and text content.
             </p>
           </div>
           {uploads.length > 0 && (
@@ -419,7 +419,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
           )}
           <p className="sheet-sharing">
             <Globe2 size={17} /> Every generated sheet is shared across Division C communities. Your
-            school and generation date appear on the card. Notes and files go to Gemini; included
+            school and generation date appear on the card. Notes and files go to Akoizo; included
             content and images are visible to other students.
           </p>
           <button type="submit" className="button button-primary" disabled={generating || reading}>
@@ -432,7 +432,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
           </button>
           {generating && (
             <p role="status">
-              Gemini is choosing high-value content, figures and diagrams. This can take about two
+              Akoizo is choosing high-value content, figures and diagrams. This can take about two
               minutes. Keep this page open for the two-page fit check.
             </p>
           )}
