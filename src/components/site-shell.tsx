@@ -70,6 +70,13 @@ export function Header() {
         <div className="header-right">
           {profile ? (
             <>
+              <Link
+                className="login-link"
+                aria-current={path === '/community' ? 'page' : undefined}
+                href="/community"
+              >
+                Community
+              </Link>
               <Link className="login-link" href={`/dashboard/${profile.role}`}>
                 My dashboard
               </Link>
@@ -121,6 +128,9 @@ export function Header() {
             <Link href="/contact">Contact</Link>
             {profile ? (
               <>
+                <Link href="/community" aria-current={path === '/community' ? 'page' : undefined}>
+                  Community
+                </Link>
                 <Link href={`/dashboard/${profile.role}`}>My dashboard</Link>
                 <Link href={`/settings/${profile.role}`}>Settings</Link>
                 <Link href="/dashboard/binders">Binders</Link>

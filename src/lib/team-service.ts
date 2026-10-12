@@ -33,15 +33,20 @@ async function teamFor(db: Database, instructor: Profile, id: unknown) {
 
 export async function listTeams(db: Database, instructor: Profile): Promise<TeamSheet[]> {
   requireInstructor(instructor);
+  return communityTeams(db, instructor);
+}
+
+/** Read-only team sheets scoped to an authenticated member's community. */
+export async function communityTeams(db: Database, member: Profile): Promise<TeamSheet[]> {
   const teams = await db.all(
     'SELECT id,name,division FROM teams WHERE school_id=? ORDER BY created_at,id',
-    instructor.schoolId,
+    member.schoolId,
   );
   const seats = await db.all(
     `SELECT ts.team_id,ts.event_id,ts.slot,ts.student_id FROM team_slots ts
      JOIN teams t ON t.id=ts.team_id JOIN users u ON u.id=ts.student_id
      WHERE t.school_id=? AND u.school_id=t.school_id AND ${active}`,
-    instructor.schoolId,
+    member.schoolId,
   );
   return teams.map((team) => {
     const division = team.division as Division;

@@ -6,6 +6,7 @@ import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember, dashboardFor } from '../src/lib/school-service.ts';
 import { createTeam, listTeams, updateTeam } from '../src/lib/team-service.ts';
 import { schoolAnalytics } from '../src/lib/analytics-service.ts';
+import { communityFor } from '../src/lib/community-service.ts';
 
 // Browser-only account mocks over an in-memory database. The real analytics service runs
 // unchanged, and no live account or school record is involved.
@@ -178,6 +179,7 @@ const handlers = {
   '/api/dashboard': () => dashboardFor(db, teacher.profile),
   '/api/teams': () => listTeams(db, teacher.profile),
   '/api/analytics': () => schoolAnalytics(db, teacher.profile),
+  '/api/community': () => communityFor(db, students['Amy Chen']),
 };
 await page.route('**/api/**', async (route) =>
   route.fulfill({ json: (await handlers[new URL(route.request().url()).pathname]?.()) ?? [] }),
@@ -291,9 +293,56 @@ try {
   await team.getByRole('button', { name: 'All teams' }).click();
   await expect(overview).toBeVisible();
 
+  // A student sees the same live analytics, static team sheets and all members.
+  handlers['/api/auth/profile'] = () => students['Amy Chen'];
+  const mutations = [];
+  page.on('request', (request) => {
+    if (/\/api\/(community|teams|analytics)/.test(request.url()) && request.method() !== 'GET')
+      mutations.push(request.method());
+  });
+  await page.clock.install();
+  await page.goto(`${base}/community`);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    teacher.profile.schoolCommunityName,
+  );
+  await expect(page.getByRole('link', { name: 'Community', exact: true })).toHaveAttribute(
+    'aria-current',
+    'page',
+  );
+  await expect(tile(page, 'Students')).toHaveText('6');
+  await fits('community-analytics');
+  await page.getByRole('tab', { name: 'Teams (2)' }).click();
+  await expect(page.getByRole('region', { name: 'Varsity events' })).toContainText('Amy Chen');
+  await expect(
+    page.getByRole('button', { name: /Add student|Delete team|Create team/ }),
+  ).toHaveCount(0);
+  await expect(page.getByLabel('Team name', { exact: true })).toHaveCount(0);
+  await fits('community-teams');
+  await page.getByRole('tab', { name: 'Members (7)' }).click();
+  await expect(page.getByRole('region', { name: 'Community members' })).toContainText(
+    'Coach Rivera',
+  );
+  await page.getByRole('textbox', { name: 'Search members' }).fill('Fay');
+  await expect(page.locator('#community-panel tbody tr')).toHaveCount(1);
+  await expect(page.locator('#community-panel tbody tr')).toContainText('Fay Wong');
+  await page.getByRole('textbox', { name: 'Search members' }).fill('');
+  await fits('community-members');
+  const newTeam = await createTeam(db, teacher.profile, { name: 'New live team', division: 'C' });
+  await page.evaluate(() => window.dispatchEvent(new Event('focus')));
+  await expect(page.getByRole('tab', { name: 'Teams (3)' })).toBeVisible();
+  await page.getByRole('tab', { name: 'Teams (3)' }).click();
+  await expect(page.getByRole('button', { name: 'New live team · C' })).toBeVisible();
+  await updateTeam(db, teacher.profile, { teamId: newTeam.id, name: 'Automatically updated' });
+  await page.clock.fastForward(31_000);
+  await expect(page.getByRole('button', { name: 'Automatically updated · C' })).toBeVisible();
+  await updateTeam(db, teacher.profile, { teamId: newTeam.id, name: 'Manually refreshed' });
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Manually refreshed · C' })).toBeVisible();
+  assert.deepEqual(mutations, []);
+
   assert.deepEqual(errors, []);
   console.log(
-    'Analytics browser checks passed: blue sidebar button, school tiles, team ranking by measure, weekly trend tooltip, event heatmap, team drill-down, student points, itemized accuracy by event, layouts.',
+    'Analytics and community browser checks passed: instructor analytics, student community analytics, read-only teams, searchable member directory, focus/automatic/manual refresh, no mutations, desktop/mobile layouts in both themes.',
   );
 } catch (error) {
   await page.screenshot({ path: `${shots}/failure.png`, fullPage: true }).catch(() => {});

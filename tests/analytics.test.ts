@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember, leaveCommunity, type Database } from '../src/lib/school-service.ts';
-import { createTeam, updateTeam } from '../src/lib/team-service.ts';
+import { createTeam, updateTeam, deleteTeam, listTeams } from '../src/lib/team-service.ts';
+import { communityFor } from '../src/lib/community-service.ts';
 import { schoolAnalytics } from '../src/lib/analytics-service.ts';
 import { accuracy, analyticsGroups, summarize, weeklyAccuracy } from '../src/lib/analytics.ts';
 
@@ -65,6 +66,63 @@ const written = (earned: number, possible: number, needsReview = false) => ({
   earned,
   possible,
   criteria: [{ id: 'a', points: possible, earned, needsReview }],
+});
+
+test('community members can read live data from only their community and cannot edit teams', async () => {
+  const { db, raw } = fixture();
+  try {
+    const home = await school(db, 'coach', 'ppchs', ['amy', 'ben']);
+    const away = await school(db, 'other-coach', 'ppcms-central', ['zed']);
+    const amy = home.members[0];
+    const { id } = await createTeam(db, home.teacher, { name: 'Varsity', division: 'C' });
+    await createTeam(db, away.teacher, { name: 'Other school', division: 'C' });
+    await updateTeam(db, home.teacher, {
+      teamId: id,
+      eventId: 'forensics',
+      slot: 0,
+      studentId: amy.id,
+    });
+    const readOnlyDb = {
+      ...db,
+      batch: async () => {
+        throw new Error('Reads must never write');
+      },
+    };
+    const data = await communityFor(readOnlyDb, amy);
+    assert.deepEqual(data.analytics, await schoolAnalytics(db, home.teacher));
+    assert.deepEqual(
+      data.members.map((m) => m.name),
+      ['amy', 'ben', 'coach'],
+    );
+    assert.equal(data.analytics.teams[0].slots.forensics[0], amy.id);
+    assert.equal(data.analytics.teams.length, 1);
+    assert.equal(
+      data.members.some((m) => m.id === away.teacher.id),
+      false,
+    );
+    assert.deepEqual(Object.keys(data.members[0]).sort(), ['division', 'id', 'name', 'role']);
+    await assert.rejects(createTeam(db, amy, { name: 'Unauthorized', division: 'C' }), {
+      status: 403,
+    });
+    await assert.rejects(updateTeam(db, amy, { teamId: id, name: 'Unauthorized' }), {
+      status: 403,
+    });
+    await assert.rejects(deleteTeam(db, amy, id), { status: 403 });
+    await assert.rejects(listTeams(db, amy), { status: 403 });
+    await assert.rejects(communityFor(db, { ...amy, schoolId: away.teacher.schoolId }), {
+      status: 403,
+    });
+    await updateTeam(db, home.teacher, { teamId: id, name: 'Updated by teacher' });
+    assert.equal((await communityFor(db, amy)).analytics.teams[0].name, 'Updated by teacher');
+    await leaveCommunity(db, home.members[1]);
+    assert.deepEqual(
+      (await communityFor(db, amy)).members.map((m) => m.name),
+      ['amy', 'coach'],
+    );
+    await assert.rejects(communityFor(db, home.members[1]), { status: 403 });
+  } finally {
+    raw.close();
+  }
 });
 
 test('school analytics itemize accuracy, points and assigned work per student and event', async () => {

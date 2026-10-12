@@ -424,7 +424,7 @@ function Meter({ value }: { value: number | null }) {
   );
 }
 
-export function InstructorAnalytics() {
+export function InstructorAnalytics({ data: suppliedData }: { data?: SchoolAnalytics } = {}) {
   const { request } = useAuth();
   const [data, setData] = useState<SchoolAnalytics | null>(null);
   const [error, setError] = useState('');
@@ -436,6 +436,11 @@ export function InstructorAnalytics() {
   const [studentMetricId, setStudentMetric] = useState<MetricId>('points');
   const [eventId, setEventId] = useState('');
   useEffect(() => {
+    if (suppliedData) {
+      setData(suppliedData);
+      setLoading(false);
+      return;
+    }
     let active = true;
     setLoading(true);
     request<SchoolAnalytics>('/api/analytics')
@@ -454,7 +459,7 @@ export function InstructorAnalytics() {
     return () => {
       active = false;
     };
-  }, [request, revision]);
+  }, [request, revision, suppliedData]);
   const groups = useMemo(() => (data ? analyticsGroups(data) : []), [data]);
   if (!data)
     return error ? (
@@ -476,7 +481,7 @@ export function InstructorAnalytics() {
       ? summary
       : { ...summary, points: ids.reduce((sum, id) => sum + (names.get(id)?.points ?? 0), 0) };
   };
-  const refresh = (
+  const refresh = !suppliedData && (
     <button
       className="button button-small button-glass"
       onClick={() => setRevision((n) => n + 1)}
@@ -689,7 +694,11 @@ export function InstructorAnalytics() {
       <div className="empty-state">
         <Users size={32} />
         <h2>Analytics start with your roster.</h2>
-        <p>Share your school password, then build teams. Scores and points appear here.</p>
+        <p>
+          {suppliedData
+            ? 'Scores and points appear here as community members study.'
+            : 'Share your school password, then build teams. Scores and points appear here.'}
+        </p>
       </div>
     );
   const shown = groups.filter((candidate) => candidate.division === division);

@@ -2,7 +2,7 @@ import { AppError, type Profile } from './domain.ts';
 import type { Division } from './events.ts';
 import type { AnalyticsActivity, SchoolAnalytics } from './analytics.ts';
 import type { Database } from './school-service.ts';
-import { listTeams } from './team-service.ts';
+import { communityTeams } from './team-service.ts';
 
 const active = 'NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)';
 const roster = `u.school_id=? AND u.role='student' AND ${active}`;
@@ -18,7 +18,12 @@ const questionSum = (field: string, kind: '=' | '>') =>
 /** Every score, point and assignment for one school's roster, for the instructor's analytics. */
 export async function schoolAnalytics(db: Database, instructor: Profile): Promise<SchoolAnalytics> {
   if (instructor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
-  const school = instructor.schoolId;
+  return communityAnalytics(db, instructor);
+}
+
+/** The same read-only analytics for members of the authenticated community. */
+export async function communityAnalytics(db: Database, member: Profile): Promise<SchoolAnalytics> {
+  const school = member.schoolId;
   const students = await db.all(
     `SELECT u.id,u.display_name,u.division,
       COALESCE((SELECT SUM(l.points) FROM points_ledger l WHERE l.student_id=u.id),0) AS points
@@ -78,7 +83,7 @@ export async function schoolAnalytics(db: Database, instructor: Profile): Promis
     target.completed += Number(work.completed);
   }
   return {
-    teams: await listTeams(db, instructor),
+    teams: await communityTeams(db, member),
     students: students.map((student) => ({
       id: String(student.id),
       name: String(student.display_name || 'Learner'),

@@ -1,0 +1,46 @@
+@layer components {
+  .community-page {
+    padding-top: 72px;
+    padding-bottom: 80px;
+  }
+  .community-status {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 24px 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .community-status > span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .community-tabs {
+    margin-bottom: 28px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .community-seat {
+    display: block;
+    padding: 8px;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+  }
+  .community-page .search-field {
+    margin-bottom: 24px;
+  }
+  .community-page .team-sheet-title h3 {
+    margin: 0;
+    margin-right: auto;
+  }
+  .header-right a[aria-current='page'] {
+    color: var(--accent);
+  }
+  @media (max-width: 600px) {
+    .community-page {
+      padding-top: 40px;
+    }
+  }
+}
