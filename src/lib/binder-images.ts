@@ -4,6 +4,10 @@ import type { BinderPhoto } from './binder-types.ts';
 const api = 'https://commons.wikimedia.org/w/api.php';
 // Licences that allow redistribution in a shared, exported binder with credit.
 const reusable = /^(public domain|pd\b|cc0|cc[ -]by(-sa)?[ -]\d)/i;
+// Labels in a figure only help if the student can read them: non-Latin titles and files tagged
+// with another language sort last.
+const foreign =
+  /[^\x20-ɏ]|[ _-](heb|deu|ger|fra|esp|rus|de|fr|es|it|ru|nl|pl|he|ar|ja|zh|pt)\.[a-z]+$/i;
 const plain = (html: unknown) =>
   String(html ?? '')
     .replace(/<[^>]+>/g, ' ')
@@ -25,12 +29,23 @@ type CommonsPage = {
   }[];
 };
 
+// Commons search requires every word to match, so a descriptive phrase often finds nothing.
+// Fall back to its leading words, which carry the subject ("oxbow lake", "galena crystal").
 export async function findBinderPhoto(
   query: string,
   fetcher: typeof fetch = fetch,
-  skip: Set<string> = new Set(),
 ): Promise<BinderPhoto | null> {
-  if (!query.trim()) return null;
+  const words = query.split(/\s+/).filter(Boolean);
+  const attempts = [words, words.slice(0, 3), words.slice(0, 2)]
+    .filter((w, i, all) => w.length && (i === 0 || w.length < all[i - 1].length))
+    .map((w) => w.join(' '));
+  for (const attempt of attempts) {
+    const photo = await searchCommons(attempt, fetcher);
+    if (photo) return photo;
+  }
+  return null;
+}
+async function searchCommons(query: string, fetcher: typeof fetch): Promise<BinderPhoto | null> {
   const params = new URLSearchParams({
     action: 'query',
     format: 'json',
@@ -50,12 +65,24 @@ export async function findBinderPhoto(
     });
     if (!response.ok) return null;
     const pages = Object.values<CommonsPage>((await response.json())?.query?.pages ?? {});
-    pages.sort((a, b) => (a.index ?? 0) - (b.index ?? 0));
+    // Search rank alone often leads with a tangential file, so prefer titles that name the subject.
+    const stems = query
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((w) => w.length > 3)
+      .map((w) => w.slice(0, 5));
+    const named = (p: CommonsPage) =>
+      stems.filter((stem) => (p.title ?? '').toLowerCase().includes(stem)).length;
+    const unreadable = (p: CommonsPage) => (foreign.test(p.title ?? '') ? 1 : 0);
+    pages.sort(
+      (a, b) =>
+        unreadable(a) - unreadable(b) || named(b) - named(a) || (a.index ?? 0) - (b.index ?? 0),
+    );
     for (const page of pages) {
       const info = page.imageinfo?.[0];
       const license = plain(info?.extmetadata?.LicenseShortName?.value);
       const src = info?.thumburl ?? '';
-      if (!info || !reusable.test(license) || skip.has(src)) continue;
+      if (!info || !reusable.test(license)) continue;
       if (!/^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(src)) continue;
       if (!/^https:\/\/commons\.wikimedia\.org\//.test(info.descriptionurl ?? '')) continue;
       if (!/^image\/(jpeg|png|svg\+xml)$/.test(info.mime ?? '')) continue;
@@ -70,7 +97,10 @@ export async function findBinderPhoto(
           .replace(/\.[a-z]{3,4}$/i, '')
           .slice(0, 110),
         author:
-          plain(info.extmetadata?.Artist?.value).slice(0, 80) || 'Wikimedia Commons contributor',
+          plain(info.extmetadata?.Artist?.value)
+            .replace(/\(?\s*https?:\S+\s*\)?/g, '')
+            .trim()
+            .slice(0, 80) || 'Wikimedia Commons contributor',
         license: license.slice(0, 30),
       };
     }

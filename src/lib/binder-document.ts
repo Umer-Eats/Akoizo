@@ -25,11 +25,13 @@ const W = 600,
   H = 210,
   ink = '#1c2c3e',
   muted = '#52687b';
+// Height of the diagram being drawn; renderers that need less than the full canvas lower it.
+let canvas = H;
 const tone = (base: number, i: number) => binderPalette[(base + i) % binderPalette.length];
 
 // SVG has no text wrapping, so lines are broken by an average glyph width for the font size.
 function wrap(text: string, width: number, size: number, max: number, bold = false) {
-  const limit = Math.max(4, Math.floor(width / (size * (bold ? 0.58 : 0.52))));
+  const limit = Math.max(4, Math.floor(width / (size * (bold ? 0.56 : 0.5))));
   const lines: string[] = [];
   let line = '';
   for (const word of text.split(' ')) {
@@ -52,6 +54,8 @@ function lines(
   if (!text.length) return '';
   return `<text x="${x}" y="${y}" font-size="${size}" fill="${opts.fill ?? ink}"${opts.bold ? ' font-weight="700"' : ''}${opts.anchor ? ` text-anchor="${opts.anchor}"` : ''}>${text.map((t, i) => `<tspan x="${x}" dy="${i ? size * 1.22 : 0}">${esc(t)}</tspan>`).join('')}</text>`;
 }
+const superscript = (n: number) =>
+  String(n).replace(/[-0-9]/g, (c) => '⁻⁰¹²³⁴⁵⁶⁷⁸⁹'[c === '-' ? 0 : Number(c) + 1]);
 function arrow(points: [number, number][], color: string) {
   const [x1, y1] = points[points.length - 2],
     [x2, y2] = points[points.length - 1];
@@ -75,18 +79,23 @@ function card(
     body = wrap(item.detail, w - 14, 10, Math.max(1, Math.floor((h - band - 8) / 12.2)));
   return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${color}" fill-opacity=".1" stroke="${color}" stroke-width="1.5"/><path d="M${x + 6} ${y}h${w - 12}a6 6 0 0 1 6 6v${band - 6}h${-w}v${6 - band}a6 6 0 0 1 6-6z" fill="${color}"/>${badge ? `<circle cx="${x + 14}" cy="${y + band / 2}" r="8.5" fill="#fff"/><text x="${x + 14}" y="${y + band / 2 + 3.8}" font-size="10.5" font-weight="700" text-anchor="middle" fill="${color}">${badge}</text>` : ''}${lines(title, x + inset + 4, y + 17, 11.5, { fill: '#fff', bold: true })}${lines(body, x + 7, y + band + 14, 10)}`;
 }
+function cardHeight(item: BinderDiagram['items'][number], w: number, badge: boolean) {
+  const title = wrap(item.label, w - (badge ? 24 : 8) - 8, 11.5, 2, true);
+  return title.length * 14 + 10 + wrap(item.detail, w - 14, 10, 12).length * 12.2 + 12;
+}
 function grid(d: BinderDiagram, base: number, flow: boolean) {
   const n = d.items.length,
     cols = n <= 4 ? n : 3,
     rows = Math.ceil(n / cols),
     gap = flow ? 26 : 12,
     w = (W - 8 - gap * (cols - 1)) / cols,
-    h = rows === 1 ? 168 : 92,
-    top = rows === 1 ? 20 : 4,
+    // Cards are only as tall as their longest explanation, so short diagrams give space back.
+    h = Math.max(...d.items.map((item) => cardHeight(item, w, flow))),
     at = (i: number) => ({
       x: 4 + (i % cols) * (w + gap),
-      y: top + Math.floor(i / cols) * (h + 22),
+      y: 4 + Math.floor(i / cols) * (h + 22),
     });
+  canvas = rows * (h + 22) - 14;
   return d.items
     .map((item, i) => {
       const { x, y } = at(i),
@@ -120,15 +129,16 @@ function grid(d: BinderDiagram, base: number, flow: boolean) {
 function cycle(d: BinderDiagram, base: number) {
   const n = d.items.length,
     w = n <= 4 ? 190 : n === 5 ? 168 : 150,
-    h = n <= 4 ? 64 : 52,
+    h = 74,
     cx = W / 2,
-    cy = H / 2,
+    cy = 128,
     rx = 205,
-    ry = 68,
+    ry = 88,
     point = (deg: number) => {
       const a = (deg * Math.PI) / 180;
       return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)] as const;
     };
+  canvas = 256;
   let out = `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="${muted}" stroke-width="2" stroke-dasharray="5 4"/>`;
   for (let i = 0; i < n; i++) {
     // Arrowheads sit on the ring midway between neighbouring stages, pointing clockwise.
@@ -154,22 +164,26 @@ function cycle(d: BinderDiagram, base: number) {
   );
 }
 function layers(d: BinderDiagram, base: number) {
-  const n = d.items.length,
-    h = Math.min(62, (H - 8) / n),
-    top = (H - h * n) / 2;
+  let next = 4;
   return d.items
     .map((item, i) => {
-      const y = top + i * h,
-        color = tone(base, i),
+      const color = tone(base, i),
         title = wrap(item.label, 172, 11.5, 2, true),
-        body = wrap(item.detail, 386, 10.5, Math.max(1, Math.floor((h - 6) / 12.8)));
+        body = wrap(item.detail, 386, 10.5, 4),
+        h = Math.max(30, title.length * 14 + 12, body.length * 12.8 + 12),
+        y = next;
+      next += h;
+      canvas = next + 1;
       return `<rect x="4" y="${y}" width="190" height="${h - 3}" fill="${color}"/><rect x="194" y="${y}" width="402" height="${h - 3}" fill="${color}" fill-opacity=".12"/>${lines(title, 14, y + (h - 3) / 2 - (title.length - 1) * 7 + 4, 11.5, { fill: '#fff', bold: true })}${lines(body, 204, y + (h - 3) / 2 - (body.length - 1) * 6.4 + 3.5, 10.5)}`;
     })
     .join('');
 }
 function scale(d: BinderDiagram, base: number) {
   const n = d.items.length,
-    w = (W - 8) / n;
+    w = (W - 8) / n,
+    bodies = d.items.map((item) => wrap(item.detail, w - 10, 10, 9)),
+    depth = Math.max(...bodies.map((b) => b.length)) * 12.2 + 12;
+  canvas = 80 + depth;
   return (
     arrow(
       [
@@ -187,8 +201,8 @@ function scale(d: BinderDiagram, base: number) {
       .map((item, i) => {
         const x = 4 + i * w,
           title = wrap(item.label, w - 10, 11, 2, true),
-          body = wrap(item.detail, w - 10, 10, 9);
-        return `<rect x="${x}" y="32" width="${w - 2}" height="42" fill="${tone(base, i)}"/>${lines(title, x + w / 2 - 1, 57 - (title.length - 1) * 6.5, 11, { fill: '#fff', bold: true, anchor: 'middle' })}<rect x="${x}" y="76" width="${w - 2}" height="${H - 80}" fill="${tone(base, i)}" fill-opacity=".1"/>${lines(body, x + 5, 92, 10)}`;
+          body = bodies[i];
+        return `<rect x="${x}" y="32" width="${w - 2}" height="42" fill="${tone(base, i)}"/>${lines(title, x + w / 2 - 1, 57 - (title.length - 1) * 6.5, 11, { fill: '#fff', bold: true, anchor: 'middle' })}<rect x="${x}" y="76" width="${w - 2}" height="${depth}" fill="${tone(base, i)}" fill-opacity=".1"/>${lines(body, x + 5, 92, 10)}`;
       })
       .join('')
   );
@@ -206,11 +220,15 @@ function plot(d: BinderDiagram, base: number) {
     const log = lo > 0 && hi / lo > 1000;
     if (log) [lo, hi] = [Math.floor(Math.log10(lo)), Math.ceil(Math.log10(hi))];
     else if (lo === hi) [lo, hi] = [lo - 1, hi + 1];
-    else {
-      const pad = (hi - lo) * 0.06;
-      [lo, hi] = [lo >= 0 && lo - pad < 0 ? 0 : lo - pad, hi + pad];
+    let count = log ? Math.min(hi - lo, 6) : 4;
+    if (!log) {
+      // Round the axis outward to steps a student can read off: 1, 2, 2.5, or 5 times a power of ten.
+      const raw = (hi - lo) / 4,
+        unit = 10 ** Math.floor(Math.log10(raw)),
+        step = [1, 2, 2.5, 5, 10].find((m) => m * unit >= raw)! * unit;
+      [lo, hi] = [Math.floor(lo / step) * step, Math.ceil(hi / step) * step];
+      count = Math.round((hi - lo) / step);
     }
-    const count = log ? Math.min(hi - lo, 6) : 4;
     return {
       at: (v: number) => from + (((log ? Math.log10(v) : v) - lo) / (hi - lo)) * (to - from),
       ticks: Array.from({ length: count + 1 }, (_, i) => {
@@ -218,10 +236,10 @@ function plot(d: BinderDiagram, base: number) {
         return {
           pos: from + ((v - lo) / (hi - lo)) * (to - from),
           label: log
-            ? `10^${Math.round(v)}`
+            ? `10${superscript(Math.round(v))}`
             : Math.abs(v) >= 10000 || (v !== 0 && Math.abs(v) < 0.01)
               ? v.toExponential(1)
-              : String(Number(v.toPrecision(3))),
+              : String(Number(v.toPrecision(4))),
         };
       }),
     };
@@ -264,6 +282,7 @@ function plot(d: BinderDiagram, base: number) {
 // Diagrams are drawn by the app from validated labels and numbers; model text is only ever
 // escaped text content, never markup.
 export function binderDiagramSvg(d: BinderDiagram, base = 0) {
+  canvas = H;
   const body =
     d.kind === 'plot'
       ? plot(d, base)
@@ -274,7 +293,7 @@ export function binderDiagramSvg(d: BinderDiagram, base = 0) {
           : d.kind === 'scale'
             ? scale(d, base)
             : grid(d, base, d.kind === 'flow');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(d.title)}" font-family="Arial,Helvetica,sans-serif">${body}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${Math.ceil(canvas)}" role="img" aria-label="${esc(d.title)}" font-family="Arial,Helvetica,sans-serif">${body}</svg>`;
 }
 
 export function binderDocument(binder: Binder) {
@@ -358,7 +377,7 @@ figure{margin:0}figcaption{font-size:.8em;line-height:1.35;margin-top:5px;color:
 footer{position:absolute;left:.5in;right:.62in;bottom:.22in;display:flex;justify-content:space-between;gap:20px;font-size:8pt;border-top:1px solid #cbd5df;padding-top:7px;color:${muted}}
 .toc{border-right-color:#405266}.toc-body{height:9.72in;overflow:hidden}.toc h2{font-size:15pt;margin:10px 0 8px;color:${ink}}.toc h2 small{font-size:9pt;color:${muted};font-weight:400}.eyebrow{font-size:9pt;letter-spacing:2px;color:${muted};margin:0}.subtitle{color:${muted};text-transform:capitalize;margin:0 0 10px}
 .toc aside{background:#f1f5f9;padding:10px 14px;font-size:8.2pt;line-height:1.45;border-radius:6px;columns:2;column-gap:20px}.toc aside p{margin:0 0 4px;break-inside:avoid}
-.toc-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.toc-columns a{display:flex;align-items:center;gap:8px;height:13pt;color:${ink};text-decoration:none;font-size:8.4pt;line-height:13pt}.toc-columns span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toc-columns i{font-style:normal;color:${muted};font-variant-numeric:tabular-nums}
+.toc-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}.toc-columns a{display:flex;align-items:center;gap:8px;height:13pt;color:${ink};text-decoration:none;font-size:8.4pt;line-height:13pt}.toc-columns span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.toc-columns i{font-style:normal;color:${muted};font-variant-numeric:tabular-nums}
 .toc-columns .toc-section{height:26pt;padding-top:6pt;font-size:9.4pt;font-weight:700;color:var(--section);border-bottom:1.5px solid var(--section)}.toc-section b{display:grid;place-items:center;min-width:17pt;height:15pt;border-radius:4px;background:var(--section);color:#fff;font-size:8.5pt}.toc-section i{color:var(--section)}.toc-topic{padding-left:25pt;border-bottom:1px dotted #d5dde5}
 @page{size:letter;margin:0}@media print{html{scroll-behavior:auto}body{background:#fff}nav{display:none}.page{margin:0;print-color-adjust:exact;-webkit-print-color-adjust:exact}a{color:inherit;text-decoration:none}}
 </style></head><body>${nav}${tocPages}${pages}</body></html>`;
