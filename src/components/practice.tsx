@@ -11,6 +11,8 @@ import {
   Search,
 } from 'lucide-react';
 import { useAuth, authMessage } from './auth-context';
+import { useSettings } from './providers';
+import { askAkoAbout, setAkoStudy } from '@/lib/ako-study';
 import { eventsForDivision } from '@/lib/events';
 import {
   competitionLevels,
@@ -274,6 +276,7 @@ function formatElapsed(seconds: number) {
 
 export function PracticeTestView({ eventId, testId }: { eventId: string; testId: string }) {
   const { profile, request } = useAuth();
+  const { ako } = useSettings();
   const [paper, setPaper] = useState<PracticePaper | null>(null);
   const [answers, setAnswers] = useState<Answers>({});
   const [attempts, setAttempts] = useState<PracticeResult[]>([]);
@@ -374,6 +377,20 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
     const timer = window.setInterval(() => setElapsedSeconds((seconds) => seconds + 1), 1000);
     return () => window.clearInterval(timer);
   }, [pending, ready, result, viewingHistory]);
+  // Ako reads the open paper and the student's current answers when asked for help.
+  const answerFor = useRef<(id: string) => string>(() => '');
+  answerFor.current = (id) =>
+    result?.questions.find((q) => q.id === id)?.answer ?? answers[id] ?? '';
+  useEffect(() => {
+    if (!paper) return;
+    setAkoStudy({
+      testId: paper.id,
+      title: practiceTitle(paper),
+      questions: paper.questions.map(({ id, label }) => ({ id, label })),
+      answerFor: (id) => answerFor.current(id),
+    });
+    return () => setAkoStudy(null);
+  }, [paper]);
   async function submit() {
     if (pending || !paper) return;
     setPending(true);
@@ -676,6 +693,16 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                         {graded ? `${graded.earned} / ` : ''}
                         {question.points} points{review ? ' · Pending review' : ''}
                       </span>
+                      {ako.visible && (
+                        <button
+                          type="button"
+                          className="practice-ask-ako"
+                          aria-label={`Ask Ako about ${question.label}`}
+                          onClick={() => askAkoAbout(question.id)}
+                        >
+                          Ask Ako
+                        </button>
+                      )}
                     </legend>
                     <p className="practice-question-reference">
                       Paper page {question.page}

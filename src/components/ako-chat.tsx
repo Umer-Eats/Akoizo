@@ -1,0 +1,221 @@
+'use client';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { authMessage, useAuth } from './auth-context';
+import type { AkoAction } from '@/lib/ako-motion';
+import { AKO_LIMITS, type AkoReply, type AkoStudy, type AkoTurn } from '@/lib/ako-study';
+
+const questionName = (label: string) =>
+  /^[\d.]+[a-z]?$/i.test(label) ? `Question ${label}` : label;
+// How long Ako waits for the student's "why" before he loses his patience.
+const PATIENCE_MS = 60000;
+
+/** Ako's study chat for the open practice test. Stays mounted so a closed panel keeps its thread. */
+export function AkoChat({
+  open,
+  study,
+  focus,
+  onFocus,
+  onClose,
+  react,
+  style,
+}: {
+  open: boolean;
+  study: AkoStudy;
+  focus: string;
+  onFocus: (questionId: string) => void;
+  onClose: () => void;
+  react: (action: AkoAction, duration?: number) => void;
+  style: CSSProperties;
+}) {
+  const { request } = useAuth();
+  const [turns, setTurns] = useState<AkoTurn[]>([]);
+  const [draft, setDraft] = useState('');
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
+  const [why, setWhy] = useState({ pending: false, missed: 0 });
+  const session = useRef(0);
+  const draftRef = useRef('');
+  const reactRef = useRef(react);
+  const log = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLTextAreaElement>(null);
+  draftRef.current = draft;
+  reactRef.current = react;
+  // A different test or question starts a fresh thread and drops any reply still in flight.
+  useEffect(() => {
+    session.current++;
+    setTurns([]);
+    setWhy({ pending: false, missed: 0 });
+    setError('');
+    setSending(false);
+  }, [study.testId, focus]);
+  useEffect(() => {
+    if (open) input.current?.focus();
+  }, [open, focus]);
+  useEffect(() => {
+    log.current?.scrollTo({ top: log.current.scrollHeight });
+  }, [turns, sending, open]);
+  useEffect(() => {
+    if (!why.pending || sending) return;
+    const timer = setTimeout(() => {
+      if (draftRef.current.trim()) return;
+      reactRef.current('angry', 120000);
+      setTurns((current) => [
+        ...current,
+        { role: 'ako', text: 'I’m still waiting! Tell me why, in your own words.' },
+      ]);
+    }, PATIENCE_MS);
+    return () => clearTimeout(timer);
+  }, [why, sending]);
+  async function send(text: string) {
+    const message = text.trim().slice(0, AKO_LIMITS.message);
+    if (!message || sending) return;
+    const id = session.current;
+    const history = turns.slice(-AKO_LIMITS.turns);
+    setTurns((current) => [...current, { role: 'student', text: message }]);
+    setDraft('');
+    setSending(true);
+    setError('');
+    react('thinking', 60000);
+    try {
+      const reply = await request<AkoReply>('/api/practice/ako', {
+        method: 'POST',
+        body: JSON.stringify({
+          testId: study.testId,
+          questionId: focus || undefined,
+          message,
+          history,
+          answer: focus ? study.answerFor(focus).slice(0, AKO_LIMITS.answer) : undefined,
+          pendingWhy: why.pending,
+          missedWhys: why.missed,
+        }),
+      });
+      if (id !== session.current) return;
+      setTurns((current) => [...current, { role: 'ako', text: reply.reply }]);
+      setWhy({ pending: reply.awaitingWhy, missed: reply.missedWhys });
+      // He stays mad, or keeps waiting, until the student explains why.
+      react(
+        reply.mood,
+        reply.mood === 'angry'
+          ? 120000
+          : reply.awaitingWhy && reply.mood === 'thinking'
+            ? PATIENCE_MS
+            : 7000,
+      );
+    } catch (failure) {
+      if (id !== session.current) return;
+      setTurns((current) => current.slice(0, -1));
+      setDraft(message);
+      setError(authMessage(failure));
+      react('sad', 4000);
+    } finally {
+      if (id === session.current) setSending(false);
+    }
+  }
+  if (!open) return null;
+  const prompts = focus
+    ? [
+        'What’s the answer?',
+        'Give me a hint',
+        ...(study.answerFor(focus).trim() ? ['Is my answer right?'] : []),
+      ]
+    : ['What does this test cover?', 'Quiz me on a topic'];
+  return (
+    <section
+      id="ako-chat"
+      className="ako-chat"
+      aria-label="Study with Ako"
+      style={style}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') onClose();
+      }}
+    >
+      <div className="ako-controls-title">
+        <strong>Study with Ako</strong>
+        <button type="button" aria-label="Close Ako chat" onClick={onClose}>
+          ×
+        </button>
+      </div>
+      <label className="ako-chat-focus">
+        <span>Looking at</span>
+        <select value={focus} onChange={(event) => onFocus(event.target.value)}>
+          <option value="">The whole test</option>
+          {study.questions.map((question) => (
+            <option key={question.id} value={question.id}>
+              {questionName(question.label)}
+            </option>
+          ))}
+        </select>
+      </label>
+      <div
+        className="ako-chat-log"
+        ref={log}
+        role="log"
+        aria-live="polite"
+        aria-label="Conversation"
+      >
+        {!turns.length && (
+          <p className="ako-chat-hint">
+            {focus
+              ? 'I can see this question. Ask me about it. If I give you an answer, I’ll want to know why it’s right!'
+              : `I’m looking at ${study.title}. Pick a question above, or press Ask Ako beside one.`}
+          </p>
+        )}
+        {turns.map((turn, index) => (
+          <p key={index} className={`ako-chat-turn ako-chat-${turn.role}`}>
+            <span className="sr-only">{turn.role === 'ako' ? 'Ako: ' : 'You: '}</span>
+            {turn.text}
+          </p>
+        ))}
+        {sending && <p className="ako-chat-turn ako-chat-ako ako-chat-pending">Ako is thinking…</p>}
+      </div>
+      {!turns.length && !sending && (
+        <div className="ako-chat-prompts">
+          {prompts.map((prompt) => (
+            <button type="button" key={prompt} onClick={() => void send(prompt)}>
+              {prompt}
+            </button>
+          ))}
+        </div>
+      )}
+      {why.pending && !sending && (
+        <p className="ako-chat-why" role="status">
+          Ako is waiting for your why.
+        </p>
+      )}
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      )}
+      <form
+        className="ako-chat-form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void send(draft);
+        }}
+      >
+        <textarea
+          ref={input}
+          rows={2}
+          maxLength={AKO_LIMITS.message}
+          aria-label={why.pending ? 'Explain why to Ako' : 'Message Ako'}
+          placeholder={why.pending ? 'Explain why…' : 'Ask Ako…'}
+          value={draft}
+          onChange={(event) => setDraft(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+              event.preventDefault();
+              void send(draft);
+            }
+          }}
+        />
+        <button type="submit" disabled={sending || !draft.trim()}>
+          Send
+        </button>
+      </form>
+      <p className="ako-chat-note">
+        Ako’s replies come from Google Gemini and can be wrong. Don’t share personal information.
+      </p>
+    </section>
+  );
+}

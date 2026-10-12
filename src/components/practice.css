@@ -399,6 +399,20 @@
     font-weight: 400;
     margin-left: 10px;
   }
+  .practice-ask-ako {
+    margin-left: 10px;
+    padding: 2px 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .practice-ask-ako:hover {
+    border-color: #89bcdf;
+  }
   .practice-question-reference {
     font-size: 0.78rem;
     color: var(--muted);

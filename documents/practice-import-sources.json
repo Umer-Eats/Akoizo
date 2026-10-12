@@ -1885,5 +1885,53 @@
     "paperPath": "output/practice-research/division-c/0d6eb302f820c9eaf5546eb33423dac92d97e6104884be2132b80092744a7c15.pdf",
     "keyPath": "output/practice-research/division-c/840fe229221b5a46ac1a0e970242e4edac16462efffa3acbf09e746ce9367f22.pdf",
     "attachmentPaths": []
+  },
+  {
+    "id": "scioly-kgvd6o10hou-c",
+    "sourceId": "KGVD6o10HOU",
+    "sourceUrl": "https://scioly.org/tests/KGVD6o10HOU",
+    "division": "C",
+    "eventId": "circuit-lab",
+    "competition": "Greenbrier Invitational",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/KGVD6o10HOU",
+    "keyUrl": "https://scioly.org/tests/KGVD6o10HOU",
+    "files": [
+      {
+        "name": "2026Greenbrier_CircuitLabB_HandsOn.pdf",
+        "type": "test",
+        "size": 42127,
+        "sha256": "0f1352d3201e996777db2b3fd05a60426beee6378f5249782664d54a90952fbf"
+      },
+      {
+        "name": "2026Greenbrier_CircuitLabB_TestPacket.pdf",
+        "type": "test",
+        "size": 649526,
+        "sha256": "a83681763e54a98d8f66a9fe4af18964a042b8316026fa48aaa7501318cac323"
+      },
+      {
+        "name": "2026Greenbrier_CircuitLabB_HandsOnKey.pdf",
+        "type": "answer_key",
+        "size": 53154,
+        "sha256": "ac6954757241565130432af0fd4f7b83830e969071030bad73088ce01b7146cd"
+      },
+      {
+        "name": "2026Greenbrier_CircuitLabB_Key.pdf",
+        "type": "answer_key",
+        "size": 657779,
+        "sha256": "15e0369a91225eabdeef4fcbd3664761b256c6e67055aec97763e965577ac1c9"
+      },
+      {
+        "name": "2026Greenbrier_CircuitLabB_AnswerSheet.pdf",
+        "type": "answer_sheet",
+        "size": 623844,
+        "sha256": "a1a9dc30505303ad569ebd8fe3afd50ddacd076c5344980656a205146c891b0c"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/greenbrier-circuit-student.pdf",
+    "keyPath": "output/practice-research/division-c/greenbrier-circuit-key.pdf",
+    "originalPaperPath": "output/practice-research/division-c/a83681763e54a98d8f66a9fe4af18964a042b8316026fa48aaa7501318cac323.pdf"
   }
 ]

@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { AkoCharacter } from './ako-character';
+import { AkoChat } from './ako-chat';
 import { useSettings } from './providers';
 import {
   AKO_ACTIONS,
@@ -10,6 +11,7 @@ import {
   type AkoAction,
   type Point,
 } from '@/lib/ako-motion';
+import { akoStudy, type AkoStudy } from '@/lib/ako-study';
 
 const encouragement = [
   'One small step still counts. You’ve got this.',
@@ -40,6 +42,9 @@ export function AkoCompanion() {
   const drag = useRef<{ x: number; y: number; origin: Point; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
   const [menu, setMenu] = useState(false);
+  const [chat, setChat] = useState(false);
+  const [study, setStudy] = useState<AkoStudy | null>(null);
+  const [focus, setFocus] = useState('');
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<Scene | null>(null);
   const scene = useRef<Scene | null>(null);
@@ -50,7 +55,8 @@ export function AkoCompanion() {
   const canMove = motion && !reduced;
   const canMoveRef = useRef(canMove);
   canMoveRef.current = canMove;
-  menuRef.current = menu;
+  // An open panel keeps Ako beside it instead of wandering off mid-conversation.
+  menuRef.current = menu || chat;
   const publish = () => {
     const next = scene.current;
     if (next)
@@ -173,9 +179,26 @@ export function AkoCompanion() {
       s.position = boundAko(s.position, innerWidth, innerHeight);
       if (s.target) s.target = boundAko(s.target, innerWidth, innerHeight);
       if (s.cheese) s.cheese = boundAko(s.cheese, innerWidth, innerHeight);
-      publish();
+      // Panels are laid out from the viewport, so repaint even when Ako himself did not move.
+      setView({ ...s });
     };
+    const studying = () => {
+      const next = akoStudy();
+      setStudy(next);
+      if (!next) setChat(false);
+      setFocus('');
+    };
+    const ask = (event: Event) => {
+      const id = (event as CustomEvent).detail?.questionId;
+      if (!akoStudy() || typeof id !== 'string') return;
+      setFocus(id);
+      setMenu(false);
+      setChat(true);
+    };
+    studying();
     document.addEventListener('click', triple);
+    window.addEventListener('ako:study', studying);
+    window.addEventListener('ako:ask', ask);
     window.addEventListener('ako:mood', mood);
     window.addEventListener('resize', resize);
     let frame = 0,
@@ -246,6 +269,8 @@ export function AkoCompanion() {
       clearTimeout(clickTimer.current);
       media.removeEventListener('change', update);
       document.removeEventListener('click', triple);
+      window.removeEventListener('ako:study', studying);
+      window.removeEventListener('ako:ask', ask);
       window.removeEventListener('ako:mood', mood);
       window.removeEventListener('resize', resize);
     };
@@ -267,7 +292,10 @@ export function AkoCompanion() {
       }
       publish();
     }
-    if (!ako.visible) setMenu(false);
+    if (!ako.visible) {
+      setMenu(false);
+      setChat(false);
+    }
   }, [ako.muted, ako.anchored, ako.visible]);
   if (!ready || !view || !ako.visible) return null;
   const panelLeft = Math.max(
@@ -275,6 +303,31 @@ export function AkoCompanion() {
     Math.min(view.position.x - 100, typeof window !== 'undefined' ? innerWidth - 248 : 0),
   );
   const panelTop = view.position.y < 240 ? view.position.y + AKO_SIZE : view.position.y - 230;
+  // The chat sits beside Ako so his reactions stay visible; on narrow screens it stacks instead.
+  const chatWidth = Math.min(320, innerWidth - 16);
+  const chatHeight = Math.min(440, innerHeight - 16);
+  const beside =
+    view.position.x - chatWidth - 8 >= 8
+      ? view.position.x - chatWidth - 8
+      : view.position.x + AKO_SIZE + 8 + chatWidth <= innerWidth - 8
+        ? view.position.x + AKO_SIZE + 8
+        : null;
+  const chatStyle = {
+    width: chatWidth,
+    height: chatHeight,
+    left: beside ?? Math.max(8, Math.min(view.position.x - 110, innerWidth - chatWidth - 8)),
+    top: Math.max(
+      8,
+      Math.min(
+        innerHeight - chatHeight - 8,
+        beside !== null
+          ? view.position.y + AKO_SIZE - chatHeight
+          : view.position.y - chatHeight - 6 >= 8
+            ? view.position.y - chatHeight - 6
+            : view.position.y + AKO_SIZE + 6,
+      ),
+    ),
+  };
   return (
     <div
       className="ako-companion"
@@ -282,6 +335,7 @@ export function AkoCompanion() {
       data-action={view.action}
       data-muted={muted}
       data-anchored={ako.anchored}
+      data-chat={chat}
     >
       {view.cheese && (
         <div
@@ -298,7 +352,7 @@ export function AkoCompanion() {
           </svg>
         </div>
       )}
-      {view.message && !muted && !menu && (
+      {view.message && !muted && !menu && !chat && (
         <div
           className="ako-bubble"
           role="status"
@@ -400,6 +454,17 @@ export function AkoCompanion() {
           AKO <span>{muted ? '· quiet' : '· your lab pal'}</span>
         </span>
       </button>
+      {study && (
+        <AkoChat
+          open={chat}
+          study={study}
+          focus={focus}
+          onFocus={setFocus}
+          onClose={() => setChat(false)}
+          react={react}
+          style={chatStyle}
+        />
+      )}
       {menu && (
         <div
           id="ako-controls"
@@ -424,6 +489,17 @@ export function AkoCompanion() {
             <br />
             Right-click Ako to toggle his pep talks.
           </p>
+          {study && (
+            <button
+              className="ako-anchor ako-study"
+              onClick={() => {
+                setMenu(false);
+                setChat(true);
+              }}
+            >
+              Study this test with Ako
+            </button>
+          )}
           <div className="ako-controls-actions">
             <button onClick={() => feed()}>Give cheese</button>
             <button aria-pressed={muted} onClick={toggleTalking}>

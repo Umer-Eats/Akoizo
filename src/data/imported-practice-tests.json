@@ -81546,5 +81546,509 @@
     "alignment": "Historical cipher families overlap general Codebusters practice; the complete 2027 cipher roster and tournament format are not certified for this older paper.",
     "questionCount": 14,
     "maxScore": 56000
+  },
+  {
+    "id": "scioly-kgvd6o10hou-c",
+    "sourceId": "KGVD6o10HOU",
+    "sourceUrl": "https://scioly.org/tests/KGVD6o10HOU",
+    "division": "C",
+    "eventId": "circuit-lab",
+    "competition": "Greenbrier Invitational",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "/practice/scioly-kgvd6o10hou-c/test.pdf",
+    "keyUrl": "/practice/scioly-kgvd6o10hou-c/key.pdf",
+    "season": 2027,
+    "reviewedOn": "2026-10-12",
+    "levelEvidence": null,
+    "minutes": 50,
+    "gradingMode": "published-key",
+    "rulesUrl": "/rules/2027/c/circuit-lab.pdf",
+    "instructions": "Read the complete original paper, including diagrams and tables. Answer every labeled part. Submit for free checks; click Auto Grade to check unresolved written explanations.",
+    "scoringBasis": "All 25 written questions and the hands-on traffic-light design are retained, with both complete student packets combined. Written question 25 uses the printed six-point maximum rather than the key’s eight; its method credit is consolidated. Questions 1 and 6 are unscored because the shell’s initial charge and flux/flux-linkage assumptions are unspecified. The available practice score is 67 raw points: 56 written plus the original 11-point hands-on rubric. This practice percentage is a raw-point percentage, not the competition’s 75% written/25% lab weighting. A text circuit design replaces physical construction. The key’s 555 values give about 1.46 s rather than 2.5 s; a corrected component example is supplied. Question 12’s missing minus sign is disclosed in its prompt.",
+    "questions": [
+      {
+        "id": "1",
+        "label": "Question 1",
+        "prompt": "A point charge is placed in a two-walled hollow\nsphere. What is the net surface charge of the hollow\nsphere?\np+\nA. p+\nB. 2p+\nC.\np+\n4πr2\nD. 0",
+        "type": "frq",
+        "points": 0,
+        "page": 1,
+        "context": "Circuit Lab B/CTest\nJANUARY 10, 2026\nGREENBRIER INVITATIONAL\nWritten By: Shiven Gupta, Singapore Armed Forces '27\nPage: 2 3 4 Total\nPoints: 18 18 24 60\nScore:\n1. Do NOT write on this packet. Only answer on your answer sheet.\n2. The points per question are boxed in the margin next to the question.\n3. You may separate the test, but ensure you put it back in order.\n4. You may remove materials from your binderAFTER the time has started.\n5. SHOW ALL OF YOUR WORK\n6. Tiebreaker questions have TB#(order) in front of them. (QN6, QN18, QN22)\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 2 of 4\nMultiple Choice [36 pts]\n1. 2 A point charge is placed in a two-walled hollow\nsphere. What is the net surface charge of the hollow\nsphere?\np+\nA. p+\nB. 2p+\nC. p+\n4πr2\nD. 0\n2. 2 When should you ground yourself?\nA. When you behave really badly.\nB. When working with sensitive electronics.\nC. When working with electrical sockets.\nD. When you need to reduce stress and\npanic.\n3. 2 Ohm is a derived unit. Which base units is it\nmade of?\nA. kg, s, m, V\nB. A, s, V, m\nC. kg, V, m, A\nD. kg, s, m, A\n4. 2 Identify the below symbol.\nA. Variable Resistor\nB. Potentiometer\nC. Resistor\nD. None of the Above\n5. 2 How does an electromagnetic wave propagate?\nA. Perpendicular to both the electric field\nand magnetic field\nB. Perpendicular to the electric field and\nparallel to the magnetic field\nC. Parallel to the electric field and perpen-\ndicular to the magnetic field\nD. Parallel to both the electric field and mag-\nnetic field\n6. 2 TB#1 What is the magnetic flux through a con-\nductor with potential differenceϵ (V ), length ℓ (m),\nresistivity ρ (Ωm), radius r (m)? Assume that it is\nalso connected to a capacitor in the circuit, and that\nthe effective capacitance is C (F ) and the resonant\nfrequency is ω (rad/s).\nA. ΦB = ϵπr2\nρℓωC (Wb)\nB. ΦB = ϵ\nρℓω2C (Wb)\nC. ΦB = ϵπr2\nρℓω2C (Wb)\nD. ΦB = ϵπr2ω2C\nρℓ (Wb)\n7. 2 What is the ferromagnetic ability of a metal re-\nliant on?\nA. Lattice structure of metals\nB. Alignment of atomic magnetic move-\nments\nC. Polarity Differences and Electronegativ-\nity\nD. Vacuum permeability (µ0)\n8. 2 Resolve the equivalent capacitance of the junc-\ntion.\n4.2 µF\n0.67 µF\n4.1 µF\nA. 4.78 µF\nB. 2.23 µF\nC. 0.506 µF\nD. 8.97 µF\n9. 2 Who formulated the law that describes the\nforce between two point charges?\nA. André-Marie Ampère\nB. Charles-Augustin de Coulomb\nC. Michael Faraday\nD. Nikola Tesla"
+      },
+      {
+        "id": "2",
+        "label": "Question 2",
+        "prompt": "When should you ground yourself?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "When you behave really badly." },
+          { "id": "B", "text": "When working with sensitive electronics." },
+          { "id": "C", "text": "When working with electrical sockets." },
+          { "id": "D", "text": "When you need to reduce stress and\npanic." }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "3",
+        "label": "Question 3",
+        "prompt": "Ohm is a derived unit. Which base units is it\nmade of?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "kg, s, m, V" },
+          { "id": "B", "text": "A, s, V, m" },
+          { "id": "C", "text": "kg, V, m, A" },
+          { "id": "D", "text": "kg, s, m, A" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "4",
+        "label": "Question 4",
+        "prompt": "Identify the below symbol.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Variable Resistor" },
+          { "id": "B", "text": "Potentiometer" },
+          { "id": "C", "text": "Resistor" },
+          { "id": "D", "text": "None of the Above" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "5",
+        "label": "Question 5",
+        "prompt": "How does an electromagnetic wave propagate?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Perpendicular to both the electric field\nand magnetic field" },
+          {
+            "id": "B",
+            "text": "Perpendicular to the electric field and\nparallel to the magnetic field"
+          },
+          {
+            "id": "C",
+            "text": "Parallel to the electric field and perpen-\ndicular to the magnetic field"
+          },
+          { "id": "D", "text": "Parallel to both the electric field and mag-\nnetic field" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "6",
+        "label": "Question 6",
+        "prompt": "TB#1 Whatisthemagneticfluxthroughacon-\nductor with potential difference ϵ (V ), length ℓ(m),\nresistivity ρ (Ωm), radius r (m)? Assume that it is\nalso connected to a capacitor in the circuit, and that\nthe effective capacitance is C (F) and the resonant\nfrequency is ω (rad/s).\nA. ΦB = ϵπr2\nρℓωC (Wb)\nB. ΦB =\nϵ\nρℓω2C (Wb)\nC. ΦB =\nϵπr2\nρℓω2C (Wb)\nD. ΦB = ϵπr2ω2C\nρℓ\n(Wb)",
+        "type": "frq",
+        "points": 0,
+        "page": 2,
+        "context": "Circuit Lab B/CTest\nJANUARY 10, 2026\nGREENBRIER INVITATIONAL\nWritten By: Shiven Gupta, Singapore Armed Forces '27\nPage: 2 3 4 Total\nPoints: 18 18 24 60\nScore:\n1. Do NOT write on this packet. Only answer on your answer sheet.\n2. The points per question are boxed in the margin next to the question.\n3. You may separate the test, but ensure you put it back in order.\n4. You may remove materials from your binderAFTER the time has started.\n5. SHOW ALL OF YOUR WORK\n6. Tiebreaker questions have TB#(order) in front of them. (QN6, QN18, QN22)\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 2 of 4\nMultiple Choice [36 pts]\n1. 2 A point charge is placed in a two-walled hollow\nsphere. What is the net surface charge of the hollow\nsphere?\np+\nA. p+\nB. 2p+\nC. p+\n4πr2\nD. 0\n2. 2 When should you ground yourself?\nA. When you behave really badly.\nB. When working with sensitive electronics.\nC. When working with electrical sockets.\nD. When you need to reduce stress and\npanic.\n3. 2 Ohm is a derived unit. Which base units is it\nmade of?\nA. kg, s, m, V\nB. A, s, V, m\nC. kg, V, m, A\nD. kg, s, m, A\n4. 2 Identify the below symbol.\nA. Variable Resistor\nB. Potentiometer\nC. Resistor\nD. None of the Above\n5. 2 How does an electromagnetic wave propagate?\nA. Perpendicular to both the electric field\nand magnetic field\nB. Perpendicular to the electric field and\nparallel to the magnetic field\nC. Parallel to the electric field and perpen-\ndicular to the magnetic field\nD. Parallel to both the electric field and mag-\nnetic field\n6. 2 TB#1 What is the magnetic flux through a con-\nductor with potential differenceϵ (V ), length ℓ (m),\nresistivity ρ (Ωm), radius r (m)? Assume that it is\nalso connected to a capacitor in the circuit, and that\nthe effective capacitance is C (F ) and the resonant\nfrequency is ω (rad/s).\nA. ΦB = ϵπr2\nρℓωC (Wb)\nB. ΦB = ϵ\nρℓω2C (Wb)\nC. ΦB = ϵπr2\nρℓω2C (Wb)\nD. ΦB = ϵπr2ω2C\nρℓ (Wb)\n7. 2 What is the ferromagnetic ability of a metal re-\nliant on?\nA. Lattice structure of metals\nB. Alignment of atomic magnetic move-\nments\nC. Polarity Differences and Electronegativ-\nity\nD. Vacuum permeability (µ0)\n8. 2 Resolve the equivalent capacitance of the junc-\ntion.\n4.2 µF\n0.67 µF\n4.1 µF\nA. 4.78 µF\nB. 2.23 µF\nC. 0.506 µF\nD. 8.97 µF\n9. 2 Who formulated the law that describes the\nforce between two point charges?\nA. André-Marie Ampère\nB. Charles-Augustin de Coulomb\nC. Michael Faraday\nD. Nikola Tesla\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K"
+      },
+      {
+        "id": "7",
+        "label": "Question 7",
+        "prompt": "What is the ferromagnetic ability of a metal re-\nliant on?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Lattice structure of metals" },
+          { "id": "B", "text": "Alignment of atomic magnetic move-\nments" },
+          { "id": "C", "text": "Polarity Differences and Electronegativ-\nity" },
+          { "id": "D", "text": "Vacuum permeability (µ0)" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "8",
+        "label": "Question 8",
+        "prompt": "Resolve the equivalent capacitance of the junc-\ntion.\n4.2 µF\n0.67 µF\n4.1 µF",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "4.78 µF" },
+          { "id": "B", "text": "2.23 µF" },
+          { "id": "C", "text": "0.506 µF" },
+          { "id": "D", "text": "8.97 µF" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "9",
+        "label": "Question 9",
+        "prompt": "Who formulated the law that describes the\nforce between two point charges?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "André-Marie Ampère" },
+          { "id": "B", "text": "Charles-Augustin de Coulomb" },
+          { "id": "C", "text": "Michael Faraday" },
+          { "id": "D", "text": "Nikola Tesla" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "10",
+        "label": "Question 10",
+        "prompt": "Which of the following cannot be considered as\nreal-life Faraday cages?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "None of the Listed" },
+          { "id": "B", "text": "Car Chassis" },
+          { "id": "C", "text": "Microwave Ovens" },
+          { "id": "D", "text": "Elevator" }
+        ],
+        "points": 2,
+        "page": 2
+      },
+      {
+        "id": "11",
+        "label": "Question 11",
+        "prompt": "Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Georg Ohm" },
+          { "id": "B", "text": "Gustav Kirchhoff" },
+          { "id": "C", "text": "Alessandro Volta" },
+          { "id": "D", "text": "James Clerk Maxwell" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "12",
+        "label": "Question 12",
+        "prompt": "Maxwell-Faraday’s Law can be written as (in\ndifferential form):⃗\n∇x ×⃗E = ∂⃗B\n∂t .\nWhat does it state?\nSource correction: Maxwell–Faraday law is curl E = -dB/dt; the printed equation omits the minus sign.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "text": "A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field."
+          },
+          {
+            "id": "B",
+            "text": "The coil of a spring is proportional to the\nelectric field it generates."
+          },
+          {
+            "id": "C",
+            "text": "Thechangeinelectricfieldisproportional\nto the time-varying magnetic field."
+          },
+          {
+            "id": "D",
+            "text": "Thechangeinelectricfieldisproportional\nto the time-varying magnetic force."
+          }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "13",
+        "label": "Question 13",
+        "prompt": "Which of the following is theoretically not a\npossible switch?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Single-Pole Single-Throw (SPST)" },
+          { "id": "B", "text": "Double-Pole Double-Throw (DPDT)" },
+          { "id": "C", "text": "Triple-Pole Quadruple-Throw (TPQT)" },
+          { "id": "D", "text": "None of the Above" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "14",
+        "label": "Question 14",
+        "prompt": "Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Switch" },
+          { "id": "B", "text": "Relay" },
+          { "id": "C", "text": "Circuit breaker" },
+          { "id": "D", "text": "Ground fault circuit interrupter" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "15",
+        "label": "Question 15",
+        "prompt": "Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "Fuse" },
+          { "id": "B", "text": "Circuit breaker" },
+          { "id": "C", "text": "Ground fault circuit interrupter (GFCI)" },
+          { "id": "D", "text": "Electromagnetic relay" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "16",
+        "label": "Question 16",
+        "prompt": "What is a common source of direct current?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "AC generator" },
+          { "id": "B", "text": "Transformer" },
+          { "id": "C", "text": "Battery" },
+          { "id": "D", "text": "Alternator" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "17",
+        "label": "Question 17",
+        "prompt": "Which of the following is true of alternating\ncurrent?",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "3-phase is stronger than 1-phase." },
+          {
+            "id": "B",
+            "text": "It changes direction periodically (specifi-\ncally following a tangential time scale)"
+          },
+          { "id": "C", "text": "It is used for high-voltage transmission\nover long distances" },
+          { "id": "D", "text": "It has heavy voltage line losses." }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "18",
+        "label": "Question 18",
+        "prompt": "TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)",
+        "type": "mcq",
+        "multiple": false,
+        "options": [
+          { "id": "A", "text": "632 Ω± 0.5%" },
+          { "id": "B", "text": "6230 Ω± 0.5%, 1 ppm/K" },
+          { "id": "C", "text": "623 Ω± 1%, 2 ppm/K" },
+          { "id": "D", "text": "62300 Ω± 0.5%, 1 ppm/K" }
+        ],
+        "points": 2,
+        "page": 3
+      },
+      {
+        "id": "19",
+        "label": "Question 19",
+        "prompt": "The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1\n2\n3\n4\n5\n0.5\n1\nt\nV (t)",
+        "type": "frq",
+        "points": 2,
+        "page": 3,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 2 of 4\nMultiple Choice [36 pts]\n1. 2 A point charge is placed in a two-walled hollow\nsphere. What is the net surface charge of the hollow\nsphere?\np+\nA. p+\nB. 2p+\nC. p+\n4πr2\nD. 0\n2. 2 When should you ground yourself?\nA. When you behave really badly.\nB. When working with sensitive electronics.\nC. When working with electrical sockets.\nD. When you need to reduce stress and\npanic.\n3. 2 Ohm is a derived unit. Which base units is it\nmade of?\nA. kg, s, m, V\nB. A, s, V, m\nC. kg, V, m, A\nD. kg, s, m, A\n4. 2 Identify the below symbol.\nA. Variable Resistor\nB. Potentiometer\nC. Resistor\nD. None of the Above\n5. 2 How does an electromagnetic wave propagate?\nA. Perpendicular to both the electric field\nand magnetic field\nB. Perpendicular to the electric field and\nparallel to the magnetic field\nC. Parallel to the electric field and perpen-\ndicular to the magnetic field\nD. Parallel to both the electric field and mag-\nnetic field\n6. 2 TB#1 What is the magnetic flux through a con-\nductor with potential differenceϵ (V ), length ℓ (m),\nresistivity ρ (Ωm), radius r (m)? Assume that it is\nalso connected to a capacitor in the circuit, and that\nthe effective capacitance is C (F ) and the resonant\nfrequency is ω (rad/s).\nA. ΦB = ϵπr2\nρℓωC (Wb)\nB. ΦB = ϵ\nρℓω2C (Wb)\nC. ΦB = ϵπr2\nρℓω2C (Wb)\nD. ΦB = ϵπr2ω2C\nρℓ (Wb)\n7. 2 What is the ferromagnetic ability of a metal re-\nliant on?\nA. Lattice structure of metals\nB. Alignment of atomic magnetic move-\nments\nC. Polarity Differences and Electronegativ-\nity\nD. Vacuum permeability (µ0)\n8. 2 Resolve the equivalent capacitance of the junc-\ntion.\n4.2 µF\n0.67 µF\n4.1 µF\nA. 4.78 µF\nB. 2.23 µF\nC. 0.506 µF\nD. 8.97 µF\n9. 2 Who formulated the law that describes the\nforce between two point charges?\nA. André-Marie Ampère\nB. Charles-Augustin de Coulomb\nC. Michael Faraday\nD. Nikola Tesla\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD"
+      },
+      {
+        "id": "20",
+        "label": "Question 20",
+        "prompt": "What is electron current, and at what speed does it occur?",
+        "type": "frq",
+        "points": 2,
+        "page": 4,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:"
+      },
+      {
+        "id": "21",
+        "label": "Question 21",
+        "prompt": "Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?",
+        "type": "frq",
+        "points": 5,
+        "page": 4,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:"
+      },
+      {
+        "id": "22",
+        "label": "Question 22",
+        "prompt": "TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?",
+        "type": "frq",
+        "points": 3,
+        "page": 4,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:"
+      },
+      {
+        "id": "23",
+        "label": "Question 23",
+        "prompt": "The effective resistance of a circuit is 28.3 Ω. What is the real component of the impedance Zre ∈R?",
+        "type": "frq",
+        "points": 2,
+        "page": 4,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:"
+      },
+      {
+        "id": "24",
+        "label": "Question 24",
+        "prompt": "Approximately how many time constants τRC are needed for a capacitor in an RC circuit to reach 47% of its full\ncharge?",
+        "type": "frq",
+        "points": 4,
+        "page": 4,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:"
+      },
+      {
+        "id": "25",
+        "label": "Question 25",
+        "prompt": "There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE\nF\nG\nH\nA\nB\nC\nD",
+        "type": "frq",
+        "points": 6,
+        "page": 4,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 3 of 4\n10. 2 Which of the followingcannot be considered as\nreal-life Faraday cages?\nA. None of the Listed\nB. Car Chassis\nC. Microwave Ovens\nD. Elevator\n11. 2 Which scientist is credited with inventing the\nelectric battery and demonstrating that electricity\ncould be produced chemically?\nA. Georg Ohm\nB. Gustav Kirchhoff\nC. Alessandro Volta\nD. James Clerk Maxwell\n12. 2 Maxwell-Faraday’s Law can be written as (in\ndifferential form):\n⃗∇x × ⃗E = ∂ ⃗B\n∂t .\nWhat does it state?\nA. A time-varying magnetic field always\naccompanies a spatially varying non-\nconservative electric field.\nB. The coil of a spring is proportional to the\nelectric field it generates.\nC. The change in electric field is proportional\nto the time-varying magnetic field.\nD. The change in electric field is proportional\nto the time-varying magnetic force.\n13. 2 Which of the following is theoretically not a\npossible switch?\nA. Single-Pole Single-Throw (SPST)\nB. Double-Pole Double-Throw (DPDT)\nC. Triple-Pole Quadruple-Throw (TPQT)\nD. None of the Above\n14. 2 Which device is designed to automatically dis-\nconnect a circuit when excessive current flows, pre-\nventing damage to the wiring?.\nA. Switch\nB. Relay\nC. Circuit breaker\nD. Ground fault circuit interrupter\n15. 2 Which of the following devices protects people\nfrom electric shock by detecting leakage currents as\nsmall as a few milliamperes and disconnecting the\ncircuit almost instantly?\nA. Fuse\nB. Circuit breaker\nC. Ground fault circuit interrupter (GFCI)\nD. Electromagnetic relay\n16. 2 What is a common source of direct current?\nA. AC generator\nB. Transformer\nC. Battery\nD. Alternator\n17. 2 Which of the following is true of alternating\ncurrent?\nA. 3-phase is stronger than 1-phase.\nB. It changes direction periodically (specifi-\ncally following a tangential time scale)\nC. It is used for high-voltage transmission\nover long distances\nD. It has heavy voltage line losses.\n18. 2 TB#2 What is the resistance of the below re-\nsistor?\n(In case of printing errors: blue, red, orange, brown,\ngreen, gray)\nA. 632 Ω ± 0.5%\nB. 6230 Ω ± 0.5%, 1 ppm/K\nC. 623 Ω ± 1%, 2 ppm/K\nD. 62300 Ω ± 0.5%, 1 ppm/K\nGREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:"
+      },
+      {
+        "id": "Lab",
+        "label": "Question Lab",
+        "prompt": "GREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:\nSCRATCH WORK:\nFor online practice, describe every connection, component value, sequence and timing calculation in text. Physical construction is replaced by your circuit design.",
+        "type": "frq",
+        "points": 11,
+        "page": 5,
+        "context": "GREENBRIER INVITATIONAL CIRCUIT LAB B/C TEST 4 of 4\nFree Response [24 pts]\n19. 2 The following graph depicts the AC voltage output passed through a half-wave rectifier. Draw the effect on the\nwaveforms if the voltage output is now passed through a full-wave rectifier.\n1 2 3 4 5\n0.5\n1\nt\nV (t)\n20. 2 What is electron current, and at what speed does it occur?\n21. 5 Define energy flux in a circuit. How does it travel? Where does it do work? What is it measured in? What is it\ndescribed by?\n22. 3 TB#3 Which forms of energy is electrical energy dissipated through when passing through buzzers?\n23. 2 The effective resistance of a circuit is28.3 Ω. What is the real component of the impedance Zre ∈ R?\n24. 4 Approximately how many time constantsτRC are needed for a capacitor in anRC circuit to reach 47% of its full\ncharge?\n25. 6 There exists a resistor cube. Solve for the resistance between A and G. Assume all resistors are of value 1Ω.\nE F\nGH\nA B\nCD\nGREENBRIER CIRCUIT B/C LAB || HANDS-ON ACTIVITY\nThis portion will be 25% of your overall score.\nTEAM NAME & #: __________________________________________________________________________\nYou are given\na) Ideal Wire d) 555 Timer IC g) 3x 330 -1k Resistors j) 3x diodes∞ Ω Ω\nb) 5V Battery e) Decade Counter h) 2x 10k -100k Resistors k) 3x NPN transistorsΩ Ω\nc) Switch f) 3x LEDs (G, Y , R) i) 2x 1-100µF capacitors l) Breadboard\nA traﬃc light goes from Green → Yellow → Red and repeats with Green. Using the above\nmaterials, design a traﬃc light system that alternates between the colors appropriately.\nLinger on each color for 2-3 seconds. Label all components appropriately.\nFeel free to use the next page for scratch work.\nTeam’s Final Answer:\nSCRATCH WORK:"
+      }
+    ],
+    "keys": {
+      "1": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The published key gives A (outer surface +q). An initially neutral isolated conducting shell has inner surface -q and outer +q, hence net shell surface charge zero; the prompt does not specify initial shell charge or distinguish outer from total surface charge. Unscored practice.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "2": { "correctOption": "B" },
+      "3": { "correctOption": "D" },
+      "4": { "correctOption": "D" },
+      "5": { "correctOption": "A" },
+      "6": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The published key gives C. For an assumed LC resonance, L=1/(omega^2 C), I=epsilon pi r^2/(rho length), giving flux linkage L I=epsilon pi r^2/(rho length omega^2 C). Actual magnetic flux also requires a specified inductive geometry/number of turns; these assumptions are omitted. Unscored practice.",
+            "points": 0,
+            "accepted": []
+          }
+        ]
+      },
+      "7": { "correctOption": "B" },
+      "8": { "correctOption": "B" },
+      "9": { "correctOption": "B" },
+      "10": { "correctOption": "A" },
+      "11": { "correctOption": "C" },
+      "12": { "correctOption": "A" },
+      "13": { "correctOption": "D" },
+      "14": { "correctOption": "C" },
+      "15": { "correctOption": "C" },
+      "16": { "correctOption": "C" },
+      "17": { "correctOption": "C" },
+      "18": { "correctOption": "B" },
+      "19": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Full-wave rectification replaces each missing negative half-cycle by its positive reflection: positive humps also on t=1–2 and t=3–4 (1); the original humps, peak 1, zeros at integer times and doubled ripple frequency are retained (1). A precise written waveform description is acceptable instead of drawing.",
+            "points": 2,
+            "accepted": []
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Electron current is electron flow from negative to positive terminal (1). Drift is slow, typically about 10^-4 to 10^-3 m/s in the key, depending on conductor/current density (1); do not confuse drift speed with field propagation.",
+            "points": 2,
+            "accepted": []
+          }
+        ]
+      },
+      "21": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Energy flux is energy transfer per unit area per unit time (1); electromagnetic fields carry it around the conductor (1) into the resistive load where work is done (1); units W/m^2 (1); Poynting vector S=E cross H (1).",
+            "points": 5,
+            "accepted": []
+          }
+        ]
+      },
+      "22": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Thermal energy (1), mechanical/kinetic energy (1), and sound/acoustic energy (1).",
+            "points": 3,
+            "accepted": []
+          }
+        ]
+      },
+      "23": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "The real component of impedance equals resistance: Re(Z)=28.3 ohms. Award two points for the correct value with units. The key labels the question two points but only marks one beside its value.",
+            "points": 2,
+            "accepted": [],
+            "numeric": {
+              "value": 28.3,
+              "tolerance": 0.05,
+              "units": ["ohm", "ohms", "Ω"],
+              "unitRequired": true
+            }
+          }
+        ]
+      },
+      "24": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "Use VC/Vmax=1-exp(-t/tau) (1), substitute 0.47 so exp(-t/tau)=0.53 (1), take logs t/tau=-ln(0.53) (1), approximately 0.634 time constants (1).",
+            "points": 4,
+            "accepted": []
+          }
+        ]
+      },
+      "25": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "By symmetry VD=VE=VB (1) and VG=VC=VF (1). Reduce the network to three series groups: three 1-ohm edges in parallel, six 1-ohm edges in parallel, three 1-ohm edges in parallel (3 total for the three groups, including equivalent reasoning). R_AG=1/3+1/6+1/3=5/6 ohm, approximately 0.833 ohm (1). The source question maximum is six; the key’s eight-point method is consolidated to six.",
+            "points": 6,
+            "accepted": []
+          }
+        ]
+      },
+      "Lab": {
+        "criteria": [
+          {
+            "id": "answer",
+            "answer": "LED arrangement: independently driven parallel branches, each with current limiting (1 point). Working sequence/design (10 points): a valid arrangement yielding Green -> Yellow -> Red -> Green, with 2–3 s per stage and labeled components. One valid design is a 555 astable clock feeding a decade counter, Q0/Q1/Q2 driving individually current-limited green/yellow/red LEDs and Q3 resetting the counter. Explain power/ground and pin connections, reset/enable and clock wiring, LED branches and timing. T=0.693(R1+2R2)C; for example R1=47 kΩ, R2=100 kΩ, C=15 µF gives approximately 2.57 s. The key’s R1=10 kΩ,R2=100 kΩ,C=10 µF gives 1.46 s and does not meet the requested timing. Other demonstrably working circuits receive full credit. The original key explicitly accepts a switch-clocked counter if the operator waits 2–3 s per press; explain that timing procedure. Merely copying a named solution without workable connections/timing is insufficient.",
+            "points": 11,
+            "accepted": []
+          }
+        ]
+      }
+    },
+    "difficulty": "Hard",
+    "difficultyReason": "Electrical recall and circuit calculations lead to a resistor-cube derivation, field concepts and a traffic-light timing circuit design.",
+    "topics": ["DC circuits", "Capacitors", "Electromagnetism", "Circuit design"],
+    "topicMatch": "current",
+    "alignment": "The source explicitly serves B/C. Written electrical concepts and the hands-on design overlap the 2027 Circuit Lab topics; this is practice rather than certification of the original tournament format.",
+    "questionCount": 26,
+    "maxScore": 67
   }
 ]

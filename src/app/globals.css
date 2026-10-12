@@ -2978,6 +2978,139 @@
   max-height: calc(100dvh - 16px);
   overflow-y: auto;
 }
+.ako-controls .ako-study {
+  margin: 0 0 8px;
+  background: #89bcdf;
+  color: #243451;
+  font-weight: 600;
+}
+/* Ako's study chat on practice tests. */
+.ako-chat {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 4px 4px 0 #24345130;
+  pointer-events: auto;
+}
+.ako-chat-focus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.ako-chat-focus select {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+}
+.ako-chat-log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px;
+}
+.ako-chat-hint,
+.ako-chat-note {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.ako-chat-note {
+  font-size: 9.5px;
+}
+.ako-chat-turn {
+  max-width: 88%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ako-chat-ako {
+  align-self: flex-start;
+  background: var(--surface-2);
+  border-bottom-left-radius: 2px;
+}
+.ako-chat-student {
+  align-self: flex-end;
+  background: #89bcdf;
+  border-color: #89bcdf;
+  color: #243451;
+  border-bottom-right-radius: 2px;
+}
+.ako-chat-pending {
+  color: var(--muted);
+  font-style: italic;
+}
+.ako-chat-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ako-chat-prompts button {
+  padding: 5px 9px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 11px;
+}
+.ako-chat-why {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ef6976;
+}
+.ako-chat .form-error {
+  font-size: 11px;
+  margin: 0;
+}
+.ako-chat-form {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+}
+.ako-chat-form textarea {
+  flex: 1;
+  min-width: 0;
+  resize: none;
+  padding: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.ako-chat-form button {
+  padding: 0 12px;
+  border: 1px solid #89bcdf;
+  border-radius: 6px;
+  background: #89bcdf;
+  color: #243451;
+  font-size: 12px;
+  font-weight: 600;
+}
+.ako-chat-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .account-settings {
   max-width: 960px;
   padding-bottom: 90px;

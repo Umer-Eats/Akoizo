@@ -753,6 +753,70 @@ if 'o2ycCDuTsSw' in SOURCES:
     assert sum(q['points'] for q in p.test['questions'])==56000
     p.finish()
 
+
+if 'KGVD6o10HOU' in SOURCES:
+    from pypdf import PdfWriter
+    source=SOURCES['KGVD6o10HOU']
+    root=ROOT
+    written=root/'a83681763e54a98d8f66a9fe4af18964a042b8316026fa48aaa7501318cac323.pdf'
+    written_key=root/'15e0369a91225eabdeef4fcbd3664761b256c6e67055aec97763e965577ac1c9.pdf'
+    hands=root/'0f1352d3201e996777db2b3fd05a60426beee6378f5249782664d54a90952fbf.pdf'
+    hands_key=root/'ac6954757241565130432af0fd4f7b83830e969071030bad73088ce01b7146cd.pdf'
+    for dest,parts in [('greenbrier-circuit-student.pdf',[written,hands]),('greenbrier-circuit-key.pdf',[written_key,hands_key])]:
+        writer=PdfWriter()
+        for part in parts: writer.append(str(part))
+        writer.write(str(root/dest))
+    source['originalPaperPath']=str(written).replace('\\','/')
+    source['paperPath']=str(root/'greenbrier-circuit-student.pdf').replace('\\','/')
+    source['keyPath']=str(root/'greenbrier-circuit-key.pdf').replace('\\','/')
+    source.pop('attachmentPaths',None)
+    p=Paper('KGVD6o10HOU',reviewedOn='2026-10-12',
+        difficulty='Hard',difficultyReason='Electrical recall and circuit calculations lead to a resistor-cube derivation, field concepts and a traffic-light timing circuit design.',
+        topics=['DC circuits','Capacitors','Electromagnetism','Circuit design'],topicMatch='current',
+        alignment='The source explicitly serves B/C. Written electrical concepts and the hands-on design overlap the 2027 Circuit Lab topics; this is practice rather than certification of the original tournament format.',
+        scoringBasis='All 25 written questions and the hands-on traffic-light design are retained, with both complete student packets combined. Written question 25 uses the printed six-point maximum rather than the key’s eight; its method credit is consolidated. Questions 1 and 6 are unscored because the shell’s initial charge and flux/flux-linkage assumptions are unspecified. The available practice score is 67 raw points: 56 written plus the original 11-point hands-on rubric. This practice percentage is a raw-point percentage, not the competition’s 75% written/25% lab weighting. A text circuit design replaces physical construction. The key’s 555 values give about 1.46 s rather than 2.5 s; a corrected component example is supplied. Question 12’s missing minus sign is disclosed in its prompt.')
+    pp=structure_helpers['read_pages'](written)
+    # Source uses two columns: extract each column separately to preserve ordering.
+    import pymupdf
+    doc=pymupdf.open(written)
+    ordered=[doc[0].get_text()]
+    for page in list(doc)[1:3]:
+        mid=page.rect.width/2
+        ordered.append(page.get_text(clip=pymupdf.Rect(0,0,mid,page.rect.height))+'\n'+page.get_text(clip=pymupdf.Rect(mid,0,page.rect.width,page.rect.height)))
+    ordered.append(doc[3].get_text())
+    ordered=['\n'.join(line for line in page.splitlines() if not re.fullmatch(r'\s*(?:GREENBRIER INVITATIONAL|CIRCUIT LAB(?: B/C TEST)?|B/C TEST|[234] of 4|Multiple Choice \[36 pts\]|Free Response \[24 pts\])\s*',line)) for page in ordered]
+    text='\n\f\n'.join(ordered)
+    marks=list(re.finditer(r'(?m)^\s*(\d+)\.\s*\n\s*(\d+)\s*\n',text))
+    assert [int(m[1]) for m in marks]==list(range(1,26))
+    qs={int(m[1]):dict(text=clean(text[m.end():marks[i+1].start() if i+1<len(marks) else len(text)]),page=text[:m.start()].count('\f')+1,weight=int(m[2])) for i,m in enumerate(marks)}
+    answers=['A','B','D','D','A','C','B','B','B','A','C','A','D','C','C','C','C','B']
+    for n in range(1,19):
+        b=qs[n]
+        if n in [1,6]:
+            answer=('The published key gives A (outer surface +q). An initially neutral isolated conducting shell has inner surface -q and outer +q, hence net shell surface charge zero; the prompt does not specify initial shell charge or distinguish outer from total surface charge. Unscored practice.' if n==1 else 'The published key gives C. For an assumed LC resonance, L=1/(omega^2 C), I=epsilon pi r^2/(rho length), giving flux linkage L I=epsilon pi r^2/(rho length omega^2 C). Actual magnetic flux also requires a specified inductive geometry/number of turns; these assumptions are omitted. Unscored practice.')
+            p.frq(str(n),b['text'],answer,points=0,page=b['page'])
+        else:
+            prompt,choices=options(b['text'])
+            if n==12: prompt+='\nSource correction: Maxwell–Faraday law is curl E = -dB/dt; the printed equation omits the minus sign.'
+            assert len(choices)==4,(n,choices)
+            p.mcq(str(n),prompt,choices,answers[n-1],points=2,page=b['page'])
+    rubrics={
+        19:(2,'Full-wave rectification replaces each missing negative half-cycle by its positive reflection: positive humps also on t=1–2 and t=3–4 (1); the original humps, peak 1, zeros at integer times and doubled ripple frequency are retained (1). A precise written waveform description is acceptable instead of drawing.'),
+        20:(2,'Electron current is electron flow from negative to positive terminal (1). Drift is slow, typically about 10^-4 to 10^-3 m/s in the key, depending on conductor/current density (1); do not confuse drift speed with field propagation.'),
+        21:(5,'Energy flux is energy transfer per unit area per unit time (1); electromagnetic fields carry it around the conductor (1) into the resistive load where work is done (1); units W/m^2 (1); Poynting vector S=E cross H (1).'),
+        22:(3,'Thermal energy (1), mechanical/kinetic energy (1), and sound/acoustic energy (1).'),
+        23:(2,'The real component of impedance equals resistance: Re(Z)=28.3 ohms. Award two points for the correct value with units. The key labels the question two points but only marks one beside its value.'),
+        24:(4,'Use VC/Vmax=1-exp(-t/tau) (1), substitute 0.47 so exp(-t/tau)=0.53 (1), take logs t/tau=-ln(0.53) (1), approximately 0.634 time constants (1).'),
+        25:(6,'By symmetry VD=VE=VB (1) and VG=VC=VF (1). Reduce the network to three series groups: three 1-ohm edges in parallel, six 1-ohm edges in parallel, three 1-ohm edges in parallel (3 total for the three groups, including equivalent reasoning). R_AG=1/3+1/6+1/3=5/6 ohm, approximately 0.833 ohm (1). The source question maximum is six; the key’s eight-point method is consolidated to six.')}
+    for n,(weight,answer) in rubrics.items():
+        b=qs[n];kwargs={}
+        if n==23: kwargs['numeric']=numeric(28.3,0.05,['ohm','ohms','Ω'],True)
+        p.frq(str(n),b['text'],answer,points=weight,page=b['page'],**kwargs)
+    prompt=clean('\n'.join(pages(hands)))+'\nFor online practice, describe every connection, component value, sequence and timing calculation in text. Physical construction is replaced by your circuit design.'
+    p.frq('Lab',prompt,'LED arrangement: independently driven parallel branches, each with current limiting (1 point). Working sequence/design (10 points): a valid arrangement yielding Green -> Yellow -> Red -> Green, with 2–3 s per stage and labeled components. One valid design is a 555 astable clock feeding a decade counter, Q0/Q1/Q2 driving individually current-limited green/yellow/red LEDs and Q3 resetting the counter. Explain power/ground and pin connections, reset/enable and clock wiring, LED branches and timing. T=0.693(R1+2R2)C; for example R1=47 kΩ, R2=100 kΩ, C=15 µF gives approximately 2.57 s. The key’s R1=10 kΩ,R2=100 kΩ,C=10 µF gives 1.46 s and does not meet the requested timing. Other demonstrably working circuits receive full credit. The original key explicitly accepts a switch-clocked counter if the operator waits 2–3 s per press; explain that timing procedure. Merely copying a named solution without workable connections/timing is insufficient.',points=11,page=5)
+    assert len(p.test['questions'])==26 and sum(q['points'] for q in p.test['questions'])==67
+    p.finish()
+
 manifest = Path('documents/practice-import-sources.json')
 existing = json.loads(manifest.read_text(encoding='utf-8'))
 for source in reviewed:

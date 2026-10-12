@@ -89,6 +89,8 @@ Ako is original code-drawn, 48×48 pixel artwork, shared by the page mascots and
 
 Run `node scripts/ako-browser-check.mjs` against the development server at port 3000 (or supply `TEST_BASE_URL`) to verify feeding, emotions, mute persistence, keyboard controls, and mobile bounds.
 
+On a practice test, **Ask Ako** beside any question (or **Study this test with Ako** in his controls) opens a study chat powered by Gemini (`GEMINI_API_KEY`). Ako reads the open question and its published key on the server, and after giving an answer he asks the student to explain why. A wrong explanation makes him mad until it is corrected; after three misses he explains it himself. `node scripts/ako-chat-browser-check.mjs` verifies the chat and his reactions with mocked accounts and a scripted model.
+
 ### Account settings and placement
 
 The signed-in header and mobile navigation link to `/settings/student` or `/settings/instructor`. Students can edit their full name, configure Ako, and leave a community. Instructors can reveal the campus joining password, rename students in their campus roster, and close the shared campus community after typing its group name. Closure affects every student and instructor in that campus.

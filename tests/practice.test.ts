@@ -348,7 +348,12 @@ test('reviewed astronomy papers retain single-choice partial credit and complete
   const regional = findPracticeTest('C', 'scioly-xgxmjpveibo-c');
   assert.equal(regional.questionCount, 32);
   assert.equal(regional.maxScore, 120);
-  for (const [answer, earned] of [['A', 2], ['C', 2], ['E', 4], ['B', 0]] as const)
+  for (const [answer, earned] of [
+    ['A', 2],
+    ['C', 2],
+    ['E', 4],
+    ['B', 0],
+  ] as const)
     assert.equal(gradePractice(regional, { '11': answer }).score, earned);
   assert.equal(gradePractice(regional, { '19': 'A' }).score, 2);
   assert.equal(gradePractice(regional, { '19': 'F' }).score, 4);
@@ -370,7 +375,8 @@ test('SSSS cipher grading applies the published error allowance without AI revie
   const question = paper.questions.find((q) => q.id === '1')!;
   const criterion = paper.keys['1'].criteria![0];
   const solution = criterion.cipher!.solution.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-  const altered = (count: number) => [...solution].map((c, i) => i < count ? (c === 'Z' ? 'Y' : 'Z') : c).join('');
+  const altered = (count: number) =>
+    [...solution].map((c, i) => (i < count ? (c === 'Z' ? 'Y' : 'Z') : c)).join('');
   assert.equal(gradePractice(paper, { '1': solution }).score, question.points);
   assert.equal(gradePractice(paper, { '1': altered(2) }).score, question.points);
   assert.equal(gradePractice(paper, { '1': altered(3) }).score, question.points - 100);
@@ -406,6 +412,24 @@ test('Clements cipher solutions use free full-solution checks and disclose the i
   assert.equal(gradePractice(paper, { '4': 'IS YOU READY TO COMMIT TREASONX' }).score, 0);
   assert.equal(gradePractice(paper, { '8': 'A different padding convention' }).pendingPoints, 0);
   assert.equal(paper.questions.find((q) => q.id === '8')!.points, 0);
+});
+
+test('Greenbrier Circuit Lab includes its separate hands-on packet and keeps ambiguous items unscored', () => {
+  const paper = findPracticeTest('C', 'scioly-kgvd6o10hou-c');
+  assert.equal(paper.questionCount, 26);
+  assert.equal(paper.maxScore, 67);
+  assert.equal(paper.questions.find((q) => q.id === 'Lab')!.page, 5);
+  assert.equal(paper.questions.find((q) => q.id === 'Lab')!.points, 11);
+  assert.equal(paper.questions.find((q) => q.id === '25')!.points, 6);
+  const result = gradePractice(paper, {
+    '1': 'neutral shell',
+    '6': 'flux linkage',
+    '23': '28.3 ohms',
+    '18': 'B',
+  });
+  assert.equal(result.score, 4);
+  assert.equal(result.pendingPoints, 0);
+  assert.match(paper.keys.Lab.criteria![0].answer, /2.57 s/);
 });
 
 test('Gemini rubric responses are bounded, validated, and applied without student identity data', async () => {
