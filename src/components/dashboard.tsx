@@ -21,6 +21,7 @@ import {
   RefreshCw,
   Copy,
   Check,
+  Table,
 } from 'lucide-react';
 import {
   elementaryManualUrl,
@@ -48,6 +49,9 @@ import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
 import { DivisionCLabs } from './division-c-labs';
+import { RankedTestList } from './ranked';
+import { InstructorRanked } from './instructor-ranked';
+import { InstructorTeams } from './instructor-teams';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -441,12 +445,16 @@ function AssignmentList({
             <h3>{assignment.eventName}</h3>
             <p>
               {remove ? `${assignment.studentName} · ` : ''}Division {assignment.division} ·
-              {assignment.testId
-                ? ' Assigned converted test · '
-                : ` Complete any 1 ${assignment.type.toLowerCase()} test · `}
+              {assignment.ranked
+                ? ` Ranked test: ${assignment.testTitle} · `
+                : assignment.testId
+                  ? ' Assigned converted test · '
+                  : ` Complete any 1 ${assignment.type.toLowerCase()} test · `}
               Due <time dateTime={assignment.due}>{assignment.due}</time>
             </p>
-            {assignment.testId && <small>Specific test ID: {assignment.testId}</small>}
+            {assignment.testId && !assignment.ranked && (
+              <small>Specific test ID: {assignment.testId}</small>
+            )}
             {division && division !== assignment.division && (
               <small>
                 Assigned in Division {assignment.division}. Switch to that division to open this
@@ -461,7 +469,7 @@ function AssignmentList({
                 ? 'OVERDUE'
                 : assignment.type.toUpperCase()}
           </span>
-          {remove && !assignment.completedAt ? (
+          {assignment.ranked && remove ? null : remove && !assignment.completedAt ? (
             <button
               disabled={!!pending}
               onClick={() => remove(assignment.id)}
@@ -472,9 +480,9 @@ function AssignmentList({
           ) : division === assignment.division && !assignment.completedAt ? (
             <Link
               className="text-link"
-              href={`/dashboard/student/events/${assignment.eventId}/${assignment.type === 'Practice' ? 'practice-tests' : 'ranked-tests'}`}
+              href={`/dashboard/student/events/${assignment.eventId}/${assignment.type === 'Practice' ? 'practice-tests' : 'ranked-tests'}${assignment.ranked ? `/${assignment.testId}` : ''}`}
             >
-              Open event
+              {assignment.ranked ? 'Open test' : 'Open event'}
             </Link>
           ) : null}
         </article>
@@ -586,8 +594,8 @@ export function StudentDashboard() {
           </div>
           <AssignmentList assignments={data.assignments} division={division} />
           <p className="source-note">
-            Test pages are ready for future content. Assignment completion will be recorded when the
-            test tools launch.
+            Practice assignments complete when you submit a practice test for that event. Ranked
+            tests open in a locked full-screen window and complete when you submit them.
           </p>
         </>
       )}
@@ -691,7 +699,9 @@ export function SchoolPanel() {
 export function InstructorDashboard() {
   const { profile, request } = useAuth();
   const { data, error, loading, refresh } = useDashboard();
-  const [tab, setTab] = useState<'school' | 'assignments' | 'progress'>('assignments');
+  const [tab, setTab] = useState<'school' | 'assignments' | 'ranked' | 'teams' | 'progress'>(
+    'assignments',
+  );
   const [studentId, setStudentId] = useState('');
   const [pending, setPending] = useState('');
   const [removeError, setRemoveError] = useState('');
@@ -738,6 +748,8 @@ export function InstructorDashboard() {
               [
                 ['school', 'School Code', Copy],
                 ['assignments', 'Assignments', FileText],
+                ['ranked', 'Ranked Tests', Trophy],
+                ['teams', 'Teams', Table],
                 ['progress', 'Student Progress', Users],
               ] as const
             ).map(([id, label, Icon]) => (
@@ -759,6 +771,9 @@ export function InstructorDashboard() {
             {tab === 'school' && 'Share this password so students join your roster.'}
             {tab === 'assignments' &&
               'Pick an event, open a converted test, and assign it to students.'}
+            {tab === 'ranked' &&
+              'Build a ranked test with Gemini, assign it by event, and release results.'}
+            {tab === 'teams' && 'Name your teams and seat students and partners in each event.'}
             {tab === 'progress' && 'Review each student’s next steps and event progress.'}
           </p>
         </aside>
@@ -772,6 +787,8 @@ export function InstructorDashboard() {
               onAssigned={refresh}
             />
           )}
+          {tab === 'ranked' && <InstructorRanked students={data.students} onChanged={refresh} />}
+          {tab === 'teams' && <InstructorTeams students={data.students} selections={selections} />}
           {tab === 'progress' && (
             <>
               <PracticeReviews />
@@ -907,6 +924,8 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
           </div>
           {toolId === 'practice-tests' ? (
             <PracticeLibrary eventId={event.id} />
+          ) : toolId === 'ranked-tests' ? (
+            <RankedTestList key={`${profile!.id}:${division}:${event.id}`} eventId={event.id} />
           ) : hasDivisionCLabs ? (
             <DivisionCLabs
               key={`${profile!.id}:${division}:${event.id}`}

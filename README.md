@@ -11,7 +11,7 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 - `/dashboard/student/events/[eventId]`: redirects to Lessons. Event cards link directly to Lessons; Rules is always last in the event toolkit.
 - `/dashboard/student/events/[eventId]/[toolId]`: study-tool pages, including a locally hosted event PDF section for Rules, with its original PDF page range beside the title.
 - `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
-- `/rankings`: earned points only, using generated public learner names. Empty until ranked tests launch.
+- `/rankings`: earned points only, using generated public learner names. Empty until students earn points in ranked tests.
 - `/` and `/mission`: public landing and mission pages.
 - `/study-tools`: public Science Olympiad study-tools guide and division event catalog.
 - `/sitemap.xml` and `/robots.txt`: generated crawler files for Google Search Console; see [SEO setup](documents/SEO.md).

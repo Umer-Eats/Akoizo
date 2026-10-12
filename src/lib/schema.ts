@@ -42,6 +42,23 @@ export const schema = [
   'CREATE INDEX IF NOT EXISTS idx_test_attempts_student ON test_attempts(student_id)',
   'CREATE INDEX IF NOT EXISTS idx_points_ledger_student ON points_ledger(student_id)',
   'CREATE UNIQUE INDEX IF NOT EXISTS idx_pending_assignment ON assignments(student_id,event_id,type,due_date) WHERE completed_at IS NULL',
+  `CREATE TABLE IF NOT EXISTS teams (id TEXT PRIMARY KEY, school_id TEXT NOT NULL REFERENCES schools(id), name TEXT NOT NULL,
+    division TEXT NOT NULL CHECK(division IN ('A','B','C')), created_at TEXT NOT NULL DEFAULT (datetime('now')))`,
+  `CREATE TABLE IF NOT EXISTS team_slots (team_id TEXT NOT NULL REFERENCES teams(id) ON DELETE CASCADE, event_id TEXT NOT NULL REFERENCES events(id),
+    slot INTEGER NOT NULL CHECK(slot BETWEEN 0 AND 2), student_id TEXT NOT NULL REFERENCES users(id),
+    PRIMARY KEY(team_id, event_id, slot), UNIQUE(team_id, event_id, student_id))`,
+  `CREATE TABLE IF NOT EXISTS ranked_tests (id TEXT PRIMARY KEY, school_id TEXT NOT NULL REFERENCES schools(id),
+    instructor_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id), title TEXT NOT NULL,
+    minutes INTEGER NOT NULL, question_count INTEGER NOT NULL, max_score REAL NOT NULL, sources_json TEXT NOT NULL,
+    paper_json TEXT NOT NULL, created_at TEXT NOT NULL)`,
+  `CREATE TABLE IF NOT EXISTS ranked_assignments (id TEXT PRIMARY KEY, test_id TEXT NOT NULL REFERENCES ranked_tests(id),
+    student_id TEXT NOT NULL REFERENCES users(id), due_date TEXT NOT NULL, assigned_at TEXT NOT NULL, started_at TEXT,
+    draft_json TEXT, violations INTEGER NOT NULL DEFAULT 0, submitted_at TEXT, result_json TEXT, released_at TEXT,
+    UNIQUE(test_id, student_id))`,
+  'CREATE INDEX IF NOT EXISTS idx_teams_school ON teams(school_id)',
+  'CREATE INDEX IF NOT EXISTS idx_team_slots_student ON team_slots(student_id)',
+  'CREATE INDEX IF NOT EXISTS idx_ranked_tests_school ON ranked_tests(school_id)',
+  'CREATE INDEX IF NOT EXISTS idx_ranked_assignments_student ON ranked_assignments(student_id)',
 ];
 export const eventSeeds = (['A', 'B', 'C'] as const).flatMap((division) =>
   eventsForDivision(division).map((event) => ({

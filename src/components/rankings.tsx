@@ -114,8 +114,8 @@ export function Rankings() {
         </div>
       )}
       <p className="source-note">
-        Only earned points appear here. Public rankings use an assigned learner name. Ranked tests
-        are coming soon.
+        Only earned points appear here. Public rankings use an assigned learner name. Each ranked
+        test is worth up to 100 points, matching the percentage score.
       </p>
     </main>
   );

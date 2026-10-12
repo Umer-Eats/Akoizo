@@ -252,6 +252,14 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
     WHERE u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY e.name`,
     instructor ? profile.schoolId : profile.id,
   );
+  // Ranked tests live in their own tables; list them beside the other assigned work.
+  const ranked = await db.all(
+    `SELECT a.id,a.student_id,u.display_name,t.event_id,e.name,e.division,a.due_date,a.submitted_at,t.id AS test_id,t.title
+    FROM ranked_assignments a JOIN ranked_tests t ON t.id=a.test_id JOIN users u ON u.id=a.student_id JOIN events e ON e.id=t.event_id
+    WHERE t.school_id=u.school_id AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND ${instructor ? 'u.school_id=?' : 'u.id=?'}
+    ORDER BY a.submitted_at IS NOT NULL,a.due_date,a.assigned_at DESC`,
+    instructor ? profile.schoolId : profile.id,
+  );
   const progress: DashboardData['progress'] = {};
   for (const row of progressRows) {
     (progress[String(row.student_id)] ||= []).push({
@@ -265,18 +273,38 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
     students: instructor ? students : [],
     stats: instructor ? { lessons: 0, practice: 0, ranked: 0, points: 0 } : asStats(rows[0] || {}),
     progress,
-    assignments: assignments.map((a) => ({
-      id: String(a.id),
-      studentId: String(a.student_id),
-      studentName: String(a.display_name),
-      eventId: String(a.event_id).split(':').slice(2).join(':'),
-      eventName: String(a.name),
-      division: a.division,
-      type: a.type,
-      due: String(a.due_date),
-      completedAt: a.completed_at,
-      testId: a.test_id ? String(a.test_id) : null,
-    })) as Assignment[],
+    assignments: (
+      [
+        ...assignments.map((a) => ({
+          id: String(a.id),
+          studentId: String(a.student_id),
+          studentName: String(a.display_name),
+          eventId: String(a.event_id).split(':').slice(2).join(':'),
+          eventName: String(a.name),
+          division: a.division,
+          type: a.type,
+          due: String(a.due_date),
+          completedAt: a.completed_at,
+          testId: a.test_id ? String(a.test_id) : null,
+        })),
+        ...ranked.map((a) => ({
+          id: String(a.id),
+          studentId: String(a.student_id),
+          studentName: String(a.display_name),
+          eventId: String(a.event_id).split(':').slice(2).join(':'),
+          eventName: String(a.name),
+          division: a.division,
+          type: 'Ranked',
+          due: String(a.due_date),
+          completedAt: a.submitted_at,
+          testId: String(a.test_id),
+          testTitle: String(a.title),
+          ranked: true,
+        })),
+      ] as Assignment[]
+    ).sort(
+      (a, b) => Number(!!a.completedAt) - Number(!!b.completedAt) || a.due.localeCompare(b.due),
+    ),
     selections: instructor ? await selectionsForSchool(db, profile) : undefined,
   };
 }
@@ -485,6 +513,12 @@ export async function leaveCommunity(db: Database, actor: Profile) {
         sql: 'DELETE FROM assignments WHERE student_id=? AND student_id IN (SELECT id FROM users WHERE school_id=?)',
         args: [actor.id, actor.schoolId],
       },
+      { sql: 'DELETE FROM team_slots WHERE student_id=?', args: [actor.id] },
+      // Submitted ranked attempts are learning records and stay with the student.
+      {
+        sql: 'DELETE FROM ranked_assignments WHERE student_id=? AND submitted_at IS NULL',
+        args: [actor.id],
+      },
     ],
     'immediate',
   );
@@ -506,6 +540,14 @@ export async function deleteCommunity(db: Database, actor: Profile, confirmation
       },
       {
         sql: `DELETE FROM assignments WHERE student_id IN (SELECT id FROM users WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities))`,
+        args: [actor.schoolId],
+      },
+      {
+        sql: `DELETE FROM team_slots WHERE team_id IN (SELECT id FROM teams WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities))`,
+        args: [actor.schoolId],
+      },
+      {
+        sql: `DELETE FROM ranked_assignments WHERE submitted_at IS NULL AND test_id IN (SELECT id FROM ranked_tests WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities))`,
         args: [actor.schoolId],
       },
     ],

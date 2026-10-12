@@ -166,29 +166,8 @@ export async function pendingPracticeReviews(
       : [];
   });
 }
-export async function reviewPractice(
-  db: Database,
-  profile: Profile,
-  input: Record<string, unknown>,
-) {
-  if (profile.role !== 'instructor') throw new AppError(403, 'An instructor account is required.');
-  if (
-    typeof input.id !== 'string' ||
-    !input.scores ||
-    typeof input.scores !== 'object' ||
-    Array.isArray(input.scores)
-  )
-    throw new AppError(400, 'Enter a score for each pending rubric item.');
-  const row = await db.get(
-    `SELECT p.result_json FROM practice_submissions p JOIN users u ON u.id=p.student_id WHERE p.id=? AND u.school_id=? AND NOT EXISTS(SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
-    input.id,
-    profile.schoolId,
-  );
-  if (!row) throw new AppError(404, 'That submission is not in your school.');
-  const result = JSON.parse(String(row.result_json)) as PracticeResult;
-  if (!result.pendingPoints)
-    throw new AppError(409, 'This submission has already been reviewed. Refresh the list.');
-  const scores = input.scores as Record<string, unknown>;
+/** Record an instructor's score for every pending rubric item, then total the attempt again. */
+export function applyReviewScores(result: PracticeResult, scores: Record<string, unknown>) {
   const pending = result.questions.flatMap((q) =>
     q.criteria.filter((c) => c.needsReview).map((c) => `${q.id}/${c.id}`),
   );
@@ -218,6 +197,30 @@ export async function reviewPractice(
   result.pendingPoints = 0;
   result.percentage = Math.round((result.score / result.maxScore) * 10000) / 100;
   result.reviewedAt = new Date().toISOString();
+}
+export async function reviewPractice(
+  db: Database,
+  profile: Profile,
+  input: Record<string, unknown>,
+) {
+  if (profile.role !== 'instructor') throw new AppError(403, 'An instructor account is required.');
+  if (
+    typeof input.id !== 'string' ||
+    !input.scores ||
+    typeof input.scores !== 'object' ||
+    Array.isArray(input.scores)
+  )
+    throw new AppError(400, 'Enter a score for each pending rubric item.');
+  const row = await db.get(
+    `SELECT p.result_json FROM practice_submissions p JOIN users u ON u.id=p.student_id WHERE p.id=? AND u.school_id=? AND NOT EXISTS(SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
+    input.id,
+    profile.schoolId,
+  );
+  if (!row) throw new AppError(404, 'That submission is not in your school.');
+  const result = JSON.parse(String(row.result_json)) as PracticeResult;
+  if (!result.pendingPoints)
+    throw new AppError(409, 'This submission has already been reviewed. Refresh the list.');
+  applyReviewScores(result, input.scores as Record<string, unknown>);
   const written = await db.batch(
     [
       {

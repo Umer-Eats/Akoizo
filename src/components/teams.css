@@ -1,0 +1,260 @@
+@layer theme {
+  .team-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    margin-bottom: 18px;
+  }
+  .team-tabs .tabs {
+    margin: 0;
+    flex-wrap: wrap;
+  }
+  .team-create {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .team-create input,
+  .team-create select {
+    width: auto;
+    min-height: 36px;
+    margin: 0;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  .team-create input {
+    width: 170px;
+  }
+  .team-create .assign-pill {
+    gap: 6px;
+  }
+  .team-sheet {
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .team-sheet-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line-strong);
+    background: var(--surface-2);
+  }
+  .team-sheet-title input {
+    flex: 1;
+    min-width: 160px;
+    min-height: 40px;
+    margin: 0;
+    padding: 6px 10px;
+    border-color: transparent;
+    background: transparent;
+    font-family: var(--font-display, inherit);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .team-sheet-title input:hover,
+  .team-sheet-title input:focus {
+    border-color: var(--line-strong);
+    background: var(--surface);
+  }
+  .team-sheet-title [data-over='true'] {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+  .team-sheet-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+  .team-sheet-delete:hover {
+    color: var(--text);
+  }
+  .team-sheet .slot-legend {
+    margin: 0;
+    padding: 12px 14px;
+    border-block: 1px solid var(--line-strong);
+  }
+  .team-grid-wrap {
+    overflow-x: auto;
+  }
+  .team-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .team-grid th,
+  .team-grid td {
+    height: 44px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    text-align: left;
+    vertical-align: middle;
+  }
+  .team-grid tr > :first-child {
+    border-left: 0;
+  }
+  .team-grid tr > :last-child {
+    border-right: 0;
+  }
+  .team-grid thead th {
+    height: 32px;
+    color: var(--muted);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--surface-2);
+  }
+  /* Names and events read as written, not in the site's uppercase table heading style. */
+  .team-grid tbody th {
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+  .team-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .team-grid .student-avatar {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    font-size: 0.6rem;
+  }
+  .team-roster th[scope='col']:first-child {
+    width: 46%;
+  }
+  .team-count {
+    width: 90px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center !important;
+  }
+  .team-dots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .team-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: var(--slot);
+  }
+  .team-clash {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+    color: var(--orange);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .team-grid-empty {
+    color: var(--muted);
+    text-align: center !important;
+  }
+  /* Event rows carry their tournament timeslot color, like the paper sheet. */
+  .team-events tbody tr {
+    background: color-mix(in srgb, var(--slot) 20%, var(--surface));
+  }
+  .team-events tbody th {
+    min-width: 190px;
+    border-left: 5px solid var(--slot) !important;
+    color: var(--text);
+  }
+  .team-events td {
+    min-width: 170px;
+    padding: 3px;
+  }
+  .team-seat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 36px;
+    padding: 3px 8px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: left;
+  }
+  .team-seat > span:not(.student-avatar) {
+    overflow-wrap: anywhere;
+  }
+  .team-seat[data-empty='true'] {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 0.75rem;
+    border-style: dashed;
+    border-color: color-mix(in srgb, var(--slot) 45%, transparent);
+  }
+  .team-seat:hover:not(:disabled) {
+    border-color: var(--text);
+    border-style: solid;
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+    color: var(--text);
+  }
+  .team-seat:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: -2px;
+  }
+  .team-seat[data-clash='true'] {
+    border-color: var(--orange);
+    border-style: solid;
+  }
+  .team-seat[data-clash='true'] > svg {
+    margin-left: auto;
+    color: var(--orange);
+  }
+  .team-seat-none {
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 6px,
+      color-mix(in srgb, var(--text) 6%, transparent) 6px 7px
+    );
+  }
+  .student-card {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+  }
+  .student-card:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .student-card-picked {
+    color: var(--green);
+    border-color: var(--green);
+  }
+  .student-card-clash {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+  @media (max-width: 600px) {
+    .team-create input {
+      width: 130px;
+    }
+    .team-events tbody th {
+      min-width: 130px;
+    }
+    .team-events td {
+      min-width: 140px;
+    }
+  }
+}

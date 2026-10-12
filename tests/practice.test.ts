@@ -297,6 +297,33 @@ test('multi-select grades the complete selected set; fractions, units and ranges
   );
 });
 
+test('new Division C archive conversions preserve source weights, aliases and partial selection credit', () => {
+  const chemistry = findPracticeTest('C', 'scioly-6p22ee45sym-c');
+  assert.equal(chemistry.year, 2025);
+  assert.equal(chemistry.questionCount, 37);
+  assert.equal(chemistry.maxScore, 57);
+  assert.equal(gradePractice(chemistry, { 'MC-27': 'C' }).score, 1);
+  assert.equal(gradePractice(chemistry, { 'MC-27': 'D' }).score, 1);
+  const anatomy = findPracticeTest('C', 'scioly-utchox7hycm-c');
+  assert.equal(anatomy.year, 2017);
+  assert.equal(anatomy.questionCount, 53);
+  assert.equal(anatomy.maxScore, 49);
+  assert.equal(anatomy.questions.find((q) => q.id === '50')!.points, 0);
+  assert.equal(findPracticeTest('C', 'scioly-at4qrn55nys-c').questionCount, 100);
+  assert.equal(findPracticeTest('C', 'scioly-agtflowr5b8-c').maxScore, 94);
+  const ocean = findPracticeTest('C', 'scioly-lrnb7z692h0-c');
+  assert.equal(gradePractice(ocean, { '9-3': 'H' }).score, 1);
+  const genetics = findPracticeTest('C', 'scioly-wg1quxfmdec-c');
+  assert.equal(genetics.questionCount, 77);
+  assert.equal(gradePractice(genetics, { '4-13': 'A' }).score, 1);
+  assert.equal(gradePractice(genetics, { '4-13': 'A,B' }).score, 2);
+  assert.equal(gradePractice(genetics, { '4-13': 'E,B,A' }).score, 3);
+  assert.equal(gradePractice(genetics, { '4-13': 'A,A' }).score, 1);
+  const invalid = structuredClone(genetics);
+  invalid.keys['4-13'].optionPoints!.A = 100;
+  assert.throws(() => validatePracticeCatalog([invalid]), /Invalid practice catalog/);
+});
+
 test('Gemini rubric responses are bounded, validated, and applied without student identity data', async () => {
   const paper = findPracticeTest('B', 'michigan-regions-2024-meteorology-b');
   const initial = gradePractice(paper, { '58': 'Get low and cover the head and neck.' });

@@ -27,6 +27,8 @@ export type Assignment = {
   completedAt: string | null;
   testId?: string | null;
   testTitle?: string | null;
+  /** A custom ranked test, managed from the instructor's Ranked Tests tab. */
+  ranked?: boolean;
 };
 export type EventProgress = Stats & { eventId: string; eventName: string };
 export type DashboardData = {

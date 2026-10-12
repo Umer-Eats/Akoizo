@@ -16,7 +16,17 @@ The instructor dashboard contains only its school's students. Selecting a studen
 
 Practice Tests opens a searchable list by competition, level, year and topic, with optional level/year filters. Six historical papers currently cover Heredity B, Disease Detectives B, Anatomy & Physiology C and Dynamic Planet C. The complete original paper is embedded beside one scrollable answer sheet. Multiple choice supports one or multiple selections; written responses preserve exact text. Scores and rubric corrections persist in the database, and local drafts survive reloads. Open explanations need instructor rubric review before the provisional score becomes final. Only instructors in the student's current study group can review them. See [practice sources and limits](PRACTICE_TESTS.md).
 
-The public rankings page displays only actual earned points with generated public learner names. It has an empty state until points exist. Practice submission does not award ranked points. No fictional ranking remains.
+## Ranked tests and teams
+
+The instructor toolkit has two further tabs. **Teams** is a sheet per team: a name, a derived roster with each student’s event count, and one row per event of the team’s division, colored by tournament timeslot. Each partner seat is filled by choosing a student card (two seats; three for Codebusters and Experimental Design). A student seated in two events of one timeslot is flagged. Seats, teams and tests belong to one school roster and are never shared across school communities.
+
+**Ranked Tests** builds a custom test for one event. The server collects questions that stand on their own (full prompt, real answer choices, a published or generated key, and no reference to the original paper, a numbered exhibit or a specimen), and Gemini chooses which to combine, drawing on several converted tests. Model output is never trusted: unknown or repeated IDs are dropped, no single source may supply more than 70% when others exist, and shortfalls are topped up from the least-used sources. Questions and keys are copied unchanged, so grading uses the original rubric. Instructors can preview the paper and key, and remove questions until a student starts.
+
+Assigning reaches every student seated in that event on any team in one step, or chosen students, whose event partners are always included. A student sees assigned tests under the event’s Ranked Tests tab. Questions are sent only after the student starts. The test runs in a full-screen locked view with a server-side deadline, autosave, and a record of each time the student leaves full screen or the tab; copy, paste, the context menu, printing shortcuts and the back button are blocked. Browsers cannot be fully locked by a web page, so this deters and records rather than guarantees; a managed kiosk or lockdown browser is needed for stricter control.
+
+Submission grades objective answers at once and written answers with Gemini against the rubric; anything Gemini cannot settle waits for the instructor. The student sees the score immediately. Their answers, the correct answers and feedback stay hidden, and are not sent to the browser, until the instructor releases results for that student. Each ranked test awards up to 100 ranking points (the rounded percentage) exactly once and counts toward dashboard totals. Verified by `tests/ranked.test.ts` and `scripts/ranked-browser-check.mjs`.
+
+The public rankings page displays only actual earned points with generated public learner names. It has an empty state until points exist. Practice submission does not award ranked points; ranked tests do. No fictional ranking remains.
 
 ## Catalog and sources
 

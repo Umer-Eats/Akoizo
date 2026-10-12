@@ -29,6 +29,8 @@ export type Criterion = {
   cipher?: { solution: string; freeErrors: number; penaltyPerError: number };
 };
 export type QuestionKey = {
+  // Only when the published key explicitly awards points per selected correct option.
+  optionPoints?: Record<string, number>;
   correctOption?: string;
   correctOptions?: string[];
   acceptedOptions?: string[];

@@ -102,6 +102,10 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       const key = test.keys[question.id];
       if (!key) return fail();
       if (question.type === 'mcq') {
+        if (key.optionPoints && (!question.multiple || !key.correctOptions ||
+          Object.keys(key.optionPoints).length !== key.correctOptions.length ||
+          Object.entries(key.optionPoints).some(([id, points]) => !key.correctOptions!.includes(id) || !Number.isFinite(points) || points <= 0) ||
+          Math.abs(Object.values(key.optionPoints).reduce((sum, points) => sum + points, 0) - question.points) > 1e-8)) return fail();
         const options = question.options?.map((o) => o.id);
         const correct = question.multiple
           ? key.correctOptions
