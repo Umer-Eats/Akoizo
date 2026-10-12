@@ -29,7 +29,7 @@ export const publicPages = [
     path: '/donate',
     title: 'Donate to Akoizo’s Free Science Olympiad Study Tools',
     description:
-      'Donate with Zelle to help keep Akoizo online and free for Science Olympiad students. Donations go directly to the student who runs the site.',
+      'Donate with PayPal or a debit or credit card to help keep Akoizo online and free for Science Olympiad students. Donations go directly to the student who runs the site.',
   },
   {
     path: '/contact',

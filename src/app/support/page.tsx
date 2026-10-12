@@ -54,7 +54,7 @@ export default function SupportPage() {
       <div className="mission-bottom">
         <p>Every amount helps. Studying on Akoizo stays free whether you give or not.</p>
         <Link className="button button-primary" href="/donate">
-          Donate with Zelle
+          Donate with PayPal or card
         </Link>
       </div>
     </main>

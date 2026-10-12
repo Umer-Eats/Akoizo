@@ -1,11 +1,7 @@
-// Zelle has no public payments API: money can only be sent from inside a bank's app.
-// The donate page shows the recipient and links to Zelle's own QR-code handoff instead.
-export const zelleName = 'Umer Qureshi';
-// The email or U.S. mobile number enrolled with Zelle. Set in .env.local and in Vercel.
-export const zelleRecipient = process.env.NEXT_PUBLIC_ZELLE_RECIPIENT?.trim() ?? '';
+// The ID of a PayPal Donate button (paypal.com/donate/buttons). Set in .env.local and in Vercel.
+const paypalDonateId = process.env.NEXT_PUBLIC_PAYPAL_DONATE_ID?.trim() ?? '';
 
-// Same payload a bank app encodes in a "My Zelle QR code".
-export function zelleLink(name: string, token: string) {
-  const data = btoa(JSON.stringify({ name, token, action: 'payment' }));
-  return `https://enroll.zellepay.com/qr-codes?data=${encodeURIComponent(data)}`;
-}
+// PayPal's hosted donate page: donors pay with a PayPal balance or a debit or credit card.
+export const paypalDonateUrl = paypalDonateId
+  ? `https://www.paypal.com/donate/?hosted_button_id=${encodeURIComponent(paypalDonateId)}`
+  : '';
