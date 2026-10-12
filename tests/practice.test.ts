@@ -344,6 +344,42 @@ test('new Division C archive conversions preserve source weights, aliases and pa
   assert.throws(() => validatePracticeCatalog([invalid]), /Invalid practice catalog/);
 });
 
+test('reviewed astronomy papers retain single-choice partial credit and complete FRQ sections', () => {
+  const regional = findPracticeTest('C', 'scioly-xgxmjpveibo-c');
+  assert.equal(regional.questionCount, 32);
+  assert.equal(regional.maxScore, 120);
+  for (const [answer, earned] of [['A', 2], ['C', 2], ['E', 4], ['B', 0]] as const)
+    assert.equal(gradePractice(regional, { '11': answer }).score, earned);
+  assert.equal(gradePractice(regional, { '19': 'A' }).score, 2);
+  assert.equal(gradePractice(regional, { '19': 'F' }).score, 4);
+  const invalid = structuredClone(regional);
+  invalid.keys['11'].optionPoints!.A = 5;
+  assert.throws(() => validatePracticeCatalog([invalid]), /Invalid practice catalog/);
+  const fairfax = findPracticeTest('C', 'scioly-8ouyzuzdj8o-c');
+  assert.equal(fairfax.questionCount, 41);
+  assert.equal(fairfax.maxScore, 116);
+  assert.equal(gradePractice(fairfax, { 'MC-15': 'B,D' }).score, 2);
+  assert.equal(gradePractice(fairfax, { 'MC-15': 'B' }).score, 0);
+  assert.equal(fairfax.questions.filter((q) => q.type === 'frq').length, 16);
+});
+
+test('SSSS cipher grading applies the published error allowance without AI review', () => {
+  const paper = findPracticeTest('C', 'scioly-usvyop3nitg-c');
+  assert.equal(paper.questionCount, 24);
+  assert.equal(paper.maxScore, 7800);
+  const question = paper.questions.find((q) => q.id === '1')!;
+  const criterion = paper.keys['1'].criteria![0];
+  const solution = criterion.cipher!.solution.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+  const altered = (count: number) => [...solution].map((c, i) => i < count ? (c === 'Z' ? 'Y' : 'Z') : c).join('');
+  assert.equal(gradePractice(paper, { '1': solution }).score, question.points);
+  assert.equal(gradePractice(paper, { '1': altered(2) }).score, question.points);
+  assert.equal(gradePractice(paper, { '1': altered(3) }).score, question.points - 100);
+  const typed = 'My exact wrong response  ';
+  const wrong = gradePractice(paper, { '1': typed, '23': '0' });
+  assert.equal(wrong.pendingPoints, 0);
+  assert.equal(wrong.questions.find((q) => q.id === '1')!.answer, typed);
+});
+
 test('Gemini rubric responses are bounded, validated, and applied without student identity data', async () => {
   const paper = findPracticeTest('B', 'michigan-regions-2024-meteorology-b');
   const initial = gradePractice(paper, { '58': 'Get low and cover the head and neck.' });
