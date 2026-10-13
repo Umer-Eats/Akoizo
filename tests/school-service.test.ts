@@ -21,8 +21,11 @@ import {
   migrateCampusRosters,
   migrateHighSchoolPassword,
   migrateCommunityDirectory,
+  syncCommunityPasswords,
 } from '../src/lib/campus-migration.ts';
 import { schoolCommunities } from '../src/lib/school-communities.ts';
+import communityPasswords from '../communitypasswords.json' with { type: 'json' };
+import { publicCommunityDirectory } from '../scripts/sync-communities.mjs';
 function fixture() {
   const raw = new DatabaseSync(':memory:');
   raw.exec('PRAGMA foreign_keys=ON');
@@ -64,14 +67,124 @@ const teacherData = {
   schoolCommunityId: 'ppchs',
 };
 const identity = (uid: string) => ({ uid, email: `${uid}@example.test` });
+
+test('a configuration entry creates a working community without additional enrollment or schema edits', async () => {
+  const { db, raw } = fixture();
+  await migrateCommunityDirectory(db);
+  const added = {
+    id: 'test-new-high',
+    name: 'Test New High School',
+    studentPassword: { env: 'TEST_NEW_STUDENT_PASSWORD' },
+    instructorPassword: { env: 'TEST_NEW_INSTRUCTOR_PASSWORD' },
+  };
+  const directory = schoolCommunities as unknown as { id: string; name: string }[];
+  communityPasswords.push(added);
+  directory.push(publicCommunityDirectory([added])[0]);
+  process.env.TEST_NEW_STUDENT_PASSWORD = 'fake-new-student';
+  process.env.TEST_NEW_INSTRUCTOR_PASSWORD = 'fake-new-instructor';
+  try {
+    const teacher = await registerMember(
+      db,
+      identity('new-teacher'),
+      {
+        ...teacherData,
+        schoolCommunityId: added.id,
+        instructorInvitePassword: 'fake-new-instructor',
+      },
+      undefined,
+    );
+    assert.equal(teacher.profile.schoolCommunityName, added.name);
+    assert.equal(teacher.credentials!.joiningPassword, 'fake-new-student');
+    const colleague = await registerMember(
+      db,
+      identity('new-colleague'),
+      {
+        ...teacherData,
+        schoolCommunityId: added.id,
+        instructorInvitePassword: 'fake-new-instructor',
+      },
+      undefined,
+    );
+    assert.equal(colleague.profile.schoolId, teacher.profile.schoolId);
+    const student = await registerMember(
+      db,
+      identity('new-student'),
+      {
+        role: 'student',
+        displayName: 'New Student',
+        division: 'C',
+        schoolPassword: 'fake-new-student',
+      },
+      undefined,
+    );
+    assert.equal(student.profile.schoolId, teacher.profile.schoolId);
+    const existing = await registerMember(
+      db,
+      identity('existing-campus-teacher'),
+      teacherData,
+      'test-invitation',
+    );
+    assert.equal((await dashboardFor(db, existing.profile)).students.length, 0);
+    process.env.TEST_NEW_STUDENT_PASSWORD = 'fake-replacement-student';
+    await syncCommunityPasswords(db);
+    await assert.rejects(
+      registerMember(
+        db,
+        identity('old-password-student'),
+        {
+          role: 'student',
+          displayName: 'Student',
+          division: 'C',
+          schoolPassword: 'fake-new-student',
+        },
+        undefined,
+      ),
+      { status: 403 },
+    );
+    const next = await registerMember(
+      db,
+      identity('new-password-student'),
+      {
+        role: 'student',
+        displayName: 'Student',
+        division: 'C',
+        schoolPassword: 'fake-replacement-student',
+      },
+      undefined,
+    );
+    assert.equal(next.profile.schoolId, teacher.profile.schoolId);
+    assert.ok(await profileForUid(db, 'new-student'));
+  } finally {
+    communityPasswords.pop();
+    directory.pop();
+    delete process.env.TEST_NEW_STUDENT_PASSWORD;
+    delete process.env.TEST_NEW_INSTRUCTOR_PASSWORD;
+    raw.close();
+  }
+});
+
+test('generated public community directory includes no password settings and rejects invalid entries', () => {
+  const entry = communityPasswords[0];
+  assert.deepEqual(publicCommunityDirectory([entry]), [{ id: entry.id, name: entry.name }]);
+  assert.throws(() => publicCommunityDirectory([entry, entry]), /unique/);
+  assert.throws(() => publicCommunityDirectory([{ ...entry, id: "bad'id" }]), /unique/);
+  assert.throws(
+    () => publicCommunityDirectory([{ ...entry, studentPassword: { env: 'NEXT_PUBLIC_SECRET' } }]),
+    /private/,
+  );
+  assert.throws(
+    () => publicCommunityDirectory([{ ...entry, instructorPassword: { env: '' } }]),
+    /private/,
+  );
+});
 test('RCSA instructor invitation is campus-specific and works without the default invitation setting', async () => {
   const { db, raw } = fixture();
   const rcsaData = {
     ...teacherData,
     schoolCommunityId: 'rcsa-high',
-    instructorInvitePassword: 'RCSA904',
+    instructorInvitePassword: 'test-rcsa-invite',
   };
-  for (const password of ['test-invitation', 'rcsascioly', 'rcsa904', 'wrong']) {
+  for (const password of ['test-invitation', 'test-rcsa-join', 'TEST-RCSA-INVITE', 'wrong']) {
     await assert.rejects(
       registerMember(
         db,
@@ -93,7 +206,7 @@ test('RCSA instructor invitation is campus-specific and works without the defaul
         {
           ...teacherData,
           schoolCommunityId: campus.id,
-          instructorInvitePassword: 'RCSA904',
+          instructorInvitePassword: 'test-rcsa-invite',
         },
         'test-invitation',
       ),
@@ -102,7 +215,7 @@ test('RCSA instructor invitation is campus-specific and works without the defaul
   }
   const instructor = await registerMember(db, identity('rcsa-teacher'), rcsaData, undefined);
   assert.equal(instructor.profile.schoolCommunityName, 'River City Science Academy High School');
-  assert.equal(instructor.credentials!.joiningPassword, 'rcsascioly');
+  assert.equal(instructor.credentials!.joiningPassword, 'test-rcsa-join');
   const student = await registerMember(
     db,
     identity('rcsa-student'),
@@ -110,7 +223,7 @@ test('RCSA instructor invitation is campus-specific and works without the defaul
       role: 'student',
       displayName: 'RCSA Student',
       division: 'C',
-      schoolPassword: 'rcsascioly',
+      schoolPassword: 'test-rcsa-join',
     },
     undefined,
   );
@@ -123,7 +236,7 @@ test('RCSA instructor invitation is campus-specific and works without the defaul
         role: 'student',
         displayName: 'Student',
         division: 'C',
-        schoolPassword: 'RCSA904',
+        schoolPassword: 'test-rcsa-invite',
       },
       undefined,
     ),
@@ -150,7 +263,7 @@ test('community directory migration expands the old CHECK constraint and preserv
     {
       ...teacherData,
       schoolCommunityId: 'rcsa-high',
-      instructorInvitePassword: 'RCSA904',
+      instructorInvitePassword: 'test-rcsa-invite',
     },
     undefined,
   );
@@ -164,7 +277,7 @@ test('high school password migration upgrades existing rosters once without chan
   raw.prepare('INSERT INTO app_migrations (id) VALUES (?)').run('shared-campus-rosters-v1');
   raw
     .prepare('UPDATE schools SET password_hash=? WHERE id=?')
-    .run(hashSchoolPassword('highschoolscioly'), first.profile.schoolId);
+    .run(hashSchoolPassword('test-old-high-join'), first.profile.schoolId);
   const otherHash = raw
     .prepare('SELECT password_hash FROM schools WHERE id=?')
     .get(second.profile.schoolId)!.password_hash;
@@ -174,8 +287,8 @@ test('high school password migration upgrades existing rosters once without chan
     raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(first.profile.schoolId)!
       .password_hash,
   );
-  assert.ok(verifySchoolPassword('ppchsscioly', hash));
-  assert.equal(verifySchoolPassword('highschoolscioly', hash), false);
+  assert.ok(verifySchoolPassword('test-high-join', hash));
+  assert.equal(verifySchoolPassword('test-old-high-join', hash), false);
   assert.equal(
     raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(second.profile.schoolId)!
       .password_hash,
@@ -273,7 +386,7 @@ test('enrollment gates, hashing, duplicate recovery, and fixed campus password r
   });
   const rotated = await rotateSchoolPassword(db, instructor.profile);
   assert.equal(rotated.joiningPassword, password);
-  assert.equal(password, 'ppchsscioly');
+  assert.equal(password, 'test-high-join');
   assert.equal(
     (
       await registerMember(
@@ -292,14 +405,20 @@ test('enrollment gates, hashing, duplicate recovery, and fixed campus password r
 
 test('each campus password joins only its shared roster and instructors cannot access other campuses', async () => {
   const { db, raw } = fixture();
-  const passwords = ['ppchsscioly', 'centralscioly', 'westscioly', 'avmscioly', 'rcsascioly'];
+  const passwords = [
+    'test-high-join',
+    'test-central-join',
+    'test-west-join',
+    'test-avm-join',
+    'test-rcsa-join',
+  ];
   const instructors: Profile[] = [];
   const learners: Profile[] = [];
   for (const [index, campus] of schoolCommunities.entries()) {
     const data = {
       ...teacherData,
       schoolCommunityId: campus.id,
-      instructorInvitePassword: campus.id === 'rcsa-high' ? 'RCSA904' : 'test-invitation',
+      instructorInvitePassword: campus.id === 'rcsa-high' ? 'test-rcsa-invite' : 'test-invitation',
     };
     const first = await registerMember(db, identity(`teacher-${index}`), data, 'test-invitation');
     const second = await registerMember(
@@ -390,7 +509,7 @@ test('existing campus groups merge once while preserving assignments, progress a
   const hash = raw
     .prepare('SELECT password_hash FROM schools WHERE id=?')
     .get(first.profile.schoolId)!.password_hash;
-  assert.ok(verifySchoolPassword('ppchsscioly', String(hash)));
+  assert.ok(verifySchoolPassword('test-high-join', String(hash)));
   await migrateCampusRosters(db);
   assert.equal(
     raw.prepare('SELECT password_hash FROM schools WHERE id=?').get(first.profile.schoolId)!

@@ -1,27 +1,30 @@
 import { randomBytes, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
-
-const campusPasswords = {
-  ppchs: 'ppchsscioly',
-  'ppcms-academic-village': 'avmscioly',
-  'ppcms-west': 'westscioly',
-  'ppcms-central': 'centralscioly',
-  'rcsa-high': 'rcsascioly',
-} as const;
+import communityPasswords from '../../communitypasswords.json' with { type: 'json' };
 
 export function instructorInviteForCommunity(
   communityId: string | undefined,
   defaultInvite: string | undefined,
 ) {
-  return communityId === 'rcsa-high' ? 'RCSA904' : defaultInvite;
+  const community = communityPasswords.find((c) => c.id === communityId);
+  if (!community) return undefined;
+  const setting = community.instructorPassword.env;
+  return setting === 'INSTRUCTOR_INVITE_PASSWORD' ? defaultInvite : process.env[setting];
 }
 
 export function campusPassword(communityId: string | null | undefined) {
-  return Object.entries(campusPasswords).find(([id]) => id === communityId)?.[1] ?? null;
+  const setting = communityPasswords.find((c) => c.id === communityId)?.studentPassword.env;
+  if (!setting) return null;
+  const password = process.env[setting];
+  if (!password) throw new Error(`Missing server enrollment setting: ${setting}`);
+  return password;
 }
 export function campusFromPassword(password: string) {
-  return (
-    Object.entries(campusPasswords).find(([, value]) => equalSecret(password, value))?.[0] ?? null
-  );
+  const matches = communityPasswords.filter((community) => {
+    const expected = process.env[community.studentPassword.env];
+    return expected ? equalSecret(password, expected) : false;
+  });
+  // Shared student passwords cannot identify which campus a student should join.
+  return matches.length === 1 ? matches[0].id : null;
 }
 export function makeSchoolPassword(schoolId: string, communityId?: string | null) {
   const password = campusPassword(communityId);

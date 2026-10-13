@@ -5,6 +5,7 @@ import {
   migrateCampusRosters,
   migrateHighSchoolPassword,
   migrateCommunityDirectory,
+  syncCommunityPasswords,
 } from './campus-migration.ts';
 
 export function getDb() {
@@ -24,6 +25,7 @@ export async function initializeDatabase() {
       await migrateCommunityDirectory(db);
       await migrateCampusRosters(db);
       await migrateHighSchoolPassword(db);
+      await syncCommunityPasswords(db);
       await db.batch(eventSeeds, 'immediate');
       try {
         await db.batch(
