@@ -152,6 +152,9 @@ try {
   await expect(page).toHaveURL(/\/students\/student-1$/);
   await expect(page.getByRole('heading', { name: 'Maya R.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Radiant', exact: true })).toBeVisible();
+  await expect(page.locator('.ranked-analytics-panel tbody tr')).toHaveCount(10);
+  await page.getByRole('button', { name: 'Older tests', exact: true }).click();
+  await expect(page.getByLabel('Test history pages')).toContainText('2 / 5');
   await page.getByRole('button', { name: 'Ranked rating', exact: true }).click();
   await expect(page.getByRole('img', { name: /Ranked rating over/ })).toBeVisible();
   await page.getByText('How Akoizo ranks work', { exact: true }).click();
@@ -162,7 +165,7 @@ try {
   await expect(page.getByText('No released ranked tests yet.', { exact: true })).toBeVisible();
   await fits('unranked');
   await page.goto(`${base}/students/missing`);
-  await expect(page.getByRole('alert')).toHaveText('Student profile not found.');
+  await expect(page.locator('main p[role="alert"]')).toHaveText('Student profile not found.');
   assert.deepEqual(errors, []);
   console.log(
     'PASS: cross-community cards, pagination, search, profile navigation, Radiant, chart controls, all nine badges, empty/error states, light/dark layout at 1440/390/320px; no browser errors.',

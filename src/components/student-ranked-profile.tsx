@@ -19,6 +19,11 @@ function ProfileView({ studentId }: { studentId: string }) {
   const [loading, setLoading] = useState(true);
   const [revision, setRevision] = useState(0);
   const [metric, setMetric] = useState<'points' | 'rating'>('points');
+  const [historyPage, setHistoryPage] = useState(0);
+  useEffect(() => {
+    setHistoryPage(0);
+    setData(null);
+  }, [studentId]);
   useEffect(() => {
     let active = true;
     setLoading(true);
@@ -257,30 +262,56 @@ function ProfileView({ studentId }: { studentId: string }) {
         <p className="eyebrow">EVERY STEP COUNTS</p>
         <h2>Ranked test history</h2>
         {data.history.length ? (
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  {['Date', 'Event', 'Points / 100', 'RR change', 'Rating'].map((h) => (
-                    <th scope="col" key={h}>
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[...data.history].reverse().map((h) => (
-                  <tr key={h.id}>
-                    <td>{date(h.date)}</td>
-                    <td>{h.event}</td>
-                    <td>{h.points}</td>
-                    <td>{h.placement ? 'Placement' : `${h.delta > 0 ? '+' : ''}${h.delta}`}</td>
-                    <td>{h.placement ? '—' : h.rating}</td>
+          <>
+            <div className="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    {['Date', 'Event', 'Points / 100', 'RR change', 'Rating'].map((h) => (
+                      <th scope="col" key={h}>
+                        {h}
+                      </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {[...data.history]
+                    .reverse()
+                    .slice(historyPage * 10, (historyPage + 1) * 10)
+                    .map((h) => (
+                      <tr key={h.id}>
+                        <td>{date(h.date)}</td>
+                        <td>{h.event}</td>
+                        <td>{h.points}</td>
+                        <td>{h.placement ? 'Placement' : `${h.delta > 0 ? '+' : ''}${h.delta}`}</td>
+                        <td>{h.placement ? '—' : h.rating}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+            {data.history.length > 10 && (
+              <div className="student-pagination" aria-label="Test history pages">
+                <button
+                  className="button button-small button-glass"
+                  disabled={historyPage === 0}
+                  onClick={() => setHistoryPage((n) => n - 1)}
+                >
+                  Newer tests
+                </button>
+                <span>
+                  {historyPage + 1} / {Math.ceil(data.history.length / 10)}
+                </span>
+                <button
+                  className="button button-small button-glass"
+                  disabled={(historyPage + 1) * 10 >= data.history.length}
+                  onClick={() => setHistoryPage((n) => n + 1)}
+                >
+                  Older tests
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <p className="empty-state">No released ranked tests yet.</p>
         )}
