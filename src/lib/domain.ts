@@ -14,7 +14,8 @@ export type Profile = {
 };
 export type SchoolCredentials = { schoolName: string; joiningPassword: string };
 export type Stats = { lessons: number; practice: number; ranked: number; points: number };
-export type Student = Profile & Stats & { division: Division };
+/** `email` is the sign-in address, sent only to the student's own instructor. */
+export type Student = Profile & Stats & { division: Division; email?: string };
 export type Assignment = {
   id: string;
   studentId: string;

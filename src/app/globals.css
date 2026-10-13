@@ -1770,6 +1770,16 @@
   .student-row > .tag {
     margin-left: auto;
   }
+  .student-row > span:nth-child(2) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .student-email {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: -8px 0 20px;
+    overflow-wrap: anywhere;
+  }
   .assignment-panel {
     border: 1px solid var(--line-strong);
     border-radius: 12px;

@@ -223,11 +223,15 @@ function asStats(row: Row): Stats {
 export async function dashboardFor(db: Database, profile: Profile): Promise<DashboardData> {
   const instructor = profile.role === 'instructor';
   const rows = await db.all(
-    `SELECT ${profileColumns}, ${statsColumns} FROM users u JOIN schools s ON s.id=u.school_id
+    `SELECT ${profileColumns}, u.email, ${statsColumns} FROM users u JOIN schools s ON s.id=u.school_id
     WHERE u.role='student' AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND ${instructor ? 'u.school_id=?' : 'u.id=?'} ORDER BY u.display_name,u.id`,
     instructor ? profile.schoolId : profile.id,
   );
-  const students = rows.map((row) => ({ ...asProfile(row), ...asStats(row) })) as Student[];
+  const students = rows.map((row) => ({
+    ...asProfile(row),
+    ...asStats(row),
+    email: String(row.email || ''),
+  })) as Student[];
   let assignments: Row[];
   try {
     assignments = await db.all(

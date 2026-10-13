@@ -558,6 +558,7 @@ test('real assignments are scoped by school, role, and current student division'
   const refreshed = await profileForUid(db, 'b');
   assert.equal(refreshed!.division, 'C');
   const dashboard = await dashboardFor(db, first.profile);
+  assert.equal(dashboard.students.find((s) => s.id === b.id)!.email, 'b@example.test');
   assert.ok(dashboard.progress[b.id].some((event) => event.eventId === 'astronomy'));
   assert.ok(!dashboard.progress[b.id].some((event) => event.eventId === 'solar-system'));
   assert.equal(

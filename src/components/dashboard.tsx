@@ -843,6 +843,7 @@ export function InstructorDashboard() {
                         </span>
                         <span>
                           {s.displayName}
+                          {s.email && <small>{s.email}</small>}
                           <small>{s.points.toLocaleString('en-US')} points</small>
                         </span>
                         <span className="tag">DIV {s.division}</span>
@@ -852,6 +853,11 @@ export function InstructorDashboard() {
                   <div className="dashboard-section-title">
                     <h2>{student.displayName}’s progress.</h2>
                   </div>
+                  {student.email && (
+                    <p className="student-email">
+                      Signs in with <a href={`mailto:${student.email}`}>{student.email}</a>
+                    </p>
+                  )}
                   <StatsGrid stats={student} />
                   <div className="dashboard-section-title">
                     <h2>Change name.</h2>
