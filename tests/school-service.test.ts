@@ -17,7 +17,11 @@ import {
 } from '../src/lib/school-service.ts';
 import { hashSchoolPassword, verifySchoolPassword } from '../src/lib/school-password.ts';
 import { eventKey, type Profile } from '../src/lib/domain.ts';
-import { migrateCampusRosters, migrateHighSchoolPassword } from '../src/lib/campus-migration.ts';
+import {
+  migrateCampusRosters,
+  migrateHighSchoolPassword,
+  migrateCommunityDirectory,
+} from '../src/lib/campus-migration.ts';
 import { schoolCommunities } from '../src/lib/school-communities.ts';
 function fixture() {
   const raw = new DatabaseSync(':memory:');
@@ -60,6 +64,101 @@ const teacherData = {
   schoolCommunityId: 'ppchs',
 };
 const identity = (uid: string) => ({ uid, email: `${uid}@example.test` });
+test('RCSA instructor invitation is campus-specific and works without the default invitation setting', async () => {
+  const { db, raw } = fixture();
+  const rcsaData = {
+    ...teacherData,
+    schoolCommunityId: 'rcsa-high',
+    instructorInvitePassword: 'RCSA904',
+  };
+  for (const password of ['test-invitation', 'rcsascioly', 'rcsa904', 'wrong']) {
+    await assert.rejects(
+      registerMember(
+        db,
+        identity(`wrong-${password}`),
+        {
+          ...rcsaData,
+          instructorInvitePassword: password,
+        },
+        'test-invitation',
+      ),
+      { status: 403 },
+    );
+  }
+  for (const campus of schoolCommunities.filter((c) => c.id !== 'rcsa-high')) {
+    await assert.rejects(
+      registerMember(
+        db,
+        identity(`wrong-${campus.id}`),
+        {
+          ...teacherData,
+          schoolCommunityId: campus.id,
+          instructorInvitePassword: 'RCSA904',
+        },
+        'test-invitation',
+      ),
+      { status: 403 },
+    );
+  }
+  const instructor = await registerMember(db, identity('rcsa-teacher'), rcsaData, undefined);
+  assert.equal(instructor.profile.schoolCommunityName, 'River City Science Academy High School');
+  assert.equal(instructor.credentials!.joiningPassword, 'rcsascioly');
+  const student = await registerMember(
+    db,
+    identity('rcsa-student'),
+    {
+      role: 'student',
+      displayName: 'RCSA Student',
+      division: 'C',
+      schoolPassword: 'rcsascioly',
+    },
+    undefined,
+  );
+  assert.equal(student.profile.schoolId, instructor.profile.schoolId);
+  await assert.rejects(
+    registerMember(
+      db,
+      identity('wrong-student'),
+      {
+        role: 'student',
+        displayName: 'Student',
+        division: 'C',
+        schoolPassword: 'RCSA904',
+      },
+      undefined,
+    ),
+    { status: 403 },
+  );
+  raw.close();
+});
+
+test('community directory migration expands the old CHECK constraint and preserves existing rosters', async () => {
+  const { db, raw, first, students } = await setup();
+  raw.exec(`ALTER TABLE school_communities RENAME TO old_directory;
+    CREATE TABLE school_communities (
+      school_id TEXT PRIMARY KEY REFERENCES schools(id) ON DELETE CASCADE,
+      community_id TEXT NOT NULL CHECK(community_id IN ('ppchs','ppcms-central','ppcms-west','ppcms-academic-village')));
+    INSERT INTO school_communities SELECT * FROM old_directory;
+    DROP TABLE old_directory;`);
+  await migrateCommunityDirectory(db);
+  await migrateCommunityDirectory(db);
+  assert.equal((await profileForUid(db, 't1'))!.schoolId, first.profile.schoolId);
+  assert.equal((await profileForUid(db, 'a'))!.id, students[0].id);
+  const instructor = await registerMember(
+    db,
+    identity('rcsa'),
+    {
+      ...teacherData,
+      schoolCommunityId: 'rcsa-high',
+      instructorInvitePassword: 'RCSA904',
+    },
+    undefined,
+  );
+  assert.equal(instructor.profile.schoolCommunityId, 'rcsa-high');
+  assert.deepEqual(raw.prepare('PRAGMA foreign_key_check').all(), []);
+  raw.close();
+});
+
 test('high school password migration upgrades existing rosters once without changing other campuses', async () => {
   const { db, raw, first, second } = await setup();
   raw.prepare('INSERT INTO app_migrations (id) VALUES (?)').run('shared-campus-rosters-v1');
@@ -193,11 +292,15 @@ test('enrollment gates, hashing, duplicate recovery, and fixed campus password r
 
 test('each campus password joins only its shared roster and instructors cannot access other campuses', async () => {
   const { db, raw } = fixture();
-  const passwords = ['ppchsscioly', 'centralscioly', 'westscioly', 'avmscioly'];
+  const passwords = ['ppchsscioly', 'centralscioly', 'westscioly', 'avmscioly', 'rcsascioly'];
   const instructors: Profile[] = [];
   const learners: Profile[] = [];
   for (const [index, campus] of schoolCommunities.entries()) {
-    const data = { ...teacherData, schoolCommunityId: campus.id };
+    const data = {
+      ...teacherData,
+      schoolCommunityId: campus.id,
+      instructorInvitePassword: campus.id === 'rcsa-high' ? 'RCSA904' : 'test-invitation',
+    };
     const first = await registerMember(db, identity(`teacher-${index}`), data, 'test-invitation');
     const second = await registerMember(
       db,

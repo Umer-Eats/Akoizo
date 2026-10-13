@@ -19,6 +19,7 @@ import { getSchoolCommunity } from './school-communities.ts';
 import {
   equalSecret,
   campusFromPassword,
+  instructorInviteForCommunity,
   hashSchoolPassword,
   makeSchoolPassword,
   schoolIdFromPassword,
@@ -77,6 +78,7 @@ export async function checkEnrollment(db: Database, data: Enrollment, invite: st
   if (data.role === 'instructor') {
     if (!getSchoolCommunity(data.schoolCommunityId))
       throw new AppError(400, 'Choose a school community from the list.');
+    invite = instructorInviteForCommunity(data.schoolCommunityId, invite);
     if (!invite) throw new AppError(503, 'Instructor registration is not configured yet.');
     if (!equalSecret(data.instructorInvitePassword || '', invite))
       throw new AppError(403, 'The instructor invitation password is incorrect.');

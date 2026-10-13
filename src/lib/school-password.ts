@@ -5,7 +5,15 @@ const campusPasswords = {
   'ppcms-academic-village': 'avmscioly',
   'ppcms-west': 'westscioly',
   'ppcms-central': 'centralscioly',
+  'rcsa-high': 'rcsascioly',
 } as const;
+
+export function instructorInviteForCommunity(
+  communityId: string | undefined,
+  defaultInvite: string | undefined,
+) {
+  return communityId === 'rcsa-high' ? 'RCSA904' : defaultInvite;
+}
 
 export function campusPassword(communityId: string | null | undefined) {
   return Object.entries(campusPasswords).find(([id]) => id === communityId)?.[1] ?? null;

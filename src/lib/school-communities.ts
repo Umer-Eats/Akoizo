@@ -6,6 +6,7 @@ export const schoolCommunities = [
   { id: 'ppcms-central', name: 'Central Campus Pembroke Pines Charter Middle School' },
   { id: 'ppcms-west', name: 'West Campus Pembroke Pines Charter Middle School' },
   { id: 'ppcms-academic-village', name: 'Academic Village Pembroke Pines Charter Middle School' },
+  { id: 'rcsa-high', name: 'River City Science Academy High School' },
 ] as const;
 
 export type SchoolCommunityId = (typeof schoolCommunities)[number]['id'];

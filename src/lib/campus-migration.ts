@@ -2,6 +2,30 @@ import { schoolCommunities } from './school-communities.ts';
 import { campusPassword, hashSchoolPassword } from './school-password.ts';
 import type { Database } from './school-service.ts';
 
+/** SQLite CHECK constraints require rebuilding the directory when adding a campus. */
+export async function migrateCommunityDirectory(db: Database) {
+  const migration = 'rcsa-community-directory-v1';
+  if (await db.get('SELECT id FROM app_migrations WHERE id=?', migration)) return;
+  await db.batch(
+    [
+      {
+        sql: `CREATE TABLE IF NOT EXISTS school_communities_expanded (
+        school_id TEXT PRIMARY KEY REFERENCES schools(id) ON DELETE CASCADE,
+        community_id TEXT NOT NULL CHECK(community_id IN (${schoolCommunities.map((c) => `'${c.id}'`).join(',')})))`,
+        args: [],
+      },
+      {
+        sql: 'INSERT OR IGNORE INTO school_communities_expanded SELECT school_id,community_id FROM school_communities',
+        args: [],
+      },
+      { sql: 'DROP TABLE school_communities', args: [] },
+      { sql: 'ALTER TABLE school_communities_expanded RENAME TO school_communities', args: [] },
+      { sql: 'INSERT OR IGNORE INTO app_migrations (id) VALUES (?)', args: [migration] },
+    ],
+    'immediate',
+  );
+}
+
 export async function migrateHighSchoolPassword(db: Database) {
   const migration = 'ppchs-password-v2';
   if (await db.get('SELECT id FROM app_migrations WHERE id=?', migration)) return;

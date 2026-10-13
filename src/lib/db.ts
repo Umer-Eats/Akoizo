@@ -1,7 +1,11 @@
 import { connect } from '@tursodatabase/serverless';
 import { schema, eventSeeds } from './schema.ts';
 import { AppError } from './domain.ts';
-import { migrateCampusRosters, migrateHighSchoolPassword } from './campus-migration.ts';
+import {
+  migrateCampusRosters,
+  migrateHighSchoolPassword,
+  migrateCommunityDirectory,
+} from './campus-migration.ts';
 
 export function getDb() {
   const url = process.env.TURSO_DATABASE_URL;
@@ -17,6 +21,7 @@ export async function initializeDatabase() {
     initialization = (async () => {
       const db = getDb();
       await db.batch(schema, 'immediate');
+      await migrateCommunityDirectory(db);
       await migrateCampusRosters(db);
       await migrateHighSchoolPassword(db);
       await db.batch(eventSeeds, 'immediate');
