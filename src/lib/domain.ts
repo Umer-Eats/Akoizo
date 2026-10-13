@@ -22,14 +22,19 @@ export type Assignment = {
   eventId: string;
   eventName: string;
   division: Division;
-  type: 'Practice' | 'Ranked';
+  type: 'Practice' | 'Ranked' | 'Lesson' | 'Lab';
   due: string;
   completedAt: string | null;
   testId?: string | null;
   testTitle?: string | null;
+  /** An assigned lesson, unit of lessons, or lab simulation. */
+  study?: { kind: StudyKind; targetId: string; title: string };
   /** A custom ranked test, managed from the instructor's Ranked Tests tab. */
   ranked?: boolean;
 };
+export type StudyKind = 'Lesson' | 'Unit' | 'Lab';
+/** The PhET simulation of an event, assigned beside its built-in labs. */
+export const PHET_LAB = 'phet';
 export type EventProgress = Stats & { eventId: string; eventName: string };
 export type DashboardData = {
   profile: Profile;

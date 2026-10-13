@@ -67,14 +67,18 @@ export async function communityAnalytics(db: Database, member: Profile): Promise
     school,
   ))
     row(entry.student_id, entry.event_id).points = Number(entry.n);
-  // Custom ranked tests are assigned in their own table; both kinds count as assigned work.
+  // Ranked tests, lessons and labs are assigned in their own tables; all count as assigned work.
   for (const work of await db.all(
     `SELECT a.student_id,a.event_id,COUNT(*) AS assigned,COUNT(a.completed_at) AS completed
      FROM assignments a JOIN users u ON u.id=a.student_id WHERE ${roster} GROUP BY a.student_id,a.event_id
      UNION ALL
      SELECT a.student_id,t.event_id,COUNT(*),COUNT(a.submitted_at)
      FROM ranked_assignments a JOIN ranked_tests t ON t.id=a.test_id JOIN users u ON u.id=a.student_id
-     WHERE ${roster} AND t.school_id=u.school_id GROUP BY a.student_id,t.event_id`,
+     WHERE ${roster} AND t.school_id=u.school_id GROUP BY a.student_id,t.event_id
+     UNION ALL
+     SELECT a.student_id,a.event_id,COUNT(*),COUNT(a.completed_at)
+     FROM study_assignments a JOIN users u ON u.id=a.student_id WHERE ${roster} GROUP BY a.student_id,a.event_id`,
+    school,
     school,
     school,
   )) {

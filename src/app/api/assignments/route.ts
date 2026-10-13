@@ -3,12 +3,15 @@ import { AppError, isDivision } from '@/lib/domain';
 import { eventsForDivision } from '@/lib/events';
 import { findPracticeTest } from '@/lib/practice-catalog';
 import { createAssignment, removeAssignment } from '@/lib/school-service';
+import { assignWork, removeStudyAssignment } from '@/lib/study-assignment-service';
 export async function POST(request: Request) {
   try {
     const { db, profile } = await memberFor(request, 'instructor');
     const body = await request.json();
     if (!body || typeof body !== 'object') throw new AppError(400, 'Enter assignment details.');
     const payload = body as Record<string, unknown>;
+    // The Assignments tab assigns by event: everyone seated in it, or students and their partners.
+    if (payload.action === 'assign') return json(await assignWork(db, profile, payload), 201);
     if (
       typeof payload.testId === 'string' &&
       payload.testId.trim() &&
@@ -42,7 +45,7 @@ export async function DELETE(request: Request) {
     const { db, profile } = await memberFor(request, 'instructor');
     const id = new URL(request.url).searchParams.get('id');
     if (!id) throw new AppError(400, 'Choose an assignment.');
-    await removeAssignment(db, profile, id);
+    if (!(await removeStudyAssignment(db, profile, id))) await removeAssignment(db, profile, id);
     return json({ removed: true });
   } catch (error) {
     return failure(error);

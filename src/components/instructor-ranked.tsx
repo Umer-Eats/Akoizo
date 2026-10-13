@@ -1,8 +1,8 @@
 'use client';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ChevronLeft, Search, Sparkles, Trophy, Users } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { ChevronLeft, Sparkles, Trophy, Users } from 'lucide-react';
 import { eventsForDivision, type Division } from '@/lib/events';
-import { dateInZone, type Student } from '@/lib/domain';
+import type { Student } from '@/lib/domain';
 import {
   RANKED_MINUTES,
   RANKED_QUESTIONS,
@@ -13,6 +13,7 @@ import {
 } from '@/lib/ranked-types';
 import type { TeamSheet } from '@/lib/teams';
 import { useAuth, authMessage } from './auth-context';
+import { AssignEventModal, seatedTeams, type AssignResult } from './assign-event-modal';
 import { RankedReview } from './ranked-review';
 import './practice.css';
 import './ranked.css';
@@ -24,17 +25,6 @@ const statusText = {
   submitted: 'Submitted',
   released: 'Results released',
 } as const;
-/** Teams whose sheet seats students in this test's event, with those students. */
-function seatedTeams(test: InstructorRankedTest, teams: TeamSheet[]) {
-  return teams
-    .filter((team) => team.division === test.division)
-    .map((team) => ({
-      team,
-      ids: (team.slots[test.eventId] ?? []).filter((id): id is string => !!id),
-    }))
-    .filter((entry) => entry.ids.length);
-}
-
 function CreateRankedTest({
   students,
   onCreated,
@@ -209,214 +199,29 @@ function AssignRankedModal({
   onAssigned: () => Promise<void>;
 }) {
   const { request } = useAuth();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const [due, setDue] = useState(() => {
-    const next = new Date();
-    next.setDate(next.getDate() + 7);
-    return dateInZone(timeZone, next);
-  });
-  const [search, setSearch] = useState('');
-  const [checked, setChecked] = useState<string[]>([]);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
-  const names = useMemo(() => new Map(students.map((s) => [s.id, s.displayName])), [students]);
-  const eligible = students.filter((student) => student.division === test.division);
-  const seated = seatedTeams(test, teams)
-    .map((entry) => ({ ...entry, ids: entry.ids.filter((id) => names.has(id)) }))
-    .filter((entry) => entry.ids.length);
-  const everyone = new Set(seated.flatMap((entry) => entry.ids));
-  const already = new Set(test.assignments.map((row) => row.studentId));
-  const partnersOf = (id: string) =>
-    seated
-      .filter((entry) => entry.ids.includes(id))
-      .flatMap((entry) => entry.ids.filter((p) => p !== id));
-  const recipients = new Set(checked.flatMap((id) => [id, ...partnersOf(id)]));
-  const visible = eligible.filter((student) =>
-    student.displayName.toLowerCase().includes(search.trim().toLowerCase()),
-  );
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
-  async function assign(body: { everyone: true } | { studentIds: string[] }) {
-    if (busy) return;
-    setBusy(true);
-    setError('');
-    setNotice('');
-    try {
-      const result = await request<{ assigned: number; alreadyAssigned: number }>('/api/ranked', {
-        method: 'POST',
-        body: JSON.stringify({ action: 'assign', testId: test.id, due, timeZone, ...body }),
-      });
-      setNotice(
-        `Assigned to ${count(result.assigned, 'student')}.${result.alreadyAssigned ? ` ${count(result.alreadyAssigned, 'student')} already had this test.` : ''}`,
-      );
-      setChecked([]);
-      await onAssigned();
-    } catch (error) {
-      setError(authMessage(error));
-    } finally {
-      setBusy(false);
-    }
-  }
   return (
-    <div className="assign-modal-overlay" onClick={onClose} role="presentation">
-      <div
-        className="assign-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Assign ${test.title}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="assign-modal-heading">
-          <div>
-            <p className="eyebrow">
-              {test.eventName.toUpperCase()} · DIVISION {test.division} · RANKED
-            </p>
-            <h2>Assign {test.title}</h2>
-            <p>
-              {count(test.questionCount, 'question')} · {test.maxScore} points · {test.minutes}{' '}
-              minutes · Due{' '}
-              <input
-                type="date"
-                aria-label="Due date"
-                value={due}
-                min={dateInZone(timeZone)}
-                onChange={(e) => setDue(e.target.value)}
-              />
-            </p>
-          </div>
-          <button className="button button-small button-glass" onClick={onClose}>
-            Close
-          </button>
-        </div>
-        <div className="ranked-everyone">
-          <strong>Everyone in {test.eventName}, across all teams</strong>
-          {seated.length ? (
-            <ul>
-              {seated.map(({ team, ids }) => (
-                <li key={team.id}>
-                  <strong>{team.name}:</strong> {ids.map((id) => names.get(id)).join(' + ')}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="ranked-test-meta">
-              No students are seated in {test.eventName} yet. Seat them in the Teams tab, or choose
-              students below.
-            </p>
-          )}
-          <button
-            className="button button-small button-primary"
-            disabled={busy || !due || !everyone.size}
-            onClick={() => assign({ everyone: true })}
-          >
-            {busy ? 'Assigning…' : `Assign to all ${count(everyone.size, 'student')}`}
-          </button>
-        </div>
-        <div className="event-toolbar">
-          <label className="search-field">
-            <span className="sr-only">Search students</span>
-            <Search size={16} />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Or choose students by name"
-            />
-          </label>
-        </div>
-        <p className="selection-summary" role="status">
-          {count(checked.length, 'student')} selected
-          {recipients.size > checked.length
-            ? ` · ${count(recipients.size, 'student')} with their event partners`
-            : ''}{' '}
-          · Partners always receive the same test.
-        </p>
-        <div className="assign-student-list" role="group" aria-label="Select students">
-          {visible.map((student) => {
-            const partners = partnersOf(student.id);
-            const isChecked = checked.includes(student.id);
-            return (
-              <label
-                key={student.id}
-                className="assign-student-row"
-                data-checked={isChecked || recipients.has(student.id)}
-              >
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={() =>
-                    setChecked((current) =>
-                      isChecked
-                        ? current.filter((id) => id !== student.id)
-                        : [...current, student.id],
-                    )
-                  }
-                  aria-label={`Assign to ${student.displayName}`}
-                />
-                <span className="student-avatar">
-                  {student.displayName.slice(0, 2).toUpperCase()}
-                </span>
-                <span className="assign-student-main">
-                  <strong>
-                    {student.displayName}
-                    {already.has(student.id) && <span className="tag">ASSIGNED</span>}
-                  </strong>
-                  <small className="assign-student-events">
-                    {partners.length ? (
-                      <span className="assign-event-chip">
-                        Partner: {partners.map((id) => names.get(id)).join(', ')}
-                      </span>
-                    ) : (
-                      <span className="assign-event-chip assign-event-empty">
-                        {everyone.has(student.id)
-                          ? 'No partner seated yet'
-                          : 'Not seated in this event'}
-                      </span>
-                    )}
-                  </small>
-                </span>
-                <span className="tag">DIV {student.division}</span>
-              </label>
-            );
-          })}
-        </div>
-        {!visible.length && (
-          <div className="empty-state">
-            <Users size={26} />
-            <h3>
-              {eligible.length
-                ? 'No students match that name.'
-                : `No Division ${test.division} students on your roster yet.`}
-            </h3>
-          </div>
-        )}
-        {error && (
-          <p className="form-error" role="alert">
-            {error}
-          </p>
-        )}
-        {notice && (
-          <p className="form-success" role="status">
-            {notice}
-          </p>
-        )}
-        <div className="assign-modal-footer">
-          <span>Students take it in a locked full-screen window. Due {due || '—'}.</span>
-          <button
-            className="button button-primary"
-            disabled={busy || !checked.length || !due}
-            onClick={() => assign({ studentIds: checked })}
-          >
-            {busy ? 'Assigning…' : `Assign to ${count(recipients.size, 'selected student')}`}
-          </button>
-        </div>
-      </div>
-    </div>
+    <AssignEventModal
+      division={test.division}
+      eventId={test.eventId}
+      eventName={test.eventName}
+      eyebrow={`${test.eventName.toUpperCase()} · DIVISION ${test.division} · RANKED`}
+      title={test.title}
+      meta={`${count(test.questionCount, 'question')} · ${test.maxScore} points · ${test.minutes} minutes`}
+      noun="test"
+      footer="Students take it in a locked full-screen window."
+      already={new Set(test.assignments.map((row) => row.studentId))}
+      students={students}
+      teams={teams}
+      onClose={onClose}
+      onAssign={async (body) => {
+        const result = await request<AssignResult>('/api/ranked', {
+          method: 'POST',
+          body: JSON.stringify({ action: 'assign', testId: test.id, ...body }),
+        });
+        await onAssigned();
+        return result;
+      }}
+    />
   );
 }
 
@@ -465,7 +270,7 @@ function RankedResults({
   }
   const submitted = test.assignments.filter((row) => row.submittedAt);
   const teamOf = (studentId: string) =>
-    seatedTeams(test, teams)
+    seatedTeams(test.division, test.eventId, teams)
       .filter((entry) => entry.ids.includes(studentId))
       .map((entry) => entry.team.name)
       .join(', ');

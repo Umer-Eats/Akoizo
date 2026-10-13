@@ -260,6 +260,12 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
     ORDER BY a.submitted_at IS NOT NULL,a.due_date,a.assigned_at DESC`,
     instructor ? profile.schoolId : profile.id,
   );
+  const study = await db.all(
+    `SELECT a.id,a.student_id,u.display_name,a.event_id,e.name,e.division,a.kind,a.target_id,a.title,a.due_date,a.completed_at
+    FROM study_assignments a JOIN users u ON u.id=a.student_id JOIN events e ON e.id=a.event_id
+    WHERE NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id) AND ${instructor ? 'u.school_id=?' : 'u.id=?'}`,
+    instructor ? profile.schoolId : profile.id,
+  );
   const progress: DashboardData['progress'] = {};
   for (const row of progressRows) {
     (progress[String(row.student_id)] ||= []).push({
@@ -300,6 +306,18 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
           testId: String(a.test_id),
           testTitle: String(a.title),
           ranked: true,
+        })),
+        ...study.map((a) => ({
+          id: String(a.id),
+          studentId: String(a.student_id),
+          studentName: String(a.display_name),
+          eventId: String(a.event_id).split(':').slice(2).join(':'),
+          eventName: String(a.name),
+          division: a.division,
+          type: a.kind === 'Lab' ? 'Lab' : 'Lesson',
+          due: String(a.due_date),
+          completedAt: a.completed_at,
+          study: { kind: a.kind, targetId: String(a.target_id), title: String(a.title) },
         })),
       ] as Assignment[]
     ).sort(
@@ -513,6 +531,7 @@ export async function leaveCommunity(db: Database, actor: Profile) {
         sql: 'DELETE FROM assignments WHERE student_id=? AND student_id IN (SELECT id FROM users WHERE school_id=?)',
         args: [actor.id, actor.schoolId],
       },
+      { sql: 'DELETE FROM study_assignments WHERE student_id=?', args: [actor.id] },
       { sql: 'DELETE FROM team_slots WHERE student_id=?', args: [actor.id] },
       // Submitted ranked attempts are learning records and stay with the student.
       {
@@ -540,6 +559,10 @@ export async function deleteCommunity(db: Database, actor: Profile, confirmation
       },
       {
         sql: `DELETE FROM assignments WHERE student_id IN (SELECT id FROM users WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities))`,
+        args: [actor.schoolId],
+      },
+      {
+        sql: `DELETE FROM study_assignments WHERE student_id IN (SELECT id FROM users WHERE school_id=? AND school_id IN (SELECT school_id FROM closed_communities))`,
         args: [actor.schoolId],
       },
       {
