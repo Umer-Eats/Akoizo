@@ -112,9 +112,75 @@
 }
 .global-ranking-card-stats {
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
-  margin-top: 20px;
+  border-left: 1px solid var(--line);
+  padding-left: 24px;
+}
+.global-ranking-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.global-ranking-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.3fr) minmax(190px, 0.9fr) minmax(160px, 0.7fr) auto;
+  align-items: center;
+  gap: 24px;
+  min-height: 154px;
+}
+.global-ranking-identity,
+.global-ranking-badge > div {
+  min-width: 0;
+}
+.global-ranking-identity .student-card-top {
+  margin-bottom: 12px;
+}
+.global-ranking-identity p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.global-ranking-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.global-ranking-badge strong,
+.global-ranking-badge span {
+  display: block;
+}
+.global-ranking-badge span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-top: 6px;
+}
+.global-ranking-card .student-card-link {
+  gap: 14px;
+  margin-top: 0;
+}
+@media (max-width: 1100px) {
+  .global-ranking-card {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 0.7fr);
+  }
+  .global-ranking-card-stats {
+    border-left: 0;
+    padding-left: 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+}
+@media (max-width: 600px) {
+  .global-ranking-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .global-ranking-badge {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .global-ranking-card .student-card-link {
+    justify-content: space-between;
+  }
 }
 .student-card-link {
   display: flex;

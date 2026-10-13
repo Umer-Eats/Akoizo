@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { ArrowUpRight, Search, Trophy } from 'lucide-react';
 import type { Division } from '@/lib/events';
 import { Orbit } from './art';
+import { RankBadge } from './rank-badge';
+import { rankLabel, PLACEMENT_TESTS, type CompetitiveRating } from '@/lib/competitive-rating';
 import './student-profile.css';
 type Ranking = {
   id: string;
@@ -12,6 +14,7 @@ type Ranking = {
   school: string;
   division: Division;
   points: number;
+  competitiveRank: Pick<CompetitiveRating, 'name' | 'tier' | 'rr' | 'placements'>;
 };
 type School = { id: string; name: string };
 export function Rankings() {
@@ -106,21 +109,33 @@ export function Rankings() {
           </button>
         </div>
       ) : results.length ? (
-        <div className="student-card-grid" role="region" aria-label="Global rankings">
+        <div className="global-ranking-grid" role="region" aria-label="Global rankings">
           {results.map((row) => (
             <Link
               key={row.id}
-              className="ranked-student-card"
+              className="ranked-student-card global-ranking-card"
               href={`/students/${encodeURIComponent(row.id)}`}
               aria-label={`View ${row.name} ranked profile`}
             >
-              <div className="student-card-top">
-                <span className="student-avatar">{row.name.slice(0, 2).toUpperCase()}</span>
-                <span className="tag">#{row.rank} · ALL-TIME POINTS</span>
-                <ArrowUpRight size={18} />
+              <div className="global-ranking-identity">
+                <div className="student-card-top">
+                  <span className="student-avatar">{row.name.slice(0, 2).toUpperCase()}</span>
+                  <span className="tag">#{row.rank} · ALL-TIME POINTS</span>
+                </div>
+                <h2>{row.name}</h2>
+                <p>{row.school}</p>
               </div>
-              <h2>{row.name}</h2>
-              <p>{row.school}</p>
+              <div className="global-ranking-badge">
+                <RankBadge rank={row.competitiveRank} size={80} />
+                <div>
+                  <strong>{rankLabel(row.competitiveRank)}</strong>
+                  <span>
+                    {row.competitiveRank.name === 'Unranked'
+                      ? `${row.competitiveRank.placements}/${PLACEMENT_TESTS} placement tests`
+                      : `${row.competitiveRank.rr} RR`}
+                  </span>
+                </div>
+              </div>
               <dl className="student-card-stats global-ranking-card-stats">
                 <div>
                   <dt>Ranked points</dt>

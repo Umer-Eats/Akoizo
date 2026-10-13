@@ -4,7 +4,11 @@ import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
 import type { Database } from '../src/lib/school-service.ts';
 import type { Profile } from '../src/lib/domain.ts';
-import { studentDirectory, studentRankedProfile } from '../src/lib/student-profile-service.ts';
+import {
+  studentDirectory,
+  studentRankedProfile,
+  publicStudentRanks,
+} from '../src/lib/student-profile-service.ts';
 
 function fixture() {
   const raw = new DatabaseSync(':memory:');
@@ -89,6 +93,15 @@ test('members can browse another community, unranked students, and safe statisti
   assert.equal(profile.points, 480);
   assert.equal(profile.accuracy, 80);
   assert.equal(profile.events[0].tests, 6);
+  const ranks = await publicStudentRanks(db);
+  assert.deepEqual(ranks.b, {
+    name: profile.rank.name,
+    tier: profile.rank.tier,
+    rr: profile.rank.rr,
+    placements: 5,
+  });
+  assert.deepEqual(Object.keys(ranks.b).sort(), ['name', 'placements', 'rr', 'tier']);
+  assert.deepEqual(ranks.a, { name: 'Unranked', tier: null, rr: 0, placements: 0 });
   assert.equal(profile.passRate, 100);
   assert.equal((await studentRankedProfile(db, member, 'a')).rank.name, 'Unranked');
   assert.equal(

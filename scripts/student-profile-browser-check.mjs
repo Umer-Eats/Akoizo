@@ -3,7 +3,11 @@ import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
-import { studentDirectory, studentRankedProfile } from '../src/lib/student-profile-service.ts';
+import {
+  studentDirectory,
+  studentRankedProfile,
+  publicStudentRanks,
+} from '../src/lib/student-profile-service.ts';
 import { communityFor } from '../src/lib/community-service.ts';
 import { dashboardFor } from '../src/lib/school-service.ts';
 
@@ -117,6 +121,7 @@ try {
               school: 'Orbit Academy',
               division: 'C',
               points: 5000,
+              competitiveRank: (await publicStudentRanks(db))['student-1'],
             },
           ],
           schools: [{ id: 'two', name: 'Orbit Academy' }],
@@ -176,6 +181,16 @@ try {
   await fits('profile');
   await page.goto(`${base}/rankings`);
   await expect(page.locator('.ranked-student-card')).toHaveCount(1);
+  await expect(
+    page.locator('.global-ranking-card').getByRole('img', { name: 'Radiant', exact: true }),
+  ).toBeVisible();
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  const gridBox = await page.locator('.global-ranking-grid').boundingBox();
+  const cardBox = await page.locator('.global-ranking-card').boundingBox();
+  assert.ok(
+    Math.abs(gridBox.width - cardBox.width) < 2,
+    'Global Rankings cards fill the available width',
+  );
   await fits('global-rankings');
   // Click the points, outside the name, to verify the whole card is the profile link.
   await page.locator('.ranked-student-card').getByText('5,000', { exact: true }).click();

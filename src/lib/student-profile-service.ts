@@ -12,7 +12,7 @@ import {
 import type { StudentCard, StudentDirectory, StudentRankedProfile } from './student-profiles.ts';
 
 /** Only safe identity fields and released ranked scores leave this service. */
-async function roster(db: Database, member: Profile) {
+async function requireActiveMember(db: Database, member: Profile) {
   const active = await db.get(
     `SELECT id FROM users WHERE id=? AND school_id=?
     AND id NOT IN (SELECT user_id FROM departed_members)
@@ -21,6 +21,8 @@ async function roster(db: Database, member: Profile) {
     member.schoolId,
   );
   if (!active) throw new AppError(403, 'Active community membership is required.');
+}
+async function roster(db: Database) {
   const users =
     await db.all(`SELECT u.id,u.display_name,u.division,u.school_id,s.name AS school,sc.community_id
     FROM users u JOIN schools s ON s.id=u.school_id LEFT JOIN school_communities sc ON sc.school_id=s.id
@@ -111,7 +113,8 @@ export async function studentDirectory(
   member: Profile,
   params: URLSearchParams,
 ): Promise<StudentDirectory> {
-  const students = await roster(db, member);
+  await requireActiveMember(db, member);
+  const students = await roster(db);
   const search = (params.get('q') ?? '').trim().toLowerCase().slice(0, 100);
   const school = params.get('school');
   const division = params.get('division');
@@ -139,7 +142,8 @@ export async function studentRankedProfile(
   member: Profile,
   id: string,
 ): Promise<StudentRankedProfile> {
-  const s = (await roster(db, member)).find((s) => s.id === id);
+  await requireActiveMember(db, member);
+  const s = (await roster(db)).find((s) => s.id === id);
   if (!s) throw new AppError(404, 'Student profile not found.');
   const history = s.rank.history.map((h) => ({
     id: h.id,
@@ -204,4 +208,19 @@ export async function studentRankedProfile(
       .sort((a, b) => b.accuracy - a.accuracy),
     history,
   };
+}
+
+/** Public cards disclose only the visible badge and progress, never history or skill estimates. */
+export async function publicStudentRanks(db: Database) {
+  return Object.fromEntries(
+    (await roster(db)).map(({ id, rank }) => [
+      id,
+      {
+        name: rank.name,
+        tier: rank.tier,
+        rr: rank.rr,
+        placements: rank.placements,
+      },
+    ]),
+  );
 }

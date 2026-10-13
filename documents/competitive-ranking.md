@@ -2,7 +2,7 @@
 
 Open **Community → Across communities** for searchable student cards, community and division filters, and rank order. Student names in community rosters, members, event seats, and the existing all-time points leaderboard open `/students/[studentId]`. Students also have a **My ranked profile** link in Community.
 
-Profiles require active enrollment. Cross-community data includes first name and last initial, community, division, released ranked statistics, event averages, score trends, and test history. Email, complete surnames, answers, instructor feedback, questions, and private account data are excluded. Practice results do not contribute to competitive rank. Existing public all-time points rankings remain separate from competitive RR.
+Profiles require active enrollment. Cross-community data includes first name and last initial, community, division, released ranked statistics, event averages, score trends, and test history. Email, complete surnames, answers, instructor feedback, questions, and private account data are excluded. Practice results do not contribute to competitive rank. Public Global Rankings uses full-width clickable cards displaying the same rank emblem, tier, RR, or first-five-test placement progress as the profile. Only that small rank summary is added to the public response; detailed analytics and test history still require enrollment. The all-time points ordering remains separate from competitive RR.
 
 ## Rules
 
