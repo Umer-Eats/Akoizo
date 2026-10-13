@@ -57,6 +57,7 @@ import { InstructorRanked } from './instructor-ranked';
 import { InstructorTeams } from './instructor-teams';
 import { InstructorAnalytics } from './instructor-analytics';
 import { NameEditor } from './name-editor';
+import { StudentWork } from './student-work';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -615,8 +616,8 @@ export function StudentDashboard() {
           </div>
           <AssignmentList assignments={data.assignments} division={division} />
           <p className="source-note">
-            Submit the assigned practice test, finish the lesson practice or every lesson in a unit,
-            or mark a lab simulation complete. Ranked tests complete when you submit them.
+            Submit the assigned practice test, submit the lesson (or every lesson in a unit), or
+            submit the lab simulation. Ranked tests complete when you submit them.
           </p>
         </>
       )}
@@ -627,9 +628,7 @@ export function StudentDashboard() {
             <span className="tag">DIVISION {division}</span>
           </div>
           <ProgressTable progress={data.progress[profile!.id] || []} />
-          <p className="source-note">
-            Completed lessons, tests, and points will appear here when the study tools launch.
-          </p>
+          <StudentWork key={profile!.id} />
         </>
       )}
     </main>
@@ -886,10 +885,7 @@ export function InstructorDashboard() {
                     <span className="tag">DIVISION {student.division} ONLY</span>
                   </div>
                   <ProgressTable progress={data.progress[student.id] || []} />
-                  <p className="source-note">
-                    Activity starts at zero. Lessons and test completion will be recorded when those
-                    tools launch.
-                  </p>
+                  <StudentWork key={`work:${student.id}`} studentId={student.id} refreshed={data} />
                 </>
               )}
             </>

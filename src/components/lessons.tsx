@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { BookOpen, Check, ChevronLeft, ChevronRight, FlaskConical, RotateCcw } from 'lucide-react';
 import type { EventLessons, Lesson, LessonSim } from '@/lib/lessons';
+import type { WorkRecord } from '@/lib/domain';
 import { calculateModel, modelControls, modelDefaults } from '@/lib/lesson-models';
 import {
   lessonStorageKey,
@@ -240,15 +241,23 @@ function SimView({ sim, lessonId }: { sim: LessonSim; lessonId: string }) {
   );
 }
 
+type LessonRecord = { score: number; maxScore: number };
 function QuizView({
   lesson,
   attempt,
   onChange,
+  record,
+  onSubmit,
 }: {
   lesson: Lesson;
   attempt: LessonAttempt;
   onChange: (attempt: LessonAttempt) => void;
+  /** The graded submission your instructor sees, once this lesson has been submitted. */
+  record?: LessonRecord;
+  onSubmit: () => Promise<void>;
 }) {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const resultRef = useRef<HTMLDivElement>(null);
   const score = scorePractice(lesson.practice, attempt.answers);
   const complete = practiceComplete(attempt, lesson.practice);
@@ -356,12 +365,43 @@ function QuizView({
               ? 'Practice complete. Revisit any answer you want to strengthen.'
               : 'Compare and review every written response above to complete this practice.'}
           </p>
-          <button
-            className="button button-small button-glass"
-            onClick={() => onChange({ ...attempt, submitted: false, reviewed: [] })}
-          >
-            Revise answers
-          </button>
+          <div className="lesson-actions">
+            <button
+              className="button button-primary"
+              disabled={!complete || submitting}
+              onClick={async () => {
+                setSubmitting(true);
+                setSubmitError('');
+                try {
+                  await onSubmit();
+                } catch (error) {
+                  setSubmitError(authMessage(error));
+                } finally {
+                  setSubmitting(false);
+                }
+              }}
+            >
+              {submitting ? 'Submitting…' : record ? 'Submit lesson again' : 'Submit lesson'}
+            </button>
+            <button
+              className="button button-small button-glass"
+              onClick={() => onChange({ ...attempt, submitted: false, reviewed: [] })}
+            >
+              Revise answers
+            </button>
+          </div>
+          {record && (
+            <p className="lesson-submitted">
+              <Check size={16} aria-hidden="true" /> Lesson submitted and marked complete.
+              {record.maxScore > 0 &&
+                ` Recorded score: ${record.score} / ${record.maxScore} multiple-choice points.`}
+            </p>
+          )}
+          {submitError && (
+            <p className="form-error" role="alert">
+              {submitError} Your answers are still saved in this browser.
+            </p>
+          )}
         </div>
       )}
     </section>
@@ -372,10 +412,14 @@ function LessonDetail({
   lesson,
   attempt,
   onChange,
+  record,
+  onSubmit,
 }: {
   lesson: Lesson;
   attempt: LessonAttempt;
   onChange: (attempt: LessonAttempt) => void;
+  record?: LessonRecord;
+  onSubmit: () => Promise<void>;
 }) {
   const extras = extrasFor(lesson.id);
   const labs = (extras.labs ?? []).map((id) => topicLabs[id]).filter(Boolean);
@@ -485,7 +529,13 @@ function LessonDetail({
         </section>
       )}
       <SimView sim={lesson.simulation} lessonId={lesson.id} />
-      <QuizView lesson={lesson} attempt={attempt} onChange={onChange} />
+      <QuizView
+        lesson={lesson}
+        attempt={attempt}
+        onChange={onChange}
+        record={record}
+        onSubmit={onSubmit}
+      />
     </article>
   );
 }
@@ -493,8 +543,7 @@ function LessonDetail({
 const emptyAttempt: LessonAttempt = { answers: {}, submitted: false, reviewed: [] };
 export function LessonsView({ course, studentId }: { course: EventLessons; studentId: string }) {
   const { request } = useAuth();
-  const [syncError, setSyncError] = useState('');
-  const [syncRetry, setSyncRetry] = useState(0);
+  const [records, setRecords] = useState<Record<string, LessonRecord>>({});
   const ordered = course.units
     .flatMap((unit) => unit.lessonIds)
     .map((id) => course.lessons.find((lesson) => lesson.id === id)!);
@@ -545,27 +594,37 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   const completed = course.lessons.filter((item) =>
     practiceComplete(attempts[item.id], item.practice),
   ).length;
-  const completedIds = course.lessons
-    .filter((item) => practiceComplete(attempts[item.id], item.practice))
-    .map((item) => item.id)
-    .join(',');
+  // Lessons already submitted from any browser; a failed read only hides the "submitted" marks.
   useEffect(() => {
-    if (!loaded || !completedIds) return;
     let active = true;
-    request('/api/progress', {
-      method: 'POST',
-      body: JSON.stringify({ eventId: course.eventId, lessonIds: completedIds.split(',') }),
-    })
-      .then(() => {
-        if (active) setSyncError('');
+    request<WorkRecord[]>('/api/progress')
+      .then((work) => {
+        if (active)
+          setRecords((current) => ({
+            ...Object.fromEntries(
+              work
+                .filter((item) => item.type === 'Lesson' && item.eventId === course.eventId)
+                .map((item) => [item.targetId, { score: item.score, maxScore: item.maxScore }]),
+            ),
+            ...current,
+          }));
       })
-      .catch((error) => {
-        if (active) setSyncError(authMessage(error));
-      });
+      .catch(() => {});
     return () => {
       active = false;
     };
-  }, [request, loaded, course.eventId, completedIds, syncRetry]);
+  }, [request, course.eventId]);
+  async function submitLesson(id: string) {
+    const record = await request<LessonRecord>('/api/progress', {
+      method: 'POST',
+      body: JSON.stringify({
+        eventId: course.eventId,
+        lessonId: id,
+        answers: attempts[id]?.answers ?? {},
+      }),
+    });
+    setRecords((current) => ({ ...current, [id]: record }));
+  }
   function selectLesson(id: string, focus = false) {
     setLessonId(id);
     if (focus)
@@ -595,27 +654,17 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
         </div>
         <div className="course-progress">
           <label htmlFor="course-progress">
-            {completed} of {course.lessons.length} practices complete
+            {completed} of {course.lessons.length} practices complete ·{' '}
+            {course.lessons.filter((item) => records[item.id]).length} submitted
           </label>
           <progress id="course-progress" value={completed} max={course.lessons.length} />
         </div>
         <p className="lesson-save-note" role="status">
           {storageUnavailable
             ? 'Browser storage is unavailable. You can keep studying, but this session’s progress may not survive a reload.'
-            : 'Answers and progress are saved for your account in this browser.'}
+            : 'Answers are saved for your account in this browser. Submit a lesson to record it as completed for your instructor.'}
         </p>
       </div>
-      {syncError && (
-        <div>
-          <p role="alert">
-            Your lesson work is saved in this browser, but assignment progress could not sync:{' '}
-            {syncError}
-          </p>
-          <button className="text-link" onClick={() => setSyncRetry((n) => n + 1)}>
-            Retry saving progress
-          </button>
-        </div>
-      )}
       {!loaded ? (
         <p role="status">Loading your lesson progress…</p>
       ) : (
@@ -677,6 +726,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
                       <small>
                         {item.durationMin} min · Text + interactive lab · {item.practice.length}{' '}
                         questions{item.extension ? ' · Extension' : ''}
+                        {records[id] ? ' · Submitted' : ''}
                       </small>
                     </span>
                     <ChevronRight size={18} aria-hidden="true" />
@@ -690,6 +740,8 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             lesson={lesson}
             attempt={attempts[lesson.id] ?? emptyAttempt}
             onChange={(attempt) => setAttempts((current) => ({ ...current, [lesson.id]: attempt }))}
+            record={records[lesson.id]}
+            onSubmit={() => submitLesson(lesson.id)}
           />
           <nav className="lesson-pagination" aria-label="Course lesson navigation">
             <button

@@ -332,28 +332,33 @@ function LabCompletion({
   eventId,
   labId,
   disabled = false,
+  submission,
 }: {
   eventId: string;
   labId: string;
   disabled?: boolean;
+  /** The setup and calculated answer of a graded lab. Without it the lab is only marked complete. */
+  submission?: { values: LabValues; scenario: number; answer: string };
 }) {
   const { request } = useAuth();
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const [accuracy, setAccuracy] = useState<number | null>(null);
   const [error, setError] = useState('');
   return (
     <div className="archive-actions">
       <button
         className="button button-small button-primary"
-        disabled={disabled || busy || done}
+        disabled={disabled || busy || (done && !submission)}
         onClick={async () => {
           setBusy(true);
           setError('');
           try {
-            await request('/api/progress', {
+            const saved = await request<{ accuracy?: number }>('/api/progress', {
               method: 'POST',
-              body: JSON.stringify({ eventId, labId }),
+              body: JSON.stringify({ eventId, labId, ...submission }),
             });
+            setAccuracy(saved.accuracy ?? null);
             setDone(true);
           } catch (error) {
             setError(authMessage(error));
@@ -362,12 +367,26 @@ function LabCompletion({
           }
         }}
       >
-        {done ? 'Lab completed' : busy ? 'Saving…' : 'Mark lab complete'}
+        {submission
+          ? busy
+            ? 'Submitting…'
+            : done
+              ? 'Submit lab again'
+              : 'Submit lab'
+          : done
+            ? 'Lab completed'
+            : busy
+              ? 'Saving…'
+              : 'Mark lab complete'}
       </button>
       {done && (
-        <p role="status">Completion saved. Any pending assignment for this lab is complete.</p>
+        <p role="status">
+          {accuracy === null
+            ? 'Completion saved. Any pending assignment for this lab is complete.'
+            : `Lab submitted. Accuracy: ${accuracy}%. Your instructor sees this score, and any pending assignment for this lab is complete.`}
+        </p>
       )}
-      {error && <p role="alert">{error} Try marking the lab complete again.</p>}
+      {error && <p role="alert">{error}</p>}
     </div>
   );
 }
@@ -702,17 +721,20 @@ function LabStation({ lab, studentId }: { lab: LabActivity; studentId: string })
         </label>
         <p>{lab.reflection}</p>
         <p>
-          Record your hypothesis, at least one trial, and your conclusion, then mark this lab
-          complete.
+          Record your hypothesis, at least one trial, your calculated answer, and your conclusion,
+          then submit this lab. Your accuracy is how close your calculated answer is to the model
+          for the setup on screen.
         </p>
         <LabCompletion
           eventId={lab.eventId}
           labId={lab.id}
+          submission={{ values, scenario, answer }}
           disabled={
             !loaded ||
             !notebook.prediction.trim() ||
             !notebook.trials.length ||
-            !notebook.conclusion.trim()
+            !notebook.conclusion.trim() ||
+            !answer.trim()
           }
         />
       </section>

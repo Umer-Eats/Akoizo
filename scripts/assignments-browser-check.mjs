@@ -5,7 +5,15 @@ import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember, dashboardFor } from '../src/lib/school-service.ts';
 import { createTeam, listTeams, updateTeam } from '../src/lib/team-service.ts';
-import { assignWork, recordLab, recordLessons } from '../src/lib/study-assignment-service.ts';
+import {
+  assignWork,
+  recordLab,
+  studentWork,
+  submitLab,
+  submitLesson,
+} from '../src/lib/study-assignment-service.ts';
+import { labsForEvent } from '../src/lib/division-c-labs.ts';
+import { calculateLab, initialLabValues } from '../src/lib/division-c-lab-models.ts';
 import { listPracticeTests } from '../src/lib/practice-catalog.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { lessonStorageKey } from '../src/lib/lesson-practice.ts';
@@ -76,7 +84,13 @@ async function api(route, profile) {
     '/api/teams': () => listTeams(db, profile),
     '/api/assignments': () => assignWork(db, profile, body),
     '/api/progress': () =>
-      body.labId ? recordLab(db, profile, body) : recordLessons(db, profile, body),
+      request.method() !== 'POST'
+        ? studentWork(db, profile, url.searchParams.get('studentId'))
+        : !body.labId
+          ? submitLesson(db, profile, body)
+          : body.labId === 'phet'
+            ? recordLab(db, profile, body)
+            : submitLab(db, profile, body),
     '/api/practice': () => ({
       tests: listPracticeTests(
         url.searchParams.get('division') || profile.division,
@@ -244,7 +258,13 @@ try {
     ({ key, attempts }) => localStorage.setItem(key, JSON.stringify({ attempts })),
     { key: lessonStorageKey(students['Amy Chen'].id, 'forensics'), attempts },
   );
-  await student.reload();
+  // Finished practice stays in the browser until the student submits each lesson.
+  for (const id of course.units[0].lessonIds) {
+    await student.goto(base + '/dashboard/student/events/forensics/lessons?lesson=' + id);
+    await student.getByRole('button', { name: 'Submit lesson', exact: true }).click();
+    await expect(student.getByText(/Lesson submitted and marked complete\./)).toBeVisible();
+  }
+  await student.screenshot({ path: shots + '/student-lesson.png', fullPage: true });
   await expect
     .poll(async () =>
       (await dashboardFor(db, students['Amy Chen'])).assignments
@@ -273,9 +293,7 @@ try {
   await student.goto(base + '/dashboard/student');
   await student.getByRole('button', { name: /Assignments \(/ }).click();
   await student.getByRole('link', { name: 'Open lab', exact: true }).click();
-  await expect(
-    student.getByRole('button', { name: 'Mark lab complete', exact: true }),
-  ).toBeDisabled();
+  await expect(student.getByRole('button', { name: 'Submit lab', exact: true })).toBeDisabled();
   await student
     .getByLabel('Your hypothesis', { exact: true })
     .fill('The ink components separate at different rates.');
@@ -283,10 +301,43 @@ try {
   await student
     .getByLabel('Evidence and conclusion', { exact: true })
     .fill('The measured distances show the components have different affinities for the solvent.');
-  await student.getByRole('button', { name: 'Mark lab complete', exact: true }).click();
-  await expect(
-    student.getByText('Completion saved. Any pending assignment for this lab is complete.'),
-  ).toBeVisible();
+  const lab = labsForEvent('C', 'forensics')[0];
+  const expected = calculateLab(lab.model, initialLabValues(lab), 0).answer;
+  // A wrong calculation is recorded with a lower accuracy; resubmitting replaces it.
+  await student.getByLabel(/^Calculated answer/).fill(String(expected * 1.5));
+  await student.getByRole('button', { name: 'Submit lab', exact: true }).click();
+  await expect(student.getByText(/Lab submitted\. Accuracy: 50%\./)).toBeVisible();
+  await student.getByLabel(/^Calculated answer/).fill(String(expected));
+  await student.getByRole('button', { name: 'Submit lab again', exact: true }).click();
+  await expect(student.getByText(/Lab submitted\. Accuracy: 100%\./)).toBeVisible();
+  await student.screenshot({ path: shots + '/student-lab-submitted.png', fullPage: true });
+  await student.goto(base + '/dashboard/student');
+  await student.getByRole('button', { name: 'My progress', exact: true }).click();
+  await expect(student.getByRole('heading', { name: 'Submitted work.' })).toBeVisible();
+  await expect(student.getByRole('rowheader', { name: lab.title, exact: true })).toBeVisible();
+
+  // The instructor opens Amy's card in Student Progress and sees the same records.
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+  await page.getByRole('button', { name: 'Student Progress', exact: false }).click();
+  await page.getByRole('button', { name: /Amy Chen/ }).click();
+  const work = page.getByRole('region', { name: 'Submitted work' });
+  await expect(work.getByRole('rowheader', { name: lab.title, exact: true })).toBeVisible();
+  await expect(work.getByRole('row', { name: new RegExp(lab.title) })).toContainText(
+    '100% accuracy',
+  );
+  for (const id of course.units[0].lessonIds)
+    await expect(
+      work.getByRole('row', { name: course.lessons.find((l) => l.id === id).title }),
+    ).toContainText('Completed');
+  const cards = page.locator('section[aria-label="Submitted work"] .stat-card');
+  await expect(cards.nth(0)).toContainText(String(course.units[0].lessonIds.length));
+  await expect(cards.nth(1)).toContainText('100%');
+  await page
+    .locator('section[aria-label="Submitted work"]')
+    .screenshot({ path: shots + '/instructor-student-work.png' });
+  await page.getByRole('button', { name: /Ben Ortiz/ }).click();
+  await expect(page.getByText('Nothing submitted yet.')).toBeVisible();
   assert.ok(
     (await dashboardFor(db, students['Amy Chen'])).assignments
       .filter((a) => a.study?.kind === 'Lab')
@@ -294,7 +345,7 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    'Assignment browser checks passed: practice, units, lessons, labs, partners, duplicates, student links, completion, and mobile layout.',
+    'Assignment browser checks passed: practice, units, lessons, labs, partners, duplicates, student links, lesson and lab submission, accuracy, per-student records, and mobile layout.',
   );
 } finally {
   await browser.close();

@@ -35,6 +35,19 @@ export type Assignment = {
 export type StudyKind = 'Lesson' | 'Unit' | 'Lab';
 /** The PhET simulation of an event, assigned beside its built-in labs. */
 export const PHET_LAB = 'phet';
+/** One graded submission: a lesson's practice, a lab simulation, or a practice test. */
+export type WorkRecord = {
+  type: 'Lesson' | 'Lab' | 'Practice';
+  eventId: string;
+  eventName: string;
+  targetId: string;
+  title: string;
+  score: number;
+  maxScore: number;
+  /** Null when nothing in the work is scored automatically. */
+  percentage: number | null;
+  completedAt: string;
+};
 export type EventProgress = Stats & { eventId: string; eventName: string };
 export type DashboardData = {
   profile: Profile;

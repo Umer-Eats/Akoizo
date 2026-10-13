@@ -120,7 +120,9 @@ export function Rankings() {
               {results.map((row) => (
                 <tr key={row.id}>
                   <td>{row.rank}</td>
-                  <td>{row.name}</td>
+                  <td>
+                    <Link href={`/students/${encodeURIComponent(row.id)}`}>{row.name}</Link>
+                  </td>
                   <td>{row.school}</td>
                   <td>{row.division}</td>
                   <td>{row.points.toLocaleString('en-US')}</td>
