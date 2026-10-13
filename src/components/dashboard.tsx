@@ -417,6 +417,19 @@ function EventCatalog({ division }: { division: Division }) {
     </>
   );
 }
+function assignmentHref(assignment: Assignment) {
+  const base = `/dashboard/student/events/${assignment.eventId}`;
+  if (assignment.study) {
+    const { kind, targetId } = assignment.study;
+    const query = encodeURIComponent(targetId);
+    return kind === 'Lab'
+      ? `${base}/lab-practice?lab=${query}`
+      : `${base}/lessons?${kind === 'Unit' ? 'unit' : 'lesson'}=${query}`;
+  }
+  const tool = assignment.type === 'Practice' ? 'practice-tests' : 'ranked-tests';
+  return `${base}/${tool}${assignment.testId ? `/${encodeURIComponent(assignment.testId)}` : ''}`;
+}
+
 function AssignmentList({
   assignments,
   division,
@@ -436,7 +449,7 @@ function AssignmentList({
         <h3>No assignments yet.</h3>
         <p>
           {remove
-            ? 'Open the Assignments tab, choose an event, then assign a converted test.'
+            ? 'Open the Assignments tab to assign practice tests, lessons, units, or labs.'
             : 'Assignments from your instructor will appear here.'}
         </p>
       </div>
@@ -452,9 +465,11 @@ function AssignmentList({
               {remove ? `${assignment.studentName} · ` : ''}Division {assignment.division} ·
               {assignment.ranked
                 ? ` Ranked test: ${assignment.testTitle} · `
-                : assignment.testId
-                  ? ' Assigned converted test · '
-                  : ` Complete any 1 ${assignment.type.toLowerCase()} test · `}
+                : assignment.study
+                  ? ` ${assignment.study.kind}: ${assignment.study.title} · `
+                  : assignment.testId
+                    ? ' Assigned converted test · '
+                    : ` Complete any 1 ${assignment.type.toLowerCase()} test · `}
               Due <time dateTime={assignment.due}>{assignment.due}</time>
             </p>
             {assignment.testId && !assignment.ranked && (
@@ -483,11 +498,12 @@ function AssignmentList({
               {pending === assignment.id ? 'Removing…' : 'Remove'}
             </button>
           ) : division === assignment.division && !assignment.completedAt ? (
-            <Link
-              className="text-link"
-              href={`/dashboard/student/events/${assignment.eventId}/${assignment.type === 'Practice' ? 'practice-tests' : 'ranked-tests'}${assignment.ranked ? `/${assignment.testId}` : ''}`}
-            >
-              {assignment.ranked ? 'Open test' : 'Open event'}
+            <Link className="text-link" href={assignmentHref(assignment)}>
+              {assignment.study
+                ? `Open ${assignment.study.kind.toLowerCase()}`
+                : assignment.testId
+                  ? 'Open test'
+                  : 'Open event'}
             </Link>
           ) : null}
         </article>
@@ -599,8 +615,8 @@ export function StudentDashboard() {
           </div>
           <AssignmentList assignments={data.assignments} division={division} />
           <p className="source-note">
-            Practice assignments complete when you submit a practice test for that event. Ranked
-            tests open in a locked full-screen window and complete when you submit them.
+            Submit the assigned practice test, finish the lesson practice or every lesson in a unit,
+            or mark a lab simulation complete. Ranked tests complete when you submit them.
           </p>
         </>
       )}
@@ -776,7 +792,7 @@ export function InstructorDashboard() {
           <p className="event-sidebar-note">
             {tab === 'school' && 'Share this password so students join your roster.'}
             {tab === 'assignments' &&
-              'Pick an event, open a converted test, and assign it to students.'}
+              'Assign practice tests, lessons, units, and lab simulations by event.'}
             {tab === 'ranked' &&
               'Let Akoizo build a ranked test, assign it by event, and release results.'}
             {tab === 'teams' && 'Name your teams and seat students and partners in each event.'}
@@ -790,7 +806,6 @@ export function InstructorDashboard() {
           {tab === 'assignments' && (
             <InstructorAssignments
               students={data.students}
-              selections={selections}
               assignments={data.assignments}
               onAssigned={refresh}
             />

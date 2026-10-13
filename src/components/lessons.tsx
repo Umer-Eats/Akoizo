@@ -10,6 +10,7 @@ import {
   scorePractice,
   type LessonAttempt,
 } from '@/lib/lesson-practice';
+import { useAuth, authMessage } from './auth-context';
 import { ChoiceOptions } from './choice-options';
 import { ModelDiagram } from './lesson-diagrams';
 import { LessonSectionVisuals } from './lesson-atlas';
@@ -491,6 +492,9 @@ function LessonDetail({
 
 const emptyAttempt: LessonAttempt = { answers: {}, submitted: false, reviewed: [] };
 export function LessonsView({ course, studentId }: { course: EventLessons; studentId: string }) {
+  const { request } = useAuth();
+  const [syncError, setSyncError] = useState('');
+  const [syncRetry, setSyncRetry] = useState(0);
   const ordered = course.units
     .flatMap((unit) => unit.lessonIds)
     .map((id) => course.lessons.find((lesson) => lesson.id === id)!);
@@ -520,6 +524,11 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
     } catch {
       setStorageUnavailable(true);
     }
+    const params = new URLSearchParams(window.location.search);
+    const requested =
+      params.get('lesson') ??
+      course.units.find((unit) => unit.id === params.get('unit'))?.lessonIds[0];
+    if (course.lessons.some((lesson) => lesson.id === requested)) setLessonId(requested!);
     setLoaded(true);
   }, [course, storageKey]);
   useEffect(() => {
@@ -536,6 +545,27 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   const completed = course.lessons.filter((item) =>
     practiceComplete(attempts[item.id], item.practice),
   ).length;
+  const completedIds = course.lessons
+    .filter((item) => practiceComplete(attempts[item.id], item.practice))
+    .map((item) => item.id)
+    .join(',');
+  useEffect(() => {
+    if (!loaded || !completedIds) return;
+    let active = true;
+    request('/api/progress', {
+      method: 'POST',
+      body: JSON.stringify({ eventId: course.eventId, lessonIds: completedIds.split(',') }),
+    })
+      .then(() => {
+        if (active) setSyncError('');
+      })
+      .catch((error) => {
+        if (active) setSyncError(authMessage(error));
+      });
+    return () => {
+      active = false;
+    };
+  }, [request, loaded, course.eventId, completedIds, syncRetry]);
   function selectLesson(id: string, focus = false) {
     setLessonId(id);
     if (focus)
@@ -575,6 +605,17 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             : 'Answers and progress are saved for your account in this browser.'}
         </p>
       </div>
+      {syncError && (
+        <div>
+          <p role="alert">
+            Your lesson work is saved in this browser, but assignment progress could not sync:{' '}
+            {syncError}
+          </p>
+          <button className="text-link" onClick={() => setSyncRetry((n) => n + 1)}>
+            Retry saving progress
+          </button>
+        </div>
+      )}
       {!loaded ? (
         <p role="status">Loading your lesson progress…</p>
       ) : (

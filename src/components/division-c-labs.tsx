@@ -11,6 +11,8 @@ import {
   type LabValues,
   type Reading,
 } from '@/lib/division-c-lab-models';
+import { useAuth, authMessage } from './auth-context';
+import { PHET_LAB } from '@/lib/domain';
 import { Slider } from './subject-lab-frame';
 import './subject-explorer.css';
 import './division-c-labs.css';
@@ -322,6 +324,50 @@ function ResponsePlot({
         {lab.model === 'salinometer' &&
           ' The vertical axis is expanded to show small changes in immersion.'}
       </small>
+    </div>
+  );
+}
+
+function LabCompletion({
+  eventId,
+  labId,
+  disabled = false,
+}: {
+  eventId: string;
+  labId: string;
+  disabled?: boolean;
+}) {
+  const { request } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
+  return (
+    <div className="archive-actions">
+      <button
+        className="button button-small button-primary"
+        disabled={disabled || busy || done}
+        onClick={async () => {
+          setBusy(true);
+          setError('');
+          try {
+            await request('/api/progress', {
+              method: 'POST',
+              body: JSON.stringify({ eventId, labId }),
+            });
+            setDone(true);
+          } catch (error) {
+            setError(authMessage(error));
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        {done ? 'Lab completed' : busy ? 'Saving…' : 'Mark lab complete'}
+      </button>
+      {done && (
+        <p role="status">Completion saved. Any pending assignment for this lab is complete.</p>
+      )}
+      {error && <p role="alert">{error} Try marking the lab complete again.</p>}
     </div>
   );
 }
@@ -655,6 +701,20 @@ function LabStation({ lab, studentId }: { lab: LabActivity; studentId: string })
           />
         </label>
         <p>{lab.reflection}</p>
+        <p>
+          Record your hypothesis, at least one trial, and your conclusion, then mark this lab
+          complete.
+        </p>
+        <LabCompletion
+          eventId={lab.eventId}
+          labId={lab.id}
+          disabled={
+            !loaded ||
+            !notebook.prediction.trim() ||
+            !notebook.trials.length ||
+            !notebook.conclusion.trim()
+          }
+        />
       </section>
     </article>
   );
@@ -662,6 +722,7 @@ function LabStation({ lab, studentId }: { lab: LabActivity; studentId: string })
 
 function PhETPanel({ eventId }: { eventId: string }) {
   const sim = phetActivities[eventId];
+  const [openedExternally, setOpenedExternally] = useState(false);
   const [launched, setLaunched] = useState(false),
     [ready, setReady] = useState(false),
     [failed, setFailed] = useState(false);
@@ -688,7 +749,13 @@ function PhETPanel({ eventId }: { eventId: string }) {
           <Play size={15} />
           {launched ? 'Close simulation' : 'Launch PhET simulation'}
         </button>
-        <a className="text-link" target="_blank" rel="noopener noreferrer" href={phetUrl(sim.slug)}>
+        <a
+          className="text-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={phetUrl(sim.slug)}
+          onClick={() => setOpenedExternally(true)}
+        >
           Open in a new tab <ExternalLink size={14} />
         </a>
       </div>
@@ -710,6 +777,8 @@ function PhETPanel({ eventId }: { eventId: string }) {
           />
         </>
       )}
+      <p>Complete the investigation described above, then mark the simulation complete.</p>
+      <LabCompletion eventId={eventId} labId={PHET_LAB} disabled={!ready && !openedExternally} />
       <p className="archive-model-note">
         PhET Interactive Simulations, University of Colorado Boulder. Internet connection required.
         If the frame is blank, use the new-tab link.{' '}
@@ -734,6 +803,14 @@ export function DivisionCLabs({
   const labs = labsForEvent('C', eventId);
   const [selected, setSelected] = useState(labs[0]?.id),
     [view, setView] = useState('archive');
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('lab');
+    if (requested === PHET_LAB && phetActivities[eventId]) setView('phet');
+    else if (labs.some((lab) => lab.id === requested)) {
+      setSelected(requested!);
+      setView('archive');
+    }
+  }, [eventId]);
   const lab = labs.find((l) => l.id === selected) || labs[0];
   if (!lab) return null;
   return (
