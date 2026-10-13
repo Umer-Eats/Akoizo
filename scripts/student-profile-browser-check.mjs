@@ -107,6 +107,20 @@ try {
     try {
       let body;
       if (url.pathname === '/api/auth/profile') body = profile;
+      else if (url.pathname === '/api/rankings')
+        body = {
+          rankings: [
+            {
+              id: 'student-1',
+              name: 'Maya R.',
+              schoolId: 'two',
+              school: 'Orbit Academy',
+              division: 'C',
+              points: 5000,
+            },
+          ],
+          schools: [{ id: 'two', name: 'Orbit Academy' }],
+        };
       else if (url.pathname === '/api/community') body = await communityFor(db, profile);
       else if (url.pathname === '/api/dashboard') body = await dashboardFor(db, profile);
       else if (url.pathname === '/api/students')
@@ -160,6 +174,17 @@ try {
   await page.getByText('How Akoizo ranks work', { exact: true }).click();
   await expect(page.locator('.ranked-badge-gallery > div')).toHaveCount(9);
   await fits('profile');
+  await page.goto(`${base}/rankings`);
+  await expect(page.locator('.ranked-student-card')).toHaveCount(1);
+  await fits('global-rankings');
+  // Click the points, outside the name, to verify the whole card is the profile link.
+  await page.locator('.ranked-student-card').getByText('5,000', { exact: true }).click();
+  await expect(page).toHaveURL(/\/students\/student-1$/);
+  await expect(page.getByRole('heading', { name: 'Maya R.' })).toBeVisible();
+  await page.goto(`${base}/rankings`);
+  await page.getByRole('link', { name: 'View Maya R. ranked profile', exact: true }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/\/students\/student-1$/);
   await page.goto(`${base}/students/student-0`);
   await expect(page.getByRole('heading', { name: 'Unranked', exact: true })).toBeVisible();
   await expect(page.getByText('No released ranked tests yet.', { exact: true })).toBeVisible();

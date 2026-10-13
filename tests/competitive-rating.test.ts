@@ -64,15 +64,21 @@ test('paper difficulty influences the skill estimate', () => {
       calculateRating(neutral.map((t) => ({ ...t, paperAverage: 80 }))).rating,
   );
 });
-test('Immortal RR is uncapped and Radiant needs threshold, top 500, and recent activity', () => {
+test('Immortal RR is uncapped and Radiant is limited to five eligible students', () => {
   const rank = calculateRating(scores(Array(50).fill(100)));
   assert.equal(rank.name, 'Immortal');
   assert.equal(rank.tier, 3);
   assert.ok(rank.rr > 450);
   const players = Array.from({ length: 501 }, (_, i) => ({ id: String(i).padStart(4, '0'), rank }));
   const ladder = applyLeaderboard(players, now);
-  assert.equal(ladder[499].rank.name, 'Radiant');
-  assert.equal(ladder[500].rank.name, 'Immortal');
+  assert.equal(ladder[4].rank.name, 'Radiant');
+  assert.equal(ladder[5].rank.name, 'Immortal');
+  assert.equal(ladder.filter((s) => s.rank.name === 'Radiant').length, 5);
+  const contender = { id: 'new', rank: { ...rank, rr: rank.rr + 30, rating: rank.rating + 30 } };
+  const updated = applyLeaderboard([...players, contender], now);
+  assert.equal(updated.at(-1)!.rank.name, 'Radiant');
+  assert.equal(updated[4].rank.name, 'Immortal');
+  assert.equal(updated.filter((s) => s.rank.name === 'Radiant').length, 5);
   assert.equal(
     applyLeaderboard([{ id: 'a', rank: { ...rank, rr: 449 } }], now)[0].rank.name,
     'Immortal',

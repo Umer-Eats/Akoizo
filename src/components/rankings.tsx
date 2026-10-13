@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Search, Trophy } from 'lucide-react';
+import { ArrowUpRight, Search, Trophy } from 'lucide-react';
 import type { Division } from '@/lib/events';
 import { Orbit } from './art';
+import './student-profile.css';
 type Ranking = {
   id: string;
   name: string;
@@ -105,31 +106,36 @@ export function Rankings() {
           </button>
         </div>
       ) : results.length ? (
-        <div className="table-wrap" role="region" aria-label="Global rankings" tabIndex={0}>
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">RANK</th>
-                <th scope="col">MEMBER</th>
-                <th scope="col">SCHOOL</th>
-                <th scope="col">DIVISION</th>
-                <th scope="col">POINTS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.rank}</td>
-                  <td>
-                    <Link href={`/students/${encodeURIComponent(row.id)}`}>{row.name}</Link>
-                  </td>
-                  <td>{row.school}</td>
-                  <td>{row.division}</td>
-                  <td>{row.points.toLocaleString('en-US')}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="student-card-grid" role="region" aria-label="Global rankings">
+          {results.map((row) => (
+            <Link
+              key={row.id}
+              className="ranked-student-card"
+              href={`/students/${encodeURIComponent(row.id)}`}
+              aria-label={`View ${row.name} ranked profile`}
+            >
+              <div className="student-card-top">
+                <span className="student-avatar">{row.name.slice(0, 2).toUpperCase()}</span>
+                <span className="tag">#{row.rank} · ALL-TIME POINTS</span>
+                <ArrowUpRight size={18} />
+              </div>
+              <h2>{row.name}</h2>
+              <p>{row.school}</p>
+              <dl className="student-card-stats global-ranking-card-stats">
+                <div>
+                  <dt>Ranked points</dt>
+                  <dd>{row.points.toLocaleString('en-US')}</dd>
+                </div>
+                <div>
+                  <dt>Division</dt>
+                  <dd>{row.division}</dd>
+                </div>
+              </dl>
+              <span className="student-card-link">
+                View ranked profile <ArrowUpRight size={14} />
+              </span>
+            </Link>
+          ))}
         </div>
       ) : (
         <div className="empty-state">

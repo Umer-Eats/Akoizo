@@ -5,7 +5,7 @@ import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { AccountGate } from './account-gate';
 import { useAuth, authMessage } from './auth-context';
 import { RankBadge } from './rank-badge';
-import { RANK_NAMES, rankLabel } from '@/lib/competitive-rating';
+import { RANK_NAMES, RADIANT_LIMIT, RADIANT_RR, rankLabel } from '@/lib/competitive-rating';
 import type { StudentRankedProfile as Profile } from '@/lib/student-profiles';
 import './student-profile.css';
 
@@ -120,7 +120,7 @@ function ProfileView({ studentId }: { studentId: string }) {
           <span>
             {ranked
               ? high
-                ? 'Radiant: 450+ RR and an active top-500 position'
+                ? `Radiant: ${RADIANT_RR}+ RR and an active top-${RADIANT_LIMIT} position`
                 : `${100 - data.rank.rr} RR to promotion`
               : `${5 - data.rank.placements} more released tests to reveal a rank`}
           </span>
@@ -336,9 +336,9 @@ function ProfileView({ studentId }: { studentId: string }) {
         </p>
         <p>
           Immortal uses an uncapped RR total: 90 RR for tier 2 and 200 RR for tier 3. Radiant
-          requires at least 450 RR and a top-500 position among elite students with a released test
-          in the last seven days. Inactivity removes leaderboard eligibility without erasing RR.
-          Corrected or reopened tests recalculate the journey automatically.
+          requires at least {RADIANT_RR} RR and a top-{RADIANT_LIMIT} position among elite students
+          with a released test in the last seven days. Inactivity removes leaderboard eligibility
+          without erasing RR. Corrected or reopened tests recalculate the journey automatically.
         </p>
         <p>
           This is Akoizo’s transparent adaptation of Valorant’s competitive structure. Riot’s exact

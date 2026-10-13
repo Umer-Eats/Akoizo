@@ -66,7 +66,8 @@
   background: var(--surface-2);
   font-size: 0.8rem;
 }
-.ranked-student-card h3 {
+.ranked-student-card h3,
+.ranked-student-card h2 {
   font-size: 1.4rem;
   margin: 0 0 5px;
 }
@@ -108,6 +109,12 @@
 .student-card-stats dd {
   font-size: 1.1rem;
   margin: 8px 0 0;
+}
+.global-ranking-card-stats {
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: 20px;
 }
 .student-card-link {
   display: flex;

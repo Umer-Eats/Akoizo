@@ -14,6 +14,7 @@ export type RankName = (typeof RANK_NAMES)[number];
 export const PLACEMENT_TESTS = 5;
 export const PASS_POINTS = 60;
 export const RADIANT_RR = 450;
+export const RADIANT_LIMIT = 5;
 export type RatingTest = {
   id: string;
   points: number;
@@ -126,7 +127,7 @@ export function applyLeaderboard<T extends { id: string; rank: CompetitiveRating
   const positions = new Map(eligible.map((s, i) => [s.id, i + 1]));
   return students.map((s) => {
     const position = positions.get(s.id) ?? null;
-    const radiant = position !== null && position <= 500 && s.rank.rr >= RADIANT_RR;
+    const radiant = position !== null && position <= RADIANT_LIMIT && s.rank.rr >= RADIANT_RR;
     return {
       ...s,
       rank: {
