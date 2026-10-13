@@ -12,12 +12,15 @@ import type { Profile } from '../src/lib/domain.ts';
 import { createTeam, updateTeam } from '../src/lib/team-service.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { labsForEvent } from '../src/lib/division-c-labs.ts';
+import { calculateLab, initialLabValues } from '../src/lib/division-c-lab-models.ts';
 import { listPracticeTests } from '../src/lib/practice-catalog.ts';
 import {
   assignWork,
   recordLab,
-  recordLessons,
   removeStudyAssignment,
+  studentWork,
+  submitLab,
+  submitLesson,
 } from '../src/lib/study-assignment-service.ts';
 
 function fixture() {
@@ -185,33 +188,73 @@ test('assignments reject work outside the event, division, or school', async () 
   );
 });
 
-test('reported lesson progress completes lesson and unit assignments', async () => {
+/** A full set of answers to one lesson's practice, with the first `wrong` multiple-choice ones missed. */
+function lessonAnswers(lessonId: string, wrong = 0) {
+  const practice = course.lessons.find((item) => item.id === lessonId)?.practice ?? [];
+  let missed = 0;
+  return Object.fromEntries(
+    practice.map((q) => [
+      q.id,
+      q.type === 'mcq' && missed++ < wrong ? q.options!.find((o) => o !== q.answer)! : q.answer,
+    ]),
+  );
+}
+const submit = (db: Database, student: Profile, lessonId: string, wrong = 0) =>
+  submitLesson(db, student, {
+    eventId: 'forensics',
+    lessonId,
+    answers: lessonAnswers(lessonId, wrong),
+  });
+
+test('submitted lessons are graded and complete lesson and unit assignments', async () => {
   const db = fixture();
   const { teacher, amy, ben } = await seated(db);
   const unit = course.units[0];
   const [first, ...rest] = unit.lessonIds;
+  const points = course.lessons
+    .find((lesson) => lesson.id === first)!
+    .practice.filter((q) => q.type === 'mcq')
+    .reduce((sum, q) => sum + (q.points ?? 1), 0);
   await assignWork(db, teacher, { ...forensics, kind: 'Unit', targetId: unit.id, everyone: true });
   await assignWork(db, teacher, { ...forensics, kind: 'Lesson', targetId: first, everyone: true });
 
-  await assert.rejects(recordLessons(db, teacher, { eventId: 'forensics', lessonIds: [first] }));
+  await assert.rejects(submit(db, teacher, first), /student account/);
+  await assert.rejects(submit(db, amy, 'nope'), /not in this event/);
   await assert.rejects(
-    recordLessons(db, amy, { eventId: 'forensics', lessonIds: ['nope'] }),
-    /Choose a lesson/,
+    submitLesson(db, amy, { eventId: 'forensics', lessonId: first, answers: {} }),
+    /Answer every practice question/,
   );
-  assert.deepEqual(await recordLessons(db, amy, { eventId: 'forensics', lessonIds: [first] }), {
-    recorded: 1,
-  });
+  // One missed multiple-choice question lowers the score; the lesson still counts as completed.
+  const graded = await submit(db, amy, first, 1);
+  assert.equal(graded.maxScore, points);
+  assert.equal(graded.score < points, true);
   let work = await mine(db, amy);
   assert.equal(work.find((a) => a.study?.kind === 'Lesson')?.completedAt !== null, true);
   assert.equal(work.find((a) => a.study?.kind === 'Unit')?.completedAt, null);
   assert.equal((await dashboardFor(db, amy)).stats.lessons, 1);
 
-  // The rest of the unit finishes it; reporting twice records nothing new.
-  await recordLessons(db, amy, { eventId: 'forensics', lessonIds: [first, ...rest] });
+  // Submitting again keeps one record with the latest score.
+  assert.deepEqual(await submit(db, amy, first), { score: points, maxScore: points });
+  let records = await studentWork(db, teacher, amy.id);
+  assert.equal(records.length, 1);
   assert.deepEqual(
-    await recordLessons(db, amy, { eventId: 'forensics', lessonIds: unit.lessonIds }),
-    { recorded: 0 },
+    { ...records[0], completedAt: '' },
+    {
+      type: 'Lesson',
+      eventId: 'forensics',
+      eventName: 'Forensics',
+      targetId: first,
+      title: course.lessons.find((lesson) => lesson.id === first)!.title,
+      score: points,
+      maxScore: points,
+      percentage: 100,
+      completedAt: '',
+    },
   );
+  assert.equal((await dashboardFor(db, amy)).stats.lessons, 1);
+
+  // The rest of the unit finishes it.
+  for (const id of rest) await submit(db, amy, id);
   work = await mine(db, amy);
   assert.equal(
     work.every((a) => a.completedAt),
@@ -224,16 +267,23 @@ test('reported lesson progress completes lesson and unit assignments', async () 
 
   // A lesson finished before it is assigned counts at once.
   const later = course.units[1].lessonIds[0];
-  await recordLessons(db, amy, { eventId: 'forensics', lessonIds: [later] });
+  await submit(db, amy, later);
   await assignWork(db, teacher, { ...forensics, kind: 'Lesson', targetId: later, everyone: true });
   assert.equal(
     (await mine(db, amy)).find((a) => a.study?.targetId === later)?.completedAt !== null,
     true,
   );
   assert.equal((await mine(db, ben)).find((a) => a.study?.targetId === later)?.completedAt, null);
+
+  // Students read their own records; instructors only those of their own school.
+  records = await studentWork(db, amy);
+  assert.equal(records.length, unit.lessonIds.length + 1);
+  assert.deepEqual(await studentWork(db, ben), []);
+  const other = await school(db, 't2', 'ppcms-central', []);
+  await assert.rejects(studentWork(db, other.teacher, amy.id), /not found in your school/);
 });
 
-test('lab simulations are assigned by event and completed by the student', async () => {
+test('lab simulations are assigned by event and submitted for accuracy', async () => {
   const db = fixture();
   const { teacher, amy, ben, cal } = await seated(db);
   const lab = labsForEvent('C', 'forensics')[0];
@@ -248,17 +298,35 @@ test('lab simulations are assigned by event and completed by the student', async
   assert.equal(assigned.study?.title, lab.title);
   assert.match((await mine(db, cal))[0].study!.title, /^PhET: /);
 
-  await assert.rejects(recordLab(db, amy, { eventId: 'forensics', labId: 'nope' }), /not in this/);
-  assert.deepEqual(await recordLab(db, amy, { eventId: 'forensics', labId: lab.id }), {
-    completed: 1,
+  const values = initialLabValues(lab);
+  const expected = calculateLab(lab.model, values, 0).answer;
+  const attempt = { eventId: 'forensics', labId: lab.id, values, scenario: 0 };
+  await assert.rejects(submitLab(db, amy, { ...attempt, labId: 'nope' }), /not in this/);
+  await assert.rejects(submitLab(db, amy, { ...attempt, answer: 'abc' }), /as a number/);
+  await assert.rejects(submitLab(db, amy, { ...attempt, values: {}, answer: 1 }), /lab control/);
+  // Accuracy falls with the distance from the model answer and never goes below zero.
+  assert.deepEqual(await submitLab(db, amy, { ...attempt, answer: expected * 1.25 }), {
+    accuracy: 75,
   });
-  assert.deepEqual(await recordLab(db, amy, { eventId: 'forensics', labId: lab.id }), {
-    completed: 0,
-  });
+  assert.deepEqual(await submitLab(db, amy, { ...attempt, answer: expected * 9 }), { accuracy: 0 });
   assert.equal(
     (await mine(db, amy)).find((a) => a.study?.targetId === lab.id)?.completedAt !== null,
     true,
   );
+  assert.deepEqual(await submitLab(db, amy, { ...attempt, answer: String(expected * 1.01) }), {
+    accuracy: 100,
+  });
+  const records = await studentWork(db, teacher, amy.id);
+  assert.equal(records.length, 1);
+  assert.equal(records[0].type, 'Lab');
+  assert.equal(records[0].title, lab.title);
+  assert.equal(records[0].percentage, 100);
+
+  // The PhET simulation is marked complete without a score.
+  assert.deepEqual(await recordLab(db, amy, { eventId: 'forensics', labId: 'phet' }), {
+    completed: 1,
+  });
+  assert.equal((await studentWork(db, amy)).length, 1);
 
   // Instructors remove pending work only, and only in their own school.
   const other = await school(db, 't2', 'ppcms-central', []);

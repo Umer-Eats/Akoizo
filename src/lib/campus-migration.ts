@@ -1,17 +1,43 @@
 import { schoolCommunities } from './school-communities.ts';
-import { campusPassword, hashSchoolPassword } from './school-password.ts';
+import { campusPassword, hashSchoolPassword, verifySchoolPassword } from './school-password.ts';
 import type { Database } from './school-service.ts';
 
-/** SQLite CHECK constraints require rebuilding the directory when adding a campus. */
+/** Apply password-setting changes to existing active rosters without affecting memberships. */
+export async function syncCommunityPasswords(db: Database) {
+  const statements: Parameters<Database['batch']>[0] = [];
+  const seen = new Set<string>();
+  for (const community of schoolCommunities) {
+    const password = campusPassword(community.id)!;
+    if (seen.has(password))
+      throw new Error('Student joining passwords must be different for each community.');
+    seen.add(password);
+    const schools = await db.all(
+      `SELECT s.id,s.password_hash FROM schools s
+      JOIN school_communities sc ON sc.school_id=s.id WHERE sc.community_id=?
+      AND s.id NOT IN (SELECT school_id FROM closed_communities)`,
+      community.id,
+    );
+    for (const school of schools) {
+      if (verifySchoolPassword(password, String(school.password_hash))) continue;
+      statements.push({
+        sql: 'UPDATE schools SET password_hash=? WHERE id=? AND password_hash=? AND id NOT IN (SELECT school_id FROM closed_communities)',
+        args: [hashSchoolPassword(password), String(school.id), String(school.password_hash)],
+      });
+    }
+  }
+  if (statements.length) await db.batch(statements, 'immediate');
+}
+
+/** Validate community IDs in the application so future additions need no schema edits. */
 export async function migrateCommunityDirectory(db: Database) {
-  const migration = 'rcsa-community-directory-v1';
+  const migration = 'configurable-community-directory-v2';
   if (await db.get('SELECT id FROM app_migrations WHERE id=?', migration)) return;
   await db.batch(
     [
       {
         sql: `CREATE TABLE IF NOT EXISTS school_communities_expanded (
         school_id TEXT PRIMARY KEY REFERENCES schools(id) ON DELETE CASCADE,
-        community_id TEXT NOT NULL CHECK(community_id IN (${schoolCommunities.map((c) => `'${c.id}'`).join(',')})))`,
+        community_id TEXT NOT NULL)`,
         args: [],
       },
       {

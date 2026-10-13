@@ -167,7 +167,7 @@ try {
       'West Campus Pembroke Pines Charter Middle School',
     );
     const schoolPassword = await teacher.getByLabel('Student joining password').inputValue();
-    assert.equal(schoolPassword, 'westscioly');
+    assert.equal(schoolPassword, process.env.WEST_STUDENT_JOIN_PASSWORD);
     await expect(teacher.getByRole('heading', { name: 'Your team starts here.' })).toBeVisible();
     await teacher.getByRole('button', { name: 'I’ve saved it', exact: true }).click();
     await teacher.reload();

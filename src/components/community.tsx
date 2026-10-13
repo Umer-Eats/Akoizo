@@ -1,5 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { StudentDirectory } from './student-directory';
 import { RefreshCw, LockKeyhole } from 'lucide-react';
 import { useAuth, authMessage } from './auth-context';
 import { AccountGate } from './account-gate';
@@ -12,7 +14,7 @@ import './teams.css';
 import './community.css';
 
 function CommunityView() {
-  const { request } = useAuth();
+  const { request, profile } = useAuth();
   const [data, setData] = useState<CommunityData | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -71,6 +73,11 @@ function CommunityView() {
           <p className="eyebrow">YOUR COMMUNITY</p>
           <h1>{data?.name ?? 'Community'}</h1>
           <p>See how your community is growing, together.</p>
+          {profile?.role === 'student' && (
+            <Link className="text-link" href={`/students/${encodeURIComponent(profile.id)}`}>
+              My ranked profile
+            </Link>
+          )}
         </div>
         <button
           className="button button-small button-glass"
@@ -100,7 +107,7 @@ function CommunityView() {
       {data && (
         <>
           <div className="tabs community-tabs" role="tablist" aria-label="Community views">
-            {['analytics', 'teams', 'members'].map((id) => (
+            {['analytics', 'teams', 'members', 'students'].map((id) => (
               <button
                 key={id}
                 id={`community-${id}-tab`}
@@ -113,11 +120,14 @@ function CommunityView() {
                   ? 'Analytics'
                   : id === 'teams'
                     ? `Teams (${data.analytics.teams.length})`
-                    : `Members (${data.members.length})`}
+                    : id === 'members'
+                      ? `Members (${data.members.length})`
+                      : 'Across communities'}
               </button>
             ))}
           </div>
           <div id="community-panel" role="tabpanel" aria-labelledby={`community-${tab}-tab`}>
+            {tab === 'students' && <StudentDirectory />}
             {tab === 'analytics' && <InstructorAnalytics data={data.analytics} />}
             {tab === 'teams' && (
               <section aria-label="Community teams">
@@ -173,7 +183,9 @@ function CommunityView() {
                                     <span className="student-avatar">
                                       {s.name.slice(0, 2).toUpperCase()}
                                     </span>
-                                    {s.name}
+                                    <Link href={`/students/${encodeURIComponent(s.id)}`}>
+                                      {s.name}
+                                    </Link>
                                   </span>
                                 </th>
                                 <td className="team-count">{mine.length}</td>
@@ -251,8 +263,16 @@ function CommunityView() {
                                   ) : (
                                     <td key={seat}>
                                       <span className="community-seat">
-                                        {students.get(team.slots[event.id]?.[seat] ?? '')?.name ??
-                                          'Unassigned'}
+                                        {team.slots[event.id]?.[seat] ? (
+                                          <Link
+                                            href={`/students/${encodeURIComponent(team.slots[event.id][seat]!)}`}
+                                          >
+                                            {students.get(team.slots[event.id]?.[seat] ?? '')
+                                              ?.name ?? 'Unassigned'}
+                                          </Link>
+                                        ) : (
+                                          'Unassigned'
+                                        )}
                                       </span>
                                     </td>
                                   ),
@@ -294,7 +314,13 @@ function CommunityView() {
                         .filter((m) => m.name.toLowerCase().includes(search.trim().toLowerCase()))
                         .map((m) => (
                           <tr key={m.id}>
-                            <th scope="row">{m.name}</th>
+                            <th scope="row">
+                              {m.role === 'student' ? (
+                                <Link href={`/students/${encodeURIComponent(m.id)}`}>{m.name}</Link>
+                              ) : (
+                                m.name
+                              )}
+                            </th>
                             <td>{m.role === 'instructor' ? 'Instructor' : 'Student'}</td>
                             <td>{m.division ? `Division ${m.division}` : '—'}</td>
                             <td>

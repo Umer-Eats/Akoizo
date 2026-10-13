@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "communities:sync": "node scripts/sync-communities.mjs",
+    "predev": "npm run communities:sync",
+    "prebuild": "npm run communities:sync",
+    "pretypecheck": "npm run communities:sync",
+    "pretest": "npm run communities:sync",
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test --test-isolation=none tests/*.test.ts",
+    "test": "node --import ./tests/enrollment-env.mjs --experimental-strip-types --test --test-isolation=none tests/*.test.ts",
     "test:browser": "node scripts/browser-check.mjs",
     "format": "prettier --write src scripts tests documents README.md BACKLOG.md *.json next.config.ts",
     "format:check": "prettier --check src scripts tests documents README.md BACKLOG.md *.json next.config.ts"

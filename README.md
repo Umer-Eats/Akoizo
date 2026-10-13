@@ -18,7 +18,9 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 - `/study-tools`: public Science Olympiad study-tools guide and division event catalog.
 - `/sitemap.xml` and `/robots.txt`: generated crawler files for Google Search Console; see [SEO setup](documents/SEO.md).
 
-Instructor enrollment checks the private invitation setting before creating school membership. Each campus shares one roster across its instructors. Student joining passwords are `ppchsscioly` (high school), `avmscioly` (Academic Village middle), `westscioly` (West middle), `centralscioly` (Central middle), and `rcsascioly` (River City Science Academy High School). Students must supply their campus password before accessing a dashboard. Instructors can reveal the same campus password from their dashboard or settings. Verification uses salted hashes. Instructors can view and manage only their campus students.
+Instructor enrollment checks the private invitation setting before creating school membership. Each campus shares one roster across its instructors. Enrollment passwords are supplied through private server environment settings; see the empty setting names in `.env.example`. Students obtain their campus joining password from their instructor. Instructors can reveal their campus student joining password from their authenticated dashboard or settings. Verification uses salted hashes. Instructors can view and manage only their campus students.
+
+Add or update communities in [`communitypasswords.json`](communitypasswords.json). See [adding communities](documents/COMMUNITIES.md) for the entry format and private password setup. Normal builds automatically update the community selector and enrollment rules.
 
 On the first service request after this update, a one-time migration merges existing active groups within each campus and sets its password. Student IDs, progress and assignments are preserved; previously closed groups remain closed. The migration does not run again after a campus is deleted or recreated.
 

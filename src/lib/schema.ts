@@ -1,6 +1,5 @@
 import { eventsForDivision } from './events.ts';
 import { eventKey } from './domain.ts';
-import { schoolCommunities } from './school-communities.ts';
 
 export const schema = [
   `CREATE TABLE IF NOT EXISTS binders (
@@ -29,7 +28,7 @@ export const schema = [
     created_at TEXT NOT NULL DEFAULT (datetime('now')))`,
   `CREATE TABLE IF NOT EXISTS school_communities (
     school_id TEXT PRIMARY KEY REFERENCES schools(id) ON DELETE CASCADE,
-    community_id TEXT NOT NULL CHECK(community_id IN (${schoolCommunities.map((community) => `'${community.id}'`).join(',')})))`,
+    community_id TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, firebase_uid TEXT NOT NULL UNIQUE, email TEXT NOT NULL,
     display_name TEXT, role TEXT NOT NULL CHECK(role IN ('student','instructor')),
     school_id TEXT NOT NULL REFERENCES schools(id), division TEXT CHECK(division IN ('A','B','C')),
@@ -79,6 +78,10 @@ export const schema = [
     kind TEXT NOT NULL CHECK(kind IN ('Lesson','Unit','Lab')), target_id TEXT NOT NULL, title TEXT NOT NULL,
     due_date TEXT NOT NULL, assigned_at TEXT NOT NULL, completed_at TEXT,
     UNIQUE(student_id, event_id, kind, target_id))`,
+  // The latest graded submission of one lesson or lab. Lab scores are an accuracy out of 100.
+  `CREATE TABLE IF NOT EXISTS study_results (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
+    kind TEXT NOT NULL CHECK(kind IN ('Lesson','Lab')), target_id TEXT NOT NULL, score REAL NOT NULL, max_score REAL NOT NULL,
+    submitted_at TEXT NOT NULL, PRIMARY KEY(student_id, event_id, kind, target_id))`,
   'CREATE INDEX IF NOT EXISTS idx_teams_school ON teams(school_id)',
   'CREATE INDEX IF NOT EXISTS idx_team_slots_student ON team_slots(student_id)',
   'CREATE INDEX IF NOT EXISTS idx_ranked_tests_school ON ranked_tests(school_id)',

@@ -1,12 +1,8 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
-import { ChevronLeft, FileText, Search, Users } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { BookOpen, ChevronLeft, FileText, FlaskConical, Search, Users } from 'lucide-react';
 import { eventSlots, slotForEvent } from '@/lib/event-slots';
-import {
-  eventsForDivision,
-  type Division,
-  type ScienceEvent,
-} from '@/lib/events';
+import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/events';
 import {
   competitionLevels,
   practiceDifficulties,
@@ -14,19 +10,20 @@ import {
   matchesPracticeFilters,
   type PracticeSummary,
 } from '@/lib/practice-types';
-import { dateInZone, type Assignment, type Student } from '@/lib/domain';
+import { PHET_LAB, type Assignment, type Student, type StudyKind } from '@/lib/domain';
+import { lessonsForEvent } from '@/lib/lessons-registry';
+import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
+import type { TeamSheet } from '@/lib/teams';
+import { AssignEventModal, type AssignResult } from './assign-event-modal';
 import { useAuth, authMessage } from './auth-context';
 
-function eventDisplayName(eventId: string): string {
-  for (const division of ['A', 'B', 'C'] as const) {
-    const found = eventsForDivision(division).find((event) => event.id === eventId);
-    if (found) return found.name;
-  }
-  return eventId
-    .split('-')
-    .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : part))
-    .join(' ');
-}
+type Work = { kind: 'Practice' | StudyKind; id: string; title: string; meta: string };
+const practiceWork = (test: PracticeSummary): Work => ({
+  kind: 'Practice',
+  id: test.id,
+  title: practiceTitle(test),
+  meta: `${test.questionCount} answer fields · ${test.maxScore} points`,
+});
 
 export function InstructorEventCatalog({
   division,
@@ -160,10 +157,12 @@ function InstructorTestList({
   division,
   event,
   onAssign,
+  disabled,
 }: {
   division: Division;
   event: ScienceEvent;
   onAssign: (test: PracticeSummary) => void;
+  disabled: boolean;
 }) {
   const { request } = useAuth();
   const [tests, setTests] = useState<PracticeSummary[] | null>(null);
@@ -308,6 +307,7 @@ function InstructorTestList({
                     </div>
                     <button
                       className="assign-pill"
+                      disabled={disabled}
                       onClick={() => onAssign(test)}
                       aria-label={`Assign test ${practiceTitle(test)}`}
                     >
@@ -321,7 +321,9 @@ function InstructorTestList({
             <div className="practice-empty">
               <FileText size={30} />
               <h2>
-                {tests.length ? 'No tests match your search.' : 'No converted tests for this event yet.'}
+                {tests.length
+                  ? 'No tests match your search.'
+                  : 'No converted tests for this event yet.'}
               </h2>
               <p>
                 {tests.length
@@ -336,342 +338,267 @@ function InstructorTestList({
   );
 }
 
-function AssignTestModal({
-  division,
-  event,
-  test,
+export function InstructorAssignments({
   students,
-  selections,
   assignments,
-  onClose,
   onAssigned,
 }: {
-  division: Division;
-  event: ScienceEvent;
-  test: PracticeSummary;
   students: Student[];
-  selections: Record<string, string[]>;
   assignments: Assignment[];
-  onClose: () => void;
   onAssigned: () => Promise<void>;
 }) {
   const { request } = useAuth();
-  const [search, setSearch] = useState('');
-  const [divisionFilter, setDivisionFilter] = useState('All');
-  const [eventFilter, setEventFilter] = useState('All');
-  const [checked, setChecked] = useState<string[]>([]);
-  const [due, setDue] = useState(() => {
-    const next = new Date();
-    next.setDate(next.getDate() + 7);
-    return next.toISOString().slice(0, 10);
-  });
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  const eventOptions = useMemo(() => {
-    const ids = new Set<string>();
-    for (const list of Object.values(selections)) for (const id of list) ids.add(id);
-    ids.add(event.id);
-    return [...ids].sort((a, b) => eventDisplayName(a).localeCompare(eventDisplayName(b)));
-  }, [selections, event.id]);
-
-  const visible = students.filter((student) => {
-    const haystack = `${student.displayName}`.toLowerCase();
-    if (search.trim() && !haystack.includes(search.trim().toLowerCase())) return false;
-    if (divisionFilter !== 'All' && student.division !== divisionFilter) return false;
-    if (eventFilter !== 'All') {
-      const list = selections[student.id] ?? [];
-      if (!list.includes(eventFilter)) return false;
-    }
-    return true;
-  });
-
-  const assignedTestIds = useMemo(() => {
-    const map = new Map<string, Set<string>>();
-    for (const assignment of assignments) {
-      if (assignment.completedAt || !assignment.testId) continue;
-      if (!map.has(assignment.studentId)) map.set(assignment.studentId, new Set());
-      map.get(assignment.studentId)!.add(assignment.testId);
-    }
-    return map;
-  }, [assignments]);
-
-  function toggle(id: string) {
-    setChecked((current) =>
-      current.includes(id) ? current.filter((value) => value !== id) : [...current, id],
-    );
-  }
-
-  async function submit() {
-    if (!checked.length || busy) return;
-    setBusy(true);
-    setError('');
-    setNotice('');
-    try {
-      await request('/api/assignments', {
-        method: 'POST',
-        body: JSON.stringify({
-          studentIds: checked,
-          eventId: event.id,
-          division,
-          type: 'Practice',
-          due,
-          timeZone,
-          testId: test.id,
-        }),
-      });
-      setNotice(
-        `Assigned “${practiceTitle(test)}” to ${checked.length} ${checked.length === 1 ? 'student' : 'students'}.`,
-      );
-      setChecked([]);
-      await onAssigned();
-    } catch (error) {
-      setError(authMessage(error));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
-    }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
-
-  return (
-    <div className="assign-modal-overlay" onClick={onClose} role="presentation">
-      <div
-        className="assign-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Assign ${practiceTitle(test)}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="assign-modal-heading">
-          <div>
-            <p className="eyebrow">
-              {event.name.toUpperCase()} · DIVISION {division}
-            </p>
-            <h2>Assign {practiceTitle(test)}</h2>
-            <p>
-              {test.questionCount} answer fields · {test.maxScore} points · Due{' '}
-              <input
-                type="date"
-                aria-label="Due date"
-                value={due}
-                min={dateInZone(timeZone)}
-                onChange={(e) => setDue(e.target.value)}
-              />
-            </p>
-          </div>
-          <button className="button button-small button-glass" onClick={onClose}>
-            Close
-          </button>
-        </div>
-        <div className="event-toolbar">
-          <label className="search-field">
-            <span className="sr-only">Search students</span>
-            <Search size={16} />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search students by name"
-            />
-          </label>
-          <label className="division-control">
-            Division
-            <select
-              aria-label="Filter students by division"
-              value={divisionFilter}
-              onChange={(e) => setDivisionFilter(e.target.value)}
-            >
-              <option value="All">All divisions</option>
-              {(['A', 'B', 'C'] as const).map((value) => (
-                <option key={value} value={value}>
-                  Division {value}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="event-type-filter">
-            Student event
-            <select
-              aria-label="Filter students by event"
-              value={eventFilter}
-              onChange={(e) => setEventFilter(e.target.value)}
-            >
-              <option value="All">All events</option>
-              {eventOptions.map((id) => (
-                <option key={id} value={id}>
-                  {eventDisplayName(id)}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <p className="selection-summary" role="status">
-          {visible.length} {visible.length === 1 ? 'student' : 'students'} · {checked.length}{' '}
-          selected · Events shown come from each student’s event picks.
-        </p>
-        <div className="assign-student-list" role="group" aria-label="Select students">
-          {visible.map((student) => {
-            const list = selections[student.id] ?? [];
-            const already = assignedTestIds.get(student.id)?.has(test.id);
-            const isChecked = checked.includes(student.id);
-            return (
-              <label
-                key={student.id}
-                className="assign-student-row"
-                data-checked={isChecked}
-                data-division={student.division}
-              >
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={() => toggle(student.id)}
-                  aria-label={`Assign to ${student.displayName}`}
-                />
-                <span className="student-avatar">
-                  {student.displayName.slice(0, 2).toUpperCase()}
-                </span>
-                <span className="assign-student-main">
-                  <strong>
-                    {student.displayName}
-                    {already && <span className="tag">ASSIGNED</span>}
-                  </strong>
-                  <small className="assign-student-events">
-                    {list.length ? (
-                      list.map((id) => (
-                        <span key={id} className="assign-event-chip">
-                          {eventDisplayName(id)}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="assign-event-chip assign-event-empty">
-                        No events picked yet
-                      </span>
-                    )}
-                  </small>
-                </span>
-                <span className="tag">DIV {student.division}</span>
-              </label>
-            );
-          })}
-        </div>
-        {!visible.length && (
-          <div className="empty-state">
-            <Users size={26} />
-            <h3>No students match these filters.</h3>
-            <button
-              className="text-link"
-              onClick={() => {
-                setSearch('');
-                setDivisionFilter('All');
-                setEventFilter('All');
-              }}
-            >
-              Clear student filters
-            </button>
-          </div>
-        )}
-        {error && (
-          <p className="form-error" role="alert">
-            {error}
-          </p>
-        )}
-        {notice && (
-          <p className="form-success" role="status">
-            {notice}
-          </p>
-        )}
-        <div className="assign-modal-footer">
-          <span>
-            {checked.length} selected · Students see this as a Practice assignment due {due || '—'}.
-          </span>
-          <button
-            className="button button-primary"
-            disabled={busy || !checked.length || !due}
-            onClick={submit}
-          >
-            {busy ? 'Assigning…' : `Assign test to ${checked.length || ''}`.trim()}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function InstructorAssignments({
-  students,
-  selections,
-  assignments,
-  onAssigned,
-}: {
-  students: Student[];
-  selections: Record<string, string[]>;
-  assignments: Assignment[];
-  onAssigned: () => Promise<void>;
-}) {
   const [division, setDivision] = useState<Division>('C');
   const [activeEvent, setActiveEvent] = useState<ScienceEvent | null>(null);
-  const [activeTest, setActiveTest] = useState<PracticeSummary | null>(null);
-
+  const [work, setWork] = useState<Work | null>(null);
+  const [tab, setTab] = useState<'Practice' | 'Lesson' | 'Lab'>('Practice');
+  const [unitId, setUnitId] = useState('');
+  const [teams, setTeams] = useState<TeamSheet[] | null>(null);
+  const [error, setError] = useState('');
+  const loadTeams = useCallback(async () => {
+    setError('');
+    try {
+      setTeams(await request<TeamSheet[]>('/api/teams'));
+    } catch (error) {
+      setError(authMessage(error));
+    }
+  }, [request]);
   useEffect(() => {
+    void loadTeams();
+  }, [loadTeams, students]);
+  function chooseDivision(next: Division) {
+    setDivision(next);
     setActiveEvent(null);
-    setActiveTest(null);
-  }, [division]);
-
-  if (!students.length) {
+    setWork(null);
+    setUnitId('');
+  }
+  if (!students.length)
     return (
       <div className="empty-state">
         <Users size={32} />
         <h2>Your team starts here.</h2>
-        <p>
-          Share your school password. Students will appear here after they create an account and
-          join your school.
-        </p>
+        <p>Share your school password. Students appear here after joining your school.</p>
       </div>
     );
-  }
-
-  if (!activeEvent) {
+  if (!activeEvent)
     return (
       <InstructorEventCatalog
         division={division}
-        onDivision={setDivision}
-        onSelect={setActiveEvent}
+        onDivision={chooseDivision}
+        onSelect={(event) => {
+          setActiveEvent(event);
+          setUnitId('');
+          setTab('Practice');
+        }}
       />
     );
-  }
-
+  const course = lessonsForEvent(activeEvent.id, division);
+  const units = course?.units.filter((unit) => !unitId || unit.id === unitId) ?? [];
+  const labs = labsForEvent(division, activeEvent.id).map((lab) => ({
+    kind: 'Lab' as const,
+    id: lab.id,
+    title: lab.title,
+    meta: `${lab.minutes} minutes · ${lab.summary}`,
+  }));
+  const phet = division === 'C' ? phetActivities[activeEvent.id] : undefined;
+  if (phet) labs.push({ kind: 'Lab', id: PHET_LAB, title: `PhET: ${phet.title}`, meta: phet.task });
+  const choose = (item: Work) => (
+    <button
+      className="assign-pill"
+      disabled={!teams || !!error}
+      aria-label={`Assign ${item.title}`}
+      onClick={() => setWork(item)}
+    >
+      Assign {item.kind.toLowerCase()}
+    </button>
+  );
   return (
     <>
       <button className="back-link" onClick={() => setActiveEvent(null)}>
         <ChevronLeft size={16} /> All Division {division} events
       </button>
       <div className="dashboard-section-title">
-        <h2>{activeEvent.name} tests.</h2>
-        <span className="tag">DIVISION {division} · CONVERTED TESTS</span>
+        <h2>{activeEvent.name} assignments.</h2>
+        <span className="tag">DIVISION {division}</span>
       </div>
-      <InstructorTestList
-        division={division}
-        event={activeEvent}
-        onAssign={setActiveTest}
-      />
-      {activeTest && (
-        <AssignTestModal
+      <p>
+        Assign to everyone seated in this event across your community’s teams, or choose students
+        and their event partners.
+      </p>
+      {error && (
+        <div>
+          <p role="alert">{error}</p>
+          <button className="text-link" onClick={loadTeams}>
+            Reload teams
+          </button>
+        </div>
+      )}
+      {!teams && !error && <p role="status">Loading teams…</p>}
+      <div className="archive-view-switch" role="group" aria-label="Assignment content">
+        {(['Practice', 'Lesson', 'Lab'] as const).map((kind) => (
+          <button key={kind} aria-pressed={tab === kind} onClick={() => setTab(kind)}>
+            {kind === 'Practice'
+              ? 'Practice tests'
+              : kind === 'Lesson'
+                ? 'Lessons by unit'
+                : 'Lab simulations'}
+          </button>
+        ))}
+      </div>
+      {tab === 'Practice' && (
+        <InstructorTestList
+          key={`${division}/${activeEvent.id}`}
           division={division}
           event={activeEvent}
-          test={activeTest}
+          disabled={!teams || !!error}
+          onAssign={(test) => {
+            if (teams && !error) setWork(practiceWork(test));
+          }}
+        />
+      )}
+      {tab === 'Lesson' &&
+        (course ? (
+          <section aria-label="Assignable lessons">
+            <label className="division-control">
+              Unit{' '}
+              <select
+                aria-label="Filter lessons by unit"
+                value={unitId}
+                onChange={(e) => setUnitId(e.target.value)}
+              >
+                <option value="">All units</option>
+                {course.units.map((unit) => (
+                  <option key={unit.id} value={unit.id}>
+                    {unit.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {units.map((unit) => (
+              <section key={unit.id} className="ranked-create">
+                <div className="dashboard-section-title">
+                  <h3>{unit.title}</h3>
+                  {choose({
+                    kind: 'Unit',
+                    id: unit.id,
+                    title: unit.title,
+                    meta: `${unit.lessonIds.length} lessons`,
+                  })}
+                </div>
+                <p>{unit.description}</p>
+                <ul className="practice-test-list instructor-test-list">
+                  {unit.lessonIds.map((id) => {
+                    const lesson = course.lessons.find((item) => item.id === id)!;
+                    const item: Work = {
+                      kind: 'Lesson',
+                      id,
+                      title: lesson.title,
+                      meta: `${lesson.durationMin} minutes · ${lesson.practice.length} practice questions`,
+                    };
+                    return (
+                      <li key={id}>
+                        <div className="instructor-test-card">
+                          <BookOpen size={22} />
+                          <div className="instructor-test-body">
+                            <h3>{item.title}</h3>
+                            <p>{item.meta}</p>
+                          </div>
+                          {choose(item)}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            ))}
+          </section>
+        ) : (
+          <div className="practice-empty">
+            <BookOpen size={30} />
+            <h3>No lessons for this event yet.</h3>
+            <p>Units and lessons will appear here when available for Division {division}.</p>
+          </div>
+        ))}
+      {tab === 'Lab' &&
+        (labs.length ? (
+          <ul className="practice-test-list instructor-test-list">
+            {labs.map((item) => (
+              <li key={item.id}>
+                <div className="instructor-test-card">
+                  <FlaskConical size={22} />
+                  <div className="instructor-test-body">
+                    <h3>{item.title}</h3>
+                    <p>{item.meta}</p>
+                  </div>
+                  {choose(item)}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="practice-empty">
+            <FlaskConical size={30} />
+            <h3>No lab simulations for this event yet.</h3>
+            <p>Available simulations will appear here for Division {division}.</p>
+          </div>
+        ))}
+      {work && teams && (
+        <AssignEventModal
+          key={`${work.kind}/${work.id}`}
+          division={division}
+          eventId={activeEvent.id}
+          eventName={activeEvent.name}
+          eyebrow={`${activeEvent.name.toUpperCase()} · DIVISION ${division} · ${work.kind.toUpperCase()}`}
+          title={work.title}
+          meta={work.meta}
+          noun={
+            work.kind === 'Unit'
+              ? 'unit'
+              : work.kind === 'Practice'
+                ? 'test'
+                : work.kind.toLowerCase()
+          }
+          footer={
+            work.kind === 'Unit'
+              ? 'Complete every lesson practice in this unit.'
+              : work.kind === 'Lesson'
+                ? 'Complete the lesson practice.'
+                : work.kind === 'Lab'
+                  ? 'Complete the simulation and mark it finished.'
+                  : 'Submit this practice test to complete the assignment.'
+          }
+          already={
+            new Set(
+              assignments
+                .filter(
+                  (a) =>
+                    a.division === division &&
+                    a.eventId === activeEvent.id &&
+                    (work.kind === 'Practice'
+                      ? a.testId === work.id && !a.ranked && !a.completedAt
+                      : a.study?.kind === work.kind && a.study.targetId === work.id),
+                )
+                .map((a) => a.studentId),
+            )
+          }
           students={students}
-          selections={selections}
-          assignments={assignments}
-          onClose={() => setActiveTest(null)}
-          onAssigned={onAssigned}
+          teams={teams}
+          onClose={() => setWork(null)}
+          onAssign={async (body) => {
+            const result = await request<AssignResult>('/api/assignments', {
+              method: 'POST',
+              body: JSON.stringify({
+                action: 'assign',
+                division,
+                eventId: activeEvent.id,
+                kind: work.kind,
+                targetId: work.id,
+                ...body,
+              }),
+            });
+            await onAssigned();
+            return result;
+          }}
         />
       )}
     </>
