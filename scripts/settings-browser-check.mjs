@@ -149,6 +149,14 @@ try {
     await p.getByLabel('Password', { exact: true }).fill('qa-test-password');
     await p.locator('form').getByRole('button', { name: 'Log in', exact: true }).click();
     await expect(p).toHaveURL(new RegExp('/dashboard/' + role + '$'));
+    if (role === 'instructor') {
+      await p.getByRole('button', { name: 'Student Progress' }).click();
+      await p.getByLabel('Ada Student · Division B').fill('Ada Renamed');
+      await p.getByRole('button', { name: 'Save name' }).click();
+      await expect(p.getByText('Name saved.', { exact: true })).toBeVisible();
+      await expect(p.getByRole('heading', { name: 'Ada Renamed’s progress.' })).toBeVisible();
+      await p.screenshot({ path: 'documents/qa/progress-rename-desktop.png', fullPage: true });
+    }
     await p.getByRole('link', { name: 'Settings', exact: true }).click();
     await expect(p).toHaveURL(new RegExp('/settings/' + role + '$'));
     if (role === 'student') {
@@ -165,7 +173,7 @@ try {
       await expect(p.getByLabel('Student joining password')).toHaveValue(
         'QA-ONLY-JOINING-PASSWORD',
       );
-      await p.getByLabel('Ada Student · Division B').fill('Ada Updated');
+      await p.getByLabel('Ada Renamed · Division B').fill('Ada Updated');
       await p.getByRole('button', { name: 'Save name' }).click();
       await expect(p.getByText('Name saved.', { exact: true })).toBeVisible();
     }

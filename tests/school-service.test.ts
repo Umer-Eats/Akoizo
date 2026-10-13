@@ -390,6 +390,12 @@ test('settings names are validated and scoped to the current community', async (
   await renameMember(db, students[0], students[0].id, '  Ada Learner  ');
   assert.equal((await profileForUid(db, 'a'))!.displayName, 'Ada Learner');
   await renameMember(db, first.profile, students[0].id, 'Ada Student');
+  assert.equal((await profileForUid(db, 'a'))!.displayName, 'Ada Student');
+  assert.equal(
+    (await dashboardFor(db, first.profile)).students.find((s) => s.id === students[0].id)!
+      .displayName,
+    'Ada Student',
+  );
   await assert.rejects(renameMember(db, students[0], students[1].id, 'Wrong'), { status: 403 });
   await assert.rejects(renameMember(db, second.profile, students[0].id, 'Wrong'), { status: 404 });
   await assert.rejects(renameMember(db, students[0], students[0].id, '  '), { status: 400 });

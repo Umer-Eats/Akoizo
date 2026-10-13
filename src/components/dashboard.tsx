@@ -56,6 +56,7 @@ import { RankedTestList } from './ranked';
 import { InstructorRanked } from './instructor-ranked';
 import { InstructorTeams } from './instructor-teams';
 import { InstructorAnalytics } from './instructor-analytics';
+import { NameEditor } from './name-editor';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -838,6 +839,19 @@ export function InstructorDashboard() {
                     <h2>{student.displayName}’s progress.</h2>
                   </div>
                   <StatsGrid stats={student} />
+                  <div className="dashboard-section-title">
+                    <h2>Change name.</h2>
+                    <span className="tag">UPDATES EVERYWHERE</span>
+                  </div>
+                  <NameEditor
+                    key={student.id}
+                    member={student}
+                    onSaved={() => {
+                      // The roster is sorted by name; keep this student selected after it reorders.
+                      setStudentId(student.id);
+                      return refresh();
+                    }}
+                  />
                   <div className="dashboard-section-title">
                     <h2>Assigned next steps.</h2>
                     <span className="tag">{student.displayName.toUpperCase()}</span>
