@@ -5171,5 +5171,2138 @@
     "maxScore": 141,
     "paperUrl": "/practice/scioly-8jq9a0w-kdu-b/test.pdf",
     "keyUrl": "/practice/scioly-8jq9a0w-kdu-b/key.pdf"
+  },
+  {
+    "sourceUrl": "https://scioly.org/tests/3HIBgzFLDjE",
+    "division": "B",
+    "eventId": "meteorology",
+    "competition": "Archimedean Invitational",
+    "year": 2026,
+    "level": null,
+    "season": 2027,
+    "difficulty": "Medium",
+    "difficultyReason": "Standard Invitational exam covering theoretical and analytical meteorology with map interpretation.",
+    "topics": [
+      "Meteorology"
+    ],
+    "topicMatch": "unverified",
+    "alignment": "Topics extracted from the paper. Compatibility with the 2027 rules still requires separate verification.",
+    "scoringBasis": "standard",
+    "instructions": "Answer all 79 questions. Refer to the image sheet for image-based questions.",
+    "id": "scioly-3hibgzfldje-b",
+    "sourceId": "3HIBgzFLDjE",
+    "reviewedOn": "2026-10-15",
+    "gradingMode": "published-key",
+    "minutes": 50,
+    "rulesUrl": "/rules/2027/b/meteorology.pdf",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "q1",
+        "page": 1,
+        "prompt": "[1] (SATA) In which of the following locations exist temperature inversions?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q1",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tropopause"
+          },
+          {
+            "id": "b",
+            "text": "Stratopause"
+          },
+          {
+            "id": "c",
+            "text": "Thermopause"
+          },
+          {
+            "id": "d",
+            "text": "Exopause"
+          }
+        ],
+        "multiple": true
+      },
+      {
+        "id": "q2",
+        "page": 1,
+        "prompt": "[1] (MCQ) Which of the following layers of the atmosphere has the highest temperature?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q2",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Troposphere"
+          },
+          {
+            "id": "b",
+            "text": "Stratosphere"
+          },
+          {
+            "id": "c",
+            "text": "Mesosphere"
+          },
+          {
+            "id": "d",
+            "text": "Thermosphere"
+          },
+          {
+            "id": "e",
+            "text": "Exosphere"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q3",
+        "page": 1,
+        "prompt": "[1] (MCQ) Which of the following boundaries define the “edge” of the atmosphere?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q3",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Exopause"
+          },
+          {
+            "id": "b",
+            "text": "Karman Line"
+          },
+          {
+            "id": "c",
+            "text": "Bergeron Line"
+          },
+          {
+            "id": "d",
+            "text": "Balmer Line"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q4",
+        "page": 2,
+        "prompt": "[1] (MCQ) According to Earth’s energy budget, how much energy is absorbed by land and oceans?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q4",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "16%"
+          },
+          {
+            "id": "b",
+            "text": "89%"
+          },
+          {
+            "id": "c",
+            "text": "51%"
+          },
+          {
+            "id": "d",
+            "text": "23%"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q5",
+        "page": 2,
+        "prompt": "[1] (MCQ) Which of the following does NOT determine how much insolation is received at a surface?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q5",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Latitude"
+          },
+          {
+            "id": "b",
+            "text": "Length of the day"
+          },
+          {
+            "id": "c",
+            "text": "Transparency of the atmosphere"
+          },
+          {
+            "id": "d",
+            "text": "Longitude"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q6",
+        "page": 2,
+        "prompt": "[1] (MCQ) Wet soil changes temperature at a slower rate than dry soil. This means wet soil has a ___ average heat capacity than dry soil.",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q6",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lower"
+          },
+          {
+            "id": "b",
+            "text": "Higher"
+          },
+          {
+            "id": "c",
+            "text": "Same"
+          },
+          {
+            "id": "d",
+            "text": "Unrelated"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q7",
+        "page": 2,
+        "prompt": "[2] (FRQ) On a very cold day, a puddle of water gradually cools to ice just before you stick a thermometer in it. You observe that the puddle was at 0 degrees Celsius before and after it froze and also observe an increase in the temperature of the air above the puddle. Explain this increase in temperature and what type of heat caused it.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q7",
+        "context": ""
+      },
+      {
+        "id": "q8",
+        "page": 2,
+        "prompt": "[2] (MCQ) Which of the following is NOT indicative of a 100% relative humidity?",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q8",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Evaporation no longer occurs"
+          },
+          {
+            "id": "b",
+            "text": "The dry bulb temperature is equal to the wet bulb temperature"
+          },
+          {
+            "id": "c",
+            "text": "Fog begins to form"
+          },
+          {
+            "id": "d",
+            "text": "Virga forms"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q9",
+        "page": 2,
+        "prompt": "[1] (FRQ) Explain the effect of increasing the axial tilt of Earth on the intensity of the seasons.",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q9",
+        "context": ""
+      },
+      {
+        "id": "q10",
+        "page": 2,
+        "prompt": "[2] (FITB) Earth is ____ (closer/farther) to the sun in the winter and ____ (closer/farther) from the sun in the summer.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q10",
+        "context": ""
+      },
+      {
+        "id": "q11",
+        "page": 2,
+        "prompt": "[1] (FITB) Cyclogenesis is the ____ (formation/dissipation) of a cyclone while cyclolysis is the ____ (formation/dissipation) of a cyclone.",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q11",
+        "context": ""
+      },
+      {
+        "id": "q12",
+        "page": 2,
+        "prompt": "[3] (FITB) Cyclones rotate ____ (CW/CCW) in the NH, and anticyclones rotate ____ (CW/CCW) in the SH. This is due to the ____ Effect.",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q12",
+        "context": ""
+      },
+      {
+        "id": "q13",
+        "page": 2,
+        "prompt": "[2] (FITB) Compared to valley winds, mountain winds are ____ (anabatic/katabatic), ____ (denser/less dense), and ____ (cause/don’t cause) fog.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q13",
+        "context": ""
+      },
+      {
+        "id": "q14",
+        "page": 3,
+        "prompt": "[2] (FITB) Sea breezes occur during the ____ (day/night) while land breezes occur during the ____ (day/night).",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q14",
+        "context": ""
+      },
+      {
+        "id": "q15",
+        "page": 3,
+        "prompt": "[1] (MCQ) The warming of a chinook wind as it moves downslope is an ____ process.",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q15",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Isothermal"
+          },
+          {
+            "id": "b",
+            "text": "Isobaric"
+          },
+          {
+            "id": "c",
+            "text": "Adiabatic"
+          },
+          {
+            "id": "d",
+            "text": "Expansionary"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q16",
+        "page": 3,
+        "prompt": "[1] (MCQ) Which of the following cloud types would you expect to reflect the most solar radiation away from Earth?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q16",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Altostratus"
+          },
+          {
+            "id": "b",
+            "text": "Cirrocumulus"
+          },
+          {
+            "id": "c",
+            "text": "Cumulonimbus"
+          },
+          {
+            "id": "d",
+            "text": "Stratus"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q17",
+        "page": 3,
+        "prompt": "[1] (MCQ) Which of the following cloud types would you expect to “trap” the most solar radiation?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q17",
+        "context": "",
+        "options": [
+          {
+            "id": "a",
+            "text": "Altocumulus"
+          },
+          {
+            "id": "b",
+            "text": "Cirrus"
+          },
+          {
+            "id": "c",
+            "text": "Cumulonimbus"
+          },
+          {
+            "id": "d",
+            "text": "Cumulus"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q18",
+        "page": 3,
+        "prompt": "[4] (FRQ) The air temperature is generally above the dew point. As expected, as the air temperature decreases towards the dew point, the relative humidity increases. However, the amount of water vapor in the air can stay the same during this process. Why is this possible? In other words, why would the relative humidity increase as temperature decreases even though the water vapor content remains the same?",
+        "type": "frq",
+        "points": 4,
+        "label": "Question q18",
+        "context": ""
+      },
+      {
+        "id": "q19",
+        "page": 3,
+        "prompt": "[3] (FRQ) We know that temperature decreases as altitude increases in the troposphere. Therefore, the relative humidity of a rising parcel of air in the troposphere will keep increasing in relative humidity until its water vapor condenses. What is the name of the altitude at which this condensation first occurs?",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q19",
+        "context": ""
+      },
+      {
+        "id": "q20",
+        "page": 3,
+        "prompt": "[2] (FRQ) The previous question assumes that the air parcel is rising. Identify and explain two reasons an air parcel might lift.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q20",
+        "context": ""
+      },
+      {
+        "id": "q21",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1A",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q21",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q22",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1B",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q22",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q23",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1C",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q23",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q24",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1D",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q24",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q25",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1E",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q25",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q26",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1F",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q26",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q27",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1G",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q27",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q28",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1H",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q28",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q29",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1I",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q29",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q30",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 1J",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q30",
+        "context": "Look at the image sheet. Identify cloud types depicted in images 1A-1J."
+      },
+      {
+        "id": "q31",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2A",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q31",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q32",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2B",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q32",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q33",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2C",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q33",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q34",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2D",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q34",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q35",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2E",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q35",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q36",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2F",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q36",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q37",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2G",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q37",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q38",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 2H",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q38",
+        "context": "Look at the image sheet. Identify the atmospheric optical effects shown in Images 2A-2H."
+      },
+      {
+        "id": "q39",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3A",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q39",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q40",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3B",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q40",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q41",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3C",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q41",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q42",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3D",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q42",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q43",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3E",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q43",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q44",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3F",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q44",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q45",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3G",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q45",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q46",
+        "page": 4,
+        "prompt": "[0.5] (SA) Image 3H",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q46",
+        "context": "Look at the image sheet. Identify the weather instruments in images 3A-3H"
+      },
+      {
+        "id": "q47",
+        "page": 5,
+        "prompt": "[2] (FRQ) Which type of front is forming near the low pressure cell north of Wisconsin?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q47",
+        "context": "Refer to the surface weather map shown in image 4 for questions 47 - 52"
+      },
+      {
+        "id": "q48",
+        "page": 5,
+        "prompt": "[2] (FRQ) What is the approximate pressure, in mb, around North Dakota?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q48",
+        "context": "Refer to the surface weather map shown in image 4 for questions 47 - 52"
+      },
+      {
+        "id": "q49",
+        "page": 5,
+        "prompt": "[4] (FRQ) Calculate the average pressure gradient (SI units) from South Dakota to North Wisconsin. Assume the distance is roughly 700 miles. Show your work.",
+        "type": "frq",
+        "points": 4,
+        "label": "Question q49",
+        "context": "Refer to the surface weather map shown in image 4 for questions 47 - 52"
+      },
+      {
+        "id": "q50",
+        "page": 5,
+        "prompt": "[2] (FRQ) It is evident that the actual pressure gradient from the previous question is not uniform. In other words, you calculated the average pressure gradient. Where (closer to SD or WI) would you expect a steeper gradient? Explain.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q50",
+        "context": "Refer to the surface weather map shown in image 4 for questions 47 - 52"
+      },
+      {
+        "id": "q51",
+        "page": 5,
+        "prompt": "[2] (FRQ) What type of clouds, if any, would you expect near North Utah to South Wyoming? Explain.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q51",
+        "context": "Refer to the surface weather map shown in image 4 for questions 47 - 52"
+      },
+      {
+        "id": "q52",
+        "page": 5,
+        "prompt": "[3] (FRQ) Which region is experiencing the strongest cold air advection? Explain.",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q52",
+        "context": "Refer to the surface weather map shown in image 4 for questions 47 - 52"
+      },
+      {
+        "id": "q53",
+        "page": 5,
+        "prompt": "[2] (FRQ) There is an occluded front in the Northeastern US. Which state is the triple point located in?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q53",
+        "context": "Refer to the surface weather map shown in image 5 for questions 53 - 57."
+      },
+      {
+        "id": "q54",
+        "page": 5,
+        "prompt": "[2] (FRQ) Is this occlusion intensifying or weakening? How can you tell?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q54",
+        "context": "Refer to the surface weather map shown in image 5 for questions 53 - 57."
+      },
+      {
+        "id": "q55",
+        "page": 5,
+        "prompt": "[3] (FRQ) Which air masses are interacting with this occluded front? Where is each from?",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q55",
+        "context": "Refer to the surface weather map shown in image 5 for questions 53 - 57."
+      },
+      {
+        "id": "q56",
+        "page": 5,
+        "prompt": "[1] (FRQ) There is a blue dashed line around the Great Plains region. What does this line signify?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q56",
+        "context": "Refer to the surface weather map shown in image 5 for questions 53 - 57."
+      },
+      {
+        "id": "q57",
+        "page": 5,
+        "prompt": "[1] (FRQ) What are the orange dashed lines called?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q57",
+        "context": "Refer to the surface weather map shown in image 5 for questions 53 - 57."
+      },
+      {
+        "id": "q58",
+        "page": 5,
+        "prompt": "[1] Is the flow over most of the US more zonal or meridional?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q58",
+        "context": "Refer to the 500 mb upper air chart shown in image 6 for questions 58 - 62"
+      },
+      {
+        "id": "q59",
+        "page": 5,
+        "prompt": "[1] Which region has the strongest 500-mb winds?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q59",
+        "context": "Refer to the 500 mb upper air chart shown in image 6 for questions 58 - 62"
+      },
+      {
+        "id": "q60",
+        "page": 5,
+        "prompt": "[2] Would you expect rising air more under a ridge or under a trough?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q60",
+        "context": "Refer to the 500 mb upper air chart shown in image 6 for questions 58 - 62"
+      },
+      {
+        "id": "q61",
+        "page": 5,
+        "prompt": "[6] Identify the location of any troughs or ridges. For each one, identify whether it is positively tilted, neutral, or negatively tilted. Clearly articulate the location by stating which states or parts of the image are covered.",
+        "type": "frq",
+        "points": 6,
+        "label": "Question q61",
+        "context": "Refer to the 500 mb upper air chart shown in image 6 for questions 58 - 62"
+      },
+      {
+        "id": "q62",
+        "page": 5,
+        "prompt": "[3] Over which region would you expect the greatest large-scale upward motion from positive vorticity advection? Explain.",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q62",
+        "context": "Refer to the 500 mb upper air chart shown in image 6 for questions 58 - 62"
+      },
+      {
+        "id": "q63",
+        "page": 5,
+        "prompt": "[2] (FRQ) Refer to image 7. Each panel (A–D) shows a vertical atmospheric temperature profile (red line) versus altitude, with the black vertical line marking 0°C. For each profile, determine the precipitation type expected at the ground.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q63",
+        "context": ""
+      },
+      {
+        "id": "q64",
+        "page": 5,
+        "prompt": "[0.5] (SA) What is the temperature, in celsius, in this region?",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q64",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q65",
+        "page": 6,
+        "prompt": "[0.5] (SA) What is the dew point, in Fahrenheit, in this region?",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q65",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q66",
+        "page": 6,
+        "prompt": "[0.5] (SA) What percentage of the sky is covered?",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q66",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q67",
+        "page": 6,
+        "prompt": "[1] (SA) What is the wind speed in mph?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q67",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q68",
+        "page": 6,
+        "prompt": "[0.5] (SA) What is the barometric pressure in mb?",
+        "type": "frq",
+        "points": 0.5,
+        "label": "Question q68",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q69",
+        "page": 6,
+        "prompt": "[1] (SA) What was the pressure in mb 3 hours ago?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q69",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q70",
+        "page": 6,
+        "prompt": "[1] (SA) What type of cloud is the low cloud? (use abbreviation)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q70",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q71",
+        "page": 6,
+        "prompt": "[1] (SA) What type of cloud is the high cloud? (use abbreviation)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q71",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q72",
+        "page": 6,
+        "prompt": "[1] (SA) What intensity level is the rain?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q72",
+        "context": "Refer to the station model shown in image 8 for questions 64 - 72"
+      },
+      {
+        "id": "q73",
+        "page": 6,
+        "prompt": "[1] (FRQ) What day of the month and at what time was this taken?",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q73",
+        "context": "Refer to the following METAR code for questions 73 - 79: METAR KJFK 301651Z 22018G28KT 10SM -RA BKN020 OVC070 12/09 A2992 RMK AO2 SLP134 T01220094"
+      },
+      {
+        "id": "q74",
+        "page": 6,
+        "prompt": "[1] (FRQ) Where is the wind blowing from and at what speed? Include units",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q74",
+        "context": "Refer to the following METAR code for questions 73 - 79"
+      },
+      {
+        "id": "q75",
+        "page": 6,
+        "prompt": "[1] (FRQ) What is the visibility? Include units",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q75",
+        "context": "Refer to the following METAR code for questions 73 - 79"
+      },
+      {
+        "id": "q76",
+        "page": 6,
+        "prompt": "[2] (FRQ) What are the altitudes of the broken and overcast cloud layers, in feet above ground level?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q76",
+        "context": "Refer to the following METAR code for questions 73 - 79"
+      },
+      {
+        "id": "q77",
+        "page": 6,
+        "prompt": "[2] (FRQ) What is the temperature and dew point in celsius?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q77",
+        "context": "Refer to the following METAR code for questions 73 - 79"
+      },
+      {
+        "id": "q78",
+        "page": 6,
+        "prompt": "[2] (FRQ) What is the pressure in inHg?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q78",
+        "context": "Refer to the following METAR code for questions 73 - 79"
+      },
+      {
+        "id": "q79",
+        "page": 6,
+        "prompt": "[2] (FRQ) What is the sea level pressure in hPa?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q79",
+        "context": "Refer to the following METAR code for questions 73 - 79"
+      }
+    ],
+    "keys": {
+      "q1": {
+        "correctOptions": [
+          "a",
+          "b"
+        ]
+      },
+      "q2": {
+        "correctOption": "d"
+      },
+      "q3": {
+        "correctOption": "b"
+      },
+      "q4": {
+        "correctOption": "c"
+      },
+      "q5": {
+        "correctOption": "d"
+      },
+      "q6": {
+        "correctOption": "b"
+      },
+      "q7": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Intermolecular bonds form and release heat during phase change",
+            "points": 1,
+            "accepted": [
+              "intermolecular bonds must form",
+              "process that releases heat",
+              "bonds form and strengthen"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Heat is latent heat not associated with temperature change",
+            "points": 1,
+            "accepted": [
+              "latent heat",
+              "latent heat of fusion"
+            ]
+          }
+        ]
+      },
+      "q8": {
+        "correctOption": "d"
+      },
+      "q9": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Increases the intensity of seasons",
+            "points": 1,
+            "accepted": [
+              "increases intensity of seasons",
+              "more intense seasons",
+              "greater extremes"
+            ]
+          }
+        ]
+      },
+      "q10": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "closer",
+            "points": 1,
+            "accepted": [
+              "closer"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "farther",
+            "points": 1,
+            "accepted": [
+              "farther",
+              "further"
+            ]
+          }
+        ]
+      },
+      "q11": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "formation, dissipation",
+            "points": 1,
+            "accepted": [
+              "formation, dissipation"
+            ]
+          }
+        ]
+      },
+      "q12": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "CCW",
+            "points": 1,
+            "accepted": [
+              "CCW",
+              "counterclockwise",
+              "counter-clockwise"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "CCW",
+            "points": 1,
+            "accepted": [
+              "CCW",
+              "counterclockwise",
+              "counter-clockwise"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Coriolis",
+            "points": 1,
+            "accepted": [
+              "Coriolis",
+              "coriolis effect"
+            ]
+          }
+        ]
+      },
+      "q13": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Katabatic",
+            "points": 0.67,
+            "accepted": [
+              "katabatic"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "denser",
+            "points": 0.67,
+            "accepted": [
+              "denser"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "cause",
+            "points": 0.66,
+            "accepted": [
+              "cause"
+            ]
+          }
+        ]
+      },
+      "q14": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Day",
+            "points": 1,
+            "accepted": [
+              "Day",
+              "day"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "night",
+            "points": 1,
+            "accepted": [
+              "night",
+              "Night"
+            ]
+          }
+        ]
+      },
+      "q15": {
+        "correctOption": "c"
+      },
+      "q16": {
+        "correctOption": "c"
+      },
+      "q17": {
+        "correctOption": "b"
+      },
+      "q18": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Decrease in temperature decreases the water vapor capacity",
+            "points": 2,
+            "accepted": [
+              "temperature decreases the amount of water vapor that the air can hold",
+              "capacity decreases"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Relative humidity is ratio of water vapor to capacity",
+            "points": 2,
+            "accepted": [
+              "relative humidity is defined as the amount of water vapor in the air out of the amount it can hold",
+              "ratio decreases denominator"
+            ]
+          }
+        ]
+      },
+      "q19": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Lifted Condensation Level",
+            "points": 3,
+            "accepted": [
+              "Lifted Condensation Level",
+              "LCL"
+            ]
+          }
+        ]
+      },
+      "q20": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "First mechanism of lifting",
+            "points": 1,
+            "accepted": [
+              "orographic",
+              "convergent",
+              "convective",
+              "frontal"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Second mechanism of lifting",
+            "points": 1,
+            "accepted": [
+              "orographic",
+              "convergent",
+              "convective",
+              "frontal"
+            ]
+          }
+        ]
+      },
+      "q21": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Ac",
+            "points": 0.5,
+            "accepted": [
+              "Ac",
+              "Altocumulus"
+            ]
+          }
+        ]
+      },
+      "q22": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Ci",
+            "points": 0.5,
+            "accepted": [
+              "Ci",
+              "Cirrus"
+            ]
+          }
+        ]
+      },
+      "q23": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Cs",
+            "points": 0.5,
+            "accepted": [
+              "Cs",
+              "Cirrostratus"
+            ]
+          }
+        ]
+      },
+      "q24": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Ln",
+            "points": 0.5,
+            "accepted": [
+              "Ln",
+              "Lc",
+              "Lenticular"
+            ]
+          }
+        ]
+      },
+      "q25": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Cb",
+            "points": 0.5,
+            "accepted": [
+              "Cb",
+              "Cumulonimbus"
+            ]
+          }
+        ]
+      },
+      "q26": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Cc",
+            "points": 0.5,
+            "accepted": [
+              "Cc",
+              "Cirrocumulus"
+            ]
+          }
+        ]
+      },
+      "q27": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "As",
+            "points": 0.5,
+            "accepted": [
+              "As",
+              "Altostratus"
+            ]
+          }
+        ]
+      },
+      "q28": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Ns",
+            "points": 0.5,
+            "accepted": [
+              "Ns",
+              "Nimbostratus"
+            ]
+          }
+        ]
+      },
+      "q29": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "St",
+            "points": 0.5,
+            "accepted": [
+              "St",
+              "Stratus"
+            ]
+          }
+        ]
+      },
+      "q30": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "PCb",
+            "points": 0.5,
+            "accepted": [
+              "PCb",
+              "Pyrocumulonimbus"
+            ]
+          }
+        ]
+      },
+      "q31": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Rainbow",
+            "points": 0.5,
+            "accepted": [
+              "Rainbow"
+            ]
+          }
+        ]
+      },
+      "q32": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sundogs",
+            "points": 0.5,
+            "accepted": [
+              "Sundogs",
+              "Sun dogs"
+            ]
+          }
+        ]
+      },
+      "q33": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Green Flash",
+            "points": 0.5,
+            "accepted": [
+              "Green Flash"
+            ]
+          }
+        ]
+      },
+      "q34": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Crepuscular Rays",
+            "points": 0.5,
+            "accepted": [
+              "Crepuscular Rays"
+            ]
+          }
+        ]
+      },
+      "q35": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mirage",
+            "points": 0.5,
+            "accepted": [
+              "Mirage",
+              "Fata Morgana"
+            ]
+          }
+        ]
+      },
+      "q36": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Rainbow",
+            "points": 0.5,
+            "accepted": [
+              "Rainbow",
+              "Fogbow"
+            ]
+          }
+        ]
+      },
+      "q37": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Halo",
+            "points": 0.5,
+            "accepted": [
+              "Halo",
+              "22 degree halo"
+            ]
+          }
+        ]
+      },
+      "q38": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mirage",
+            "points": 0.5,
+            "accepted": [
+              "Mirage"
+            ]
+          }
+        ]
+      },
+      "q39": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Barometer",
+            "points": 0.5,
+            "accepted": [
+              "Barometer",
+              "Mercury barometer"
+            ]
+          }
+        ]
+      },
+      "q40": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Doppler Radar",
+            "points": 0.5,
+            "accepted": [
+              "Doppler Radar",
+              "Radar"
+            ]
+          }
+        ]
+      },
+      "q41": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Radiosonde/Rawinsonde",
+            "points": 0.5,
+            "accepted": [
+              "Radiosonde",
+              "Rawinsonde",
+              "Weather balloon"
+            ]
+          }
+        ]
+      },
+      "q42": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Anemometer",
+            "points": 0.5,
+            "accepted": [
+              "Anemometer"
+            ]
+          }
+        ]
+      },
+      "q43": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Rain Gauge",
+            "points": 0.5,
+            "accepted": [
+              "Rain Gauge",
+              "Raingauge"
+            ]
+          }
+        ]
+      },
+      "q44": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Wind Profiler",
+            "points": 0.5,
+            "accepted": [
+              "Wind Profiler"
+            ]
+          }
+        ]
+      },
+      "q45": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sling Psychrometer",
+            "points": 0.5,
+            "accepted": [
+              "Sling Psychrometer",
+              "Psychrometer"
+            ]
+          }
+        ]
+      },
+      "q46": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Snowboard",
+            "points": 0.5,
+            "accepted": [
+              "Snowboard"
+            ]
+          }
+        ]
+      },
+      "q47": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Occluded front",
+            "points": 2,
+            "accepted": [
+              "Occluded",
+              "occluded front"
+            ]
+          }
+        ]
+      },
+      "q48": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "1028",
+            "points": 2,
+            "accepted": [
+              "1028",
+              "1028 mb"
+            ]
+          }
+        ]
+      },
+      "q49": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Pressure over SD and WI identified correctly",
+            "points": 1,
+            "accepted": [
+              "1031 mb",
+              "996 mb",
+              "103100 Pa",
+              "99600 Pa"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Pressure difference calculated correctly",
+            "points": 1,
+            "accepted": [
+              "3500"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Distance converted to meters correctly",
+            "points": 1,
+            "accepted": [
+              "1126300"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Final pressure gradient value",
+            "points": 1,
+            "accepted": [
+              "3.1e-3",
+              "0.0031",
+              "3.1E-3"
+            ]
+          }
+        ]
+      },
+      "q50": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Closer to WI",
+            "points": 1,
+            "accepted": [
+              "WI",
+              "Wisconsin",
+              "closer to WI"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Isobars are tightly packed near low pressure",
+            "points": 1,
+            "accepted": [
+              "isobars are much more tightly packed",
+              "pressure changing more rapidly"
+            ]
+          }
+        ]
+      },
+      "q51": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "High pressure inhibits convection/little to no clouds",
+            "points": 2,
+            "accepted": [
+              "little to none",
+              "high pressure inhibiting convection"
+            ]
+          }
+        ]
+      },
+      "q52": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "GA-FL area",
+            "points": 1,
+            "accepted": [
+              "GA-FL",
+              "Georgia-Florida",
+              "GA-FL area"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Winds flow counterclockwise around low",
+            "points": 1,
+            "accepted": [
+              "CCW",
+              "counterclockwise"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Winds flowing into region with cold front",
+            "points": 1,
+            "accepted": [
+              "winds are flowing into this region with the cold front"
+            ]
+          }
+        ]
+      },
+      "q53": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "New York",
+            "points": 2,
+            "accepted": [
+              "New York",
+              "NY"
+            ]
+          }
+        ]
+      },
+      "q54": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Intensifying",
+            "points": 1,
+            "accepted": [
+              "intensifying"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Warm front is small / characteristic of growing cyclone",
+            "points": 1,
+            "accepted": [
+              "warm front is very small",
+              "state of the occluded front is characteristic of a growing cyclone"
+            ]
+          }
+        ]
+      },
+      "q55": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "cP from central Canada",
+            "points": 1,
+            "accepted": [
+              "cP",
+              "continental polar",
+              "central Canada"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "mP from Atlantic ocean",
+            "points": 1,
+            "accepted": [
+              "mP",
+              "maritime polar",
+              "Atlantic ocean"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "mT from Atlantic ocean",
+            "points": 1,
+            "accepted": [
+              "mT",
+              "maritime tropical"
+            ]
+          }
+        ]
+      },
+      "q56": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Pressure trough",
+            "points": 1,
+            "accepted": [
+              "Pressure trough",
+              "trough"
+            ]
+          }
+        ]
+      },
+      "q57": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Dry line",
+            "points": 1,
+            "accepted": [
+              "Dry line",
+              "dryline"
+            ]
+          }
+        ]
+      },
+      "q58": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Meridional",
+            "points": 1,
+            "accepted": [
+              "Meridional"
+            ]
+          }
+        ]
+      },
+      "q59": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "East coast / NE",
+            "points": 1,
+            "accepted": [
+              "East coast",
+              "NE",
+              "Northeast"
+            ]
+          }
+        ]
+      },
+      "q60": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Under a trough",
+            "points": 2,
+            "accepted": [
+              "Under a trough",
+              "trough"
+            ]
+          }
+        ]
+      },
+      "q61": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Trough over ID, MT, UT, AZ",
+            "points": 1,
+            "accepted": [
+              "ID, MT, UT, AZ"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Trough is positively tilted",
+            "points": 1,
+            "accepted": [
+              "positively tilted"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Trough over Atlantic Ocean/NE US",
+            "points": 1,
+            "accepted": [
+              "Atlantic Ocean/NE US"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Atlantic/NE US trough is negatively tilted",
+            "points": 1,
+            "accepted": [
+              "negatively tilted"
+            ]
+          },
+          {
+            "id": "c5",
+            "answer": "Ridge over ND, SD, NE, KS, OK",
+            "points": 1,
+            "accepted": [
+              "ND, SD, NE, KS, OK"
+            ]
+          },
+          {
+            "id": "c6",
+            "answer": "Ridge is positively tilted",
+            "points": 1,
+            "accepted": [
+              "positively tilted"
+            ]
+          }
+        ]
+      },
+      "q62": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "New York area",
+            "points": 1,
+            "accepted": [
+              "New York area",
+              "NY"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Cyclonic curvature / higher vorticity flow toward East Coast",
+            "points": 1,
+            "accepted": [
+              "cyclonic curvature is strong",
+              "higher vorticity air toward the East Coast"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Favors ascent / supports surface low",
+            "points": 1,
+            "accepted": [
+              "favoring ascent and supporting the surface low"
+            ]
+          }
+        ]
+      },
+      "q63": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "A: Rain",
+            "points": 0.5,
+            "accepted": [
+              "Rain"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "B: Snow",
+            "points": 0.5,
+            "accepted": [
+              "Snow"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "C: Sleet",
+            "points": 0.5,
+            "accepted": [
+              "Sleet"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "D: Freezing Rain",
+            "points": 0.5,
+            "accepted": [
+              "Freezing Rain"
+            ]
+          }
+        ]
+      },
+      "q64": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "12.8 C",
+            "points": 0.5,
+            "accepted": [
+              "12.8 C",
+              "12.8"
+            ]
+          }
+        ]
+      },
+      "q65": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "43 F",
+            "points": 0.5,
+            "accepted": [
+              "43 F",
+              "43"
+            ]
+          }
+        ]
+      },
+      "q66": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "100%",
+            "points": 0.5,
+            "accepted": [
+              "100%",
+              "100"
+            ]
+          }
+        ]
+      },
+      "q67": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "74.8 mph",
+            "points": 1,
+            "accepted": [
+              "74.8 mph",
+              "74.8"
+            ]
+          }
+        ]
+      },
+      "q68": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "996 mb",
+            "points": 0.5,
+            "accepted": [
+              "996 mb",
+              "996"
+            ]
+          }
+        ]
+      },
+      "q69": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "998 mb",
+            "points": 1,
+            "accepted": [
+              "998 mb",
+              "998"
+            ]
+          }
+        ]
+      },
+      "q70": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Cb",
+            "points": 1,
+            "accepted": [
+              "Cb",
+              "Cumulonimbus"
+            ]
+          }
+        ]
+      },
+      "q71": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Ci",
+            "points": 1,
+            "accepted": [
+              "Ci",
+              "Cirrus"
+            ]
+          }
+        ]
+      },
+      "q72": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Moderate",
+            "points": 1,
+            "accepted": [
+              "Moderate"
+            ]
+          }
+        ]
+      },
+      "q73": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "30th, 16:51",
+            "points": 1,
+            "accepted": [
+              "30th, 16:51",
+              "30 16:51"
+            ]
+          }
+        ]
+      },
+      "q74": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "220 degrees (SW), sustained 20.7 mph, gusts 32.2 mph",
+            "points": 1,
+            "accepted": [
+              "220 degrees",
+              "SW",
+              "20.7 mph",
+              "32.2 mph",
+              "18 knots",
+              "28 knots"
+            ]
+          }
+        ]
+      },
+      "q75": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "10 statute miles",
+            "points": 1,
+            "accepted": [
+              "10 statute miles",
+              "10 SM",
+              "10 miles"
+            ]
+          }
+        ]
+      },
+      "q76": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Broken: 2000 ft",
+            "points": 1,
+            "accepted": [
+              "2000 ft",
+              "2000"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Overcast: 7000 ft",
+            "points": 1,
+            "accepted": [
+              "7000 ft",
+              "7000"
+            ]
+          }
+        ]
+      },
+      "q77": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Temperature: 12 C",
+            "points": 1,
+            "accepted": [
+              "12 C",
+              "12"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Dew Point: 9 C",
+            "points": 1,
+            "accepted": [
+              "9 C",
+              "9"
+            ]
+          }
+        ]
+      },
+      "q78": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "29.92 inHg",
+            "points": 2,
+            "accepted": [
+              "29.92 inHg",
+              "29.92"
+            ]
+          }
+        ]
+      },
+      "q79": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "1013.4 hPa",
+            "points": 2,
+            "accepted": [
+              "1013.4 hPa",
+              "1013.4"
+            ]
+          }
+        ]
+      }
+    },
+    "questionCount": 79,
+    "maxScore": 103.0,
+    "paperUrl": "/practice/scioly-3hibgzfldje-b/test.pdf",
+    "keyUrl": "/practice/scioly-3hibgzfldje-b/key.pdf",
+    "supplementUrl": "/practice/scioly-3hibgzfldje-b/images.pdf"
   }
 ]
