@@ -5,6 +5,7 @@ their source hashes, review approval, answer coverage, and catalog shape.
 """
 
 import argparse
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -14,7 +15,10 @@ IMPORTER = ROOT / 'scripts' / 'import-batch-converter-exports.py'
 
 
 def run(*args):
-    return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=True)
+    executable = shutil.which(args[0])
+    if not executable:
+        raise ValueError(f'{args[0]} is required to publish approved tests.')
+    return subprocess.run((executable, *args[1:]), cwd=ROOT, text=True, capture_output=True, check=True)
 
 
 def clean_checkout():
