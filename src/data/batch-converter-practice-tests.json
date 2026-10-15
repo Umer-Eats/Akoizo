@@ -3382,5 +3382,1794 @@
     "maxScore": 46.0,
     "paperUrl": "/practice/scioly-pwzfkrh8qli-b/test.pdf",
     "keyUrl": "/practice/scioly-pwzfkrh8qli-b/key.pdf"
+  },
+  {
+    "sourceUrl": "https://scioly.org/tests/8Jq9a0W_KdU",
+    "division": "B",
+    "eventId": "remote-sensing",
+    "competition": "North Carolina State University Invitational",
+    "year": 2026,
+    "level": null,
+    "season": 2027,
+    "difficulty": "Medium",
+    "difficultyReason": "Comprehensive set of 64 questions covering satellite platforms, bands, electromagnetic physics, and image interpretation appropriate for Division B Remote Sensing.",
+    "topics": [
+      "Remote Sensing Principles",
+      "Orbits and Sensors",
+      "Landsat and MODIS",
+      "Vegetation Indices",
+      "Radar and Lidar",
+      "Topographic Maps"
+    ],
+    "topicMatch": "unverified",
+    "alignment": "Topics extracted from the paper. Compatibility with the 2027 rules still requires separate verification.",
+    "scoringBasis": "Standard Science Olympiad Test Scoring (64 questions, point totals specified per question)",
+    "instructions": "DO NOT WRITE ON THIS TEST. Open this booklet when the event leader starts time.",
+    "id": "scioly-8jq9a0w-kdu-b",
+    "sourceId": "8Jq9a0W_KdU",
+    "reviewedOn": "2026-10-15",
+    "gradingMode": "published-key",
+    "minutes": 50,
+    "rulesUrl": "/rules/2027/b/remote-sensing.pdf",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "q1",
+        "page": 2,
+        "prompt": "What is remote sensing? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q1",
+        "context": "Question 1 on page 2."
+      },
+      {
+        "id": "q2",
+        "page": 2,
+        "prompt": "Match each term with its correct definition (5 pts):\n\nA. Radar\nB. Scatterometer\nC. Sounder\nD. Lidar\nE. Laser altimeter\n\nDefinitions:\n1. A sensor that measures atmospheric conditions vertically by detecting or emitting signals to analyze properties such as temperature or humidity at different heights.\n2. A system that determines distance using light impulses and calculates target location by multiplying travel time by the speed of light.\n3. A device that measures elevation using lidar technology.\n4. A sensor that uses radio signals to measure distance by emitting impulses and detecting the energy that scatters back from an obstacle.\n5. A device designed to measure the amount of backscattered radiation.",
+        "type": "frq",
+        "points": 5,
+        "label": "Question q2",
+        "context": "Question 2 on page 2."
+      },
+      {
+        "id": "q3",
+        "page": 2,
+        "prompt": "What does ALI stand for? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q3",
+        "context": "Question 3 on page 2.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Airborne Light Imager"
+          },
+          {
+            "id": "B",
+            "text": "Advanced Land Imager"
+          },
+          {
+            "id": "C",
+            "text": "Atmospheric Luminance Instrument"
+          },
+          {
+            "id": "D",
+            "text": "Active Laser Interferometer"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q4",
+        "page": 3,
+        "prompt": "Which of the following types of data is NOT provided by NASA’s TERRA satellite? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q4",
+        "context": "Question 4 on page 3.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Land surface temperature and vegetation cover"
+          },
+          {
+            "id": "B",
+            "text": "Atmospheric pollution and cloud properties"
+          },
+          {
+            "id": "C",
+            "text": "Ocean color and sea surface temperature"
+          },
+          {
+            "id": "D",
+            "text": "Interior structure of the Earth’s crust"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q5",
+        "page": 3,
+        "prompt": "Give the ranges in kilometers for each of the following orbits (3 pts):\n- Low-Earth: ___a____ to ____b___ above Earth\n- Medium-Earth: _____c____ to ______d____ above Earth\n- High-Earth: ______e______ above Earth",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q5",
+        "context": "Question 5 on page 3."
+      },
+      {
+        "id": "q6",
+        "page": 3,
+        "prompt": "Which of the following correctly explains why Sun-synchronous polar-orbiting platforms like NASA’s Aqua are valuable for climate monitoring? (2 pt)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q6",
+        "context": "Question 6 on page 3.",
+        "options": [
+          {
+            "id": "A",
+            "text": "They remain fixed above one location, allowing continuous observation of regional weather systems."
+          },
+          {
+            "id": "B",
+            "text": "They orbit at the same altitude as geostationary platforms, enabling high temporal resolution."
+          },
+          {
+            "id": "C",
+            "text": "They pass over the same location at the same solar time each orbit, ensuring consistent lighting conditions for global, repeatable observations."
+          },
+          {
+            "id": "D",
+            "text": "They orbit only over the equator, minimizing atmospheric distortion in data collection."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q7",
+        "page": 3,
+        "prompt": "During a major cyclone, thick clouds cover a river basin for several days. You must map the flood extent over a large area.\n- Would you choose a passive optical sensor (visible/NIR/SWIR) or an active microwave (SAR) sensor? (1 pt)\n- Name the relevant part(s) of the electromagnetic spectrum and give two reasons for your choice grounded in the physics of EM waves–surface/atmosphere interaction. (4 pts)",
+        "type": "frq",
+        "points": 5,
+        "label": "Question q7",
+        "context": "Question 7 on page 3."
+      },
+      {
+        "id": "q8",
+        "page": 4,
+        "prompt": "Which of these is an active EM sensor? (1 pt)",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q8",
+        "context": "Question 8 on page 4.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Spectrometer"
+          },
+          {
+            "id": "b",
+            "text": "Accelerometer"
+          },
+          {
+            "id": "c",
+            "text": "Hyperspectral Radiometer"
+          },
+          {
+            "id": "d",
+            "text": "Radar"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q9",
+        "page": 4,
+        "prompt": "A satellite image shows surface reflectance of a crop field: Red = 0.18, NIR = 0.62.\n(a) Compute NDVI. (1 pt)\n(b) Briefly interpret the value in terms of vegetation condition. (2 pt)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q9",
+        "context": "Question 9 on page 4."
+      },
+      {
+        "id": "q10",
+        "page": 4,
+        "prompt": "Which is not a satellite? (1 pt)",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q10",
+        "context": "Question 10 on page 4.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Aqua"
+          },
+          {
+            "id": "b",
+            "text": "SeaWiFS"
+          },
+          {
+            "id": "c",
+            "text": "Cloudsat"
+          },
+          {
+            "id": "d",
+            "text": "Terra"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q11",
+        "page": 4,
+        "prompt": "Which type of orbit is best for real-time weather monitoring, and why? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q11",
+        "context": "Question 11 on page 4."
+      },
+      {
+        "id": "q12",
+        "page": 4,
+        "prompt": "Which instrument type (optical scanner, multispectral imager, radiometer, or radar altimeter) is best for measuring sea surface height, and why can’t an optical sensor do this? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q12",
+        "context": "Question 12 on page 4."
+      },
+      {
+        "id": "q13",
+        "page": 4,
+        "prompt": "Give one advantage of a pushbroom scanner over a whiskbroom scanner in satellite imaging. (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q13",
+        "context": "Question 13 on page 4."
+      },
+      {
+        "id": "q14",
+        "page": 4,
+        "prompt": "What is the compass bearing for an Azimuth of 212°? Answer in quadrant bearing. (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q14",
+        "context": "Question 14 on page 4."
+      },
+      {
+        "id": "q15",
+        "page": 5,
+        "prompt": "What causes the large green crop circles seen in satellite images taken by Landsat TM of southern Alberta? (Tiebreaker Question #1)",
+        "type": "frq",
+        "points": 4,
+        "label": "Question q15",
+        "context": "Question 15 on page 5 with image of crop circles."
+      },
+      {
+        "id": "q16",
+        "page": 5,
+        "prompt": "Why are there no Landsat bands in the 1400 and 1900 nm areas of the spectrum? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q16",
+        "context": "Question 16 on page 5, referencing atmospheric transmission graph."
+      },
+      {
+        "id": "q17",
+        "page": 5,
+        "prompt": "Which Landsat sensor was the first to include a widely used thermal infrared band, and at approximately what wavelength does it operate? (4 pts)",
+        "type": "frq",
+        "points": 4,
+        "label": "Question q17",
+        "context": "Question 17 on page 5."
+      },
+      {
+        "id": "q18",
+        "page": 6,
+        "prompt": "What is one improvement that Landsat OLI has compared to the older MSS sensor? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q18",
+        "context": "Question 18 on page 6."
+      },
+      {
+        "id": "q19",
+        "page": 6,
+        "prompt": "Which Landsat band(s) would be most appropriate for distinguishing snow from clouds, and why? (3 pt)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q19",
+        "context": "Question 19 on page 6."
+      },
+      {
+        "id": "q20",
+        "page": 6,
+        "prompt": "Why are the thermal bands shown far to the right of the chart, past 10,000 nm? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q20",
+        "context": "Question 20 on page 6."
+      },
+      {
+        "id": "q21",
+        "page": 6,
+        "prompt": "The three MODIS chlorophyll maps below were produced using different processing methods. In the boxed coastal region, the left image (OC3) shows much higher chlorophyll values than the right image (SWIR). Which of the following best explains why the OC3 method overestimates chlorophyll in this area? (2 pts) (Tiebreaker Question #2)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q21",
+        "context": "Question 21 on page 6 with MODIS chlorophyll maps.",
+        "options": [
+          {
+            "id": "A",
+            "text": "OC3 cannot detect chlorophyll in shallow water."
+          },
+          {
+            "id": "B",
+            "text": "The OC3 algorithm uses visible blue-green bands, which are strongly affected by sediment and dissolved organic matter near the coast."
+          },
+          {
+            "id": "C",
+            "text": "The SWIR method removes chlorophyll signals, so it shows lower values everywhere."
+          },
+          {
+            "id": "D",
+            "text": "The OBPG Level-2 product is the only one that measures real chlorophyll concentration; the others are false-color images."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q22",
+        "page": 8,
+        "prompt": "Which areas in the Modesto image likely correspond to farmland, and which to urban land? Explain using color and evapotranspiration clues. (4 pts)",
+        "type": "frq",
+        "points": 4,
+        "label": "Question q22",
+        "context": "Question 22 on page 8, referring to Modesto ETa map on page 7."
+      },
+      {
+        "id": "q23",
+        "page": 8,
+        "prompt": "Landsat uses a thermal infrared sensor to estimate ETa. Describe what warmer vs. cooler surface temperatures indicate about water use. (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q23",
+        "context": "Question 23 on page 8."
+      },
+      {
+        "id": "q24",
+        "page": 8,
+        "prompt": "Explain why vegetated farmland shows higher ETa than bare or urban land, in terms of the surface energy balance. (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q24",
+        "context": "Question 24 on page 8."
+      },
+      {
+        "id": "q25",
+        "page": 8,
+        "prompt": "Landsat’s pixel size is 30 meters. Why is this spatial resolution useful for monitoring individual agricultural fields? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q25",
+        "context": "Question 25 on page 8."
+      },
+      {
+        "id": "q26",
+        "page": 8,
+        "prompt": "How can satellite-based ETa maps help farmers in drought-prone regions manage irrigation? (3 pts)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q26",
+        "context": "Question 26 on page 8."
+      },
+      {
+        "id": "q27",
+        "page": 8,
+        "prompt": "Landsat Next will collect thermal data more frequently and at higher resolution. Explain how this improves environmental monitoring. (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q27",
+        "context": "Question 27 on page 8."
+      },
+      {
+        "id": "q28",
+        "page": 9,
+        "prompt": "Identify the indicated area (1 pt each)\n1. ____________________\n2. ____________________\n3. ____________________",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q28",
+        "context": "Question 28 on page 9 with topographic map."
+      },
+      {
+        "id": "q29",
+        "page": 9,
+        "prompt": "When there are large amounts of smoke or dust (aerosols) in the atmosphere, how does this most likely affect satellite images taken in the visible spectrum? (1 pt)",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q29",
+        "context": "Question 29 on page 9.",
+        "options": [
+          {
+            "id": "A",
+            "text": "The images become brighter because more sunlight reaches the surface."
+          },
+          {
+            "id": "B",
+            "text": "The images appear blurrier or hazier because particles scatter sunlight."
+          },
+          {
+            "id": "C",
+            "text": "The surface looks warmer because aerosols trap heat."
+          },
+          {
+            "id": "D",
+            "text": "The resolution of the satellite sensor decreases permanently."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q30",
+        "page": 10,
+        "prompt": "Two fields appear side-by-side in a Landsat thermal image. Field A has a high albedo (light color) and Field B has a low albedo (dark color). Which statement correctly describes their surface temperatures? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q30",
+        "context": "Question 30 on page 10.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Field A will likely be cooler than Field B because it reflects more sunlight."
+          },
+          {
+            "id": "B",
+            "text": "Field A will likely be warmer than Field B because it absorbs more energy."
+          },
+          {
+            "id": "C",
+            "text": "Both fields will have the same surface temperature because albedo doesn’t affect heat."
+          },
+          {
+            "id": "D",
+            "text": "The darker field will scatter more light, reducing its temperature."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q31",
+        "page": 10,
+        "prompt": "A research team compares two Landsat 8 time-series datasets of farmland from June and September.\nThey analyze three bands:\n- Red (0.64–0.67 µm)\n- Near-Infrared (NIR, 0.85–0.88 µm)\n- Shortwave Infrared (SWIR, 1.57–1.65 µm)\nThey find that from June to September:\n- NIR reflectance decreases\n- Red reflectance increases slightly\n- SWIR reflectance increases significantly\nWhich of the following best explains the environmental change that occurred in these fields? (3 pts) (Tiebreaker Question #3)",
+        "type": "mcq",
+        "points": 3,
+        "label": "Question q31",
+        "context": "Question 31 on page 10.",
+        "options": [
+          {
+            "id": "A",
+            "text": "The plants grew more vigorously and absorbed less sunlight, indicating a healthy crop."
+          },
+          {
+            "id": "B",
+            "text": "The soil became wetter after irrigation, reducing reflectance in all infrared bands."
+          },
+          {
+            "id": "C",
+            "text": "Vegetation dried and thinned, causing more reflected SWIR and Red and less NIR as water content decreased."
+          },
+          {
+            "id": "D",
+            "text": "Atmospheric haze increased, artificially lowering the NIR signal while leaving SWIR unchanged."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q32",
+        "page": 11,
+        "prompt": "What does MODIS stand for? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q32",
+        "context": "Question 32 on page 11."
+      },
+      {
+        "id": "q33",
+        "page": 11,
+        "prompt": "For MODIS, which bands are used to make a true-color image? (3 pts)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q33",
+        "context": "Question 33 on page 11."
+      },
+      {
+        "id": "q34",
+        "page": 11,
+        "prompt": "Fill in the blank: Passive remote sensors measure radiant energy _________ by the Earth’s atmosphere system. (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q34",
+        "context": "Question 34 on page 11."
+      },
+      {
+        "id": "q35",
+        "page": 11,
+        "prompt": "The radar image above shows a grainy “salt-and-pepper” texture known as speckle. Speckle occurs in Synthetic Aperture Radar (SAR) images because each radar pixel records the combined return from many small surface scatterers (rocks, buildings, vegetation).\nWhich statement best explains the nature of radar speckle and how scientists reduce its effect? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q35",
+        "context": "Question 35 on page 11 with SAR radar image.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Speckle is caused by random noise in the radar instrument; it can be removed completely by increasing radar power."
+          },
+          {
+            "id": "B",
+            "text": "Speckle results from constructive and destructive interference of radar waves from many scatterers within one pixel; it can be reduced by averaging multiple looks or using filters."
+          },
+          {
+            "id": "C",
+            "text": "Speckle appears when the radar wavelength is shorter than visible light; it disappears if the satellite switches to optical imaging."
+          },
+          {
+            "id": "D",
+            "text": "Speckle indicates areas of strong backscatter due to metallic objects; bright speckles always mark man-made surfaces."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q36",
+        "page": 12,
+        "prompt": "What does the term “albedo” refer to? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q36",
+        "context": "Question 36 on page 12."
+      },
+      {
+        "id": "q37",
+        "page": 12,
+        "prompt": "A. B.\nWhat are processes A and B formally known as? (1 pt each)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q37",
+        "context": "Question 37 on page 12 with classification flowchart diagrams labeled A and B."
+      },
+      {
+        "id": "q38",
+        "page": 12,
+        "prompt": "What are the two most commonly used geographic systems? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q38",
+        "context": "Question 38 on page 12."
+      },
+      {
+        "id": "q39",
+        "page": 12,
+        "prompt": "What was the Terra satellite originally known as? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q39",
+        "context": "Question 39 on page 12."
+      },
+      {
+        "id": "q40",
+        "page": 13,
+        "prompt": "What instrument was used to make this image? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q40",
+        "context": "Question 40 on page 13 with 3D forest canopy point cloud image."
+      },
+      {
+        "id": "q41",
+        "page": 13,
+        "prompt": "What do each of the dots in the image represent? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q41",
+        "context": "Question 41 on page 13."
+      },
+      {
+        "id": "q42",
+        "page": 13,
+        "prompt": "What is the most significant natural source of aerosols? (1 pt)",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question q42",
+        "context": "Question 42 on page 13.",
+        "options": [
+          {
+            "id": "a",
+            "text": "The ocean"
+          },
+          {
+            "id": "b",
+            "text": "Volcanoes"
+          },
+          {
+            "id": "c",
+            "text": "Wind"
+          },
+          {
+            "id": "d",
+            "text": "Wildfire"
+          },
+          {
+            "id": "e",
+            "text": "None of the above"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q43",
+        "page": 14,
+        "prompt": "What is the diagonal white line at the top right of the image?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q43",
+        "context": "Question 43 on page 14 using the satellite image."
+      },
+      {
+        "id": "q44",
+        "page": 14,
+        "prompt": "Was Landsat 5 a low, medium, or high Earth orbit satellite?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q44",
+        "context": "Question 44 on page 14."
+      },
+      {
+        "id": "q45",
+        "page": 14,
+        "prompt": "What sensors did Landsat 5 have?",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q45",
+        "context": "Question 45 on page 14."
+      },
+      {
+        "id": "q46",
+        "page": 14,
+        "prompt": "List and define the four spectral classes of optical remote sensing systems. (8 pts) (Tiebreaker #4)",
+        "type": "frq",
+        "points": 8,
+        "label": "Question q46",
+        "context": "Question 46 on page 14."
+      },
+      {
+        "id": "q47",
+        "page": 14,
+        "prompt": "When the atmosphere contains a high concentration of aerosols (for example, after wildfires), how would this most likely affect a visible-light satellite image of Earth’s surface? (3 pts)",
+        "type": "mcq",
+        "points": 3,
+        "label": "Question q47",
+        "context": "Question 47 on page 14.",
+        "options": [
+          {
+            "id": "A",
+            "text": "The image becomes brighter and clearer because aerosols reflect more sunlight."
+          },
+          {
+            "id": "B",
+            "text": "The image appears hazier and less detailed because scattered light reduces surface contrast."
+          },
+          {
+            "id": "C",
+            "text": "The image shows warmer temperatures due to increased surface heating."
+          },
+          {
+            "id": "D",
+            "text": "The image becomes sharper since aerosols filter out unwanted wavelengths."
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q48",
+        "page": 15,
+        "prompt": "What is the name of the scientist who first proposed the astronomical theory for climate change? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q48",
+        "context": "Question 48 on page 15."
+      },
+      {
+        "id": "q49",
+        "page": 15,
+        "prompt": "The marginal information of a topographic or satellite map usually includes which of the following? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q49",
+        "context": "Question 49 on page 15.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Only the latitude and longitude of the map center"
+          },
+          {
+            "id": "B",
+            "text": "Aerial photograph of the area at high resolution"
+          },
+          {
+            "id": "C",
+            "text": "Contour lines and symbols for elevation"
+          },
+          {
+            "id": "D",
+            "text": "Metadata such as scale, legend, title, date, and projection information"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q50",
+        "page": 15,
+        "prompt": "A Landsat image has a scale of 1:100,000. If two towns are 5 cm apart in the image, what is their actual distance on the ground? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q50",
+        "context": "Question 50 on page 15."
+      },
+      {
+        "id": "q51",
+        "page": 15,
+        "prompt": "Which satellite sensor and band combination would best detect active lava flows during a volcanic eruption? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q51",
+        "context": "Question 51 on page 15.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Landsat TM Band 3 (red, 0.63–0.69 µm)"
+          },
+          {
+            "id": "B",
+            "text": "MODIS thermal IR (3.9 µm and 11 µm)"
+          },
+          {
+            "id": "C",
+            "text": "Sentinel-2 green band (0.56 µm)"
+          },
+          {
+            "id": "D",
+            "text": "Landsat OLI coastal/aerosol band (0.43 µm)"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q52",
+        "page": 15,
+        "prompt": "Which of the following satellites or instruments listed below would be most useful for creating a global digital elevation model (DEM)? (2 pts)",
+        "type": "mcq",
+        "points": 2,
+        "label": "Question q52",
+        "context": "Question 52 on page 15.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Terra (MODIS instrument)"
+          },
+          {
+            "id": "B",
+            "text": "Sentinel-2 (multispectral optical imaging)"
+          },
+          {
+            "id": "C",
+            "text": "Shuttle Radar Topography Mission (SRTM)"
+          },
+          {
+            "id": "D",
+            "text": "Landsat 9 (OLI sensor)"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q53",
+        "page": 16,
+        "prompt": "What does the term “climate noise” refer to? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q53",
+        "context": "Question 53 on page 16."
+      },
+      {
+        "id": "q54",
+        "page": 16,
+        "prompt": "Which Landsat TM band is most useful for assessing vegetation health and biomass by detecting near-infrared reflectance from plant leaves? (3 pts)",
+        "type": "mcq",
+        "points": 3,
+        "label": "Question q54",
+        "context": "Question 54 on page 16.",
+        "options": [
+          {
+            "id": "A",
+            "text": "TM 2 (green)"
+          },
+          {
+            "id": "B",
+            "text": "TM 3 (red)"
+          },
+          {
+            "id": "C",
+            "text": "TM 4 (near infrared)"
+          },
+          {
+            "id": "D",
+            "text": "TM 7 (shortwave infrared)"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q55",
+        "page": 16,
+        "prompt": "If a scientist wants to map coastal regions and shallow water depth (bathymetry), which TM band would provide the most useful data? (3 pts)",
+        "type": "mcq",
+        "points": 3,
+        "label": "Question q55",
+        "context": "Question 55 on page 16.",
+        "options": [
+          {
+            "id": "A",
+            "text": "TM 1 (blue)"
+          },
+          {
+            "id": "B",
+            "text": "TM 3 (red)"
+          },
+          {
+            "id": "C",
+            "text": "TM 5 (shortwave IR)"
+          },
+          {
+            "id": "D",
+            "text": "TM 6 (thermal IR)"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q56",
+        "page": 16,
+        "prompt": "A Landsat image shows areas of low reflectance in the near IR (TM 4) and high brightness in the thermal IR (TM 6). What does this combination most likely indicate? (3 pts)",
+        "type": "mcq",
+        "points": 3,
+        "label": "Question q56",
+        "context": "Question 56 on page 16.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Healthy, dense vegetation"
+          },
+          {
+            "id": "B",
+            "text": "Vegetation stress or drought conditions"
+          },
+          {
+            "id": "C",
+            "text": "Cloud cover interference"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q57",
+        "page": 17,
+        "prompt": "What does OLI stand for? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q57",
+        "context": "Question 57 on page 17, using OLI image of the northern Caspian sea."
+      },
+      {
+        "id": "q58",
+        "page": 17,
+        "prompt": "What type of scanner is OLI-1? (1 pt)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question q58",
+        "context": "Question 58 on page 17."
+      },
+      {
+        "id": "q59",
+        "page": 17,
+        "prompt": "What satellite does OLI-1 fly on? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q59",
+        "context": "Question 59 on page 17."
+      },
+      {
+        "id": "q60",
+        "page": 17,
+        "prompt": "The northern areas of the Caspian Sea are more prone to freezing in wintertime. Why? (3 pts) (Tiebreaker #5)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question q60",
+        "context": "Question 60 on page 17."
+      },
+      {
+        "id": "q61",
+        "page": 17,
+        "prompt": "The National Land Cover Database (NLCD) provides standardized land cover maps for the contiguous United States (CONUS). What type of information does it primarily show? (3 pts)",
+        "type": "mcq",
+        "points": 3,
+        "label": "Question q61",
+        "context": "Question 61 on page 17.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elevation and terrain slope"
+          },
+          {
+            "id": "B",
+            "text": "Land cover categories such as forest, urban, water, grassland, and agriculture"
+          },
+          {
+            "id": "C",
+            "text": "Air temperature and humidity patterns"
+          },
+          {
+            "id": "D",
+            "text": "Ocean salinity and wave height"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "q62",
+        "page": 18,
+        "prompt": "When radar waves strike a surface, the return signal can be measured in different polarizations (HH, HV, VH, VV). Why might a cross-polarized (HV or VH) return be stronger over a forest canopy than over smooth open water? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q62",
+        "context": "Question 62 on page 18."
+      },
+      {
+        "id": "q63",
+        "page": 18,
+        "prompt": "A satellite sensor with an 8-bit radiometric resolution can record 256 levels of brightness. If a newer sensor increases this to 12 bits, how many distinct intensity levels can it detect? (2 pts)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q63",
+        "context": "Question 63 on page 18."
+      },
+      {
+        "id": "q64",
+        "page": 18,
+        "prompt": "A topographic map uses a UTM coordinate grid, with easting = 500 000 m E and northing = 4 000 000 m N. What projection system is UTM based on, and why is it preferred for remote-sensing imagery over large areas? (2 pts) (Tiebreaker #6)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question q64",
+        "context": "Question 64 on page 18."
+      }
+    ],
+    "keys": {
+      "q1": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Remote sensing is obtaining information about an object from a distance, usually using satellites or aircrafts to detect and measure reflected and emitted radiation, OR a set of techniques used to collect information about an area or object (a target) without being in physical contact with that target.",
+            "points": 1,
+            "accepted": [
+              "obtaining information about an object from a distance",
+              "detect and measure reflected and emitted radiation",
+              "collect information about an area or object without being in physical contact"
+            ]
+          }
+        ]
+      },
+      "q2": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "A-4, B-5, C-1, D-2, E-3",
+            "points": 5,
+            "accepted": [
+              "A-4, B-5, C-1, D-2, E-3",
+              "4, 5, 1, 2, 3"
+            ]
+          }
+        ]
+      },
+      "q3": {
+        "correctOption": "B"
+      },
+      "q4": {
+        "correctOption": "D"
+      },
+      "q5": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Give ranges for LEO, MEO, HEO. Give one point for each orbit correct, half a point if one of the min or maxs are wrong.",
+            "points": 3,
+            "accepted": [
+              "160 to 2000",
+              "2000 to 35500",
+              "35500",
+              "35786"
+            ]
+          }
+        ]
+      },
+      "q6": {
+        "correctOption": "C"
+      },
+      "q7": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "SAR / microwave",
+            "points": 1,
+            "accepted": [
+              "SAR",
+              "microwave"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Cloud penetration, day/night active illumination, water = low backscatter",
+            "points": 4,
+            "accepted": [
+              "cloud-penetration",
+              "day/night active illumination",
+              "water = low backscatter"
+            ]
+          }
+        ]
+      },
+      "q8": {
+        "correctOption": "d"
+      },
+      "q9": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "0.55",
+            "points": 1,
+            "accepted": [
+              "0.55",
+              ".55"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Healthy, actively photosynthesizing vegetation",
+            "points": 2,
+            "accepted": [
+              "healthy",
+              "actively photosynthesizing vegetation",
+              "vigorous"
+            ]
+          }
+        ]
+      },
+      "q10": {
+        "correctOption": "b"
+      },
+      "q11": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Geostationary orbit (GEO)",
+            "points": 1,
+            "accepted": [
+              "geostationary",
+              "geo"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "stays over the same point on Earth and provides continuous, high-frequency images",
+            "points": 1,
+            "accepted": [
+              "continuous",
+              "stays over same point",
+              "high-frequency"
+            ]
+          }
+        ]
+      },
+      "q12": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Radar altimeter",
+            "points": 1,
+            "accepted": [
+              "radar altimeter"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "measures time delay of microwave pulses / optical sensors can't penetrate clouds and measure distance",
+            "points": 1,
+            "accepted": [
+              "time delay",
+              "microwave",
+              "optical sensors can't penetrate clouds"
+            ]
+          }
+        ]
+      },
+      "q13": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "no moving mirror, less geometric distortion, or longer dwell time / better SNR",
+            "points": 2,
+            "accepted": [
+              "no moving mirror",
+              "less geometric distortion",
+              "longer dwell time",
+              "better SNR"
+            ]
+          }
+        ]
+      },
+      "q14": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "South 32 °West",
+            "points": 1,
+            "accepted": [
+              "South 32 °West",
+              "S 32 W",
+              "S32W"
+            ]
+          }
+        ]
+      },
+      "q15": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "pivot irrigation systems",
+            "points": 2,
+            "accepted": [
+              "pivot irrigation",
+              "center pivot"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "green areas show healthy irrigated crops, corners/brown are unwatered",
+            "points": 2,
+            "accepted": [
+              "healthy irrigated crops",
+              "corners dry",
+              "unwatered zones"
+            ]
+          }
+        ]
+      },
+      "q16": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Water vapor in the atmosphere blocks out most of the light in those wavelengths",
+            "points": 2,
+            "accepted": [
+              "water vapor",
+              "atmospheric absorption",
+              "water absorption"
+            ]
+          }
+        ]
+      },
+      "q17": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Landsat TM / Thematic Mapper",
+            "points": 2,
+            "accepted": [
+              "Landsat TM",
+              "Thematic Mapper",
+              "TM"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "10.4-12.5 um",
+            "points": 2,
+            "accepted": [
+              "10.4-12.5",
+              "10.4–12.5 µm",
+              "Band 6"
+            ]
+          }
+        ]
+      },
+      "q18": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "OLI has more bands, coastal/aerosol band, SWIR bands",
+            "points": 1,
+            "accepted": [
+              "more bands",
+              "coastal/aerosol band",
+              "SWIR bands"
+            ]
+          }
+        ]
+      },
+      "q19": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "SWIR bands",
+            "points": 1,
+            "accepted": [
+              "SWIR",
+              "Band 6",
+              "Band 7"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "snow has low reflectance in SWIR while clouds remain highly reflective",
+            "points": 2,
+            "accepted": [
+              "snow low reflectance in SWIR",
+              "clouds reflective in SWIR"
+            ]
+          }
+        ]
+      },
+      "q20": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "measure heat energy Earth gives off, not reflected sunlight, long-wavelength infrared",
+            "points": 2,
+            "accepted": [
+              "emitted radiation",
+              "heat energy",
+              "long-wavelength infrared"
+            ]
+          }
+        ]
+      },
+      "q21": {
+        "correctOption": "B"
+      },
+      "q22": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Farmland is green/blue, high ETa, active transpiration",
+            "points": 2,
+            "accepted": [
+              "green",
+              "blue",
+              "high ETa"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Urban is tan, low ETa, impervious surfaces",
+            "points": 2,
+            "accepted": [
+              "tan",
+              "low ETa",
+              "urban"
+            ]
+          }
+        ]
+      },
+      "q23": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Cooler surfaces = high ET",
+            "points": 1,
+            "accepted": [
+              "cooler",
+              "high ET"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Warmer surfaces = low ET",
+            "points": 1,
+            "accepted": [
+              "warmer",
+              "low ET"
+            ]
+          }
+        ]
+      },
+      "q24": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "convert absorbed solar energy into latent heat",
+            "points": 2,
+            "accepted": [
+              "latent heat",
+              "evaporation",
+              "transpiration"
+            ]
+          }
+        ]
+      },
+      "q25": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "detailed enough to detect field-scale variations while covering large regions",
+            "points": 1,
+            "accepted": [
+              "field-scale",
+              "detect variations"
+            ]
+          }
+        ]
+      },
+      "q26": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "identify fields or zones using more or less water, guiding targeted irrigation and conserving resources",
+            "points": 3,
+            "accepted": [
+              "targeted irrigation",
+              "conserving resources",
+              "identify water use"
+            ]
+          }
+        ]
+      },
+      "q27": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "near-real-time tracking, quick detection of crop stress, urban heat, or hydrologic change",
+            "points": 2,
+            "accepted": [
+              "near-real-time",
+              "crop stress",
+              "urban heat"
+            ]
+          }
+        ]
+      },
+      "q28": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Ridge",
+            "points": 1,
+            "accepted": [
+              "Ridge"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Valley",
+            "points": 1,
+            "accepted": [
+              "Valley"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Canyon",
+            "points": 1,
+            "accepted": [
+              "Canyon"
+            ]
+          }
+        ]
+      },
+      "q29": {
+        "correctOption": "B"
+      },
+      "q30": {
+        "correctOption": "A"
+      },
+      "q31": {
+        "correctOption": "C"
+      },
+      "q32": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Moderate Resolution Imaging Spectroradiometer",
+            "points": 1,
+            "accepted": [
+              "Moderate Resolution Imaging Spectroradiometer"
+            ]
+          }
+        ]
+      },
+      "q33": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "1, 4, 3",
+            "points": 3,
+            "accepted": [
+              "1, 4, 3",
+              "1 4 3"
+            ]
+          }
+        ]
+      },
+      "q34": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Reflected or emitted",
+            "points": 1,
+            "accepted": [
+              "reflected or emitted",
+              "reflected/emitted"
+            ]
+          }
+        ]
+      },
+      "q35": {
+        "correctOption": "B"
+      },
+      "q36": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "measure of reflectivity of the Earth's surface",
+            "points": 1,
+            "accepted": [
+              "reflectivity",
+              "reflection of solar radiation"
+            ]
+          }
+        ]
+      },
+      "q37": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "A: Unsupervised classification",
+            "points": 1,
+            "accepted": [
+              "Unsupervised classification",
+              "Unsupervised"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "B: Supervised Classification",
+            "points": 1,
+            "accepted": [
+              "Supervised classification",
+              "Supervised"
+            ]
+          }
+        ]
+      },
+      "q38": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Geographic and Projected",
+            "points": 1,
+            "accepted": [
+              "Geographic and Projected",
+              "Geographic coordinate system and projected coordinate system"
+            ]
+          }
+        ]
+      },
+      "q39": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "EOS AM-1",
+            "points": 1,
+            "accepted": [
+              "EOS AM-1",
+              "EOS-AM1"
+            ]
+          }
+        ]
+      },
+      "q40": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "LIDAR",
+            "points": 2,
+            "accepted": [
+              "LIDAR",
+              "LiDAR"
+            ]
+          }
+        ]
+      },
+      "q41": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Backscatter, hit, return of a laser pulse",
+            "points": 1,
+            "accepted": [
+              "backscatter",
+              "return",
+              "laser pulse hit"
+            ]
+          }
+        ]
+      },
+      "q42": {
+        "correctOption": "a"
+      },
+      "q43": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Aircraft condensation trail (contrail)",
+            "points": 2,
+            "accepted": [
+              "contrail",
+              "condensation trail"
+            ]
+          }
+        ]
+      },
+      "q44": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Low Earth orbit",
+            "points": 2,
+            "accepted": [
+              "Low Earth orbit",
+              "LEO"
+            ]
+          }
+        ]
+      },
+      "q45": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Multispectral Scanner (MSS) and Thematic Mapper (TM)",
+            "points": 2,
+            "accepted": [
+              "MSS",
+              "TM",
+              "Multispectral Scanner",
+              "Thematic Mapper"
+            ]
+          }
+        ]
+      },
+      "q46": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Panchromatic definition",
+            "points": 2,
+            "accepted": [
+              "Panchromatic",
+              "single channel",
+              "broad range"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Multispectral definition",
+            "points": 2,
+            "accepted": [
+              "Multispectral",
+              "multichannel",
+              "few spectral bands"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Superspectral/Ultraspectral definition",
+            "points": 2,
+            "accepted": [
+              "Superspectral",
+              "Ultraspectral",
+              "many spectral bands"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Hyperspectral definition",
+            "points": 2,
+            "accepted": [
+              "Hyperspectral",
+              "lots of contiguous spectral bands",
+              ">100"
+            ]
+          }
+        ]
+      },
+      "q47": {
+        "correctOption": "B"
+      },
+      "q48": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Milutin Milankovitch",
+            "points": 1,
+            "accepted": [
+              "Milankovitch",
+              "Milutin Milankovitch"
+            ]
+          }
+        ]
+      },
+      "q49": {
+        "correctOption": "D"
+      },
+      "q50": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "50 km",
+            "points": 1,
+            "accepted": [
+              "50 km",
+              "50 kilometers"
+            ]
+          }
+        ]
+      },
+      "q51": {
+        "correctOption": "B"
+      },
+      "q52": {
+        "correctOption": "C"
+      },
+      "q53": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "short-term, natural fluctuations in the climate system that make it difficult to distinguish long-term climate signals",
+            "points": 2,
+            "accepted": [
+              "short-term natural fluctuations",
+              "climate noise"
+            ]
+          }
+        ]
+      },
+      "q54": {
+        "correctOption": "C"
+      },
+      "q55": {
+        "correctOption": "A"
+      },
+      "q56": {
+        "correctOption": "B"
+      },
+      "q57": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Operational Land Imager",
+            "points": 1,
+            "accepted": [
+              "Operational Land Imager"
+            ]
+          }
+        ]
+      },
+      "q58": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Push broom scanner / Along-track scanner",
+            "points": 1,
+            "accepted": [
+              "Push broom scanner",
+              "Along-track scanner",
+              "pushbroom"
+            ]
+          }
+        ]
+      },
+      "q59": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Landsat 8",
+            "points": 2,
+            "accepted": [
+              "Landsat 8"
+            ]
+          }
+        ]
+      },
+      "q60": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "colder temperatures, fresher/less saline water, shallower depth",
+            "points": 3,
+            "accepted": [
+              "colder",
+              "fresher",
+              "less saline",
+              "shallower"
+            ]
+          }
+        ]
+      },
+      "q61": {
+        "correctOption": "B"
+      },
+      "q62": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "tree canopies cause multiple scattering and depolarization / smooth water reflects energy away",
+            "points": 2,
+            "accepted": [
+              "multiple scattering",
+              "depolarization",
+              "tree canopies"
+            ]
+          }
+        ]
+      },
+      "q63": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "4096",
+            "points": 2,
+            "accepted": [
+              "4096",
+              "2^12",
+              "2 to the 12th"
+            ]
+          }
+        ]
+      },
+      "q64": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Transverse Mercator projection",
+            "points": 1,
+            "accepted": [
+              "Transverse Mercator",
+              "transverse mercator projection"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "minimizes distortion within each 6-degree longitudinal zone / accurate distance and area",
+            "points": 1,
+            "accepted": [
+              "minimizes distortion",
+              "6-degree longitudinal zone",
+              "accurate distance and area"
+            ]
+          }
+        ]
+      }
+    },
+    "questionCount": 64,
+    "maxScore": 141,
+    "paperUrl": "/practice/scioly-8jq9a0w-kdu-b/test.pdf",
+    "keyUrl": "/practice/scioly-8jq9a0w-kdu-b/key.pdf"
   }
 ]
