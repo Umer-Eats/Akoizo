@@ -12,6 +12,10 @@ for (const id of ids) {
   const source = sources.find((s) => s.id === id);
   if (!source) throw new Error(`Missing source manifest: ${id}`);
   const test = JSON.parse(await readFile(`output/practice-research/converted/${id}.json`, 'utf8'));
+  for (const path of [source.paperPath, source.keyPath, source.contextPath].filter(Boolean)) {
+    if ((await readFile(path)).subarray(0, 5).toString() !== '%PDF-')
+      throw new Error(`Expected a PDF, not an image or download page: ${path}`);
+  }
   // Retain archive identity so publication removes its unconverted listing.
   if (source.sourceId) test.sourceId = source.sourceId;
   validatePracticeCatalog([test]);

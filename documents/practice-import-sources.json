@@ -2074,5 +2074,704 @@
     "attachmentPaths": [
       "output/practice-research/division-c/26bffefa1bece2e8bc9126ffa0431c104b921d44757703b4d95a5ff61e33e47a.pdf"
     ]
+  },
+  {
+    "id": "scioly-51mtaevlop0-c",
+    "sourceId": "51MtaevLop0",
+    "sourceUrl": "https://scioly.org/tests/51MtaevLop0",
+    "division": "C",
+    "eventId": "codebusters",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/51MtaevLop0",
+    "keyUrl": "https://scioly.org/tests/51MtaevLop0",
+    "files": [
+      {
+        "name": "Syosset-CSE-Code-Test.pdf",
+        "type": "test",
+        "size": 398563,
+        "sha256": "be53bd91ccdab0e3f31acadc517fd056c1bb1713d4a2a98fa17b8bada5a6dc46"
+      },
+      {
+        "name": "Syosset-CSE-Code-Key.pdf",
+        "type": "answer_key",
+        "size": 62427,
+        "sha256": "1618b61065924aa104ddc3e6fbb0c86f67a5b9da118f39d22ebcf4ef3fe4b1fa"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/be53bd91ccdab0e3f31acadc517fd056c1bb1713d4a2a98fa17b8bada5a6dc46.pdf",
+    "keyPath": "output/practice-research/division-c/1618b61065924aa104ddc3e6fbb0c86f67a5b9da118f39d22ebcf4ef3fe4b1fa.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-yyjk7oyaqzi-c",
+    "sourceId": "yYjK7oyAQZI",
+    "sourceUrl": "https://scioly.org/tests/yYjK7oyAQZI",
+    "division": "C",
+    "eventId": "codebusters",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/yYjK7oyAQZI",
+    "keyUrl": "https://scioly.org/tests/yYjK7oyAQZI",
+    "files": [
+      {
+        "name": "WWPN_CSE_Codebusters_TEST.pdf",
+        "type": "test",
+        "size": 475766,
+        "sha256": "2aefae4c1ec07875b3b7b1b3f55ef2f5839d778b8d26947f930f0349c7c4a6b9"
+      },
+      {
+        "name": "KEY_Code_WWPN_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 119365,
+        "sha256": "fffa9e877bdf10cbf61ade844127e3419b796ce3a0058043ace220475b859be9"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/2aefae4c1ec07875b3b7b1b3f55ef2f5839d778b8d26947f930f0349c7c4a6b9.pdf",
+    "keyPath": "output/practice-research/division-c/fffa9e877bdf10cbf61ade844127e3419b796ce3a0058043ace220475b859be9.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-nt3v7oj3rjc-c",
+    "sourceId": "nt3v7oJ3rjc",
+    "sourceUrl": "https://scioly.org/tests/nt3v7oJ3rjc",
+    "division": "C",
+    "eventId": "codebusters",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/nt3v7oJ3rjc",
+    "keyUrl": "https://scioly.org/tests/nt3v7oJ3rjc",
+    "files": [
+      {
+        "name": "TEST_Codebusters_Montgomery_CSE2025.pdf",
+        "type": "test",
+        "size": 1574664,
+        "sha256": "8121b82f6036d7709d4274fab6675737c45a9a7a4fab59ea8afb1dd28c368047"
+      },
+      {
+        "name": "KEY_Codebusters_Montgomery_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 131591,
+        "sha256": "e80e60a913e746ff254bf5d84dc7d360f3b1c5207ca0c8626275639fd586e067"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/8121b82f6036d7709d4274fab6675737c45a9a7a4fab59ea8afb1dd28c368047.pdf",
+    "keyPath": "output/practice-research/division-c/e80e60a913e746ff254bf5d84dc7d360f3b1c5207ca0c8626275639fd586e067.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-uk5mc-xtiqw-c",
+    "sourceId": "uk5mc-XTiQw",
+    "sourceUrl": "https://scioly.org/tests/uk5mc-XTiQw",
+    "division": "C",
+    "eventId": "thermodynamics",
+    "competition": "University of Michigan Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/uk5mc-XTiQw",
+    "keyUrl": "https://scioly.org/tests/uk5mc-XTiQw",
+    "files": [
+      {
+        "name": "thermodynamics_2018_c_umich_test.pdf",
+        "type": "test",
+        "size": 219508,
+        "sha256": "90b6e9d4cdf1e0797d8095b5a499e4a5c177aeb16e9022def618be09ec6489a0"
+      },
+      {
+        "name": "thermodynamics_2018_c_umich_key.pdf",
+        "type": "answer_key",
+        "size": 170429,
+        "sha256": "cc56a2dd418156d15fdb57e16630e9eb380118134f982af0b168d85dc1331fcf"
+      },
+      {
+        "name": "thermodynamics_2018_c_umich_scores.png",
+        "type": "scoresheet",
+        "size": 11339,
+        "sha256": "2c1c51baef6f0ae4c2c8e9202738b3a78d59215aa92d6f8526b373aaac63fb1a"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/90b6e9d4cdf1e0797d8095b5a499e4a5c177aeb16e9022def618be09ec6489a0.pdf",
+    "keyPath": "output/practice-research/division-c/cc56a2dd418156d15fdb57e16630e9eb380118134f982af0b168d85dc1331fcf.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/2c1c51baef6f0ae4c2c8e9202738b3a78d59215aa92d6f8526b373aaac63fb1a.png"
+    ]
+  },
+  {
+    "id": "scioly-ny-dzskly80-c",
+    "sourceId": "nY-DzsKLY80",
+    "sourceUrl": "https://scioly.org/tests/nY-DzsKLY80",
+    "division": "C",
+    "eventId": "anatomy-and-physiology",
+    "competition": "Islip Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/nY-DzsKLY80",
+    "keyUrl": "https://scioly.org/tests/nY-DzsKLY80",
+    "files": [
+      {
+        "name": "anatomy_2017_c_islip_test1.pdf",
+        "type": "test",
+        "size": 617307,
+        "sha256": "353481930182b610adb1a194dd82c42e7c963380e4d57947cb32be8bcaa3255d"
+      },
+      {
+        "name": "anatomy_2017_c_islip_test2.pdf",
+        "type": "test",
+        "size": 540529,
+        "sha256": "6db8b2319cc8e029dea3c6953716c89d30e13e50a05b09784afc9a7a4c496b26"
+      },
+      {
+        "name": "anatomy_2017_c_islip_key1.pdf",
+        "type": "answer_key",
+        "size": 118030,
+        "sha256": "8b30d1005c4d1a48c5fdd13df2140dbdb9307d96a2e537948c0bdcdb541c5b74"
+      },
+      {
+        "name": "anatomy_2017_c_islip_key2.pdf",
+        "type": "answer_key",
+        "size": 129336,
+        "sha256": "c0cdd1063501e3fac48964277f7f7b2dfad6e259396516810b817027b9036f93"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/353481930182b610adb1a194dd82c42e7c963380e4d57947cb32be8bcaa3255d.pdf",
+    "keyPath": "output/practice-research/division-c/8b30d1005c4d1a48c5fdd13df2140dbdb9307d96a2e537948c0bdcdb541c5b74.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/6db8b2319cc8e029dea3c6953716c89d30e13e50a05b09784afc9a7a4c496b26.pdf",
+      "output/practice-research/division-c/c0cdd1063501e3fac48964277f7f7b2dfad6e259396516810b817027b9036f93.pdf"
+    ]
+  },
+  {
+    "id": "scioly-z1tqamhu3cw-c",
+    "sourceId": "z1tQAMHU3cw",
+    "sourceUrl": "https://scioly.org/tests/z1tQAMHU3cw",
+    "division": "C",
+    "eventId": "anatomy-and-physiology",
+    "competition": "Princeton Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/z1tQAMHU3cw",
+    "keyUrl": "https://scioly.org/tests/z1tQAMHU3cw",
+    "files": [
+      {
+        "name": "anatomy_2017_c_princeton_test.pdf",
+        "type": "test",
+        "size": 505692,
+        "sha256": "ab3346177497251750331c29d4b04d17b4874757ecc4803688951ae80e1a545c"
+      },
+      {
+        "name": "anatomy_2017_c_princeton_key.pdf",
+        "type": "answer_key",
+        "size": 257454,
+        "sha256": "607fa3336d782e233a92ea019e0a1f8de4814179610c162a682f29e6273681b4"
+      },
+      {
+        "name": "anatomy_2017_c_princeton_sheet.pdf",
+        "type": "answer_sheet",
+        "size": 177123,
+        "sha256": "afc128545b5373b9009261def2b3c9d1d3ab5a810b2ccdbbc798f38462810b6e"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/ab3346177497251750331c29d4b04d17b4874757ecc4803688951ae80e1a545c.pdf",
+    "keyPath": "output/practice-research/division-c/607fa3336d782e233a92ea019e0a1f8de4814179610c162a682f29e6273681b4.pdf",
+    "contextPath": "output/practice-research/division-c/afc128545b5373b9009261def2b3c9d1d3ab5a810b2ccdbbc798f38462810b6e.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/afc128545b5373b9009261def2b3c9d1d3ab5a810b2ccdbbc798f38462810b6e.pdf"
+    ]
+  },
+  {
+    "id": "scioly-ajzmepy-1v8-c",
+    "sourceId": "ajzMepy-1V8",
+    "sourceUrl": "https://scioly.org/tests/ajzMepy-1V8",
+    "division": "C",
+    "eventId": "anatomy-and-physiology",
+    "competition": "SSSS",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/ajzMepy-1V8",
+    "keyUrl": "https://scioly.org/tests/ajzMepy-1V8",
+    "files": [
+      {
+        "name": "anatomy_2018_c_ssss-cherrielan_test.pdf",
+        "type": "test",
+        "size": 807566,
+        "sha256": "dc3aca5721b3854879a1b4b331f742946fe49bba2d8889cba5f4a25106dddfd2"
+      },
+      {
+        "name": "anatomy_2018_c_ssss-cherrielan_key.pdf",
+        "type": "answer_key",
+        "size": 973958,
+        "sha256": "125da6ab8a2afcd71904e70dbca2e25f91b7458ce2593ffbea7a93664be08d99"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/dc3aca5721b3854879a1b4b331f742946fe49bba2d8889cba5f4a25106dddfd2.pdf",
+    "keyPath": "output/practice-research/division-c/125da6ab8a2afcd71904e70dbca2e25f91b7458ce2593ffbea7a93664be08d99.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-msr9ze54iku-c",
+    "sourceId": "MSR9Ze54iKU",
+    "sourceUrl": "https://scioly.org/tests/MSR9Ze54iKU",
+    "division": "C",
+    "eventId": "rocks-and-minerals",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/MSR9Ze54iKU",
+    "keyUrl": "https://scioly.org/tests/MSR9Ze54iKU",
+    "files": [
+      {
+        "name": "TEST_Rocks and Minerals_Tesla STEM_CSE2025 (2).pdf",
+        "type": "test",
+        "size": 34037270,
+        "sha256": "86c6c0070259279d93f70b6381d561d9984627bb988af58abc6a90a579e42a0d"
+      },
+      {
+        "name": "KEY_Rocks and Minerals_Tesla STEM_CSE2025 (2).pdf",
+        "type": "answer_key",
+        "size": 34065169,
+        "sha256": "d6e0b034131fe8904622f2055e34c82334dd1941b08374618bbd4b386d4d7013"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/86c6c0070259279d93f70b6381d561d9984627bb988af58abc6a90a579e42a0d.pdf",
+    "keyPath": "output/practice-research/division-c/d6e0b034131fe8904622f2055e34c82334dd1941b08374618bbd4b386d4d7013.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-pgz8ogkxhr0-c",
+    "sourceId": "pgZ8OGkXHr0",
+    "sourceUrl": "https://scioly.org/tests/pgZ8OGkXHr0",
+    "division": "C",
+    "eventId": "rocks-and-minerals",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/pgZ8OGkXHr0",
+    "keyUrl": "https://scioly.org/tests/pgZ8OGkXHr0",
+    "files": [
+      {
+        "name": "TEST_Rocks&Minerals_CLARKHS_CSE2025.pdf",
+        "type": "test",
+        "size": 19303908,
+        "sha256": "7eae5a054790cbafa3a26a37c2610a3c28e98e3bc0da14ebb3d27fe323fe7d7d"
+      },
+      {
+        "name": "KEY_Rocks&Minerals_CLARKHS_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 10157216,
+        "sha256": "4c735b178c9b13ba29563678f555c55807a0f2ab5ad3fe733316b07c38cc0174"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/7eae5a054790cbafa3a26a37c2610a3c28e98e3bc0da14ebb3d27fe323fe7d7d.pdf",
+    "keyPath": "output/practice-research/division-c/4c735b178c9b13ba29563678f555c55807a0f2ab5ad3fe733316b07c38cc0174.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-fehps-jnwpk-c",
+    "sourceId": "feHPs-Jnwpk",
+    "sourceUrl": "https://scioly.org/tests/feHPs-Jnwpk",
+    "division": "C",
+    "eventId": "forensics",
+    "competition": "Yale Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/feHPs-Jnwpk",
+    "keyUrl": "https://scioly.org/tests/feHPs-Jnwpk",
+    "files": [
+      {
+        "name": "forensics_2017_c_yale_test.pdf",
+        "type": "test",
+        "size": 1136598,
+        "sha256": "1502c1df7b7546349e4392d544a359358ac31aaaf7d970b5601992e11c18baeb"
+      },
+      {
+        "name": "forensics_2017_c_yale_key.pdf",
+        "type": "answer_key",
+        "size": 209543,
+        "sha256": "26e259b24391ca9631a41a38b10168e07d1b6b5cac5d28b8a6489e29d420630b"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/1502c1df7b7546349e4392d544a359358ac31aaaf7d970b5601992e11c18baeb.pdf",
+    "keyPath": "output/practice-research/division-c/26e259b24391ca9631a41a38b10168e07d1b6b5cac5d28b8a6489e29d420630b.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-zrvevxmrlcc-c",
+    "sourceId": "zrvevxmrLCc",
+    "sourceUrl": "https://scioly.org/tests/zrvevxmrLCc",
+    "division": "C",
+    "eventId": "forensics",
+    "competition": "Northern Florida Regional",
+    "year": 2018,
+    "level": "Regionals",
+    "levelText": "Northern Florida Regional",
+    "paperUrl": "https://scioly.org/tests/zrvevxmrLCc",
+    "keyUrl": "https://scioly.org/tests/zrvevxmrLCc",
+    "files": [
+      {
+        "name": "forensics_2018_c_uflorida_test.pdf",
+        "type": "test",
+        "size": 2309480,
+        "sha256": "4bac8d617fc06d0055173db1ae7cab4c544dc926bc3d018602497b59aea9d5d5"
+      },
+      {
+        "name": "forensics_2018_c_uflorida_key.pdf",
+        "type": "answer_key",
+        "size": 4535379,
+        "sha256": "4a86952eb92eda65c1e1facab840208d7b5c80471426a160c43950ead569323e"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/4bac8d617fc06d0055173db1ae7cab4c544dc926bc3d018602497b59aea9d5d5.pdf",
+    "keyPath": "output/practice-research/division-c/4a86952eb92eda65c1e1facab840208d7b5c80471426a160c43950ead569323e.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-37x5bgyxapo-c",
+    "sourceId": "37x5BgyXapo",
+    "sourceUrl": "https://scioly.org/tests/37x5BgyXapo",
+    "division": "C",
+    "eventId": "disease-detectives",
+    "competition": "Greenbrier Invitational",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/37x5BgyXapo",
+    "keyUrl": "https://scioly.org/tests/37x5BgyXapo",
+    "files": [
+      {
+        "name": "2026Greenbrier_DiseaseDetectivesC_TestPacket.pdf",
+        "type": "test",
+        "size": 178868,
+        "sha256": "577973d3bceae7363a636279650d158c33c99d9ff26c0a4c2df8f31864545bf3"
+      },
+      {
+        "name": "2026Greenbrier_DiseaseDetectivesC_Key.pdf",
+        "type": "answer_key",
+        "size": 111546,
+        "sha256": "345475fffcec823b62d236b9d8ce7e2231d872acb447951f0d6393ecac717666"
+      },
+      {
+        "name": "2026Greenbrier_DiseaseDetectivesC_AnswerSheet.pdf",
+        "type": "answer_sheet",
+        "size": 73799,
+        "sha256": "8f97ce58566e9d922037659e345b5cd9aab557ff80c169d71d31348c6e581016"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/577973d3bceae7363a636279650d158c33c99d9ff26c0a4c2df8f31864545bf3.pdf",
+    "keyPath": "output/practice-research/division-c/345475fffcec823b62d236b9d8ce7e2231d872acb447951f0d6393ecac717666.pdf",
+    "contextPath": "output/practice-research/division-c/8f97ce58566e9d922037659e345b5cd9aab557ff80c169d71d31348c6e581016.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/8f97ce58566e9d922037659e345b5cd9aab557ff80c169d71d31348c6e581016.pdf"
+    ]
+  },
+  {
+    "id": "scioly-d9cpysudn-y-c",
+    "sourceId": "d9cpYsuDN_Y",
+    "sourceUrl": "https://scioly.org/tests/d9cpYsuDN_Y",
+    "division": "C",
+    "eventId": "disease-detectives",
+    "competition": "Islip Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/d9cpYsuDN_Y",
+    "keyUrl": "https://scioly.org/tests/d9cpYsuDN_Y",
+    "files": [
+      {
+        "name": "diseasedetectives_2017_c_islip_test.pdf",
+        "type": "test",
+        "size": 273211,
+        "sha256": "ccff49c574eeea04a1fa2ff5d2e4f9a34c5f961bf4d0fa76aae87d5db4002bb4"
+      },
+      {
+        "name": "diseasedetectives_2017_c_islip_key.pdf",
+        "type": "answer_key",
+        "size": 83578,
+        "sha256": "e8b5e644570dcc40eb4b80be305c5a3dfb612f252bb93ba5ce0e057cabad5369"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/ccff49c574eeea04a1fa2ff5d2e4f9a34c5f961bf4d0fa76aae87d5db4002bb4.pdf",
+    "keyPath": "output/practice-research/division-c/e8b5e644570dcc40eb4b80be305c5a3dfb612f252bb93ba5ce0e057cabad5369.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-nchmgorixfs-c",
+    "sourceId": "nChmgorIXfs",
+    "sourceUrl": "https://scioly.org/tests/nChmgorIXfs",
+    "division": "C",
+    "eventId": "disease-detectives",
+    "competition": "Fairfax Invitational",
+    "year": 2017,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/nChmgorIXfs",
+    "keyUrl": "https://scioly.org/tests/nChmgorIXfs",
+    "files": [
+      {
+        "name": "diseasedetectives_2017_c_fairfax_test.pdf",
+        "type": "test",
+        "size": 205434,
+        "sha256": "8f2b31dfdab4418863dcc0e0ecfeda2c5fbed24c8a454f1b83970f4cc62053ed"
+      },
+      {
+        "name": "diseasedetectives_2017_c_fairfax_key.pdf",
+        "type": "answer_key",
+        "size": 121000,
+        "sha256": "c3e2016f8bb0db9c8573e050aede93f7f9049a35f5f92dd7283473cf351b222b"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/8f2b31dfdab4418863dcc0e0ecfeda2c5fbed24c8a454f1b83970f4cc62053ed.pdf",
+    "keyPath": "output/practice-research/division-c/c3e2016f8bb0db9c8573e050aede93f7f9049a35f5f92dd7283473cf351b222b.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-mypk0kixvlm-c",
+    "sourceId": "MYPk0KIxvlM",
+    "sourceUrl": "https://scioly.org/tests/MYPk0KIxvlM",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/MYPk0KIxvlM",
+    "keyUrl": "https://scioly.org/tests/MYPk0KIxvlM",
+    "files": [
+      {
+        "name": "TEST_Remote Sensing_Ann Arbor Pioneer_CSE2025 (1).pdf",
+        "type": "test",
+        "size": 1542156,
+        "sha256": "53f28c2395c957583c978cb0ec37d20ec89638a3f5ac3cd3a779f6daa408f5ee"
+      },
+      {
+        "name": "KEY_Remote Sensing_Ann Arbor Pioneer_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 1571962,
+        "sha256": "5c3ff72bcccf9e1b6b45fd530df28f5f18c74c8cfb1868e5c2b318454aca0c17"
+      },
+      {
+        "name": "IMAGES_Remote Sensing_Ann Arbor Pioneer_CSE2025 (1).pdf",
+        "type": "images",
+        "size": 6727504,
+        "sha256": "37089f923ccfea6ea6eb82faa0ed11ef46e78d8a3311a6ffbf513aed382c3842"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/53f28c2395c957583c978cb0ec37d20ec89638a3f5ac3cd3a779f6daa408f5ee.pdf",
+    "keyPath": "output/practice-research/division-c/5c3ff72bcccf9e1b6b45fd530df28f5f18c74c8cfb1868e5c2b318454aca0c17.pdf",
+    "contextPath": "output/practice-research/division-c/37089f923ccfea6ea6eb82faa0ed11ef46e78d8a3311a6ffbf513aed382c3842.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/37089f923ccfea6ea6eb82faa0ed11ef46e78d8a3311a6ffbf513aed382c3842.pdf"
+    ]
+  },
+  {
+    "id": "scioly-q7mxc-lyt3q-c",
+    "sourceId": "q7MxC-LYT3Q",
+    "sourceUrl": "https://scioly.org/tests/q7MxC-LYT3Q",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/q7MxC-LYT3Q",
+    "keyUrl": "https://scioly.org/tests/q7MxC-LYT3Q",
+    "files": [
+      {
+        "name": "TEST_RemoteSensing_WardMelville_CSE2025.pdf",
+        "type": "test",
+        "size": 164033,
+        "sha256": "c2bc173331138f9d3bbfec46555cff4515caf0d4885802d5b4ff765fb561255d"
+      },
+      {
+        "name": "KEY_RemoteSensing_WardMelville_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 194681,
+        "sha256": "04a8163c5ad0188e9a7bdf04ad952f62ef431a904a3f99f7eb40cf0beab6a442"
+      },
+      {
+        "name": "IMAGESHEET_RemoteSensing_WardMelville_CSE2025.pdf",
+        "type": "images",
+        "size": 2018542,
+        "sha256": "1e73c0f4fc4f149c9a0a1598f0b7ff9708a272e5a2d88587bf1c438efc778075"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/c2bc173331138f9d3bbfec46555cff4515caf0d4885802d5b4ff765fb561255d.pdf",
+    "keyPath": "output/practice-research/division-c/04a8163c5ad0188e9a7bdf04ad952f62ef431a904a3f99f7eb40cf0beab6a442.pdf",
+    "contextPath": "output/practice-research/division-c/1e73c0f4fc4f149c9a0a1598f0b7ff9708a272e5a2d88587bf1c438efc778075.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/1e73c0f4fc4f149c9a0a1598f0b7ff9708a272e5a2d88587bf1c438efc778075.pdf"
+    ]
+  },
+  {
+    "id": "scioly-oyws8qhr8-s-c",
+    "sourceId": "OyWS8QhR8_s",
+    "sourceUrl": "https://scioly.org/tests/OyWS8QhR8_s",
+    "division": "C",
+    "eventId": "designer-genes",
+    "competition": "CSE",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/OyWS8QhR8_s",
+    "keyUrl": "https://scioly.org/tests/OyWS8QhR8_s",
+    "files": [
+      {
+        "name": "TEST_Designer Genes_Palo Alto High School_CSE2025.pdf",
+        "type": "test",
+        "size": 3200866,
+        "sha256": "f1ab20f01eebf20fe8947a1d7d9c725d3b341985de478dfcf3006cdc5cd3f0eb"
+      },
+      {
+        "name": "KEY_Designer Genes_Palo Alto High School_CSE2025.pdf",
+        "type": "answer_key",
+        "size": 1564526,
+        "sha256": "9ab328d203d61a2ca758bc2b1cc73955b65b8d55e81f38c35d235150f598d97a"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/f1ab20f01eebf20fe8947a1d7d9c725d3b341985de478dfcf3006cdc5cd3f0eb.pdf",
+    "keyPath": "output/practice-research/division-c/9ab328d203d61a2ca758bc2b1cc73955b65b8d55e81f38c35d235150f598d97a.pdf",
+    "attachmentPaths": []
+  },
+  {
+    "id": "scioly-p-vah4utveu-c",
+    "sourceId": "p_vAH4UtvEU",
+    "sourceUrl": "https://scioly.org/tests/p_vAH4UtvEU",
+    "division": "C",
+    "eventId": "designer-genes",
+    "competition": "Greenbrier Invitational",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/p_vAH4UtvEU",
+    "keyUrl": "https://scioly.org/tests/p_vAH4UtvEU",
+    "files": [
+      {
+        "name": "2026Greenbrier_DesignerGenesC_TestPacket.pdf",
+        "type": "test",
+        "size": 184872,
+        "sha256": "b84061d0171126421b829d7b1b8e11bcc2963b532add2748dc60330233721bd4"
+      },
+      {
+        "name": "2026Greenbrier_DesignerGenesC_Key.pdf",
+        "type": "answer_key",
+        "size": 1065680,
+        "sha256": "39247da54fec073d66fbc21be388a76d3b01ae71f664e84274c9243427ab5bc5"
+      },
+      {
+        "name": "2026Greenbrier_DesignerGenesC_AnswerSheet.pdf",
+        "type": "answer_sheet",
+        "size": 31567,
+        "sha256": "78bdde134cb4239cc6a1b669c55a62ce615346d19701a048f1906f1abdc0ef2c"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/b84061d0171126421b829d7b1b8e11bcc2963b532add2748dc60330233721bd4.pdf",
+    "keyPath": "output/practice-research/division-c/39247da54fec073d66fbc21be388a76d3b01ae71f664e84274c9243427ab5bc5.pdf",
+    "contextPath": "output/practice-research/division-c/78bdde134cb4239cc6a1b669c55a62ce615346d19701a048f1906f1abdc0ef2c.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/78bdde134cb4239cc6a1b669c55a62ce615346d19701a048f1906f1abdc0ef2c.pdf"
+    ]
+  },
+  {
+    "id": "scioly-lqsqfowwqcu-c",
+    "sourceId": "lQsQFOwWQCU",
+    "sourceUrl": "https://scioly.org/tests/lQsQFOwWQCU",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "competition": "MIT Invitational",
+    "year": 2026,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/lQsQFOwWQCU",
+    "keyUrl": "https://scioly.org/tests/lQsQFOwWQCU",
+    "files": [
+      {
+        "name": "2026MITInvitational_RemoteSensingC_TestPacket.pdf",
+        "type": "test",
+        "size": 145919,
+        "sha256": "3a6e07f2857027906b2179702c8f19208fc6632eb65638c8b13756e332972af6"
+      },
+      {
+        "name": "2026MITInvitational_RemoteSensingC_Key.pdf",
+        "type": "answer_key",
+        "size": 112063,
+        "sha256": "2c193ab2424d3f0355f5a4f4bea23af635cb40fff7e75fb69c475a1972cf4ddf"
+      },
+      {
+        "name": "2026MITInvitational_RemoteSensingC_AnswerSheet.pdf",
+        "type": "answer_sheet",
+        "size": 84086,
+        "sha256": "d8c06b7c285e565b01f2dd3e244a60ea634e6b2857a34f81c60eb6e0a3934b49"
+      },
+      {
+        "name": "2026MIT_RemoteSensingC_ScoreGraph.png",
+        "type": "scoresheet",
+        "size": 26340,
+        "sha256": "9b3e9212c01cefe1c7e37e0e374f9eb304cf066a99864749fa5940c038518fe1"
+      },
+      {
+        "name": "2026MIT_RemoteSensingC_SectionScores.png",
+        "type": "scoresheet",
+        "size": 86363,
+        "sha256": "a44883e40b534fe9baa073d0795dedba6516061bc3f65b8b2374181758dcd979"
+      },
+      {
+        "name": "2026MITInvitational_RemoteSensingC_ImageSheet.pdf",
+        "type": "images",
+        "size": 6194161,
+        "sha256": "b0e5b28415d1e623977c3d80bc31aff0367e1deceb0b752abaa82cf4fc39d91e"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/3a6e07f2857027906b2179702c8f19208fc6632eb65638c8b13756e332972af6.pdf",
+    "keyPath": "output/practice-research/division-c/2c193ab2424d3f0355f5a4f4bea23af635cb40fff7e75fb69c475a1972cf4ddf.pdf",
+    "attachmentPaths": [
+      "output/practice-research/division-c/d8c06b7c285e565b01f2dd3e244a60ea634e6b2857a34f81c60eb6e0a3934b49.pdf",
+      "output/practice-research/division-c/9b3e9212c01cefe1c7e37e0e374f9eb304cf066a99864749fa5940c038518fe1.png",
+      "output/practice-research/division-c/a44883e40b534fe9baa073d0795dedba6516061bc3f65b8b2374181758dcd979.png",
+      "output/practice-research/division-c/b0e5b28415d1e623977c3d80bc31aff0367e1deceb0b752abaa82cf4fc39d91e.pdf"
+    ],
+    "contextPath": "output\\practice-research\\division-c\\b0e5b28415d1e623977c3d80bc31aff0367e1deceb0b752abaa82cf4fc39d91e.pdf"
+  },
+  {
+    "id": "scioly-8hoey-b0s6o-c",
+    "sourceId": "8HOeY_b0s6o",
+    "sourceUrl": "https://scioly.org/tests/8HOeY_b0s6o",
+    "division": "C",
+    "eventId": "thermodynamics",
+    "competition": "Clements Invitational",
+    "year": 2018,
+    "level": null,
+    "paperUrl": "https://scioly.org/tests/8HOeY_b0s6o",
+    "keyUrl": "https://scioly.org/tests/8HOeY_b0s6o",
+    "files": [
+      {
+        "name": "Thermodynamics.pdf",
+        "type": "test",
+        "size": 179106,
+        "sha256": "2cfee1c49041d309ff4a031a100ecd8f5e3751f5604700ac7e2642841c635cf6"
+      },
+      {
+        "name": "Thermodynamics KEY.pdf",
+        "type": "answer_key",
+        "size": 87175,
+        "sha256": "fc9e5c255552ac13d0e58cb1f1c73f264812f10b92e9f3d3aa9a6791ea9c2ec8"
+      }
+    ],
+    "state": "downloaded",
+    "paperPath": "output/practice-research/division-c/2cfee1c49041d309ff4a031a100ecd8f5e3751f5604700ac7e2642841c635cf6.pdf",
+    "keyPath": "output/practice-research/division-c/fc9e5c255552ac13d0e58cb1f1c73f264812f10b92e9f3d3aa9a6791ea9c2ec8.pdf",
+    "attachmentPaths": []
   }
 ]
