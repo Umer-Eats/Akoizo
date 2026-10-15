@@ -38,6 +38,10 @@ def main():
     if args.publish:
         clean_checkout()
     preview = run(sys.executable, str(IMPORTER), str(args.converter_home))
+    rejected = [line for line in preview.stdout.splitlines()
+                if line.startswith('Skipped ') and not line.endswith(': already in Akoizo')]
+    if rejected:
+        raise ValueError('Approved export failed Akoizo validation: ' + ' '.join(rejected)[:1200])
     if 'Ready to import: 0 approved tests' in preview.stdout:
         print('No new approved tests to add.')
         return
