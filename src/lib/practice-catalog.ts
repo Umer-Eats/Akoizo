@@ -1,6 +1,7 @@
 // Server-side catalog: never import this module from a client component.
 import catalog from '../data/practice-tests.json' with { type: 'json' };
 import imported from '../data/imported-practice-tests.json' with { type: 'json' };
+import batchConverter from '../data/batch-converter-practice-tests.json' with { type: 'json' };
 import archive from '../data/scioly-archive.json' with { type: 'json' };
 import { AppError } from './domain.ts';
 import { eventsForDivision, slug, type Division } from './events.ts';
@@ -153,7 +154,7 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       return fail();
   }
 }
-const checkedCatalog: unknown = [...catalog, ...imported];
+const checkedCatalog: unknown = [...catalog, ...imported, ...batchConverter];
 validatePracticeCatalog(checkedCatalog);
 export const practiceTests = checkedCatalog;
 export function practiceSummary(test: PracticeTest): PracticeSummary {

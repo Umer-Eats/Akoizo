@@ -1,0 +1,3386 @@
+[
+  {
+    "sourceUrl": "https://scioly.org/tests/ATHVm0bZ4zQ",
+    "division": "B",
+    "eventId": "heredity",
+    "competition": "Texas A&M Invitational",
+    "year": 2026,
+    "level": null,
+    "season": 2027,
+    "difficulty": "Hard",
+    "difficultyReason": "Six stations combine linkage and epistasis, multi-step inheritance probabilities, chi-square interpretation, pedigrees, meiosis, DNA expression, and PCR calculations.",
+    "topics": [
+      "Mendelian inheritance and probability",
+      "Linkage and non-Mendelian inheritance",
+      "Chi-square analysis",
+      "Pedigrees",
+      "Mitosis and meiosis",
+      "DNA, gene expression, and PCR"
+    ],
+    "topicMatch": "current",
+    "alignment": "Covers the 2027 Heredity B genetics, cell division, molecular biology, and PCR topics. Linkage, incomplete dominance, and epistasis are State/Nationals-only topics under the 2027 rules; this invitational paper is not classified as a Regional, State, or National test.",
+    "scoringBasis": "Published paper and key: six stations of eight multiple-choice questions, one point each, for 48 points total.",
+    "instructions": "Use the complete original paper and any supplements. Answer all labeled parts.",
+    "id": "scioly-athvm0bz4zq-b",
+    "sourceId": "ATHVm0bZ4zQ",
+    "reviewedOn": "2026-10-14",
+    "gradingMode": "published-key",
+    "minutes": 50,
+    "rulesUrl": "/rules/2027/b/heredity.pdf",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "st1_q1",
+        "page": 2,
+        "prompt": "Mendel's Law of Segregation refers to which process?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q1",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "Separation of homologous chromosomes during meiosis I"
+          },
+          {
+            "id": "B",
+            "text": "Independent assortment of non-homologous chromosomes"
+          },
+          {
+            "id": "C",
+            "text": "Crossing over between homologs"
+          },
+          {
+            "id": "D",
+            "text": "Equal division of cytoplasm following mitosis"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q2",
+        "page": 2,
+        "prompt": "Which scenario violates Mendel's Law of Independent Assortment?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q2",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "Two genes located 2 cM apart on the same chromosome"
+          },
+          {
+            "id": "B",
+            "text": "Two genes on different chromosomes"
+          },
+          {
+            "id": "C",
+            "text": "A monohybrid cross"
+          },
+          {
+            "id": "D",
+            "text": "X-linked recessive inheritance in males"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q3",
+        "page": 2,
+        "prompt": "Which of the following produces a 9:7 phenotypic ratio?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q3",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "Duplicate recessive epistasis"
+          },
+          {
+            "id": "B",
+            "text": "Sex-linked inheritance"
+          },
+          {
+            "id": "C",
+            "text": "Dominant lethality"
+          },
+          {
+            "id": "D",
+            "text": "Codominance"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q4",
+        "page": 2,
+        "prompt": "Which statement about incomplete dominance is TRUE?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q4",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "F₂ phenotypic ratio = 9:3:3:1"
+          },
+          {
+            "id": "B",
+            "text": "Heterozygotes show a phenotype intermediate between parents"
+          },
+          {
+            "id": "C",
+            "text": "Alleles blend permanently in offspring"
+          },
+          {
+            "id": "D",
+            "text": "Only recessive traits appear in the F₂ generation"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q5",
+        "page": 2,
+        "prompt": "Mendel's pea plant experiments succeeded largely because...",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q5",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "Peas are tetraploid"
+          },
+          {
+            "id": "B",
+            "text": "He chose traits controlled by unlinked genes with complete dominance"
+          },
+          {
+            "id": "C",
+            "text": "Peas undergo meiotic drive"
+          },
+          {
+            "id": "D",
+            "text": "All traits showed intermediate expression"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q6",
+        "page": 3,
+        "prompt": "A dihybrid cross yields 9:3:3:1 phenotypes. What is the probability of getting an offspring that is homozygous recessive at one locus and heterozygous at the other?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q6",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "2/16"
+          },
+          {
+            "id": "B",
+            "text": "4/16"
+          },
+          {
+            "id": "C",
+            "text": "6/16"
+          },
+          {
+            "id": "D",
+            "text": "8/16"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q7",
+        "page": 3,
+        "prompt": "A linked heterozygote has alleles in coupling: AB / ab with recombination frequency 20%. What fraction of gametes are Ab?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q7",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.10"
+          },
+          {
+            "id": "B",
+            "text": "0.20"
+          },
+          {
+            "id": "C",
+            "text": "0.40"
+          },
+          {
+            "id": "D",
+            "text": "0.50"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st1_q8",
+        "page": 3,
+        "prompt": "In the same situation, what fraction of gametes are AB?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st1_q8",
+        "context": "Station 1",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.10"
+          },
+          {
+            "id": "B",
+            "text": "0.20"
+          },
+          {
+            "id": "C",
+            "text": "0.40"
+          },
+          {
+            "id": "D",
+            "text": "0.80"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q1",
+        "page": 4,
+        "prompt": "In rabbits, black (B) is dominant to white (b). Two black rabbits produce 96 black and 32 white offspring. What are the most likely parental genotypes?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q1",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "BB × BB"
+          },
+          {
+            "id": "B",
+            "text": "BB × Bb"
+          },
+          {
+            "id": "C",
+            "text": "Bb × Bb"
+          },
+          {
+            "id": "D",
+            "text": "Bb × bb"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q2",
+        "page": 4,
+        "prompt": "Using the cross in Q1, if you randomly pick a black offspring, what is the probability it is a carrier (Bb)?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q2",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/3"
+          },
+          {
+            "id": "B",
+            "text": "1/2"
+          },
+          {
+            "id": "C",
+            "text": "2/3"
+          },
+          {
+            "id": "D",
+            "text": "3/4"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q3",
+        "page": 4,
+        "prompt": "A plant is known to be Rr for seed shape (R = round, r = wrinkled). Its seed color genotype is unknown (Y = yellow, y = green). It is testcrossed with rryy and produces ~equal numbers of four phenotypes: round yellow, round green, wrinkled yellow, wrinkled green. What is the unknown parent's full genotype?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q3",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "RRYy"
+          },
+          {
+            "id": "B",
+            "text": "RrYy"
+          },
+          {
+            "id": "C",
+            "text": "RrYY"
+          },
+          {
+            "id": "D",
+            "text": "Rryy"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q4",
+        "page": 4,
+        "prompt": "For the cross RrYy × rryy, what is P(round | yellow)?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q4",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/4"
+          },
+          {
+            "id": "B",
+            "text": "1/3"
+          },
+          {
+            "id": "C",
+            "text": "1/2"
+          },
+          {
+            "id": "D",
+            "text": "3/4"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q5",
+        "page": 5,
+        "prompt": "In RrYy × RrYy, what is the probability an offspring has exactly one recessive phenotype (i.e., round green OR wrinkled yellow)?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q5",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "3/16"
+          },
+          {
+            "id": "B",
+            "text": "1/4"
+          },
+          {
+            "id": "C",
+            "text": "3/8"
+          },
+          {
+            "id": "D",
+            "text": "9/16"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q6",
+        "page": 5,
+        "prompt": "In RrYy × RrYy, the probability of wrinkled green (rryy) is 1/16. What is the probability that in 5 offspring, exactly 2 are wrinkled green?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q6",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.032 (≈3.2%)"
+          },
+          {
+            "id": "B",
+            "text": "0.062 (≈6.2%)"
+          },
+          {
+            "id": "C",
+            "text": "0.118 (≈11.8%)"
+          },
+          {
+            "id": "D",
+            "text": "0.250 (25%)"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q7",
+        "page": 5,
+        "prompt": "An autosomal recessive disorder is caused by allele a. A woman is unaffected, but she has an affected sibling. Her parents are both unaffected. She has children with a man who is a known carrier. What is the probability their child will be affected?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q7",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/12"
+          },
+          {
+            "id": "B",
+            "text": "1/6"
+          },
+          {
+            "id": "C",
+            "text": "1/4"
+          },
+          {
+            "id": "D",
+            "text": "1/3"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st2_q8",
+        "page": 5,
+        "prompt": "In RrYy × RrYy, given that an offspring shows both dominant phenotypes, what is the probability the offspring is heterozygous at exactly one locus (RRYy or RrYY)?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st2_q8",
+        "context": "Station 2",
+        "options": [
+          {
+            "id": "A",
+            "text": "2/9"
+          },
+          {
+            "id": "B",
+            "text": "4/9"
+          },
+          {
+            "id": "C",
+            "text": "5/9"
+          },
+          {
+            "id": "D",
+            "text": "2/3"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q1",
+        "page": 6,
+        "prompt": "Expected number of purple under 3:1 is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q1",
+        "context": "Station 3, Dataset A (Monohybrid), Cross Pp × Pp produced: Purple = 312, White = 108 (Total 420)",
+        "options": [
+          {
+            "id": "A",
+            "text": "280"
+          },
+          {
+            "id": "B",
+            "text": "300"
+          },
+          {
+            "id": "C",
+            "text": "315"
+          },
+          {
+            "id": "D",
+            "text": "330"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q2",
+        "page": 6,
+        "prompt": "Expected number of white under 3:1 is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q2",
+        "context": "Station 3, Dataset A (Monohybrid)",
+        "options": [
+          {
+            "id": "A",
+            "text": "105"
+          },
+          {
+            "id": "B",
+            "text": "120"
+          },
+          {
+            "id": "C",
+            "text": "140"
+          },
+          {
+            "id": "D",
+            "text": "160"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q3",
+        "page": 6,
+        "prompt": "χ² for Dataset A is closest to:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q3",
+        "context": "Station 3, Dataset A (Monohybrid)",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.11"
+          },
+          {
+            "id": "B",
+            "text": "0.86"
+          },
+          {
+            "id": "C",
+            "text": "3.84"
+          },
+          {
+            "id": "D",
+            "text": "6.40"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q4",
+        "page": 6,
+        "prompt": "With df = 1 and χ² critical ≈ 3.84 (p = 0.05), best conclusion is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q4",
+        "context": "Station 3, Dataset A (Monohybrid)",
+        "options": [
+          {
+            "id": "A",
+            "text": "Reject 3:1"
+          },
+          {
+            "id": "B",
+            "text": "Fail to reject 3:1"
+          },
+          {
+            "id": "C",
+            "text": "Must be linkage"
+          },
+          {
+            "id": "D",
+            "text": "Must be incomplete dominance"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q5",
+        "page": 7,
+        "prompt": "Expected wrinkled green under 9:3:3:1 is closest to:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q5",
+        "context": "Station 3, Dataset B (Dihybrid), Observed from RrYy × RrYy (Total 498): Round yellow 278, Round green 97, Wrinkled yellow 92, Wrinkled green 31",
+        "options": [
+          {
+            "id": "A",
+            "text": "20"
+          },
+          {
+            "id": "B",
+            "text": "31"
+          },
+          {
+            "id": "C",
+            "text": "45"
+          },
+          {
+            "id": "D",
+            "text": "62"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q6",
+        "page": 7,
+        "prompt": "χ² for Dataset B is closest to:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q6",
+        "context": "Station 3, Dataset B (Dihybrid)",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.18"
+          },
+          {
+            "id": "B",
+            "text": "2.67"
+          },
+          {
+            "id": "C",
+            "text": "7.82"
+          },
+          {
+            "id": "D",
+            "text": "15.0"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q7",
+        "page": 7,
+        "prompt": "Expected number of pink is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q7",
+        "context": "Station 3, Dataset C (Incomplete dominance), Cross RW × RW observed: Red 45, Pink 98, White 57 (Total 200). Expected ratio 1:2:1.",
+        "options": [
+          {
+            "id": "A",
+            "text": "50"
+          },
+          {
+            "id": "B",
+            "text": "80"
+          },
+          {
+            "id": "C",
+            "text": "100"
+          },
+          {
+            "id": "D",
+            "text": "150"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st3_q8",
+        "page": 7,
+        "prompt": "Best evidence-based statement about Dataset C is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st3_q8",
+        "context": "Station 3, Dataset C (Incomplete dominance)",
+        "options": [
+          {
+            "id": "A",
+            "text": "Deviations prove the trait isn't incomplete dominance"
+          },
+          {
+            "id": "B",
+            "text": "χ² comparison can show whether deviations are consistent with sampling error"
+          },
+          {
+            "id": "C",
+            "text": "A 1:2:1 ratio is impossible in genetics"
+          },
+          {
+            "id": "D",
+            "text": "Only dihybrid crosses can be analyzed statistically"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q1",
+        "page": 8,
+        "prompt": "Individual II-1 is affected, but his daughter III-3 is unaffected. This observation rules out which inheritance pattern?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q1",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "Autosomal dominant"
+          },
+          {
+            "id": "B",
+            "text": "Autosomal recessive"
+          },
+          {
+            "id": "C",
+            "text": "X-linked dominant"
+          },
+          {
+            "id": "D",
+            "text": "Mitochondrial"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q2",
+        "page": 8,
+        "prompt": "Individual II-5 is an affected female, but her father (I-1) is unaffected. Assuming a single-gene trait with full penetrance, this rules out:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q2",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "X-linked recessive"
+          },
+          {
+            "id": "B",
+            "text": "Autosomal dominant"
+          },
+          {
+            "id": "C",
+            "text": "Autosomal recessive"
+          },
+          {
+            "id": "D",
+            "text": "X-linked dominant"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q3",
+        "page": 8,
+        "prompt": "For this question ONLY assume II-4 is related to I-2. Individual I-2 is affected, but one of her children (II-4) is unaffected. Assuming full penetrance, this most strongly rules out:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q3",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "Autosomal dominant"
+          },
+          {
+            "id": "B",
+            "text": "Autosomal recessive"
+          },
+          {
+            "id": "C",
+            "text": "X-linked dominant"
+          },
+          {
+            "id": "D",
+            "text": "Mitochondrial inheritance"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q4",
+        "page": 9,
+        "prompt": "Assume the trait is autosomal dominant and fully penetrant. Because I-1 is unaffected and II-4 is unaffected, the genotype of I-2 must be:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q4",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "AA"
+          },
+          {
+            "id": "B",
+            "text": "Aa"
+          },
+          {
+            "id": "C",
+            "text": "aa"
+          },
+          {
+            "id": "D",
+            "text": "Cannot be determined"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q5",
+        "page": 9,
+        "prompt": "Assume the trait is autosomal recessive and fully penetrant. Because I-2 is affected and I-1 is unaffected but they have affected children, I-1 must be:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q5",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "AA"
+          },
+          {
+            "id": "B",
+            "text": "Aa"
+          },
+          {
+            "id": "C",
+            "text": "aa"
+          },
+          {
+            "id": "D",
+            "text": "Cannot be determined"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q6",
+        "page": 9,
+        "prompt": "Assume autosomal recessive inheritance. Individual II-1 is affected. Any unaffected child of II-1 must be:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q6",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "AA"
+          },
+          {
+            "id": "B",
+            "text": "Aa"
+          },
+          {
+            "id": "C",
+            "text": "aa"
+          },
+          {
+            "id": "D",
+            "text": "Either A or B"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q7",
+        "page": 9,
+        "prompt": "Assume autosomal dominant and that II-1 is heterozygous and II-2 is aa. What is the probability that all 3 of their children are unaffected?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q7",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/2"
+          },
+          {
+            "id": "B",
+            "text": "1/4"
+          },
+          {
+            "id": "C",
+            "text": "1/8"
+          },
+          {
+            "id": "D",
+            "text": "1/16"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st4_q8",
+        "page": 9,
+        "prompt": "Assume autosomal recessive, full penetrance, and that II-5 is affected. If II-4 is a carrier, what is the probability that all 4 of their children are affected?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st4_q8",
+        "context": "Station 4 Pedigree",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/4"
+          },
+          {
+            "id": "B",
+            "text": "1/8"
+          },
+          {
+            "id": "C",
+            "text": "1/16"
+          },
+          {
+            "id": "D",
+            "text": "1/32"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q1",
+        "page": 10,
+        "prompt": "After S phase, number of chromatids in a somatic cell is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q1",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "8"
+          },
+          {
+            "id": "B",
+            "text": "16"
+          },
+          {
+            "id": "C",
+            "text": "4"
+          },
+          {
+            "id": "D",
+            "text": "32"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q2",
+        "page": 10,
+        "prompt": "Homologous chromosomes separate during:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q2",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Anaphase I"
+          },
+          {
+            "id": "B",
+            "text": "Anaphase II"
+          },
+          {
+            "id": "C",
+            "text": "Metaphase II"
+          },
+          {
+            "id": "D",
+            "text": "Telophase II"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q3",
+        "page": 10,
+        "prompt": "Crossing over occurs primarily during:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q3",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Prophase I"
+          },
+          {
+            "id": "B",
+            "text": "Metaphase I"
+          },
+          {
+            "id": "C",
+            "text": "Anaphase I"
+          },
+          {
+            "id": "D",
+            "text": "Prophase II"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q4",
+        "page": 10,
+        "prompt": "Number of possible gamete chromosome combinations from independent assortment alone is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q4",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "4"
+          },
+          {
+            "id": "B",
+            "text": "8"
+          },
+          {
+            "id": "C",
+            "text": "16"
+          },
+          {
+            "id": "D",
+            "text": "32"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q5",
+        "page": 10,
+        "prompt": "At metaphase I, how many tetrads are aligned at the metaphase plate?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q5",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "2"
+          },
+          {
+            "id": "B",
+            "text": "4"
+          },
+          {
+            "id": "C",
+            "text": "8"
+          },
+          {
+            "id": "D",
+            "text": "16"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q6",
+        "page": 11,
+        "prompt": "At metaphase II, how many chromosomes are present in each cell for this species?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q6",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "2"
+          },
+          {
+            "id": "B",
+            "text": "4"
+          },
+          {
+            "id": "C",
+            "text": "8"
+          },
+          {
+            "id": "D",
+            "text": "16"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q7",
+        "page": 11,
+        "prompt": "Which statement best distinguishes mitosis from meiosis?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q7",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Mitosis produces haploid cells; meiosis produces diploid cells"
+          },
+          {
+            "id": "B",
+            "text": "Mitosis produces genetically identical daughter cells; meiosis produces genetically diverse haploid gametes"
+          },
+          {
+            "id": "C",
+            "text": "Crossing over occurs in mitosis but not meiosis"
+          },
+          {
+            "id": "D",
+            "text": "DNA replication occurs between meiosis I and meiosis II"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st5_q8",
+        "page": 11,
+        "prompt": "Which event occurs in meiosis I but not in mitosis?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st5_q8",
+        "context": "Station 5, A species has 2n = 8.",
+        "options": [
+          {
+            "id": "A",
+            "text": "Separation of sister chromatids"
+          },
+          {
+            "id": "B",
+            "text": "Alignment of individual chromosomes at the metaphase plate"
+          },
+          {
+            "id": "C",
+            "text": "Synapsis of homologous chromosomes to form tetrads"
+          },
+          {
+            "id": "D",
+            "text": "Replication of DNA during S phase"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q1",
+        "page": 13,
+        "prompt": "How many hydrogen bonds are in this 1200 bp DNA molecule?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q1",
+        "context": "Station 6, Case A: A double-stranded DNA molecule is 1200 bp long. Its overall base composition includes 18% G.",
+        "options": [
+          {
+            "id": "A",
+            "text": "2400"
+          },
+          {
+            "id": "B",
+            "text": "2688"
+          },
+          {
+            "id": "C",
+            "text": "2832"
+          },
+          {
+            "id": "D",
+            "text": "3600"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q2",
+        "page": 13,
+        "prompt": "A phosphodiester bond forms between the:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q2",
+        "context": "Station 6",
+        "options": [
+          {
+            "id": "A",
+            "text": "5′ phosphate of one nucleotide and 3′ OH of the next"
+          },
+          {
+            "id": "B",
+            "text": "base of one nucleotide and sugar of the next"
+          },
+          {
+            "id": "C",
+            "text": "phosphate groups of adjacent nucleotides"
+          },
+          {
+            "id": "D",
+            "text": "3′ OH groups of adjacent nucleotides"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q3",
+        "page": 13,
+        "prompt": "What mRNA sequence is produced from the template strand?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q3",
+        "context": "Station 6, Case B: Template strand: 3′– TAC TTT GGC AGA CTT –5′",
+        "options": [
+          {
+            "id": "A",
+            "text": "5′– AUG AAA CCG UCU GAA –3′"
+          },
+          {
+            "id": "B",
+            "text": "5′– UAC UUU GGC AGA CUU –3′"
+          },
+          {
+            "id": "C",
+            "text": "5′– AUG TTT GGC AGA CTT –3′"
+          },
+          {
+            "id": "D",
+            "text": "5′– CAU UUU GGC UCU GAA –3′"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q4",
+        "page": 13,
+        "prompt": "Using the codon key, the peptide produced from the mRNA in Q3 is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q4",
+        "context": "Station 6, Case B",
+        "options": [
+          {
+            "id": "A",
+            "text": "Met–Lys–Pro–Ser–Glu"
+          },
+          {
+            "id": "B",
+            "text": "Met–Phe–Gly–Arg–Leu"
+          },
+          {
+            "id": "C",
+            "text": "Tyr–Lys–Pro–Ser–Glu"
+          },
+          {
+            "id": "D",
+            "text": "Met–Lys–Pro–Ser–Stop"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q5",
+        "page": 13,
+        "prompt": "In ideal PCR, each cycle doubles the number of target DNA molecules. Starting with 1 double-stranded target molecule, how many copies are present after 6 cycles (ideal doubling)?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q5",
+        "context": "Station 6, Case C",
+        "options": [
+          {
+            "id": "A",
+            "text": "12"
+          },
+          {
+            "id": "B",
+            "text": "32"
+          },
+          {
+            "id": "C",
+            "text": "64"
+          },
+          {
+            "id": "D",
+            "text": "128"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q6",
+        "page": 14,
+        "prompt": "What is the expected PCR amplicon length (bp)?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q6",
+        "context": "Station 6, Case C: Forward primer 145-164, Reverse primer 612-593",
+        "options": [
+          {
+            "id": "A",
+            "text": "448"
+          },
+          {
+            "id": "B",
+            "text": "468"
+          },
+          {
+            "id": "C",
+            "text": "488"
+          },
+          {
+            "id": "D",
+            "text": "612"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q7",
+        "page": 14,
+        "prompt": "All three PCR reactions used the same master mix (primers, polymerase, dNTPs, Mg²•) and the same cycling conditions; only the DNA template added differed. Lane 3 (Sample B) shows no band. Most likely explanation is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q7",
+        "context": "Station 6, Case C",
+        "options": [
+          {
+            "id": "A",
+            "text": "No template DNA was added to tube B"
+          },
+          {
+            "id": "B",
+            "text": "The ladder was loaded incorrectly"
+          },
+          {
+            "id": "C",
+            "text": "PCR cannot amplify dsDNA"
+          },
+          {
+            "id": "D",
+            "text": "Nondisjunction occurred during PCR"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "st6_q8",
+        "page": 14,
+        "prompt": "A DNA-binding repressor binds near a gene's promoter and blocks RNA polymerase binding. The most direct effect is:",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question st6_q8",
+        "context": "Station 6",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increased transcription initiation"
+          },
+          {
+            "id": "B",
+            "text": "Decreased transcription initiation"
+          },
+          {
+            "id": "C",
+            "text": "Increased translation termination"
+          },
+          {
+            "id": "D",
+            "text": "Decreased DNA replication"
+          }
+        ],
+        "multiple": false
+      }
+    ],
+    "keys": {
+      "st1_q1": {
+        "correctOption": "A"
+      },
+      "st1_q2": {
+        "correctOption": "A"
+      },
+      "st1_q3": {
+        "correctOption": "A"
+      },
+      "st1_q4": {
+        "correctOption": "B"
+      },
+      "st1_q5": {
+        "correctOption": "B"
+      },
+      "st1_q6": {
+        "correctOption": "B"
+      },
+      "st1_q7": {
+        "correctOption": "A"
+      },
+      "st1_q8": {
+        "correctOption": "C"
+      },
+      "st2_q1": {
+        "correctOption": "C"
+      },
+      "st2_q2": {
+        "correctOption": "C"
+      },
+      "st2_q3": {
+        "correctOption": "B"
+      },
+      "st2_q4": {
+        "correctOption": "C"
+      },
+      "st2_q5": {
+        "correctOption": "C"
+      },
+      "st2_q6": {
+        "correctOption": "A"
+      },
+      "st2_q7": {
+        "correctOption": "B"
+      },
+      "st2_q8": {
+        "correctOption": "B"
+      },
+      "st3_q1": {
+        "correctOption": "C"
+      },
+      "st3_q2": {
+        "correctOption": "A"
+      },
+      "st3_q3": {
+        "correctOption": "A"
+      },
+      "st3_q4": {
+        "correctOption": "B"
+      },
+      "st3_q5": {
+        "correctOption": "B"
+      },
+      "st3_q6": {
+        "correctOption": "A"
+      },
+      "st3_q7": {
+        "correctOption": "C"
+      },
+      "st3_q8": {
+        "correctOption": "B"
+      },
+      "st4_q1": {
+        "correctOption": "C"
+      },
+      "st4_q2": {
+        "correctOption": "A"
+      },
+      "st4_q3": {
+        "correctOption": "D"
+      },
+      "st4_q4": {
+        "correctOption": "B"
+      },
+      "st4_q5": {
+        "correctOption": "B"
+      },
+      "st4_q6": {
+        "correctOption": "B"
+      },
+      "st4_q7": {
+        "correctOption": "C"
+      },
+      "st4_q8": {
+        "correctOption": "C"
+      },
+      "st5_q1": {
+        "correctOption": "B"
+      },
+      "st5_q2": {
+        "correctOption": "A"
+      },
+      "st5_q3": {
+        "correctOption": "A"
+      },
+      "st5_q4": {
+        "correctOption": "C"
+      },
+      "st5_q5": {
+        "correctOption": "B"
+      },
+      "st5_q6": {
+        "correctOption": "B"
+      },
+      "st5_q7": {
+        "correctOption": "B"
+      },
+      "st5_q8": {
+        "correctOption": "C"
+      },
+      "st6_q1": {
+        "correctOption": "C"
+      },
+      "st6_q2": {
+        "correctOption": "A"
+      },
+      "st6_q3": {
+        "correctOption": "A"
+      },
+      "st6_q4": {
+        "correctOption": "A"
+      },
+      "st6_q5": {
+        "correctOption": "C"
+      },
+      "st6_q6": {
+        "correctOption": "B"
+      },
+      "st6_q7": {
+        "correctOption": "A"
+      },
+      "st6_q8": {
+        "correctOption": "B"
+      }
+    },
+    "questionCount": 48,
+    "maxScore": 48,
+    "paperUrl": "/practice/scioly-athvm0bz4zq-b/test.pdf",
+    "keyUrl": "/practice/scioly-athvm0bz4zq-b/key.pdf",
+    "supplementUrl": "/practice/scioly-athvm0bz4zq-b/images.pdf"
+  },
+  {
+    "sourceUrl": "https://scioly.org/tests/6Hj-3avSUYE",
+    "division": "B",
+    "eventId": "remote-sensing",
+    "competition": "Berkeley Invitational",
+    "year": 2026,
+    "level": null,
+    "season": 2027,
+    "difficulty": "Hard",
+    "difficultyReason": "Forty questions across nine paper pages use a separate image sheet, multi-part calculations and explanations, and a 78-point published rubric.",
+    "topics": [
+      "electromagnetic radiation and atmospheric scattering",
+      "active and passive sensing, radar altimetry and satellite instruments",
+      "satellite orbits and spatial, temporal, radiometric and spectral resolution",
+      "aerosols, clouds, and radiative balance",
+      "Sentinel-2 false-color imagery, NDVI, NDWI, and land-cover classification"
+    ],
+    "topicMatch": "different",
+    "alignment": "Most topics overlap the 2027 Division B Remote Sensing rules, including satellite imagery, atmospheric effects, resolution, and vegetation/water indices. The paper's quantitative Snell's-law refraction item exceeds the 2027 B rules' starred-equation scope, so this is marked as a different-topic practice test.",
+    "scoringBasis": "The test cover states 78 points. Questions 1–40 have printed point values in the paper/key; the 0-point dynamic CO2 tiebreaker is excluded. The 40 scores sum to 78.",
+    "instructions": "Use the complete original paper and any supplements. Answer all labeled parts.",
+    "id": "scioly-6hj-3avsuye-b",
+    "sourceId": "6Hj-3avSUYE",
+    "reviewedOn": "2026-10-15",
+    "gradingMode": "published-key",
+    "minutes": 50,
+    "rulesUrl": "/rules/2027/b/remote-sensing.pdf",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "page": 2,
+        "prompt": "The blue color of the sky is primarily derived from what type of scattering? What conditions are required for this type of scattering to occur? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 1",
+        "context": "Scattering physics"
+      },
+      {
+        "id": "2",
+        "page": 2,
+        "prompt": "Identify the most appropriate method of imaging for each of the following scenarios, choosing from: I) Active sensing II) Whisk broom passive sensing III) Push broom passive sensing; each term may be used multiple times or none at all. (4)\n\n_____ An aircraft is rapidly flying over a field and wants to image the vegetation underneath.\n_____ A satellite in geostationary orbit wants to vertically profile clouds in order to predict rainfall.\n_____ Bob wants to build his own remote sensor. He is financially limited but wants a flexible sensor that can scan various specialized geometry or terrains.\n_____ Alice also wants a remote sensor, but she wants whichever option that can provide the highest resolution.",
+        "type": "frq",
+        "points": 4,
+        "label": "Question 2",
+        "context": "Imaging methods scenarios"
+      },
+      {
+        "id": "3",
+        "page": 2,
+        "prompt": "What are two ways that remote sensing can be used in forecasting volcanic eruptions? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 3",
+        "context": "Volcano forecasting"
+      },
+      {
+        "id": "4",
+        "page": 2,
+        "prompt": "A beam of light enters from air (index of refraction = 1.0) to a layer of peculiar air with index of refraction of 1.25 at an angle of 60º from the normal. At what angle from the normal would the light beam emerge from the peculiar air back into air, if at all? Show your work or reasoning. (3)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 4",
+        "context": "Refraction physics problem"
+      },
+      {
+        "id": "5",
+        "page": 3,
+        "prompt": "What units are the margins of the map labeled with? (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 5",
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "6",
+        "page": 3,
+        "prompt": "What remote sensing technique is primarily used to obtain this image? Briefly explain how this technique is able to measure the elevation of the ground. (3)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 6",
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "7",
+        "page": 3,
+        "prompt": "What region of the electromagnetic spectrum does this technique primarily operate in? (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 7",
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "8",
+        "page": 3,
+        "prompt": "Name something else that this technique could be good for measuring. (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 8",
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "9",
+        "page": 3,
+        "prompt": "What is the overall trend of this region’s change in elevation?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 9",
+        "context": "Use Image 1, Taiwan region",
+        "options": [
+          {
+            "id": "a",
+            "text": "Increase"
+          },
+          {
+            "id": "b",
+            "text": "Decrease"
+          },
+          {
+            "id": "c",
+            "text": "Constant"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "10",
+        "page": 3,
+        "prompt": "What is a likely anthropogenic cause for the change you selected in the previous question? Briefly explain the mechanism through which it occurs. (3)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 10",
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "11",
+        "page": 4,
+        "prompt": "List two natural and two anthropogenic sources of aerosols on Earth. (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 11",
+        "context": "Aerosols sources"
+      },
+      {
+        "id": "12",
+        "page": 4,
+        "prompt": "Refer to Image 2, which depicts aerosol hotspots across the globe during January and July. Match the months to each image and give one reason of how you can tell. (2)\n\n2a: __________\n2b: __________",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 12",
+        "context": "Aerosols global hotspots"
+      },
+      {
+        "id": "13",
+        "page": 4,
+        "prompt": "What instrument on Terra took these images? How does it physically measure aerosol concentration? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 13",
+        "context": "Aerosol instrument on Terra"
+      },
+      {
+        "id": "14",
+        "page": 4,
+        "prompt": "Explain the Twomey effect. Be sure to explain how the addition of aerosols influences clouds and ultimately Earth’s radiative balance. (3)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 14",
+        "context": "Twomey effect"
+      },
+      {
+        "id": "15",
+        "page": 4,
+        "prompt": "Explain how the opposite of what you described above might be true (e.g. if you previously concluded the Twomey effect states aerosols cool the Earth, now propose a process by which aerosols can warm the Earth, and vice versa). (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 15",
+        "context": "Aerosol warming mechanism"
+      },
+      {
+        "id": "16",
+        "page": 5,
+        "prompt": "How is false color implemented in the context of remote sensing (as opposed to true color)? Which image(s) between 3a-c display(s) false coloration, if any? (3)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 16",
+        "context": "Sentinel-2 Bay Area images"
+      },
+      {
+        "id": "17",
+        "page": 5,
+        "prompt": "What orbit is Sentinel-2 in and why might that be helpful for its task? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 17",
+        "context": "Sentinel-2 orbit"
+      },
+      {
+        "id": "18",
+        "page": 5,
+        "prompt": "Sentinel-2 has a spatial resolution of 10 meters in Image 3a. A square of what area is covered by each pixel? Assuming the images provided are 32.5 km by 53 km, what is overall resolution of Image 3a? Show your work. (4)",
+        "type": "frq",
+        "points": 4,
+        "label": "Question 18",
+        "context": "Sentinel-2 spatial resolution"
+      },
+      {
+        "id": "19",
+        "page": 5,
+        "prompt": "Match the following descriptions of Sentinel-2 to the type of resolution being described, choosing from: Temporal, Radiometric, Spectral. (3)\n\n___________ Sentinel-2’s 12-bit resolution allows it to distinguish between 4,096 levels of brightness\n___________ Sentinel-2 has 13 bands, covering the electromagnetic spectrum from 442 nm to 2202.4 nm\n___________ Sentinel-2 revisits the same location every 5 days",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 19",
+        "context": "Sentinel-2 resolutions matching"
+      },
+      {
+        "id": "20",
+        "page": 5,
+        "prompt": "What general region of the electromagnetic spectrum is used to produce Image 3a? (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 20",
+        "context": "Sentinel-2 spectrum"
+      },
+      {
+        "id": "21",
+        "page": 6,
+        "prompt": "Are the clouds displayed near the top right of Image 3a high or low clouds? Do you expect them to contribute to a net warming or cooling of the surface? Explain. (3)",
+        "type": "frq",
+        "points": 3,
+        "label": "Question 21",
+        "context": "Cloud effects on Image 3a"
+      },
+      {
+        "id": "22",
+        "page": 6,
+        "prompt": "In Image 3a, what color generally corresponds to the densest vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 22",
+        "context": "Image 3a vegetation color",
+        "options": [
+          {
+            "id": "a",
+            "text": "Brown"
+          },
+          {
+            "id": "b",
+            "text": "Yellow"
+          },
+          {
+            "id": "c",
+            "text": "White"
+          },
+          {
+            "id": "d",
+            "text": "Blue"
+          },
+          {
+            "id": "e",
+            "text": "Green"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "23",
+        "page": 6,
+        "prompt": "In Image 3b, what color generally corresponds to the densest vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 23",
+        "context": "Image 3b vegetation color",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red"
+          },
+          {
+            "id": "b",
+            "text": "Yellow"
+          },
+          {
+            "id": "c",
+            "text": "Orange"
+          },
+          {
+            "id": "d",
+            "text": "Light green"
+          },
+          {
+            "id": "e",
+            "text": "Dark green"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "24",
+        "page": 6,
+        "prompt": "In Image 3c, what generally color corresponds to the densest vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 24",
+        "context": "Image 3c vegetation color",
+        "options": [
+          {
+            "id": "a",
+            "text": "White"
+          },
+          {
+            "id": "b",
+            "text": "Blue"
+          },
+          {
+            "id": "c",
+            "text": "Light green"
+          },
+          {
+            "id": "d",
+            "text": "Dark green"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "25",
+        "page": 6,
+        "prompt": "Which of the labeled points on the surface has the highest albedo?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 25",
+        "context": "Surface albedo points",
+        "options": [
+          {
+            "id": "a",
+            "text": "A"
+          },
+          {
+            "id": "b",
+            "text": "B"
+          },
+          {
+            "id": "c",
+            "text": "C"
+          },
+          {
+            "id": "d",
+            "text": "D"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "26",
+        "page": 6,
+        "prompt": "Place the following electromagnetic regions on the spectrum provided: near infrared (NIR), far infrared (FIR), short-wave infrared (SWIR), mid-wave infrared (MWIR), long-wave infrared (LWIR). (2)\n\nVisible _______ _______ _______ _______ _______ Microwave",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 26",
+        "context": "EM spectrum placement"
+      },
+      {
+        "id": "27",
+        "page": 7,
+        "prompt": "Image 3b utilizes the NDVI to display vegetation health. What does NDVI stand for? (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 27",
+        "context": "NDVI question"
+      },
+      {
+        "id": "28",
+        "page": 7,
+        "prompt": "The NDVI calculation requires the visible red and what region of the infrared spectrum as listed in the previous question? What bands do they correspond to, respectively? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 28",
+        "context": "NDVI calculation bands"
+      },
+      {
+        "id": "29",
+        "page": 7,
+        "prompt": "The data utilized in NDVI primarily relies on which of the following interactions of light with vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 29",
+        "context": "NDVI light interaction",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reflection"
+          },
+          {
+            "id": "b",
+            "text": "Refraction"
+          },
+          {
+            "id": "c",
+            "text": "Diffraction"
+          },
+          {
+            "id": "d",
+            "text": "Scattering"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "30",
+        "page": 7,
+        "prompt": "Image 3c utilizes the NDWI, a similar index for water instead of vegetation. It can be calculated using the following formula for Sentinel-2: NDWI = (Band 3 - Band 8) / (Band 3 + Band 8). Circle the words that best complete the following sentence: (2)\n\nIf Band 3 receives a much stronger signal than Band 8, the NDWI will be (low/high), indicating (water/dry land). Band 8 is (longer/shorter) in wavelength than Band 3, as water produces stronger signal in (longer/shorter) wavelengths compared to dry land.",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 30",
+        "context": "NDWI sentence completion"
+      },
+      {
+        "id": "31",
+        "page": 7,
+        "prompt": "What is the range of all possible values for the NDWI? In other words, what are the lowest and highest possible NDWI values? (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 31",
+        "context": "NDWI range"
+      },
+      {
+        "id": "32",
+        "page": 7,
+        "prompt": "What color in image 3c has the lowest NDWI value? (1)",
+        "type": "frq",
+        "points": 1,
+        "label": "Question 32",
+        "context": "Image 3c lowest NDWI color"
+      },
+      {
+        "id": "33",
+        "page": 8,
+        "prompt": "Which of the following best identifies the features circled in E on the maps?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 33",
+        "context": "Map feature E identification",
+        "options": [
+          {
+            "id": "a",
+            "text": "Greenbelts"
+          },
+          {
+            "id": "b",
+            "text": "Buildings"
+          },
+          {
+            "id": "c",
+            "text": "Crops field"
+          },
+          {
+            "id": "d",
+            "text": "Artificial ponds"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "34",
+        "page": 8,
+        "prompt": "Use evidence from at least 2 images between 3a-c to support your choice above. (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 34",
+        "context": "Supporting evidence for feature E"
+      },
+      {
+        "id": "35",
+        "page": 8,
+        "prompt": "Other than point B, which labeled point/region would you expect to have the highest risk of flooding (choose from A, C, D, E)? Briefly explain your answer. (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 35",
+        "context": "Flood risk assessment"
+      },
+      {
+        "id": "36",
+        "page": 8,
+        "prompt": "At which labeled point would you expect to have the lowest variation in daily temperature? Why? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 36",
+        "context": "Temperature variation point"
+      },
+      {
+        "id": "37",
+        "page": 8,
+        "prompt": "Notice the main river on the left. Which general direction is it flowing in?",
+        "type": "mcq",
+        "points": 1,
+        "label": "Question 37",
+        "context": "River flow direction",
+        "options": [
+          {
+            "id": "a",
+            "text": "Northeast"
+          },
+          {
+            "id": "b",
+            "text": "Northwest"
+          },
+          {
+            "id": "c",
+            "text": "Southeast"
+          },
+          {
+            "id": "d",
+            "text": "Southwest"
+          }
+        ],
+        "multiple": false
+      },
+      {
+        "id": "38",
+        "page": 8,
+        "prompt": "Notice that the majority of the branches of the river are to the west side of the river. Why might that be the case? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 38",
+        "context": "River branch asymmetry"
+      },
+      {
+        "id": "39",
+        "page": 9,
+        "prompt": "Refer to image Image 4d, which shows the annual NLCD land classification by the USGS in 2024. Assign a Land Cover Class, as below, to each labeled point in Image 4d. (4)\n\na. Developed ____ Point W\nb. Barren ____ Point X\nc. Herbaceous ____ Point Y\nd. Shrubland ____ Point Z\ne. Cultivated\nf. Wetland",
+        "type": "frq",
+        "points": 4,
+        "label": "Question 39",
+        "context": "The original question says images 4d/4e, but the supplied image sheet labels the corresponding land-cover maps 3d (2024) and 3e (2004). Use those maps."
+      },
+      {
+        "id": "40",
+        "page": 9,
+        "prompt": "Compare Image 4d with 4e, which is the NLCD classification for 2004. What are two differences that you notice? (2)",
+        "type": "frq",
+        "points": 2,
+        "label": "Question 40",
+        "context": "The original question says images 4d/4e, but the supplied image sheet labels the corresponding land-cover maps 3d (2024) and 3e (2004). Use those maps."
+      }
+    ],
+    "keys": {
+      "1": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Rayleigh scattering",
+            "points": 1.0,
+            "accepted": [
+              "Rayleigh scattering"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "particle size much smaller than wavelength",
+            "points": 1.0,
+            "accepted": [
+              "particle size is much smaller than the wavelength of the light",
+              "particle size much smaller than wavelength"
+            ]
+          }
+        ]
+      },
+      "2": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "III",
+            "points": 1.0,
+            "accepted": [
+              "III"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "I",
+            "points": 1.0,
+            "accepted": [
+              "I"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "II",
+            "points": 1.0,
+            "accepted": [
+              "II"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "I",
+            "points": 1.0,
+            "accepted": [
+              "I"
+            ]
+          }
+        ]
+      },
+      "3": {
+        "criteria": [
+          {
+            "id": "method-1",
+            "answer": "First valid observation: ground deformation, surface temperature change, or gas emissions/content",
+            "points": 0.5
+          },
+          {
+            "id": "instrument-1",
+            "answer": "Matching instrument for first observation: radar/altimetry, radiometer/pyrometer/thermometer, or spectrometer",
+            "points": 0.5
+          },
+          {
+            "id": "method-2",
+            "answer": "Second distinct valid observation from the published key",
+            "points": 0.5
+          },
+          {
+            "id": "instrument-2",
+            "answer": "Matching instrument for second observation",
+            "points": 0.5
+          }
+        ]
+      },
+      "4": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "60 degrees",
+            "points": 1.0,
+            "accepted": [
+              "60",
+              "60 degrees",
+              "60°"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Because the incident and final media are both air with the same refractive index, the exiting angle equals 60 degrees; accept equivalent Snell's-law work.",
+            "points": 2.0,
+            "accepted": [
+              "initial and final media have the same indices of refraction",
+              "shows work for arriving at 60"
+            ]
+          }
+        ]
+      },
+      "5": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Degrees",
+            "points": 0.5,
+            "accepted": [
+              "Degrees",
+              "Degree"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Minutes",
+            "points": 0.5,
+            "accepted": [
+              "arcminutes",
+              "minutes of arc",
+              "minutes"
+            ]
+          }
+        ]
+      },
+      "6": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Technique name",
+            "points": 1.0,
+            "accepted": [
+              "Radar altimetry"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Sends pulses towards ground",
+            "points": 1.0,
+            "accepted": [
+              "sends pulses towards the ground",
+              "emits pulses"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Measures time delay",
+            "points": 1.0,
+            "accepted": [
+              "measures the time it takes the pulse to bounce off the ground back to the sensor",
+              "measures travel time"
+            ]
+          }
+        ]
+      },
+      "7": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Microwave",
+            "points": 1.0,
+            "accepted": [
+              "Microwave",
+              "Microwaves"
+            ]
+          }
+        ]
+      },
+      "8": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Reasonable radar measurement",
+            "points": 1.0,
+            "accepted": [
+              "Cloud or precipitation profiles",
+              "anti-aircraft guns",
+              "probing beneath the ground/ice",
+              "radar altimeters use"
+            ]
+          }
+        ]
+      },
+      "9": {
+        "correctOption": "b"
+      },
+      "10": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Groundwater extraction",
+            "points": 1.0,
+            "accepted": [
+              "Groundwater extraction faster than the rate of replenishment",
+              "excessive groundwater pumping"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Aquifer compaction",
+            "points": 2.0,
+            "accepted": [
+              "causing aquifer pores to empty and collapse",
+              "lowering surface elevation due to aquifer collapse"
+            ]
+          }
+        ]
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Natural source 1",
+            "points": 0.5,
+            "accepted": [
+              "volcanic eruptions",
+              "forest fires",
+              "wind blowing dust into the air",
+              "plant/fungal emissions",
+              "sea spray"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Natural source 2",
+            "points": 0.5,
+            "accepted": [
+              "volcanic eruptions",
+              "forest fires",
+              "wind blowing dust into the air",
+              "plant/fungal emissions",
+              "sea spray"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Anthropogenic source 1",
+            "points": 0.5,
+            "accepted": [
+              "burning fossil fuels",
+              "refrigerants",
+              "cloud seeding",
+              "transportation emissions"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Anthropogenic source 2",
+            "points": 0.5,
+            "accepted": [
+              "burning fossil fuels",
+              "refrigerants",
+              "cloud seeding",
+              "transportation emissions"
+            ]
+          }
+        ]
+      },
+      "12": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "2a and 2b correct identification",
+            "points": 1.0,
+            "accepted": [
+              "2a: July, 2b: January",
+              "July for 2a and January for 2b"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reasoning",
+            "points": 1.0,
+            "accepted": [
+              "monsoon season in northern hemisphere",
+              "ITCZ is further north in 2a",
+              "more human activity or plant emissions during summer",
+              "more fires tend to occur during summer",
+              "data range covers more of northern hemisphere in 2a"
+            ]
+          }
+        ]
+      },
+      "13": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Instrument name",
+            "points": 1.0,
+            "accepted": [
+              "MODIS",
+              "Moderate Resolution Imaging Spectroradiometer"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Measurement method",
+            "points": 1.0,
+            "accepted": [
+              "measures aerosol optical depth",
+              "computed from spectral analysis reflected sunlight"
+            ]
+          }
+        ]
+      },
+      "14": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Smaller droplets / condensation nuclei",
+            "points": 1.0,
+            "accepted": [
+              "smaller droplet sizes",
+              "acting as condensation nuclei"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reflect more sunlight",
+            "points": 1.0,
+            "accepted": [
+              "reflect more sunlight",
+              "higher albedo"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Cooling effect",
+            "points": 1.0,
+            "accepted": [
+              "cools the Earth",
+              "cooling of Earth"
+            ]
+          }
+        ]
+      },
+      "15": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Dark aerosols / soot",
+            "points": 1.0,
+            "accepted": [
+              "Dark aerosols such as dust or soot",
+              "black carbon"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Absorb heat / warm atmosphere",
+            "points": 1.0,
+            "accepted": [
+              "absorb heat and reradiate it to heat up the surrounding atmosphere",
+              "absorb solar radiation"
+            ]
+          }
+        ]
+      },
+      "16": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "False color definition",
+            "points": 2.0,
+            "accepted": [
+              "Colors assigned to the image are not what they directly appear as in real life",
+              "non-optical radiation mapped to visible colors"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Identify images",
+            "points": 1.0,
+            "accepted": [
+              "3b and 3c",
+              "3b, 3c"
+            ]
+          }
+        ]
+      },
+      "17": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sun-synchronous",
+            "points": 1.0,
+            "accepted": [
+              "Sun-synchronous",
+              "Sun synchronous"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Consistent lighting",
+            "points": 1.0,
+            "accepted": [
+              "passes over the same region at the same local solar time",
+              "consistent lighting conditions for comparison"
+            ]
+          }
+        ]
+      },
+      "18": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Area per pixel calculation",
+            "points": 2.0,
+            "accepted": [
+              "(10m)^2 = 100 m2",
+              "100 m2"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Work",
+            "points": 1.0,
+            "accepted": [
+              "32500m*53000m/100m2",
+              "32500/10*53000/10"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Solution",
+            "points": 1.0,
+            "accepted": [
+              "17225000",
+              "3250 pixels x 5300 pixels",
+              "3250 x 5300"
+            ]
+          }
+        ]
+      },
+      "19": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Radiometric",
+            "points": 1.0,
+            "accepted": [
+              "Radiometric"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Spectral",
+            "points": 1.0,
+            "accepted": [
+              "Spectral"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Temporal",
+            "points": 1.0,
+            "accepted": [
+              "Temporal"
+            ]
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Visible",
+            "points": 1.0,
+            "accepted": [
+              "Visible",
+              "Visible light"
+            ]
+          }
+        ]
+      },
+      "21": {
+        "criteria": [
+          {
+            "id": "cloud-height",
+            "answer": "High clouds",
+            "points": 1
+          },
+          {
+            "id": "net-effect",
+            "answer": "Net warming of the surface",
+            "points": 1
+          },
+          {
+            "id": "shortwave",
+            "answer": "Thin high clouds reflect incoming sunlight poorly",
+            "points": 0.5
+          },
+          {
+            "id": "longwave",
+            "answer": "They absorb and reradiate outgoing longwave radiation",
+            "points": 0.5
+          }
+        ]
+      },
+      "22": {
+        "correctOption": "e"
+      },
+      "23": {
+        "correctOption": "e"
+      },
+      "24": {
+        "correctOption": "a"
+      },
+      "25": {
+        "correctOption": "d"
+      },
+      "26": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Order from visible toward microwave: NIR, SWIR, MWIR, LWIR, FIR; start from 2 points and subtract 0.5 for each wrong placement.",
+            "points": 2.0,
+            "accepted": [
+              "NIR, SWIR, MWIR, LWIR, FIR",
+              "Near Infrared, Short-wave infrared, Mid-wave infrared, Long-wave infrared, Far infrared"
+            ]
+          }
+        ]
+      },
+      "27": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Normalized Difference Vegetation Index",
+            "points": 1.0,
+            "accepted": [
+              "Normalized Difference Vegetation Index"
+            ]
+          }
+        ]
+      },
+      "28": {
+        "criteria": [
+          {
+            "id": "region",
+            "answer": "Near infrared (NIR)",
+            "points": 1
+          },
+          {
+            "id": "red-band",
+            "answer": "Visible red is Sentinel-2 band B04",
+            "points": 0.5
+          },
+          {
+            "id": "nir-band",
+            "answer": "NIR is Sentinel-2 band B08",
+            "points": 0.5
+          }
+        ]
+      },
+      "29": {
+        "correctOption": "a"
+      },
+      "30": {
+        "criteria": [
+          {
+            "id": "index",
+            "answer": "High NDWI",
+            "points": 0.5
+          },
+          {
+            "id": "surface",
+            "answer": "Water",
+            "points": 0.5
+          },
+          {
+            "id": "band-comparison",
+            "answer": "Band 8 has a longer wavelength than Band 3",
+            "points": 0.5
+          },
+          {
+            "id": "water-signal",
+            "answer": "Water produces a stronger signal at shorter wavelengths than dry land",
+            "points": 0.5
+          }
+        ]
+      },
+      "31": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "-1 to 1",
+            "points": 1.0,
+            "accepted": [
+              "-1 to 1",
+              "[-1, 1]"
+            ]
+          }
+        ]
+      },
+      "32": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "White",
+            "points": 1.0,
+            "accepted": [
+              "White"
+            ]
+          }
+        ]
+      },
+      "33": {
+        "correctOption": "d"
+      },
+      "34": {
+        "criteria": [
+          {
+            "id": "image-1",
+            "answer": "First relevant observation from one of images 3a–3c supporting the student's question 33 choice",
+            "points": 1
+          },
+          {
+            "id": "image-2",
+            "answer": "Second relevant observation from a different image among 3a–3c",
+            "points": 1
+          }
+        ]
+      },
+      "35": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Point C",
+            "points": 1.0,
+            "accepted": [
+              "Point C",
+              "C"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reasoning",
+            "points": 1.0,
+            "accepted": [
+              "low elevation",
+              "likely a wetland",
+              "very close to water bodies"
+            ]
+          }
+        ]
+      },
+      "36": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Point B",
+            "points": 1.0,
+            "accepted": [
+              "Point B",
+              "B"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reasoning",
+            "points": 1.0,
+            "accepted": [
+              "water has high heat capacity",
+              "acts as a buffer for temperature changes"
+            ]
+          }
+        ]
+      },
+      "37": {
+        "correctOption": "c"
+      },
+      "38": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Elevation increases to east / hill",
+            "points": 1.0,
+            "accepted": [
+              "elevation increases relatively steeply to the east",
+              "there is a hill to the east"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "West is flat / prevents meandering",
+            "points": 1.0,
+            "accepted": [
+              "prevents meandering channels from developing",
+              "unlike the west that is relatively flat"
+            ]
+          }
+        ]
+      },
+      "39": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Point W",
+            "points": 1.0,
+            "accepted": [
+              "f",
+              "Wetland"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Point X",
+            "points": 1.0,
+            "accepted": [
+              "c",
+              "Herbaceous"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Point Y",
+            "points": 1.0,
+            "accepted": [
+              "e",
+              "Cultivated"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Point Z",
+            "points": 1.0,
+            "accepted": [
+              "a",
+              "Developed"
+            ]
+          }
+        ]
+      },
+      "40": {
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Difference 1",
+            "points": 1.0,
+            "accepted": [
+              "Part of the wetland has become cultivated",
+              "urbanization in the northeast corner",
+              "drying of some permanently flooded areas to become wetlands",
+              "areas of water body becoming barren"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "A second distinct, relevant land-cover change between the 2004 and 2024 maps",
+            "points": 1.0,
+            "accepted": [
+              "Part of the wetland has become cultivated",
+              "urbanization in the northeast corner",
+              "drying of some permanently flooded areas to become wetlands",
+              "areas of water body becoming barren"
+            ]
+          }
+        ]
+      }
+    },
+    "questionCount": 40,
+    "maxScore": 78,
+    "paperUrl": "/practice/scioly-6hj-3avsuye-b/test.pdf",
+    "keyUrl": "/practice/scioly-6hj-3avsuye-b/key.pdf",
+    "supplementUrl": "/practice/scioly-6hj-3avsuye-b/images.pdf"
+  },
+  {
+    "sourceUrl": "https://scioly.org/tests/pwzfkRh8QLI",
+    "division": "B",
+    "eventId": "meteorology",
+    "competition": "Greenbrier Invitational",
+    "year": 2026,
+    "level": null,
+    "season": 2027,
+    "difficulty": "Hard",
+    "difficultyReason": "Twenty written questions require 12 instrument matches, calculations, explanations and storm-scenario analysis under a 50-minute limit; the source assigns 46 points.",
+    "topics": [
+      "atmospheric layers and observational instruments",
+      "wet-bulb temperature, temperature inversions and virga",
+      "fronts, convection, vertical wind shear and single-cell thunderstorms",
+      "precipitation, downdrafts, gusts and local storm impacts"
+    ],
+    "topicMatch": "different",
+    "alignment": "The 2027 Division B rules focus on severe weather and storms. Questions 13–20 overlap that focus, but the paper also spends substantial space on general atmosphere layers, instrument recall and a subsolar-position calculation, so topic alignment is partial.",
+    "scoringBasis": "The original cover prints per-page totals 9, 10, 11, 8 and 8 (46 overall). Questions 1–20 print point values that sum to 46; the separate key supplies each solution.",
+    "instructions": "Answer all 20 written questions. For questions 13–20 use the storm scenarios shown with the question cards and the original paper. Submit the test, then select Auto Grade to evaluate written explanations against the published key.",
+    "id": "scioly-pwzfkrh8qli-b",
+    "sourceId": "pwzfkRh8QLI",
+    "reviewedOn": "2026-10-15",
+    "gradingMode": "published-key",
+    "minutes": 50,
+    "rulesUrl": "/rules/2027/b/meteorology.pdf",
+    "levelEvidence": null,
+    "questions": [
+      {
+        "id": "1",
+        "page": 2,
+        "prompt": "(2 points) Order the following layers of the atmosphere from lowest to highest altitude:\n\n      • Mesosphere\n\n      • Troposphere\n\n      • Exosphere\n\n      • Thermosphere\n\n      • Stratosphere",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 1",
+        "context": ""
+      },
+      {
+        "id": "2",
+        "page": 2,
+        "prompt": "(2 points) Which layer of the atmosphere is the most dense, and why?",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 2",
+        "context": ""
+      },
+      {
+        "id": "3",
+        "page": 2,
+        "prompt": "(3 points) For each layer of the atmosphere, what is the most common pollutant?",
+        "type": "frq",
+        "points": 3.0,
+        "label": "Question 3",
+        "context": ""
+      },
+      {
+        "id": "4",
+        "page": 2,
+        "prompt": "(2 points) How much does the sun’s longitude change with respect to the equator each day?\n\n\n\n\n\n                                        Page 1 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 4",
+        "context": "The paper says ‘longitude’; the key expects approximately 0.4° daily subsolar displacement."
+      },
+      {
+        "id": "5",
+        "page": 3,
+        "prompt": "(2 points) Using your answer from the previous question, what would the longitude of the subsolar spot\n   be on March 30th? Show your work.\n\n\n\n\n\n   For question 6, write the appropriate instrument to monitor the atmospheric condition.\n   There may be more than one correct answer, but there will be only one best answer.",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 5",
+        "context": "The paper says ‘longitude’; the key expects 4° north of the equator on March 30."
+      },
+      {
+        "id": "6",
+        "page": 3,
+        "prompt": "For each listed atmospheric condition, name an appropriate monitoring instrument (0.5 point each): (6 points) Air temperature, atmospheric pressure, relative humidity, wind speed, wind direction, precip-\n    itation amount, cloud base height, solar radiation intensity, atmospheric ozone concentration, particulate\n    matter, vertical temperature profile, and atmospheric water vapor content.",
+        "type": "frq",
+        "points": 6.0,
+        "label": "Question 6",
+        "context": ""
+      },
+      {
+        "id": "7",
+        "page": 3,
+        "prompt": "(2 points) Define and explain the meteorological significance of a wet-bulb temperature\n\n\n\n\n\n                                        Page 2 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 7",
+        "context": ""
+      },
+      {
+        "id": "8",
+        "page": 4,
+        "prompt": "(3 points) At the wet-bulb temperatures 0◦C, 10◦C, and 20◦C, what cloud formations would be expected",
+        "type": "frq",
+        "points": 3.0,
+        "label": "Question 8",
+        "context": ""
+      },
+      {
+        "id": "9",
+        "page": 4,
+        "prompt": "(2 points) What is the most important meteorological condition in order for a green flash to happen,\n   and why?",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 9",
+        "context": ""
+      },
+      {
+        "id": "10",
+        "page": 4,
+        "prompt": "(2 points) Compare and contrast mercury-based and alcohol-based thermometers based on their effec-\n    tiveness at different temperatures",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 10",
+        "context": ""
+      },
+      {
+        "id": "11",
+        "page": 4,
+        "prompt": "(2 points) Which region of the world has the most virga, and why?",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 11",
+        "context": ""
+      },
+      {
+        "id": "12",
+        "page": 4,
+        "prompt": "(2 points) If the Coriolis effect magically disappeared immediately, what would be expected over the\n    course of the next five minutes?\n\n\n\n\n\n                                        Page 3 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:\n\n\nFor questions 13-16, use the following information: On a summer afternoon, a weak surface\nlow and a nearby stationary front allow warm, moist air to pool over a flat inland region.\nDaytime solar heating increases instability, producing scattered cumulus that grow into isolated\nthunderstorms, but weak wind shear prevents storm organization. The storms produce brief\nheavy rain and occasional lightning, with no hail or damaging winds.",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 12",
+        "context": ""
+      },
+      {
+        "id": "13",
+        "page": 5,
+        "prompt": "(1 point) Identify the lifting mechanism responsible for thunderstorm initiation in this scenario.",
+        "type": "frq",
+        "points": 1.0,
+        "label": "Question 13",
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds."
+      },
+      {
+        "id": "14",
+        "page": 5,
+        "prompt": "(2 points) Explain why the thunderstorms remain nonsevere despite the presence of warm, moist air.",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 14",
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds."
+      },
+      {
+        "id": "15",
+        "page": 5,
+        "prompt": "(2 points) Describe how the vertical wind shear profile influences storm type and lifetime in this situa-\n    tion.",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 15",
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds."
+      },
+      {
+        "id": "16",
+        "page": 5,
+        "prompt": "(3 points) If mid-level dry air were introduced into this environment, analyze how precipitation type\n   and downdraft strength might change without necessarily producing severe storms.\n\n\n\n\n\n                                        Page 4 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:\n\n\nUse the following information to answer questions 17-20: As the single-cell thunderstorms\ndevelop, they produce brief, localized heavy rain and occasional lightning strikes, but most\nprecipitation evaporates before reaching the ground in some areas. Gusty downdrafts cre-\nate temporary wind shifts at the surface, and minor puddling occurs in low-lying areas, but\nno flooding develops. The storms quickly dissipate as the updraft collapses, leaving behind\nscattered clouds and a temporary drop in temperature.",
+        "type": "frq",
+        "points": 3.0,
+        "label": "Question 16",
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds."
+      },
+      {
+        "id": "17",
+        "page": 6,
+        "prompt": "(1 point) Identify what meteorological phenomenon is observed when precipitation evaporates before\n    reaching the ground.",
+        "type": "frq",
+        "points": 1.0,
+        "label": "Question 17",
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse."
+      },
+      {
+        "id": "18",
+        "page": 6,
+        "prompt": "(2 points) Explain why surface gusts occur during these short-lived thunderstorms.",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 18",
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse."
+      },
+      {
+        "id": "19",
+        "page": 6,
+        "prompt": "(2 points) Describe how uneven rainfall distribution in this scenario could impact local areas differently.",
+        "type": "frq",
+        "points": 2.0,
+        "label": "Question 19",
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse."
+      },
+      {
+        "id": "20",
+        "page": 6,
+        "prompt": "(3 points) Analyze how the combination of virga and downdrafts affects near-surface temperature and\n    humidity immediately after the storm.\n\n\n\n\n\n                                        Page 5 of 5",
+        "type": "frq",
+        "points": 3.0,
+        "label": "Question 20",
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse."
+      }
+    ],
+    "keys": {
+      "1": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Complete order, lowest to highest: Troposphere, Stratosphere, Mesosphere, Thermosphere, Exosphere. Published key says all or nothing.",
+            "points": 2
+          }
+        ]
+      },
+      "2": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Troposphere is most dense",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Compressed by the weight of atmospheric layers above it",
+            "points": 1
+          }
+        ]
+      },
+      "3": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Troposphere: particulate matter (PM)",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Stratosphere: ozone-depleting substances",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "Mesosphere, thermosphere and exosphere: none",
+            "points": 1
+          }
+        ]
+      },
+      "4": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "0.39° to 0.41° per day, as printed in the key",
+            "points": 2
+          }
+        ]
+      },
+      "5": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "4° north on March 30 using 10 days after March 20 at about 0.4° per day; all or nothing in key",
+            "points": 2
+          }
+        ]
+      },
+      "6": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Surface air temperature: thermometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-2",
+            "answer": "Atmospheric pressure: barometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-3",
+            "answer": "Relative humidity: hygrometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-4",
+            "answer": "Wind speed: anemometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-5",
+            "answer": "Wind direction: wind vane",
+            "points": 0.5
+          },
+          {
+            "id": "part-6",
+            "answer": "Precipitation amount: rain gauge",
+            "points": 0.5
+          },
+          {
+            "id": "part-7",
+            "answer": "Cloud-base height: ceilometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-8",
+            "answer": "Solar radiation intensity: pyranometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-9",
+            "answer": "Atmospheric ozone concentration: Dobson spectrophotometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-10",
+            "answer": "Particulate matter: air-quality monitor",
+            "points": 0.5
+          },
+          {
+            "id": "part-11",
+            "answer": "Vertical temperature profile: radiosonde",
+            "points": 0.5
+          },
+          {
+            "id": "part-12",
+            "answer": "Atmospheric water-vapor content: microwave radiometer",
+            "points": 0.5
+          }
+        ]
+      },
+      "7": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Wet-bulb temperature is the lowest air temperature achievable by evaporative cooling at constant pressure",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Meteorological use: estimate humidity, cloud formation or related conditions",
+            "points": 1
+          }
+        ]
+      },
+      "8": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "At 0°C: nimbus or nimbostratus/stratonimbus",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "At 10°C: cumulus",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "At 20°C: cumulonimbus",
+            "points": 1
+          }
+        ]
+      },
+      "9": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "A temperature inversion",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "It enhances refraction and dispersion of sunlight",
+            "points": 1
+          }
+        ]
+      },
+      "10": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Mercury thermometers are better at higher temperatures",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Alcohol thermometers are better at lower temperatures",
+            "points": 1
+          }
+        ]
+      },
+      "11": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "The Great Basin, Nevada, United States",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Dry lower troposphere and high-elevation basins, with mid-level clouds or precipitation aloft",
+            "points": 1
+          }
+        ]
+      },
+      "12": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Without Coriolis deflection, surface winds move directly from high to low pressure instead of curving",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "One plausible short-term circulation change, such as trade/westerly wind pattern or cyclone rotation; grade generously per key",
+            "points": 1
+          }
+        ]
+      },
+      "13": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Surface heating causes convective lifting, aided by weak convergence along the stationary front",
+            "points": 1
+          }
+        ]
+      },
+      "14": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Weak vertical wind shear prevents organized storms",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Updrafts do not persist long enough for severe intensity despite warm moist instability",
+            "points": 1
+          }
+        ]
+      },
+      "15": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Minimal vertical shear favors single-cell or air-mass thunderstorms",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Their downdrafts cut off updrafts, making storms short-lived",
+            "points": 1
+          }
+        ]
+      },
+      "16": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Mid-level dry air causes more evaporation and evaporative cooling",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Downdrafts strengthen and gustiness increases",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "Precipitation may evaporate as virga or briefly reach ground as heavy rain; weak shear can still prevent severe organization",
+            "points": 1
+          }
+        ]
+      },
+      "17": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Virga",
+            "points": 1
+          }
+        ]
+      },
+      "18": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Cooler-air downdrafts form as updrafts collapse",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "They accelerate to the surface and create short-lived localized gusts",
+            "points": 1
+          }
+        ]
+      },
+      "19": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Some locations receive brief heavy rain and temporary puddles",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Others get little or no surface rain due to virga, producing uneven soil moisture",
+            "points": 1
+          }
+        ]
+      },
+      "20": {
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Virga evaporates, cooling and moistening air aloft",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Downdrafts bring cooler denser air down, temporarily lowering surface temperature and causing gusts",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "Surface humidity may rise slightly as the storm dissipates",
+            "points": 1
+          }
+        ]
+      }
+    },
+    "questionCount": 20,
+    "maxScore": 46.0,
+    "paperUrl": "/practice/scioly-pwzfkrh8qli-b/test.pdf",
+    "keyUrl": "/practice/scioly-pwzfkrh8qli-b/key.pdf"
+  }
+]

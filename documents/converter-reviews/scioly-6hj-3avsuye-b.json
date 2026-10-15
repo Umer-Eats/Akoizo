@@ -1,0 +1,2022 @@
+{
+  "approvalHash": "bbbfa9671a13ca0b458858d27e66480f65da6198e23e7b8a01e708e1a15975cb",
+  "review": {
+    "id": "scioly-6hj-3avsuye-b",
+    "sourceFingerprint": "2bd906efdbf09224e7af47102dc3e5f0cb833666b367aa4ff0f8ad44efaa7632",
+    "metadata": {
+      "id": "scioly-6hj-3avsuye-b",
+      "sourceId": "6Hj-3avSUYE",
+      "sourceUrl": "https://scioly.org/tests/6Hj-3avSUYE",
+      "division": "B",
+      "eventId": "remote-sensing",
+      "competition": "Berkeley Invitational",
+      "year": 2026,
+      "level": null,
+      "levelText": null,
+      "season": 2027,
+      "difficulty": "Hard",
+      "difficultyReason": "Forty questions across nine paper pages use a separate image sheet, multi-part calculations and explanations, and a 78-point published rubric.",
+      "topics": [
+        "electromagnetic radiation and atmospheric scattering",
+        "active and passive sensing, radar altimetry and satellite instruments",
+        "satellite orbits and spatial, temporal, radiometric and spectral resolution",
+        "aerosols, clouds, and radiative balance",
+        "Sentinel-2 false-color imagery, NDVI, NDWI, and land-cover classification"
+      ],
+      "topicMatch": "different",
+      "alignment": "Most topics overlap the 2027 Division B Remote Sensing rules, including satellite imagery, atmospheric effects, resolution, and vegetation/water indices. The paper's quantitative Snell's-law refraction item exceeds the 2027 B rules' starred-equation scope, so this is marked as a different-topic practice test.",
+      "scoringBasis": "The test cover states 78 points. Questions 1–40 have printed point values in the paper/key; the 0-point dynamic CO2 tiebreaker is excluded. The 40 scores sum to 78.",
+      "instructions": "Use the complete original paper and any supplements. Answer all labeled parts."
+    },
+    "fields": [
+      {
+        "id": "1",
+        "page": 2,
+        "prompt": "The blue color of the sky is primarily derived from what type of scattering? What conditions are required for this type of scattering to occur? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Rayleigh scattering, when the particle size is much smaller than the wavelength of the light",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Rayleigh scattering",
+            "points": 1.0,
+            "accepted": [
+              "Rayleigh scattering"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "particle size much smaller than wavelength",
+            "points": 1.0,
+            "accepted": [
+              "particle size is much smaller than the wavelength of the light",
+              "particle size much smaller than wavelength"
+            ]
+          }
+        ],
+        "context": "Scattering physics"
+      },
+      {
+        "id": "2",
+        "page": 2,
+        "prompt": "Identify the most appropriate method of imaging for each of the following scenarios, choosing from: I) Active sensing II) Whisk broom passive sensing III) Push broom passive sensing; each term may be used multiple times or none at all. (4)\n\n_____ An aircraft is rapidly flying over a field and wants to image the vegetation underneath.\n_____ A satellite in geostationary orbit wants to vertically profile clouds in order to predict rainfall.\n_____ Bob wants to build his own remote sensor. He is financially limited but wants a flexible sensor that can scan various specialized geometry or terrains.\n_____ Alice also wants a remote sensor, but she wants whichever option that can provide the highest resolution.",
+        "type": "frq",
+        "points": 4,
+        "answer": "III, I, II, I",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "III",
+            "points": 1.0,
+            "accepted": [
+              "III"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "I",
+            "points": 1.0,
+            "accepted": [
+              "I"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "II",
+            "points": 1.0,
+            "accepted": [
+              "II"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "I",
+            "points": 1.0,
+            "accepted": [
+              "I"
+            ]
+          }
+        ],
+        "context": "Imaging methods scenarios"
+      },
+      {
+        "id": "3",
+        "page": 2,
+        "prompt": "What are two ways that remote sensing can be used in forecasting volcanic eruptions? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Any two distinct methods: detect ground deformation using altimetry/radar; measure surface temperature with a radiometer/pyrometer/thermometer; or measure gas emission/content with a spectrometer. For each method, award 0.5 for the observation and 0.5 for an appropriate instrument.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "method-1",
+            "answer": "First valid observation: ground deformation, surface temperature change, or gas emissions/content",
+            "points": 0.5
+          },
+          {
+            "id": "instrument-1",
+            "answer": "Matching instrument for first observation: radar/altimetry, radiometer/pyrometer/thermometer, or spectrometer",
+            "points": 0.5
+          },
+          {
+            "id": "method-2",
+            "answer": "Second distinct valid observation from the published key",
+            "points": 0.5
+          },
+          {
+            "id": "instrument-2",
+            "answer": "Matching instrument for second observation",
+            "points": 0.5
+          }
+        ],
+        "context": "Volcano forecasting"
+      },
+      {
+        "id": "4",
+        "page": 2,
+        "prompt": "A beam of light enters from air (index of refraction = 1.0) to a layer of peculiar air with index of refraction of 1.25 at an angle of 60º from the normal. At what angle from the normal would the light beam emerge from the peculiar air back into air, if at all? Show your work or reasoning. (3)",
+        "type": "frq",
+        "points": 3,
+        "answer": "The angle is still 60º, because the initial and final media have the same indices of refraction.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "60 degrees",
+            "points": 1.0,
+            "accepted": [
+              "60",
+              "60 degrees",
+              "60°"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Because the incident and final media are both air with the same refractive index, the exiting angle equals 60 degrees; accept equivalent Snell's-law work.",
+            "points": 2.0,
+            "accepted": [
+              "initial and final media have the same indices of refraction",
+              "shows work for arriving at 60"
+            ]
+          }
+        ],
+        "context": "Refraction physics problem"
+      },
+      {
+        "id": "5",
+        "page": 3,
+        "prompt": "What units are the margins of the map labeled with? (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "Degrees, arcminutes or minutes of arc or minutes",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Degrees",
+            "points": 0.5,
+            "accepted": [
+              "Degrees",
+              "Degree"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Minutes",
+            "points": 0.5,
+            "accepted": [
+              "arcminutes",
+              "minutes of arc",
+              "minutes"
+            ]
+          }
+        ],
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "6",
+        "page": 3,
+        "prompt": "What remote sensing technique is primarily used to obtain this image? Briefly explain how this technique is able to measure the elevation of the ground. (3)",
+        "type": "frq",
+        "points": 3,
+        "answer": "Radar altimetry, it sends pulses towards the ground and measures the time it takes the pulse to bounce off the ground back to the sensor.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Technique name",
+            "points": 1.0,
+            "accepted": [
+              "Radar altimetry"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Sends pulses towards ground",
+            "points": 1.0,
+            "accepted": [
+              "sends pulses towards the ground",
+              "emits pulses"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Measures time delay",
+            "points": 1.0,
+            "accepted": [
+              "measures the time it takes the pulse to bounce off the ground back to the sensor",
+              "measures travel time"
+            ]
+          }
+        ],
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "7",
+        "page": 3,
+        "prompt": "What region of the electromagnetic spectrum does this technique primarily operate in? (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "Microwave",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Microwave",
+            "points": 1.0,
+            "accepted": [
+              "Microwave",
+              "Microwaves"
+            ]
+          }
+        ],
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "8",
+        "page": 3,
+        "prompt": "Name something else that this technique could be good for measuring. (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "Any reasonable radar/radar-altimeter use, including cloud or precipitation profiling, probing under ground or ice, or anti-aircraft radar applications.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Reasonable radar measurement",
+            "points": 1.0,
+            "accepted": [
+              "Cloud or precipitation profiles",
+              "anti-aircraft guns",
+              "probing beneath the ground/ice",
+              "radar altimeters use"
+            ]
+          }
+        ],
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "9",
+        "page": 3,
+        "prompt": "What is the overall trend of this region’s change in elevation?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "b",
+        "options": [
+          {
+            "id": "a",
+            "text": "Increase"
+          },
+          {
+            "id": "b",
+            "text": "Decrease"
+          },
+          {
+            "id": "c",
+            "text": "Constant"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "10",
+        "page": 3,
+        "prompt": "What is a likely anthropogenic cause for the change you selected in the previous question? Briefly explain the mechanism through which it occurs. (3)",
+        "type": "frq",
+        "points": 3,
+        "answer": "Groundwater extraction faster than the rate of replenishment, causing aquifer pores to empty and collapse, lowering surface elevation.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Groundwater extraction",
+            "points": 1.0,
+            "accepted": [
+              "Groundwater extraction faster than the rate of replenishment",
+              "excessive groundwater pumping"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Aquifer compaction",
+            "points": 2.0,
+            "accepted": [
+              "causing aquifer pores to empty and collapse",
+              "lowering surface elevation due to aquifer collapse"
+            ]
+          }
+        ],
+        "context": "Use Image 1, Taiwan region"
+      },
+      {
+        "id": "11",
+        "page": 4,
+        "prompt": "List two natural and two anthropogenic sources of aerosols on Earth. (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Natural: volcanic eruptions, forest fires. Anthropogenic: burning fossil fuels, refrigerants.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Natural source 1",
+            "points": 0.5,
+            "accepted": [
+              "volcanic eruptions",
+              "forest fires",
+              "wind blowing dust into the air",
+              "plant/fungal emissions",
+              "sea spray"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Natural source 2",
+            "points": 0.5,
+            "accepted": [
+              "volcanic eruptions",
+              "forest fires",
+              "wind blowing dust into the air",
+              "plant/fungal emissions",
+              "sea spray"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Anthropogenic source 1",
+            "points": 0.5,
+            "accepted": [
+              "burning fossil fuels",
+              "refrigerants",
+              "cloud seeding",
+              "transportation emissions"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Anthropogenic source 2",
+            "points": 0.5,
+            "accepted": [
+              "burning fossil fuels",
+              "refrigerants",
+              "cloud seeding",
+              "transportation emissions"
+            ]
+          }
+        ],
+        "context": "Aerosols sources"
+      },
+      {
+        "id": "12",
+        "page": 4,
+        "prompt": "Refer to Image 2, which depicts aerosol hotspots across the globe during January and July. Match the months to each image and give one reason of how you can tell. (2)\n\n2a: __________\n2b: __________",
+        "type": "frq",
+        "points": 2,
+        "answer": "2a: July, 2b: January, with reasoning about monsoon or ITCZ position.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "2a and 2b correct identification",
+            "points": 1.0,
+            "accepted": [
+              "2a: July, 2b: January",
+              "July for 2a and January for 2b"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reasoning",
+            "points": 1.0,
+            "accepted": [
+              "monsoon season in northern hemisphere",
+              "ITCZ is further north in 2a",
+              "more human activity or plant emissions during summer",
+              "more fires tend to occur during summer",
+              "data range covers more of northern hemisphere in 2a"
+            ]
+          }
+        ],
+        "context": "Aerosols global hotspots"
+      },
+      {
+        "id": "13",
+        "page": 4,
+        "prompt": "What instrument on Terra took these images? How does it physically measure aerosol concentration? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "MODIS (Moderate Resolution Imaging Spectroradiometer), it measures aerosol optical depth computed from spectral analysis of reflected sunlight.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Instrument name",
+            "points": 1.0,
+            "accepted": [
+              "MODIS",
+              "Moderate Resolution Imaging Spectroradiometer"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Measurement method",
+            "points": 1.0,
+            "accepted": [
+              "measures aerosol optical depth",
+              "computed from spectral analysis reflected sunlight"
+            ]
+          }
+        ],
+        "context": "Aerosol instrument on Terra"
+      },
+      {
+        "id": "14",
+        "page": 4,
+        "prompt": "Explain the Twomey effect. Be sure to explain how the addition of aerosols influences clouds and ultimately Earth’s radiative balance. (3)",
+        "type": "frq",
+        "points": 3,
+        "answer": "Aerosols lead to smaller droplet sizes as condensation nuclei, causing clouds to reflect more sunlight and cool the Earth.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Smaller droplets / condensation nuclei",
+            "points": 1.0,
+            "accepted": [
+              "smaller droplet sizes",
+              "acting as condensation nuclei"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reflect more sunlight",
+            "points": 1.0,
+            "accepted": [
+              "reflect more sunlight",
+              "higher albedo"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Cooling effect",
+            "points": 1.0,
+            "accepted": [
+              "cools the Earth",
+              "cooling of Earth"
+            ]
+          }
+        ],
+        "context": "Twomey effect"
+      },
+      {
+        "id": "15",
+        "page": 4,
+        "prompt": "Explain how the opposite of what you described above might be true (e.g. if you previously concluded the Twomey effect states aerosols cool the Earth, now propose a process by which aerosols can warm the Earth, and vice versa). (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Dark aerosols such as dust or soot absorb heat and reradiate it to heat up the surrounding atmosphere.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Dark aerosols / soot",
+            "points": 1.0,
+            "accepted": [
+              "Dark aerosols such as dust or soot",
+              "black carbon"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Absorb heat / warm atmosphere",
+            "points": 1.0,
+            "accepted": [
+              "absorb heat and reradiate it to heat up the surrounding atmosphere",
+              "absorb solar radiation"
+            ]
+          }
+        ],
+        "context": "Aerosol warming mechanism"
+      },
+      {
+        "id": "16",
+        "page": 5,
+        "prompt": "How is false color implemented in the context of remote sensing (as opposed to true color)? Which image(s) between 3a-c display(s) false coloration, if any? (3)",
+        "type": "frq",
+        "points": 3,
+        "answer": "Colors assigned are not what they directly appear as in real life, especially for non-optical radiation such as infrared. Images 3b and 3c.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "False color definition",
+            "points": 2.0,
+            "accepted": [
+              "Colors assigned to the image are not what they directly appear as in real life",
+              "non-optical radiation mapped to visible colors"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Identify images",
+            "points": 1.0,
+            "accepted": [
+              "3b and 3c",
+              "3b, 3c"
+            ]
+          }
+        ],
+        "context": "Sentinel-2 Bay Area images"
+      },
+      {
+        "id": "17",
+        "page": 5,
+        "prompt": "What orbit is Sentinel-2 in and why might that be helpful for its task? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Sun-synchronous, passes over the same region at the same local solar time to ensure consistent lighting conditions for comparison.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sun-synchronous",
+            "points": 1.0,
+            "accepted": [
+              "Sun-synchronous",
+              "Sun synchronous"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Consistent lighting",
+            "points": 1.0,
+            "accepted": [
+              "passes over the same region at the same local solar time",
+              "consistent lighting conditions for comparison"
+            ]
+          }
+        ],
+        "context": "Sentinel-2 orbit"
+      },
+      {
+        "id": "18",
+        "page": 5,
+        "prompt": "Sentinel-2 has a spatial resolution of 10 meters in Image 3a. A square of what area is covered by each pixel? Assuming the images provided are 32.5 km by 53 km, what is overall resolution of Image 3a? Show your work. (4)",
+        "type": "frq",
+        "points": 4,
+        "answer": "100 m^2 per pixel; 3250 pixels x 5300 pixels (or 17,225,000 pixels)",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Area per pixel calculation",
+            "points": 2.0,
+            "accepted": [
+              "(10m)^2 = 100 m2",
+              "100 m2"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Work",
+            "points": 1.0,
+            "accepted": [
+              "32500m*53000m/100m2",
+              "32500/10*53000/10"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Solution",
+            "points": 1.0,
+            "accepted": [
+              "17225000",
+              "3250 pixels x 5300 pixels",
+              "3250 x 5300"
+            ]
+          }
+        ],
+        "context": "Sentinel-2 spatial resolution"
+      },
+      {
+        "id": "19",
+        "page": 5,
+        "prompt": "Match the following descriptions of Sentinel-2 to the type of resolution being described, choosing from: Temporal, Radiometric, Spectral. (3)\n\n___________ Sentinel-2’s 12-bit resolution allows it to distinguish between 4,096 levels of brightness\n___________ Sentinel-2 has 13 bands, covering the electromagnetic spectrum from 442 nm to 2202.4 nm\n___________ Sentinel-2 revisits the same location every 5 days",
+        "type": "frq",
+        "points": 3,
+        "answer": "Radiometric, Spectral, Temporal",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Radiometric",
+            "points": 1.0,
+            "accepted": [
+              "Radiometric"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Spectral",
+            "points": 1.0,
+            "accepted": [
+              "Spectral"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Temporal",
+            "points": 1.0,
+            "accepted": [
+              "Temporal"
+            ]
+          }
+        ],
+        "context": "Sentinel-2 resolutions matching"
+      },
+      {
+        "id": "20",
+        "page": 5,
+        "prompt": "What general region of the electromagnetic spectrum is used to produce Image 3a? (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "Visible",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Visible",
+            "points": 1.0,
+            "accepted": [
+              "Visible",
+              "Visible light"
+            ]
+          }
+        ],
+        "context": "Sentinel-2 spectrum"
+      },
+      {
+        "id": "21",
+        "page": 6,
+        "prompt": "Are the clouds displayed near the top right of Image 3a high or low clouds? Do you expect them to contribute to a net warming or cooling of the surface? Explain. (3)",
+        "type": "frq",
+        "points": 3,
+        "answer": "High clouds, net warming because they are thin and reflect light poorly but absorb and reradiate outgoing longwave radiation.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "cloud-height",
+            "answer": "High clouds",
+            "points": 1
+          },
+          {
+            "id": "net-effect",
+            "answer": "Net warming of the surface",
+            "points": 1
+          },
+          {
+            "id": "shortwave",
+            "answer": "Thin high clouds reflect incoming sunlight poorly",
+            "points": 0.5
+          },
+          {
+            "id": "longwave",
+            "answer": "They absorb and reradiate outgoing longwave radiation",
+            "points": 0.5
+          }
+        ],
+        "context": "Cloud effects on Image 3a"
+      },
+      {
+        "id": "22",
+        "page": 6,
+        "prompt": "In Image 3a, what color generally corresponds to the densest vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "e",
+        "options": [
+          {
+            "id": "a",
+            "text": "Brown"
+          },
+          {
+            "id": "b",
+            "text": "Yellow"
+          },
+          {
+            "id": "c",
+            "text": "White"
+          },
+          {
+            "id": "d",
+            "text": "Blue"
+          },
+          {
+            "id": "e",
+            "text": "Green"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Image 3a vegetation color"
+      },
+      {
+        "id": "23",
+        "page": 6,
+        "prompt": "In Image 3b, what color generally corresponds to the densest vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "e",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red"
+          },
+          {
+            "id": "b",
+            "text": "Yellow"
+          },
+          {
+            "id": "c",
+            "text": "Orange"
+          },
+          {
+            "id": "d",
+            "text": "Light green"
+          },
+          {
+            "id": "e",
+            "text": "Dark green"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Image 3b vegetation color"
+      },
+      {
+        "id": "24",
+        "page": 6,
+        "prompt": "In Image 3c, what generally color corresponds to the densest vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "White"
+          },
+          {
+            "id": "b",
+            "text": "Blue"
+          },
+          {
+            "id": "c",
+            "text": "Light green"
+          },
+          {
+            "id": "d",
+            "text": "Dark green"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Image 3c vegetation color"
+      },
+      {
+        "id": "25",
+        "page": 6,
+        "prompt": "Which of the labeled points on the surface has the highest albedo?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "d",
+        "options": [
+          {
+            "id": "a",
+            "text": "A"
+          },
+          {
+            "id": "b",
+            "text": "B"
+          },
+          {
+            "id": "c",
+            "text": "C"
+          },
+          {
+            "id": "d",
+            "text": "D"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Surface albedo points"
+      },
+      {
+        "id": "26",
+        "page": 6,
+        "prompt": "Place the following electromagnetic regions on the spectrum provided: near infrared (NIR), far infrared (FIR), short-wave infrared (SWIR), mid-wave infrared (MWIR), long-wave infrared (LWIR). (2)\n\nVisible _______ _______ _______ _______ _______ Microwave",
+        "type": "frq",
+        "points": 2,
+        "answer": "NIR, SWIR, MWIR, LWIR, FIR",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Order from visible toward microwave: NIR, SWIR, MWIR, LWIR, FIR; start from 2 points and subtract 0.5 for each wrong placement.",
+            "points": 2.0,
+            "accepted": [
+              "NIR, SWIR, MWIR, LWIR, FIR",
+              "Near Infrared, Short-wave infrared, Mid-wave infrared, Long-wave infrared, Far infrared"
+            ]
+          }
+        ],
+        "context": "EM spectrum placement"
+      },
+      {
+        "id": "27",
+        "page": 7,
+        "prompt": "Image 3b utilizes the NDVI to display vegetation health. What does NDVI stand for? (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "Normalized Difference Vegetation Index",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Normalized Difference Vegetation Index",
+            "points": 1.0,
+            "accepted": [
+              "Normalized Difference Vegetation Index"
+            ]
+          }
+        ],
+        "context": "NDVI question"
+      },
+      {
+        "id": "28",
+        "page": 7,
+        "prompt": "The NDVI calculation requires the visible red and what region of the infrared spectrum as listed in the previous question? What bands do they correspond to, respectively? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "NIR; red = B04, NIR = B08",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "region",
+            "answer": "Near infrared (NIR)",
+            "points": 1
+          },
+          {
+            "id": "red-band",
+            "answer": "Visible red is Sentinel-2 band B04",
+            "points": 0.5
+          },
+          {
+            "id": "nir-band",
+            "answer": "NIR is Sentinel-2 band B08",
+            "points": 0.5
+          }
+        ],
+        "context": "NDVI calculation bands"
+      },
+      {
+        "id": "29",
+        "page": 7,
+        "prompt": "The data utilized in NDVI primarily relies on which of the following interactions of light with vegetation?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "a",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reflection"
+          },
+          {
+            "id": "b",
+            "text": "Refraction"
+          },
+          {
+            "id": "c",
+            "text": "Diffraction"
+          },
+          {
+            "id": "d",
+            "text": "Scattering"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "NDVI light interaction"
+      },
+      {
+        "id": "30",
+        "page": 7,
+        "prompt": "Image 3c utilizes the NDWI, a similar index for water instead of vegetation. It can be calculated using the following formula for Sentinel-2: NDWI = (Band 3 - Band 8) / (Band 3 + Band 8). Circle the words that best complete the following sentence: (2)\n\nIf Band 3 receives a much stronger signal than Band 8, the NDWI will be (low/high), indicating (water/dry land). Band 8 is (longer/shorter) in wavelength than Band 3, as water produces stronger signal in (longer/shorter) wavelengths compared to dry land.",
+        "type": "frq",
+        "points": 2,
+        "answer": "high, water, longer, shorter",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "index",
+            "answer": "High NDWI",
+            "points": 0.5
+          },
+          {
+            "id": "surface",
+            "answer": "Water",
+            "points": 0.5
+          },
+          {
+            "id": "band-comparison",
+            "answer": "Band 8 has a longer wavelength than Band 3",
+            "points": 0.5
+          },
+          {
+            "id": "water-signal",
+            "answer": "Water produces a stronger signal at shorter wavelengths than dry land",
+            "points": 0.5
+          }
+        ],
+        "context": "NDWI sentence completion"
+      },
+      {
+        "id": "31",
+        "page": 7,
+        "prompt": "What is the range of all possible values for the NDWI? In other words, what are the lowest and highest possible NDWI values? (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "-1 to 1",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "-1 to 1",
+            "points": 1.0,
+            "accepted": [
+              "-1 to 1",
+              "[-1, 1]"
+            ]
+          }
+        ],
+        "context": "NDWI range"
+      },
+      {
+        "id": "32",
+        "page": 7,
+        "prompt": "What color in image 3c has the lowest NDWI value? (1)",
+        "type": "frq",
+        "points": 1,
+        "answer": "White",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "White",
+            "points": 1.0,
+            "accepted": [
+              "White"
+            ]
+          }
+        ],
+        "context": "Image 3c lowest NDWI color"
+      },
+      {
+        "id": "33",
+        "page": 8,
+        "prompt": "Which of the following best identifies the features circled in E on the maps?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "d",
+        "options": [
+          {
+            "id": "a",
+            "text": "Greenbelts"
+          },
+          {
+            "id": "b",
+            "text": "Buildings"
+          },
+          {
+            "id": "c",
+            "text": "Crops field"
+          },
+          {
+            "id": "d",
+            "text": "Artificial ponds"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Map feature E identification"
+      },
+      {
+        "id": "34",
+        "page": 8,
+        "prompt": "Use evidence from at least 2 images between 3a-c to support your choice above. (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Award 1 point each for two valid observations from different images 3a–3c that support the chosen answer to question 33. For artificial ponds: 3a dark/low albedo; 3b red like the bay/low vegetation or NDVI; 3c blue like other water bodies/high NDWI. The published key also accepts evidence appropriate to a different choice in question 33.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "image-1",
+            "answer": "First relevant observation from one of images 3a–3c supporting the student's question 33 choice",
+            "points": 1
+          },
+          {
+            "id": "image-2",
+            "answer": "Second relevant observation from a different image among 3a–3c",
+            "points": 1
+          }
+        ],
+        "context": "Supporting evidence for feature E"
+      },
+      {
+        "id": "35",
+        "page": 8,
+        "prompt": "Other than point B, which labeled point/region would you expect to have the highest risk of flooding (choose from A, C, D, E)? Briefly explain your answer. (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Point C, located at a low elevation (likely a wetland) and very close to water bodies.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Point C",
+            "points": 1.0,
+            "accepted": [
+              "Point C",
+              "C"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reasoning",
+            "points": 1.0,
+            "accepted": [
+              "low elevation",
+              "likely a wetland",
+              "very close to water bodies"
+            ]
+          }
+        ],
+        "context": "Flood risk assessment"
+      },
+      {
+        "id": "36",
+        "page": 8,
+        "prompt": "At which labeled point would you expect to have the lowest variation in daily temperature? Why? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Point B, as water has high heat capacity and acts as a buffer for temperature changes.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Point B",
+            "points": 1.0,
+            "accepted": [
+              "Point B",
+              "B"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Reasoning",
+            "points": 1.0,
+            "accepted": [
+              "water has high heat capacity",
+              "acts as a buffer for temperature changes"
+            ]
+          }
+        ],
+        "context": "Temperature variation point"
+      },
+      {
+        "id": "37",
+        "page": 8,
+        "prompt": "Notice the main river on the left. Which general direction is it flowing in?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "c",
+        "options": [
+          {
+            "id": "a",
+            "text": "Northeast"
+          },
+          {
+            "id": "b",
+            "text": "Northwest"
+          },
+          {
+            "id": "c",
+            "text": "Southeast"
+          },
+          {
+            "id": "d",
+            "text": "Southwest"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "River flow direction"
+      },
+      {
+        "id": "38",
+        "page": 8,
+        "prompt": "Notice that the majority of the branches of the river are to the west side of the river. Why might that be the case? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Elevation increases relatively steeply (there is a hill) to the east and prevents meandering channels, unlike the flatter west.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Elevation increases to east / hill",
+            "points": 1.0,
+            "accepted": [
+              "elevation increases relatively steeply to the east",
+              "there is a hill to the east"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "West is flat / prevents meandering",
+            "points": 1.0,
+            "accepted": [
+              "prevents meandering channels from developing",
+              "unlike the west that is relatively flat"
+            ]
+          }
+        ],
+        "context": "River branch asymmetry"
+      },
+      {
+        "id": "39",
+        "page": 9,
+        "prompt": "Refer to image Image 4d, which shows the annual NLCD land classification by the USGS in 2024. Assign a Land Cover Class, as below, to each labeled point in Image 4d. (4)\n\na. Developed ____ Point W\nb. Barren ____ Point X\nc. Herbaceous ____ Point Y\nd. Shrubland ____ Point Z\ne. Cultivated\nf. Wetland",
+        "type": "frq",
+        "points": 4,
+        "answer": "Point W: f, Point X: c, Point Y: e, Point Z: a",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Point W",
+            "points": 1.0,
+            "accepted": [
+              "f",
+              "Wetland"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "Point X",
+            "points": 1.0,
+            "accepted": [
+              "c",
+              "Herbaceous"
+            ]
+          },
+          {
+            "id": "c3",
+            "answer": "Point Y",
+            "points": 1.0,
+            "accepted": [
+              "e",
+              "Cultivated"
+            ]
+          },
+          {
+            "id": "c4",
+            "answer": "Point Z",
+            "points": 1.0,
+            "accepted": [
+              "a",
+              "Developed"
+            ]
+          }
+        ],
+        "context": "The original question says images 4d/4e, but the supplied image sheet labels the corresponding land-cover maps 3d (2024) and 3e (2004). Use those maps."
+      },
+      {
+        "id": "40",
+        "page": 9,
+        "prompt": "Compare Image 4d with 4e, which is the NLCD classification for 2004. What are two differences that you notice? (2)",
+        "type": "frq",
+        "points": 2,
+        "answer": "Valid observations such as part of the wetland becoming cultivated or urbanization in the northeast corner.",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Difference 1",
+            "points": 1.0,
+            "accepted": [
+              "Part of the wetland has become cultivated",
+              "urbanization in the northeast corner",
+              "drying of some permanently flooded areas to become wetlands",
+              "areas of water body becoming barren"
+            ]
+          },
+          {
+            "id": "c2",
+            "answer": "A second distinct, relevant land-cover change between the 2004 and 2024 maps",
+            "points": 1.0,
+            "accepted": [
+              "Part of the wetland has become cultivated",
+              "urbanization in the northeast corner",
+              "drying of some permanently flooded areas to become wetlands",
+              "areas of water body becoming barren"
+            ]
+          }
+        ],
+        "context": "The original question says images 4d/4e, but the supplied image sheet labels the corresponding land-cover maps 3d (2024) and 3e (2004). Use those maps."
+      }
+    ],
+    "resolutions": {
+      "number_sequence:paper": "The paper and published key each contain numbered questions 1–40; the 0-point tiebreaker is excluded.",
+      "repeated_question_in_key:5": "Checked the published key's response text and blue-marked choice where applicable at extracted item 5; corrected the review field against the source.",
+      "missing_weight:5": "The original paper/key print a point value for this item (extraction item 5); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:6": "Checked the published key's response text and blue-marked choice where applicable at extracted item 6; corrected the review field against the source.",
+      "missing_weight:6": "The original paper/key print a point value for this item (extraction item 6); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:6": "Checked the original image sheet for extracted item 6; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:7": "Checked the published key's response text and blue-marked choice where applicable at extracted item 7; corrected the review field against the source.",
+      "missing_weight:7": "The original paper/key print a point value for this item (extraction item 7); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:8": "Checked the published key's response text and blue-marked choice where applicable at extracted item 8; corrected the review field against the source.",
+      "missing_weight:8": "The original paper/key print a point value for this item (extraction item 8); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:9": "Checked the published key's response text and blue-marked choice where applicable at extracted item 9; corrected the review field against the source.",
+      "missing_weight:9": "The original paper/key print a point value for this item (extraction item 9); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:10": "Checked the published key's response text and blue-marked choice where applicable at extracted item 10; corrected the review field against the source.",
+      "missing_weight:10": "The original paper/key print a point value for this item (extraction item 10); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:11": "Checked the published key's response text and blue-marked choice where applicable at extracted item 11; corrected the review field against the source.",
+      "missing_weight:11": "The original paper/key print a point value for this item (extraction item 11); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:12": "Checked the published key's response text and blue-marked choice where applicable at extracted item 12; corrected the review field against the source.",
+      "missing_weight:12": "The original paper/key print a point value for this item (extraction item 12); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:12": "Checked the original image sheet for extracted item 12; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:13": "Checked the published key's response text and blue-marked choice where applicable at extracted item 13; corrected the review field against the source.",
+      "missing_weight:13": "The original paper/key print a point value for this item (extraction item 13); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:13": "Checked the original image sheet for extracted item 13; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:14": "Checked the published key's response text and blue-marked choice where applicable at extracted item 14; corrected the review field against the source.",
+      "missing_weight:14": "The original paper/key print a point value for this item (extraction item 14); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:15": "Checked the published key's response text and blue-marked choice where applicable at extracted item 15; corrected the review field against the source.",
+      "missing_weight:15": "The original paper/key print a point value for this item (extraction item 15); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:15": "Checked the original image sheet for extracted item 15; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:16": "Checked the published key's response text and blue-marked choice where applicable at extracted item 16; corrected the review field against the source.",
+      "missing_weight:16": "The original paper/key print a point value for this item (extraction item 16); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:16": "Checked the original image sheet for extracted item 16; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:17": "Checked the published key's response text and blue-marked choice where applicable at extracted item 17; corrected the review field against the source.",
+      "missing_weight:17": "The original paper/key print a point value for this item (extraction item 17); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:18": "Checked the published key's response text and blue-marked choice where applicable at extracted item 18; corrected the review field against the source.",
+      "missing_weight:18": "The original paper/key print a point value for this item (extraction item 18); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:18": "Checked the original image sheet for extracted item 18; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:19": "Checked the published key's response text and blue-marked choice where applicable at extracted item 19; corrected the review field against the source.",
+      "missing_weight:19": "The original paper/key print a point value for this item (extraction item 19); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:20": "Checked the published key's response text and blue-marked choice where applicable at extracted item 20; corrected the review field against the source.",
+      "missing_weight:20": "The original paper/key print a point value for this item (extraction item 20); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:20": "Checked the original image sheet for extracted item 20; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:21": "Checked the published key's response text and blue-marked choice where applicable at extracted item 21; corrected the review field against the source.",
+      "missing_weight:21": "The original paper/key print a point value for this item (extraction item 21); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:21": "Checked the original image sheet for extracted item 21; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "missing_weight:22": "The original paper/key print a point value for this item (extraction item 22); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:22": "Checked the original image sheet for extracted item 22; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:23": "Checked the published key's response text and blue-marked choice where applicable at extracted item 23; corrected the review field against the source.",
+      "missing_weight:23": "The original paper/key print a point value for this item (extraction item 23); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:23": "Checked the original image sheet for extracted item 23; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:24": "Checked the published key's response text and blue-marked choice where applicable at extracted item 24; corrected the review field against the source.",
+      "missing_weight:24": "The original paper/key print a point value for this item (extraction item 24); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:24": "Checked the original image sheet for extracted item 24; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:25": "Checked the published key's response text and blue-marked choice where applicable at extracted item 25; corrected the review field against the source.",
+      "missing_weight:25": "The original paper/key print a point value for this item (extraction item 25); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:26": "Checked the published key's response text and blue-marked choice where applicable at extracted item 26; corrected the review field against the source.",
+      "missing_weight:26": "The original paper/key print a point value for this item (extraction item 26); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:27": "Checked the published key's response text and blue-marked choice where applicable at extracted item 27; corrected the review field against the source.",
+      "missing_weight:27": "The original paper/key print a point value for this item (extraction item 27); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:27": "Checked the original image sheet for extracted item 27; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:28": "Checked the published key's response text and blue-marked choice where applicable at extracted item 28; corrected the review field against the source.",
+      "missing_weight:28": "The original paper/key print a point value for this item (extraction item 28); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:29": "Checked the published key's response text and blue-marked choice where applicable at extracted item 29; corrected the review field against the source.",
+      "missing_weight:29": "The original paper/key print a point value for this item (extraction item 29); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:30": "Checked the published key's response text and blue-marked choice where applicable at extracted item 30; corrected the review field against the source.",
+      "missing_weight:30": "The original paper/key print a point value for this item (extraction item 30); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:30": "Checked the original image sheet for extracted item 30; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:31": "Checked the published key's response text and blue-marked choice where applicable at extracted item 31; corrected the review field against the source.",
+      "missing_weight:31": "The original paper/key print a point value for this item (extraction item 31); the reviewed 40 values total the 78 points printed on the cover.",
+      "missing_weight:32": "The original paper/key print a point value for this item (extraction item 32); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:32": "Checked the original image sheet for extracted item 32; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:33": "Checked the published key's response text and blue-marked choice where applicable at extracted item 33; corrected the review field against the source.",
+      "missing_weight:33": "The original paper/key print a point value for this item (extraction item 33); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:34": "Checked the published key's response text and blue-marked choice where applicable at extracted item 34; corrected the review field against the source.",
+      "missing_weight:34": "The original paper/key print a point value for this item (extraction item 34); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:34": "Checked the original image sheet for extracted item 34; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:35": "Checked the published key's response text and blue-marked choice where applicable at extracted item 35; corrected the review field against the source.",
+      "missing_weight:35": "The original paper/key print a point value for this item (extraction item 35); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:36": "Checked the published key's response text and blue-marked choice where applicable at extracted item 36; corrected the review field against the source.",
+      "missing_weight:36": "The original paper/key print a point value for this item (extraction item 36); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:37": "Checked the published key's response text and blue-marked choice where applicable at extracted item 37; corrected the review field against the source.",
+      "missing_weight:37": "The original paper/key print a point value for this item (extraction item 37); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:38": "Checked the published key's response text and blue-marked choice where applicable at extracted item 38; corrected the review field against the source.",
+      "missing_weight:38": "The original paper/key print a point value for this item (extraction item 38); the reviewed 40 values total the 78 points printed on the cover.",
+      "repeated_question_in_key:39": "Checked the published key's response text and blue-marked choice where applicable at extracted item 39; corrected the review field against the source.",
+      "missing_weight:39": "The original paper/key print a point value for this item (extraction item 39); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:39": "Checked the original image sheet for extracted item 39; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "repeated_question_in_key:40": "Checked the published key's response text and blue-marked choice where applicable at extracted item 40; corrected the review field against the source.",
+      "missing_weight:40": "The original paper/key print a point value for this item (extraction item 40); the reviewed 40 values total the 78 points printed on the cover.",
+      "visual_context:40": "Checked the original image sheet for extracted item 40; the full one-page sheet is bundled with the test, and the published-key rubric is transcribed.",
+      "source_review:paper": "Compared all 40 numbered questions with the nine-page source paper and eight-page published key. Corrected colored MCQ choices 23, 24 and 25; checked all eight choices, rubric allocations, 78-point total and one-page image sheet. The source paper's 4d/4e image references differ from the sheet's 3d/3e labels; questions 39–40 clarify this. 2027 rules checked locally; quantitative Snell's-law item is marked as an alignment difference.",
+      "metadata:paper": "The source identifies Berkeley Invitational, 2026, Remote Sensing B. Invitational is not recast as a regional/state/national tier. Difficulty, tested topics, 2027 alignment, and scoring are source-reviewed in metadata."
+    },
+    "reviewer": "Codex manual source review",
+    "reviewNotes": "Compared all 40 numbered questions with the nine-page source paper and eight-page published key. Corrected colored MCQ choices 23, 24 and 25; checked all eight choices, rubric allocations, 78-point total and one-page image sheet. The source paper's 4d/4e image references differ from the sheet's 3d/3e labels; questions 39–40 clarify this. 2027 rules checked locally; quantitative Snell's-law item is marked as an alignment difference."
+  },
+  "flags": [
+    {
+      "id": "number_sequence:paper",
+      "category": "unclear_formatting",
+      "code": "number_sequence",
+      "location": "paper",
+      "message": "Non-continuous numbering or subsections detected. Verify that every item is included."
+    },
+    {
+      "id": "repeated_question_in_key:5",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "5",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:5",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "5",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:6",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "6",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:6",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "6",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:6",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "6",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:7",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "7",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:7",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "7",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:8",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "8",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:8",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "8",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:9",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "9",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:9",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "9",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:10",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "10",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:10",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "10",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:11",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "11",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:11",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "11",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:12",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "12",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:12",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "12",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:12",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "12",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:13",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "13",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:13",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "13",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:13",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "13",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:14",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "14",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:14",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "14",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:15",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "15",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:15",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "15",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:15",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "15",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:16",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "16",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:16",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "16",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:16",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "16",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:17",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "17",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:17",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "17",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:18",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "18",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:18",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "18",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:18",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "18",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:19",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "19",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:19",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "19",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:20",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "20",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:20",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "20",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:20",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "20",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:21",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "21",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:21",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "21",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:21",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "21",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "missing_weight:22",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "22",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:22",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "22",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:23",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "23",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:23",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "23",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:23",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "23",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:24",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "24",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:24",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "24",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:24",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "24",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:25",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "25",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:25",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "25",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:26",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "26",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:26",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "26",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:27",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "27",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:27",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "27",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:27",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "27",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:28",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "28",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:28",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "28",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:29",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "29",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:29",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "29",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:30",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "30",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:30",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "30",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:30",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "30",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:31",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "31",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:31",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "31",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "missing_weight:32",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "32",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:32",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "32",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:33",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "33",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:33",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "33",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:34",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "34",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:34",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "34",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:34",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "34",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:35",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "35",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:35",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "35",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:36",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "36",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:36",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "36",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:37",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "37",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:37",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "37",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:38",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "38",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:38",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "38",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "repeated_question_in_key:39",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "39",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:39",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "39",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:39",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "39",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "repeated_question_in_key:40",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "40",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "missing_weight:40",
+      "category": "conflicting_scores",
+      "code": "missing_weight",
+      "location": "40",
+      "message": "No explicit point value. Do not assume one point without review."
+    },
+    {
+      "id": "visual_context:40",
+      "category": "unclear_formatting",
+      "code": "visual_context",
+      "location": "40",
+      "message": "Check the original diagram/table/specimen and transcribe enough rubric detail to grade it."
+    },
+    {
+      "id": "source_review:paper",
+      "category": "review_required",
+      "code": "source_review",
+      "location": "paper",
+      "message": "Check the complete original test/key, question coverage, diagram context, factual accuracy, dates, topics and scoring before approval."
+    },
+    {
+      "id": "metadata:paper",
+      "category": "metadata_review",
+      "code": "metadata",
+      "location": "paper",
+      "message": "Confirm division, event, competition date, reported level, topics, difficulty and scoring notes."
+    }
+  ]
+}

@@ -1,0 +1,1457 @@
+{
+  "approvalHash": "aedecba49b855e0beab64fc14c68ea109c14b00a7c1058cbb690def789b05b15",
+  "review": {
+    "id": "scioly-athvm0bz4zq-b",
+    "sourceFingerprint": "07d7ff2733da0e331882ac0b5b69ec697ee4665a4ea0336f688f1d541ed0d746",
+    "metadata": {
+      "id": "scioly-athvm0bz4zq-b",
+      "sourceId": "ATHVm0bZ4zQ",
+      "sourceUrl": "https://scioly.org/tests/ATHVm0bZ4zQ",
+      "division": "B",
+      "eventId": "heredity",
+      "competition": "Texas A&M Invitational",
+      "year": 2026,
+      "level": null,
+      "levelText": "",
+      "season": 2027,
+      "difficulty": "Hard",
+      "difficultyReason": "Six stations combine linkage and epistasis, multi-step inheritance probabilities, chi-square interpretation, pedigrees, meiosis, DNA expression, and PCR calculations.",
+      "topics": [
+        "Mendelian inheritance and probability",
+        "Linkage and non-Mendelian inheritance",
+        "Chi-square analysis",
+        "Pedigrees",
+        "Mitosis and meiosis",
+        "DNA, gene expression, and PCR"
+      ],
+      "topicMatch": "current",
+      "alignment": "Covers the 2027 Heredity B genetics, cell division, molecular biology, and PCR topics. Linkage, incomplete dominance, and epistasis are State/Nationals-only topics under the 2027 rules; this invitational paper is not classified as a Regional, State, or National test.",
+      "scoringBasis": "Published paper and key: six stations of eight multiple-choice questions, one point each, for 48 points total.",
+      "instructions": "Use the complete original paper and any supplements. Answer all labeled parts."
+    },
+    "fields": [
+      {
+        "id": "st1_q1",
+        "page": 2,
+        "prompt": "Mendel's Law of Segregation refers to which process?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "Separation of homologous chromosomes during meiosis I"
+          },
+          {
+            "id": "B",
+            "text": "Independent assortment of non-homologous chromosomes"
+          },
+          {
+            "id": "C",
+            "text": "Crossing over between homologs"
+          },
+          {
+            "id": "D",
+            "text": "Equal division of cytoplasm following mitosis"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q2",
+        "page": 2,
+        "prompt": "Which scenario violates Mendel's Law of Independent Assortment?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "Two genes located 2 cM apart on the same chromosome"
+          },
+          {
+            "id": "B",
+            "text": "Two genes on different chromosomes"
+          },
+          {
+            "id": "C",
+            "text": "A monohybrid cross"
+          },
+          {
+            "id": "D",
+            "text": "X-linked recessive inheritance in males"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q3",
+        "page": 2,
+        "prompt": "Which of the following produces a 9:7 phenotypic ratio?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "Duplicate recessive epistasis"
+          },
+          {
+            "id": "B",
+            "text": "Sex-linked inheritance"
+          },
+          {
+            "id": "C",
+            "text": "Dominant lethality"
+          },
+          {
+            "id": "D",
+            "text": "Codominance"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q4",
+        "page": 2,
+        "prompt": "Which statement about incomplete dominance is TRUE?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "F₂ phenotypic ratio = 9:3:3:1"
+          },
+          {
+            "id": "B",
+            "text": "Heterozygotes show a phenotype intermediate between parents"
+          },
+          {
+            "id": "C",
+            "text": "Alleles blend permanently in offspring"
+          },
+          {
+            "id": "D",
+            "text": "Only recessive traits appear in the F₂ generation"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q5",
+        "page": 2,
+        "prompt": "Mendel's pea plant experiments succeeded largely because...",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "Peas are tetraploid"
+          },
+          {
+            "id": "B",
+            "text": "He chose traits controlled by unlinked genes with complete dominance"
+          },
+          {
+            "id": "C",
+            "text": "Peas undergo meiotic drive"
+          },
+          {
+            "id": "D",
+            "text": "All traits showed intermediate expression"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q6",
+        "page": 3,
+        "prompt": "A dihybrid cross yields 9:3:3:1 phenotypes. What is the probability of getting an offspring that is homozygous recessive at one locus and heterozygous at the other?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "2/16"
+          },
+          {
+            "id": "B",
+            "text": "4/16"
+          },
+          {
+            "id": "C",
+            "text": "6/16"
+          },
+          {
+            "id": "D",
+            "text": "8/16"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q7",
+        "page": 3,
+        "prompt": "A linked heterozygote has alleles in coupling: AB / ab with recombination frequency 20%. What fraction of gametes are Ab?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.10"
+          },
+          {
+            "id": "B",
+            "text": "0.20"
+          },
+          {
+            "id": "C",
+            "text": "0.40"
+          },
+          {
+            "id": "D",
+            "text": "0.50"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st1_q8",
+        "page": 3,
+        "prompt": "In the same situation, what fraction of gametes are AB?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.10"
+          },
+          {
+            "id": "B",
+            "text": "0.20"
+          },
+          {
+            "id": "C",
+            "text": "0.40"
+          },
+          {
+            "id": "D",
+            "text": "0.80"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 1"
+      },
+      {
+        "id": "st2_q1",
+        "page": 4,
+        "prompt": "In rabbits, black (B) is dominant to white (b). Two black rabbits produce 96 black and 32 white offspring. What are the most likely parental genotypes?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "BB × BB"
+          },
+          {
+            "id": "B",
+            "text": "BB × Bb"
+          },
+          {
+            "id": "C",
+            "text": "Bb × Bb"
+          },
+          {
+            "id": "D",
+            "text": "Bb × bb"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q2",
+        "page": 4,
+        "prompt": "Using the cross in Q1, if you randomly pick a black offspring, what is the probability it is a carrier (Bb)?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/3"
+          },
+          {
+            "id": "B",
+            "text": "1/2"
+          },
+          {
+            "id": "C",
+            "text": "2/3"
+          },
+          {
+            "id": "D",
+            "text": "3/4"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q3",
+        "page": 4,
+        "prompt": "A plant is known to be Rr for seed shape (R = round, r = wrinkled). Its seed color genotype is unknown (Y = yellow, y = green). It is testcrossed with rryy and produces ~equal numbers of four phenotypes: round yellow, round green, wrinkled yellow, wrinkled green. What is the unknown parent's full genotype?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "RRYy"
+          },
+          {
+            "id": "B",
+            "text": "RrYy"
+          },
+          {
+            "id": "C",
+            "text": "RrYY"
+          },
+          {
+            "id": "D",
+            "text": "Rryy"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q4",
+        "page": 4,
+        "prompt": "For the cross RrYy × rryy, what is P(round | yellow)?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/4"
+          },
+          {
+            "id": "B",
+            "text": "1/3"
+          },
+          {
+            "id": "C",
+            "text": "1/2"
+          },
+          {
+            "id": "D",
+            "text": "3/4"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q5",
+        "page": 5,
+        "prompt": "In RrYy × RrYy, what is the probability an offspring has exactly one recessive phenotype (i.e., round green OR wrinkled yellow)?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "3/16"
+          },
+          {
+            "id": "B",
+            "text": "1/4"
+          },
+          {
+            "id": "C",
+            "text": "3/8"
+          },
+          {
+            "id": "D",
+            "text": "9/16"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q6",
+        "page": 5,
+        "prompt": "In RrYy × RrYy, the probability of wrinkled green (rryy) is 1/16. What is the probability that in 5 offspring, exactly 2 are wrinkled green?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.032 (≈3.2%)"
+          },
+          {
+            "id": "B",
+            "text": "0.062 (≈6.2%)"
+          },
+          {
+            "id": "C",
+            "text": "0.118 (≈11.8%)"
+          },
+          {
+            "id": "D",
+            "text": "0.250 (25%)"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q7",
+        "page": 5,
+        "prompt": "An autosomal recessive disorder is caused by allele a. A woman is unaffected, but she has an affected sibling. Her parents are both unaffected. She has children with a man who is a known carrier. What is the probability their child will be affected?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/12"
+          },
+          {
+            "id": "B",
+            "text": "1/6"
+          },
+          {
+            "id": "C",
+            "text": "1/4"
+          },
+          {
+            "id": "D",
+            "text": "1/3"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st2_q8",
+        "page": 5,
+        "prompt": "In RrYy × RrYy, given that an offspring shows both dominant phenotypes, what is the probability the offspring is heterozygous at exactly one locus (RRYy or RrYY)?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "2/9"
+          },
+          {
+            "id": "B",
+            "text": "4/9"
+          },
+          {
+            "id": "C",
+            "text": "5/9"
+          },
+          {
+            "id": "D",
+            "text": "2/3"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 2"
+      },
+      {
+        "id": "st3_q1",
+        "page": 6,
+        "prompt": "Expected number of purple under 3:1 is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "280"
+          },
+          {
+            "id": "B",
+            "text": "300"
+          },
+          {
+            "id": "C",
+            "text": "315"
+          },
+          {
+            "id": "D",
+            "text": "330"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset A (Monohybrid), Cross Pp × Pp produced: Purple = 312, White = 108 (Total 420)"
+      },
+      {
+        "id": "st3_q2",
+        "page": 6,
+        "prompt": "Expected number of white under 3:1 is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "105"
+          },
+          {
+            "id": "B",
+            "text": "120"
+          },
+          {
+            "id": "C",
+            "text": "140"
+          },
+          {
+            "id": "D",
+            "text": "160"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset A (Monohybrid)"
+      },
+      {
+        "id": "st3_q3",
+        "page": 6,
+        "prompt": "χ² for Dataset A is closest to:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.11"
+          },
+          {
+            "id": "B",
+            "text": "0.86"
+          },
+          {
+            "id": "C",
+            "text": "3.84"
+          },
+          {
+            "id": "D",
+            "text": "6.40"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset A (Monohybrid)"
+      },
+      {
+        "id": "st3_q4",
+        "page": 6,
+        "prompt": "With df = 1 and χ² critical ≈ 3.84 (p = 0.05), best conclusion is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "Reject 3:1"
+          },
+          {
+            "id": "B",
+            "text": "Fail to reject 3:1"
+          },
+          {
+            "id": "C",
+            "text": "Must be linkage"
+          },
+          {
+            "id": "D",
+            "text": "Must be incomplete dominance"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset A (Monohybrid)"
+      },
+      {
+        "id": "st3_q5",
+        "page": 7,
+        "prompt": "Expected wrinkled green under 9:3:3:1 is closest to:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "20"
+          },
+          {
+            "id": "B",
+            "text": "31"
+          },
+          {
+            "id": "C",
+            "text": "45"
+          },
+          {
+            "id": "D",
+            "text": "62"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset B (Dihybrid), Observed from RrYy × RrYy (Total 498): Round yellow 278, Round green 97, Wrinkled yellow 92, Wrinkled green 31"
+      },
+      {
+        "id": "st3_q6",
+        "page": 7,
+        "prompt": "χ² for Dataset B is closest to:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "0.18"
+          },
+          {
+            "id": "B",
+            "text": "2.67"
+          },
+          {
+            "id": "C",
+            "text": "7.82"
+          },
+          {
+            "id": "D",
+            "text": "15.0"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset B (Dihybrid)"
+      },
+      {
+        "id": "st3_q7",
+        "page": 7,
+        "prompt": "Expected number of pink is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "50"
+          },
+          {
+            "id": "B",
+            "text": "80"
+          },
+          {
+            "id": "C",
+            "text": "100"
+          },
+          {
+            "id": "D",
+            "text": "150"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset C (Incomplete dominance), Cross RW × RW observed: Red 45, Pink 98, White 57 (Total 200). Expected ratio 1:2:1."
+      },
+      {
+        "id": "st3_q8",
+        "page": 7,
+        "prompt": "Best evidence-based statement about Dataset C is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "Deviations prove the trait isn't incomplete dominance"
+          },
+          {
+            "id": "B",
+            "text": "χ² comparison can show whether deviations are consistent with sampling error"
+          },
+          {
+            "id": "C",
+            "text": "A 1:2:1 ratio is impossible in genetics"
+          },
+          {
+            "id": "D",
+            "text": "Only dihybrid crosses can be analyzed statistically"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 3, Dataset C (Incomplete dominance)"
+      },
+      {
+        "id": "st4_q1",
+        "page": 8,
+        "prompt": "Individual II-1 is affected, but his daughter III-3 is unaffected. This observation rules out which inheritance pattern?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "Autosomal dominant"
+          },
+          {
+            "id": "B",
+            "text": "Autosomal recessive"
+          },
+          {
+            "id": "C",
+            "text": "X-linked dominant"
+          },
+          {
+            "id": "D",
+            "text": "Mitochondrial"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q2",
+        "page": 8,
+        "prompt": "Individual II-5 is an affected female, but her father (I-1) is unaffected. Assuming a single-gene trait with full penetrance, this rules out:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "X-linked recessive"
+          },
+          {
+            "id": "B",
+            "text": "Autosomal dominant"
+          },
+          {
+            "id": "C",
+            "text": "Autosomal recessive"
+          },
+          {
+            "id": "D",
+            "text": "X-linked dominant"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q3",
+        "page": 8,
+        "prompt": "For this question ONLY assume II-4 is related to I-2. Individual I-2 is affected, but one of her children (II-4) is unaffected. Assuming full penetrance, this most strongly rules out:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "D",
+        "options": [
+          {
+            "id": "A",
+            "text": "Autosomal dominant"
+          },
+          {
+            "id": "B",
+            "text": "Autosomal recessive"
+          },
+          {
+            "id": "C",
+            "text": "X-linked dominant"
+          },
+          {
+            "id": "D",
+            "text": "Mitochondrial inheritance"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q4",
+        "page": 9,
+        "prompt": "Assume the trait is autosomal dominant and fully penetrant. Because I-1 is unaffected and II-4 is unaffected, the genotype of I-2 must be:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "AA"
+          },
+          {
+            "id": "B",
+            "text": "Aa"
+          },
+          {
+            "id": "C",
+            "text": "aa"
+          },
+          {
+            "id": "D",
+            "text": "Cannot be determined"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q5",
+        "page": 9,
+        "prompt": "Assume the trait is autosomal recessive and fully penetrant. Because I-2 is affected and I-1 is unaffected but they have affected children, I-1 must be:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "AA"
+          },
+          {
+            "id": "B",
+            "text": "Aa"
+          },
+          {
+            "id": "C",
+            "text": "aa"
+          },
+          {
+            "id": "D",
+            "text": "Cannot be determined"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q6",
+        "page": 9,
+        "prompt": "Assume autosomal recessive inheritance. Individual II-1 is affected. Any unaffected child of II-1 must be:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "AA"
+          },
+          {
+            "id": "B",
+            "text": "Aa"
+          },
+          {
+            "id": "C",
+            "text": "aa"
+          },
+          {
+            "id": "D",
+            "text": "Either A or B"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q7",
+        "page": 9,
+        "prompt": "Assume autosomal dominant and that II-1 is heterozygous and II-2 is aa. What is the probability that all 3 of their children are unaffected?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/2"
+          },
+          {
+            "id": "B",
+            "text": "1/4"
+          },
+          {
+            "id": "C",
+            "text": "1/8"
+          },
+          {
+            "id": "D",
+            "text": "1/16"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st4_q8",
+        "page": 9,
+        "prompt": "Assume autosomal recessive, full penetrance, and that II-5 is affected. If II-4 is a carrier, what is the probability that all 4 of their children are affected?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "1/4"
+          },
+          {
+            "id": "B",
+            "text": "1/8"
+          },
+          {
+            "id": "C",
+            "text": "1/16"
+          },
+          {
+            "id": "D",
+            "text": "1/32"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 4 Pedigree"
+      },
+      {
+        "id": "st5_q1",
+        "page": 10,
+        "prompt": "After S phase, number of chromatids in a somatic cell is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "8"
+          },
+          {
+            "id": "B",
+            "text": "16"
+          },
+          {
+            "id": "C",
+            "text": "4"
+          },
+          {
+            "id": "D",
+            "text": "32"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q2",
+        "page": 10,
+        "prompt": "Homologous chromosomes separate during:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "Anaphase I"
+          },
+          {
+            "id": "B",
+            "text": "Anaphase II"
+          },
+          {
+            "id": "C",
+            "text": "Metaphase II"
+          },
+          {
+            "id": "D",
+            "text": "Telophase II"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q3",
+        "page": 10,
+        "prompt": "Crossing over occurs primarily during:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "Prophase I"
+          },
+          {
+            "id": "B",
+            "text": "Metaphase I"
+          },
+          {
+            "id": "C",
+            "text": "Anaphase I"
+          },
+          {
+            "id": "D",
+            "text": "Prophase II"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q4",
+        "page": 10,
+        "prompt": "Number of possible gamete chromosome combinations from independent assortment alone is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "4"
+          },
+          {
+            "id": "B",
+            "text": "8"
+          },
+          {
+            "id": "C",
+            "text": "16"
+          },
+          {
+            "id": "D",
+            "text": "32"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q5",
+        "page": 10,
+        "prompt": "At metaphase I, how many tetrads are aligned at the metaphase plate?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "2"
+          },
+          {
+            "id": "B",
+            "text": "4"
+          },
+          {
+            "id": "C",
+            "text": "8"
+          },
+          {
+            "id": "D",
+            "text": "16"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q6",
+        "page": 11,
+        "prompt": "At metaphase II, how many chromosomes are present in each cell for this species?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "2"
+          },
+          {
+            "id": "B",
+            "text": "4"
+          },
+          {
+            "id": "C",
+            "text": "8"
+          },
+          {
+            "id": "D",
+            "text": "16"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q7",
+        "page": 11,
+        "prompt": "Which statement best distinguishes mitosis from meiosis?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "Mitosis produces haploid cells; meiosis produces diploid cells"
+          },
+          {
+            "id": "B",
+            "text": "Mitosis produces genetically identical daughter cells; meiosis produces genetically diverse haploid gametes"
+          },
+          {
+            "id": "C",
+            "text": "Crossing over occurs in mitosis but not meiosis"
+          },
+          {
+            "id": "D",
+            "text": "DNA replication occurs between meiosis I and meiosis II"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st5_q8",
+        "page": 11,
+        "prompt": "Which event occurs in meiosis I but not in mitosis?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "Separation of sister chromatids"
+          },
+          {
+            "id": "B",
+            "text": "Alignment of individual chromosomes at the metaphase plate"
+          },
+          {
+            "id": "C",
+            "text": "Synapsis of homologous chromosomes to form tetrads"
+          },
+          {
+            "id": "D",
+            "text": "Replication of DNA during S phase"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 5, A species has 2n = 8."
+      },
+      {
+        "id": "st6_q1",
+        "page": 13,
+        "prompt": "How many hydrogen bonds are in this 1200 bp DNA molecule?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "2400"
+          },
+          {
+            "id": "B",
+            "text": "2688"
+          },
+          {
+            "id": "C",
+            "text": "2832"
+          },
+          {
+            "id": "D",
+            "text": "3600"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6, Case A: A double-stranded DNA molecule is 1200 bp long. Its overall base composition includes 18% G."
+      },
+      {
+        "id": "st6_q2",
+        "page": 13,
+        "prompt": "A phosphodiester bond forms between the:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "5′ phosphate of one nucleotide and 3′ OH of the next"
+          },
+          {
+            "id": "B",
+            "text": "base of one nucleotide and sugar of the next"
+          },
+          {
+            "id": "C",
+            "text": "phosphate groups of adjacent nucleotides"
+          },
+          {
+            "id": "D",
+            "text": "3′ OH groups of adjacent nucleotides"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6"
+      },
+      {
+        "id": "st6_q3",
+        "page": 13,
+        "prompt": "What mRNA sequence is produced from the template strand?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "5′– AUG AAA CCG UCU GAA –3′"
+          },
+          {
+            "id": "B",
+            "text": "5′– UAC UUU GGC AGA CUU –3′"
+          },
+          {
+            "id": "C",
+            "text": "5′– AUG TTT GGC AGA CTT –3′"
+          },
+          {
+            "id": "D",
+            "text": "5′– CAU UUU GGC UCU GAA –3′"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6, Case B: Template strand: 3′– TAC TTT GGC AGA CTT –5′"
+      },
+      {
+        "id": "st6_q4",
+        "page": 13,
+        "prompt": "Using the codon key, the peptide produced from the mRNA in Q3 is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "Met–Lys–Pro–Ser–Glu"
+          },
+          {
+            "id": "B",
+            "text": "Met–Phe–Gly–Arg–Leu"
+          },
+          {
+            "id": "C",
+            "text": "Tyr–Lys–Pro–Ser–Glu"
+          },
+          {
+            "id": "D",
+            "text": "Met–Lys–Pro–Ser–Stop"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6, Case B"
+      },
+      {
+        "id": "st6_q5",
+        "page": 13,
+        "prompt": "In ideal PCR, each cycle doubles the number of target DNA molecules. Starting with 1 double-stranded target molecule, how many copies are present after 6 cycles (ideal doubling)?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "C",
+        "options": [
+          {
+            "id": "A",
+            "text": "12"
+          },
+          {
+            "id": "B",
+            "text": "32"
+          },
+          {
+            "id": "C",
+            "text": "64"
+          },
+          {
+            "id": "D",
+            "text": "128"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6, Case C"
+      },
+      {
+        "id": "st6_q6",
+        "page": 14,
+        "prompt": "What is the expected PCR amplicon length (bp)?",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "448"
+          },
+          {
+            "id": "B",
+            "text": "468"
+          },
+          {
+            "id": "C",
+            "text": "488"
+          },
+          {
+            "id": "D",
+            "text": "612"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6, Case C: Forward primer 145-164, Reverse primer 612-593"
+      },
+      {
+        "id": "st6_q7",
+        "page": 14,
+        "prompt": "All three PCR reactions used the same master mix (primers, polymerase, dNTPs, Mg²•) and the same cycling conditions; only the DNA template added differed. Lane 3 (Sample B) shows no band. Most likely explanation is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "A",
+        "options": [
+          {
+            "id": "A",
+            "text": "No template DNA was added to tube B"
+          },
+          {
+            "id": "B",
+            "text": "The ladder was loaded incorrectly"
+          },
+          {
+            "id": "C",
+            "text": "PCR cannot amplify dsDNA"
+          },
+          {
+            "id": "D",
+            "text": "Nondisjunction occurred during PCR"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6, Case C"
+      },
+      {
+        "id": "st6_q8",
+        "page": 14,
+        "prompt": "A DNA-binding repressor binds near a gene's promoter and blocks RNA polymerase binding. The most direct effect is:",
+        "type": "mcq",
+        "points": 1,
+        "answer": "B",
+        "options": [
+          {
+            "id": "A",
+            "text": "Increased transcription initiation"
+          },
+          {
+            "id": "B",
+            "text": "Decreased transcription initiation"
+          },
+          {
+            "id": "C",
+            "text": "Increased translation termination"
+          },
+          {
+            "id": "D",
+            "text": "Decreased DNA replication"
+          }
+        ],
+        "multiple": false,
+        "criteria": [],
+        "context": "Station 6"
+      }
+    ],
+    "resolutions": {
+      "no_questions:paper": "Extracted all 48 questions across 6 stations from the TAMU Heredity Invitational Exam PDF and verified against the official answer key.",
+      "source_review:paper": "All MCQ options, prompt texts, and answers were cross-checked and aligned precisely with the provided test and answer key documents.",
+      "metadata:paper": "Verified the 2026 Texas A&M Invitational Division B Heredity paper, all 48 answer letters against the key, six station totals, and the 2027 Heredity B topic list. The competition tier is left unclassified because the paper identifies only an invitational."
+    },
+    "reviewer": "Gemini AI repair with Codex source audit",
+    "reviewNotes": "Successfully extracted all 48 questions across 6 stations from the 2026 Texas A&M Science Olympiad Invitational Heredity Div B test and verified every option and answer against the official answer key. Source audit: all 48 answers matched the published key, and the paper and key both state 48 points; 2027 topic alignment was checked against the local rule PDF."
+  },
+  "flags": [
+    {
+      "id": "no_questions:paper",
+      "category": "unclear_formatting",
+      "code": "no_questions",
+      "location": "paper",
+      "message": "No reliable numbered questions found. The complete text and PDFs remain available."
+    },
+    {
+      "id": "source_review:paper",
+      "category": "review_required",
+      "code": "source_review",
+      "location": "paper",
+      "message": "Check the complete original test/key, question coverage, diagram context, factual accuracy, dates, topics and scoring before approval."
+    },
+    {
+      "id": "metadata:paper",
+      "category": "metadata_review",
+      "code": "metadata",
+      "location": "paper",
+      "message": "Confirm division, event, competition date, reported level, topics, difficulty and scoring notes."
+    }
+  ]
+}

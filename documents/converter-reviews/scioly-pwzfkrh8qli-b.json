@@ -1,0 +1,688 @@
+{
+  "approvalHash": "76e8c06f1379e26d7ccf85997bf55caaeced6f65ad7fbf0d6242d36d4ac37748",
+  "review": {
+    "id": "scioly-pwzfkrh8qli-b",
+    "sourceFingerprint": "b7662a7263f89f772b534fb46c4b5727bbcec94ca5d7170b64bf19a6f5dcf594",
+    "metadata": {
+      "id": "scioly-pwzfkrh8qli-b",
+      "sourceId": "pwzfkRh8QLI",
+      "sourceUrl": "https://scioly.org/tests/pwzfkRh8QLI",
+      "division": "B",
+      "eventId": "meteorology",
+      "competition": "Greenbrier Invitational",
+      "year": 2026,
+      "level": null,
+      "levelText": null,
+      "season": 2027,
+      "difficulty": "Hard",
+      "difficultyReason": "Twenty written questions require 12 instrument matches, calculations, explanations and storm-scenario analysis under a 50-minute limit; the source assigns 46 points.",
+      "topics": [
+        "atmospheric layers and observational instruments",
+        "wet-bulb temperature, temperature inversions and virga",
+        "fronts, convection, vertical wind shear and single-cell thunderstorms",
+        "precipitation, downdrafts, gusts and local storm impacts"
+      ],
+      "topicMatch": "different",
+      "alignment": "The 2027 Division B rules focus on severe weather and storms. Questions 13–20 overlap that focus, but the paper also spends substantial space on general atmosphere layers, instrument recall and a subsolar-position calculation, so topic alignment is partial.",
+      "scoringBasis": "The original cover prints per-page totals 9, 10, 11, 8 and 8 (46 overall). Questions 1–20 print point values that sum to 46; the separate key supplies each solution.",
+      "instructions": "Answer all 20 written questions. For questions 13–20 use the storm scenarios shown with the question cards and the original paper. Submit the test, then select Auto Grade to evaluate written explanations against the published key."
+    },
+    "fields": [
+      {
+        "id": "1",
+        "page": 2,
+        "prompt": "(2 points) Order the following layers of the atmosphere from lowest to highest altitude:\n\n      • Mesosphere\n\n      • Troposphere\n\n      • Exosphere\n\n      • Thermosphere\n\n      • Stratosphere",
+        "type": "frq",
+        "answer": "Lowest: Troposphere, Stratosphere, Mesosphere, Thermosphere, Exosphere: Highest. All or nothing for points.",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Complete order, lowest to highest: Troposphere, Stratosphere, Mesosphere, Thermosphere, Exosphere. Published key says all or nothing.",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "page": 2,
+        "prompt": "(2 points) Which layer of the atmosphere is the most dense, and why?",
+        "type": "frq",
+        "answer": "Troposphere, since it’s compressed by the layers above it.",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Troposphere is most dense",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Compressed by the weight of atmospheric layers above it",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "page": 2,
+        "prompt": "(3 points) For each layer of the atmosphere, what is the most common pollutant?",
+        "type": "frq",
+        "answer": "Troposphere: Particulate Matter (PM) (1pt); Stratosphere: Ozone Depleting Substances (ODS) (1pt); Mesosphere/Thermosphere/Exosphere: None (1pt). One point",
+        "points": 3.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Troposphere: particulate matter (PM)",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Stratosphere: ozone-depleting substances",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "Mesosphere, thermosphere and exosphere: none",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "page": 2,
+        "prompt": "(2 points) How much does the sun’s longitude change with respect to the equator each day?\n\n\n\n\n\n                                        Page 1 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:",
+        "type": "frq",
+        "answer": "Accept any answer in the range 0.39◦−0.41◦",
+        "points": 2.0,
+        "context": "The paper says ‘longitude’; the key expects approximately 0.4° daily subsolar displacement.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "0.39° to 0.41° per day, as printed in the key",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "page": 3,
+        "prompt": "(2 points) Using your answer from the previous question, what would the longitude of the subsolar spot\n   be on March 30th? Show your work.\n\n\n\n\n\n   For question 6, write the appropriate instrument to monitor the atmospheric condition.\n   There may be more than one correct answer, but there will be only one best answer.",
+        "type": "frq",
+        "answer": "The spring equinox is March 20th. March 30th is 10 days later. 10 days × 0.4◦= 4◦. In the spring, the sun is moving north, making the final position 4◦N. All or nothing points. For question 6, write the appropriate instrument to monitor the atmospheric condition. There may be more than one correct answer, but there will be only one best answer.",
+        "points": 2.0,
+        "context": "The paper says ‘longitude’; the key expects 4° north of the equator on March 30.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "4° north on March 30 using 10 days after March 20 at about 0.4° per day; all or nothing in key",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "page": 3,
+        "prompt": "For each listed atmospheric condition, name an appropriate monitoring instrument (0.5 point each): (6 points) Air temperature, atmospheric pressure, relative humidity, wind speed, wind direction, precip-\n    itation amount, cloud base height, solar radiation intensity, atmospheric ozone concentration, particulate\n    matter, vertical temperature profile, and atmospheric water vapor content.",
+        "type": "frq",
+        "answer": "Air temperature (surface) — Thermometer Atmospheric pressure — Barometer Relative humidity — Hygrometer Wind speed — Anemometer Wind direction — Wind vane Precipitation amount — Rain gauge Cloud base height — Ceilometer Solar radiation intensity — Pyranometer Atmospheric ozone concentration — Dobson spectrophotometer Particulate matter (PM2.5 / PM10) — Air quality monitor Vertical temperature profile — Radiosonde Atmospheric water vapor content — Microwave radiometer. Award 0.5 points per correct",
+        "points": 6.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Surface air temperature: thermometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-2",
+            "answer": "Atmospheric pressure: barometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-3",
+            "answer": "Relative humidity: hygrometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-4",
+            "answer": "Wind speed: anemometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-5",
+            "answer": "Wind direction: wind vane",
+            "points": 0.5
+          },
+          {
+            "id": "part-6",
+            "answer": "Precipitation amount: rain gauge",
+            "points": 0.5
+          },
+          {
+            "id": "part-7",
+            "answer": "Cloud-base height: ceilometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-8",
+            "answer": "Solar radiation intensity: pyranometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-9",
+            "answer": "Atmospheric ozone concentration: Dobson spectrophotometer",
+            "points": 0.5
+          },
+          {
+            "id": "part-10",
+            "answer": "Particulate matter: air-quality monitor",
+            "points": 0.5
+          },
+          {
+            "id": "part-11",
+            "answer": "Vertical temperature profile: radiosonde",
+            "points": 0.5
+          },
+          {
+            "id": "part-12",
+            "answer": "Atmospheric water-vapor content: microwave radiometer",
+            "points": 0.5
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "page": 3,
+        "prompt": "(2 points) Define and explain the meteorological significance of a wet-bulb temperature\n\n\n\n\n\n                                        Page 2 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:",
+        "type": "frq",
+        "answer": "Wet-bulb temperature is the lowest temperature air can reach through evaporative cooling alone, under constant pressure. (1pt) It is important since it helps with the estimation of humidity, cloud formation, etc. (1pt)",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Wet-bulb temperature is the lowest air temperature achievable by evaporative cooling at constant pressure",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Meteorological use: estimate humidity, cloud formation or related conditions",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "page": 4,
+        "prompt": "(3 points) At the wet-bulb temperatures 0◦C, 10◦C, and 20◦C, what cloud formations would be expected",
+        "type": "frq",
+        "answer": "0◦C: Nimbus/Stratonimbus (1pt) 10◦C: Cumulus (1pt) 20◦C Cumulonimbus (1pt)",
+        "points": 3.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "At 0°C: nimbus or nimbostratus/stratonimbus",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "At 10°C: cumulus",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "At 20°C: cumulonimbus",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "9",
+        "page": 4,
+        "prompt": "(2 points) What is the most important meteorological condition in order for a green flash to happen,\n   and why?",
+        "type": "frq",
+        "answer": "A temperature inversion (1pt), because refraction and dispersion of sunlight is enhanced.",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "A temperature inversion",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "It enhances refraction and dispersion of sunlight",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "page": 4,
+        "prompt": "(2 points) Compare and contrast mercury-based and alcohol-based thermometers based on their effec-\n    tiveness at different temperatures",
+        "type": "frq",
+        "answer": "Mercury-based thermometers are better at measuring higher temperatures (1pt), whereas alcohol-based thermometers are better at lower temperatures (1pt).",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Mercury thermometers are better at higher temperatures",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Alcohol thermometers are better at lower temperatures",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "11",
+        "page": 4,
+        "prompt": "(2 points) Which region of the world has the most virga, and why?",
+        "type": "frq",
+        "answer": "The Great Basin (Nevada, US) (1pt), because of the high-elevation basins, extremely dry lower troposphere, frequent mid-level clouds, and precipitation aloft",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "The Great Basin, Nevada, United States",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Dry lower troposphere and high-elevation basins, with mid-level clouds or precipitation aloft",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "12",
+        "page": 4,
+        "prompt": "(2 points) If the Coriolis effect magically disappeared immediately, what would be expected over the\n    course of the next five minutes?\n\n\n\n\n\n                                        Page 3 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:\n\n\nFor questions 13-16, use the following information: On a summer afternoon, a weak surface\nlow and a nearby stationary front allow warm, moist air to pool over a flat inland region.\nDaytime solar heating increases instability, producing scattered cumulus that grow into isolated\nthunderstorms, but weak wind shear prevents storm organization. The storms produce brief\nheavy rain and occasional lightning, with no hail or damaging winds.",
+        "type": "frq",
+        "answer": "If the Coriolis effect disappeared, surface winds would blow directly from high to low pressure without curving, trade winds and westerlies would vanish, cyclones and hurricanes could not rotate, ocean gyres would collapse, and precipitation and climate patterns worldwide would be drastically altered. Note to graders: this is supposed to be a more fun question before the more difficult scenario-based analysis ones, so please grade easier on this one.",
+        "points": 2.0,
+        "context": "",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Without Coriolis deflection, surface winds move directly from high to low pressure instead of curving",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "One plausible short-term circulation change, such as trade/westerly wind pattern or cyclone rotation; grade generously per key",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "13",
+        "page": 5,
+        "prompt": "(1 point) Identify the lifting mechanism responsible for thunderstorm initiation in this scenario.",
+        "type": "frq",
+        "answer": "Surface heating (convective lifting), aided by weak convergence along the stationary front.",
+        "points": 1.0,
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Surface heating causes convective lifting, aided by weak convergence along the stationary front",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "14",
+        "page": 5,
+        "prompt": "(2 points) Explain why the thunderstorms remain nonsevere despite the presence of warm, moist air.",
+        "type": "frq",
+        "answer": "Although instability is present, weak vertical wind shear prevents storm organization and long-lived updrafts, limiting storm intensity.",
+        "points": 2.0,
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Weak vertical wind shear prevents organized storms",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Updrafts do not persist long enough for severe intensity despite warm moist instability",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "15",
+        "page": 5,
+        "prompt": "(2 points) Describe how the vertical wind shear profile influences storm type and lifetime in this situa-\n    tion.",
+        "type": "frq",
+        "answer": "Minimal vertical wind shear favors single-cell (air-mass) thunderstorms, where the downdraft quickly cuts off the updraft, resulting in short-lived storms.",
+        "points": 2.0,
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Minimal vertical shear favors single-cell or air-mass thunderstorms",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Their downdrafts cut off updrafts, making storms short-lived",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "16",
+        "page": 5,
+        "prompt": "(3 points) If mid-level dry air were introduced into this environment, analyze how precipitation type\n   and downdraft strength might change without necessarily producing severe storms.\n\n\n\n\n\n                                        Page 4 of 5\nMeteorology B                          Greenbrier Invitational              Team Number:\n\n\nUse the following information to answer questions 17-20: As the single-cell thunderstorms\ndevelop, they produce brief, localized heavy rain and occasional lightning strikes, but most\nprecipitation evaporates before reaching the ground in some areas. Gusty downdrafts cre-\nate temporary wind shifts at the surface, and minor puddling occurs in low-lying areas, but\nno flooding develops. The storms quickly dissipate as the updraft collapses, leaving behind\nscattered clouds and a temporary drop in temperature.",
+        "type": "frq",
+        "answer": "Dry mid-level air would enhance evaporational cooling, strengthening downdrafts and increasing gustiness, while precipitation may partially evaporate as virga or produce brief heavy rain, still without sufficient shear to become severe.",
+        "points": 3.0,
+        "context": "For questions 13–16: A summer afternoon has a weak surface low and nearby stationary front. Warm moist air pools over a flat inland region. Daytime heating produces isolated thunderstorms, but weak wind shear prevents organization. They bring brief heavy rain and lightning without hail or damaging winds.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Mid-level dry air causes more evaporation and evaporative cooling",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Downdrafts strengthen and gustiness increases",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "Precipitation may evaporate as virga or briefly reach ground as heavy rain; weak shear can still prevent severe organization",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "17",
+        "page": 6,
+        "prompt": "(1 point) Identify what meteorological phenomenon is observed when precipitation evaporates before\n    reaching the ground.",
+        "type": "frq",
+        "answer": "Virga",
+        "points": 1.0,
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Virga",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "18",
+        "page": 6,
+        "prompt": "(2 points) Explain why surface gusts occur during these short-lived thunderstorms.",
+        "type": "frq",
+        "answer": "Gusts occur because downdrafts of cooler air from collapsing updrafts accelerate toward the surface, creating brief, localized wind events.",
+        "points": 2.0,
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Cooler-air downdrafts form as updrafts collapse",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "They accelerate to the surface and create short-lived localized gusts",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "19",
+        "page": 6,
+        "prompt": "(2 points) Describe how uneven rainfall distribution in this scenario could impact local areas differently.",
+        "type": "frq",
+        "answer": "Some areas may receive brief heavy rain, causing temporary puddles, while others experience little or no surface rainfall due to virga, leading to unequal soil moisture and minor localized flooding.",
+        "points": 2.0,
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Some locations receive brief heavy rain and temporary puddles",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Others get little or no surface rain due to virga, producing uneven soil moisture",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "20",
+        "page": 6,
+        "prompt": "(3 points) Analyze how the combination of virga and downdrafts affects near-surface temperature and\n    humidity immediately after the storm.\n\n\n\n\n\n                                        Page 5 of 5",
+        "type": "frq",
+        "answer": "Evaporation of falling precipitation (virga) cools and moistens the air aloft, while downdrafts push cooler, denser air to the surface, producing a temporary drop in temperature and a brief increase in local wind gusts, often followed by slightly increased surface humidity as the storm dissipates.",
+        "points": 3.0,
+        "context": "For questions 17–20: These short-lived single-cell storms produce localized rain and lightning. Some precipitation evaporates before reaching the ground. Downdrafts cause temporary surface wind shifts and minor puddling; storms dissipate as updrafts collapse.",
+        "criteria": [
+          {
+            "id": "part-1",
+            "answer": "Virga evaporates, cooling and moistening air aloft",
+            "points": 1
+          },
+          {
+            "id": "part-2",
+            "answer": "Downdrafts bring cooler denser air down, temporarily lowering surface temperature and causing gusts",
+            "points": 1
+          },
+          {
+            "id": "part-3",
+            "answer": "Surface humidity may rise slightly as the storm dissipates",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "resolutions": {
+      "repeated_question_in_key:1": "Question 1: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:2": "Question 2: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:3": "Question 3: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:4": "Question 4: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:5": "Question 5: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:6": "Question 6: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:7": "Question 7: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:8": "Question 8: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:9": "Question 9: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:10": "Question 10: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:11": "Question 11: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:12": "Question 12: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:13": "Question 13: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:14": "Question 14: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:15": "Question 15: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:16": "Question 16: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:17": "Question 17: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:18": "Question 18: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:19": "Question 19: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "repeated_question_in_key:20": "Question 20: isolated the printed Solution block from the downloaded key and rebuilt its scoring criteria from the source.",
+      "total_mismatch:paper": "The cover's 9 points is only the first page subtotal; 9+10+11+8+8=46, matching questions 1–20.",
+      "source_review:paper": "No Gemini repair was used. Extracted every Solution block directly from the downloaded six-page published key, compared all 20 questions and points with the six-page original paper, restored the two storm scenarios, and transcribed the 46-point rubric. The cover's 9/10/11/8/8 figures are per-page subtotals, not a conflicting nine-point total. The paper's use of ‘longitude’ for subsolar displacement is clarified in questions 4–5. 2027 severe-weather topic alignment is partial and is marked different.",
+      "metadata:paper": "Source identifies Greenbrier Invitational 2026 Meteorology B. Invitational has no supported regional/state/national tier. Difficulty, 2027 topic alignment, subject list and 46-point scoring were checked against the local PDFs."
+    },
+    "reviewer": "Codex manual source review",
+    "reviewNotes": "No Gemini repair was used. Extracted every Solution block directly from the downloaded six-page published key, compared all 20 questions and points with the six-page original paper, restored the two storm scenarios, and transcribed the 46-point rubric. The cover's 9/10/11/8/8 figures are per-page subtotals, not a conflicting nine-point total. The paper's use of ‘longitude’ for subsolar displacement is clarified in questions 4–5. 2027 severe-weather topic alignment is partial and is marked different."
+  },
+  "flags": [
+    {
+      "id": "repeated_question_in_key:1",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "1",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:2",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "2",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:3",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "3",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:4",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "4",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:5",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "5",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:6",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "6",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:7",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "7",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:8",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "8",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:9",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "9",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:10",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "10",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:11",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "11",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:12",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "12",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:13",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "13",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:14",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "14",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:15",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "15",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:16",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "16",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:17",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "17",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:18",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "18",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:19",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "19",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "repeated_question_in_key:20",
+      "category": "unclear_formatting",
+      "code": "repeated_question_in_key",
+      "location": "20",
+      "message": "The key repeats the question. Correct choices may be bold, colored or handwritten; inspect the original key."
+    },
+    {
+      "id": "total_mismatch:paper",
+      "category": "conflicting_scores",
+      "code": "total_mismatch",
+      "location": "paper",
+      "message": "Extracted questions total 46; cover totals: [9.0]."
+    },
+    {
+      "id": "source_review:paper",
+      "category": "review_required",
+      "code": "source_review",
+      "location": "paper",
+      "message": "Check the complete original test/key, question coverage, diagram context, factual accuracy, dates, topics and scoring before approval."
+    },
+    {
+      "id": "metadata:paper",
+      "category": "metadata_review",
+      "code": "metadata",
+      "location": "paper",
+      "message": "Confirm division, event, competition date, reported level, topics, difficulty and scoring notes."
+    }
+  ]
+}
