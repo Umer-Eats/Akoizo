@@ -1,0 +1,1791 @@
+{
+  "approvalHash": "e9e800315093c6852848e4bf8770c99a294732388dc7403a0be4994cbe7ac2d7",
+  "review": {
+    "id": "scioly-ddlkqnct2rs-b",
+    "sourceFingerprint": "e0d5c38c23254e964dae0cb2b0dac5de6618f8f2847b97f88d068cd325c6d2ea",
+    "metadata": {
+      "id": "scioly-ddlkqnct2rs-b",
+      "sourceId": "dDLKQNCt2Rs",
+      "sourceUrl": "https://scioly.org/tests/dDLKQNCt2Rs",
+      "division": "B",
+      "eventId": "crime-busters",
+      "competition": "North Carolina State University Invitational",
+      "year": 2026,
+      "level": null,
+      "levelText": null,
+      "season": 2027,
+      "difficulty": "Medium",
+      "difficultyReason": "Standard Division B Crime Busters test featuring chemical identification, polymers, chromatography, DNA analysis, and qualitative case analysis.",
+      "topics": [
+        "Chemistry",
+        "Forensics",
+        "Crime Busters"
+      ],
+      "topicMatch": "unverified",
+      "alignment": "Topics extracted from the paper. Compatibility with the 2027 rules still requires separate verification.",
+      "scoringBasis": "Points are awarded per table cell and question as printed in the test booklet and answer key.",
+      "instructions": "Use the complete original paper and any supplements. Answer all labeled parts."
+    },
+    "fields": [
+      {
+        "id": "S1_name",
+        "page": 3,
+        "prompt": "Powder S1 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Baking Soda",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Baking Soda",
+            "points": 2,
+            "accepted": [
+              "Baking Soda"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S1 Name"
+      },
+      {
+        "id": "S1_formula",
+        "page": 3,
+        "prompt": "Powder S1 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "NaHCO3",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "NaHCO3",
+            "points": 2,
+            "accepted": [
+              "NaHCO3",
+              "𝑁𝑎𝐻𝐶𝑂3"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S1 Formula"
+      },
+      {
+        "id": "S1_suspect",
+        "page": 3,
+        "prompt": "Powder S1 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide and/or Dasan",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide and/or Dasan",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide and/or Dasan",
+              "Mrs. Monoxide",
+              "Dasan"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S1 Suspect"
+      },
+      {
+        "id": "S2_name",
+        "page": 3,
+        "prompt": "Powder S2 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Table Salt",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Table Salt",
+            "points": 2,
+            "accepted": [
+              "Table Salt",
+              "Salt"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S2 Name"
+      },
+      {
+        "id": "S2_formula",
+        "page": 3,
+        "prompt": "Powder S2 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "NaCl",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "NaCl",
+            "points": 2,
+            "accepted": [
+              "NaCl",
+              "𝑁𝑎𝐶𝑙"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S2 Formula"
+      },
+      {
+        "id": "S2_suspect",
+        "page": 3,
+        "prompt": "Powder S2 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide and/or Dasan",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide and/or Dasan",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide and/or Dasan",
+              "Mrs. Monoxide",
+              "Dasan"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S2 Suspect"
+      },
+      {
+        "id": "S3_name",
+        "page": 3,
+        "prompt": "Powder S3 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Flour",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Flour",
+            "points": 2,
+            "accepted": [
+              "Flour"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S3 Name"
+      },
+      {
+        "id": "S3_formula",
+        "page": 3,
+        "prompt": "Powder S3 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C6H10O5",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C6H10O5",
+            "points": 2,
+            "accepted": [
+              "C6H10O5",
+              "𝐶6𝐻10𝑂5"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S3 Formula"
+      },
+      {
+        "id": "S3_suspect",
+        "page": 3,
+        "prompt": "Powder S3 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S3 Suspect"
+      },
+      {
+        "id": "S4_name",
+        "page": 3,
+        "prompt": "Powder S4 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Sugar",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sugar",
+            "points": 2,
+            "accepted": [
+              "Sugar"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S4 Name"
+      },
+      {
+        "id": "S4_formula",
+        "page": 3,
+        "prompt": "Powder S4 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C12H22O11",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C12H22O11",
+            "points": 2,
+            "accepted": [
+              "C12H22O11",
+              "𝐶12𝐻22𝑂11"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S4 Formula"
+      },
+      {
+        "id": "S4_suspect",
+        "page": 3,
+        "prompt": "Powder S4 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S4 Suspect"
+      },
+      {
+        "id": "S5_name",
+        "page": 3,
+        "prompt": "Powder S5 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Alka-Seltzer",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Alka-Seltzer",
+            "points": 2,
+            "accepted": [
+              "Alka-Seltzer"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S5 Name"
+      },
+      {
+        "id": "S5_formula",
+        "page": 3,
+        "prompt": "Powder S5 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C8H12KNaO13 (2+)",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C8H12KNaO13 (2+)",
+            "points": 2,
+            "accepted": [
+              "C8H12KNaO13 (2+)",
+              "𝐶8𝐻12𝐾𝑁𝑎𝑂13 2+"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S5 Formula"
+      },
+      {
+        "id": "S5_suspect",
+        "page": 3,
+        "prompt": "Powder S5 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Dasan",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Dasan",
+            "points": 1,
+            "accepted": [
+              "Dasan"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S5 Suspect"
+      },
+      {
+        "id": "S6_name",
+        "page": 3,
+        "prompt": "Powder S6 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Sand",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sand",
+            "points": 2,
+            "accepted": [
+              "Sand"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S6 Name"
+      },
+      {
+        "id": "S6_formula",
+        "page": 3,
+        "prompt": "Powder S6 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "SiO2",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "SiO2",
+            "points": 2,
+            "accepted": [
+              "SiO2",
+              "𝑆𝑖𝑂2"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S6 Formula"
+      },
+      {
+        "id": "S6_suspect",
+        "page": 3,
+        "prompt": "Powder S6 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Agua de Fina",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Agua de Fina",
+            "points": 1,
+            "accepted": [
+              "Agua de Fina"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S6 Suspect"
+      },
+      {
+        "id": "S7_name",
+        "page": 3,
+        "prompt": "Powder S7 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Corn Starch",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Corn Starch",
+            "points": 2,
+            "accepted": [
+              "Corn Starch",
+              "Cornstarch"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S7 Name"
+      },
+      {
+        "id": "S7_formula",
+        "page": 3,
+        "prompt": "Powder S7 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C6H10O5",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C6H10O5",
+            "points": 2,
+            "accepted": [
+              "C6H10O5",
+              "𝐶6𝐻10𝑂5"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S7 Formula"
+      },
+      {
+        "id": "S7_suspect",
+        "page": 3,
+        "prompt": "Powder S7 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide and/or Dasan",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide and/or Dasan",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide and/or Dasan",
+              "Mrs. Monoxide",
+              "Dasan"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S7 Suspect"
+      },
+      {
+        "id": "S8_name",
+        "page": 3,
+        "prompt": "Powder S8 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Yeast",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Yeast",
+            "points": 2,
+            "accepted": [
+              "Yeast"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S8 Name"
+      },
+      {
+        "id": "S8_formula",
+        "page": 3,
+        "prompt": "Powder S8 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "N/A",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "N/A",
+            "points": 2,
+            "accepted": [
+              "N/A"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S8 Formula"
+      },
+      {
+        "id": "S8_suspect",
+        "page": 3,
+        "prompt": "Powder S8 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S8 Suspect"
+      },
+      {
+        "id": "S9_name",
+        "page": 3,
+        "prompt": "Powder S9 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Powdered Limestone or Calcium Carbonate",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Powdered Limestone or Calcium Carbonate",
+            "points": 2,
+            "accepted": [
+              "Powdered Limestone or Calcium Carbonate",
+              "Powdered Limestone",
+              "Calcium Carbonate"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S9 Name"
+      },
+      {
+        "id": "S9_formula",
+        "page": 3,
+        "prompt": "Powder S9 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "CaCO3",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "CaCO3",
+            "points": 2,
+            "accepted": [
+              "CaCO3",
+              "𝐶𝑎𝐶𝑂3"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S9 Formula"
+      },
+      {
+        "id": "S9_suspect",
+        "page": 3,
+        "prompt": "Powder S9 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "None",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "None",
+            "points": 1,
+            "accepted": [
+              "None",
+              "N/A"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Powders, S9 Suspect"
+      },
+      {
+        "id": "L1_name",
+        "page": 3,
+        "prompt": "Liquid L1 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Lemon Juice",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Lemon Juice",
+            "points": 2,
+            "accepted": [
+              "Lemon Juice"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L1 Name"
+      },
+      {
+        "id": "L1_formula",
+        "page": 3,
+        "prompt": "Liquid L1 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C6H8O7",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C6H8O7",
+            "points": 2,
+            "accepted": [
+              "C6H8O7",
+              "𝐶6𝐻8𝑂7"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L1 Formula"
+      },
+      {
+        "id": "L1_suspect",
+        "page": 3,
+        "prompt": "Liquid L1 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L1 Suspect"
+      },
+      {
+        "id": "L2_name",
+        "page": 3,
+        "prompt": "Liquid L2 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Vinegar",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Vinegar",
+            "points": 2,
+            "accepted": [
+              "Vinegar"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L2 Name"
+      },
+      {
+        "id": "L2_formula",
+        "page": 3,
+        "prompt": "Liquid L2 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "CH3COOH",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "CH3COOH",
+            "points": 2,
+            "accepted": [
+              "CH3COOH",
+              "𝐶𝐻3𝐶𝑂𝑂𝐻"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L2 Formula"
+      },
+      {
+        "id": "L2_suspect",
+        "page": 3,
+        "prompt": "Liquid L2 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Dasan",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Dasan",
+            "points": 1,
+            "accepted": [
+              "Dasan"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L2 Suspect"
+      },
+      {
+        "id": "L3_name",
+        "page": 3,
+        "prompt": "Liquid L3 Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "Water",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Water",
+            "points": 2,
+            "accepted": [
+              "Water"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L3 Name"
+      },
+      {
+        "id": "L3_formula",
+        "page": 3,
+        "prompt": "Liquid L3 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "H2O",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "H2O",
+            "points": 2,
+            "accepted": [
+              "H2O",
+              "𝐻2𝑂"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L3 Formula"
+      },
+      {
+        "id": "L3_suspect",
+        "page": 3,
+        "prompt": "Liquid L3 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Agua de Fina",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Agua de Fina",
+            "points": 1,
+            "accepted": [
+              "Agua de Fina"
+            ]
+          }
+        ],
+        "context": "Section B - Identification of Substances, Liquids, L3 Suspect"
+      },
+      {
+        "id": "P1_desc",
+        "page": 4,
+        "prompt": "Plastic P1 Description/Test Results",
+        "type": "frq",
+        "points": 1,
+        "answer": "Sinks with all tests",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Sinks with all tests",
+            "points": 1,
+            "accepted": [
+              "Sinks with all tests"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P1 Description"
+      },
+      {
+        "id": "P1_name",
+        "page": 4,
+        "prompt": "Plastic P1 Plastic Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "PETE",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "PETE",
+            "points": 2,
+            "accepted": [
+              "PETE"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P1 Name"
+      },
+      {
+        "id": "P1_formula",
+        "page": 4,
+        "prompt": "Plastic P1 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C10H8O4",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C10H8O4",
+            "points": 2,
+            "accepted": [
+              "C10H8O4",
+              "𝐶10𝐻8𝑂4"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P1 Formula"
+      },
+      {
+        "id": "P1_suspect",
+        "page": 4,
+        "prompt": "Plastic P1 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Used to make food containers and plastic packaging, Mrs. Monoxide and Agua de Fina",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Used to make food containers and plastic packaging, Mrs. Monoxide and Agua de Fina",
+            "points": 1,
+            "accepted": [
+              "Used to make food containers and plastic packaging, Mrs. Monoxide and Agua de Fina",
+              "Mrs. Monoxide and Agua de Fina",
+              "Mrs. Monoxide",
+              "Agua de Fina"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P1 Suspect"
+      },
+      {
+        "id": "P2_desc",
+        "page": 4,
+        "prompt": "Plastic P2 Description/Test Results",
+        "type": "frq",
+        "points": 1,
+        "answer": "Floats with Water and all concentrations of NaCl Sinks with Alcohol and corn oil",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Floats with Water and all concentrations of NaCl Sinks with Alcohol and corn oil",
+            "points": 1,
+            "accepted": [
+              "Floats with Water and all concentrations of NaCl Sinks with Alcohol and corn oil"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P2 Description"
+      },
+      {
+        "id": "P2_name",
+        "page": 4,
+        "prompt": "Plastic P2 Plastic Name",
+        "type": "frq",
+        "points": 2,
+        "answer": "HDPE",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "HDPE",
+            "points": 2,
+            "accepted": [
+              "HDPE"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P2 Name"
+      },
+      {
+        "id": "P2_formula",
+        "page": 4,
+        "prompt": "Plastic P2 Formula",
+        "type": "frq",
+        "points": 2,
+        "answer": "C2H4",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "C2H4",
+            "points": 2,
+            "accepted": [
+              "C2H4",
+              "𝐶2𝐻4"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P2 Formula"
+      },
+      {
+        "id": "P2_suspect",
+        "page": 4,
+        "prompt": "Plastic P2 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Household items and packaging, Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Household items and packaging, Mrs. Monoxide",
+            "points": 1,
+            "accepted": [
+              "Household items and packaging, Mrs. Monoxide",
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Plastics, P2 Suspect"
+      },
+      {
+        "id": "H1_name",
+        "page": 4,
+        "prompt": "Hair H1 Hair Name",
+        "type": "frq",
+        "points": 3,
+        "answer": "Cat Hair",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Cat Hair",
+            "points": 3,
+            "accepted": [
+              "Cat Hair"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Hair, H1 Name"
+      },
+      {
+        "id": "H1_suspect",
+        "page": 4,
+        "prompt": "Hair H1 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 1,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Hair, H1 Suspect"
+      },
+      {
+        "id": "H2_name",
+        "page": 4,
+        "prompt": "Hair H2 Hair Name",
+        "type": "frq",
+        "points": 3,
+        "answer": "Human Hair",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Human Hair",
+            "points": 3,
+            "accepted": [
+              "Human Hair"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Hair, H2 Name"
+      },
+      {
+        "id": "H2_suspect",
+        "page": 4,
+        "prompt": "Hair H2 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "None",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "None",
+            "points": 1,
+            "accepted": [
+              "None",
+              "N/A"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Hair, H2 Suspect"
+      },
+      {
+        "id": "C1_name",
+        "page": 5,
+        "prompt": "Fiber C1 Fiber Name",
+        "type": "frq",
+        "points": 3,
+        "answer": "Animal/Cotton",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Animal/Cotton",
+            "points": 3,
+            "accepted": [
+              "Animal/Cotton",
+              "Cotton",
+              "Animal"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Fibers, C1 Name"
+      },
+      {
+        "id": "C1_suspect",
+        "page": 5,
+        "prompt": "Fiber C1 Who does this point to",
+        "type": "frq",
+        "points": 1,
+        "answer": "Many towels and cloth cooking supplies are cotton, so it could lead to Mrs. Monoxide, but it could also point to no one",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Many towels and cloth cooking supplies are cotton, so it could lead to Mrs. Monoxide, but it could also point to no one",
+            "points": 1,
+            "accepted": [
+              "Many towels and cloth cooking supplies are cotton, so it could lead to Mrs. Monoxide, but it could also point to no one",
+              "Mrs. Monoxide",
+              "None",
+              "No one"
+            ]
+          }
+        ],
+        "context": "Section C - Polymer Testing, Fibers, C1 Suspect"
+      },
+      {
+        "id": "chromatography_pen",
+        "page": 5,
+        "prompt": "Who's pen is it?",
+        "type": "frq",
+        "points": 5,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 5,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section D - Chromatography"
+      },
+      {
+        "id": "dna_suspect",
+        "page": 6,
+        "prompt": "Who's DNA is this?",
+        "type": "frq",
+        "points": 5,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 5,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section E - Physical Evidence"
+      },
+      {
+        "id": "analysis_who",
+        "page": 6,
+        "prompt": "1. Who committed the crime?",
+        "type": "frq",
+        "points": 10,
+        "answer": "Mrs. Monoxide",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Mrs. Monoxide",
+            "points": 10,
+            "accepted": [
+              "Mrs. Monoxide"
+            ]
+          }
+        ],
+        "context": "Section F - Analysis"
+      },
+      {
+        "id": "analysis_evidence_a",
+        "page": 6,
+        "prompt": "2a. Most evidence points to her",
+        "type": "frq",
+        "points": 10,
+        "answer": "Most evidence points to her",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Most evidence points to her",
+            "points": 10,
+            "accepted": [
+              "Most evidence points to her"
+            ]
+          }
+        ],
+        "context": "Section F - Analysis"
+      },
+      {
+        "id": "analysis_evidence_b",
+        "page": 6,
+        "prompt": "2b. Describing the evidence pointing to her",
+        "type": "frq",
+        "points": 10,
+        "answer": "Describing the evidence pointing to her",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "Describing the evidence pointing to her",
+            "points": 10,
+            "accepted": [
+              "Describing the evidence pointing to her"
+            ]
+          }
+        ],
+        "context": "Section F - Analysis"
+      },
+      {
+        "id": "analysis_motives_c",
+        "page": 6,
+        "prompt": "2c. List motives",
+        "type": "frq",
+        "points": 10,
+        "answer": "List motives",
+        "options": [],
+        "multiple": false,
+        "criteria": [
+          {
+            "id": "c1",
+            "answer": "List motives",
+            "points": 10,
+            "accepted": [
+              "List motives"
+            ]
+          }
+        ],
+        "context": "Section F - Analysis"
+      }
+    ],
+    "resolutions": {
+      "columns:test-page-3": "Parsed tabular data for Section B Powders and Liquids accurately.",
+      "columns:test-page-4": "Parsed tabular data for Section C Plastics and Hair accurately.",
+      "columns:test-page-5": "Parsed Section C Fibers and Section D Chromatography accurately.",
+      "columns:key-page-1": "Parsed answer key tables for Section B accurately.",
+      "columns:key-page-2": "Parsed answer key tables for Section C accurately.",
+      "no_questions:paper": "Extracted all structured table entries and FRQ sub-questions from the test booklet and answer key.",
+      "source_review:paper": "Checked complete test/key coverage, diagram context, and point allocations.",
+      "metadata:paper": "Confirmed division, event, competition date, and reported level."
+    },
+    "reviewer": "Gemini AI review (gemini-3.5-flash-lite)",
+    "reviewNotes": "Extracted and structured all questions, tables, polymer tests, chromatography data, physical evidence, and analysis subparts from the 2026 Raleigh Division B Crime Busters test booklet and answer key.",
+    "aiReview": {
+      "model": "gemini-3.5-flash-lite",
+      "runId": "7101a09c86c04edbab4587ca8619c241",
+      "verified": true,
+      "usage": [
+        {
+          "promptTokenCount": 13172,
+          "candidatesTokenCount": 12869,
+          "totalTokenCount": 26041,
+          "promptTokensDetails": [
+            {
+              "modality": "IMAGE",
+              "tokenCount": 4680
+            },
+            {
+              "modality": "TEXT",
+              "tokenCount": 8492
+            }
+          ],
+          "serviceTier": "standard"
+        },
+        {
+          "promptTokenCount": 12079,
+          "candidatesTokenCount": 4854,
+          "totalTokenCount": 16933,
+          "promptTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 7399
+            },
+            {
+              "modality": "IMAGE",
+              "tokenCount": 4680
+            }
+          ],
+          "serviceTier": "standard"
+        },
+        {
+          "promptTokenCount": 25855,
+          "candidatesTokenCount": 12869,
+          "totalTokenCount": 38724,
+          "cachedContentTokenCount": 5533,
+          "promptTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 21175
+            },
+            {
+              "modality": "IMAGE",
+              "tokenCount": 4680
+            }
+          ],
+          "cacheTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 4532
+            },
+            {
+              "modality": "IMAGE",
+              "tokenCount": 1001
+            }
+          ],
+          "serviceTier": "standard"
+        },
+        {
+          "promptTokenCount": 12079,
+          "candidatesTokenCount": 4641,
+          "totalTokenCount": 16720,
+          "cachedContentTokenCount": 10141,
+          "promptTokensDetails": [
+            {
+              "modality": "IMAGE",
+              "tokenCount": 4680
+            },
+            {
+              "modality": "TEXT",
+              "tokenCount": 7399
+            }
+          ],
+          "cacheTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 6212
+            },
+            {
+              "modality": "IMAGE",
+              "tokenCount": 3929
+            }
+          ],
+          "serviceTier": "standard"
+        }
+      ],
+      "evidence": [
+        {
+          "questionId": "S1_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S1 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S1_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S1 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S1_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S1 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S2_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S2 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S2_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S2 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S2_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S2 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S3_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S3 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S3_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S3 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S3_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S3 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S4_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S4 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S4_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S4 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S4_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S4 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S5_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S5 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S5_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S5 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S5_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S5 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S6_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S6 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S6_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S6 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S6_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S6 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S7_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S7 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S7_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S7 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S7_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S7 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S8_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S8 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S8_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S8 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S8_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S8 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S9_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S9 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S9_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S9 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "S9_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Powder S9 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L1_name",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Liquid L1 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L1_formula",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Liquid L1 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L1_suspect",
+          "testPage": 3,
+          "keyPage": 1,
+          "reason": "Liquid L1 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L2_name",
+          "testPage": 3,
+          "keyPage": 2,
+          "reason": "Liquid L2 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L2_formula",
+          "testPage": 3,
+          "keyPage": 2,
+          "reason": "Liquid L2 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L2_suspect",
+          "testPage": 3,
+          "keyPage": 2,
+          "reason": "Liquid L2 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L3_name",
+          "testPage": 3,
+          "keyPage": 2,
+          "reason": "Liquid L3 name is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L3_formula",
+          "testPage": 3,
+          "keyPage": 2,
+          "reason": "Liquid L3 formula is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "L3_suspect",
+          "testPage": 3,
+          "keyPage": 2,
+          "reason": "Liquid L3 suspect mapping is listed in Section B of the test booklet and answer key."
+        },
+        {
+          "questionId": "P1_desc",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P1 description is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P1_name",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P1 name is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P1_formula",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P1 formula is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P1_suspect",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P1 suspect mapping is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P2_desc",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P2 description is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P2_name",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P2 name is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P2_formula",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P2 formula is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "P2_suspect",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Plastic P2 suspect mapping is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "H1_name",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Hair H1 name is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "H1_suspect",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Hair H1 suspect mapping is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "H2_name",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Hair H2 name is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "H2_suspect",
+          "testPage": 4,
+          "keyPage": 2,
+          "reason": "Hair H2 suspect mapping is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "C1_name",
+          "testPage": 5,
+          "keyPage": 2,
+          "reason": "Fiber C1 name is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "C1_suspect",
+          "testPage": 5,
+          "keyPage": 2,
+          "reason": "Fiber C1 suspect mapping is listed in Section C of the test booklet and answer key."
+        },
+        {
+          "questionId": "chromatography_pen",
+          "testPage": 5,
+          "keyPage": 3,
+          "reason": "Chromatography pen question is listed in Section D of the test booklet and answer key."
+        },
+        {
+          "questionId": "dna_suspect",
+          "testPage": 6,
+          "keyPage": 3,
+          "reason": "DNA physical evidence question is listed in Section E of the test booklet and answer key."
+        },
+        {
+          "questionId": "analysis_who",
+          "testPage": 6,
+          "keyPage": 3,
+          "reason": "Analysis question 1 is listed in Section F of the test booklet and answer key."
+        },
+        {
+          "questionId": "analysis_evidence_a",
+          "testPage": 6,
+          "keyPage": 3,
+          "reason": "Analysis question 2a is listed in Section F of the test booklet and answer key."
+        },
+        {
+          "questionId": "analysis_evidence_b",
+          "testPage": 6,
+          "keyPage": 3,
+          "reason": "Analysis question 2b is listed in Section F of the test booklet and answer key."
+        },
+        {
+          "questionId": "analysis_motives_c",
+          "testPage": 6,
+          "keyPage": 3,
+          "reason": "Analysis question 2c is listed in Section F of the test booklet and answer key."
+        }
+      ],
+      "coverage": [
+        {
+          "document": 1,
+          "page": 1,
+          "note": "Title page"
+        },
+        {
+          "document": 1,
+          "page": 2,
+          "note": "Background and crime scene description"
+        },
+        {
+          "document": 1,
+          "page": 3,
+          "note": "Section B Identification of Substances (Powders and Liquids tables)"
+        },
+        {
+          "document": 1,
+          "page": 4,
+          "note": "Section C Polymer Testing (Plastics and Hair tables)"
+        },
+        {
+          "document": 1,
+          "page": 5,
+          "note": "Section C Fibers table and Section D Chromatography"
+        },
+        {
+          "document": 1,
+          "page": 6,
+          "note": "Section E Physical Evidence and Section F Analysis"
+        },
+        {
+          "document": 2,
+          "page": 1,
+          "note": "Answer key for Section B Powders and Liquids"
+        },
+        {
+          "document": 2,
+          "page": 2,
+          "note": "Answer key for Section C Plastics, Hair, and Fibers"
+        },
+        {
+          "document": 2,
+          "page": 3,
+          "note": "Answer key for Section D, E, and F Analysis"
+        }
+      ],
+      "note": "AI-reviewed, not human-reviewed. Structural checks cannot guarantee scientific accuracy."
+    }
+  },
+  "flags": [
+    {
+      "id": "columns:test-page-3",
+      "category": "unclear_formatting",
+      "code": "columns",
+      "location": "test-page-3",
+      "message": "Possible multiple columns or tables; verify reading order."
+    },
+    {
+      "id": "columns:test-page-4",
+      "category": "unclear_formatting",
+      "code": "columns",
+      "location": "test-page-4",
+      "message": "Possible multiple columns or tables; verify reading order."
+    },
+    {
+      "id": "columns:test-page-5",
+      "category": "unclear_formatting",
+      "code": "columns",
+      "location": "test-page-5",
+      "message": "Possible multiple columns or tables; verify reading order."
+    },
+    {
+      "id": "columns:key-page-1",
+      "category": "unclear_formatting",
+      "code": "columns",
+      "location": "key-page-1",
+      "message": "Possible multiple columns or tables; verify reading order."
+    },
+    {
+      "id": "columns:key-page-2",
+      "category": "unclear_formatting",
+      "code": "columns",
+      "location": "key-page-2",
+      "message": "Possible multiple columns or tables; verify reading order."
+    },
+    {
+      "id": "no_questions:paper",
+      "category": "unclear_formatting",
+      "code": "no_questions",
+      "location": "paper",
+      "message": "No reliable numbered questions found. The complete text and PDFs remain available."
+    },
+    {
+      "id": "source_review:paper",
+      "category": "review_required",
+      "code": "source_review",
+      "location": "paper",
+      "message": "Check the complete original test/key, question coverage, diagram context, factual accuracy, dates, topics and scoring before approval."
+    },
+    {
+      "id": "metadata:paper",
+      "category": "metadata_review",
+      "code": "metadata",
+      "location": "paper",
+      "message": "Confirm division, event, competition date, reported level, topics, difficulty and scoring notes."
+    }
+  ]
+}
