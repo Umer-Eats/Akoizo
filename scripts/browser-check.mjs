@@ -126,6 +126,7 @@ try {
     'West Campus Pembroke Pines Charter Middle School',
     'Academic Village Pembroke Pines Charter Middle School',
     'River City Science Academy High School',
+    'Saint Ignatius High School',
   ]);
   await communitySelect.selectOption('ppcms-academic-village');
   await layout(page, 'instructor-signup');

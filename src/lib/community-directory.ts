@@ -20,4 +20,8 @@ export const schoolCommunities = [
     id: 'rcsa-high',
     name: 'River City Science Academy High School',
   },
+  {
+    id: 'sihs',
+    name: 'Saint Ignatius High School',
+  },
 ] as const;

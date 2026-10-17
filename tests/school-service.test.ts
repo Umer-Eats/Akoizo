@@ -411,6 +411,7 @@ test('each campus password joins only its shared roster and instructors cannot a
     'test-west-join',
     'test-avm-join',
     'test-rcsa-join',
+    'test-sihs-join',
   ];
   const instructors: Profile[] = [];
   const learners: Profile[] = [];
@@ -418,7 +419,12 @@ test('each campus password joins only its shared roster and instructors cannot a
     const data = {
       ...teacherData,
       schoolCommunityId: campus.id,
-      instructorInvitePassword: campus.id === 'rcsa-high' ? 'test-rcsa-invite' : 'test-invitation',
+      instructorInvitePassword:
+        campus.id === 'rcsa-high'
+          ? 'test-rcsa-invite'
+          : campus.id === 'sihs'
+            ? 'test-sihs-invite'
+            : 'test-invitation',
     };
     const first = await registerMember(db, identity(`teacher-${index}`), data, 'test-invitation');
     const second = await registerMember(

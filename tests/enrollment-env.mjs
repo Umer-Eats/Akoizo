@@ -5,3 +5,5 @@ process.env.WEST_STUDENT_JOIN_PASSWORD = 'test-west-join';
 process.env.CENTRAL_STUDENT_JOIN_PASSWORD = 'test-central-join';
 process.env.RCSA_STUDENT_JOIN_PASSWORD = 'test-rcsa-join';
 process.env.RCSA_INSTRUCTOR_INVITE_PASSWORD = 'test-rcsa-invite';
+process.env.SIHS_STUDENT_JOIN_PASSWORD = 'test-sihs-join';
+process.env.SIHS_INSTRUCTOR_INVITE_PASSWORD = 'test-sihs-invite';
