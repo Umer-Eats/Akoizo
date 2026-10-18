@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BookOpen, Check, ChevronLeft, ChevronRight, FlaskConical, RotateCcw } from 'lucide-react';
 import type { EventLessons, Lesson, LessonSim } from '@/lib/lessons';
 import type { WorkRecord } from '@/lib/domain';
@@ -26,6 +26,10 @@ import { LessonActivities, InlineCheck } from './lesson-activities';
 import { TopicLabPreview, TopicLabView } from './topic-lab';
 import { PhetSim } from './phet-sim';
 import './lessons.css';
+import { akoLessonLines } from '@/lib/ako-lesson';
+import { askAkoAbout, setAkoStudy } from '@/lib/ako-study';
+import { AkoCharacter } from './ako-character';
+import { useSettings } from './providers';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
   const [values, setValues] = useState(() => modelDefaults(sim.model));
@@ -410,17 +414,46 @@ function QuizView({
 
 function LessonDetail({
   lesson,
+  eventId,
   attempt,
   onChange,
   record,
   onSubmit,
 }: {
   lesson: Lesson;
+  eventId: string;
   attempt: LessonAttempt;
   onChange: (attempt: LessonAttempt) => void;
   record?: LessonRecord;
   onSubmit: () => Promise<void>;
 }) {
+  const { motion, ako, updateAko } = useSettings();
+  const [teachingLine, setTeachingLine] = useState('');
+  const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
+  useEffect(() => {
+    setAkoStudy({
+      testId: `lesson:${eventId}:${lesson.id}`,
+      title: lesson.title,
+      questions: lines,
+      answerFor: () => '',
+      lesson: {
+        eventId,
+        lessonId: lesson.id,
+        onLine: (id) => {
+          setTeachingLine(id);
+          document
+            .getElementById(`ako-line-${id}`)
+            ?.scrollIntoView({ block: 'start', behavior: 'instant' });
+        },
+      },
+    });
+    return () => setAkoStudy(null);
+  }, [eventId, lesson, lines]);
+  const teachLine = (id: string) => {
+    if (!ako.visible) updateAko({ visible: true });
+    setTeachingLine(id);
+    askAkoAbout(id);
+  };
   const extras = extrasFor(lesson.id);
   const labs = (extras.labs ?? []).map((id) => topicLabs[id]).filter(Boolean);
   const phetSims = extras.phet ?? [];
@@ -435,6 +468,20 @@ function LessonDetail({
         <h2 id="current-lesson-title" tabIndex={-1}>
           {lesson.title}
         </h2>
+        <div className="lesson-ako-intro">
+          <strong>Learn with Ako</strong>
+          <p>
+            I’ll walk through the reading with you, unpack new words, and ask questions as we go.
+            You set the pace.
+          </p>
+          <button
+            type="button"
+            className="button button-small button-glass"
+            onClick={() => teachLine(teachingLine || lines[0].id)}
+          >
+            {teachingLine ? 'Continue with Ako' : 'Teach me this lesson'}
+          </button>
+        </div>
         <nav className="lesson-jumps" aria-label="Jump within this lesson">
           <a href="#lesson-reading">Read</a>
           <a href="#lesson-example">Worked example</a>
@@ -458,7 +505,26 @@ function LessonDetail({
             <p className="lesson-section-number">{String(index + 1).padStart(2, '0')}</p>
             <h3>{section.heading}</h3>
             {section.body.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
+              <div
+                key={i}
+                id={`ako-line-${index}:${i}`}
+                className={`lesson-ako-line ${teachingLine === `${index}:${i}` ? 'is-teaching' : ''}`}
+              >
+                {teachingLine === `${index}:${i}` && (
+                  <span className="lesson-ako-marker" aria-label="Ako is teaching this line">
+                    <AkoCharacter action="thinking" motion={motion} look={1} paused={false} />
+                  </span>
+                )}
+                <p>{paragraph}</p>
+                <button
+                  type="button"
+                  className="lesson-ako-line-button"
+                  aria-label={`Teach line ${i + 1} of ${section.heading}`}
+                  onClick={() => teachLine(`${index}:${i}`)}
+                >
+                  Teach this line
+                </button>
+              </div>
             ))}
             <LessonSectionVisuals lesson={lesson} index={index} />
             {(
@@ -738,6 +804,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
           <LessonDetail
             key={lesson.id}
             lesson={lesson}
+            eventId={course.eventId}
             attempt={attempts[lesson.id] ?? emptyAttempt}
             onChange={(attempt) => setAttempts((current) => ({ ...current, [lesson.id]: attempt }))}
             record={records[lesson.id]}

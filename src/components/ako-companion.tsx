@@ -186,7 +186,7 @@ export function AkoCompanion() {
       const next = akoStudy();
       setStudy(next);
       if (!next) setChat(false);
-      setFocus('');
+      setFocus(next?.lesson ? (next.questions[0]?.id ?? '') : '');
     };
     const ask = (event: Event) => {
       const id = (event as CustomEvent).detail?.questionId;
@@ -305,7 +305,9 @@ export function AkoCompanion() {
   const panelTop = view.position.y < 240 ? view.position.y + AKO_SIZE : view.position.y - 230;
   // The chat sits beside Ako so his reactions stay visible; on narrow screens it stacks instead.
   const chatWidth = Math.min(320, innerWidth - 16);
-  const chatHeight = Math.min(440, innerHeight - 16);
+  const chatHeight = study?.lesson
+    ? Math.min(620, innerHeight - 112)
+    : Math.min(440, innerHeight - 16);
   const beside =
     view.position.x - chatWidth - 8 >= 8
       ? view.position.x - chatWidth - 8
@@ -497,7 +499,7 @@ export function AkoCompanion() {
                 setChat(true);
               }}
             >
-              Study this test with Ako
+              {study.lesson ? 'Learn this lesson with Ako' : 'Study this test with Ako'}
             </button>
           )}
           <div className="ako-controls-actions">

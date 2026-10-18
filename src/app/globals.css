@@ -3086,6 +3086,12 @@
   font-weight: 600;
   color: #ef6976;
 }
+.ako-chat-lesson .ako-chat-why {
+  color: var(--text);
+}
+.ako-chat-lesson .ako-chat-log {
+  min-height: 90px;
+}
 .ako-chat .form-error {
   font-size: 11px;
   margin: 0;

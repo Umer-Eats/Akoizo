@@ -694,3 +694,45 @@
     transition: none;
   }
 }
+.lesson-ako-intro {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.lesson-ako-line {
+  position: relative;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  scroll-margin-block: 100px;
+}
+.lesson-ako-line.is-teaching {
+  border-color: #549ac5;
+  background: var(--surface-2);
+}
+.lesson-ako-marker {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.lesson-ako-marker .ako-pixel {
+  width: 64px;
+  height: 64px;
+}
+.lesson-ako-line-button {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.lesson-ako-line-button:focus-visible {
+  outline: 2px solid #549ac5;
+  outline-offset: 3px;
+}

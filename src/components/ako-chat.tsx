@@ -9,7 +9,7 @@ const questionName = (label: string) =>
 // How long Ako waits for the student's "why" before he loses his patience.
 const PATIENCE_MS = 60000;
 
-/** Ako's study chat for the open practice test. Stays mounted so a closed panel keeps its thread. */
+/** Shared practice tutor and guided lesson teacher. Closing the panel keeps its thread. */
 export function AkoChat({
   open,
   study,
@@ -38,16 +38,39 @@ export function AkoChat({
   const reactRef = useRef(react);
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
+  const sendRef = useRef<(text: string) => Promise<void>>(async () => {});
+  const taught = useRef('');
+  const lesson = study.lesson;
   draftRef.current = draft;
   reactRef.current = react;
-  // A different test or question starts a fresh thread and drops any reply still in flight.
+  // Keep the lesson conversation between lines, but cancel stale replies and reset the check.
   useEffect(() => {
     session.current++;
-    setTurns([]);
+    if (!study.lesson) setTurns([]);
     setWhy({ pending: false, missed: 0 });
     setError('');
     setSending(false);
+    setDraft('');
   }, [study.testId, focus]);
+  useEffect(() => {
+    setTurns([]);
+    setDraft('');
+    taught.current = '';
+    return () => {
+      session.current++;
+    };
+  }, [study.testId]);
+  useEffect(() => {
+    if (!open || !lesson || !focus) return;
+    lesson.onLine(focus);
+    const key = `${study.testId}/${focus}`;
+    if (taught.current === key) return;
+    const timer = setTimeout(() => {
+      taught.current = key;
+      void sendRef.current('Teach this line.');
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [open, focus, study.testId, lesson]);
   useEffect(() => {
     if (open) input.current?.focus();
   }, [open, focus]);
@@ -55,7 +78,14 @@ export function AkoChat({
     log.current?.scrollTo({ top: log.current.scrollHeight });
   }, [turns, sending, open]);
   useEffect(() => {
-    if (!why.pending || sending) return;
+    const element = log.current;
+    if (!open || !element) return;
+    const observer = new ResizeObserver(() => element.scrollTo({ top: element.scrollHeight }));
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [open]);
+  useEffect(() => {
+    if (lesson || !open || !why.pending || sending) return;
     const timer = setTimeout(() => {
       if (draftRef.current.trim()) return;
       reactRef.current('angry', 120000);
@@ -65,7 +95,7 @@ export function AkoChat({
       ]);
     }, PATIENCE_MS);
     return () => clearTimeout(timer);
-  }, [why, sending]);
+  }, [why, sending, lesson, open]);
   async function send(text: string) {
     const message = text.trim().slice(0, AKO_LIMITS.message);
     if (!message || sending) return;
@@ -77,14 +107,16 @@ export function AkoChat({
     setError('');
     react('thinking', 60000);
     try {
-      const reply = await request<AkoReply>('/api/practice/ako', {
+      const reply = await request<AkoReply>(lesson ? '/api/lessons/ako' : '/api/practice/ako', {
         method: 'POST',
         body: JSON.stringify({
-          testId: study.testId,
+          ...(lesson
+            ? { eventId: lesson.eventId, lessonId: lesson.lessonId }
+            : { testId: study.testId }),
           questionId: focus || undefined,
           message,
           history,
-          answer: focus ? study.answerFor(focus).slice(0, AKO_LIMITS.answer) : undefined,
+          answer: !lesson && focus ? study.answerFor(focus).slice(0, AKO_LIMITS.answer) : undefined,
           pendingWhy: why.pending,
           missedWhys: why.missed,
         }),
@@ -111,18 +143,27 @@ export function AkoChat({
       if (id === session.current) setSending(false);
     }
   }
+  sendRef.current = send;
   if (!open) return null;
-  const prompts = focus
+  const lineIndex = study.questions.findIndex((line) => line.id === focus);
+  const prompts = lesson
     ? [
-        'What’s the answer?',
-        'Give me a hint',
-        ...(study.answerFor(focus).trim() ? ['Is my answer right?'] : []),
+        'Explain more simply',
+        'Explain the key terms',
+        'Give me an example',
+        'Quiz me on this concept',
       ]
-    : ['What does this test cover?', 'Quiz me on a topic'];
+    : focus
+      ? [
+          'What’s the answer?',
+          'Give me a hint',
+          ...(study.answerFor(focus).trim() ? ['Is my answer right?'] : []),
+        ]
+      : ['What does this test cover?', 'Quiz me on a topic'];
   return (
     <section
       id="ako-chat"
-      className="ako-chat"
+      className={`ako-chat${lesson ? ' ako-chat-lesson' : ''}`}
       aria-label="Study with Ako"
       style={style}
       onKeyDown={(event) => {
@@ -138,14 +179,44 @@ export function AkoChat({
       <label className="ako-chat-focus">
         <span>Looking at</span>
         <select value={focus} onChange={(event) => onFocus(event.target.value)}>
-          <option value="">The whole test</option>
+          {!lesson && <option value="">The whole test</option>}
           {study.questions.map((question) => (
             <option key={question.id} value={question.id}>
-              {questionName(question.label)}
+              {lesson ? question.label : questionName(question.label)}
             </option>
           ))}
         </select>
       </label>
+      {lesson && (
+        <nav className="ako-chat-prompts" aria-label="Lesson teaching controls">
+          <button
+            type="button"
+            disabled={lineIndex <= 0}
+            onClick={() => onFocus(study.questions[lineIndex - 1].id)}
+          >
+            Previous line
+          </button>
+          <span className="ako-chat-hint">
+            {lineIndex + 1} / {study.questions.length}
+          </span>
+          <button
+            type="button"
+            disabled={lineIndex >= study.questions.length - 1}
+            onClick={() => onFocus(study.questions[lineIndex + 1].id)}
+          >
+            Next line
+          </button>
+          {lineIndex === study.questions.length - 1 && (
+            <button
+              type="button"
+              disabled={sending}
+              onClick={() => void send('Recap this lesson and ask me an application question.')}
+            >
+              Recap lesson
+            </button>
+          )}
+        </nav>
+      )}
       <div
         className="ako-chat-log"
         ref={log}
@@ -155,9 +226,11 @@ export function AkoChat({
       >
         {!turns.length && (
           <p className="ako-chat-hint">
-            {focus
-              ? 'I can see this question. Ask me about it. If I give you an answer, I’ll want to know why it’s right!'
-              : `I’m looking at ${study.title}. Pick a question above, or press Ask Ako beside one.`}
+            {lesson
+              ? 'Let’s explore this line together. I’ll explain it, then give you a question to think about.'
+              : focus
+                ? 'I can see this question. Ask me about it. If I give you an answer, I’ll want to know why it’s right!'
+                : `I’m looking at ${study.title}. Pick a question above, or press Ask Ako beside one.`}
           </p>
         )}
         {turns.map((turn, index) => (
@@ -168,7 +241,7 @@ export function AkoChat({
         ))}
         {sending && <p className="ako-chat-turn ako-chat-ako ako-chat-pending">Ako is thinking…</p>}
       </div>
-      {!turns.length && !sending && (
+      {(lesson || !turns.length) && !sending && (
         <div className="ako-chat-prompts">
           {prompts.map((prompt) => (
             <button type="button" key={prompt} onClick={() => void send(prompt)}>
@@ -179,7 +252,9 @@ export function AkoChat({
       )}
       {why.pending && !sending && (
         <p className="ako-chat-why" role="status">
-          Ako is waiting for your why.
+          {lesson
+            ? 'Your turn — try an answer, or ask for another explanation.'
+            : 'Ako is waiting for your why.'}
         </p>
       )}
       {error && (
@@ -198,8 +273,12 @@ export function AkoChat({
           ref={input}
           rows={2}
           maxLength={AKO_LIMITS.message}
-          aria-label={why.pending ? 'Explain why to Ako' : 'Message Ako'}
-          placeholder={why.pending ? 'Explain why…' : 'Ask Ako…'}
+          aria-label={
+            lesson ? 'Answer or ask Ako' : why.pending ? 'Explain why to Ako' : 'Message Ako'
+          }
+          placeholder={
+            lesson ? 'Try an answer or ask for help…' : why.pending ? 'Explain why…' : 'Ask Ako…'
+          }
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
           onKeyDown={(event) => {

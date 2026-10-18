@@ -75,6 +75,7 @@ export function allowAkoMessage(
 
 /** The practice test the student has open, published for the companion in the root layout. */
 export type AkoStudy = {
+  lesson?: { eventId: string; lessonId: string; onLine: (id: string) => void };
   testId: string;
   title: string;
   questions: { id: string; label: string }[];
