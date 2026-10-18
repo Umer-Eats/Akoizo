@@ -216,7 +216,6 @@ export function AkoCompanion() {
     window.addEventListener('resize', resize);
     let frame = 0,
       previous = performance.now(),
-      lastPaint = 0,
       talkIndex = 0,
       roamIndex = 0;
     const tick = (now: number) => {
@@ -293,10 +292,7 @@ export function AkoCompanion() {
         // Compositor movement follows the display refresh rate without rerendering the chat.
         if (body.current)
           body.current.style.transform = `translate3d(${s.position.x}px, ${s.position.y}px, 0)`;
-        if (now - lastPaint > 33) {
-          publish();
-          lastPaint = now;
-        }
+        publish();
       }
       frame = requestAnimationFrame(tick);
     };

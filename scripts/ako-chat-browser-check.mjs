@@ -1,4 +1,5 @@
 import { chromium, expect } from '@playwright/test';
+import { AKO_ACTIONS } from '../src/lib/ako-motion.ts';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { practiceTests, publicPracticePaper } from '../src/lib/practice-catalog.ts';
@@ -192,6 +193,30 @@ try {
   await page.locator('.ako-companion-body').click();
   await page.getByRole('button', { name: 'Study this test with Ako' }).click();
   await expect(chat).toBeVisible();
+
+  // Every expression uses the same display-rate animation path, even slow idle/sleep clips.
+  for (const action of AKO_ACTIONS) {
+    await page.evaluate((action) => {
+      window.dispatchEvent(new CustomEvent('ako:mood', { detail: { action, duration: 10000 } }));
+    }, action);
+    await expect(buddy).toHaveAttribute('data-action', action);
+    const poses = await page.evaluate(async () => {
+      const samples = [];
+      for (let i = 0; i < 12; i++) {
+        await new Promise(requestAnimationFrame);
+        samples.push(document.querySelector('.ako-pixel path[stroke-width="4"]').getAttribute('d'));
+      }
+      return samples;
+    });
+    assert.ok(new Set(poses).size >= 5, `${action} interpolates on successive display frames`);
+  }
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const stillPose = () => page.locator('.ako-pixel').evaluate((svg) => svg.innerHTML);
+  await expect.poll(stillPose).toContain('v-5H8');
+  const reducedPose = await stillPose();
+  await page.waitForTimeout(200);
+  assert.equal(await stillPose(), reducedPose, 'reduced motion keeps Ako still');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
 
   for (const [width, height] of [
     [390, 844],

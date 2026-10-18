@@ -710,9 +710,10 @@
   color: #201c00;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  border-radius: 3px;
-  outline: 2px solid #fff000;
-  box-shadow: 0 0 12px #ffe60080;
+  /* Keep the paint inside each text fragment, including at wrapped sentence boundaries. */
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none;
 }
 .is-ako-guided .lesson-reading {
   padding-inline-start: 72px;

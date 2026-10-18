@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { BookOpen, Check, ChevronLeft, ChevronRight, FlaskConical, RotateCcw } from 'lucide-react';
 import type { EventLessons, Lesson, LessonSim } from '@/lib/lessons';
 import type { WorkRecord } from '@/lib/domain';
@@ -554,15 +554,17 @@ function LessonDetail({
                 {lines
                   .filter((line) => line.sectionIndex === index && line.paragraphIndex === i)
                   .map((line) => (
-                    <span
-                      key={line.id}
-                      id={`ako-line-${line.id}`}
-                      data-ako-sentence={line.id}
-                      aria-current={activeStep?.anchorId === line.id ? 'step' : undefined}
-                      className={`lesson-ako-sentence${activeStep?.highlightIds.includes(line.id) ? ' is-teaching' : ''}`}
-                    >
-                      {line.text}
-                    </span>
+                    <Fragment key={line.id}>
+                      <span
+                        id={`ako-line-${line.id}`}
+                        data-ako-sentence={line.id}
+                        aria-current={activeStep?.anchorId === line.id ? 'step' : undefined}
+                        className={`lesson-ako-sentence${activeStep?.highlightIds.includes(line.id) ? ' is-teaching' : ''}`}
+                      >
+                        {line.text.trimEnd()}
+                      </span>
+                      {line.text.slice(line.text.trimEnd().length)}
+                    </Fragment>
                   ))}
               </p>
             ))}

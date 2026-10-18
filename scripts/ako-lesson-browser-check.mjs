@@ -2,7 +2,7 @@ import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
-import { akoLessonPlan } from '../src/lib/ako-lesson.ts';
+import { akoLessonLines, akoLessonPlan } from '../src/lib/ako-lesson.ts';
 import { askAkoLesson } from '../src/lib/ako-tutor.ts';
 
 // Browser-only account mocks. The real tutor service runs unchanged against a scripted model, so
@@ -147,6 +147,49 @@ try {
   const lesson = anatomyLessons.lessons[0];
   const plan = akoLessonPlan(lesson);
   const active = page.locator('.lesson-ako-sentence[aria-current=step]');
+  const checkHighlightBoundaries = async () => {
+    const rendered = await page.locator('[data-ako-sentence]').evaluateAll((sentences) =>
+      sentences.map((sentence) => {
+        const style = getComputedStyle(sentence);
+        return {
+          id: sentence.getAttribute('data-ako-sentence'),
+          text: sentence.textContent,
+          paragraph: sentence.parentElement.textContent,
+          gap:
+            sentence.nextSibling?.nodeType === Node.TEXT_NODE
+              ? sentence.nextSibling.textContent
+              : '',
+          highlighted: sentence.classList.contains('is-teaching'),
+          outline: style.outlineWidth,
+          shadow: style.boxShadow,
+          padding: style.padding,
+          overflow: style.overflow,
+        };
+      }),
+    );
+    const source = akoLessonLines(lesson);
+    assert.equal(rendered.length, source.length);
+    for (const sentence of rendered) {
+      const original = source.find((line) => line.id === sentence.id);
+      assert.equal(sentence.text, original.text.trimEnd(), 'highlight contains the whole sentence');
+      assert.equal(
+        sentence.gap,
+        original.text.slice(original.text.trimEnd().length),
+        'sentence spacing stays outside the highlight',
+      );
+      assert.equal(
+        sentence.paragraph,
+        lesson.sections[original.sectionIndex].body[original.paragraphIndex],
+        'no source text is clipped or lost',
+      );
+      if (sentence.highlighted) {
+        assert.equal(sentence.outline, '0px');
+        assert.equal(sentence.shadow, 'none');
+        assert.equal(sentence.padding, '0px');
+        assert.equal(sentence.overflow, 'visible');
+      }
+    }
+  };
   await page.clock.install();
   await page.getByRole('button', { name: 'Teach me this lesson', exact: true }).click();
   await expect(chat).toBeVisible();
@@ -157,6 +200,7 @@ try {
     'rgb(255, 240, 0)',
   );
   await expect(page.locator('.ako-pixel')).toHaveCount(1);
+  await checkHighlightBoundaries();
   await expect(page.getByRole('button', { name: 'Teach this line', exact: true })).toHaveCount(0);
   assert.equal(requests[0].lessonId, lesson.id);
   assert.equal(requests[0].testId, undefined);
@@ -236,6 +280,7 @@ try {
     [320, 640],
   ]) {
     await page.setViewportSize({ width, height });
+    await checkHighlightBoundaries();
     await expect
       .poll(async () => {
         const rat = await page.locator('.ako-companion-body').boundingBox();

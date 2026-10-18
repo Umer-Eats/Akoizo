@@ -1,9 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { AKO_CLIPS, akoFrame, type AkoAction } from '@/lib/ako-motion';
+import { akoPose, type AkoAction } from '@/lib/ako-motion';
 
-/** Original 48px artwork: integer pixels, shared palette and a fixed foot anchor.
- * Discrete clips follow PerfectPixel's frame/identity/anchor consistency approach. */
+/** Original 48px artwork with smooth pose interpolation and a fixed foot anchor. */
 export function AkoCharacter({
   action = 'idle',
   actionKey = 0,
@@ -17,22 +16,17 @@ export function AkoCharacter({
   motion?: boolean;
   look?: number;
 }) {
-  const [frame, setFrame] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   useEffect(() => {
-    setFrame(0);
+    setSeconds(0);
     if (!motion || paused) return;
     let previous = performance.now(),
       elapsed = 0,
-      lastFrame = 0,
       animation = 0;
     const tick = (now: number) => {
       if (!document.hidden) {
         elapsed += Math.min((now - previous) / 1000, 0.1);
-        const next = akoFrame(action, elapsed);
-        if (next !== lastFrame) {
-          setFrame(next);
-          lastFrame = next;
-        }
+        setSeconds(elapsed);
       }
       previous = now;
       animation = requestAnimationFrame(tick);
@@ -40,22 +34,20 @@ export function AkoCharacter({
     animation = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(animation);
   }, [action, actionKey, motion, paused]);
-  const f = motion ? frame % AKO_CLIPS[action].frames : 0;
-  const moving = action === 'walk' || action === 'run';
+  const {
+    frame: f,
+    bounce,
+    stride,
+    sway,
+    drift,
+    thoughts,
+  } = akoPose(action, motion && !paused ? seconds : 0);
   const joy = action === 'happy';
   const angry = action === 'angry';
   const sad = action === 'sad';
   const sleep = action === 'sleep';
   const eat = action === 'eat';
   const think = action === 'thinking';
-  const bounce = moving
-    ? [0, -1, -2, -1, 0, -1, -2, -1][f]
-    : joy
-      ? [0, -2, -4, -3, -1, 0][f]
-      : f % 4 === 2
-        ? -1
-        : 0;
-  const stride = moving ? [0, 2, 3, 2, 0, -2, -3, -2][f] : 0;
   const outline = '#243451',
     fur = angry ? '#ef6976' : '#89bcdf',
     light = angry ? '#ffabb0' : '#c1e2ef';
@@ -74,8 +66,8 @@ export function AkoCharacter({
     >
       <path fill="#213450" opacity=".18" d="M12 44h26v2H12z" />
       <g transform={look !== undefined && look < -0.2 ? 'translate(48 0) scale(-1 1)' : undefined}>
-        <path fill="none" stroke={outline} strokeWidth="4" d={`M15 37H8v-3H5v-${5 + (f % 2)}H8`} />
-        <path fill="none" stroke="#ee9daa" strokeWidth="2" d={`M15 37H8v-3H5v-${5 + (f % 2)}H8`} />
+        <path fill="none" stroke={outline} strokeWidth="4" d={`M15 37H8v-3H5v-${5 + sway}H8`} />
+        <path fill="none" stroke="#ee9daa" strokeWidth="2" d={`M15 37H8v-3H5v-${5 + sway}H8`} />
         <path
           fill={outline}
           d={`M${16 + stride} 40h7v4h-9v-2h2z M${28 - stride} 40h7v4h-9v-2h2z`}
@@ -84,7 +76,7 @@ export function AkoCharacter({
           fill="#eea9b3"
           d={`M${16 + stride} 41h5v2h-7v-1h2z M${28 - stride} 41h5v2h-7v-1h2z`}
         />
-        <g transform={`translate(${angry && f % 2 ? 1 : 0} ${bounce})`}>
+        <g transform={`translate(${angry ? sway : 0} ${bounce})`}>
           <path fill={outline} d="M17 27h16v3h3v11H14V30h3z" />
           <path fill="#f8f4df" d="M18 28h14v3h2v9H16v-9h2z" />
           <path fill="#c5dce0" d="M16 33h3v7h-3zM31 31h3v9h-3z" />
@@ -117,7 +109,7 @@ export function AkoCharacter({
             {sad && (
               <>
                 <path fill={outline} d="M18 16h3v-1h2v1h-2v1h-3zM29 15h2v1h3v1h-3v-1h-2z" />
-                <path fill="#63c6ee" d={`M32 ${23 + (f % 3)}h2v3h-2z`} />
+                <path fill="#63c6ee" d={`M32 ${23 + drift}h2v3h-2z`} />
               </>
             )}
             <path fill="#e08b9b" d="M24 22h5v2h-1v1h-3v-1h-1zM16 23h3v1h-3zM34 23h3v1h-3z" />
@@ -136,16 +128,16 @@ export function AkoCharacter({
           </g>
           <path
             fill={outline}
-            d={action === 'wave' || joy ? `M12 ${23 + (f % 2) * 2}h4v11h-4z` : 'M12 31h4v7h-4z'}
+            d={action === 'wave' || joy ? `M12 ${23 + sway * 2}h4v11h-4z` : 'M12 31h4v7h-4z'}
           />
           <path
             fill={fur}
-            d={action === 'wave' || joy ? `M12 ${22 + (f % 2) * 2}h3v4h-3z` : 'M12 34h3v3h-3z'}
+            d={action === 'wave' || joy ? `M12 ${22 + sway * 2}h3v4h-3z` : 'M12 34h3v3h-3z'}
           />
           <path fill={outline} d={think || eat ? 'M30 28h5v6h-5z' : 'M34 31h3v7h-3z'} />
           <path fill={fur} d={think || eat ? 'M29 27h5v4h-5z' : 'M34 34h3v3h-3z'} />
           {eat && (
-            <g transform={`translate(22 ${31 + (f % 2)})`}>
+            <g transform={`translate(22 ${31 + sway})`}>
               <path fill="#ac6a32" d="M0 0h7v6H0z" />
               <path fill="#ffdc78" d="M0 0h6v4H0z" />
               <path fill="#d69b3d" d="M2 1h2v2H2z" />
@@ -156,27 +148,20 @@ export function AkoCharacter({
       {joy && (
         <g fill={f % 2 ? '#ffe79c' : '#f6b84e'}>
           <path d="M7 4h2v3h3v2H9v3H7V9H4V7h3zM39 28h2v3h3v2h-3v3h-2v-3h-3v-2h3z" />
-          <path d={`M${34 + (f % 3)} 3h2v2h-2zM7 20h2v2H7z`} />
+          <path d={`M${34 + drift} 3h2v2h-2zM7 20h2v2H7z`} />
         </g>
       )}
       {think && (
         <g fill="#acd6f5">
           {[0, 1, 2].map((i) => (
-            <rect
-              key={i}
-              x={24 + i * 5}
-              y={4}
-              width="3"
-              height="3"
-              opacity={f % 3 === i ? 1 : 0.25}
-            />
+            <rect key={i} x={24 + i * 5} y={4} width="3" height="3" opacity={thoughts[i]} />
           ))}
         </g>
       )}
       {angry && <path fill="#f16f7d" d="M37 2h2v3h3v2h-5zM43 8h2v5h-5v-2h3z" />}
       {sleep && (
         <path
-          transform={`translate(0 ${-f % 3})`}
+          transform={`translate(0 ${-drift})`}
           fill="#8bb5d9"
           d="M34 2h7v2h-2v2h-2v2h4v2h-7V8h2V6h2V4h-4z"
         />

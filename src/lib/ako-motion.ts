@@ -30,6 +30,34 @@ export function akoFrame(action: AkoAction, seconds: number) {
   const clip = AKO_CLIPS[action];
   return Math.floor(Math.max(0, seconds) * clip.fps) % clip.frames;
 }
+/** Sample every pose at the display rate without speeding up the original clips. */
+export function akoPose(action: AkoAction, seconds: number) {
+  const clip = AKO_CLIPS[action];
+  const phase = Math.max(0, seconds) * clip.fps;
+  const frame = Math.floor(phase) % clip.frames;
+  const next = (frame + 1) % clip.frames;
+  const fraction = phase - Math.floor(phase);
+  const blend = fraction * fraction * (3 - 2 * fraction);
+  const sample = (value: (frame: number) => number) =>
+    value(frame) + (value(next) - value(frame)) * blend;
+  const moving = action === 'walk' || action === 'run';
+  return {
+    frame,
+    bounce: sample((f) =>
+      moving
+        ? [0, -1, -2, -1, 0, -1, -2, -1][f]
+        : action === 'happy'
+          ? [0, -2, -4, -3, -1, 0][f]
+          : f % 4 === 2
+            ? -1
+            : 0,
+    ),
+    stride: moving ? sample((f) => [0, 2, 3, 2, 0, -2, -3, -2][f]) : 0,
+    sway: sample((f) => f % 2),
+    drift: sample((f) => f % 3),
+    thoughts: [0, 1, 2].map((i) => sample((f) => (f % 3 === i ? 1 : 0.25))),
+  };
+}
 export type Point = { x: number; y: number };
 export const AKO_SIZE = 96;
 export function boundAko(point: Point, width: number, height: number): Point {
