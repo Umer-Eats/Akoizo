@@ -51,6 +51,8 @@ export function AkoCompanion() {
   const mutedRef = useRef(false);
   const held = useRef(false);
   const menuRef = useRef(false);
+  const guideRef = useRef<string | null>(null);
+  guideRef.current = chat && study?.lesson ? focus : null;
   const clickTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const canMove = motion && !reduced;
   const canMoveRef = useRef(canMove);
@@ -181,6 +183,10 @@ export function AkoCompanion() {
       if (s.cheese) s.cheese = boundAko(s.cheese, innerWidth, innerHeight);
       // Panels are laid out from the viewport, so repaint even when Ako himself did not move.
       setView({ ...s });
+      if (guideRef.current) {
+        const id = guideRef.current;
+        requestAnimationFrame(() => akoStudy()?.lesson?.onLine(id));
+      }
     };
     const studying = () => {
       const next = akoStudy();
@@ -212,7 +218,28 @@ export function AkoCompanion() {
       const s = scene.current!;
       if (!document.hidden && preferences.current.visible && !drag.current?.moved) {
         if (s.message && now > s.messageUntil) s.message = '';
-        if (!menuRef.current && (!held.current || s.cheese)) {
+        const sentence =
+          guideRef.current && document.getElementById(`ako-line-${guideRef.current}`);
+        const sentenceRects = sentence ? Array.from(sentence.getClientRects()) : [];
+        const sentenceRect = sentenceRects[0];
+        if (sentenceRect) {
+          // The one global Ako follows the actual highlighted sentence, independently of chat.
+          const target = boundAko(
+            {
+              x: Math.min(...sentenceRects.map((rect) => rect.left)) - 76,
+              y: sentenceRect.top - 18,
+            },
+            innerWidth,
+            innerHeight,
+          );
+          s.target = null;
+          s.cheese = null;
+          s.facing = 1;
+          const distance = Math.hypot(target.x - s.position.x, target.y - s.position.y);
+          s.position = canMoveRef.current ? stepAko(s.position, target, dt, 560) : target;
+          if (distance > 2 && canMoveRef.current) s.action = 'walk';
+          else if (s.action === 'walk' || now >= s.until) s.action = 'thinking';
+        } else if (!menuRef.current && (!held.current || s.cheese)) {
           if (s.target) {
             s.facing = s.target.x < s.position.x ? -1 : 1;
             s.position = canMoveRef.current
@@ -304,9 +331,9 @@ export function AkoCompanion() {
   );
   const panelTop = view.position.y < 240 ? view.position.y + AKO_SIZE : view.position.y - 230;
   // The chat sits beside Ako so his reactions stay visible; on narrow screens it stacks instead.
-  const chatWidth = Math.min(320, innerWidth - 16);
+  const chatWidth = Math.min(study?.lesson ? 360 : 320, innerWidth - 16);
   const chatHeight = study?.lesson
-    ? Math.min(620, innerHeight - 112)
+    ? Math.min(innerHeight - 16, 560, Math.max(400, innerHeight * 0.55))
     : Math.min(440, innerHeight - 16);
   const beside =
     view.position.x - chatWidth - 8 >= 8
@@ -314,22 +341,24 @@ export function AkoCompanion() {
       : view.position.x + AKO_SIZE + 8 + chatWidth <= innerWidth - 8
         ? view.position.x + AKO_SIZE + 8
         : null;
-  const chatStyle = {
-    width: chatWidth,
-    height: chatHeight,
-    left: beside ?? Math.max(8, Math.min(view.position.x - 110, innerWidth - chatWidth - 8)),
-    top: Math.max(
-      8,
-      Math.min(
-        innerHeight - chatHeight - 8,
-        beside !== null
-          ? view.position.y + AKO_SIZE - chatHeight
-          : view.position.y - chatHeight - 6 >= 8
-            ? view.position.y - chatHeight - 6
-            : view.position.y + AKO_SIZE + 6,
-      ),
-    ),
-  };
+  const chatStyle = study?.lesson
+    ? { width: chatWidth, height: chatHeight, right: 8, bottom: 8 }
+    : {
+        width: chatWidth,
+        height: chatHeight,
+        left: beside ?? Math.max(8, Math.min(view.position.x - 110, innerWidth - chatWidth - 8)),
+        top: Math.max(
+          8,
+          Math.min(
+            innerHeight - chatHeight - 8,
+            beside !== null
+              ? view.position.y + AKO_SIZE - chatHeight
+              : view.position.y - chatHeight - 6 >= 8
+                ? view.position.y - chatHeight - 6
+                : view.position.y + AKO_SIZE + 6,
+          ),
+        ),
+      };
   return (
     <div
       className="ako-companion"
@@ -338,6 +367,7 @@ export function AkoCompanion() {
       data-muted={muted}
       data-anchored={ako.anchored}
       data-chat={chat}
+      data-guiding={Boolean(chat && study?.lesson)}
     >
       {view.cheese && (
         <div
@@ -462,7 +492,10 @@ export function AkoCompanion() {
           study={study}
           focus={focus}
           onFocus={setFocus}
-          onClose={() => setChat(false)}
+          onClose={() => {
+            setChat(false);
+            study.lesson?.onPause();
+          }}
           react={react}
           style={chatStyle}
         />

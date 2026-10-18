@@ -13,6 +13,21 @@ export type AkoMood = (typeof AKO_MOODS)[number];
 export const AKO_VERDICTS = ['none', 'correct', 'partial', 'incorrect'] as const;
 export type AkoVerdict = (typeof AKO_VERDICTS)[number];
 export type AkoTurn = { role: 'student' | 'ako'; text: string };
+/** Preserve provider paragraph breaks; split long unformatted explanations into readable ideas. */
+export function akoReplyParagraphs(text: string): string[] {
+  const paragraphs = text.split(/\n\s*\n/).filter((part) => part.trim());
+  if (paragraphs.length > 1 || text.length < 240) return paragraphs;
+  const sentences = Array.from(
+    new Intl.Segmenter('en', { granularity: 'sentence' }).segment(text),
+    ({ segment }) => segment,
+  );
+  return Array.from({ length: Math.ceil(sentences.length / 2) }, (_, index) =>
+    sentences
+      .slice(index * 2, index * 2 + 2)
+      .join('')
+      .trim(),
+  );
+}
 export type AkoReply = {
   reply: string;
   mood: AkoMood;
@@ -20,6 +35,7 @@ export type AkoReply = {
   // Ako asked "why?" and is still waiting for a correct explanation.
   awaitingWhy: boolean;
   missedWhys: number;
+  nextLineId?: string;
 };
 /** After this many wrong explanations Ako explains the reasoning himself and moves on. */
 export const AKO_MAX_MISSES = 3;
@@ -75,7 +91,7 @@ export function allowAkoMessage(
 
 /** The practice test the student has open, published for the companion in the root layout. */
 export type AkoStudy = {
-  lesson?: { eventId: string; lessonId: string; onLine: (id: string) => void };
+  lesson?: { eventId: string; lessonId: string; onLine: (id: string) => void; onPause: () => void };
   testId: string;
   title: string;
   questions: { id: string; label: string }[];

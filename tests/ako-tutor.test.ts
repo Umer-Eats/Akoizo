@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { askAko, askAkoLesson } from '../src/lib/ako-tutor.ts';
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
-import { akoLessonLines } from '../src/lib/ako-lesson.ts';
+import { akoLessonLines, shouldAdvanceAkoLesson } from '../src/lib/ako-lesson.ts';
 import { AKO_MAX_MISSES, allowAkoMessage, settleAkoReply } from '../src/lib/ako-study.ts';
 import { findPracticeTest } from '../src/lib/practice-catalog.ts';
 
@@ -192,7 +192,7 @@ test('lesson teaching uses the canonical line, surrounding context and glossary 
 test('lesson checks support mistakes, clarification and explanation without angry reactions', async () => {
   const lesson = anatomyLessons.lessons[0];
   const input = {
-    questionId: '0:0',
+    questionId: '0:0:0',
     message: 'I think it is the opposite',
     pendingWhy: true,
     missedWhys: 0,
@@ -231,4 +231,48 @@ test('lesson checks support mistakes, clarification and explanation without angr
     askAkoLesson(lesson, input, { apiKey: '' }),
     (error: { status?: number }) => error.status === 503,
   );
+});
+
+test('sentence anchors preserve source paragraphs and advance only on readiness or understanding', () => {
+  const lesson = anatomyLessons.lessons[0];
+  const lines = akoLessonLines(lesson);
+  for (let section = 0; section < lesson.sections.length; section++) {
+    for (let paragraph = 0; paragraph < lesson.sections[section].body.length; paragraph++) {
+      assert.equal(
+        lines
+          .filter((line) => line.sectionIndex === section && line.paragraphIndex === paragraph)
+          .map((line) => line.text)
+          .join(''),
+        lesson.sections[section].body[paragraph],
+      );
+    }
+  }
+  assert.ok(lines.length > lesson.sections.reduce((sum, section) => sum + section.body.length, 0));
+  assert.equal(shouldAdvanceAkoLesson('Continue', 'none', false), true);
+  assert.equal(shouldAdvanceAkoLesson('Next sentence please?', 'none', true), true);
+  assert.equal(shouldAdvanceAkoLesson('got it', 'none', true), true);
+  assert.equal(shouldAdvanceAkoLesson('because of diffusion', 'correct', false), true);
+  assert.equal(shouldAdvanceAkoLesson('Explain next steps in this process', 'none', true), false);
+  assert.equal(shouldAdvanceAkoLesson('not sure', 'partial', true), false);
+});
+
+test('lesson progression returns only the following canonical sentence and stops at the end', async () => {
+  const lesson = anatomyLessons.lessons[0];
+  const lines = akoLessonLines(lesson);
+  const ok = config({
+    reply: 'Good. We can continue.',
+    mood: 'happy',
+    verdict: 'correct',
+    askedWhy: false,
+  });
+  const reply = await askAkoLesson(
+    lesson,
+    { questionId: lines[0].id, message: 'Because of structure', pendingWhy: true },
+    ok,
+  );
+  assert.equal(reply.nextLineId, lines[1].id);
+  const next = await askAkoLesson(lesson, { questionId: lines[0].id, message: 'continue' }, ok);
+  assert.equal(next.nextLineId, lines[1].id);
+  const last = await askAkoLesson(lesson, { questionId: lines.at(-1)!.id, message: 'continue' }, ok);
+  assert.equal(last.nextLineId, undefined);
 });

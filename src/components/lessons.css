@@ -701,38 +701,67 @@
   border-radius: 12px;
   background: var(--surface-2);
 }
-.lesson-ako-line {
-  position: relative;
+.lesson-ako-sentence {
+  /* The page already reserves 100px with scroll-padding-top. */
+  scroll-margin-top: 90px;
+}
+.lesson-ako-sentence.is-teaching {
+  background: #ffe477;
+  color: #302700;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 3px;
+  outline: 2px solid #ffe477;
+}
+.is-ako-guided .lesson-reading {
+  padding-inline-start: 72px;
+}
+.lesson-ako-guide {
+  position: sticky;
+  top: 82px;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
   padding: 10px 14px;
-  margin: 8px 0;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  scroll-margin-block: 100px;
-}
-.lesson-ako-line.is-teaching {
-  border-color: #549ac5;
-  background: var(--surface-2);
-}
-.lesson-ako-marker {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-}
-.lesson-ako-marker .ako-pixel {
-  width: 64px;
-  height: 64px;
-}
-.lesson-ako-line-button {
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 4px 10px;
   background: var(--surface);
-  color: var(--text);
-  font: inherit;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px #0002;
+}
+.lesson-ako-guide span {
+  color: var(--muted);
   font-size: 12px;
+  margin-inline-end: auto;
+}
+.lesson-ako-guide button {
+  padding: 6px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  color: var(--text);
   cursor: pointer;
 }
-.lesson-ako-line-button:focus-visible {
-  outline: 2px solid #549ac5;
-  outline-offset: 3px;
+@media (min-width: 1100px) {
+  .is-ako-guided .lesson-reading {
+    padding-inline-end: 340px;
+  }
+}
+@media (max-width: 600px) {
+  .lesson-ako-sentence {
+    scroll-margin-top: 40px;
+  }
+  .is-ako-guided .lesson-reading {
+    padding-inline-start: 48px;
+    padding-bottom: 55vh;
+  }
+  .lesson-ako-guide {
+    top: 64px;
+    font-size: 12px;
+    gap: 6px;
+  }
+  .lesson-ako-guide strong {
+    display: none;
+  }
 }

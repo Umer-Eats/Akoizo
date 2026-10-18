@@ -28,7 +28,6 @@ import { PhetSim } from './phet-sim';
 import './lessons.css';
 import { akoLessonLines } from '@/lib/ako-lesson';
 import { askAkoAbout, setAkoStudy } from '@/lib/ako-study';
-import { AkoCharacter } from './ako-character';
 import { useSettings } from './providers';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
@@ -427,8 +426,9 @@ function LessonDetail({
   record?: LessonRecord;
   onSubmit: () => Promise<void>;
 }) {
-  const { motion, ako, updateAko } = useSettings();
+  const { ako, updateAko } = useSettings();
   const [teachingLine, setTeachingLine] = useState('');
+  const lastTeachingLine = useRef('');
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
   useEffect(() => {
     setAkoStudy({
@@ -440,11 +440,19 @@ function LessonDetail({
         eventId,
         lessonId: lesson.id,
         onLine: (id) => {
+          lastTeachingLine.current = id;
           setTeachingLine(id);
-          document
-            .getElementById(`ako-line-${id}`)
-            ?.scrollIntoView({ block: 'start', behavior: 'instant' });
+          requestAnimationFrame(() => {
+            const sentence = document.getElementById(`ako-line-${id}`);
+            const rect = sentence?.getBoundingClientRect();
+            const panel = document.getElementById('ako-chat')?.getBoundingClientRect();
+            const bottom =
+              panel && rect && panel.left < rect.right ? panel.top - 20 : innerHeight - 40;
+            if (rect && (rect.top < (innerWidth < 600 ? 125 : 175) || rect.bottom > bottom))
+              sentence?.scrollIntoView({ block: 'start', behavior: 'instant' });
+          });
         },
+        onPause: () => setTeachingLine(''),
       },
     });
     return () => setAkoStudy(null);
@@ -459,7 +467,10 @@ function LessonDetail({
   const phetSims = extras.phet ?? [];
   const hasLessonLabs = labs.length + phetSims.length > 0;
   return (
-    <article className="lesson-detail" aria-labelledby="current-lesson-title">
+    <article
+      className={`lesson-detail${teachingLine ? ' is-ako-guided' : ''}`}
+      aria-labelledby="current-lesson-title"
+    >
       <header className="lesson-title-block">
         <p className="eyebrow">
           <BookOpen size={16} aria-hidden="true" /> TEXT LESSON · {lesson.durationMin} MIN
@@ -477,9 +488,11 @@ function LessonDetail({
           <button
             type="button"
             className="button button-small button-glass"
-            onClick={() => teachLine(teachingLine || lines[0].id)}
+            onClick={() => teachLine(teachingLine || lastTeachingLine.current || lines[0].id)}
           >
-            {teachingLine ? 'Continue with Ako' : 'Teach me this lesson'}
+            {teachingLine || lastTeachingLine.current
+              ? 'Continue with Ako'
+              : 'Teach me this lesson'}
           </button>
         </div>
         <nav className="lesson-jumps" aria-label="Jump within this lesson">
@@ -499,32 +512,53 @@ function LessonDetail({
           ))}
         </ul>
       </section>
+      {teachingLine && (
+        <nav className="lesson-ako-guide" aria-label="Ako reading guide">
+          <strong>Ako’s reading guide</strong>
+          <span>
+            {lines.findIndex((line) => line.id === teachingLine) + 1} / {lines.length}
+          </span>
+          <button
+            type="button"
+            disabled={teachingLine === lines[0].id}
+            onClick={() =>
+              teachLine(lines[lines.findIndex((line) => line.id === teachingLine) - 1].id)
+            }
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            disabled={teachingLine === lines.at(-1)?.id}
+            onClick={() =>
+              teachLine(lines[lines.findIndex((line) => line.id === teachingLine) + 1].id)
+            }
+          >
+            Continue
+          </button>
+        </nav>
+      )}
       <div id="lesson-reading" className="lesson-reading">
         {lesson.sections.map((section, index) => (
           <section key={section.heading} className="lesson-section">
             <p className="lesson-section-number">{String(index + 1).padStart(2, '0')}</p>
             <h3>{section.heading}</h3>
             {section.body.map((paragraph, i) => (
-              <div
-                key={i}
-                id={`ako-line-${index}:${i}`}
-                className={`lesson-ako-line ${teachingLine === `${index}:${i}` ? 'is-teaching' : ''}`}
-              >
-                {teachingLine === `${index}:${i}` && (
-                  <span className="lesson-ako-marker" aria-label="Ako is teaching this line">
-                    <AkoCharacter action="thinking" motion={motion} look={1} paused={false} />
-                  </span>
-                )}
-                <p>{paragraph}</p>
-                <button
-                  type="button"
-                  className="lesson-ako-line-button"
-                  aria-label={`Teach line ${i + 1} of ${section.heading}`}
-                  onClick={() => teachLine(`${index}:${i}`)}
-                >
-                  Teach this line
-                </button>
-              </div>
+              <p key={i}>
+                {lines
+                  .filter((line) => line.sectionIndex === index && line.paragraphIndex === i)
+                  .map((line) => (
+                    <span
+                      key={line.id}
+                      id={`ako-line-${line.id}`}
+                      data-ako-sentence={line.id}
+                      aria-current={teachingLine === line.id ? 'step' : undefined}
+                      className={`lesson-ako-sentence${teachingLine === line.id ? ' is-teaching' : ''}`}
+                    >
+                      {line.text}
+                    </span>
+                  ))}
+              </p>
             ))}
             <LessonSectionVisuals lesson={lesson} index={index} />
             {(

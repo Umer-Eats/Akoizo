@@ -26,7 +26,8 @@ export async function POST(request: Request) {
       (lesson) => lesson.id === body.lessonId,
     );
     if (!lesson) throw new AppError(404, 'That lesson is not available in your division.');
-    if (!allowAkoMessage(recent, profile.id, Date.now()))
+    // A guided sentence can use both an explanation turn and a teach-back turn.
+    if (!allowAkoMessage(recent, profile.id, Date.now(), 60))
       throw new AppError(429, 'Ako needs a short break. Try again in a few minutes.');
     return json(await askAkoLesson(lesson, body));
   } catch (error) {

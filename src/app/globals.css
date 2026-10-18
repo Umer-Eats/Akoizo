@@ -2875,6 +2875,82 @@
   outline-offset: 3px;
   border-radius: 8px;
 }
+.ako-companion[data-guiding='true'] .ako-companion-body,
+.ako-companion[data-guiding='true'] .ako-companion-body .ako-pixel {
+  width: 64px;
+  height: 64px;
+}
+.ako-companion[data-guiding='true'] .ako-nameplate {
+  display: none;
+}
+.ako-chat-resize {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px 0 7px 0;
+  color: var(--text);
+  background: var(--surface-2);
+  touch-action: none;
+  cursor: nwse-resize;
+  z-index: 1;
+}
+.ako-chat .ako-controls-title {
+  padding-left: 18px;
+}
+.ako-chat-turn p {
+  margin: 0;
+}
+.ako-chat-turn p + p {
+  margin-top: 10px;
+}
+.ako-chat-help {
+  flex-shrink: 0;
+  font-size: 11px;
+}
+.ako-chat-help summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+.ako-chat-help[open] summary {
+  margin-bottom: 8px;
+}
+.ako-chat-advance {
+  font-size: 11px;
+  color: var(--muted);
+}
+.ako-chat-advance button {
+  padding: 3px 7px;
+  margin-left: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.ako-chat > :not(.ako-chat-log) {
+  flex-shrink: 0;
+}
+.ako-chat {
+  overflow: auto;
+}
+.ako-chat.ako-chat-lesson {
+  gap: 6px;
+  padding: 10px;
+}
+.ako-chat-lesson .ako-chat-focus select {
+  min-height: 28px;
+  height: 28px;
+  padding: 3px 6px;
+}
+@media (max-width: 600px) {
+  .ako-chat-lesson .ako-chat-focus,
+  .ako-chat-lesson .ako-chat-why {
+    display: none;
+  }
+}
 .ako-nameplate {
   position: absolute;
   bottom: 0;

@@ -112,7 +112,9 @@ try {
                             reply:
                               body.message === 'slow reply'
                                 ? 'Stale reply must disappear'
-                                : 'Teaching line ' + body.questionId + '. What do you predict?',
+                                : 'Teaching line ' +
+                                  body.questionId +
+                                  '.\n\nYour turn: What do you predict?',
                             mood: 'thinking',
                             verdict: 'none',
                             askedWhy: true,
@@ -144,53 +146,116 @@ try {
   const lines = akoLessonLines(lesson);
   await page.getByRole('button', { name: 'Teach me this lesson', exact: true }).click();
   await expect(chat).toBeVisible();
-  await expect(chat.getByText('Teaching line 0:0. What do you predict?')).toBeVisible();
-  await expect(page.locator('.lesson-ako-line.is-teaching')).toHaveAttribute('id', 'ako-line-0:0');
-  await expect(chat.getByRole('button', { name: 'Previous line', exact: true })).toBeDisabled();
+  await expect(chat.getByText('Teaching line 0:0:0.')).toBeVisible();
+  await expect(page.locator('.lesson-ako-sentence.is-teaching')).toHaveAttribute(
+    'id',
+    'ako-line-0:0:0',
+  );
+  await expect(chat.getByRole('button', { name: 'Back', exact: true })).toBeDisabled();
   assert.equal(requests[0].eventId, anatomyLessons.eventId);
   assert.equal(requests[0].lessonId, lesson.id);
   assert.equal(requests[0].pendingWhy, false);
   assert.equal(requests[0].testId, undefined);
   assert.equal(requests[0].answer, undefined);
+  await expect(page.getByRole('button', { name: 'Teach this line', exact: true })).toHaveCount(0);
+  await expect(page.locator('.ako-companion .ako-pixel')).toHaveCount(1);
+  await expect(page.locator('.lesson-detail .ako-pixel')).toHaveCount(0);
+  await expect(page.locator('.lesson-ako-sentence.is-teaching')).toHaveCSS(
+    'background-color',
+    'rgb(255, 228, 119)',
+  );
+  await chat.getByText('Examples, terms & more help', { exact: true }).click();
   await chat.getByRole('button', { name: 'Explain the key terms', exact: true }).click();
   await expect.poll(() => requests.length).toBe(2);
-  await expect(chat.getByRole('button', { name: 'Next line', exact: true })).toBeEnabled();
-  await chat.getByRole('button', { name: 'Next line', exact: true }).click();
-  await expect(
-    chat.getByText('Teaching line ' + lines[1].id + '. What do you predict?'),
-  ).toBeVisible();
-  await expect(page.locator('.lesson-ako-line.is-teaching')).toHaveAttribute(
+  await expect(chat.getByRole('button', { name: 'Continue', exact: true })).toBeEnabled();
+  await page
+    .getByRole('navigation', { name: 'Ako reading guide', exact: true })
+    .getByRole('button', { name: 'Continue', exact: true })
+    .click();
+  await expect(chat.getByText('Teaching line ' + lines[1].id + '.')).toBeVisible();
+  await expect(page.locator('.lesson-ako-sentence.is-teaching')).toHaveAttribute(
     'id',
     'ako-line-' + lines[1].id,
   );
   assert.equal(requests.at(-1).pendingWhy, false);
   assert.ok(requests.at(-1).history.length >= 2);
   const box = chat.getByRole('textbox');
+  const ratBefore = await page.locator('.ako-companion-body').boundingBox();
+  await box.fill('continue');
+  await box.press('Enter');
+  await expect(chat.getByRole('combobox')).toHaveValue(lines[2].id, { timeout: 10000 });
+  await expect
+    .poll(async () => {
+      const rect = await page.locator('.ako-companion-body').boundingBox();
+      return Math.hypot(rect.x - ratBefore.x, rect.y - ratBefore.y);
+    })
+    .toBeGreaterThan(5);
   await box.fill('break');
   await box.press('Enter');
   await expect(chat.getByRole('alert')).toContainText('Ako is taking a nap');
   await expect(box).toHaveValue('break');
   await box.fill('slow reply');
   await box.press('Enter');
-  await chat.getByRole('button', { name: 'Next line', exact: true }).click();
-  await expect(
-    chat.getByText('Teaching line ' + lines[2].id + '. What do you predict?'),
-  ).toBeVisible();
+  await chat.getByRole('button', { name: 'Continue', exact: true }).click();
+  await expect(chat.getByText('Teaching line ' + lines[3].id + '.')).toBeVisible();
   await page.waitForTimeout(1100);
   await expect(chat.getByText('Stale reply must disappear')).toHaveCount(0);
   await chat.getByRole('combobox').selectOption(lines.at(-1).id);
-  await expect(
-    chat.getByText('Teaching line ' + lines.at(-1).id + '. What do you predict?'),
-  ).toBeVisible();
-  await expect(chat.getByRole('button', { name: 'Next line', exact: true })).toBeDisabled();
-  await expect(chat.getByRole('button', { name: 'Recap lesson', exact: true })).toBeVisible();
-  await expect(page.locator('.lesson-ako-marker')).toHaveCount(1);
+  await expect(chat.getByText('Teaching line ' + lines.at(-1).id + '.')).toBeVisible();
+  await expect(chat.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
+  await expect(chat.getByRole('button', { name: 'Recap', exact: true })).toBeVisible();
+  await expect(page.locator('.ako-pixel')).toHaveCount(1);
+  await expect
+    .poll(async () => {
+      const sentence = await page
+        .locator('.lesson-ako-sentence.is-teaching')
+        .evaluate((element) => {
+          const rect = element.getClientRects()[0];
+          return { x: rect.left, y: rect.top };
+        });
+      const rat = await page.locator('.ako-companion-body').boundingBox();
+      return Math.abs(rat.y - Math.max(0, Math.min(804, sentence.y - 18)));
+    })
+    .toBeLessThan(3);
+  const before = await chat.boundingBox();
+  const handle = await chat.getByRole('button', { name: 'Resize Ako chat' }).boundingBox();
+  await page.mouse.move(handle.x + 13, handle.y + 13);
+  await page.mouse.down();
+  await page.mouse.move(handle.x - 65, handle.y - 65, { steps: 8 });
+  await page.mouse.up();
+  const expanded = await chat.boundingBox();
+  assert.ok(expanded.width > before.width + 50 && expanded.height > before.height + 50);
+  await chat.getByRole('button', { name: 'Resize Ako chat' }).focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowDown');
+  const compressed = await chat.boundingBox();
+  assert.ok(compressed.width < expanded.width && compressed.height < expanded.height);
+  await expect(page.locator('.ako-pixel')).toHaveCount(1);
   await page.screenshot({ path: 'documents/qa/ako-lesson-desktop.png' });
   for (const [width, height] of [
     [390, 844],
     [320, 640],
   ]) {
     await page.setViewportSize({ width, height });
+    await expect
+      .poll(async () => {
+        const rat = await page.locator('.ako-companion-body').boundingBox();
+        const sentence = await page
+          .locator('.lesson-ako-sentence.is-teaching')
+          .evaluate((element) => ({
+            top: element.getClientRects()[0].top,
+            left: Math.min(...Array.from(element.getClientRects(), (rect) => rect.left)),
+          }));
+        const panel = await chat.boundingBox();
+        return (
+          sentence.top >= 115 &&
+          sentence.top < panel.y &&
+          rat.y + rat.height <= panel.y &&
+          Math.abs(rat.x - Math.max(0, sentence.left - 76)) < 3 &&
+          rat.x + rat.width <= sentence.left
+        );
+      })
+      .toBe(true);
     const panel = await chat.boundingBox();
     assert.ok(
       panel.x >= 0 &&
@@ -220,7 +285,7 @@ try {
   await chat.getByRole('button', { name: 'Close Ako chat' }).click();
   await page.locator('.lesson-button').nth(1).click();
   await page.getByRole('button', { name: 'Teach me this lesson', exact: true }).click();
-  await expect(chat.getByText('Teaching line 0:0. What do you predict?')).toBeVisible();
+  await expect(chat.getByText('Teaching line 0:0:0.')).toBeVisible();
   assert.equal(requests.at(-1).history.length, 0);
   assert.equal(requests.at(-1).lessonId, anatomyLessons.units[0].lessonIds[1]);
   if (errors.length) throw Error(errors.join('\n'));

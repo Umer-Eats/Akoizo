@@ -2,7 +2,13 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { authMessage, useAuth } from './auth-context';
 import type { AkoAction } from '@/lib/ako-motion';
-import { AKO_LIMITS, type AkoReply, type AkoStudy, type AkoTurn } from '@/lib/ako-study';
+import {
+  AKO_LIMITS,
+  akoReplyParagraphs,
+  type AkoReply,
+  type AkoStudy,
+  type AkoTurn,
+} from '@/lib/ako-study';
 
 const questionName = (label: string) =>
   /^[\d.]+[a-z]?$/i.test(label) ? `Question ${label}` : label;
@@ -41,10 +47,22 @@ export function AkoChat({
   const sendRef = useRef<(text: string) => Promise<void>>(async () => {});
   const taught = useRef('');
   const lesson = study.lesson;
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+  const resizeDrag = useRef<{ x: number; y: number; width: number; height: number } | null>(null);
+  const advance = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [advancing, setAdvancing] = useState(false);
+  const openRef = useRef(open);
+  openRef.current = open;
+  const cancelAdvance = () => {
+    if (advance.current) clearTimeout(advance.current);
+    advance.current = null;
+    setAdvancing(false);
+  };
   draftRef.current = draft;
   reactRef.current = react;
   // Keep the lesson conversation between lines, but cancel stale replies and reset the check.
   useEffect(() => {
+    cancelAdvance();
     session.current++;
     if (!study.lesson) setTurns([]);
     setWhy({ pending: false, missed: 0 });
@@ -52,6 +70,12 @@ export function AkoChat({
     setSending(false);
     setDraft('');
   }, [study.testId, focus]);
+  useEffect(() => () => cancelAdvance(), [open]);
+  useEffect(() => {
+    const resize = () => setSize(null);
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
   useEffect(() => {
     setTurns([]);
     setDraft('');
@@ -97,6 +121,7 @@ export function AkoChat({
     return () => clearTimeout(timer);
   }, [why, sending, lesson, open]);
   async function send(text: string) {
+    cancelAdvance();
     const message = text.trim().slice(0, AKO_LIMITS.message);
     if (!message || sending) return;
     const id = session.current;
@@ -124,6 +149,23 @@ export function AkoChat({
       if (id !== session.current) return;
       setTurns((current) => [...current, { role: 'ako', text: reply.reply }]);
       setWhy({ pending: reply.awaitingWhy, missed: reply.missedWhys });
+      if (
+        lesson &&
+        reply.nextLineId &&
+        study.questions.some((line) => line.id === reply.nextLineId)
+      ) {
+        setAdvancing(true);
+        advance.current = setTimeout(
+          () => {
+            setAdvancing(false);
+            if (openRef.current && id === session.current && !draftRef.current.trim())
+              onFocus(reply.nextLineId!);
+          },
+          reply.verdict === 'correct'
+            ? Math.max(4500, Math.min(18000, reply.reply.split(/\s+/).length * 280))
+            : 1500,
+        );
+      }
       // He stays mad, or keeps waiting, until the student explains why.
       react(
         reply.mood,
@@ -165,11 +207,92 @@ export function AkoChat({
       id="ako-chat"
       className={`ako-chat${lesson ? ' ako-chat-lesson' : ''}`}
       aria-label="Study with Ako"
-      style={style}
+      style={{
+        ...style,
+        ...(size
+          ? {
+              width: Math.min(size.width, innerWidth - 16),
+              height: Math.min(size.height, innerHeight - 16),
+              ...(lesson
+                ? {}
+                : {
+                    left: Math.max(
+                      8,
+                      Math.min(
+                        Number(style.left) || 8,
+                        innerWidth - Math.min(size.width, innerWidth - 16) - 8,
+                      ),
+                    ),
+                    top: Math.max(
+                      8,
+                      Math.min(
+                        Number(style.top) || 8,
+                        innerHeight - Math.min(size.height, innerHeight - 16) - 8,
+                      ),
+                    ),
+                  }),
+            }
+          : {}),
+      }}
       onKeyDown={(event) => {
         if (event.key === 'Escape') onClose();
       }}
     >
+      <button
+        type="button"
+        className="ako-chat-resize"
+        aria-label="Resize Ako chat"
+        title="Drag to resize; use arrow keys for smaller adjustments"
+        onPointerDown={(event) => {
+          const rect = event.currentTarget.parentElement!.getBoundingClientRect();
+          resizeDrag.current = {
+            x: event.clientX,
+            y: event.clientY,
+            width: rect.width,
+            height: rect.height,
+          };
+          event.currentTarget.setPointerCapture(event.pointerId);
+        }}
+        onPointerMove={(event) => {
+          const drag = resizeDrag.current;
+          if (!drag) return;
+          setSize({
+            width: Math.min(innerWidth - 16, Math.max(280, drag.width + drag.x - event.clientX)),
+            height: Math.min(innerHeight - 16, Math.max(320, drag.height + drag.y - event.clientY)),
+          });
+        }}
+        onLostPointerCapture={() => {
+          resizeDrag.current = null;
+        }}
+        onPointerUp={(event) => {
+          resizeDrag.current = null;
+          event.currentTarget.releasePointerCapture(event.pointerId);
+        }}
+        onKeyDown={(event) => {
+          if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+          event.preventDefault();
+          const rect = event.currentTarget.parentElement!.getBoundingClientRect();
+          setSize({
+            width: Math.min(
+              innerWidth - 16,
+              Math.max(
+                280,
+                rect.width +
+                  (event.key === 'ArrowLeft' ? 24 : event.key === 'ArrowRight' ? -24 : 0),
+              ),
+            ),
+            height: Math.min(
+              innerHeight - 16,
+              Math.max(
+                320,
+                rect.height + (event.key === 'ArrowUp' ? 24 : event.key === 'ArrowDown' ? -24 : 0),
+              ),
+            ),
+          });
+        }}
+      >
+        ⤢
+      </button>
       <div className="ako-controls-title">
         <strong>Study with Ako</strong>
         <button type="button" aria-label="Close Ako chat" onClick={onClose}>
@@ -194,7 +317,7 @@ export function AkoChat({
             disabled={lineIndex <= 0}
             onClick={() => onFocus(study.questions[lineIndex - 1].id)}
           >
-            Previous line
+            Back
           </button>
           <span className="ako-chat-hint">
             {lineIndex + 1} / {study.questions.length}
@@ -204,7 +327,7 @@ export function AkoChat({
             disabled={lineIndex >= study.questions.length - 1}
             onClick={() => onFocus(study.questions[lineIndex + 1].id)}
           >
-            Next line
+            Continue
           </button>
           {lineIndex === study.questions.length - 1 && (
             <button
@@ -212,7 +335,7 @@ export function AkoChat({
               disabled={sending}
               onClick={() => void send('Recap this lesson and ask me an application question.')}
             >
-              Recap lesson
+              Recap
             </button>
           )}
         </nav>
@@ -234,21 +357,33 @@ export function AkoChat({
           </p>
         )}
         {turns.map((turn, index) => (
-          <p key={index} className={`ako-chat-turn ako-chat-${turn.role}`}>
+          <div key={index} className={`ako-chat-turn ako-chat-${turn.role}`}>
             <span className="sr-only">{turn.role === 'ako' ? 'Ako: ' : 'You: '}</span>
-            {turn.text}
-          </p>
+            {turn.role === 'ako'
+              ? akoReplyParagraphs(turn.text).map((paragraph, i) => <p key={i}>{paragraph}</p>)
+              : turn.text}
+          </div>
         ))}
         {sending && <p className="ako-chat-turn ako-chat-ako ako-chat-pending">Ako is thinking…</p>}
       </div>
       {(lesson || !turns.length) && !sending && (
-        <div className="ako-chat-prompts">
-          {prompts.map((prompt) => (
-            <button type="button" key={prompt} onClick={() => void send(prompt)}>
-              {prompt}
-            </button>
-          ))}
-        </div>
+        <details
+          className="ako-chat-help"
+          open={lesson ? undefined : true}
+          onClick={(event) => {
+            if (lesson && (event.target as HTMLElement).closest('button'))
+              event.currentTarget.open = false;
+          }}
+        >
+          {lesson && <summary>Examples, terms & more help</summary>}
+          <div className="ako-chat-prompts">
+            {prompts.map((prompt) => (
+              <button type="button" key={prompt} onClick={() => void send(prompt)}>
+                {prompt}
+              </button>
+            ))}
+          </div>
+        </details>
       )}
       {why.pending && !sending && (
         <p className="ako-chat-why" role="status">
@@ -256,6 +391,14 @@ export function AkoChat({
             ? 'Your turn — try an answer, or ask for another explanation.'
             : 'Ako is waiting for your why.'}
         </p>
+      )}
+      {advancing && (
+        <div className="ako-chat-advance" role="status">
+          Next sentence coming up.{' '}
+          <button type="button" onClick={cancelAdvance}>
+            Stay here
+          </button>
+        </div>
       )}
       {error && (
         <p className="form-error" role="alert">
@@ -280,7 +423,10 @@ export function AkoChat({
             lesson ? 'Try an answer or ask for help…' : why.pending ? 'Explain why…' : 'Ask Ako…'
           }
           value={draft}
-          onChange={(event) => setDraft(event.target.value)}
+          onChange={(event) => {
+            cancelAdvance();
+            setDraft(event.target.value);
+          }}
           onKeyDown={(event) => {
             if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
               event.preventDefault();
