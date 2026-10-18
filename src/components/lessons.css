@@ -706,12 +706,13 @@
   scroll-margin-top: 90px;
 }
 .lesson-ako-sentence.is-teaching {
-  background: #ffe477;
-  color: #302700;
+  background: #fff000;
+  color: #201c00;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   border-radius: 3px;
-  outline: 2px solid #ffe477;
+  outline: 2px solid #fff000;
+  box-shadow: 0 0 12px #ffe60080;
 }
 .is-ako-guided .lesson-reading {
   padding-inline-start: 72px;

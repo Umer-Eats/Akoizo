@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { authMessage, useAuth } from './auth-context';
 import type { AkoAction } from '@/lib/ako-motion';
+import { akoTeachingDelay } from '@/lib/ako-lesson';
 import {
   AKO_LIMITS,
   akoReplyParagraphs,
@@ -44,19 +45,22 @@ export function AkoChat({
   const reactRef = useRef(react);
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
-  const sendRef = useRef<(text: string) => Promise<void>>(async () => {});
+  const sendRef = useRef<(text: string, automatic?: boolean) => Promise<void>>(async () => {});
   const taught = useRef('');
   const lesson = study.lesson;
   const [size, setSize] = useState<{ width: number; height: number } | null>(null);
   const resizeDrag = useRef<{ x: number; y: number; width: number; height: number } | null>(null);
   const advance = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [advancing, setAdvancing] = useState(false);
+  const [pacing, setPacing] = useState<{ id: string; session: number; delay: number } | null>(null);
+  const [paused, setPaused] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [complete, setComplete] = useState(false);
   const openRef = useRef(open);
   openRef.current = open;
   const cancelAdvance = () => {
     if (advance.current) clearTimeout(advance.current);
     advance.current = null;
-    setAdvancing(false);
+    setPacing(null);
   };
   draftRef.current = draft;
   reactRef.current = react;
@@ -69,8 +73,25 @@ export function AkoChat({
     setError('');
     setSending(false);
     setDraft('');
+    setComplete(false);
   }, [study.testId, focus]);
-  useEffect(() => () => cancelAdvance(), [open]);
+  useEffect(() => {
+    const visibility = () => setVisible(!document.hidden);
+    visibility();
+    document.addEventListener('visibilitychange', visibility);
+    return () => document.removeEventListener('visibilitychange', visibility);
+  }, []);
+  useEffect(() => {
+    if (!open || !lesson || !pacing || paused || sending || draft.trim() || error || !visible)
+      return;
+    advance.current = setTimeout(() => {
+      if (openRef.current && pacing.session === session.current && !draftRef.current.trim())
+        onFocus(pacing.id);
+    }, pacing.delay);
+    return () => {
+      if (advance.current) clearTimeout(advance.current);
+    };
+  }, [open, lesson, pacing, paused, sending, draft, error, visible, onFocus]);
   useEffect(() => {
     const resize = () => setSize(null);
     window.addEventListener('resize', resize);
@@ -79,6 +100,8 @@ export function AkoChat({
   useEffect(() => {
     setTurns([]);
     setDraft('');
+    setPaused(false);
+    setComplete(false);
     taught.current = '';
     return () => {
       session.current++;
@@ -87,16 +110,19 @@ export function AkoChat({
   useEffect(() => {
     if (!open || !lesson || !focus) return;
     lesson.onLine(focus);
+  }, [open, focus, study.testId, lesson]);
+  useEffect(() => {
+    if (!open || !lesson || !focus || sending) return;
     const key = `${study.testId}/${focus}`;
     if (taught.current === key) return;
     const timer = setTimeout(() => {
       taught.current = key;
-      void sendRef.current('Teach this line.');
+      void sendRef.current('Teach this topic.', true);
     }, 0);
     return () => clearTimeout(timer);
-  }, [open, focus, study.testId, lesson]);
+  }, [open, focus, study.testId, lesson, sending]);
   useEffect(() => {
-    if (open) input.current?.focus();
+    if (open && !lesson) input.current?.focus();
   }, [open, focus]);
   useEffect(() => {
     log.current?.scrollTo({ top: log.current.scrollHeight });
@@ -120,13 +146,16 @@ export function AkoChat({
     }, PATIENCE_MS);
     return () => clearTimeout(timer);
   }, [why, sending, lesson, open]);
-  async function send(text: string) {
+  async function send(text: string, automatic = false) {
     cancelAdvance();
     const message = text.trim().slice(0, AKO_LIMITS.message);
     if (!message || sending) return;
     const id = session.current;
-    const history = turns.slice(-AKO_LIMITS.turns);
-    setTurns((current) => [...current, { role: 'student', text: message }]);
+    const history = turns.slice(-AKO_LIMITS.turns).map(({ role, text }) => ({ role, text }));
+    setTurns((current) => [
+      ...current,
+      { role: 'student', text: message, ...(automatic ? { automatic: true } : {}) },
+    ]);
     setDraft('');
     setSending(true);
     setError('');
@@ -142,29 +171,24 @@ export function AkoChat({
           message,
           history,
           answer: !lesson && focus ? study.answerFor(focus).slice(0, AKO_LIMITS.answer) : undefined,
-          pendingWhy: why.pending,
-          missedWhys: why.missed,
+          pendingWhy: automatic ? false : why.pending,
+          missedWhys: automatic ? 0 : why.missed,
         }),
       });
       if (id !== session.current) return;
       setTurns((current) => [...current, { role: 'ako', text: reply.reply }]);
       setWhy({ pending: reply.awaitingWhy, missed: reply.missedWhys });
+      setComplete(reply.lessonComplete === true);
       if (
         lesson &&
         reply.nextLineId &&
         study.questions.some((line) => line.id === reply.nextLineId)
       ) {
-        setAdvancing(true);
-        advance.current = setTimeout(
-          () => {
-            setAdvancing(false);
-            if (openRef.current && id === session.current && !draftRef.current.trim())
-              onFocus(reply.nextLineId!);
-          },
-          reply.verdict === 'correct'
-            ? Math.max(4500, Math.min(18000, reply.reply.split(/\s+/).length * 280))
-            : 1500,
-        );
+        setPacing({
+          id: reply.nextLineId,
+          session: id,
+          delay: akoTeachingDelay(reply.reply, reply.lessonStep?.kind ?? 'explain'),
+        });
       }
       // He stays mad, or keeps waiting, until the student explains why.
       react(
@@ -188,6 +212,7 @@ export function AkoChat({
   sendRef.current = send;
   if (!open) return null;
   const lineIndex = study.questions.findIndex((line) => line.id === focus);
+  const advancing = pacing && !paused && !sending && !draft.trim() && !error && visible;
   const prompts = lesson
     ? [
         'Explain more simply',
@@ -327,8 +352,17 @@ export function AkoChat({
             disabled={lineIndex >= study.questions.length - 1}
             onClick={() => onFocus(study.questions[lineIndex + 1].id)}
           >
-            Continue
+            Skip ahead
           </button>
+          {!complete && (
+            <button
+              type="button"
+              aria-pressed={paused}
+              onClick={() => setPaused((value) => !value)}
+            >
+              {paused ? 'Resume teaching' : 'Pause teaching'}
+            </button>
+          )}
           {lineIndex === study.questions.length - 1 && (
             <button
               type="button"
@@ -350,20 +384,22 @@ export function AkoChat({
         {!turns.length && (
           <p className="ako-chat-hint">
             {lesson
-              ? 'Let’s explore this line together. I’ll explain it, then give you a question to think about.'
+              ? 'I’ll teach the big idea, show you an example, then give you a chance to try it.'
               : focus
                 ? 'I can see this question. Ask me about it. If I give you an answer, I’ll want to know why it’s right!'
                 : `I’m looking at ${study.title}. Pick a question above, or press Ask Ako beside one.`}
           </p>
         )}
-        {turns.map((turn, index) => (
-          <div key={index} className={`ako-chat-turn ako-chat-${turn.role}`}>
-            <span className="sr-only">{turn.role === 'ako' ? 'Ako: ' : 'You: '}</span>
-            {turn.role === 'ako'
-              ? akoReplyParagraphs(turn.text).map((paragraph, i) => <p key={i}>{paragraph}</p>)
-              : turn.text}
-          </div>
-        ))}
+        {turns
+          .filter((turn) => !turn.automatic)
+          .map((turn, index) => (
+            <div key={index} className={`ako-chat-turn ako-chat-${turn.role}`}>
+              <span className="sr-only">{turn.role === 'ako' ? 'Ako: ' : 'You: '}</span>
+              {turn.role === 'ako'
+                ? akoReplyParagraphs(turn.text).map((paragraph, i) => <p key={i}>{paragraph}</p>)
+                : turn.text}
+            </div>
+          ))}
         {sending && <p className="ako-chat-turn ako-chat-ako ako-chat-pending">Ako is thinking…</p>}
       </div>
       {(lesson || !turns.length) && !sending && (
@@ -394,11 +430,21 @@ export function AkoChat({
       )}
       {advancing && (
         <div className="ako-chat-advance" role="status">
-          Next sentence coming up.{' '}
-          <button type="button" onClick={cancelAdvance}>
-            Stay here
+          Ako will keep teaching after reading time.{' '}
+          <button type="button" onClick={() => setPaused(true)}>
+            Pause
           </button>
         </div>
+      )}
+      {paused && lesson && !complete && (
+        <p className="ako-chat-advance" role="status">
+          Teaching paused. Ask a question, or resume when you’re ready.
+        </p>
+      )}
+      {complete && lesson && (
+        <p className="ako-chat-advance" role="status">
+          Lesson walkthrough complete. Try the lesson activities or ask Ako to revisit a concept.
+        </p>
       )}
       {error && (
         <p className="form-error" role="alert">
@@ -424,7 +470,6 @@ export function AkoChat({
           }
           value={draft}
           onChange={(event) => {
-            cancelAdvance();
             setDraft(event.target.value);
           }}
           onKeyDown={(event) => {

@@ -2,7 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { askAko, askAkoLesson } from '../src/lib/ako-tutor.ts';
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
-import { akoLessonLines, shouldAdvanceAkoLesson } from '../src/lib/ako-lesson.ts';
+import {
+  akoLessonLines,
+  akoLessonPlan,
+  akoTeachingDelay,
+  shouldAdvanceAkoLesson,
+} from '../src/lib/ako-lesson.ts';
 import { AKO_MAX_MISSES, allowAkoMessage, settleAkoReply } from '../src/lib/ako-study.ts';
 import { findPracticeTest } from '../src/lib/practice-catalog.ts';
 
@@ -152,7 +157,7 @@ test('each student gets a bounded number of Ako messages per window', () => {
 
 test('lesson teaching uses the canonical line, surrounding context and glossary without assignment keys', async () => {
   const lesson = anatomyLessons.lessons[0];
-  const lines = akoLessonLines(lesson);
+  const lines = akoLessonPlan(lesson);
   assert.equal(new Set(lines.map((line) => line.id)).size, lines.length);
   let sent = '';
   const reply = await askAkoLesson(
@@ -186,13 +191,13 @@ test('lesson teaching uses the canonical line, surrounding context and glossary 
   const instruction = JSON.parse(sent).systemInstruction.parts[0].text;
   assert.match(instruction, /ONE focused/);
   assert.match(instruction, /Never shame/);
-  assert.match(instruction, /student chooses when to move/);
+  assert.match(instruction, /Do not require a Continue click/);
 });
 
 test('lesson checks support mistakes, clarification and explanation without angry reactions', async () => {
   const lesson = anatomyLessons.lessons[0];
   const input = {
-    questionId: '0:0:0',
+    questionId: 'topic:0:check',
     message: 'I think it is the opposite',
     pendingWhy: true,
     missedWhys: 0,
@@ -258,7 +263,7 @@ test('sentence anchors preserve source paragraphs and advance only on readiness 
 
 test('lesson progression returns only the following canonical sentence and stops at the end', async () => {
   const lesson = anatomyLessons.lessons[0];
-  const lines = akoLessonLines(lesson);
+  const lines = akoLessonPlan(lesson);
   const ok = config({
     reply: 'Good. We can continue.',
     mood: 'happy',
@@ -273,6 +278,72 @@ test('lesson progression returns only the following canonical sentence and stops
   assert.equal(reply.nextLineId, lines[1].id);
   const next = await askAkoLesson(lesson, { questionId: lines[0].id, message: 'continue' }, ok);
   assert.equal(next.nextLineId, lines[1].id);
-  const last = await askAkoLesson(lesson, { questionId: lines.at(-1)!.id, message: 'continue' }, ok);
+  const last = await askAkoLesson(
+    lesson,
+    { questionId: lines.at(-1)!.id, message: 'continue' },
+    ok,
+  );
   assert.equal(last.nextLineId, undefined);
+});
+
+test('the teacher covers topics with explanation, application and checks, then a final recap', () => {
+  const lesson = anatomyLessons.lessons[0];
+  const plan = akoLessonPlan(lesson);
+  const anchors = new Set(akoLessonLines(lesson).map((line) => line.id));
+  assert.equal(plan.length, lesson.sections.length * 3 + 1);
+  assert.deepEqual(
+    plan.slice(0, 3).map((step) => step.kind),
+    ['explain', 'example', 'check'],
+  );
+  assert.equal(plan.at(-1)!.kind, 'recap');
+  for (const step of plan) {
+    assert.ok(anchors.has(step.anchorId));
+    assert.ok(step.highlightIds.every((id) => anchors.has(id)));
+    assert.ok(step.text.includes(lesson.sections[step.topicIndex].body[0]));
+  }
+  assert.ok(akoTeachingDelay('Short explanation.', 'explain') >= 12000);
+  assert.ok(
+    akoTeachingDelay('word '.repeat(100), 'example') > akoTeachingDelay('short', 'explain'),
+  );
+  assert.ok(akoTeachingDelay('word '.repeat(500), 'example') <= 45000);
+});
+
+test('teaching advances automatically through explanations but waits at an understanding check', async () => {
+  const lesson = anatomyLessons.lessons[0];
+  const plan = akoLessonPlan(lesson);
+  const teaching = config({
+    reply: 'Here is the idea, and why it matters.',
+    mood: 'thinking',
+    verdict: 'none',
+    askedWhy: false,
+  });
+  for (const index of [0, 1]) {
+    const reply = await askAkoLesson(
+      lesson,
+      { questionId: plan[index].id, message: 'Teach this topic.' },
+      teaching,
+    );
+    assert.equal(reply.nextLineId, plan[index + 1].id);
+    assert.equal(reply.lessonStep!.kind, plan[index].kind);
+  }
+  const checking = config({
+    reply: 'What do you predict?',
+    mood: 'thinking',
+    verdict: 'none',
+    askedWhy: true,
+  });
+  const check = await askAkoLesson(
+    lesson,
+    { questionId: plan[2].id, message: 'Teach this topic.' },
+    checking,
+  );
+  assert.equal(check.nextLineId, undefined);
+  assert.equal(check.awaitingWhy, true);
+  const recap = await askAkoLesson(
+    lesson,
+    { questionId: plan.at(-1)!.id, message: 'Teach this topic.' },
+    teaching,
+  );
+  assert.equal(recap.nextLineId, undefined);
+  assert.equal(recap.lessonComplete, true);
 });

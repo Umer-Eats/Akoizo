@@ -12,7 +12,7 @@ export const AKO_MOODS = [
 export type AkoMood = (typeof AKO_MOODS)[number];
 export const AKO_VERDICTS = ['none', 'correct', 'partial', 'incorrect'] as const;
 export type AkoVerdict = (typeof AKO_VERDICTS)[number];
-export type AkoTurn = { role: 'student' | 'ako'; text: string };
+export type AkoTurn = { role: 'student' | 'ako'; text: string; automatic?: boolean };
 /** Preserve provider paragraph breaks; split long unformatted explanations into readable ideas. */
 export function akoReplyParagraphs(text: string): string[] {
   const paragraphs = text.split(/\n\s*\n/).filter((part) => part.trim());
@@ -36,6 +36,8 @@ export type AkoReply = {
   awaitingWhy: boolean;
   missedWhys: number;
   nextLineId?: string;
+  lessonStep?: { kind: 'explain' | 'example' | 'check' | 'recap'; topic: string };
+  lessonComplete?: boolean;
 };
 /** After this many wrong explanations Ako explains the reasoning himself and moves on. */
 export const AKO_MAX_MISSES = 3;
@@ -94,7 +96,7 @@ export type AkoStudy = {
   lesson?: { eventId: string; lessonId: string; onLine: (id: string) => void; onPause: () => void };
   testId: string;
   title: string;
-  questions: { id: string; label: string }[];
+  questions: { id: string; label: string; anchorId?: string }[];
   answerFor: (questionId: string) => string;
 };
 let study: AkoStudy | null = null;

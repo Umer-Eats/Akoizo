@@ -2855,6 +2855,7 @@
   pointer-events: none;
 }
 .ako-companion-body {
+  will-change: transform;
   position: absolute;
   width: 96px;
   height: 96px;

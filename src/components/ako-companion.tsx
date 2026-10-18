@@ -48,11 +48,18 @@ export function AkoCompanion() {
   const [ready, setReady] = useState(false);
   const [view, setView] = useState<Scene | null>(null);
   const scene = useRef<Scene | null>(null);
+  const body = useRef<HTMLButtonElement>(null);
   const mutedRef = useRef(false);
   const held = useRef(false);
   const menuRef = useRef(false);
-  const guideRef = useRef<string | null>(null);
-  guideRef.current = chat && study?.lesson ? focus : null;
+  const guideRef = useRef<{ stepId: string; anchorId: string } | null>(null);
+  guideRef.current =
+    chat && study?.lesson
+      ? {
+          stepId: focus,
+          anchorId: study.questions.find((step) => step.id === focus)?.anchorId ?? focus,
+        }
+      : null;
   const clickTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const canMove = motion && !reduced;
   const canMoveRef = useRef(canMove);
@@ -64,7 +71,7 @@ export function AkoCompanion() {
     if (next)
       setView((previous) =>
         previous &&
-        previous.position === next.position &&
+        (guideRef.current || previous.position === next.position) &&
         previous.action === next.action &&
         previous.facing === next.facing &&
         previous.message === next.message &&
@@ -184,7 +191,7 @@ export function AkoCompanion() {
       // Panels are laid out from the viewport, so repaint even when Ako himself did not move.
       setView({ ...s });
       if (guideRef.current) {
-        const id = guideRef.current;
+        const id = guideRef.current.stepId;
         requestAnimationFrame(() => akoStudy()?.lesson?.onLine(id));
       }
     };
@@ -219,7 +226,7 @@ export function AkoCompanion() {
       if (!document.hidden && preferences.current.visible && !drag.current?.moved) {
         if (s.message && now > s.messageUntil) s.message = '';
         const sentence =
-          guideRef.current && document.getElementById(`ako-line-${guideRef.current}`);
+          guideRef.current && document.getElementById(`ako-line-${guideRef.current.anchorId}`);
         const sentenceRects = sentence ? Array.from(sentence.getClientRects()) : [];
         const sentenceRect = sentenceRects[0];
         if (sentenceRect) {
@@ -283,6 +290,9 @@ export function AkoCompanion() {
           say(encouragement[talkIndex++ % encouragement.length]);
           s.nextTalk = now + 75000;
         }
+        // Compositor movement follows the display refresh rate without rerendering the chat.
+        if (body.current)
+          body.current.style.transform = `translate3d(${s.position.x}px, ${s.position.y}px, 0)`;
         if (now - lastPaint > 33) {
           publish();
           lastPaint = now;
@@ -397,8 +407,13 @@ export function AkoCompanion() {
         </div>
       )}
       <button
+        ref={body}
         className="ako-companion-body"
-        style={{ left: view.position.x, top: view.position.y }}
+        style={{
+          left: 0,
+          top: 0,
+          transform: `translate3d(${view.position.x}px, ${view.position.y}px, 0)`,
+        }}
         aria-label={`Ako, your study buddy. ${muted ? 'Talking muted.' : 'Talking enabled.'} Click for controls; right-click to toggle talking.`}
         aria-expanded={menu}
         aria-controls="ako-controls"
@@ -433,6 +448,8 @@ export function AkoCompanion() {
           s.cheese = null;
           s.action = 'idle';
           s.until = 0;
+          if (body.current)
+            body.current.style.transform = `translate3d(${s.position.x}px, ${s.position.y}px, 0)`;
           publish();
         }}
         onLostPointerCapture={() => {

@@ -26,7 +26,7 @@ import { LessonActivities, InlineCheck } from './lesson-activities';
 import { TopicLabPreview, TopicLabView } from './topic-lab';
 import { PhetSim } from './phet-sim';
 import './lessons.css';
-import { akoLessonLines } from '@/lib/ako-lesson';
+import { akoLessonLines, akoLessonPlan } from '@/lib/ako-lesson';
 import { askAkoAbout, setAkoStudy } from '@/lib/ako-study';
 import { useSettings } from './providers';
 
@@ -430,11 +430,13 @@ function LessonDetail({
   const [teachingLine, setTeachingLine] = useState('');
   const lastTeachingLine = useRef('');
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
+  const plan = useMemo(() => akoLessonPlan(lesson), [lesson]);
+  const activeStep = plan.find((step) => step.id === teachingLine);
   useEffect(() => {
     setAkoStudy({
       testId: `lesson:${eventId}:${lesson.id}`,
       title: lesson.title,
-      questions: lines,
+      questions: plan,
       answerFor: () => '',
       lesson: {
         eventId,
@@ -443,7 +445,9 @@ function LessonDetail({
           lastTeachingLine.current = id;
           setTeachingLine(id);
           requestAnimationFrame(() => {
-            const sentence = document.getElementById(`ako-line-${id}`);
+            const sentence = document.getElementById(
+              `ako-line-${plan.find((step) => step.id === id)?.anchorId}`,
+            );
             const rect = sentence?.getBoundingClientRect();
             const panel = document.getElementById('ako-chat')?.getBoundingClientRect();
             const bottom =
@@ -456,7 +460,7 @@ function LessonDetail({
       },
     });
     return () => setAkoStudy(null);
-  }, [eventId, lesson, lines]);
+  }, [eventId, lesson, plan]);
   const teachLine = (id: string) => {
     if (!ako.visible) updateAko({ visible: true });
     setTeachingLine(id);
@@ -482,13 +486,13 @@ function LessonDetail({
         <div className="lesson-ako-intro">
           <strong>Learn with Ako</strong>
           <p>
-            I’ll walk through the reading with you, unpack new words, and ask questions as we go.
-            You set the pace.
+            I’ll teach the main ideas, walk through examples, and check your understanding. I’ll
+            keep the lesson moving — pause me or ask for help whenever you need.
           </p>
           <button
             type="button"
             className="button button-small button-glass"
-            onClick={() => teachLine(teachingLine || lastTeachingLine.current || lines[0].id)}
+            onClick={() => teachLine(teachingLine || lastTeachingLine.current || plan[0].id)}
           >
             {teachingLine || lastTeachingLine.current
               ? 'Continue with Ako'
@@ -514,27 +518,29 @@ function LessonDetail({
       </section>
       {teachingLine && (
         <nav className="lesson-ako-guide" aria-label="Ako reading guide">
-          <strong>Ako’s reading guide</strong>
+          <strong>Ako is teaching</strong>
           <span>
-            {lines.findIndex((line) => line.id === teachingLine) + 1} / {lines.length}
+            {activeStep?.kind === 'recap'
+              ? 'Recap'
+              : `Topic ${(activeStep?.topicIndex ?? 0) + 1} / ${lesson.sections.length}`}
           </span>
           <button
             type="button"
-            disabled={teachingLine === lines[0].id}
+            disabled={teachingLine === plan[0].id}
             onClick={() =>
-              teachLine(lines[lines.findIndex((line) => line.id === teachingLine) - 1].id)
+              teachLine(plan[plan.findIndex((line) => line.id === teachingLine) - 1].id)
             }
           >
             Back
           </button>
           <button
             type="button"
-            disabled={teachingLine === lines.at(-1)?.id}
+            disabled={teachingLine === plan.at(-1)?.id}
             onClick={() =>
-              teachLine(lines[lines.findIndex((line) => line.id === teachingLine) + 1].id)
+              teachLine(plan[plan.findIndex((line) => line.id === teachingLine) + 1].id)
             }
           >
-            Continue
+            Skip ahead
           </button>
         </nav>
       )}
@@ -552,8 +558,8 @@ function LessonDetail({
                       key={line.id}
                       id={`ako-line-${line.id}`}
                       data-ako-sentence={line.id}
-                      aria-current={teachingLine === line.id ? 'step' : undefined}
-                      className={`lesson-ako-sentence${teachingLine === line.id ? ' is-teaching' : ''}`}
+                      aria-current={activeStep?.anchorId === line.id ? 'step' : undefined}
+                      className={`lesson-ako-sentence${activeStep?.highlightIds.includes(line.id) ? ' is-teaching' : ''}`}
                     >
                       {line.text}
                     </span>

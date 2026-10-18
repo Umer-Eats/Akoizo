@@ -2,7 +2,7 @@ import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
-import { akoLessonLines } from '../src/lib/ako-lesson.ts';
+import { akoLessonPlan } from '../src/lib/ako-lesson.ts';
 import { askAkoLesson } from '../src/lib/ako-tutor.ts';
 
 // Browser-only account mocks. The real tutor service runs unchanged against a scripted model, so
@@ -93,6 +93,7 @@ try {
       const body = route.request().postDataJSON();
       requests.push(body);
       const lesson = anatomyLessons.lessons.find((item) => item.id === body.lessonId);
+      const step = akoLessonPlan(lesson).find((item) => item.id === body.questionId);
       try {
         const reply = await askAkoLesson(lesson, body, {
           apiKey: 'qa',
@@ -112,12 +113,13 @@ try {
                             reply:
                               body.message === 'slow reply'
                                 ? 'Stale reply must disappear'
-                                : 'Teaching line ' +
+                                : 'Teaching topic ' +
                                   body.questionId +
                                   '.\n\nYour turn: What do you predict?',
                             mood: 'thinking',
-                            verdict: 'none',
-                            askedWhy: true,
+                            verdict: body.message === 'scientific reasoning' ? 'correct' : 'none',
+                            askedWhy:
+                              step.kind === 'check' && body.message !== 'scientific reasoning',
                           }),
                         },
                       ],
@@ -143,80 +145,77 @@ try {
   const chat = page.getByRole('region', { name: 'Study with Ako' });
   await page.goto(base + '/dashboard/student/events/anatomy-and-physiology/lessons');
   const lesson = anatomyLessons.lessons[0];
-  const lines = akoLessonLines(lesson);
+  const plan = akoLessonPlan(lesson);
+  const active = page.locator('.lesson-ako-sentence[aria-current=step]');
+  await page.clock.install();
   await page.getByRole('button', { name: 'Teach me this lesson', exact: true }).click();
   await expect(chat).toBeVisible();
-  await expect(chat.getByText('Teaching line 0:0:0.')).toBeVisible();
-  await expect(page.locator('.lesson-ako-sentence.is-teaching')).toHaveAttribute(
-    'id',
-    'ako-line-0:0:0',
-  );
-  await expect(chat.getByRole('button', { name: 'Back', exact: true })).toBeDisabled();
-  assert.equal(requests[0].eventId, anatomyLessons.eventId);
-  assert.equal(requests[0].lessonId, lesson.id);
-  assert.equal(requests[0].pendingWhy, false);
-  assert.equal(requests[0].testId, undefined);
-  assert.equal(requests[0].answer, undefined);
-  await expect(page.getByRole('button', { name: 'Teach this line', exact: true })).toHaveCount(0);
-  await expect(page.locator('.ako-companion .ako-pixel')).toHaveCount(1);
-  await expect(page.locator('.lesson-detail .ako-pixel')).toHaveCount(0);
-  await expect(page.locator('.lesson-ako-sentence.is-teaching')).toHaveCSS(
+  await expect(chat.getByText('Teaching topic topic:0:explain.')).toBeVisible();
+  await expect(active).toHaveAttribute('id', 'ako-line-' + plan[0].anchorId);
+  await expect(page.locator('.lesson-ako-sentence[aria-current=step]').first()).toHaveCSS(
     'background-color',
-    'rgb(255, 228, 119)',
+    'rgb(255, 240, 0)',
   );
-  await chat.getByText('Examples, terms & more help', { exact: true }).click();
-  await chat.getByRole('button', { name: 'Explain the key terms', exact: true }).click();
-  await expect.poll(() => requests.length).toBe(2);
-  await expect(chat.getByRole('button', { name: 'Continue', exact: true })).toBeEnabled();
-  await page
-    .getByRole('navigation', { name: 'Ako reading guide', exact: true })
-    .getByRole('button', { name: 'Continue', exact: true })
-    .click();
-  await expect(chat.getByText('Teaching line ' + lines[1].id + '.')).toBeVisible();
-  await expect(page.locator('.lesson-ako-sentence.is-teaching')).toHaveAttribute(
-    'id',
-    'ako-line-' + lines[1].id,
-  );
-  assert.equal(requests.at(-1).pendingWhy, false);
-  assert.ok(requests.at(-1).history.length >= 2);
+  await expect(page.locator('.ako-pixel')).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'Teach this line', exact: true })).toHaveCount(0);
+  assert.equal(requests[0].lessonId, lesson.id);
+  assert.equal(requests[0].testId, undefined);
+  assert.equal(requests[0].pendingWhy, false);
+  await expect(chat.getByText('Ako will keep teaching after reading time.')).toBeVisible();
+  await chat.getByRole('button', { name: 'Close Ako chat', exact: true }).click();
+  await page.clock.fastForward(60000);
+  assert.equal(requests.length, 1, 'closed teaching makes no background requests');
+  await page.getByRole('button', { name: 'Continue with Ako', exact: true }).click();
+  await expect(chat).toBeVisible();
+  await chat.getByRole('button', { name: 'Pause teaching', exact: true }).click();
+  await page.clock.fastForward(60000);
+  assert.equal(requests.length, 1, 'paused teaching makes no automatic requests');
+  await chat.getByRole('button', { name: 'Resume teaching', exact: true }).click();
   const box = chat.getByRole('textbox');
-  const ratBefore = await page.locator('.ako-companion-body').boundingBox();
-  await box.fill('continue');
+  await box.fill('I have a question');
+  await page.clock.fastForward(60000);
+  assert.equal(requests.length, 1, 'typing holds the teacher at the current topic');
+  await box.fill('');
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', { configurable: true, value: true });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await page.clock.fastForward(60000);
+  assert.equal(requests.length, 1, 'hidden tabs do not keep teaching');
+  await page.evaluate(() => {
+    delete document.hidden;
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await page.clock.fastForward(46000);
+  await expect(chat.getByText('Teaching topic ' + plan[1].id + '.')).toBeVisible();
+  assert.equal(requests.length, 2, 'the teacher introduces the example without Continue');
+  await page.clock.fastForward(46000);
+  await expect(chat.getByText('Teaching topic ' + plan[2].id + '.')).toBeVisible();
+  await page.clock.fastForward(60000);
+  assert.equal(requests.length, 3, 'a check waits for the student, however much time passes');
+  await box.fill('scientific reasoning');
   await box.press('Enter');
-  await expect(chat.getByRole('combobox')).toHaveValue(lines[2].id, { timeout: 10000 });
-  await expect
-    .poll(async () => {
-      const rect = await page.locator('.ako-companion-body').boundingBox();
-      return Math.hypot(rect.x - ratBefore.x, rect.y - ratBefore.y);
-    })
-    .toBeGreaterThan(5);
+  await expect.poll(() => requests.length).toBe(4);
+  await expect(chat.getByText('Ako will keep teaching after reading time.')).toBeVisible();
+  await page.clock.fastForward(10000);
+  await expect(chat.getByText('Teaching topic ' + plan[3].id + '.')).toBeVisible();
+  await expect(active).toHaveAttribute('id', 'ako-line-' + plan[3].anchorId);
+  await chat.getByRole('button', { name: 'Pause teaching', exact: true }).click();
   await box.fill('break');
   await box.press('Enter');
   await expect(chat.getByRole('alert')).toContainText('Ako is taking a nap');
   await expect(box).toHaveValue('break');
   await box.fill('slow reply');
   await box.press('Enter');
-  await chat.getByRole('button', { name: 'Continue', exact: true }).click();
-  await expect(chat.getByText('Teaching line ' + lines[3].id + '.')).toBeVisible();
+  await chat.getByRole('button', { name: 'Skip ahead', exact: true }).click();
+  await expect(chat.getByText('Teaching topic ' + plan[4].id + '.')).toBeVisible();
   await page.waitForTimeout(1100);
   await expect(chat.getByText('Stale reply must disappear')).toHaveCount(0);
-  await chat.getByRole('combobox').selectOption(lines.at(-1).id);
-  await expect(chat.getByText('Teaching line ' + lines.at(-1).id + '.')).toBeVisible();
-  await expect(chat.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
-  await expect(chat.getByRole('button', { name: 'Recap', exact: true })).toBeVisible();
+  await chat.getByRole('combobox').selectOption(plan.at(-1).id);
+  await expect(chat.getByText('Teaching topic ' + plan.at(-1).id + '.')).toBeVisible();
+  await expect(chat.getByText(/Lesson walkthrough complete/)).toBeVisible();
+  await expect(chat.getByRole('button', { name: 'Skip ahead', exact: true })).toBeDisabled();
   await expect(page.locator('.ako-pixel')).toHaveCount(1);
-  await expect
-    .poll(async () => {
-      const sentence = await page
-        .locator('.lesson-ako-sentence.is-teaching')
-        .evaluate((element) => {
-          const rect = element.getClientRects()[0];
-          return { x: rect.left, y: rect.top };
-        });
-      const rat = await page.locator('.ako-companion-body').boundingBox();
-      return Math.abs(rat.y - Math.max(0, Math.min(804, sentence.y - 18)));
-    })
-    .toBeLessThan(3);
   const before = await chat.boundingBox();
   const handle = await chat.getByRole('button', { name: 'Resize Ako chat' }).boundingBox();
   await page.mouse.move(handle.x + 13, handle.y + 13);
@@ -241,7 +240,7 @@ try {
       .poll(async () => {
         const rat = await page.locator('.ako-companion-body').boundingBox();
         const sentence = await page
-          .locator('.lesson-ako-sentence.is-teaching')
+          .locator('.lesson-ako-sentence[aria-current=step]')
           .evaluate((element) => ({
             top: element.getClientRects()[0].top,
             left: Math.min(...Array.from(element.getClientRects(), (rect) => rect.left)),
@@ -285,12 +284,12 @@ try {
   await chat.getByRole('button', { name: 'Close Ako chat' }).click();
   await page.locator('.lesson-button').nth(1).click();
   await page.getByRole('button', { name: 'Teach me this lesson', exact: true }).click();
-  await expect(chat.getByText('Teaching line 0:0:0.')).toBeVisible();
+  await expect(chat.getByText('Teaching topic topic:0:explain.')).toBeVisible();
   assert.equal(requests.at(-1).history.length, 0);
   assert.equal(requests.at(-1).lessonId, anatomyLessons.units[0].lessonIds[1]);
   if (errors.length) throw Error(errors.join('\n'));
   console.log(
-    'Ako lesson checks passed: proactive teaching, glossary help, line navigation, highlights, error recovery, stale replies, fresh lesson threads, mobile bounds.',
+    'Ako lesson checks passed: automatic topic teaching, reading time, pause/resume, typing holds, understanding checks, vivid highlights, error recovery, resizing, one moving Ako, mobile bounds.',
   );
 } finally {
   await browser.close();

@@ -20,7 +20,7 @@ export const AKO_CLIPS: Record<AkoAction, { frames: number; fps: number }> = {
   angry: { frames: 4, fps: 7 },
   happy: { frames: 6, fps: 8 },
   sad: { frames: 6, fps: 3 },
-  walk: { frames: 8, fps: 8 },
+  walk: { frames: 8, fps: 12 },
   run: { frames: 8, fps: 14 },
   eat: { frames: 6, fps: 7 },
   sleep: { frames: 6, fps: 2 },

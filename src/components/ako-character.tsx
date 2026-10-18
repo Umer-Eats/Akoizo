@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { akoFrame, type AkoAction } from '@/lib/ako-motion';
+import { AKO_CLIPS, akoFrame, type AkoAction } from '@/lib/ako-motion';
 
 /** Original 48px artwork: integer pixels, shared palette and a fixed foot anchor.
  * Discrete clips follow PerfectPixel's frame/identity/anchor consistency approach. */
@@ -21,16 +21,26 @@ export function AkoCharacter({
   useEffect(() => {
     setFrame(0);
     if (!motion || paused) return;
-    let time = 0;
-    const timer = setInterval(() => {
+    let previous = performance.now(),
+      elapsed = 0,
+      lastFrame = 0,
+      animation = 0;
+    const tick = (now: number) => {
       if (!document.hidden) {
-        time += 0.07;
-        setFrame(akoFrame(action, time));
+        elapsed += Math.min((now - previous) / 1000, 0.1);
+        const next = akoFrame(action, elapsed);
+        if (next !== lastFrame) {
+          setFrame(next);
+          lastFrame = next;
+        }
       }
-    }, 70);
-    return () => clearInterval(timer);
+      previous = now;
+      animation = requestAnimationFrame(tick);
+    };
+    animation = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animation);
   }, [action, actionKey, motion, paused]);
-  const f = motion ? frame : 0;
+  const f = motion ? frame % AKO_CLIPS[action].frames : 0;
   const moving = action === 'walk' || action === 'run';
   const joy = action === 'happy';
   const angry = action === 'angry';
