@@ -477,7 +477,7 @@ function LessonDetail({
     setTeachingLine(id);
     askAkoAbout(id);
   };
-  const extras = extrasFor(lesson.id);
+  const extras = extrasFor(lesson.id, lesson);
   const labs = (extras.labs ?? []).map((id) => topicLabs[id]).filter(Boolean);
   const phetSims = extras.phet ?? [];
   const hasLessonLabs = labs.length + phetSims.length > 0;
@@ -670,7 +670,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   const [attempts, setAttempts] = useState<Record<string, LessonAttempt>>({});
   const [loaded, setLoaded] = useState(false);
   const [storageUnavailable, setStorageUnavailable] = useState(false);
-  const storageKey = lessonStorageKey(studentId, course.eventId);
+  const storageKey = lessonStorageKey(studentId, course.eventId, course.division);
   useEffect(() => {
     try {
       const raw = localStorage.getItem(storageKey);

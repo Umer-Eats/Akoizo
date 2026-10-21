@@ -7,6 +7,7 @@ export type LabModel =
   | 'bridge'
   | 'chromatography'
   | 'salinometer'
+  | 'salinometer-b'
   | 'bod'
   | 'absorption'
   | 'curd';
@@ -330,6 +331,41 @@ export const divisionCLabs: LabActivity[] = [
 
 // Division B labs follow the 2027 Division B rules and are built around Division B archive papers.
 export const divisionBLabs: LabActivity[] = [
+  {
+    id: 'salinometer-calibration-b',
+    eventId: 'water-quality',
+    divisions: ['B'],
+    title: 'Calibrate saltwater from 1 to 10 percent',
+    model: 'salinometer-b',
+    minutes: 20,
+    summary:
+      'Calibrate a floating hydrometer and estimate an unknown salt concentration in percent mass/volume.',
+    source: {
+      title: '2027 Water Quality B · Salinometer Testing',
+      url: '/rules/2027/b/water-quality.pdf',
+      paper: '/rules/2027/b/water-quality.pdf#page=2',
+      section: 'Page 2 · Part IV',
+      basis:
+        'Original synthetic calibration activity based on the supplied Division B rules. This is not an archived competition dataset.',
+    },
+    controls: [
+      control('salinity', 'Standard salt concentration', '% mass/volume', 1, 10, 0.1, 1),
+      control('mass', 'Float mass', 'g', 1.5, 3, 0.1, 2),
+    ],
+    procedure: [
+      'Keep float mass fixed. Record immersion at 1, 3, 5, 7, and 10% mass/volume. One percent means 1 g salt per 100 mL final solution.',
+      'Compare the unknown immersion with nearby standards; adjust the standard concentration until the depths match.',
+      'Report the unknown to the nearest 0.1%. Change float mass and repeat the calibration before measuring again.',
+    ],
+    question: 'What is the unknown salt concentration, to the nearest tenth of a percent?',
+    answerUnit: '% mass/volume',
+    explanation:
+      'Match the unknown depth to your calibration curve. Denser saltwater supports the same float with less immersion. Percent mass/volume is not interchangeable with g/kg.',
+    reflection:
+      'Use two bracketing standards to justify your estimate. Explain why temperature, float mass, wall contact, and reading the liquid level must be controlled.',
+    assumptions:
+      'Synthetic fixed-temperature calibration: density = 0.9982 + 0.007 × concentration in percent mass/volume, cross section 0.20 cm². This approximate teaching relation is not a reference density table. Prepare real standards and calibrate your own device for competition.',
+  },
   {
     id: 'resistor-bench-b',
     eventId: 'circuit-lab',

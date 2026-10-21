@@ -4,7 +4,7 @@ import { Plus, Search, Trash2, TriangleAlert, Users } from 'lucide-react';
 import { eventSlots, slotForEvent } from '@/lib/event-slots';
 import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/events';
 import type { Student } from '@/lib/domain';
-import { partnerLimit, TEAM_SIZE, type TeamSheet } from '@/lib/teams';
+import { partnerLimit, rosterDivision, TEAM_SIZE, type TeamSheet } from '@/lib/teams';
 import { useAuth, authMessage } from './auth-context';
 import './teams.css';
 
@@ -434,11 +434,8 @@ export function InstructorTeams({
   const [name, setName] = useState('');
   const [creating, setCreating] = useState(false);
   // Start new teams in the division most of the roster competes in.
-  const common = (['C', 'B', 'A'] as const)
-    .map((division) => ({ division, n: students.filter((s) => s.division === division).length }))
-    .sort((a, b) => b.n - a.n)[0];
-  const [division, setDivision] = useState<Division>(
-    common.n ? common.division : profile?.schoolCommunityId === 'ppchs' ? 'C' : 'B',
+  const [division, setDivision] = useState<Division>(() =>
+    rosterDivision(students, profile?.schoolCommunityName ?? profile?.schoolName),
   );
   useEffect(() => {
     let active = true;

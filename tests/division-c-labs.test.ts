@@ -29,7 +29,7 @@ test('every Division B and C Lab tab has an event-specific simulation; A receive
       if (hasLab) assert.ok(phetActivities[event.id], event.id);
       assert.deepEqual(labsForEvent('A', event.id), []);
     }
-  assert.equal(new Set(allLabs.map((l) => l.id)).size, 11);
+  assert.equal(new Set(allLabs.map((l) => l.id)).size, allLabs.length);
   // Division B does not inherit Division C's labs, apart from the shared design lab.
   assert.deepEqual(
     labsForEvent('B', 'circuit-lab').map((l) => l.id),
@@ -48,7 +48,10 @@ test('archive sources refer to real questions from the lab’s own division and 
   ].flatMap((file) => JSON.parse(readFileSync(`src/data/${file}.json`, 'utf8')));
   for (const lab of allLabs) {
     if (!lab.source.testId) {
-      assert.match(lab.source.paper, /experimentaldesign_2021_c/);
+      if (lab.id === 'salinometer-calibration-b') {
+        assert.equal(lab.source.paper, '/rules/2027/b/water-quality.pdf#page=2');
+        assert.ok(existsSync(`public${lab.source.paper.split('#')[0]}`));
+      } else assert.match(lab.source.paper, /experimentaldesign_2021_c/);
       continue;
     }
     const source = tests.find((t: { id: string }) => t.id === lab.source.testId);

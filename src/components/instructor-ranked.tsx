@@ -11,7 +11,7 @@ import {
   type InstructorRankedTest,
   type RankedPool,
 } from '@/lib/ranked-types';
-import type { TeamSheet } from '@/lib/teams';
+import { rosterDivision, type TeamSheet } from '@/lib/teams';
 import { useAuth, authMessage } from './auth-context';
 import { AssignEventModal, seatedTeams, type AssignResult } from './assign-event-modal';
 import { RankedReview } from './ranked-review';
@@ -32,11 +32,10 @@ function CreateRankedTest({
   students: Student[];
   onCreated: (id: string) => Promise<void>;
 }) {
-  const { request } = useAuth();
-  const common = (['C', 'B', 'A'] as const)
-    .map((division) => ({ division, n: students.filter((s) => s.division === division).length }))
-    .sort((a, b) => b.n - a.n)[0];
-  const [division, setDivision] = useState<Division>(common.division);
+  const { request, profile } = useAuth();
+  const [division, setDivision] = useState<Division>(() =>
+    rosterDivision(students, profile?.schoolCommunityName ?? profile?.schoolName),
+  );
   const [pool, setPool] = useState<RankedPool[] | null>(null);
   const [eventId, setEventId] = useState('');
   const [questions, setQuestions] = useState(String(RANKED_QUESTIONS.default));

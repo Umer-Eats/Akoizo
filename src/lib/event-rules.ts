@@ -70,7 +70,13 @@ const labEvents: Record<Division, Set<string>> = {
     'metric-mastery',
     'professor-jensens-potions',
   ]),
-  B: new Set(['circuit-lab', 'crime-busters', 'experimental-design', 'food-science']),
+  B: new Set([
+    'circuit-lab',
+    'crime-busters',
+    'experimental-design',
+    'food-science',
+    'water-quality',
+  ]),
   C: new Set(['chemistry-lab', 'circuit-lab', 'experimental-design', 'forensics', 'water-quality']),
 };
 
@@ -90,6 +96,7 @@ const buildEvents: Record<Division, Set<string>> = {
     'roller-coaster',
     'scrambler',
     'thermodynamics',
+    'water-quality',
   ]),
   C: new Set([
     'boomilever',

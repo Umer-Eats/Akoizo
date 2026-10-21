@@ -1,4 +1,6 @@
 import type { EventExtras, LessonExtras } from '../lesson-extras.ts';
+import type { Lesson } from '../lessons';
+import { check } from '../lesson-extras.ts';
 import type { TopicLab } from '../topic-lab-kit.ts';
 import { anatomyExtras } from './anatomy.ts';
 import { astronomyExtras } from './astronomy.ts';
@@ -53,4 +55,25 @@ export const lessonExtras: Record<string, LessonExtras> = Object.assign(
   ...eventExtras.map((event) => event.lessons),
 );
 const none: LessonExtras = {};
-export const extrasFor = (lessonId: string): LessonExtras => lessonExtras[lessonId] ?? none;
+export const extrasFor = (lessonId: string, lesson?: Lesson): LessonExtras => {
+  if (lessonExtras[lessonId]) return lessonExtras[lessonId];
+  if (!lesson || !lessonId.endsWith('-b')) return none;
+  const quiz = lesson.practice.find((q) => q.type === 'mcq');
+  return {
+    checks: quiz?.options
+      ? [
+          check(
+            lesson.sections.length - 1,
+            quiz.prompt,
+            [quiz.answer, ...quiz.options.filter((option) => option !== quiz.answer)],
+            quiz.explanation,
+          ),
+        ]
+      : [],
+    sort: {
+      title: 'Connect each idea to its meaning',
+      bins: lesson.keyTerms.map((t) => t.term),
+      items: lesson.keyTerms.map((t, i) => [t.definition, i]),
+    },
+  };
+};

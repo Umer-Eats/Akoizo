@@ -17,8 +17,8 @@ export function scorePractice(questions: LessonQuizQuestion[], answers: Record<s
 }
 
 // Storage is untrusted and scoped to a student, division, event, and content version.
-export function lessonStorageKey(studentId: string, eventId: string) {
-  return `akoizo:lessons:v2:${encodeURIComponent(studentId)}:C:${eventId}`;
+export function lessonStorageKey(studentId: string, eventId: string, division: 'B' | 'C' = 'C') {
+  return `akoizo:lessons:v2:${encodeURIComponent(studentId)}:${division}:${eventId}`;
 }
 
 export function readAttempt(value: unknown, questions: LessonQuizQuestion[]): LessonAttempt {

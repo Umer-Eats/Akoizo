@@ -13,7 +13,7 @@ import {
 import { PHET_LAB, type Assignment, type Student, type StudyKind } from '@/lib/domain';
 import { lessonsForEvent } from '@/lib/lessons-registry';
 import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
-import type { TeamSheet } from '@/lib/teams';
+import { rosterDivision, type TeamSheet } from '@/lib/teams';
 import { AssignEventModal, type AssignResult } from './assign-event-modal';
 import { useAuth, authMessage } from './auth-context';
 
@@ -347,8 +347,11 @@ export function InstructorAssignments({
   assignments: Assignment[];
   onAssigned: () => Promise<void>;
 }) {
-  const { request } = useAuth();
-  const [division, setDivision] = useState<Division>('C');
+  const { request, profile } = useAuth();
+  // Open on the roster's division, like Teams and Ranked, until the instructor picks another.
+  const [pickedDivision, setDivision] = useState<Division | null>(null);
+  const division =
+    pickedDivision ?? rosterDivision(students, profile?.schoolCommunityName ?? profile?.schoolName);
   const [activeEvent, setActiveEvent] = useState<ScienceEvent | null>(null);
   const [work, setWork] = useState<Work | null>(null);
   const [tab, setTab] = useState<'Practice' | 'Lesson' | 'Lab'>('Practice');

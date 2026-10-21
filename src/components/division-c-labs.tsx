@@ -178,7 +178,7 @@ function BenchDiagram({
             Front
           </text>
         </>
-      ) : lab.model === 'salinometer' ? (
+      ) : lab.model === 'salinometer' || lab.model === 'salinometer-b' ? (
         <>
           {[0, 1].map((i) => (
             <g key={i}>
@@ -303,7 +303,10 @@ function ResponsePlot({
     ys = plot.points.map((p) => p.y);
   const minX = Math.min(...xs),
     maxX = Math.max(...xs),
-    minY = lab.model === 'salinometer' ? Math.min(...ys) * 0.999 : Math.min(0, ...ys),
+    minY =
+      lab.model === 'salinometer' || lab.model === 'salinometer-b'
+        ? Math.min(...ys) * 0.999
+        : Math.min(0, ...ys),
     maxY = Math.max(...ys, 0.001);
   const x = (n: number) => 75 + ((n - minX) / (maxX - minX)) * 460;
   const y = (n: number) => 200 - ((n - minY) / (maxY - minY)) * 150;
@@ -352,7 +355,7 @@ function ResponsePlot({
       </svg>
       <small>
         Model prediction curve; the dot marks the current setting. Record your own trials below.
-        {lab.model === 'salinometer' &&
+        {(lab.model === 'salinometer' || lab.model === 'salinometer-b') &&
           ' The vertical axis is expanded to show small changes in immersion.'}
       </small>
     </div>

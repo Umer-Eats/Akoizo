@@ -100,11 +100,13 @@ export function calculateLab(model: LabModel, v: LabValues, scenario = 0): LabRe
         ready: true,
       };
     }
+    case 'salinometer-b':
     case 'salinometer': {
-      const unknown = 10 + 5 * s,
-        density = 0.9982 + 0.00075 * v.salinity;
+      const coefficient = model === 'salinometer-b' ? 0.007 : 0.00075;
+      const unknown = model === 'salinometer-b' ? 1.5 + 2 * s : 10 + 5 * s,
+        density = 0.9982 + coefficient * v.salinity;
       const depth = v.mass / (0.2 * density),
-        unknownDepth = v.mass / (0.2 * (0.9982 + 0.00075 * unknown));
+        unknownDepth = v.mass / (0.2 * (0.9982 + coefficient * unknown));
       return {
         readings: [
           reading('Standard immersion', depth, 'cm'),

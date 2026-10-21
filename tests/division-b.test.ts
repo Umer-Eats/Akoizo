@@ -10,6 +10,7 @@ import { sheetEventsByDivision } from '../src/lib/cheatsheets.ts';
 import { sheetRuleText } from '../src/lib/cheatsheet-ai.ts';
 import { binderEventsByDivision, binderRecommendations } from '../src/lib/binders.ts';
 import { labsForEvent } from '../src/lib/division-c-labs.ts';
+import { rosterDivision } from '../src/lib/teams.ts';
 import { listPracticeTests } from '../src/lib/practice-catalog.ts';
 import binderRulesB from '../src/data/binder-rules-b.json' with { type: 'json' };
 
@@ -59,14 +60,19 @@ test('every Division B tool that Division C fills has content in Division B too'
   );
 });
 
-test('shared Division B courses reuse Division C lessons and say so', () => {
+test('shared Division B courses have independent B scope without changing C', () => {
   for (const id of sharedDivisionBEvents) {
     const b = lessonsForEvent(id, 'B')!,
       c = lessonsForEvent(id, 'C')!;
     assert.equal(b.division, 'B');
     assert.equal(c.division, 'C');
-    assert.equal(b.lessons, c.lessons);
-    assert.match(b.intro, /shared with Division C/);
+    assert.notEqual(b.lessons, c.lessons);
+    assert.match(b.intro, /Division B study path/);
+    assert.deepEqual(
+      b.units.flatMap((unit) => unit.lessonIds),
+      b.lessons.map((lesson) => lesson.id),
+    );
+    assert.ok(b.references.some((reference) => reference.url === `/rules/2027/b/${id}.pdf`));
     assert.doesNotMatch(c.intro, /shared with Division C/);
   }
 });
@@ -124,4 +130,16 @@ test('Division B-only courses meet the lesson quality bar', () => {
     }
   }
   assert.equal(ids.size, 37);
+});
+
+test('instructor pages open on the roster division, falling back to the community level', () => {
+  const roster = (...divisions: ('A' | 'B' | 'C')[]) => divisions.map((division) => ({ division }));
+  assert.equal(rosterDivision(roster('B', 'B', 'C'), 'Pembroke Pines Charter High School'), 'B');
+  assert.equal(
+    rosterDivision(roster('C'), 'Central Campus Pembroke Pines Charter Middle School'),
+    'C',
+  );
+  assert.equal(rosterDivision([], 'Central Campus Pembroke Pines Charter Middle School'), 'B');
+  assert.equal(rosterDivision([], 'Saint Ignatius High School'), 'C');
+  assert.equal(rosterDivision([], null), 'C');
 });

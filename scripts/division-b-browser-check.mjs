@@ -104,10 +104,21 @@ try {
   await lab.screenshot({ path: `${out}/heredity-investigation.png` });
   await p.screenshot({ path: `${out}/heredity-lessons.png` });
 
-  // A shared course carries the Division B note.
+  // A shared subject has a Division B study path.
   await p.goto(base + '/dashboard/student/events/anatomy-and-physiology/lessons');
-  await expect(p.locator('.lessons-intro')).toContainText('shared with Division C');
+  await expect(p.locator('.lessons-intro')).toContainText('Division B study path');
   await expect(p.locator('.lessons-intro .eyebrow')).toContainText('DIVISION B');
+
+  // Rewritten B content uses its own evidence, practice, and mobile layout.
+  await p.goto(base + '/dashboard/student/events/remote-sensing/lessons?unit=remote-u7');
+  await expect(p.locator('#current-lesson-title')).toContainText(
+    'Light, temperature, and radar distance',
+  );
+  await expect(p.locator('#lesson-lab')).toContainText('600,000 m');
+  await p.setViewportSize({ width: 390, height: 844 });
+  await p.screenshot({ path: `${out}/remote-sensing-b-mobile.png` });
+  assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
+  await p.setViewportSize({ width: 1440, height: 1000 });
 
   // Meteorology unit 3 (LCL topic lab) through its unit link.
   await p.goto(base + '/dashboard/student/events/meteorology/lessons?unit=met-u3');
@@ -119,6 +130,7 @@ try {
     ['crime-busters', 'Match the ransom-note ink'],
     ['food-science', 'Curdle milk and find percent curd'],
     ['circuit-lab', 'Measure series and parallel resistors'],
+    ['water-quality', 'Calibrate saltwater from 1 to 10 percent'],
   ]) {
     await p.goto(`${base}/dashboard/student/events/${eventId}/lab-practice`);
     await expect(p.locator('.archive-overview')).toContainText('DIVISION B / VIRTUAL LABS');
