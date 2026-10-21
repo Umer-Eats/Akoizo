@@ -16,14 +16,28 @@ export type UnitChapter = {
   challenge: string;
   takeaway: string;
   extension?: boolean;
+  /** Evidence-based investigation used instead of the course's subject explorer. */
+  investigation?: Omit<
+    Extract<LessonSim, { kind: 'investigation' }>,
+    'kind' | 'title' | 'instructions'
+  >;
 };
+function explorerLab(
+  lab: Extract<LessonSim, { kind: 'explorer' }>['lab'] | undefined,
+  title: string,
+) {
+  if (!lab) throw new Error(`${title} needs an investigation or a course explorer lab`);
+  return lab;
+}
 export function buildCourse(config: {
   eventId: string;
   eventName: string;
   prefix: string;
+  division?: EventLessons['division'];
   syllabus: string;
   intro: string;
-  lab: Extract<LessonSim, { kind: 'explorer' }>['lab'];
+  /** Subject explorer; required unless every chapter supplies an investigation. */
+  lab?: Extract<LessonSim, { kind: 'explorer' }>['lab'];
   references: EventLessons['references'];
   chapters: UnitChapter[];
 }): EventLessons {
@@ -39,16 +53,24 @@ export function buildCourse(config: {
       sections: c.sections.map(([heading, body]) => ({ heading, body: body.split('\n\n') })),
       keyTerms: c.terms.map(([term, definition]) => ({ term, definition })),
       workedExample: { title: 'Apply the reasoning', ...c.example },
-      simulation: {
-        kind: 'explorer',
-        lab: config.lab,
-        topic: i + 1,
-        title: `${config.eventName}: ${c.title} lab`,
-        instructions:
-          'Use the diagram and controls to test the lesson challenge. Predict first, change one factor at a time, and compare recorded trials. All data in this lab are synthetic teaching examples.',
-        challenge: c.challenge,
-        takeaway: c.takeaway,
-      },
+      simulation: c.investigation
+        ? {
+            kind: 'investigation',
+            title: `${config.eventName}: ${c.title} investigation`,
+            instructions:
+              'Form a working hypothesis, open each piece of evidence, and record what it supports or rules out. All case data are synthetic teaching examples.',
+            ...c.investigation,
+          }
+        : {
+            kind: 'explorer',
+            lab: explorerLab(config.lab, c.title),
+            topic: i + 1,
+            title: `${config.eventName}: ${c.title} lab`,
+            instructions:
+              'Use the diagram and controls to test the lesson challenge. Predict first, change one factor at a time, and compare recorded trials. All data in this lab are synthetic teaching examples.',
+            challenge: c.challenge,
+            takeaway: c.takeaway,
+          },
       visual: {
         section: 1,
         title: c.title,
@@ -86,7 +108,7 @@ export function buildCourse(config: {
   return {
     eventId: config.eventId,
     eventName: config.eventName,
-    division: 'C',
+    division: config.division ?? 'C',
     syllabus: config.syllabus,
     intro: config.intro,
     references: config.references,

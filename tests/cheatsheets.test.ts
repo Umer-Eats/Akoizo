@@ -5,14 +5,20 @@ import { schema } from '../src/lib/schema.ts';
 import type { Database } from '../src/lib/school-service.ts';
 import type { Profile } from '../src/lib/domain.ts';
 import type { SheetContent, SheetInput } from '../src/lib/cheatsheet-types.ts';
-import { sheetEvents, parseSheetInput, parseSheetContent } from '../src/lib/cheatsheets.ts';
+import {
+  sheetEvents,
+  sheetEventsByDivision,
+  parseSheetInput,
+  parseSheetContent,
+} from '../src/lib/cheatsheets.ts';
 import { createSheet, readSheet, publishSheet, listSheets } from '../src/lib/cheatsheet-service.ts';
-import { generateSheet } from '../src/lib/cheatsheet-ai.ts';
+import { generateSheet, sheetRuleText } from '../src/lib/cheatsheet-ai.ts';
 import { sheetDocument } from '../src/lib/cheatsheet-document.ts';
 import { sheetFigures } from '../src/lib/cheatsheet-figures.ts';
 
 const input: SheetInput = {
   eventId: 'anatomy-and-physiology',
+  division: 'C',
   title: 'Respiration reference',
   level: 'national',
   notes: '',
@@ -85,9 +91,18 @@ function fixture() {
   };
   return { db, raw };
 }
-test('only eight Division C events qualify; input and upload bounds are enforced', () => {
+test('eight events per division qualify; input and upload bounds are enforced', () => {
   assert.equal(sheetEvents.length, 8);
+  assert.equal(sheetEventsByDivision.B.length, 8);
   assert.deepEqual(parseSheetInput(input), input);
+  // Each division accepts only its own sheet events, and every one has its own rule text.
+  const heredity = { ...input, eventId: 'heredity', division: 'B' as const };
+  assert.deepEqual(parseSheetInput(heredity, 'B'), heredity);
+  assert.throws(() => parseSheetInput(heredity, 'C'));
+  assert.throws(() => parseSheetInput({ ...input, eventId: 'forensics' }, 'B'));
+  for (const division of ['B', 'C'] as const)
+    for (const event of sheetEventsByDivision[division])
+      assert.match(sheetRuleText(division, event.id) ?? '', new RegExp(`${division}\\b`), event.id);
   for (const patch of [
     { eventId: 'astronomy' },
     { eventId: '../../etc' },
@@ -118,7 +133,10 @@ test('drafts remain private, publication shares across schools and preserves sch
     assert.equal(shared.exclusions, input.exclusions);
     assert.equal((await listSheets(db, other, input.eventId, null)).sheets.length, 1);
     assert.equal((await listSheets(db, other, 'botany', null)).sheets.length, 0);
-    await assert.rejects(readSheet(db, { ...other, division: 'B' }, draft.id), { status: 403 });
+    // Division B has its own library: a Division C sheet is not part of it.
+    await assert.rejects(readSheet(db, { ...other, division: 'B' }, draft.id), { status: 404 });
+    assert.equal((await listSheets(db, { ...other, division: 'B' }, null, null)).sheets.length, 0);
+    await assert.rejects(readSheet(db, { ...other, division: 'A' }, draft.id), { status: 403 });
     await assert.rejects(listSheets(db, { ...other, role: 'instructor' }, null, null), {
       status: 403,
     });
@@ -207,6 +225,56 @@ test('Gemini receives the correct rulebook, exclusions and uploads; invalid draf
   await assert.rejects(generateSheet(input, { apiKey: 'test-key', fetcher: failed }), {
     status: 502,
   });
+});
+test('Division B sheets use the Division B rulebook and a separate shared library', async () => {
+  const { db, raw } = fixture();
+  try {
+    const bStudent: Profile = { ...student, id: 'cara', division: 'B' };
+    const bOther: Profile = { ...other, id: 'dev', division: 'B' };
+    const heredity: SheetInput = { ...input, eventId: 'heredity', division: 'B' };
+    // A request cannot borrow another division's event or rules.
+    await assert.rejects(
+      createSheet(db, bStudent, input, async () => content),
+      { status: 400 },
+    );
+    await assert.rejects(
+      createSheet(db, student, heredity, async () => content),
+      { status: 400 },
+    );
+    const draft = await createSheet(db, bStudent, heredity, async () => content);
+    await publishSheet(db, bStudent, draft.id);
+    assert.equal((await readSheet(db, bOther, draft.id)).eventId, 'heredity');
+    assert.equal((await listSheets(db, bOther, 'heredity', null)).sheets.length, 1);
+    assert.equal((await listSheets(db, other, null, null)).sheets.length, 0);
+    await assert.rejects(readSheet(db, other, draft.id), { status: 404 });
+    await assert.rejects(listSheets(db, bOther, 'designer-genes', null), { status: 400 });
+  } finally {
+    raw.close();
+  }
+  const calls: string[] = [];
+  const fetcher = (async (_url, options) => {
+    calls.push(String(options?.body));
+    return new Response(
+      JSON.stringify({
+        candidates: [
+          { finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(content) }] } },
+        ],
+      }),
+    );
+  }) as typeof fetch;
+  await generateSheet(
+    { ...input, eventId: 'heredity', division: 'B' },
+    { apiKey: 'test-key', fetcher },
+  );
+  const request = JSON.parse(calls[0]);
+  const payload = JSON.parse(request.contents[0].parts[0].text);
+  assert.equal(payload.division, 'B');
+  assert.match(payload.ruleText, /HEREDITY B/);
+  assert.match(payload.ruleText, /Hardy-Weinberg/);
+  // Heredity draws on the reviewed genetics figures; events without a set get none.
+  assert.ok(sheetFigures('heredity').length >= 5);
+  assert.ok(sheetFigures('crime-busters').length >= 5);
+  assert.deepEqual(sheetFigures('food-science'), []);
 });
 test('model text is escaped in standalone sheets; diagram edge references are validated', async () => {
   const malicious = structuredClone(content);

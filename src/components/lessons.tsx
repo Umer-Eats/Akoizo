@@ -164,9 +164,11 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
 function InvestigationLab({
   sim,
   lessonId,
+  pathway,
 }: {
   sim: Extract<LessonSim, { kind: 'investigation' }>;
   lessonId: string;
+  pathway?: Lesson['visual'];
 }) {
   const [observed, setObserved] = useState<number[]>([]);
   const [picked, setPicked] = useState<number | null>(null);
@@ -177,6 +179,7 @@ function InvestigationLab({
         key={restartKey}
         lessonId={lessonId}
         sim={sim}
+        reference={pathway}
         observed={observed}
         onObserve={(i) =>
           setObserved((current) => (current.includes(i) ? current : [...current, i]))
@@ -225,7 +228,15 @@ function InvestigationLab({
   );
 }
 
-function SimView({ sim, lessonId }: { sim: LessonSim; lessonId: string }) {
+function SimView({
+  sim,
+  lessonId,
+  pathway,
+}: {
+  sim: LessonSim;
+  lessonId: string;
+  pathway?: Lesson['visual'];
+}) {
   return (
     <section id="lesson-lab" className="lesson-sim" aria-labelledby="lesson-lab-title">
       <p className="eyebrow">
@@ -236,7 +247,7 @@ function SimView({ sim, lessonId }: { sim: LessonSim; lessonId: string }) {
       {sim.kind === 'model' ? (
         <ModelLab sim={sim} />
       ) : sim.kind === 'investigation' ? (
-        <InvestigationLab sim={sim} lessonId={lessonId} />
+        <InvestigationLab sim={sim} lessonId={lessonId} pathway={pathway} />
       ) : (
         <SubjectExplorer sim={sim} />
       )}
@@ -636,7 +647,7 @@ function LessonDetail({
           ))}
         </section>
       )}
-      <SimView sim={lesson.simulation} lessonId={lesson.id} />
+      <SimView sim={lesson.simulation} lessonId={lesson.id} pathway={lesson.visual} />
       <QuizView
         lesson={lesson}
         attempt={attempt}
@@ -750,8 +761,10 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
     >
       <div className="lessons-intro">
         <p className="eyebrow">
-          <span className="lesson-slot-dot" /> DIVISION C ·{' '}
-          {slotForEvent(course.eventId)?.label.toUpperCase()} TIMESLOT
+          <span className="lesson-slot-dot" /> DIVISION {course.division}
+          {slotForEvent(course.eventId)
+            ? ` · ${slotForEvent(course.eventId)!.label.toUpperCase()} TIMESLOT`
+            : ' · LESSONS'}
         </p>
         <h2>{course.eventName}</h2>
         <p>{course.intro}</p>

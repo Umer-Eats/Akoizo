@@ -1,6 +1,6 @@
 # Division C study binders
 
-The Notes / Binder Generator tab builds a binder for the six Division C events that have it: Astronomy, Circuit Lab, Dynamic Planet, Remote Sensing, Rocks and Minerals, and Thermodynamics. Division A and B are unchanged.
+The Notes / Binder Generator tab builds a binder for the six Division C events that have it: Astronomy, Circuit Lab, Dynamic Planet, Remote Sensing, Rocks and Minerals, and Thermodynamics. Division B students can also generate binders for their six binder events; see [Division B parity](DIVISION_B.md).
 
 ## Length
 
@@ -36,7 +36,7 @@ Print / save PDF waits for the photographs, then opens the print dialog. Downloa
 
 ## Sharing
 
-A finished binder is published automatically and is readable by every signed-in member of every school. Only Division C students can generate: one unfinished binder at a time, three per day.
+A finished binder is published automatically and is readable by every signed-in member of every school. Only Division B and C students can generate: one unfinished binder at a time, three per day.
 
 ## Verification
 

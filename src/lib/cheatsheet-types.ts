@@ -1,7 +1,9 @@
 export type SheetLevel = 'regional' | 'state' | 'national';
 export type SheetUpload = { name: string; mime: string; data: string };
+export type SheetDivision = 'B' | 'C';
 export type SheetInput = {
   eventId: string;
+  division: SheetDivision;
   title: string;
   level: SheetLevel;
   notes: string;

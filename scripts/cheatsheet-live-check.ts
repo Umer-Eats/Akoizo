@@ -1,5 +1,5 @@
 // Opt-in local smoke test. Calls Gemini once and writes only local QA output; no school DB changes.
-// Run: node --env-file=.env.local --experimental-strip-types scripts/cheatsheet-live-check.ts [eventId] [--reuse]
+// Run: node --env-file=.env.local --experimental-strip-types scripts/cheatsheet-live-check.ts [eventId] [--reuse] [--division-b]
 // --reuse lays out the previous tmp/cheatsheets/live-sheet.json again without calling Gemini.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from '@playwright/test';
@@ -10,6 +10,7 @@ import type { CheatSheet, SheetInput } from '../src/lib/cheatsheet-types.ts';
 
 const input: SheetInput = {
   eventId: process.argv[2] ?? 'anatomy-and-physiology',
+  division: process.argv.includes('--division-b') ? 'B' : 'C',
   title: 'Live check',
   level: 'national',
   notes: '',

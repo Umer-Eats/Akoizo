@@ -2,6 +2,7 @@ import type { SheetUpload, SheetLevel } from './cheatsheet-types.ts';
 
 export type BinderInput = {
   eventId: string;
+  division: 'B' | 'C';
   title: string;
   level: SheetLevel;
   pageCount: number;
@@ -44,6 +45,7 @@ export type BinderPage = {
 export type BinderCard = {
   id: string;
   eventId: string;
+  division: 'B' | 'C';
   title: string;
   level: SheetLevel;
   pageCount: number;

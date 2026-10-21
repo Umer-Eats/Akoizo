@@ -1,5 +1,5 @@
 import { connect } from '@tursodatabase/serverless';
-import { schema, eventSeeds } from './schema.ts';
+import { schema, eventSeeds, divisionIndexes, divisionMigrations } from './schema.ts';
 import { AppError } from './domain.ts';
 import {
   migrateCampusRosters,
@@ -44,18 +44,21 @@ export async function initializeDatabase() {
         )
           throw error;
       }
-      try {
-        await db.batch(
-          [{ sql: 'ALTER TABLE assignments ADD COLUMN test_id TEXT', args: [] }],
-          'immediate',
-        );
-      } catch (error) {
-        if (
-          !(error instanceof Error) ||
-          !/duplicate column name|already exists/i.test(error.message)
-        )
-          throw error;
+      for (const sql of [
+        'ALTER TABLE assignments ADD COLUMN test_id TEXT',
+        ...divisionMigrations,
+      ]) {
+        try {
+          await db.batch([{ sql, args: [] }], 'immediate');
+        } catch (error) {
+          if (
+            !(error instanceof Error) ||
+            !/duplicate column name|already exists/i.test(error.message)
+          )
+            throw error;
+        }
       }
+      await db.batch(divisionIndexes, 'immediate');
     })().catch((error) => {
       initialization = null;
       throw error;

@@ -9,9 +9,14 @@ import type {
   BinderPlan,
 } from './binder-types.ts';
 
-export const binderEvents = eventsForDivision('C').filter((e) =>
-  eventToolIds('C', e).includes('binder-generator'),
-);
+export type BinderDivision = 'B' | 'C';
+const eventsWithBinders = (division: BinderDivision) =>
+  eventsForDivision(division).filter((e) => eventToolIds(division, e).includes('binder-generator'));
+export const binderEventsByDivision: Record<
+  BinderDivision,
+  ReturnType<typeof eventsWithBinders>
+> = { B: eventsWithBinders('B'), C: eventsWithBinders('C') };
+export const binderEvents = binderEventsByDivision.C;
 export const binderRecommendations: Record<
   string,
   { min: number; max: number; suggested: number; reason: string; resources: string }
@@ -68,19 +73,38 @@ export const binderRecommendations: Record<
       'A compact handbook can cover thermal laws, calculations, heat transfer, device constraints, and experimental analysis.',
     resources: 'Paper notes and resources of any size; pages may be separated during the event.',
   },
+  // Division B only. The other Division B binder events share the Division C guidance above,
+  // because their 2027 resource rules match.
+  meteorology: {
+    min: 50,
+    max: 250,
+    suggested: 100,
+    reason:
+      'Severe weather science, radar and satellite products, station models, soundings, scales, and historic storm cases benefit from an illustrated reference with worked interpretations.',
+    resources:
+      'One three-ring binder of any size, attached by the rings, including a U.S. map with state names; keep materials attached during stations.',
+  },
 };
-export function binderEvent(id: unknown) {
-  const event = binderEvents.find((e) => e.id === id);
+export function binderEvent(id: unknown, division?: BinderDivision) {
+  const event = (
+    division
+      ? binderEventsByDivision[division]
+      : [...binderEventsByDivision.C, ...binderEventsByDivision.B]
+  ).find((e) => e.id === id);
   if (!event)
-    throw new AppError(400, 'Choose a Division C event with a Notes / Binder Generator tab.');
+    throw new AppError(
+      400,
+      `Choose a Division ${division ?? 'B or C'} event with a Notes / Binder Generator tab.`,
+    );
   return event;
 }
-export function requireBinderStudent(profile: Profile) {
-  if (profile.role !== 'student' || profile.division !== 'C')
+export function requireBinderStudent(profile: Profile): BinderDivision {
+  if (profile.role !== 'student' || (profile.division !== 'B' && profile.division !== 'C'))
     throw new AppError(
       403,
-      'Only Division C students can generate binders. All signed-in members can read the library.',
+      'Only Division B and C students can generate binders. All signed-in members can read the library.',
     );
+  return profile.division;
 }
 export function record(v: unknown): Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new Error('Invalid object');
@@ -95,10 +119,10 @@ function array(v: unknown, min: number, max: number): unknown[] {
   if (!Array.isArray(v) || v.length < min || v.length > max) throw new Error('Invalid list');
   return v;
 }
-export function parseBinderInput(value: unknown): BinderInput {
+export function parseBinderInput(value: unknown, division: BinderDivision = 'C'): BinderInput {
   try {
     const v = record(value),
-      event = binderEvent(v.eventId);
+      event = binderEvent(v.eventId, division);
     if (!Number.isInteger(v.pageCount) || Number(v.pageCount) < 10 || Number(v.pageCount) > 400)
       throw new Error('Invalid page count');
     if (!['regional', 'state', 'national'].includes(String(v.level)))
@@ -135,6 +159,7 @@ export function parseBinderInput(value: unknown): BinderInput {
     if (total > 3_000_000) throw new Error('Files too large');
     return {
       eventId: event.id,
+      division,
       title: text(v.title, 100, true) || `${event.name} study binder`,
       level: v.level as BinderInput['level'],
       pageCount: Number(v.pageCount),

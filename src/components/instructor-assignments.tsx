@@ -400,7 +400,7 @@ export function InstructorAssignments({
     title: lab.title,
     meta: `${lab.minutes} minutes · ${lab.summary}`,
   }));
-  const phet = division === 'C' ? phetActivities[activeEvent.id] : undefined;
+  const phet = labs.length ? phetActivities[activeEvent.id] : undefined;
   if (phet) labs.push({ kind: 'Lab', id: PHET_LAB, title: `PhET: ${phet.title}`, meta: phet.task });
   const choose = (item: Work) => (
     <button

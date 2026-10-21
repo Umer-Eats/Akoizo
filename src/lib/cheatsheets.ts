@@ -1,18 +1,27 @@
 import { AppError, type Profile } from './domain.ts';
 import { eventsForDivision } from './events.ts';
 import { eventToolIds } from './event-rules.ts';
-import type { SheetContent, SheetInput, SheetUpload } from './cheatsheet-types.ts';
+import type { SheetContent, SheetDivision, SheetInput, SheetUpload } from './cheatsheet-types.ts';
 
-export const sheetEvents = eventsForDivision('C').filter((e) =>
-  eventToolIds('C', e).includes('cheatsheet-generator'),
-);
-export function requireSheetStudent(profile: Profile) {
-  if (profile.role !== 'student' || profile.division !== 'C')
-    throw new AppError(403, 'Cheat sheets are currently available to Division C students.');
+const eventsWithSheets = (division: SheetDivision) =>
+  eventsForDivision(division).filter((e) =>
+    eventToolIds(division, e).includes('cheatsheet-generator'),
+  );
+export const sheetEventsByDivision: Record<SheetDivision, ReturnType<typeof eventsWithSheets>> = {
+  B: eventsWithSheets('B'),
+  C: eventsWithSheets('C'),
+};
+export const sheetEvents = sheetEventsByDivision.C;
+/** Cheat sheets are written per division: each division has its own rules and shared library. */
+export function requireSheetStudent(profile: Profile): SheetDivision {
+  if (profile.role !== 'student' || (profile.division !== 'B' && profile.division !== 'C'))
+    throw new AppError(403, 'Cheat sheets are available to Division B and C students.');
+  return profile.division;
 }
-export function sheetEvent(id: unknown) {
-  const event = sheetEvents.find((e) => e.id === id);
-  if (!event) throw new AppError(400, 'Choose a Division C event with a cheat sheet generator.');
+export function sheetEvent(id: unknown, division: SheetDivision = 'C') {
+  const event = sheetEventsByDivision[division].find((e) => e.id === id);
+  if (!event)
+    throw new AppError(400, `Choose a Division ${division} event with a cheat sheet generator.`);
   return event;
 }
 function record(value: unknown): Record<string, unknown> {
@@ -25,10 +34,10 @@ function text(value: unknown, limit: number, empty = false): string {
     throw new Error('Invalid text');
   return value.trim();
 }
-export function parseSheetInput(value: unknown): SheetInput {
+export function parseSheetInput(value: unknown, division: SheetDivision = 'C'): SheetInput {
   try {
     const v = record(value);
-    const event = sheetEvent(v.eventId);
+    const event = sheetEvent(v.eventId, division);
     if (!['regional', 'state', 'national'].includes(String(v.level)))
       throw new Error('Invalid level');
     if (!Array.isArray(v.uploads) || v.uploads.length > 4) throw new Error('Invalid uploads');
@@ -71,6 +80,7 @@ export function parseSheetInput(value: unknown): SheetInput {
     if (total > 2_000_000) throw new Error('Uploads too large');
     return {
       eventId: event.id,
+      division,
       title: text(v.title, 100, true) || `${event.name} reference`,
       level: v.level as SheetInput['level'],
       notes: text(v.notes, 6000, true),

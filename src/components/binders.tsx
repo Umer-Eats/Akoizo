@@ -13,7 +13,12 @@ import {
   X,
 } from 'lucide-react';
 import { useAuth, authMessage, RequestError } from './auth-context';
-import { binderContentPages, binderEvents, binderRecommendations } from '@/lib/binders';
+import {
+  binderContentPages,
+  binderEventsByDivision,
+  binderRecommendations,
+  type BinderDivision,
+} from '@/lib/binders';
 import { binderDocument, binderPalette, fitBinderDocument } from '@/lib/binder-document';
 import type { Binder, BinderCard, BinderLibrary } from '@/lib/binder-types';
 import type { SheetLevel, SheetUpload } from '@/lib/cheatsheet-types';
@@ -49,15 +54,24 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function Binders({ eventId }: { eventId?: string }) {
   const { request, profile } = useAuth();
-  const event = binderEvents.find((e) => e.id === eventId),
-    recommendation = eventId ? binderRecommendations[eventId] : null;
+  const ownDivision: BinderDivision | null =
+    profile?.division === 'B' || profile?.division === 'C' ? profile.division : null;
+  // An event view shows its own division; the library page lists both divisions together.
+  const scope: BinderDivision | null = eventId ? (ownDivision ?? 'C') : null;
+  const filterEvents = (scope ? [scope] : (['C', 'B'] as const)).flatMap((division) =>
+    binderEventsByDivision[division].map((e) => ({ ...e, division, key: `${division}:${e.id}` })),
+  );
+  const eventName = (b: BinderCard) =>
+    binderEventsByDivision[b.division ?? 'C'].find((e) => e.id === b.eventId)?.name;
+  const event = scope ? binderEventsByDivision[scope].find((e) => e.id === eventId) : undefined,
+    recommendation = event ? binderRecommendations[event.id] : null;
   const [title, setTitle] = useState(''),
     [notes, setNotes] = useState(''),
     [level, setLevel] = useState<SheetLevel>('national');
   const [pageCount, setPageCount] = useState(recommendation?.suggested ?? 50);
   const [uploads, setUploads] = useState<SheetUpload[]>([]),
     [reading, setReading] = useState(false);
-  const [filter, setFilter] = useState(eventId ?? '');
+  const [filter, setFilter] = useState(eventId ? `${scope}:${eventId}` : '');
   const [library, setLibrary] = useState<BinderLibrary>({
     binders: [],
     jobs: [],
@@ -93,8 +107,10 @@ export function Binders({ eventId }: { eventId?: string }) {
       const revision = ++sequence.current;
       setLoading(true);
       try {
+        const [filterDivision, filterEvent] = filter.split(':');
         const params = new URLSearchParams({
-          ...(filter ? { eventId: filter } : {}),
+          ...(filter ? { eventId: filterEvent, division: filterDivision } : {}),
+          ...(!filter && scope ? { division: scope } : {}),
           ...(cursor ? { before: cursor } : {}),
         });
         const result = await request<BinderLibrary>(`/api/binders?${params}`);
@@ -109,7 +125,7 @@ export function Binders({ eventId }: { eventId?: string }) {
         if (active.current && revision === sequence.current) setLoading(false);
       }
     },
-    [filter, request],
+    [filter, request, scope],
   );
   useEffect(() => {
     void refresh();
@@ -318,7 +334,7 @@ export function Binders({ eventId }: { eventId?: string }) {
       if (active.current) setExporting('');
     }
   }
-  const canCreate = profile?.role === 'student' && profile.division === 'C';
+  const canCreate = profile?.role === 'student' && ownDivision !== null && scope === ownDivision;
   const jobTotal = job ? binderContentPages(job.pageCount) : 0;
   return (
     <div className="cheatsheets binders">
@@ -334,7 +350,7 @@ export function Binders({ eventId }: { eventId?: string }) {
               <p>
                 In-depth explanations, worked examples, a labeled diagram and a real photograph on
                 nearly every page, and a full table of contents—written by Akoizo around the 2027
-                Division C rules.
+                Division {scope} rules.
               </p>
             </div>
           </div>
@@ -619,7 +635,12 @@ export function Binders({ eventId }: { eventId?: string }) {
           <div>
             <span className="eyebrow">KNOWLEDGE ACROSS COMMUNITIES</span>
             <h2>The shared binder library</h2>
-            <p>Division C binders from every school. All signed-in members can read and export.</p>
+            <p>
+              {scope
+                ? `Division ${scope} binders from every school.`
+                : 'Division B and C binders from every school.'}{' '}
+              All signed-in members can read and export.
+            </p>
           </div>
           <button
             className="button button-secondary"
@@ -633,9 +654,9 @@ export function Binders({ eventId }: { eventId?: string }) {
           Show event
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="">All binder events</option>
-            {binderEvents.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.name}
+            {filterEvents.map((e) => (
+              <option key={e.key} value={e.key}>
+                {scope ? e.name : `${e.name} (Division ${e.division})`}
               </option>
             ))}
           </select>
@@ -650,8 +671,8 @@ export function Binders({ eventId }: { eventId?: string }) {
             <BookOpen size={30} />
             <h3>A place for your next discovery.</h3>
             <p>
-              Completed binders will appear here. Division C students can create one from an event’s
-              Notes / Binder Generator tab.
+              Completed binders will appear here. Division B and C students can create one from an
+              event’s Notes / Binder Generator tab.
             </p>
           </div>
         )}
@@ -662,11 +683,11 @@ export function Binders({ eventId }: { eventId?: string }) {
                 <BookOpen size={25} />
                 <span>{b.pageCount} PAGES</span>
               </div>
-              <p className="sheet-event-name">
-                {binderEvents.find((e) => e.id === b.eventId)?.name}
-              </p>
+              <p className="sheet-event-name">{eventName(b)}</p>
               <h3>{b.title}</h3>
-              <p className="sheet-card-meta">{b.level} · 2027 rules · Illustrated</p>
+              <p className="sheet-card-meta">
+                Division {b.division ?? 'C'} · {b.level} · 2027 rules · Illustrated
+              </p>
               <p>
                 Generated by <strong>{b.schoolName}</strong>
               </p>
@@ -710,7 +731,7 @@ export function BinderLibraryPage() {
       <section className="page-heading">
         <p className="eyebrow">AKOIZO / SHARED REFERENCES</p>
         <h1>The binder library.</h1>
-        <p>Explore Division C study binders across every school community.</p>
+        <p>Explore Division B and C study binders across every school community.</p>
       </section>
       {loading ? (
         <p role="status">Loading your account…</p>

@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { divisionCLabs, labsForEvent, phetActivities } from '../src/lib/division-c-labs.ts';
+import {
+  divisionBLabs,
+  divisionCLabs,
+  labsForEvent,
+  phetActivities,
+} from '../src/lib/division-c-labs.ts';
 import {
   calculateLab,
   initialLabValues,
@@ -13,27 +18,41 @@ import { eventToolIds } from '../src/lib/event-rules.ts';
 
 const near = (a: number, b: number, epsilon = 1e-9) =>
   assert.ok(Math.abs(a - b) < epsilon, `${a} ≠ ${b}`);
-test('every existing Division C Lab tab has an event-specific simulation; A/B receive none', () => {
-  for (const event of eventsForDivision('C')) {
-    const hasLab = eventToolIds('C', event).some(
-      (id) => id === 'lab-practice' || id === 'lab-generator',
-    );
-    assert.equal(labsForEvent('C', event.id).length > 0, hasLab, event.id);
-    if (hasLab) assert.ok(phetActivities[event.id]);
-    assert.deepEqual(labsForEvent('B', event.id), []);
-    assert.deepEqual(labsForEvent('A', event.id), []);
-  }
-  assert.equal(new Set(divisionCLabs.map((l) => l.id)).size, 8);
+const allLabs = [...divisionCLabs, ...divisionBLabs];
+test('every Division B and C Lab tab has an event-specific simulation; A receives none', () => {
+  for (const division of ['B', 'C'] as const)
+    for (const event of eventsForDivision(division)) {
+      const hasLab = eventToolIds(division, event).some(
+        (id) => id === 'lab-practice' || id === 'lab-generator',
+      );
+      assert.equal(labsForEvent(division, event.id).length > 0, hasLab, `${division}/${event.id}`);
+      if (hasLab) assert.ok(phetActivities[event.id], event.id);
+      assert.deepEqual(labsForEvent('A', event.id), []);
+    }
+  assert.equal(new Set(allLabs.map((l) => l.id)).size, 11);
+  // Division B does not inherit Division C's labs, apart from the shared design lab.
+  assert.deepEqual(
+    labsForEvent('B', 'circuit-lab').map((l) => l.id),
+    ['resistor-bench-b'],
+  );
+  assert.deepEqual(
+    labsForEvent('B', 'experimental-design').map((l) => l.id),
+    labsForEvent('C', 'experimental-design').map((l) => l.id),
+  );
 });
-test('archive sources refer to real imported C questions and existing original papers', () => {
-  const tests = JSON.parse(readFileSync('src/data/imported-practice-tests.json', 'utf8'));
-  for (const lab of divisionCLabs) {
+test('archive sources refer to real questions from the lab’s own division and existing papers', () => {
+  const tests = [
+    'imported-practice-tests',
+    'practice-tests',
+    'batch-converter-practice-tests',
+  ].flatMap((file) => JSON.parse(readFileSync(`src/data/${file}.json`, 'utf8')));
+  for (const lab of allLabs) {
     if (!lab.source.testId) {
       assert.match(lab.source.paper, /experimentaldesign_2021_c/);
       continue;
     }
     const source = tests.find((t: { id: string }) => t.id === lab.source.testId);
-    assert.equal(source.division, 'C');
+    assert.ok((lab.divisions ?? ['C']).includes(source.division), lab.id);
     assert.equal(source.eventId, lab.eventId);
     for (const id of lab.source.questionIds!)
       assert.ok(source.questions.some((q: { id: string }) => q.id === id));
@@ -41,7 +60,7 @@ test('archive sources refer to real imported C questions and existing original p
   }
 });
 test('all sample variants and slider boundaries yield finite readings, answers, and plot points', () => {
-  for (const lab of divisionCLabs)
+  for (const lab of allLabs)
     for (let scenario = 0; scenario < 5; scenario++) {
       const initial = initialLabValues(lab);
       for (const values of [
@@ -127,4 +146,16 @@ test('answer checking rejects blanks, nonfinite values and incorrect results', (
   assert.match(checkLabAnswer('Infinity', 0.5), /finite/);
   assert.match(checkLabAnswer('0.505', 0.5), /Correct/);
   assert.match(checkLabAnswer('5', 0.5), /Not yet/);
+});
+
+test('curd yield plateaus once all casein curdles and scales with milk mass', () => {
+  const partial = calculateLab('curd', { vinegar: 1, milk: 120 }, 2);
+  const full = calculateLab('curd', { vinegar: 2, milk: 120 }, 2);
+  const extra = calculateLab('curd', { vinegar: 6, milk: 120 }, 2);
+  assert.equal(partial.ready, false);
+  assert.equal(full.ready, true);
+  near(partial.readings[0].value * 2, full.readings[0].value);
+  near(full.readings[0].value, extra.readings[0].value);
+  near((full.readings[0].value / 120) * 100, full.answer);
+  near(calculateLab('curd', { vinegar: 2, milk: 130 }, 2).answer, full.answer);
 });

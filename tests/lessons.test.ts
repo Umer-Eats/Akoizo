@@ -4,6 +4,7 @@ import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
 import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { eventSlots } from '../src/lib/event-slots.ts';
+import { eventsForDivision } from '../src/lib/events.ts';
 import { atlasImages, lessonAtlas } from '../src/lib/lesson-atlas.ts';
 import { experimentPresets } from '../src/lib/lesson-experiments.ts';
 import { existsSync } from 'node:fs';
@@ -20,11 +21,16 @@ import {
   scorePractice,
 } from '../src/lib/lesson-practice.ts';
 
-test('requested pink, yellow and purple Division C courses are available only in Division C', () => {
+// Division B students get the same course for an event that both divisions share.
+const inDivisionB = (id: string) => eventsForDivision('B').some((event) => event.id === id);
+test('pink, yellow and purple courses serve Division C and the matching Division B events', () => {
   const pink = eventSlots.find((slot) => slot.color === 'pink')!;
   for (const id of pink.events) {
     assert.equal(!!lessonsForEvent(id, 'C'), id !== 'engineering-cad');
-    assert.equal(lessonsForEvent(id, 'B'), null);
+    assert.equal(
+      lessonsForEvent(id, 'B')?.lessons ?? null,
+      inDivisionB(id) ? lessonsForEvent(id, 'C')!.lessons : null,
+    );
     assert.equal(lessonsForEvent(id, 'A'), null);
   }
   for (const slot of eventSlots.filter(
@@ -32,7 +38,10 @@ test('requested pink, yellow and purple Division C courses are available only in
   ))
     for (const id of slot.events) {
       assert.equal(lessonsForEvent(id, 'C')?.eventId, id);
-      assert.equal(lessonsForEvent(id, 'B'), null);
+      assert.equal(
+        lessonsForEvent(id, 'B')?.lessons ?? null,
+        inDivisionB(id) ? lessonsForEvent(id, 'C')!.lessons : null,
+      );
       assert.equal(lessonsForEvent(id, 'A'), null);
     }
 });

@@ -12,14 +12,16 @@ import {
 } from './binders.ts';
 import { outlineBinder, planBinderTopics, writeBinderPages } from './binder-ai.ts';
 import type { Binder, BinderCard, BinderInput, BinderPlan } from './binder-types.ts';
+import type { BinderDivision } from './binders.ts';
 
 type Row = Record<string, string | number | null>;
 const columns =
-  'id,event_id,title,level,page_count,completed_pages,status,school_name,created_at,generated_at';
+  'id,event_id,title,level,page_count,completed_pages,status,school_name,created_at,generated_at,division';
 function card(r: Row): BinderCard {
   return {
     id: String(r.id),
     eventId: String(r.event_id),
+    division: r.division === 'B' ? 'B' : 'C',
     title: String(r.title),
     level: r.level as BinderCard['level'],
     pageCount: Number(r.page_count),
@@ -35,14 +37,20 @@ export async function listBinders(
   profile: Profile,
   eventId: string | null,
   before: string | null,
+  divisionFilter: string | null = null,
 ) {
-  if (eventId) binderEvent(eventId);
+  if (divisionFilter !== null && divisionFilter !== 'B' && divisionFilter !== 'C')
+    throw new AppError(400, 'Choose Division B or C.');
+  const division = divisionFilter as BinderDivision | null;
+  if (eventId) binderEvent(eventId, division ?? undefined);
   if (before && !/^\d{4}-\d\d-\d\dT[\d:.]+Z\|[a-f0-9-]{36}$/.test(before))
     throw new AppError(400, 'Invalid library page.');
   const [date, id] = before?.split('|') ?? [];
-  // Shared with every authenticated school member; deliberately no school or division filter.
+  // Shared with every authenticated school member across schools and divisions. An event view
+  // passes its division, since Division B and C events can share an id but not their rules.
   const rows = await db.all(
-    `SELECT ${columns} FROM binders WHERE status='published' ${eventId ? 'AND event_id=?' : ''} ${before ? 'AND (generated_at<? OR (generated_at=? AND id<?))' : ''} ORDER BY generated_at DESC,id DESC LIMIT 25`,
+    `SELECT ${columns} FROM binders WHERE status='published' ${division ? 'AND division=?' : ''} ${eventId ? 'AND event_id=?' : ''} ${before ? 'AND (generated_at<? OR (generated_at=? AND id<?))' : ''} ORDER BY generated_at DESC,id DESC LIMIT 25`,
+    ...(division ? [division] : []),
     ...(eventId ? [eventId] : []),
     ...(before ? [date, date, id] : []),
   );
@@ -50,8 +58,9 @@ export async function listBinders(
     last = binders.at(-1);
   const jobs = (
     await db.all(
-      `SELECT ${columns} FROM binders WHERE creator_id=? AND status IN ('generating','ready') ${eventId ? 'AND event_id=?' : ''} ORDER BY created_at DESC LIMIT 10`,
+      `SELECT ${columns} FROM binders WHERE creator_id=? AND status IN ('generating','ready') ${division ? 'AND division=?' : ''} ${eventId ? 'AND event_id=?' : ''} ORDER BY created_at DESC LIMIT 10`,
       profile.id,
+      ...(division ? [division] : []),
       ...(eventId ? [eventId] : []),
     )
   ).map(card);
@@ -80,15 +89,15 @@ export async function readBinder(db: Database, profile: Profile, id: string): Pr
   };
 }
 export async function createBinder(db: Database, profile: Profile, value: BinderInput) {
-  requireBinderStudent(profile);
-  const input = parseBinderInput(value),
+  const division = requireBinderStudent(profile);
+  const input = parseBinderInput(value, division),
     id = randomUUID(),
     now = new Date().toISOString();
   const result = await db.batch(
     [
       {
-        sql: `INSERT INTO binders (id,creator_id,event_id,title,level,page_count,completed_pages,status,school_name,created_at,input_json,plan_json,images_json,attempts)
-    SELECT ?,?,?,?,?,?,0,'generating',?,?,?,'{"sections":[]}',?,0
+        sql: `INSERT INTO binders (id,creator_id,event_id,title,level,page_count,completed_pages,status,school_name,created_at,input_json,plan_json,images_json,attempts,division)
+    SELECT ?,?,?,?,?,?,0,'generating',?,?,?,'{"sections":[]}',?,0,?
     WHERE NOT EXISTS (SELECT 1 FROM binders WHERE creator_id=? AND status IN ('generating','ready'))
     AND (SELECT COUNT(*) FROM binders WHERE creator_id=? AND created_at>?)<3`,
         args: [
@@ -102,6 +111,7 @@ export async function createBinder(db: Database, profile: Profile, value: Binder
           now,
           JSON.stringify(input),
           JSON.stringify(input.uploads.filter((u) => u.mime.startsWith('image/'))),
+          division,
           profile.id,
           profile.id,
           new Date(Date.now() - 86400_000).toISOString(),

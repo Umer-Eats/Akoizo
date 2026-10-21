@@ -10,10 +10,15 @@ import { designerGenesExtras } from './designer-genes.ts';
 import { diseaseDetectivesExtras } from './disease-detectives.ts';
 import { dynamicPlanetExtras } from './dynamic-planet.ts';
 import { experimentalDesignExtras } from './experimental-design.ts';
+import { crimeBustersExtras } from './crime-busters.ts';
+import { foodScienceExtras } from './food-science.ts';
 import { forensicsExtras } from './forensics.ts';
+import { heredityExtras } from './heredity.ts';
+import { meteorologyExtras } from './meteorology.ts';
 import { proteinModelingExtras } from './protein-modeling.ts';
 import { remoteSensingExtras } from './remote-sensing.ts';
 import { rocksAndMineralsExtras } from './rocks-and-minerals.ts';
+import { solarSystemExtras } from './solar-system.ts';
 import { thermodynamicsExtras } from './thermodynamics.ts';
 import { waterQualityExtras } from './water-quality.ts';
 
@@ -29,6 +34,11 @@ export const eventExtras: EventExtras[] = [
   dynamicPlanetExtras,
   experimentalDesignExtras,
   forensicsExtras,
+  heredityExtras,
+  meteorologyExtras,
+  crimeBustersExtras,
+  foodScienceExtras,
+  solarSystemExtras,
   proteinModelingExtras,
   remoteSensingExtras,
   rocksAndMineralsExtras,

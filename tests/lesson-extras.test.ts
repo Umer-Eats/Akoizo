@@ -11,6 +11,7 @@ import {
 import { check, solutionSequence, stableShuffle, termRounds } from '../src/lib/lesson-extras.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { eventSlots } from '../src/lib/event-slots.ts';
+import { divisionBCourses } from '../src/lib/lessons-division-b.ts';
 
 // PhET HTML5 simulations whose embed URL returned HTTP 200 when the lessons were authored.
 const verifiedPhet = new Set(
@@ -18,10 +19,14 @@ const verifiedPhet = new Set(
     ' ',
   ),
 );
-const courses = eventSlots
-  .flatMap((slot) => [...slot.events])
-  .map((id) => lessonsForEvent(id, 'C'))
-  .filter((course) => course !== null);
+const courses = [
+  ...eventSlots
+    .flatMap((slot) => [...slot.events])
+    .map((id) => lessonsForEvent(id, 'C'))
+    .filter((course) => course !== null),
+  // Division B events without a Division C counterpart have their own courses.
+  ...divisionBCourses,
+];
 
 function assertFinite(lab: TopicLab, values: LabValues, context: string) {
   const result = runLab(lab, values);
@@ -153,8 +158,8 @@ test('every topic lab is finite across its control range and every goal is reach
   assert.deepEqual(problems, []);
 });
 
-test('all sixteen Division C courses receive lesson-specific labs, activities, and checks', () => {
-  assert.equal(courses.length, 16);
+test('all sixteen Division C and five Division B-only courses receive lesson-specific labs, activities, and checks', () => {
+  assert.equal(courses.length, 21);
   assert.deepEqual(eventExtras.map((e) => e.eventId).sort(), courses.map((c) => c.eventId).sort());
   const labUse = new Map<string, string[]>();
   const sortTitles = new Set<string>(),
@@ -162,7 +167,7 @@ test('all sixteen Division C courses receive lesson-specific labs, activities, a
   let lessons = 0,
     phetPlacements = 0;
   for (const event of eventExtras) {
-    const course = lessonsForEvent(event.eventId, 'C')!;
+    const course = courses.find((c) => c.eventId === event.eventId)!;
     assert.deepEqual(
       Object.keys(event.lessons).sort(),
       course.lessons.map((l) => l.id).sort(),
@@ -237,8 +242,8 @@ test('all sixteen Division C courses receive lesson-specific labs, activities, a
       }
     }
   }
-  assert.equal(lessons, 167);
-  assert.equal(Object.keys(lessonExtras).length, 167);
+  assert.equal(lessons, 204);
+  assert.equal(Object.keys(lessonExtras).length, 204);
   // Labs are specific: none is shared between events, and none repeats in more than two lessons.
   for (const lab of Object.values(topicLabs)) {
     const used = labUse.get(lab.id) ?? [];

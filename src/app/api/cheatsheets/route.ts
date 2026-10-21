@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const { db, profile } = await memberFor(request, 'student');
-    requireSheetStudent(profile);
+    const division = requireSheetStudent(profile);
     // Bound the stream before JSON parsing, including requests without a Content-Length header.
     const reader = request.body?.getReader();
     if (!reader) throw new AppError(400, 'Enter your sheet details.');
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
         throw new AppError(400, 'Choose a draft to publish.');
       return json(await publishSheet(db, profile, body.id));
     }
-    return json(await createSheet(db, profile, parseSheetInput(body)), 201);
+    return json(await createSheet(db, profile, parseSheetInput(body, division)), 201);
   } catch (error) {
     return failure(error);
   }

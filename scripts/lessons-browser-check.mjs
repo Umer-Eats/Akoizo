@@ -423,7 +423,7 @@ try {
   profile.id = 'qa-student';
   profile.division = 'B';
   await p.reload();
-  await expect(p.locator('.lessons-workspace')).toHaveCount(0);
+  await expect(p.locator('.lessons-intro')).toContainText('shared with Division C');
   profile.division = 'C';
   await p.goto(`${base}/dashboard/student/events/engineering-cad/lessons`);
   await expect(p.locator('.lessons-workspace')).toHaveCount(0);
@@ -449,7 +449,7 @@ try {
   await expect(p.locator('#current-lesson-title')).toHaveText(forensicsLessons.lessons[2].title);
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: 40 lesson atlases, source image zoom, interactive charts, prediction scenarios, sweep playback, trial plots, specimen controls and notebooks, spectrum keyboard annotation, phone layouts; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; practice scoring/review; draft restoration; student isolation; Division C/CAD scope; corrupted/blocked storage.',
+    'PASS: 40 lesson atlases, source image zoom, interactive charts, prediction scenarios, sweep playback, trial plots, specimen controls and notebooks, spectrum keyboard annotation, phone layouts; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; practice scoring/review; draft restoration; student isolation; shared Division B course; CAD scope; corrupted/blocked storage.',
   );
 } finally {
   await browser.close();

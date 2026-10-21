@@ -263,10 +263,10 @@ try {
   await expect(p.locator('.sheet-card')).toHaveCount(2);
   profile = { ...profile, division: 'B' };
   await p.reload();
-  await expect(p.getByText('COMING SOON', { exact: true })).toBeVisible();
+  await expect(p.getByRole('heading', { name: 'The Division B sheet library' })).toBeVisible();
   assert.equal(errors.length, 0, errors.join('\n'));
   console.log(
-    'Page checks passed: upload, exclusions, auto-share, school/date cards, export, mobile/themes, Division B unchanged.',
+    'Page checks passed: upload, exclusions, auto-share, school/date cards, export, mobile/themes, Division B library.',
   );
 } finally {
   await browser.close();

@@ -131,6 +131,23 @@ export function calculateLab(model: LabModel, v: LabValues, scenario = 0): LabRe
         hint: 'Advance incubation to day 5 before calculating BOD₅.',
       };
     }
+    case 'curd': {
+      // Each sample is a milk with its own curd yield once all the casein has precipitated.
+      const percent = 12 + s * 0.5,
+        curdled = Math.min(1, v.vinegar / 2),
+        mass = (v.milk * percent * curdled) / 100;
+      return {
+        readings: [
+          reading('Drained curd mass', mass, 'g'),
+          reading('Milk mass', v.milk, 'g'),
+          reading('Casein curdled', curdled * 100, '%'),
+        ],
+        answer: percent,
+        diagram: [mass, curdled],
+        ready: curdled >= 1,
+        hint: 'Add vinegar until the curd mass stops rising before calculating percent curd.',
+      };
+    }
     case 'absorption': {
       const mass = absorptionMass(v.area, v.soak, v.replicate, scenario);
       const mean =

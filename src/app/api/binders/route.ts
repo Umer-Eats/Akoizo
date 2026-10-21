@@ -1,13 +1,13 @@
 import { failure, json, memberFor } from '@/lib/api';
 import { AppError } from '@/lib/domain';
-import { parseBinderInput } from '@/lib/binders';
+import { parseBinderInput, requireBinderStudent } from '@/lib/binders';
 import { advanceBinder, cancelBinder, createBinder, listBinders, publishBinder, readBinder } from '@/lib/binder-service';
 export const maxDuration = 150;
 export async function GET(request: Request) {
   try {
     const { db, profile } = await memberFor(request);
     const p = new URL(request.url).searchParams;
-    return json(p.get('id') ? await readBinder(db, profile, p.get('id')!) : await listBinders(db, profile, p.get('eventId'), p.get('before')));
+    return json(p.get('id') ? await readBinder(db, profile, p.get('id')!) : await listBinders(db, profile, p.get('eventId'), p.get('before'), p.get('division')));
   } catch (e) { return failure(e); }
 }
 export async function POST(request: Request) {
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       chunks.push(value);
     }
     const body = JSON.parse(Buffer.concat(chunks).toString('utf8'));
-    if (body?.action === 'create') return json(await createBinder(db, profile, parseBinderInput(body)), 201);
+    if (body?.action === 'create') return json(await createBinder(db, profile, parseBinderInput(body, requireBinderStudent(profile))), 201);
     if (!body || typeof body.id !== 'string' || !/^[a-f0-9-]{36}$/.test(body.id)) throw new AppError(400, 'Choose a binder.');
     if (body.action === 'advance') return json(await advanceBinder(db, profile, body.id));
     if (body.action === 'publish') return json(await publishBinder(db, profile, body.id));

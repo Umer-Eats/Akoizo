@@ -1,6 +1,6 @@
 # Division C lessons
 
-The lesson catalog serves the Pink, Yellow, Purple, Blue, Green, and Orange timeslots in Division C, except Engineering CAD. Division B and A remain outside this lesson rollout.
+The lesson catalog serves the Pink, Yellow, Purple, Blue, Green, and Orange timeslots in Division C, except Engineering CAD. Division B shares these courses for matching events and has five courses of its own; see [Division B parity](DIVISION_B.md). Division A remains outside this lesson rollout.
 
 - Anatomy and Physiology: 10 units, 20 lessons, 140 practice questions.
 - Forensics: 9 units, 20 lessons, 140 practice questions. Includes the syllabus's integumentary-system, pollen/seed, and track topics.

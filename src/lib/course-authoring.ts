@@ -31,3 +31,20 @@ export function chapter(
     extension,
   };
 }
+
+// Evidence investigation for a unit: observations are revealed one at a time before concluding.
+export function evidence(
+  observations: [label: string, result: string][],
+  question: string,
+  options: string[],
+  correct: number,
+  explanation: string,
+): NonNullable<UnitChapter['investigation']> {
+  return {
+    observations: observations.map(([label, result]) => ({ label, result })),
+    question,
+    options,
+    correct,
+    explanation,
+  };
+}

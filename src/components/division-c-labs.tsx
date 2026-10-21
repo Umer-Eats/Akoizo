@@ -209,6 +209,37 @@ function BenchDiagram({
             Immersion measured below waterline
           </text>
         </>
+      ) : lab.model === 'curd' ? (
+        <>
+          <path d="M120 60H300V215H120Z" className="bench-outline" />
+          <rect x="125" y="95" width="170" height="115" fill={`url(#liquid-${lab.id})`} />
+          {Array.from({ length: Math.round(data[1] * 14) }, (_, i) => (
+            <circle
+              key={i}
+              cx={145 + (i % 7) * 22}
+              cy={120 + Math.floor(i / 7) * 26}
+              r="8"
+              fill="var(--surface)"
+              stroke="var(--accent)"
+            />
+          ))}
+          <text x="210" y="45" textAnchor="middle">
+            Milk + {v.vinegar} mL vinegar
+          </text>
+          <path d="M360 90H540L505 150H395Z" className="bench-outline" />
+          <path d="M370 100H530" className="bench-dashed" />
+          <rect x="380" y="180" width="140" height="40" rx="5" className="bench-solid" />
+          <text x="450" y="206" textAnchor="middle">
+            {number(data[0])} g curd
+          </text>
+          <text x="450" y="75" textAnchor="middle">
+            Cheesecloth · 15 min drain
+          </text>
+          <text x="300" y="248" textAnchor="middle">
+            {data[1] >= 1 ? 'All casein curdled' : `${number(data[1] * 100)}% of casein curdled`} ·
+            milk {v.milk} g
+          </text>
+        </>
       ) : lab.model === 'bod' ? (
         <>
           <path d="M225 45H375V220H225Z" className="bench-outline" />
@@ -817,12 +848,14 @@ export function DivisionCLabs({
   eventId,
   eventName,
   studentId,
+  division = 'C',
 }: {
   eventId: string;
   eventName: string;
   studentId: string;
+  division?: 'B' | 'C';
 }) {
-  const labs = labsForEvent('C', eventId);
+  const labs = labsForEvent(division, eventId);
   const [selected, setSelected] = useState(labs[0]?.id),
     [view, setView] = useState('archive');
   useEffect(() => {
@@ -840,7 +873,7 @@ export function DivisionCLabs({
       <header className="archive-overview">
         <div>
           <p className="eyebrow">
-            <FlaskConical size={16} /> DIVISION C / VIRTUAL LABS
+            <FlaskConical size={16} /> DIVISION {division} / VIRTUAL LABS
           </p>
           <h2>Think it. Test it. Explain it.</h2>
           <p>

@@ -23,17 +23,19 @@ export async function listSheets(
   eventId: string | null,
   before: string | null,
 ) {
-  requireSheetStudent(profile);
-  if (eventId) sheetEvent(eventId);
+  const division = requireSheetStudent(profile);
+  if (eventId) sheetEvent(eventId, division);
   if (before && !/^\d{4}-\d\d-\d\dT[\d:.]+Z\|[a-f0-9-]{36}$/.test(before))
     throw new AppError(400, 'Invalid library page.');
   const [date, id] = before?.split('|') ?? [];
-  // Deliberately global: no school_id or creator filter. Only published Division C sheets.
+  // Deliberately global across schools: no school_id or creator filter. Each division has its
+  // own library, because sheets follow that division's rules.
   const rows = await db.all(
     `SELECT id,event_id,title,level,created_at,school_name,has_exclusions,image_count FROM cheat_sheets
-    WHERE status='published' ${eventId ? 'AND event_id=?' : ''}
+    WHERE status='published' AND division=? ${eventId ? 'AND event_id=?' : ''}
     ${before ? 'AND (created_at < ? OR (created_at = ? AND id < ?))' : ''}
     ORDER BY created_at DESC,id DESC LIMIT 25`,
+    division,
     ...(eventId ? [eventId] : []),
     ...(before ? [date, date, id] : []),
   );
@@ -42,8 +44,9 @@ export async function listSheets(
   const last = items.at(-1);
   const drafts = (
     await db.all(
-      `SELECT id,event_id,title,level,created_at,school_name,has_exclusions,image_count FROM cheat_sheets WHERE creator_id=? AND status='draft' ${eventId ? 'AND event_id=?' : ''} ORDER BY created_at DESC LIMIT 10`,
+      `SELECT id,event_id,title,level,created_at,school_name,has_exclusions,image_count FROM cheat_sheets WHERE creator_id=? AND status='draft' AND division=? ${eventId ? 'AND event_id=?' : ''} ORDER BY created_at DESC LIMIT 10`,
       profile.id,
+      division,
       ...(eventId ? [eventId] : []),
     )
   ).map(card);
@@ -54,10 +57,11 @@ export async function listSheets(
   };
 }
 export async function readSheet(db: Database, profile: Profile, id: string): Promise<CheatSheet> {
-  requireSheetStudent(profile);
+  const division = requireSheetStudent(profile);
   const row = await db.get(
-    `SELECT * FROM cheat_sheets WHERE id=? AND (status='published' OR (creator_id=? AND status='draft'))`,
+    `SELECT * FROM cheat_sheets WHERE id=? AND division=? AND (status='published' OR (creator_id=? AND status='draft'))`,
     id,
+    division,
     profile.id,
   );
   if (!row) throw new AppError(404, 'That cheat sheet is not available.');
@@ -75,8 +79,10 @@ export async function createSheet(
   input: SheetInput,
   generate = generateSheet,
 ) {
-  requireSheetStudent(profile);
-  sheetEvent(input.eventId);
+  const division = requireSheetStudent(profile);
+  sheetEvent(input.eventId, division);
+  if (input.division !== division)
+    throw new AppError(400, `Choose a Division ${division} event with a cheat sheet generator.`);
   const id = randomUUID(),
     now = new Date().toISOString();
   const windowStart = new Date(Date.now() - 10 * 60_000).toISOString();
@@ -86,8 +92,8 @@ export async function createSheet(
     [
       {
         sql: `INSERT INTO cheat_sheets
-    (id,creator_id,event_id,title,school_name,level,created_at,status,has_exclusions,image_count,exclusions,content_json,images_json)
-    SELECT ?,?,?,?,?,?,?,'generating',?,?,?,'{}','[]'
+    (id,creator_id,event_id,title,school_name,level,created_at,status,has_exclusions,image_count,exclusions,content_json,images_json,division)
+    SELECT ?,?,?,?,?,?,?,'generating',?,?,?,'{}','[]',?
     WHERE (SELECT COUNT(*) FROM cheat_sheets WHERE creator_id=? AND created_at>?) < 3
     AND NOT EXISTS (SELECT 1 FROM cheat_sheets WHERE creator_id=? AND status='generating' AND created_at>?)`,
         args: [
@@ -101,6 +107,7 @@ export async function createSheet(
           Number(Boolean(input.exclusions)),
           input.uploads.filter((u) => u.mime.startsWith('image/')).length,
           input.exclusions,
+          division,
           profile.id,
           windowStart,
           profile.id,

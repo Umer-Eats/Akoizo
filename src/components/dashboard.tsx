@@ -50,6 +50,7 @@ import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
 import { DivisionCLabs } from './division-c-labs';
+import { labsForEvent } from '@/lib/division-c-labs';
 import { CheatSheets } from './cheatsheets';
 import { Binders } from './binders';
 import { RankedTestList } from './ranked';
@@ -925,7 +926,9 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
   const course = toolId === 'lessons' ? lessonsForEvent(event.id, division) : null;
   const hasDivisionCLabs =
-    division === 'C' && (toolId === 'lab-practice' || toolId === 'lab-generator');
+    division !== 'A' &&
+    (toolId === 'lab-practice' || toolId === 'lab-generator') &&
+    labsForEvent(division, event.id).length > 0;
   return (
     <main
       id="main"
@@ -965,9 +968,9 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
             <PracticeLibrary eventId={event.id} />
           ) : toolId === 'ranked-tests' ? (
             <RankedTestList key={`${profile!.id}:${division}:${event.id}`} eventId={event.id} />
-          ) : division === 'C' && toolId === 'cheatsheet-generator' ? (
+          ) : division !== 'A' && toolId === 'cheatsheet-generator' ? (
             <CheatSheets key={`${profile!.id}:${event.id}`} eventId={event.id} />
-          ) : division === 'C' && toolId === 'binder-generator' ? (
+          ) : division !== 'A' && toolId === 'binder-generator' ? (
             <Binders key={`${profile!.id}:${event.id}`} eventId={event.id} />
           ) : hasDivisionCLabs ? (
             <DivisionCLabs
@@ -975,6 +978,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
               eventId={event.id}
               eventName={event.name}
               studentId={profile!.id}
+              division={division === 'B' ? 'B' : 'C'}
             />
           ) : toolId === 'lessons' && course ? (
             <LessonsView

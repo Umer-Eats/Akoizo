@@ -7,6 +7,7 @@ import type { Profile } from '../src/lib/domain.ts';
 import {
   binderContentPages,
   binderEvents,
+  binderEventsByDivision,
   binderRecommendations,
   binderTocPages,
   binderTopics,
@@ -47,6 +48,7 @@ const other: Profile = {
 };
 const input: BinderInput = {
   eventId: 'dynamic-planet',
+  division: 'C',
   title: 'Freshwater study binder',
   pageCount: 10,
   level: 'national',
@@ -168,7 +170,21 @@ const commons = (files: { title: string; license: string; index: number }[]) =>
     }),
   );
 
-test('only the six existing C binder events; integer page cap and real file signatures', () => {
+test('six binder events per division; integer page cap and real file signatures', () => {
+  assert.deepEqual(
+    binderEventsByDivision.B.map((e) => e.id).sort(),
+    [
+      'circuit-lab',
+      'dynamic-planet',
+      'meteorology',
+      'remote-sensing',
+      'rocks-and-minerals',
+      'thermodynamics',
+    ].sort(),
+  );
+  assert.equal(parseBinderInput({ ...input, eventId: 'meteorology' }, 'B').division, 'B');
+  assert.throws(() => parseBinderInput({ ...input, eventId: 'meteorology' }));
+  assert.throws(() => parseBinderInput({ ...input, eventId: 'astronomy' }, 'B'));
   assert.deepEqual(
     binderEvents.map((e) => e.id).sort(),
     [
@@ -211,7 +227,7 @@ test('only the six existing C binder events; integer page cap and real file sign
   );
 });
 test('page guidance separates compact events from large study events, all within 10–400', () => {
-  for (const event of binderEvents) {
+  for (const event of [...binderEventsByDivision.B, ...binderEventsByDivision.C]) {
     const r = binderRecommendations[event.id];
     assert.ok(r.min >= 10 && r.min <= r.suggested && r.suggested <= r.max && r.max <= 400);
   }
@@ -311,7 +327,10 @@ test('pages are trimmed to fit instead of rejected, but thin pages and label-fre
 test('resumable generation, school attribution, complete-only publish, global access and private uploads', async () => {
   const { db, raw } = fixture();
   try {
-    await assert.rejects(createBinder(db, other, input), /Only Division C/);
+    await assert.rejects(
+      createBinder(db, { ...other, role: 'instructor' }, input),
+      /Only Division B and C/,
+    );
     let job = await createBinder(db, profile, input);
     await assert.rejects(createBinder(db, profile, input), /Resume or cancel/);
     await assert.rejects(readBinder(db, other, job.id), /not available/);
@@ -369,6 +388,34 @@ test('resumable generation, school attribution, complete-only publish, global ac
   } finally {
     raw.close();
   }
+});
+test('Division B binders follow Division B rules and can be filtered by division', async () => {
+  const { db, raw } = fixture();
+  try {
+    const meteorology = { ...input, eventId: 'meteorology', division: 'B' as const };
+    await assert.rejects(createBinder(db, profile, meteorology), /Division C event/);
+    const job = await createBinder(db, other, meteorology);
+    assert.equal(job.division, 'B');
+    assert.equal((await listBinders(db, other, 'meteorology', null, 'B')).jobs.length, 1);
+    assert.equal((await listBinders(db, other, null, null, 'C')).jobs.length, 0);
+    await assert.rejects(listBinders(db, other, 'astronomy', null, 'B'), /Division B event/);
+    await assert.rejects(listBinders(db, other, null, null, 'A'), /Division B or C/);
+  } finally {
+    raw.close();
+  }
+  let body = '';
+  await outlineBinder(
+    { ...input, eventId: 'meteorology', division: 'B' },
+    {
+      apiKey: 'test',
+      fetcher: async (_url, init) => {
+        body = String(init?.body);
+        return gemini(outline);
+      },
+    },
+  );
+  assert.ok(body.includes('METEOROLOGY B') && body.includes('Saffir-Simpson'));
+  assert.ok(body.includes('\\"division\\":\\"B\\"'));
 });
 test('atomic lease prevents duplicate batches; cancel invalidates in-flight results', async () => {
   const { db, raw } = fixture();

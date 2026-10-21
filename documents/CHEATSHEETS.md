@@ -1,6 +1,6 @@
 # Division C cheat sheets
 
-The eight existing Division C cheat sheet tabs now generate references for Anatomy and Physiology, Botany, Chemistry Lab, Designer Genes, Disease Detectives, Forensics, Protein Modeling, and Water Quality. Division A and B tools are unchanged.
+The eight existing Division C cheat sheet tabs now generate references for Anatomy and Physiology, Botany, Chemistry Lab, Designer Genes, Disease Detectives, Forensics, Protein Modeling, and Water Quality. Division B has its own eight cheat sheet events, rules, and library; see [Division B parity](DIVISION_B.md).
 
 ## Generation and scope
 

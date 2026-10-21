@@ -1,4 +1,4 @@
-// Shared lesson model for the supported Division C timeslots.
+// Shared lesson model for the supported Division B and C events.
 // Event -> Units -> Lessons -> Simulation + Practice assignment.
 export type LessonQuizQuestion = {
   id: string;
@@ -108,7 +108,7 @@ export type LessonUnit = {
 export type EventLessons = {
   eventId: string;
   eventName: string;
-  division: 'C';
+  division: 'B' | 'C';
   syllabus: string;
   references: { title: string; url: string }[];
   intro: string;

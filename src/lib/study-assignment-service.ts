@@ -31,7 +31,8 @@ function titleOf(division: Division, eventId: string, kind: WorkKind, targetId: 
   }
   if (kind === 'Lab') {
     const title =
-      targetId === PHET_LAB && division === 'C'
+      // The PhET companion appears only beside an event's own virtual labs.
+      targetId === PHET_LAB && labsForEvent(division, eventId).length > 0
         ? phetActivities[eventId] && `PhET: ${phetActivities[eventId].title}`
         : labsForEvent(division, eventId).find((lab) => lab.id === targetId)?.title;
     if (!title) throw new AppError(404, 'That lab simulation is not in this event.');

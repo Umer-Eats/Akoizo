@@ -188,15 +188,15 @@ try {
   }
   profile.division = 'B';
   await p.goto(`${base}/dashboard/student/events/circuit-lab/lab-practice`);
-  await expect(p.getByText('COMING SOON', { exact: true })).toBeVisible();
-  await expect(p.locator('.archive-labs')).toHaveCount(0);
+  await expect(p.locator('.archive-overview')).toContainText('DIVISION B / VIRTUAL LABS');
+  await expect(p.locator('.archive-lab-picker button')).toHaveCount(1);
   profile.division = 'A';
   await p.goto(`${base}/dashboard/student/events/crimebusters/lab-practice`);
   await expect(p.getByText('COMING SOON', { exact: true })).toBeVisible();
   await expect(p.locator('.archive-labs')).toHaveCount(0);
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: all 8 archive labs across 5 C tabs; live readings, calculation checks, reset, persistence, notebook export, PhET launch URLs, desktop/mobile layout, and A/B isolation. Auth/API mocked; PhET network content is external.',
+    'PASS: all 8 archive labs across 5 C tabs; live readings, calculation checks, reset, persistence, notebook export, PhET launch URLs, desktop/mobile layout, Division B labs, and Division A isolation. Auth/API mocked; PhET network content is external.',
   );
 } catch (error) {
   await p.screenshot({ path: 'output/lab-qa/failure.png', fullPage: true });

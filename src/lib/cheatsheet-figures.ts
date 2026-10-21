@@ -11,6 +11,9 @@ const lessonPrefix: Record<string, string> = {
   forensics: 'for',
   'protein-modeling': 'prot',
   'water-quality': 'water',
+  // Division B events reuse the closest reviewed set; the model only picks relevant figures.
+  'crime-busters': 'for',
+  heredity: 'gene',
 };
 export type SheetFigure = { id: string; title: string; alt: string; src: string; credit: string };
 
@@ -27,7 +30,13 @@ for (const [eventId, prefix] of Object.entries(lessonPrefix)) {
     if (!f.lessonId.startsWith(`${prefix}-`) || !f.src.startsWith('https://')) continue;
     // Ids depend only on the source address, so stored sheets survive catalog reordering.
     const id = `${prefix}-${hash(f.src)}`;
-    if (byId.has(id)) continue;
+    if (figures.some((figure) => figure.id === id)) continue;
+    // A prefix shared by two events yields the same figure objects for both.
+    const known = byId.get(id);
+    if (known) {
+      figures.push(known);
+      continue;
+    }
     const figure = {
       id,
       title: f.title,

@@ -1,6 +1,6 @@
 # Division C Lab tabs
 
-Eight native interactive stations now replace the placeholder on every existing Division C Lab tab. The Experimental Design station uses its existing Lab Generator route. No Division A/B tool availability or content is changed.
+Eight native interactive stations now replace the placeholder on every existing Division C Lab tab. The Experimental Design station uses its existing Lab Generator route. Division B Lab tabs are described in [Division B parity](DIVISION_B.md).
 
 | Event               | Stations                                    | Archive basis                                                                                       |
 | ------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------- |

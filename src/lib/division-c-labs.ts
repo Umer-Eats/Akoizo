@@ -8,7 +8,8 @@ export type LabModel =
   | 'chromatography'
   | 'salinometer'
   | 'bod'
-  | 'absorption';
+  | 'absorption'
+  | 'curd';
 export type LabControl = {
   key: string;
   label: string;
@@ -30,6 +31,8 @@ export type LabSource = {
 export type LabActivity = {
   id: string;
   eventId: string;
+  /** Divisions whose Lab tab shows this lab. Omitted means Division C only. */
+  divisions?: ('B' | 'C')[];
   title: string;
   summary: string;
   minutes: number;
@@ -287,6 +290,8 @@ export const divisionCLabs: LabActivity[] = [
   {
     id: 'absorption-design',
     eventId: 'experimental-design',
+    // Experimental design skills are the same in both divisions.
+    divisions: ['B', 'C'],
     title: 'Design an absorption experiment',
     model: 'absorption',
     minutes: 25,
@@ -323,8 +328,127 @@ export const divisionCLabs: LabActivity[] = [
   },
 ];
 
+// Division B labs follow the 2027 Division B rules and are built around Division B archive papers.
+export const divisionBLabs: LabActivity[] = [
+  {
+    id: 'resistor-bench-b',
+    eventId: 'circuit-lab',
+    divisions: ['B'],
+    title: 'Measure series and parallel resistors',
+    model: 'circuit',
+    minutes: 20,
+    summary:
+      'Wire two resistors in series or parallel, read ideal meters, and calculate equivalent resistance.',
+    source: {
+      title: 'BullSO 2026 · Circuit Lab B',
+      url: 'https://drive.google.com/drive/folders/1O1duR0PqVUilIS5VwtgkbmHq8Oo0fqv4',
+      paper: '/practice/bullso-2026-circuit-lab-b/test.pdf#page=8',
+      section: 'Pages 8–9 · Part 2, Questions 2–4',
+      basis:
+        'A hands-on extension of the archived current and equivalent-resistance questions. The circuit values and meter readings are newly simulated.',
+      testId: 'bullso-2026-circuit-lab-b',
+      questionIds: ['p2_q2a', 'p2_q3', 'p2_q4'],
+    },
+    controls: [
+      control('voltage', 'Battery voltage', 'V', 1, 12, 0.5, 9),
+      control('r1', 'Resistance R₁', 'Ω', 50, 500, 10, 150),
+      control('r2', 'Resistance R₂', 'Ω', 50, 500, 10, 300),
+      control('parallel', 'Wiring: 0 = series, 1 = parallel', '', 0, 1, 1, 0),
+      control('closed', 'Switch: 0 = open, 1 = closed', '', 0, 1, 1, 1),
+    ],
+    procedure: [
+      'Close the switch. Record the ammeter and the voltage across R₁ for the series circuit.',
+      'Without changing the battery or resistors, rewire in parallel and record both meters again.',
+      'Use Ohm’s law with your readings to check the equivalent resistance you calculate.',
+    ],
+    question: 'Calculate the equivalent resistance of the selected network.',
+    answerUnit: 'Ω',
+    explanation:
+      'Series resistances add: Req = R₁ + R₂. Parallel resistances combine as Req = R₁R₂/(R₁ + R₂), which is always smaller than either one. Check with Ohm’s law: Req = V/I.',
+    reflection:
+      'Which wiring draws more current from the battery, and why? Use two controlled trials and the idea that parallel branches share the same voltage.',
+    assumptions:
+      'Ideal battery, wires, ohmic resistors, and meters. The voltmeter is across R₁ and the ammeter measures the total battery current. No heating or wire resistance.',
+  },
+  {
+    id: 'ink-chromatography-b',
+    eventId: 'crime-busters',
+    divisions: ['B'],
+    title: 'Match the ransom-note ink',
+    model: 'chromatography',
+    minutes: 15,
+    summary:
+      'Develop a paper chromatogram of the note’s ink, calculate Rf, and compare it with two suspects’ pens.',
+    source: {
+      title: 'Greenbrier Invitational 2026 · Crime Busters B',
+      url: 'https://scioly.org/tests/_pzG4T1mnTM',
+      paper: '/practice/greenbrier-2026-crime-busters-b/test.pdf#page=7',
+      section: 'Page 7 · Question 38',
+      basis:
+        'A simulated chromatography station built on the archived Rf question. Ink patterns and distances are synthetic and are not evidence from the original scenario.',
+      testId: 'greenbrier-2026-crime-busters-b',
+      questionIds: ['q38'],
+    },
+    controls: [control('front', 'Solvent-front distance', 'cm', 2, 18, 0.5, 12)],
+    procedure: [
+      'Measure from the pencil starting line to the solvent front and to the upper dye spot.',
+      'Calculate the upper spot’s Rf. Let the solvent travel farther and test whether Rf changes.',
+      'Compare both dye spots with the two suspect pens. Decide which pen is consistent with the note.',
+    ],
+    question: 'What is the Rf of the upper dye spot from the note?',
+    answerUnit: '(unitless)',
+    explanation:
+      'Rf = distance travelled by the spot ÷ distance travelled by the solvent front, both measured from the starting line. It stays the same as the solvent runs farther under the same conditions.',
+    reflection:
+      'Which suspect pen matches every band? Write one sentence that implicates a suspect and one that excludes the other, and say why a match is class evidence.',
+    assumptions:
+      'Ideal paper chromatography with fixed Rf values and no streaking. A matching pattern shows consistency with a pen type, not a single pen.',
+  },
+  {
+    id: 'acid-curd-b',
+    eventId: 'food-science',
+    divisions: ['B'],
+    title: 'Curdle milk and find percent curd',
+    model: 'curd',
+    minutes: 20,
+    summary:
+      'Add vinegar to 120 mL of milk, drain the curds through cheesecloth, and calculate percent curd.',
+    source: {
+      title: 'Wicklund Invitational 2016 · Food Science B',
+      url: 'https://scioly.org/tests/oZdxPOZn3QY',
+      paper: '/practice/wicklund-2016-food-science-b/test.pdf#page=11',
+      section: 'Pages 4 and 11 · Questions 12, 48, and 53',
+      basis:
+        'A virtual version of the curd mass lab task, connected to the archived casein precipitation and cheese yield questions. Milk samples and masses are newly simulated.',
+      testId: 'wicklund-2016-food-science-b',
+      questionIds: ['12', '48_1', '53'],
+    },
+    controls: [
+      control('vinegar', 'Vinegar added', 'mL', 0, 6, 0.5, 0.5),
+      control('milk', 'Milk mass', 'g', 110, 135, 1, 124),
+    ],
+    procedure: [
+      'Weigh the milk. Add vinegar in 0.5 mL steps, swirling for 30 seconds and resting 5 minutes each time.',
+      'Drain for 15 minutes and record the curd mass. Find the vinegar volume where the curd mass stops rising.',
+      'Calculate percent curd = curd mass ÷ milk mass × 100. Repeat with a different milk mass to check it.',
+    ],
+    question:
+      'Once all the casein has curdled, what is the percent curd of this milk sample? (Use your measured masses.)',
+    answerUnit: '%',
+    explanation:
+      'Acid lowers the pH toward 4.6, where casein micelles lose their charge and clump. Once every micelle has curdled, more acid adds no curd, so percent curd = curd mass ÷ milk mass × 100 is a property of the milk.',
+    reflection:
+      'Which variable did you change, and which did you hold constant? Explain why percent curd, rather than curd mass, lets you compare samples of different sizes.',
+    assumptions:
+      'Synthetic milk samples with 12–14% curd after a fixed 15-minute drain. Casein fully precipitates at 2 mL of vinegar per 120 mL. Temperature, stirring, and drain time are held constant.',
+  },
+];
+
 export function labsForEvent(division: Division, eventId: string) {
-  return division === 'C' ? divisionCLabs.filter((lab) => lab.eventId === eventId) : [];
+  if (division === 'A') return [];
+  return [...divisionCLabs, ...divisionBLabs].filter(
+    (lab) => lab.eventId === eventId && (lab.divisions ?? ['C']).includes(division),
+  );
 }
 
 export const phetActivities: Record<string, { slug: string; title: string; task: string }> = {
@@ -347,6 +471,16 @@ export const phetActivities: Record<string, { slug: string; title: string; task:
     slug: 'density',
     title: 'Density',
     task: 'Explore floating and displaced volume. Use buoyancy to explain the salinometer calibration. This is a conceptual companion, not a salinity meter.',
+  },
+  'crime-busters': {
+    slug: 'density',
+    title: 'Density',
+    task: 'Measure the mass and volume of mystery blocks and calculate their densities. Use the same float-or-sink reasoning to sort recyclable plastic fragments between liquids of known density.',
+  },
+  'food-science': {
+    slug: 'states-of-matter-basics',
+    title: 'States of Matter: Basics',
+    task: 'Cool water until it freezes and describe how particle motion changes. Use your observations to explain why dissolved salt makes an ice bath colder for the ice cream task.',
   },
   'experimental-design': {
     slug: 'pendulum-lab',

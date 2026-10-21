@@ -1,6 +1,6 @@
 import { useId, useState } from 'react';
 import type { LessonSim } from '@/lib/lessons';
-import { lessonAtlas } from '@/lib/lesson-atlas';
+import { lessonAtlas, type AtlasEntry } from '@/lib/lesson-atlas';
 import { InvestigationDiagram } from './lesson-diagrams';
 import { ProcessAtlas, SourceImage } from './lesson-atlas';
 import './evidence-workbench.css';
@@ -401,11 +401,14 @@ export function EvidenceWorkbench({
   sim,
   observed,
   onObserve,
+  reference: fallbackPathway,
 }: {
   lessonId: string;
   sim: Investigation;
   observed: number[];
   onObserve: (index: number) => void;
+  /** Reference pathway for lessons without a hand-drawn atlas entry. */
+  reference?: AtlasEntry;
 }) {
   const [active, setActive] = useState(0),
     [zoom, setZoom] = useState(100),
@@ -416,6 +419,7 @@ export function EvidenceWorkbench({
     [hypothesis, setHypothesis] = useState(''),
     [notes, setNotes] = useState<Record<number, string>>({});
   const kind = specimenForLesson[lessonId];
+  const pathway = lessonAtlas[lessonId] ?? fallbackPathway;
   const options =
     kind === 'fiber'
       ? ['No reference', 'Cotton-like', 'Wool-like', 'Smooth filament']
@@ -432,13 +436,15 @@ export function EvidenceWorkbench({
     <div className="evidence-workbench">
       <div className="evidence-workbench-header">
         <span className="eyebrow">VIRTUAL EVIDENCE WORKBENCH</span>
-        <button
-          className="button button-small button-glass"
-          aria-pressed={atlas}
-          onClick={() => setAtlas(!atlas)}
-        >
-          {atlas ? 'Return to case exhibit' : 'Explore reference pathway'}
-        </button>
+        {pathway && (
+          <button
+            className="button button-small button-glass"
+            aria-pressed={atlas}
+            onClick={() => setAtlas(!atlas)}
+          >
+            {atlas ? 'Return to case exhibit' : 'Explore reference pathway'}
+          </button>
+        )}
       </div>
       <label className="evidence-hypothesis">
         Working hypothesis
@@ -453,10 +459,10 @@ export function EvidenceWorkbench({
           ))}
         </select>
       </label>
-      {atlas ? (
+      {atlas && pathway ? (
         <div className="reference-explorer">
-          <ProcessAtlas entry={lessonAtlas[lessonId]} compact />
-          {lessonAtlas[lessonId].image && <SourceImage image={lessonAtlas[lessonId].image!} />}
+          <ProcessAtlas entry={pathway} compact />
+          {pathway.image && <SourceImage image={pathway.image} />}
         </div>
       ) : kind ? (
         <figure className="lab-figure specimen-inspector" data-diagram={kind}>

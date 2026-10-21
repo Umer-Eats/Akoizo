@@ -1,6 +1,6 @@
 // Opt-in local smoke test. Calls Gemini and Wikimedia Commons, writes only local QA output; no
 // school DB changes. Usage:
-//   node --env-file=.env.local --experimental-strip-types scripts/binder-live-check.ts [eventId] [pages]
+//   node --env-file=.env.local --experimental-strip-types scripts/binder-live-check.ts [eventId] [pages] [--division-b]
 import { mkdir, writeFile } from 'node:fs/promises';
 import { outlineBinder, planBinderTopics, writeBinderPages } from '../src/lib/binder-ai.ts';
 import { binderDocument } from '../src/lib/binder-document.ts';
@@ -11,6 +11,7 @@ const eventId = process.argv[2] ?? 'dynamic-planet',
   pageCount = Number(process.argv[3] ?? 10);
 const input: BinderInput = {
   eventId,
+  division: process.argv.includes('--division-b') ? 'B' : 'C',
   title: `${eventId} live check`,
   level: 'national',
   pageCount,

@@ -13,7 +13,7 @@ import {
   X,
 } from 'lucide-react';
 import { useAuth, authMessage } from './auth-context';
-import { sheetEvents } from '@/lib/cheatsheets';
+import { sheetEventsByDivision } from '@/lib/cheatsheets';
 import { fitSheetDocument, sheetDocument } from '@/lib/cheatsheet-document';
 import type { CheatSheet, SheetCard, SheetLevel, SheetUpload } from '@/lib/cheatsheet-types';
 import './cheatsheets.css';
@@ -89,7 +89,10 @@ function loadFigure(id: string) {
 }
 
 export function CheatSheets({ eventId }: { eventId: string }) {
-  const { request } = useAuth();
+  const { request, profile } = useAuth();
+  // Each division has its own rules and shared library; the server enforces the same split.
+  const division = profile?.division === 'B' ? 'B' : 'C';
+  const sheetEvents = sheetEventsByDivision[division];
   const [library, setLibrary] = useState<Library>({ sheets: [], nextCursor: null });
   const [filter, setFilter] = useState(eventId);
   const [loading, setLoading] = useState(true);
@@ -220,7 +223,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
       });
       if (selectedId.current === next.id) setSheet(saved);
       setDraftId('');
-      setNotice('Your sheet is shared with Division C students across every community.');
+      setNotice(`Your sheet is shared with Division ${division} students across every community.`);
       await refresh(true);
     } catch (e) {
       setError(`Your sheet is ready, but sharing failed. ${authMessage(e)}`);
@@ -325,8 +328,8 @@ export function CheatSheets({ eventId }: { eventId: string }) {
             <span className="eyebrow">ONE SHEET. BOTH SIDES.</span>
             <h2 id="sheet-create-title">Your event, condensed.</h2>
             <p>
-              Build a dense {event.name} reference with Akoizo, grounded in the 2027 Division C
-              rules.
+              Build a dense {event.name} reference with Akoizo, grounded in the 2027 Division{' '}
+              {division} rules.
             </p>
           </div>
         </div>
@@ -418,9 +421,9 @@ export function CheatSheets({ eventId }: { eventId: string }) {
             </ul>
           )}
           <p className="sheet-sharing">
-            <Globe2 size={17} /> Every generated sheet is shared across Division C communities. Your
-            school and generation date appear on the card. Notes and files go to Akoizo; included
-            content and images are visible to other students.
+            <Globe2 size={17} /> Every generated sheet is shared across Division {division}{' '}
+            communities. Your school and generation date appear on the card. Notes and files go to
+            Akoizo; included content and images are visible to other students.
           </p>
           <button type="submit" className="button button-primary" disabled={generating || reading}>
             {generating ? (
@@ -461,7 +464,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
               <h2>{sheet.title}</h2>
               <p>
                 {ready
-                  ? `Exactly 2 pages · ${fontSize.toFixed(1)} pt text · ${sheet.published ? 'Shared with everyone in Division C' : 'Sharing…'}`
+                  ? `Exactly 2 pages · ${fontSize.toFixed(1)} pt text · ${sheet.published ? `Shared with everyone in Division ${division}` : 'Sharing…'}`
                   : 'Loading figures and checking that all content fits on two sides…'}
               </p>
             </div>
@@ -531,7 +534,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
         <div className="sheet-library-heading">
           <div>
             <span className="eyebrow">SHARED ACROSS COMMUNITIES</span>
-            <h2 id="sheet-library-title">The Division C sheet library</h2>
+            <h2 id="sheet-library-title">The Division {division} sheet library</h2>
             <p>Open, print, or export any sheet. New sheets appear automatically.</p>
           </div>
           <button
@@ -545,7 +548,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
         <label className="sheet-filter">
           Show event
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <option value="">All Division C events</option>
+            <option value="">All Division {division} events</option>
             {sheetEvents.map((e) => (
               <option key={e.id} value={e.id}>
                 {e.name}
