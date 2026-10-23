@@ -15,6 +15,7 @@ import {
 import { useAuth, authMessage } from './auth-context';
 import { sheetEventsByDivision } from '@/lib/cheatsheets';
 import { fitSheetDocument, sheetDocument } from '@/lib/cheatsheet-document';
+import { exportPreview, saveFile, type ExportFormat } from '@/lib/document-export';
 import type { CheatSheet, SheetCard, SheetLevel, SheetUpload } from '@/lib/cheatsheet-types';
 import './cheatsheets.css';
 
@@ -111,6 +112,8 @@ export function CheatSheets({ eventId }: { eventId: string }) {
   const [html, setHtml] = useState('');
   const [ready, setReady] = useState(false);
   const [fitError, setFitError] = useState('');
+  const [exportFormat, setExportFormat] = useState<ExportFormat>('html');
+  const [exporting, setExporting] = useState('');
   const [fontSize, setFontSize] = useState(0);
   const frame = useRef<HTMLIFrameElement>(null);
   const preview = useRef<HTMLDivElement>(null);
@@ -302,19 +305,33 @@ export function CheatSheets({ eventId }: { eventId: string }) {
       setReading(false);
     }
   }
-  function download() {
+  async function download() {
     const doc = frame.current?.contentDocument;
-    if (!ready || !doc || !sheet) return;
-    const clone = doc.documentElement.cloneNode(true) as HTMLElement;
-    clone.querySelector('template')?.remove();
-    const url = URL.createObjectURL(
-      new Blob(['<!doctype html>' + clone.outerHTML], { type: 'text/html;charset=utf-8' }),
-    );
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${sheet.eventId}-cheatsheet.html`;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    if (!ready || !doc || !sheet || exporting) return;
+    setExporting('Preparing…');
+    setError('');
+    try {
+      if (exportFormat === 'html') {
+        const clone = doc.documentElement.cloneNode(true) as HTMLElement;
+        clone.querySelector('template')?.remove();
+        saveFile(
+          new Blob(['<!doctype html>' + clone.outerHTML], { type: 'text/html;charset=utf-8' }),
+          `${sheet.eventId}-cheatsheet.html`,
+        );
+      } else {
+        await exportPreview(
+          doc,
+          exportFormat,
+          `${sheet.eventId}-cheatsheet`,
+          sheet.title,
+          (page, total) => setExporting(`Exporting page ${page} of ${total}…`),
+        );
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'The export failed. Please try again.');
+    } finally {
+      setExporting('');
+    }
   }
 
   return (
@@ -487,13 +504,30 @@ export function CheatSheets({ eventId }: { eventId: string }) {
           <div className="sheet-actions">
             <button
               className="button button-primary"
-              disabled={!ready}
+              disabled={!ready || Boolean(exporting)}
               onClick={() => frame.current?.contentWindow?.print()}
             >
               <Printer size={17} /> Print / save PDF
             </button>
-            <button className="button button-secondary" disabled={!ready} onClick={download}>
-              <Download size={17} /> Download sheet
+            <label className="sheet-export-format">
+              <span>Export format</span>
+              <select
+                value={exportFormat}
+                disabled={!ready || Boolean(exporting)}
+                onChange={(e) => setExportFormat(e.target.value as ExportFormat)}
+              >
+                <option value="html">HTML</option>
+                <option value="pdf">PDF</option>
+                <option value="png">PNG pages (ZIP)</option>
+                <option value="docx">DOCX</option>
+              </select>
+            </label>
+            <button
+              className="button button-secondary"
+              disabled={!ready || Boolean(exporting)}
+              onClick={() => void download()}
+            >
+              <Download size={17} /> {exporting || `Download ${exportFormat.toUpperCase()}`}
             </button>
             {ready && !sheet.published && (
               <button className="button button-secondary" onClick={() => void publish(sheet)}>
@@ -503,9 +537,9 @@ export function CheatSheets({ eventId }: { eventId: string }) {
           </div>
           <p className="sheet-print-note">
             Print pages 1–2 on <strong>one sheet, double-sided, flip on long edge</strong>. Use
-            Letter paper, 100% scale, and turn off headers and footers. Choose “Save as PDF” to
-            export the two-page PDF. Your printer’s double-sided setting must be selected in the
-            print dialog.
+            Letter paper, 100% scale, and turn off headers and footers. The PDF download contains
+            both sides. PNG pages download together in a ZIP file. Your printer’s double-sided
+            setting must be selected in the print dialog.
           </p>
           {sheet.exclusions && (
             <details className="sheet-omitted">

@@ -20,6 +20,7 @@ import {
   type BinderDivision,
 } from '@/lib/binders';
 import { binderDocument, binderPalette, fitBinderDocument } from '@/lib/binder-document';
+import { exportPreview, saveFile, type ExportFormat } from '@/lib/document-export';
 import type { Binder, BinderCard, BinderLibrary } from '@/lib/binder-types';
 import type { SheetLevel, SheetUpload } from '@/lib/cheatsheet-types';
 import './cheatsheets.css';
@@ -88,6 +89,7 @@ export function Binders({ eventId }: { eventId?: string }) {
     [opening, setOpening] = useState(''),
     [exporting, setExporting] = useState('');
   const [fitError, setFitError] = useState('');
+  const [exportFormat, setExportFormat] = useState<ExportFormat>('html');
   const frame = useRef<HTMLIFrameElement>(null),
     active = useRef(true),
     running = useRef(false),
@@ -304,7 +306,20 @@ export function Binders({ eventId }: { eventId?: string }) {
     const doc = frame.current?.contentDocument;
     if (!ready || !doc || !binder || exporting) return;
     setExporting('download');
+    setError('');
     try {
+      if (exportFormat !== 'html') {
+        await exportPreview(
+          doc,
+          exportFormat,
+          `${binder.eventId}-binder`,
+          binder.title,
+          (page, total) => {
+            if (active.current) setExporting(`Exporting page ${page} of ${total}…`);
+          },
+        );
+        return;
+      }
       const copy = doc.documentElement.cloneNode(true) as HTMLElement;
       const remote = Array.from(copy.querySelectorAll<HTMLImageElement>('img[src^="https:"]'));
       let next = 0;
@@ -322,14 +337,13 @@ export function Binders({ eventId }: { eventId?: string }) {
           }
         }),
       );
-      const url = URL.createObjectURL(
+      saveFile(
         new Blob(['<!doctype html>' + copy.outerHTML], { type: 'text/html;charset=utf-8' }),
+        `${binder.eventId}-binder.html`,
       );
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${binder.eventId}-binder.html`;
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (e) {
+      if (active.current)
+        setError(e instanceof Error ? e.message : 'The export failed. Please try again.');
     } finally {
       if (active.current) setExporting('');
     }
@@ -600,13 +614,30 @@ export function Binders({ eventId }: { eventId?: string }) {
             >
               <Printer size={17} /> {exporting === 'print' ? 'Loading images…' : 'Print / save PDF'}
             </button>
+            <label className="sheet-export-format">
+              <span>Export format</span>
+              <select
+                value={exportFormat}
+                disabled={!ready || Boolean(exporting)}
+                onChange={(e) => setExportFormat(e.target.value as ExportFormat)}
+              >
+                <option value="html">HTML</option>
+                <option value="pdf">PDF</option>
+                <option value="png">PNG pages (ZIP)</option>
+                <option value="docx">DOCX</option>
+              </select>
+            </label>
             <button
               className="button button-secondary"
               disabled={!ready || Boolean(exporting)}
               onClick={() => void download()}
             >
               <Download size={17} />{' '}
-              {exporting === 'download' ? 'Embedding images…' : 'Download HTML'}
+              {exporting && exporting !== 'print'
+                ? exporting === 'download'
+                  ? 'Preparing…'
+                  : exporting
+                : `Download ${exportFormat.toUpperCase()}`}
             </button>
             {ready && binder.status === 'ready' && (
               <button className="button button-secondary" onClick={() => void share(binder)}>
@@ -615,9 +646,9 @@ export function Binders({ eventId }: { eventId?: string }) {
             )}
           </div>
           <p className="sheet-print-note">
-            Export a PDF using “Save as PDF” in the print dialog: Letter paper, 100% scale, headers
-            and footers off, background graphics on for the colored tabs. The HTML download embeds
-            every diagram and photograph for offline study.
+            Download the selected format, or print on Letter paper at 100% scale with headers and
+            footers off. PNG pages download together in a ZIP file. HTML embeds diagrams and
+            photographs for offline study.
           </p>
           <div className="binder-preview">
             <iframe

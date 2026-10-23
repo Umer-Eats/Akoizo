@@ -257,6 +257,19 @@
   flex-wrap: wrap;
   gap: 10px;
   margin: 12px 0;
+  align-items: end;
+}
+.sheet-export-format {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 155px;
+}
+.sheet-export-format span {
+  font-size: 12px;
+}
+.sheet-export-format select {
+  min-height: 42px;
 }
 .sheet-print-note {
   padding: 12px 14px;
