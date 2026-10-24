@@ -1,21 +1,64 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Lesson } from '@/lib/lessons';
 import { atlasImages, lessonAtlas, type AtlasEntry, type AtlasImage } from '@/lib/lesson-atlas';
 import { calculateModel, modelControls, modelDefaults, type ModelId } from '@/lib/lesson-models';
 import './lesson-atlas.css';
+import { DiagramViewer } from './diagram-viewer';
 
 export function ProcessAtlas({ entry, compact = false }: { entry: AtlasEntry; compact?: boolean }) {
   const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  useEffect(() => {
+    if (!playing) return;
+    const timer = window.setTimeout(() => {
+      if (active >= entry.steps.length - 1) setPlaying(false);
+      else setActive((step) => step + 1);
+    }, 3000);
+    return () => window.clearTimeout(timer);
+  }, [playing, active, entry.steps.length]);
   return (
     <figure className={`lesson-visual process-atlas${compact ? ' compact' : ''}`}>
       <figcaption>
         <span className="eyebrow">TRACE THE MECHANISM</span>
         <strong>{entry.title}</strong>
       </figcaption>
+      <div className="lesson-actions process-playback">
+        <button
+          type="button"
+          className="button button-small button-glass"
+          aria-pressed={playing}
+          onClick={() => {
+            if (!playing && active === entry.steps.length - 1) setActive(0);
+            setPlaying((p) => !p);
+          }}
+        >
+          {playing ? 'Pause walkthrough' : 'Play walkthrough'}
+        </button>
+        <button
+          type="button"
+          className="button button-small button-glass"
+          onClick={() => {
+            setPlaying(false);
+            setActive(0);
+          }}
+        >
+          Restart walkthrough
+        </button>
+        <span>
+          Step {active + 1} of {entry.steps.length} · 3 seconds per step
+        </span>
+      </div>
       <ol className="process-path">
         {entry.steps.map((step, i) => (
           <li key={step.label}>
-            <button type="button" aria-pressed={active === i} onClick={() => setActive(i)}>
+            <button
+              type="button"
+              aria-pressed={active === i}
+              onClick={() => {
+                setPlaying(false);
+                setActive(i);
+              }}
+            >
               <span className="process-index">{i + 1}</span>
               <strong>{step.label}</strong>
               {!compact && <span>{step.detail}</span>}
@@ -23,14 +66,21 @@ export function ProcessAtlas({ entry, compact = false }: { entry: AtlasEntry; co
           </li>
         ))}
       </ol>
-      <div className="process-focus" aria-live="polite">
-        <strong>
-          Step {active + 1}: {entry.steps[active].label}
-        </strong>
-        <p>{entry.steps[active].detail}</p>
-        {active < entry.steps.length - 1 && (
-          <small>Trace the connection to {entry.steps[active + 1].label.toLowerCase()}.</small>
-        )}
+      <div className="process-focus" aria-live="polite" aria-atomic="true">
+        <div key={active} className="process-step-detail">
+          <strong>
+            Step {active + 1}: {entry.steps[active].label}
+          </strong>
+          <p>{entry.steps[active].detail}</p>
+          {active < entry.steps.length - 1 && (
+            <small>Trace the connection to {entry.steps[active + 1].label.toLowerCase()}.</small>
+          )}
+          {active > 0 && (
+            <small>
+              Connect back: {entry.steps[active - 1].label} → {entry.steps[active].label}.
+            </small>
+          )}
+        </div>
       </div>
     </figure>
   );
@@ -212,12 +262,7 @@ export function RelationshipChart({ model }: { model: ModelId }) {
           {control.label} → {metric.label.toLowerCase()}
         </strong>
       </figcaption>
-      <div
-        className="atlas-chart-scroll"
-        tabIndex={0}
-        role="region"
-        aria-label="Relationship chart viewer"
-      >
+      <DiagramViewer label={`${control.label} and ${metric.label}`}>
         <svg
           viewBox="0 0 480 270"
           role="img"
@@ -248,7 +293,7 @@ export function RelationshipChart({ model }: { model: ModelId }) {
             {control.unit}
           </text>
         </svg>
-      </div>
+      </DiagramViewer>
       <label className="atlas-zoom">
         Chart: {control.label}
         <output>

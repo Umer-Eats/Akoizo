@@ -1,5 +1,6 @@
 'use client';
 import { useState, type ReactNode } from 'react';
+import { DiagramViewer } from './diagram-viewer';
 import type { LessonSim } from '@/lib/lessons';
 export type Explorer = Extract<LessonSim, { kind: 'explorer' }>;
 export type Props = { sim: Explorer; preview?: boolean };
@@ -45,20 +46,11 @@ export function Slider({
 export function Plot({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="subject-figure">
-      <div
-        className="subject-plot-scroll"
-        role="region"
-        aria-label={`${label} diagram viewer`}
-        tabIndex={0}
-      >
+      <DiagramViewer label={label}>
         <svg className="subject-plot" viewBox="0 0 640 340" role="img" aria-label={label}>
           {children}
         </svg>
-      </div>
-      <p className="subject-scroll-hint">
-        Scroll the diagram sideways to inspect every label. You can focus the viewer and use the
-        arrow keys.
-      </p>
+      </DiagramViewer>
     </div>
   );
 }
@@ -93,6 +85,25 @@ export function LabFrame({
           : 'Simplified teaching model; not observed field data'}
       </p>
       {children}
+      {!preview && (
+        <dl className="model-reading-guide">
+          <div>
+            <dt>Current inputs</dt>
+            <dd>{snapshot.settings}</dd>
+          </div>
+          <div>
+            <dt>Read the output</dt>
+            <dd>{snapshot.result}</dd>
+          </div>
+          <div>
+            <dt>Build a fair comparison</dt>
+            <dd>
+              Record a baseline, change one input, and record another trial. Compare both the
+              direction and size of the change before explaining the mechanism.
+            </dd>
+          </div>
+        </dl>
+      )}
       {!preview && (
         <>
           <div className="lab-challenge">

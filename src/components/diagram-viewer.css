@@ -1,0 +1,140 @@
+.diagram-inspector {
+  min-width: 0;
+  max-width: 100%;
+}
+.diagram-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.diagram-toolbar > span {
+  margin-right: auto;
+}
+.diagram-toolbar button {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.diagram-toolbar button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.diagram-toolbar output {
+  min-width: 42px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.diagram-inspector-scroll {
+  overflow: auto;
+  max-height: 80vh;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.diagram-inspector-scroll:focus-visible,
+.diagram-toolbar button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.diagram-inspector-canvas {
+  min-width: 560px;
+}
+.diagram-inspector .diagram-inspector-canvas > svg {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 0;
+}
+.diagram-inspector .diagram-inspector-hint {
+  margin: 8px 0 12px;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.model-reading-guide {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+.model-reading-guide > div {
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  min-width: 0;
+}
+.model-reading-guide dt {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.model-reading-guide dd {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .diagram-inspector svg :is(circle, ellipse, rect, line) {
+    transition:
+      cx 240ms ease,
+      cy 240ms ease,
+      r 240ms ease,
+      rx 240ms ease,
+      ry 240ms ease,
+      x 240ms ease,
+      y 240ms ease,
+      width 240ms ease,
+      height 240ms ease,
+      opacity 240ms ease;
+  }
+  .process-focus,
+  .la-mark,
+  .tl-feedback {
+    animation: lesson-reveal 220ms ease-out;
+  }
+  .process-index,
+  .la-chip,
+  .la-drop-bin {
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+  @keyframes lesson-reveal {
+    from {
+      opacity: 0.25;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+:root[data-motion='off'] .diagram-inspector svg *,
+:root[data-motion='off']
+  :is(
+    .process-step-detail,
+    .process-focus,
+    .la-mark,
+    .tl-feedback,
+    .process-index,
+    .la-chip,
+    .la-drop-bin
+  ) {
+  transition: none;
+  animation: none;
+}

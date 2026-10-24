@@ -245,3 +245,30 @@
     font-size: 0.86rem;
   }
 }
+.process-playback {
+  margin: 14px 0;
+}
+.process-playback > span {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.process-step-detail small {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .process-step-detail {
+    animation: process-step-enter 250ms ease-out;
+  }
+  @keyframes process-step-enter {
+    from {
+      opacity: 0.2;
+      transform: translateX(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

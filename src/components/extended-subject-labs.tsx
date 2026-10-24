@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, type Dispatch, type SetStateAction } from 'react';
+import { useState, useEffect, useId, type Dispatch, type SetStateAction } from 'react';
 import { f, Slider, Plot, Metric, LabFrame, type Props } from './subject-lab-frame';
 import {
   gasProcess,
@@ -456,6 +456,16 @@ export function MineralLab({ sim, preview }: Props) {
           d="M320 155L125 75M320 155L505 75M320 155L125 255M320 155L505 255"
         />
         <polygon className="subject-box" points="275,110 330,85 380,130 365,205 295,220 260,170" />
+        <polygon points="275,110 330,85 323,142 260,170" fill="var(--accent)" opacity=".12" />
+        <polygon points="330,85 380,130 365,205 323,142" fill="var(--accent)" opacity=".22" />
+        <polygon points="260,170 323,142 365,205 295,220" fill="var(--accent)" opacity=".07" />
+        <path
+          d="M275 110L323 142L380 130M323 142L295 220"
+          stroke="var(--accent)"
+          strokeWidth="1"
+          fill="none"
+          opacity=".5"
+        />
         <text x="282" y="156">
           Unknown
         </text>
@@ -959,6 +969,13 @@ export function WaterLab({ sim, preview }: Props) {
 
 const residueClasses = ['Nonpolar', 'Polar', 'Positive', 'Negative'] as const;
 export function ProteinLab({ sim, preview }: Props) {
+  const materialId = useId().replace(/:/g, '');
+  const residueColors = [
+    'var(--accent)',
+    'var(--tl-green, #429b80)',
+    'var(--tl-cool, #378bc0)',
+    'var(--tl-warm, #c45c40)',
+  ];
   const [angle, setAngle] = useState(30),
     [compact, setCompact] = useState(50),
     [cutoff, setCutoff] = useState(2),
@@ -1014,38 +1031,108 @@ export function ProteinLab({ sim, preview }: Props) {
       <Plot
         label={`Synthetic 24-residue chain, rotated ${angle} degrees; ${contacts} nonlocal contacts`}
       >
-        <polyline
-          className="subject-line"
-          points={projected.map((p) => `${p.x},${p.y}`).join(' ')}
-        />
-        {projected.map((p, i) => (
-          <g
-            key={i}
-            opacity={
-              i + 1 === selected ||
-              i === 0 ||
-              i === 23 ||
-              highlight === 'All residues' ||
-              highlight === residueClasses[i % 4]
-                ? 1
-                : 0.2
-            }
-          >
-            <circle
-              cx={p.x}
-              cy={p.y}
-              r={i + 1 === selected ? 10 : 6}
-              className={i + 1 === selected ? 'subject-point' : 'subject-fill'}
-            />
-            {(i === 0 || i === 23 || i + 1 === selected) && (
-              <text x={p.x + 10} y={p.y - 10}>
-                {i === 0 ? 'N' : i === 23 ? 'C' : `Residue ${i + 1}`}
-              </text>
-            )}
+        <defs>
+          {residueColors.map((color, i) => (
+            <radialGradient key={i} id={`${materialId}-${i}`} cx="30%" cy="25%" r="75%">
+              <stop stopColor="var(--surface)" />
+              <stop offset=".35" stopColor={color} stopOpacity=".7" />
+              <stop offset="1" stopColor={color} />
+            </radialGradient>
+          ))}
+        </defs>
+        {residueClasses.map((label, i) => (
+          <g key={label}>
+            <circle cx={38 + i * 145} cy="25" r="5" fill={residueColors[i]} />
+            <text x={50 + i * 145} y="29">
+              {label}
+            </text>
           </g>
         ))}
+        {points
+          .flatMap((a, i) => points.slice(i + 3).map((b, j) => ({ a, b, i, j: j + i + 3 })))
+          .filter(({ a, b }) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z) < cutoff)
+          .map(({ i, j }) => (
+            <line
+              key={`${i}-${j}`}
+              x1={projected[i].x}
+              y1={projected[i].y}
+              x2={projected[j].x}
+              y2={projected[j].y}
+              stroke="var(--muted)"
+              strokeDasharray="3 5"
+              opacity=".3"
+            />
+          ))}
+        {projected
+          .slice(1)
+          .map((point, i) => ({ point, previous: projected[i], i }))
+          .sort((a, b) => a.point.depth + a.previous.depth - (b.point.depth + b.previous.depth))
+          .map(({ point, previous, i }) => (
+            <g key={i}>
+              <line
+                x1={previous.x}
+                y1={previous.y}
+                x2={point.x}
+                y2={point.y}
+                stroke="var(--bg)"
+                strokeWidth="9"
+                strokeLinecap="round"
+              />
+              <line
+                x1={previous.x}
+                y1={previous.y}
+                x2={point.x}
+                y2={point.y}
+                stroke="var(--accent)"
+                opacity={0.55 + Math.max(-3, Math.min(3, point.depth)) * 0.06}
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+            </g>
+          ))}
+        {projected
+          .map((p, i) => ({ ...p, i }))
+          .sort((a, b) => a.depth - b.depth)
+          .map(({ i, ...p }) => (
+            <g
+              key={i}
+              opacity={
+                i + 1 === selected ||
+                i === 0 ||
+                i === 23 ||
+                highlight === 'All residues' ||
+                highlight === residueClasses[i % 4]
+                  ? 1
+                  : 0.2
+              }
+            >
+              {i + 1 === selected && (
+                <circle
+                  cx={p.x}
+                  cy={p.y}
+                  r="17"
+                  fill="none"
+                  stroke="var(--lesson-pink)"
+                  strokeDasharray="3 3"
+                />
+              )}
+              <circle
+                cx={p.x}
+                cy={p.y}
+                r={i + 1 === selected ? 11 : 8 + Math.max(-3, Math.min(3, p.depth)) * 0.35}
+                fill={`url(#${materialId}-${i % 4})`}
+                stroke={residueColors[i % 4]}
+                strokeWidth="1"
+              />
+              {(i === 0 || i === 23 || i + 1 === selected) && (
+                <text x={p.x + 10} y={p.y - 10}>
+                  {i === 0 ? 'N' : i === 23 ? 'C' : `Residue ${i + 1}`}
+                </text>
+              )}
+            </g>
+          ))}
         <text x="40" y="280">
-          N → C backbone trace · generic coordinates
+          N → C backbone · dashed lines: nonlocal geometric contacts
         </text>
         <text x="40" y="305">
           Rotation preserves connectivity; compaction changes coordinates.

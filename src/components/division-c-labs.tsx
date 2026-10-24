@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { FlaskConical, ExternalLink, RotateCcw, Download, Play, BookOpen } from 'lucide-react';
 import { labsForEvent, phetActivities, phetUrl, type LabActivity } from '@/lib/division-c-labs';
 import {
@@ -16,6 +16,7 @@ import { PHET_LAB } from '@/lib/domain';
 import { Slider } from './subject-lab-frame';
 import './subject-explorer.css';
 import './division-c-labs.css';
+import { DiagramViewer } from './diagram-viewer';
 
 const number = (v: number) =>
   Number(v.toPrecision(5)).toLocaleString('en-US', { maximumFractionDigits: 5 });
@@ -32,6 +33,7 @@ function BenchDiagram({
   values: LabValues;
   data: number[];
 }) {
+  const artId = useId().replace(/:/g, '');
   return (
     <svg
       className="archive-bench-diagram"
@@ -40,6 +42,12 @@ function BenchDiagram({
       aria-label={`${lab.title}: live apparatus`}
     >
       <defs>
+        <linearGradient id={`${artId}-glass`} x1="0" x2="1">
+          <stop stopColor="var(--accent)" stopOpacity=".06" />
+          <stop offset=".2" stopColor="var(--accent)" stopOpacity=".17" />
+          <stop offset=".35" stopColor="var(--accent)" stopOpacity=".02" />
+          <stop offset="1" stopColor="var(--accent)" stopOpacity=".12" />
+        </linearGradient>
         <linearGradient id={`liquid-${lab.id}`} x1="0" y1="0" x2="0" y2="1">
           <stop stopColor="var(--accent)" stopOpacity="0.15" />
           <stop offset="1" stopColor="var(--accent)" stopOpacity="0.6" />
@@ -48,7 +56,7 @@ function BenchDiagram({
       {lab.model === 'kinetics' || lab.model === 'colorimetry' ? (
         <>
           <rect x="35" y="90" width="100" height="80" rx="10" className="bench-outline" />
-          <text x="85" y="135" textAnchor="middle">
+          <text x="85" y="156" textAnchor="middle">
             Light source
           </text>
           <path d="M135 130H240" className="bench-ray" />
@@ -284,6 +292,186 @@ function BenchDiagram({
           </text>
         </>
       )}
+      <g className="bench-detail" aria-hidden="true">
+        {(lab.model === 'kinetics' || lab.model === 'colorimetry') && (
+          <>
+            <circle cx="85" cy="115" r="12" fill="var(--accent-soft)" stroke="var(--accent)" />
+            <path d="M78 115L82 111L87 119L92 115M81 130H89" className="bench-ray" />
+            <path d="M135 121L238 112V148L135 139Z" fill="var(--accent)" opacity=".08" />
+            <path
+              d="M330 115L440 124V136L330 145Z"
+              fill="var(--accent)"
+              opacity={Math.max(0.025, 0.15 * 10 ** -data[0])}
+            />
+            <path d="M187 103V124M187 136V157" className="bench-wire" />
+            <rect x="240" y="55" width="90" height="150" rx="6" fill={`url(#${artId}-glass)`} />
+            <path
+              d="M246 61V197M324 61V197M245 85Q285 91 325 85"
+              stroke="var(--accent)"
+              fill="none"
+              opacity=".4"
+            />
+            <path d="M240 45H330M240 41V49M330 41V49" className="bench-wire" />
+            <text x="285" y="29" textAnchor="middle">
+              Optical path
+            </text>
+            <text x="185" y="182" textAnchor="middle">
+              Slit · I₀
+            </text>
+            <text x="386" y="182" textAnchor="middle">
+              I transmitted
+            </text>
+          </>
+        )}
+        {lab.model === 'circuit' && (
+          <>
+            <text x="64" y="121">
+              +
+            </text>
+            <text x="64" y="157">
+              −
+            </text>
+            {[0, 1, 2].map((i) => (
+              <g key={i} stroke="var(--accent)" opacity=".5">
+                {v.parallel ? (
+                  <>
+                    <path d={`M209 ${124 + i * 14}h22`} />
+                    <path d={`M389 ${124 + i * 14}h22`} />
+                  </>
+                ) : (
+                  <>
+                    <path d={`M${238 + i * 20} 69v22`} />
+                    <path d={`M${368 + i * 20} 69v22`} />
+                  </>
+                )}
+              </g>
+            ))}
+            {v.parallel &&
+              [220, 400].flatMap((x) =>
+                [80, 205].map((y) => (
+                  <circle key={`${x}-${y}`} cx={x} cy={y} r="3.5" fill="var(--text)" />
+                )),
+              )}
+            <circle cx="140" cy="205" r="3" fill="var(--text)" />
+            <circle cx="205" cy="205" r="3" fill="var(--text)" />
+          </>
+        )}
+        {lab.model === 'bridge' && (
+          <>
+            {[
+              [210, 82, -28],
+              [390, 82, 28],
+              [210, 177, 28],
+              [390, 177, -28],
+            ].map(([x, y, a], i) => (
+              <g key={i} transform={`translate(${x} ${y}) rotate(${a})`}>
+                <rect x="-25" y="-9" width="50" height="18" className="bench-solid" />
+                {[-12, 0, 12].map((b) => (
+                  <path key={b} d={`M${b} -6V6`} stroke="var(--accent)" opacity=".5" />
+                ))}
+              </g>
+            ))}
+            {[
+              [300, 35],
+              [120, 130],
+              [300, 225],
+              [480, 130],
+            ].map(([x, y]) => (
+              <circle key={`${x}-${y}`} cx={x} cy={y} r="4" fill="var(--text)" />
+            ))}
+            <path d="M278 150H322" stroke="var(--line-strong)" />
+          </>
+        )}
+        {lab.model === 'chromatography' && (
+          <>
+            {[180, 300, 420].map((x) => (
+              <g key={x}>
+                <path d={`M${x} 30V210`} stroke="var(--line-strong)" strokeDasharray="2 7" />
+                <path d={`M${x - 5} 210h10`} className="bench-wire" />
+              </g>
+            ))}
+            {Array.from({ length: 18 }, (_, i) => (
+              <path
+                key={i}
+                d={`M114 ${35 + i * 10}h${i % 5 ? 6 : 12}`}
+                stroke="var(--muted)"
+                opacity=".5"
+              />
+            ))}
+          </>
+        )}
+        {(lab.model === 'salinometer' || lab.model === 'salinometer-b') &&
+          [0, 1].map((i) => (
+            <g key={i}>
+              <path
+                d={`M${100 + i * 290} 42V208M${225 + i * 290} 42V208`}
+                stroke="var(--accent)"
+                opacity=".15"
+                strokeWidth="3"
+              />
+              {Array.from({ length: 12 }, (_, j) => (
+                <path
+                  key={j}
+                  d={`M${155 + i * 290} ${70 + data[i] * 8 - 121 + j * 8}h${j % 3 ? 6 : 12}`}
+                  stroke="var(--accent)"
+                  strokeWidth=".8"
+                />
+              ))}
+              <path
+                d={`M${98 + i * 290} 70Q${163 + i * 290} 76 ${227 + i * 290} 70`}
+                fill="none"
+                stroke="var(--accent)"
+                opacity=".5"
+              />
+            </g>
+          ))}
+        {lab.model === 'curd' && (
+          <>
+            <rect x="120" y="60" width="180" height="155" fill={`url(#${artId}-glass)`} />
+            {Array.from({ length: 7 }, (_, i) => (
+              <path key={i} d={`M125 ${111 + i * 14}h${i % 2 ? 9 : 17}`} stroke="var(--muted)" />
+            ))}
+            {Array.from({ length: 8 }, (_, i) => (
+              <path
+                key={i}
+                d={`M${380 + i * 18} 94L${398 + i * 13} 146`}
+                stroke="var(--muted)"
+                opacity=".3"
+              />
+            ))}
+            <path
+              d="M405 110H496M410 125H490M422 150V169M449 150V174M476 150V169"
+              stroke="var(--accent)"
+              opacity=".5"
+            />
+          </>
+        )}
+        {lab.model === 'bod' && (
+          <>
+            <rect x="225" y="45" width="150" height="175" fill={`url(#${artId}-glass)`} />
+            {Array.from({ length: 14 }, (_, i) => (
+              <path key={i} d={`M${229 + i * 10} 33V46`} stroke="var(--accent)" opacity=".4" />
+            ))}
+            <path d="M235 55V204M365 55V204" stroke="var(--accent)" opacity=".2" strokeWidth="3" />
+            <path d="M377 110H431V82H462" className="bench-dashed" />
+            <text x="468" y="86">
+              Sealed sample
+            </text>
+            <path d="M230 70Q300 77 370 70" fill="none" stroke="var(--accent)" opacity=".4" />
+          </>
+        )}
+        {lab.model === 'absorption' && (
+          <>
+            {Array.from({ length: 10 }, (_, i) => (
+              <g key={i} stroke="var(--accent)" opacity=".18">
+                <path d={`M${70 + i * Math.sqrt(v.area) * 1.1} 50v${Math.sqrt(v.area) * 11}`} />
+                <path d={`M70 ${50 + i * Math.sqrt(v.area) * 1.1}h${Math.sqrt(v.area) * 11}`} />
+              </g>
+            ))}
+            <path d="M360 226v7h18v-7M476 226v7h18v-7" className="bench-wire" />
+          </>
+        )}
+      </g>
     </svg>
   );
 }
@@ -322,37 +510,43 @@ function ResponsePlot({
           </select>
         </label>
       )}
-      <svg viewBox="0 0 600 260" role="img" aria-label={`${plot.yLabel} against ${plot.xLabel}`}>
-        <text x="75" y="24">
-          {plot.yLabel}
-        </text>
-        <path d="M75 40V200H545" className="bench-wire" />
-        {[0, 0.5, 1].map((t) => (
-          <g key={t}>
-            <text x="67" y={204 - t * 150} textAnchor="end">
-              {number(minY + (maxY - minY) * t)}
-            </text>
-            <path d={`M75 ${200 - t * 150}H535`} className="bench-dashed" />
-            <text x={75 + t * 460} y="222" textAnchor="middle">
-              {number(minX + (maxX - minX) * t)}
-            </text>
-          </g>
-        ))}
-        <path
-          d={plot.points.map((p, i) => `${i ? 'L' : 'M'}${x(p.x)},${y(p.y)}`).join(' ')}
-          className="bench-ray"
-        />
-        <circle
-          cx={x(plot.current.x)}
-          cy={y(plot.current.y)}
-          r="6"
-          fill="var(--lesson-pink)"
-          stroke="var(--text)"
-        />
-        <text x="305" y="250" textAnchor="middle">
-          {plot.xLabel}
-        </text>
-      </svg>
+      <DiagramViewer label={`${plot.yLabel} against ${plot.xLabel}`}>
+        <svg viewBox="0 0 600 260" role="img" aria-label={`${plot.yLabel} against ${plot.xLabel}`}>
+          <text x="75" y="24">
+            {plot.yLabel}
+          </text>
+          <path d="M75 40V200H545" className="bench-wire" />
+          {[0, 0.5, 1].map((t) => (
+            <g key={t}>
+              <text x="67" y={204 - t * 150} textAnchor="end">
+                {number(minY + (maxY - minY) * t)}
+              </text>
+              <path d={`M75 ${200 - t * 150}H535`} className="bench-dashed" />
+              <text x={75 + t * 460} y="222" textAnchor="middle">
+                {number(minX + (maxX - minX) * t)}
+              </text>
+            </g>
+          ))}
+          <path
+            d={plot.points.map((p, i) => `${i ? 'L' : 'M'}${x(p.x)},${y(p.y)}`).join(' ')}
+            className="bench-ray"
+          />
+          <circle
+            cx={x(plot.current.x)}
+            cy={y(plot.current.y)}
+            r="6"
+            fill="var(--lesson-pink)"
+            stroke="var(--text)"
+          />
+          <text x="305" y="250" textAnchor="middle">
+            {plot.xLabel}
+          </text>
+        </svg>
+      </DiagramViewer>
+      <p className="archive-plot-reading">
+        Current point: {plot.xLabel} = {number(plot.current.x)}; {plot.yLabel} ={' '}
+        {number(plot.current.y)}.
+      </p>
       <small>
         Model prediction curve; the dot marks the current setting. Record your own trials below.
         {(lab.model === 'salinometer' || lab.model === 'salinometer-b') &&
@@ -595,7 +789,19 @@ function LabStation({ lab, studentId }: { lab: LabActivity; studentId: string })
         </div>
         <div className="archive-instrument">
           <p className="eyebrow">02 / OBSERVE · SYNTHETIC READINGS</p>
-          <BenchDiagram lab={lab} values={values} data={result.diagram} />
+          <DiagramViewer label={lab.title + ' apparatus'}>
+            <BenchDiagram lab={lab} values={values} data={result.diagram} />
+          </DiagramViewer>
+          <dl className="model-reading-guide">
+            <div>
+              <dt>Apparatus and purpose</dt>
+              <dd>{lab.summary}</dd>
+            </div>
+            <div>
+              <dt>Measure and explain</dt>
+              <dd>{lab.question}</dd>
+            </div>
+          </dl>
           <div className="archive-readings" aria-live="polite">
             {result.readings.map((r) => (
               <div key={r.label}>

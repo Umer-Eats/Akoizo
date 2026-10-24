@@ -4,6 +4,7 @@ import { BookOpen, Check, ChevronLeft, ChevronRight, FlaskConical, RotateCcw } f
 import type { EventLessons, Lesson, LessonSim } from '@/lib/lessons';
 import type { WorkRecord } from '@/lib/domain';
 import { calculateModel, modelControls, modelDefaults } from '@/lib/lesson-models';
+import { modelGuides } from '@/lib/lesson-model-guides';
 import {
   lessonStorageKey,
   practiceComplete,
@@ -101,6 +102,20 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
         values={values}
         setValues={setValues}
       />
+      <dl className="model-reading-guide">
+        <div>
+          <dt>Read the diagram</dt>
+          <dd>{modelGuides[sim.model].observe}</dd>
+        </div>
+        <div>
+          <dt>Design a comparison</dt>
+          <dd>{modelGuides[sim.model].compare}</dd>
+        </div>
+        <div>
+          <dt>Limits of this model</dt>
+          <dd>{modelGuides[sim.model].limit}</dd>
+        </div>
+      </dl>
       <p className="lab-equation">{result.equation}</p>
       <p className="lab-assumptions">
         <strong>What the model means:</strong> {result.interpretation}

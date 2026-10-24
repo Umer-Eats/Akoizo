@@ -56,6 +56,16 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
   const [order] = useState(() => stableShuffle(activity.items, lessonId));
   const [placed, setPlaced] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
+  const [dragged, setDragged] = useState<number | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [over, setOver] = useState<number | null>(null);
+  const place = (item: number, bin: number) => {
+    setPlaced((current) => ({ ...current, [item]: bin }));
+    setChecked(false);
+    setSelected(null);
+    setDragged(null);
+    setOver(null);
+  };
   const complete = Object.keys(placed).length === order.length;
   const right = order.filter(([, bin], i) => placed[i] === bin).length;
   return (
@@ -63,14 +73,69 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
       <p className="eyebrow">CLASSIFY THE EVIDENCE</p>
       <h4>{activity.title}</h4>
       <p className="tl-quiet">
-        Choose a category for every card, then check. Wrong cards stay open so you can revise.
+        Drag a card into a category, or select a card and then a category. You can also use the
+        category buttons on each card. Check when every card is placed.
       </p>
+      <div className="la-drop-bins" aria-label="Classification drop zones">
+        {activity.bins.map((bin, b) => (
+          <button
+            key={bin}
+            type="button"
+            className="la-drop-bin"
+            data-over={over === b}
+            aria-label={`Place selected card in ${bin}`}
+            aria-disabled={selected === null && dragged === null}
+            onDragOver={(e) => {
+              if (dragged !== null) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                setOver(b);
+              }
+            }}
+            onDragLeave={() => setOver(null)}
+            onDrop={(e) => {
+              e.preventDefault();
+              if (dragged !== null) place(dragged, b);
+            }}
+            onClick={() => {
+              if (selected !== null) place(selected, b);
+            }}
+          >
+            <strong>{bin}</strong>
+            <span>{order.filter((_, i) => placed[i] === b).length} cards placed</span>
+            {order.map(([text], i) => (placed[i] === b ? <small key={text}>{text}</small> : null))}
+          </button>
+        ))}
+      </div>
       <ul className="la-sort">
         {order.map(([text], i) => {
           const state = !checked ? undefined : placed[i] === order[i][1] ? 'right' : 'wrong';
           return (
-            <li key={text} data-state={state}>
+            <li
+              key={text}
+              data-state={state}
+              data-dragging={dragged === i}
+              draggable={!(checked && state === 'right')}
+              onDragStart={(e) => {
+                e.dataTransfer.setData('text/plain', text);
+                e.dataTransfer.effectAllowed = 'move';
+                setDragged(i);
+              }}
+              onDragEnd={() => {
+                setDragged(null);
+                setOver(null);
+              }}
+            >
               <span>{text}</span>
+              <button
+                type="button"
+                className="la-chip"
+                aria-pressed={selected === i}
+                disabled={checked && state === 'right'}
+                onClick={() => setSelected(selected === i ? null : i)}
+              >
+                {selected === i ? 'Selected — choose a category' : 'Select card to place'}
+              </button>
               <div role="group" aria-label={`Category for: ${text}`}>
                 {activity.bins.map((bin, b) => (
                   <button
@@ -80,8 +145,7 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
                     aria-pressed={placed[i] === b}
                     disabled={checked && state === 'right'}
                     onClick={() => {
-                      setPlaced((current) => ({ ...current, [i]: b }));
-                      setChecked(false);
+                      place(i, b);
                     }}
                   >
                     {bin}
@@ -112,6 +176,9 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
           onClick={() => {
             setPlaced({});
             setChecked(false);
+            setSelected(null);
+            setDragged(null);
+            setOver(null);
           }}
         >
           <RotateCcw size={15} aria-hidden="true" /> Start over
@@ -175,13 +242,16 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
   const sequence = solutionSequence(lesson);
   const [order, setOrder] = useState<string[]>(() => sequence?.scrambled ?? []);
   const [checked, setChecked] = useState(false);
+  const [dragged, setDragged] = useState<number | null>(null);
+  const [over, setOver] = useState<number | null>(null);
   if (!sequence) return null;
   const solved = order.every((step, i) => step === sequence.answer[i]);
   const move = (from: number, to: number) => {
     setChecked(false);
     setOrder((current) => {
       const next = [...current];
-      [next[from], next[to]] = [next[to], next[from]];
+      const [step] = next.splice(from, 1);
+      next.splice(to, 0, step);
       return next;
     });
   };
@@ -190,10 +260,40 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
       <p className="eyebrow">REBUILD THE REASONING</p>
       <h4>Put the worked-example steps in a defensible order</h4>
       <p className="tl-quiet">{lesson.workedExample.problem}</p>
+      <p className="tl-quiet">
+        Drag a step onto another position, or use its up and down buttons. Follow the dependencies
+        between steps.
+      </p>
       <ol className="la-order">
         {order.map((step, i) => (
           <li
             key={step}
+            draggable
+            data-dragging={dragged === i}
+            data-over={over === i}
+            onDragStart={(e) => {
+              e.dataTransfer.setData('text/plain', step);
+              e.dataTransfer.effectAllowed = 'move';
+              setDragged(i);
+            }}
+            onDragOver={(e) => {
+              if (dragged !== null) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                setOver(i);
+              }
+            }}
+            onDragLeave={() => setOver(null)}
+            onDragEnd={() => {
+              setDragged(null);
+              setOver(null);
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              if (dragged !== null) move(dragged, i);
+              setDragged(null);
+              setOver(null);
+            }}
             data-state={checked ? (step === sequence.answer[i] ? 'right' : 'wrong') : undefined}
           >
             <span>{step}</span>
@@ -238,6 +338,18 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
               'Some steps depend on a result that comes later. Move the marked steps.'
             ))}
         </span>
+        <button
+          type="button"
+          className="button button-small button-glass"
+          onClick={() => {
+            setOrder(sequence.scrambled);
+            setChecked(false);
+            setDragged(null);
+            setOver(null);
+          }}
+        >
+          Reset order
+        </button>
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import {
 import { experimentPresets } from '@/lib/lesson-experiments';
 import { chartControlKey, teachingMetric } from './lesson-atlas';
 import './lesson-experiments.css';
+import { DiagramViewer } from './diagram-viewer';
 
 export function ExperimentControls({
   model,
@@ -198,12 +199,7 @@ export function TrialComparison({ trials, model }: { trials: LabTrial[]; model: 
           ))}
         </select>
       </label>
-      <div
-        className="atlas-chart-scroll"
-        tabIndex={0}
-        role="region"
-        aria-label="Recorded trial chart"
-      >
+      <DiagramViewer label="Recorded trial chart">
         <svg
           viewBox="0 0 480 260"
           className="trial-chart"
@@ -239,7 +235,7 @@ export function TrialComparison({ trials, model }: { trials: LabTrial[]; model: 
             Recorded trial
           </text>
         </svg>
-      </div>
+      </DiagramViewer>
       <p>
         Compare the settings in your notebook to explain why the measured outputs differ. Recorded
         results use the same unit and axis.

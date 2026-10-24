@@ -11,6 +11,7 @@ import {
   type TopicLab,
 } from '@/lib/topic-lab-kit';
 import './lesson-extras.css';
+import { DiagramViewer } from './diagram-viewer';
 
 const fmt = (n: number | string, digits = 3) =>
   typeof n === 'string'
@@ -19,8 +20,22 @@ const fmt = (n: number | string, digits = 3) =>
       ? 'Undefined'
       : Number(n.toPrecision(digits)).toLocaleString('en-US', { maximumFractionDigits: 5 });
 
-function ShapeNode({ s }: { s: Shape }) {
+const sceneColors = {
+  ink: 'var(--text)',
+  accent: 'var(--accent)',
+  slot: 'var(--lesson-pink)',
+  warm: 'var(--tl-warm)',
+  cool: 'var(--tl-cool)',
+  green: 'var(--tl-green)',
+  gold: 'var(--tl-gold)',
+  muted: 'var(--muted)',
+};
+function ShapeNode({ s, sceneId }: { s: Shape; sceneId: string }) {
   const tone = `tl-${s.tone}`;
+  const material =
+    'fill' in s && s.fill
+      ? { fill: `url(#${sceneId}-${s.tone})`, stroke: sceneColors[s.tone], strokeWidth: 0.7 }
+      : undefined;
   switch (s.k) {
     case 'line':
       return (
@@ -43,7 +58,7 @@ function ShapeNode({ s }: { s: Shape }) {
           height={s.h}
           rx={s.rx}
           opacity={s.o}
-          style={s.color ? { fill: s.color } : undefined}
+          style={s.color ? { fill: s.color } : material}
           className={`${s.fill ? 'tl-fill' : 'tl-stroke'} ${tone}`}
         />
       );
@@ -53,6 +68,7 @@ function ShapeNode({ s }: { s: Shape }) {
           cx={s.x}
           cy={s.y}
           r={s.r}
+          style={material}
           opacity={s.o}
           className={`${s.fill ? 'tl-fill' : 'tl-stroke'} ${tone}`}
         />
@@ -64,6 +80,7 @@ function ShapeNode({ s }: { s: Shape }) {
           cy={s.y}
           rx={s.rx}
           ry={s.ry}
+          style={material}
           opacity={s.o}
           className={`${s.fill ? 'tl-fill' : 'tl-stroke'} ${tone}`}
         />
@@ -72,6 +89,7 @@ function ShapeNode({ s }: { s: Shape }) {
       return (
         <path
           d={s.d}
+          style={material}
           opacity={s.o}
           strokeWidth={s.w}
           strokeDasharray={s.dash ? '6 5' : undefined}
@@ -89,11 +107,11 @@ function ShapeNode({ s }: { s: Shape }) {
 
 function Viewer({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="tl-viewer" role="region" aria-label={`${label} viewer`} tabIndex={0}>
+    <DiagramViewer label={label}>
       <svg className="tl-svg" viewBox="0 0 640 340" role="img" aria-label={label}>
         {children}
       </svg>
-    </div>
+    </DiagramViewer>
   );
 }
 
@@ -107,138 +125,150 @@ function PlotView({ plot }: { plot: LabPlot }) {
     .map((p) => `${p.label ?? 'point'} at ${fmt(p.x)}, ${fmt(p.y)}`)
     .join('; ');
   return (
-    <Viewer label={`${plot.title ?? `${yl} against ${xl}`}${summary ? `: ${summary}` : ''}`}>
+    <>
       {plot.title && (
-        <text x="610" y="22" textAnchor="end" className="tl-text tl-muted" fontSize="12">
-          {plot.title}
-        </text>
+        <p className="tl-plot-heading">
+          <strong>{plot.title}</strong>
+        </p>
       )}
-      {ticks.map((t) => (
-        <g key={t}>
-          <line x1="74" x2="610" y1={286 - t * 244} y2={286 - t * 244} className="tl-grid" />
-          <text
-            x="66"
-            y={290 - t * 244}
-            textAnchor="end"
-            className="tl-text tl-muted"
-            fontSize="11"
-          >
-            {fmt(y0 + t * (y1 - y0))}
-          </text>
-          <text
-            x={74 + t * 536}
-            y="304"
-            textAnchor="middle"
-            className="tl-text tl-muted"
-            fontSize="11"
-          >
-            {fmt(x0 + t * (x1 - x0))}
-          </text>
-        </g>
-      ))}
-      <path d="M74 42V286H610" className="tl-stroke tl-muted" strokeWidth="1.5" />
-      <text x="342" y="328" textAnchor="middle" className="tl-text tl-ink" fontSize="12">
-        {xl}
-      </text>
-      <text x="74" y="22" className="tl-text tl-ink" fontSize="12">
-        {yl}
-      </text>
-      {(plot.hlines ?? []).map((h) => (
-        <g key={`h${h.y}`}>
-          <line
-            x1="74"
-            x2="610"
-            y1={py(h.y)}
-            y2={py(h.y)}
-            className="tl-stroke tl-gold"
-            strokeDasharray="6 5"
-          />
-          {h.label && (
+      <Viewer label={`${plot.title ?? `${yl} against ${xl}`}${summary ? `: ${summary}` : ''}`}>
+        {ticks.map((t) => (
+          <g key={t}>
+            <line x1="74" x2="610" y1={286 - t * 244} y2={286 - t * 244} className="tl-grid" />
             <text
-              x="606"
-              y={py(h.y) - 5}
+              x="66"
+              y={290 - t * 244}
               textAnchor="end"
-              className="tl-text tl-gold"
+              className="tl-text tl-muted"
               fontSize="11"
             >
-              {h.label}
+              {fmt(y0 + t * (y1 - y0))}
             </text>
-          )}
-        </g>
-      ))}
-      {(plot.vlines ?? []).map((v) => (
-        <g key={`v${v.x}`}>
-          <line
-            x1={px(v.x)}
-            x2={px(v.x)}
-            y1="42"
-            y2="286"
-            className="tl-stroke tl-gold"
-            strokeDasharray="6 5"
-          />
-          {v.label && (
-            <text x={px(v.x) + 5} y="54" className="tl-text tl-gold" fontSize="11">
-              {v.label}
-            </text>
-          )}
-        </g>
-      ))}
-      {plot.curves.map((curve, n) => (
-        <path
-          key={n}
-          className={`tl-stroke tl-${curve.tone ?? (n ? 'cool' : 'accent')}`}
-          strokeWidth="2.75"
-          strokeDasharray={curve.dash ? '7 5' : undefined}
-          d={Array.from({ length: 161 }, (_, i) => {
-            const x = x0 + ((x1 - x0) * i) / 160;
-            return `${i ? 'L' : 'M'}${px(x).toFixed(1)},${py(curve.f(x)).toFixed(1)}`;
-          }).join('')}
-        />
-      ))}
-      {plot.curves.some((c) => c.label) && (
-        <g>
-          {plot.curves.map((curve, n) =>
-            curve.label ? (
-              <g key={n}>
-                <line
-                  x1="430"
-                  x2="456"
-                  y1={56 + n * 17}
-                  y2={56 + n * 17}
-                  strokeWidth="2.75"
-                  strokeDasharray={curve.dash ? '7 5' : undefined}
-                  className={`tl-stroke tl-${curve.tone ?? (n ? 'cool' : 'accent')}`}
-                />
-                <text x="462" y={60 + n * 17} className="tl-text tl-ink" fontSize="11">
-                  {curve.label}
-                </text>
-              </g>
-            ) : null,
-          )}
-        </g>
-      )}
-      {(plot.points ?? []).map((p, n) => (
-        <g key={n}>
-          <circle
-            cx={px(p.x)}
-            cy={py(p.y)}
-            r="7"
-            className={`tl-fill tl-${p.tone ?? 'slot'} tl-marker`}
-          />
-          {p.label && (
             <text
-              x={px(p.x) + (px(p.x) > 480 ? -11 : 11)}
-              y={py(p.y) - 10}
-              textAnchor={px(p.x) > 480 ? 'end' : 'start'}
-              className="tl-text tl-ink"
-              fontSize="12"
+              x={74 + t * 536}
+              y="304"
+              textAnchor="middle"
+              className="tl-text tl-muted"
+              fontSize="11"
             >
-              {p.label}
+              {fmt(x0 + t * (x1 - x0))}
             </text>
-          )}
-        </g>
-      ))}
-    </Viewer>
+          </g>
+        ))}
+        <path d="M74 42V286H610" className="tl-stroke tl-muted" strokeWidth="1.5" />
+        <text x="342" y="328" textAnchor="middle" className="tl-text tl-ink" fontSize="12">
+          {xl}
+        </text>
+        <text x="74" y="22" className="tl-text tl-ink" fontSize="12">
+          {yl}
+        </text>
+        {(plot.hlines ?? []).map((h) => (
+          <g key={`h${h.y}`}>
+            <line
+              x1="74"
+              x2="610"
+              y1={py(h.y)}
+              y2={py(h.y)}
+              className="tl-stroke tl-gold"
+              strokeDasharray="6 5"
+            />
+            {h.label && (
+              <text
+                x="606"
+                y={py(h.y) - 5}
+                textAnchor="end"
+                className="tl-text tl-gold"
+                fontSize="11"
+              >
+                {h.label}
+              </text>
+            )}
+          </g>
+        ))}
+        {(plot.vlines ?? []).map((v) => (
+          <g key={`v${v.x}`}>
+            <line
+              x1={px(v.x)}
+              x2={px(v.x)}
+              y1="42"
+              y2="286"
+              className="tl-stroke tl-gold"
+              strokeDasharray="6 5"
+            />
+            {v.label && (
+              <text x={px(v.x) + 5} y="54" className="tl-text tl-gold" fontSize="11">
+                {v.label}
+              </text>
+            )}
+          </g>
+        ))}
+        {plot.curves.map((curve, n) => (
+          <path
+            key={n}
+            className={`tl-stroke tl-${curve.tone ?? (n ? 'cool' : 'accent')}`}
+            strokeWidth="2.75"
+            strokeDasharray={curve.dash ? '7 5' : undefined}
+            d={Array.from({ length: 161 }, (_, i) => {
+              const x = x0 + ((x1 - x0) * i) / 160;
+              return `${i ? 'L' : 'M'}${px(x).toFixed(1)},${py(curve.f(x)).toFixed(1)}`;
+            }).join('')}
+          />
+        ))}
+        {(plot.points ?? []).map((p, n) => (
+          <g key={n}>
+            <circle
+              cx={px(p.x)}
+              cy={py(p.y)}
+              r="7"
+              className={`tl-fill tl-${p.tone ?? 'slot'} tl-marker`}
+            />
+            {p.label && (
+              <text
+                x={px(p.x) + (px(p.x) > 480 ? -11 : 11)}
+                y={py(p.y) - 10}
+                textAnchor={px(p.x) > 480 ? 'end' : 'start'}
+                className="tl-text tl-ink"
+                fontSize="12"
+              >
+                {p.label}
+              </text>
+            )}
+          </g>
+        ))}
+      </Viewer>
+      <div className="tl-plot-key" aria-label="Chart legend and readings">
+        {plot.curves.map((curve, i) => (
+          <span key={i}>
+            <svg width="28" height="12" aria-hidden="true">
+              <line
+                x1="0"
+                y1="6"
+                x2="28"
+                y2="6"
+                strokeWidth="3"
+                strokeDasharray={curve.dash ? '5 3' : undefined}
+                className={`tl-stroke tl-${curve.tone ?? (i ? 'cool' : 'accent')}`}
+              />
+            </svg>
+            {curve.label ?? `Model curve ${i + 1}`}
+          </span>
+        ))}
+      </div>
+      {!!plot.points?.length && (
+        <dl className="model-reading-guide">
+          {plot.points.map((point, i) => (
+            <div key={i}>
+              <dt>{point.label ?? `Selected point ${i + 1}`}</dt>
+              <dd>
+                {xl}: {fmt(point.x)}
+                <br />
+                {yl}: {fmt(point.y)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </>
   );
 }
 
@@ -265,12 +295,22 @@ function BarsView({ bars }: { bars: NonNullable<LabResult['bars']> }) {
 }
 
 export function LabFigure({ result, title }: { result: LabResult; title: string }) {
+  const sceneId = useId().replace(/:/g, '');
   return (
     <>
       {result.scene && (
         <Viewer label={result.sceneLabel ?? `${title} diagram`}>
+          <defs>
+            {Object.entries(sceneColors).map(([tone, color]) => (
+              <radialGradient key={tone} id={`${sceneId}-${tone}`} cx="32%" cy="25%" r="85%">
+                <stop stopColor={color} stopOpacity=".5" />
+                <stop offset=".55" stopColor={color} stopOpacity=".8" />
+                <stop offset="1" stopColor={color} />
+              </radialGradient>
+            ))}
+          </defs>
           {result.scene.map((s, i) => (
-            <ShapeNode key={i} s={s} />
+            <ShapeNode key={i} s={s} sceneId={sceneId} />
           ))}
         </Viewer>
       )}
@@ -307,6 +347,28 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
   const [guess, setGuess] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [trials, setTrials] = useState<Trial[]>([]);
+  const sweepControls = lab.controls.filter(
+    (c) => !c.options && !c.toggle && c.min !== undefined && c.max !== undefined,
+  );
+  const [sweepKey, setSweepKey] = useState(sweepControls[0]?.key ?? '');
+  const [sweeping, setSweeping] = useState(false);
+  const sweep = sweepControls.find((c) => c.key === sweepKey);
+  useEffect(() => {
+    if (!sweeping || !sweep || sweep.min === undefined || sweep.max === undefined) return;
+    if (values[sweep.key] >= sweep.max) {
+      setSweeping(false);
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      const max = sweep.max!;
+      const step = sweep.step ?? 1;
+      setValues((current) => ({
+        ...current,
+        [sweep.key]: Math.min(max, Number((current[sweep.key] + step).toPrecision(12))),
+      }));
+    }, 180);
+    return () => window.clearTimeout(timer);
+  }, [sweeping, sweep, values]);
   const result = runLab(lab, values);
   // Missions latch: once reached, a goal stays complete while the student keeps exploring.
   useEffect(() => {
@@ -315,8 +377,10 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
       .filter((i) => i >= 0 && !done.includes(i));
     if (reached.length) setDone((current) => [...current, ...reached]);
   }, [lab, result.o, values, done]);
-  const set = (key: string, value: number) =>
+  const set = (key: string, value: number) => {
+    setSweeping(false);
     setValues((current) => ({ ...current, [key]: value }));
+  };
   return (
     <section className="tl-lab" id={`topic-lab-${lab.id}`} aria-labelledby={`${uid}-title`}>
       <header>
@@ -324,6 +388,64 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
         <h4 id={`${uid}-title`}>{lab.title}</h4>
         <p>{lab.lead}</p>
       </header>
+      {sweep && (
+        <div className="tl-sweep">
+          <label>
+            Animate one variable
+            <select
+              aria-label="Variable to animate"
+              value={sweepKey}
+              onChange={(e) => {
+                setSweeping(false);
+                setSweepKey(e.target.value);
+              }}
+            >
+              {sweepControls.map((c) => (
+                <option key={c.key} value={c.key}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <p>
+            Watch {sweep.label.toLowerCase()} change from {sweep.min} to {sweep.max}{' '}
+            {sweep.unit ?? ''}. All other inputs stay fixed. This is a variable sweep, not elapsed
+            experimental time.
+          </p>
+          <div className="lesson-actions">
+            <button
+              type="button"
+              className="button button-small button-glass"
+              aria-pressed={sweeping}
+              onClick={() => {
+                if (sweeping) setSweeping(false);
+                else {
+                  setValues((current) => ({ ...current, [sweep.key]: sweep.min! }));
+                  setSweeping(true);
+                }
+              }}
+            >
+              {sweeping ? 'Pause animation' : 'Animate variable'}
+            </button>
+            <button
+              type="button"
+              className="button button-small button-glass"
+              disabled={sweeping || values[sweep.key] >= sweep.max!}
+              onClick={() =>
+                set(
+                  sweep.key,
+                  Math.min(
+                    sweep.max!,
+                    Number((values[sweep.key] + (sweep.step ?? 1)).toPrecision(12)),
+                  ),
+                )
+              }
+            >
+              Advance variable one step
+            </button>
+          </div>
+        </div>
+      )}
       <fieldset className="tl-predict">
         <legend>
           <Lightbulb size={15} aria-hidden="true" /> Predict before you test: {lab.predict.q}
@@ -474,6 +596,7 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
           type="button"
           className="button button-small button-glass"
           onClick={() => {
+            setSweeping(false);
             setValues(labDefaults(lab));
             setDone([]);
             setHints([]);

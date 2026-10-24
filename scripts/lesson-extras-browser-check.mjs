@@ -4,12 +4,13 @@
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
-import { eventExtras, topicLabs } from '../src/lib/extras/index.ts';
+import { eventExtras, topicLabs, extrasFor } from '../src/lib/extras/index.ts';
 import { phetUrl, solutionSequence, termRounds } from '../src/lib/lesson-extras.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const only = process.env.EVENTS?.split(',');
+const division = process.env.DIVISION || 'C';
 const shots = process.env.SHOTS === '1';
 const out = 'documents/qa/lesson-extras';
 await mkdir(out, { recursive: true });
@@ -39,7 +40,7 @@ const profile = {
   schoolName: 'Science Team',
   schoolCommunityName: 'Science Team',
   schoolCommunityId: 'ppchs',
-  division: 'C',
+  division,
 };
 const payload = Buffer.from(
   JSON.stringify({
@@ -112,16 +113,17 @@ try {
   await p.getByLabel('Email address', { exact: true }).fill('qa@example.test');
   await p.getByLabel('Password', { exact: true }).fill('qa-test-password');
   await p.locator('form').getByRole('button', { name: 'Log in', exact: true }).click();
-  await expect(p).toHaveURL(/dashboard\/student$/);
+  await p.waitForURL(/dashboard\/student$/, { timeout: 30000 });
   for (const event of eventExtras) {
     if (only && !only.includes(event.eventId)) continue;
-    const course = lessonsForEvent(event.eventId, 'C');
+    const course = lessonsForEvent(event.eventId, division);
+    if (!course) continue;
     await p.goto(`${base}/dashboard/student/events/${event.eventId}/lessons`);
     await expect(p.locator('.lessons-workspace')).toBeVisible();
     for (const [unitIndex, unit] of course.units.entries())
       for (const lessonId of unit.lessonIds) {
         const lesson = course.lessons.find((l) => l.id === lessonId);
-        const extras = event.lessons[lessonId] ?? {};
+        const extras = extrasFor(lessonId, lesson);
         await p.locator('.unit-button').nth(unitIndex).click();
         await p.locator('.lesson-button', { hasText: lesson.title }).first().click();
         await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);

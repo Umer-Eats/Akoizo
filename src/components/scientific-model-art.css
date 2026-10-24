@@ -1,0 +1,30 @@
+.scientific-model {
+  grid-column: 1 / -1;
+  --art-blue: #88baff;
+  --art-rose: #f3a0be;
+  --art-teal: #6bd5c3;
+}
+.scientific-model + .lab-controls {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+:root[data-theme='light'] .scientific-model {
+  --art-blue: #205ec4;
+  --art-rose: #aa385f;
+  --art-teal: #14756e;
+}
+.science-art {
+  background: var(--bg);
+}
+.scientific-model .science-art text {
+  font: 13px var(--font-body);
+  letter-spacing: 0.01em;
+}
+.science-art path,
+.science-art polyline {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.scientific-model .diagram-inspector-canvas {
+  min-width: 720px;
+}
