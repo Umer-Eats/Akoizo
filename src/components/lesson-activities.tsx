@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, type DragEvent, type KeyboardEvent, type MouseEvent } from 'react';
 import { ArrowDown, ArrowUp, Check, RotateCcw } from 'lucide-react';
 import { useLessonDrag } from './use-lesson-drag';
 import type { Lesson } from '@/lib/lessons';
@@ -53,6 +53,28 @@ export function InlineCheck({ check }: { check: QuickCheck }) {
   );
 }
 
+// Draggable items are not <button>s (a native drag cannot start on one), so they take the
+// button role and answer Enter/Space themselves.
+function pressable(onPress: () => void, disabled = false) {
+  return {
+    role: 'button',
+    tabIndex: disabled ? -1 : 0,
+    'aria-disabled': disabled || undefined,
+    onClick: (e: MouseEvent) => {
+      e.stopPropagation();
+      if (!disabled) onPress();
+    },
+    onKeyDown: (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (!disabled) onPress();
+    },
+  } as const;
+}
+
+const POOL = -1;
+
 export function SortBoard({ activity, lessonId }: { activity: SortActivity; lessonId: string }) {
   const startDrag = useLessonDrag();
   const [order] = useState(() => stableShuffle(activity.items, lessonId));
@@ -62,111 +84,127 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
   const [selected, setSelected] = useState<number | null>(null);
   const [over, setOver] = useState<number | null>(null);
   const place = (item: number, bin: number) => {
-    setPlaced((current) => ({ ...current, [item]: bin }));
+    setPlaced((current) => {
+      const next = { ...current };
+      if (bin === POOL) delete next[item];
+      else next[item] = bin;
+      return next;
+    });
     setChecked(false);
     setSelected(null);
     setDragged(null);
     setOver(null);
   };
-  const complete = Object.keys(placed).length === order.length;
+  const stateOf = (i: number) =>
+    !checked || placed[i] === undefined ? undefined : placed[i] === order[i][1] ? 'right' : 'wrong';
+  // Drop zones: each category, plus the pool of unplaced cards.
+  const dropZone = (target: number) => ({
+    'data-over': over === target,
+    onDragOver: (e: DragEvent) => {
+      if (dragged === null) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      setOver(target);
+    },
+    onDragLeave: (e: DragEvent) => {
+      if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOver(null);
+    },
+    onDrop: (e: DragEvent) => {
+      e.preventDefault();
+      if (dragged !== null) place(dragged, target);
+    },
+    onClick: () => {
+      if (selected !== null) place(selected, target);
+    },
+  });
+  const card = (i: number) => {
+    const [text] = order[i];
+    const state = stateOf(i);
+    const locked = state === 'right';
+    return (
+      <li
+        key={text}
+        className="la-sort-card"
+        data-state={state}
+        data-dragging={dragged === i}
+        aria-pressed={selected === i}
+        draggable={!locked}
+        onDragStart={(e) => {
+          if (!startDrag(e, text)) return;
+          setDragged(i);
+        }}
+        onDragEnd={() => {
+          setDragged(null);
+          setOver(null);
+        }}
+        {...pressable(() => setSelected(selected === i ? null : i), locked)}
+      >
+        <span>{text}</span>
+        {state && (
+          <span className="sr-only">
+            {state === 'right' ? ' (correct)' : ' (incorrect, move this card)'}
+          </span>
+        )}
+      </li>
+    );
+  };
+  const unplaced = order.map((_, i) => i).filter((i) => placed[i] === undefined);
+  const placedCount = order.length - unplaced.length;
   const right = order.filter(([, bin], i) => placed[i] === bin).length;
   return (
-    <section className="la-card" aria-label={activity.title}>
+    <section
+      className="la-card"
+      aria-label={activity.title}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') setSelected(null);
+      }}
+    >
       <p className="eyebrow">CLASSIFY THE EVIDENCE</p>
       <h4>{activity.title}</h4>
       <p className="tl-quiet">
-        Drag a card into a category, or select a card and then a category. You can also use the
-        category buttons on each card. Check when every card is placed.
+        Drag each card into a category, or select a card and then a category. Check when every card
+        is placed.
       </p>
-      <div className="la-drop-bins" aria-label="Classification drop zones">
-        {activity.bins.map((bin, b) => (
-          <button
-            key={bin}
-            type="button"
-            className="la-drop-bin"
-            data-over={over === b}
-            aria-label={`Place selected card in ${bin}`}
-            aria-disabled={selected === null && dragged === null}
-            onDragOver={(e) => {
-              if (dragged !== null) {
-                e.preventDefault();
-                e.dataTransfer.dropEffect = 'move';
-                setOver(b);
-              }
-            }}
-            onDragLeave={() => setOver(null)}
-            onDrop={(e) => {
-              e.preventDefault();
-              if (dragged !== null) place(dragged, b);
-            }}
-            onClick={() => {
-              if (selected !== null) place(selected, b);
-            }}
-          >
-            <strong>{bin}</strong>
-            <span>{order.filter((_, i) => placed[i] === b).length} cards placed</span>
-            {order.map(([text], i) => (placed[i] === b ? <small key={text}>{text}</small> : null))}
-          </button>
-        ))}
-      </div>
-      <ul className="la-sort">
-        {order.map(([text], i) => {
-          const state = !checked ? undefined : placed[i] === order[i][1] ? 'right' : 'wrong';
+      <div className="la-drop-bins" aria-label="Categories">
+        {activity.bins.map((bin, b) => {
+          const cards = order.map((_, i) => i).filter((i) => placed[i] === b);
           return (
-            <li
-              key={text}
-              data-state={state}
-              data-dragging={dragged === i}
-              draggable={!(checked && state === 'right')}
-              onDragStart={(e) => {
-                if (!startDrag(e, text)) return;
-                setDragged(i);
-              }}
-              onDragEnd={() => {
-                setDragged(null);
-                setOver(null);
-              }}
+            <div
+              key={bin}
+              className="la-drop-bin"
+              data-ready={selected !== null && placed[selected] !== b}
+              {...dropZone(b)}
             >
-              <span>{text}</span>
               <button
                 type="button"
-                className="la-chip"
-                aria-pressed={selected === i}
-                disabled={checked && state === 'right'}
-                onClick={() => setSelected(selected === i ? null : i)}
+                className="la-bin-title"
+                aria-disabled={selected === null}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (selected !== null) place(selected, b);
+                }}
               >
-                {selected === i ? 'Selected — choose a category' : 'Select card to place'}
+                {bin}
               </button>
-              <div role="group" aria-label={`Category for: ${text}`}>
-                {activity.bins.map((bin, b) => (
-                  <button
-                    key={bin}
-                    type="button"
-                    className="la-chip"
-                    aria-pressed={placed[i] === b}
-                    disabled={checked && state === 'right'}
-                    onClick={() => {
-                      place(i, b);
-                    }}
-                  >
-                    {bin}
-                  </button>
-                ))}
-              </div>
-              {state && (
-                <span className="la-mark">
-                  {state === 'right' ? 'Correct' : `Revise — not ${activity.bins[placed[i]]}`}
-                </span>
+              {cards.length > 0 && (
+                <ul className="la-bin-cards" aria-label={`Cards in ${bin}`}>
+                  {cards.map(card)}
+                </ul>
               )}
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
+      {unplaced.length > 0 && (
+        <ul className="la-sort" aria-label="Cards to place" {...dropZone(POOL)}>
+          {unplaced.map(card)}
+        </ul>
+      )}
       <div className="lesson-actions">
         <button
           type="button"
           className="button button-small button-glass"
-          disabled={!complete}
+          disabled={unplaced.length > 0}
           onClick={() => setChecked(true)}
         >
           Check classification
@@ -186,55 +224,165 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
         </button>
         <span aria-live="polite">
           {checked
-            ? `${right} of ${order.length} correct${right === order.length ? ' — complete.' : '. Revise the marked cards.'}`
-            : `${Object.keys(placed).length} of ${order.length} placed`}
+            ? `${right} of ${order.length} correct${right === order.length ? ' — complete.' : '. Move the marked cards.'}`
+            : `${placedCount} of ${order.length} placed`}
         </span>
       </div>
     </section>
   );
 }
 
+type MatchPick = { side: 'term' | 'def'; index: number };
+
+// Two side-by-side columns: pair a term with its definition by selecting one of each, or by
+// dragging a term onto a definition. Correct pairs lock in with a shared number.
 function TermMatch({ lesson }: { lesson: Lesson }) {
+  const startDrag = useLessonDrag();
   const rounds = termRounds(lesson);
-  const [picks, setPicks] = useState<Record<number, string>>({});
+  // Each definition is identified by the index of the term it belongs to.
+  const [definitions] = useState(() =>
+    stableShuffle(
+      rounds.map((_, i) => i),
+      `${lesson.id}:definitions`,
+    ),
+  );
+  const [matched, setMatched] = useState<Record<number, number>>({});
+  const [picked, setPicked] = useState<MatchPick | null>(null);
+  const [miss, setMiss] = useState<{ term: number; def: number } | null>(null);
+  const [misses, setMisses] = useState(0);
+  const [dragged, setDragged] = useState<number | null>(null);
+  const [over, setOver] = useState<number | null>(null);
   if (!rounds.length) return null;
-  const right = rounds.filter((r, i) => picks[i] === r.answer).length;
+  const termFor = (def: number) => {
+    const entry = Object.entries(matched).find(([, d]) => d === def);
+    return entry ? Number(entry[0]) : undefined;
+  };
+  const attempt = (term: number, def: number) => {
+    setPicked(null);
+    setDragged(null);
+    setOver(null);
+    // Compare definitions by text so two terms that share a definition both count.
+    if (rounds[term].answer === rounds[def].answer) {
+      setMatched((current) => ({ ...current, [term]: def }));
+      setMiss(null);
+    } else {
+      setMiss({ term, def });
+      setMisses((n) => n + 1);
+    }
+  };
+  const choose = (side: MatchPick['side'], index: number) => {
+    setMiss(null);
+    if (picked && picked.side !== side) {
+      if (side === 'term') attempt(index, picked.index);
+      else attempt(picked.index, index);
+      return;
+    }
+    setPicked(picked?.side === side && picked.index === index ? null : { side, index });
+  };
+  const done = Object.keys(matched).length;
   return (
-    <section className="la-card" aria-label="Match key terms">
+    <section
+      className="la-card"
+      aria-label="Match key terms"
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') setPicked(null);
+      }}
+    >
       <p className="eyebrow">VOCABULARY IN CONTEXT</p>
       <h4>Match each term to its meaning</h4>
-      <ol className="la-terms">
-        {rounds.map((round, i) => (
-          <li key={round.term}>
-            <strong>{round.term}</strong>
-            <div className="tl-options">
-              {round.options.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  className="tl-option"
-                  aria-pressed={picks[i] === option}
-                  data-state={
-                    picks[i] === undefined
-                      ? undefined
-                      : option === round.answer
-                        ? 'right'
-                        : picks[i] === option
-                          ? 'wrong'
-                          : undefined
-                  }
-                  onClick={() => setPicks((current) => ({ ...current, [i]: option }))}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p aria-live="polite" className="tl-quiet">
-        {Object.keys(picks).length} of {rounds.length} answered · {right} correct
+      <p className="tl-quiet">
+        Select a term, then its definition, or drag a term onto its definition.
       </p>
+      <div className="la-match">
+        <p className="la-match-head" aria-hidden="true">
+          Term
+        </p>
+        <p className="la-match-head" aria-hidden="true">
+          Definition
+        </p>
+        <ol className="la-terms" aria-label="Terms">
+          {rounds.map((round, i) => {
+            const isMatched = matched[i] !== undefined;
+            return (
+              <li
+                key={round.term}
+                className="la-match-item"
+                data-state={isMatched ? 'right' : miss?.term === i ? 'wrong' : undefined}
+                data-dragging={dragged === i}
+                aria-pressed={picked?.side === 'term' && picked.index === i}
+                draggable={!isMatched}
+                onDragStart={(e) => {
+                  if (!startDrag(e, round.term)) return;
+                  setMiss(null);
+                  setDragged(i);
+                }}
+                onDragEnd={() => {
+                  setDragged(null);
+                  setOver(null);
+                }}
+                {...pressable(() => choose('term', i), isMatched)}
+              >
+                {isMatched && <span className="la-match-num">{i + 1}</span>}
+                <span>{round.term}</span>
+              </li>
+            );
+          })}
+        </ol>
+        <ol className="la-defs" aria-label="Definitions">
+          {definitions.map((d) => {
+            const term = termFor(d);
+            const isMatched = term !== undefined;
+            return (
+              <li
+                key={d}
+                className="la-match-item"
+                data-state={isMatched ? 'right' : miss?.def === d ? 'wrong' : undefined}
+                data-over={over === d}
+                aria-pressed={picked?.side === 'def' && picked.index === d}
+                onDragOver={(e) => {
+                  if (dragged === null || isMatched) return;
+                  e.preventDefault();
+                  e.dataTransfer.dropEffect = 'move';
+                  setOver(d);
+                }}
+                onDragLeave={() => setOver(null)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  if (dragged !== null && !isMatched) attempt(dragged, d);
+                }}
+                {...pressable(() => choose('def', d), isMatched)}
+              >
+                {isMatched && <span className="la-match-num">{term + 1}</span>}
+                <span>{rounds[d].answer}</span>
+                {isMatched && <span className="sr-only"> (matched to {rounds[term].term})</span>}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+      <div className="lesson-actions">
+        <button
+          type="button"
+          className="button button-small button-glass"
+          onClick={() => {
+            setMatched({});
+            setPicked(null);
+            setMiss(null);
+            setMisses(0);
+            setDragged(null);
+            setOver(null);
+          }}
+        >
+          <RotateCcw size={15} aria-hidden="true" /> Start over
+        </button>
+        <span aria-live="polite">
+          {miss
+            ? 'Not a match. Try another pairing.'
+            : done === rounds.length
+              ? `All ${rounds.length} matched${misses ? ` with ${misses} ${misses === 1 ? 'miss' : 'misses'}` : ' on the first try'}.`
+              : `${done} of ${rounds.length} matched`}
+        </span>
+      </div>
     </section>
   );
 }

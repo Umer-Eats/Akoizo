@@ -1,0 +1,299 @@
+/* Lesson motion. Every rule is scoped to :root:not([data-motion='off']), so it all switches
+   off with the app's motion setting, which defaults to the system reduced-motion preference. */
+
+@keyframes lm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lm-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lm-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes lm-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+@keyframes lm-glow {
+  from {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb, var(--tl-green) 45%, transparent),
+      inset 3px 0 var(--tl-green);
+  }
+  to {
+    box-shadow:
+      0 0 0 10px transparent,
+      inset 3px 0 var(--tl-green);
+  }
+}
+@keyframes lm-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lm-breathe {
+  50% {
+    border-color: color-mix(in srgb, var(--lesson-pink) 45%, var(--line-strong));
+  }
+}
+
+/* Opening a lesson: the lesson rises in and its header pieces follow in sequence. */
+:root:not([data-motion='off']) .lessons-workspace .lesson-detail {
+  animation: lm-rise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-title-block > * {
+  animation: lm-rise 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-title-block > :nth-child(2) {
+  animation-delay: 60ms;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-title-block > :nth-child(3) {
+  animation-delay: 120ms;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-title-block > :nth-child(4) {
+  animation-delay: 180ms;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-objectives li {
+  animation: lm-slide-in 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 220ms;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-objectives li:nth-child(2) {
+  animation-delay: 280ms;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-objectives li:nth-child(3) {
+  animation-delay: 340ms;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-objectives li:nth-child(n + 4) {
+  animation-delay: 400ms;
+}
+
+/* Reading blocks and activity cards ease in as they scroll into view. */
+@supports (animation-timeline: view()) {
+  :root:not([data-motion='off'])
+    .lessons-workspace
+    :is(
+      .lesson-section,
+      .lesson-example,
+      .lesson-terms,
+      .la-card,
+      .la-check,
+      .tl-lab,
+      .lesson-sim,
+      .lesson-quiz
+    ) {
+    animation: lm-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+
+/* Course navigation. */
+:root:not([data-motion='off']) .lessons-workspace :is(.unit-button, .lesson-button) {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-button > svg:last-child {
+  transition: transform 180ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-index svg {
+  animation: lm-pop 320ms ease-out both;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-jumps a {
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-disclosure summary {
+  transition: color 160ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-disclosure[open] > :not(summary) {
+  animation: lm-rise 280ms ease-out both;
+}
+
+/* Ako's reading guide. */
+:root:not([data-motion='off']) .lessons-workspace .lesson-ako-guide {
+  animation: lm-rise 260ms ease-out both;
+}
+:root:not([data-motion='off']) .lessons-workspace .lesson-ako-sentence {
+  transition:
+    background-color 260ms ease,
+    color 260ms ease;
+}
+
+/* Classification and matching activities. */
+:root:not([data-motion='off']) .lessons-workspace :is(.la-sort-card, .la-match-item) {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-sort-card {
+  /* A card that moves to a new place re-enters with a small pop. */
+  animation: lm-pop 260ms ease-out both;
+}
+:root:not([data-motion='off'])
+  .lessons-workspace
+  :is(.la-sort-card, .la-match-item)[aria-pressed='true'] {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 16px #0003,
+    inset 3px 0 var(--lesson-pink);
+}
+:root:not([data-motion='off'])
+  .lessons-workspace
+  :is(.la-sort-card, .la-match-item)[data-dragging='true'] {
+  transform: scale(0.97);
+}
+:root:not([data-motion='off'])
+  .lessons-workspace
+  :is(.la-sort-card, .la-match-item, .la-order li, .tl-option)[data-state='wrong'] {
+  animation: lm-shake 360ms ease-in-out;
+}
+:root:not([data-motion='off'])
+  .lessons-workspace
+  :is(.la-sort-card, .la-match-item, .tl-option)[data-state='right'] {
+  animation: lm-glow 600ms ease-out;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-match-num {
+  animation: lm-pop 320ms ease-out both;
+}
+:root:not([data-motion='off']) .lessons-workspace :is(.la-drop-bin, .la-sort) {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    outline-color 180ms ease,
+    transform 200ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-drop-bin[data-ready='true'] {
+  animation: lm-breathe 1.6s ease-in-out infinite;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-drop-bin[data-over='true'] {
+  transform: scale(1.015);
+  animation: none;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-order li {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-order li[data-dragging='true'] {
+  transform: scale(0.98);
+}
+:root:not([data-motion='off']) .lessons-workspace .la-move {
+  transition:
+    border-color 160ms ease,
+    transform 120ms ease;
+}
+:root:not([data-motion='off']) .lessons-workspace .la-move:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+/* Answer choices, feedback and practice slides. */
+:root:not([data-motion='off']) .lessons-workspace :is(.tl-option, .sim-option, .practice-option) {
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+:root:not([data-motion='off'])
+  .lessons-workspace
+  :is(.tl-feedback, .sim-feedback, .quiz-review, .quiz-result, .tl-complete, .lesson-submitted) {
+  animation: lm-rise 300ms ease-out both;
+}
+:root:not([data-motion='off']) .lessons-workspace .quiz-question {
+  animation: lm-slide-in 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+:root:not([data-motion='off'])
+  .lessons-workspace
+  .tl-missions
+  li[data-done='true']
+  .tl-mission-mark {
+  animation: lm-pop 320ms ease-out both;
+}
+
+/* Hover lift only where a pointer can hover. */
+@media (hover: hover) {
+  :root:not([data-motion='off']) .lessons-workspace :is(.unit-button, .lesson-button):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px #0002;
+  }
+  :root:not([data-motion='off']) .lessons-workspace .unit-button[aria-pressed='true']:hover {
+    box-shadow:
+      0 6px 18px #0002,
+      inset 3px 0 var(--lesson-pink);
+  }
+  :root:not([data-motion='off']) .lessons-workspace .lesson-button:hover > svg:last-child {
+    transform: translateX(4px);
+  }
+  :root:not([data-motion='off']) .lessons-workspace .lesson-jumps a:hover {
+    transform: translateY(-2px);
+  }
+  :root:not([data-motion='off'])
+    .lessons-workspace
+    :is(.la-sort-card, .la-match-item):hover:not(
+      [aria-disabled='true'],
+      [aria-pressed='true'],
+      [data-state]
+    ) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px #0002;
+  }
+  :root:not([data-motion='off'])
+    .lessons-workspace
+    :is(.tl-option, .sim-option, .practice-option):hover:not(:disabled) {
+    transform: translateX(3px);
+  }
+}

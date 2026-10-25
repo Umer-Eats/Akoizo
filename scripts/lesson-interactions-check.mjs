@@ -4,7 +4,7 @@ import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { topicLabs, extrasFor } from '../src/lib/extras/index.ts';
-import { solutionSequence } from '../src/lib/lesson-extras.ts';
+import { solutionSequence, termRounds } from '../src/lib/lesson-extras.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
@@ -124,20 +124,66 @@ try {
   await p.goto(`${base}/dashboard/student/events/${eventId}/lessons`);
   await p.locator('.unit-button').nth(unitIndex).click();
   await p.locator('.lesson-button', { hasText: lesson.title }).first().click();
-  const sort = p.locator('.la-card').filter({ has: p.locator('.la-sort') });
-  const card = sort.locator('.la-sort > li').first();
+  const sort = p.locator('.la-card').filter({ has: p.locator('.la-drop-bins') });
+  const card = sort.locator('.la-sort > .la-sort-card').first();
   const cardText = await card.locator(':scope > span').first().innerText();
   await card.dragTo(sort.locator('.la-drop-bin').first());
   await expect(sort.locator('.la-drop-bin').first()).toContainText(cardText);
   // Keyboard/touch fallback can move an already placed card.
-  await card.getByRole('button', { name: 'Select card to place' }).focus();
+  await sort
+    .locator('.la-drop-bin')
+    .first()
+    .locator('.la-sort-card', { hasText: cardText })
+    .focus();
   await p.keyboard.press('Enter');
-  await sort.locator('.la-drop-bin').nth(1).focus();
+  await sort.locator('.la-bin-title').nth(1).focus();
   await p.keyboard.press('Enter');
   await expect(sort.locator('.la-drop-bin').nth(1)).toContainText(cardText);
   await expect(sort.locator('.la-drop-bin').first()).not.toContainText(cardText);
   await sort.getByRole('button', { name: 'Start over' }).click();
-  await expect(sort.locator('.la-drop-bin small')).toHaveCount(0);
+  await expect(sort.locator('.la-drop-bin .la-sort-card')).toHaveCount(0);
+  // Sort cards carry only their text.
+  await expect(sort.locator('.la-sort-card button')).toHaveCount(0);
+  // The reading uses the full width of the lesson panel.
+  const [readingWidth, panelWidth] = await p.evaluate(() => {
+    const detail = document.querySelector('.lesson-detail');
+    const style = getComputedStyle(detail);
+    return [
+      document.querySelector('.lesson-reading').getBoundingClientRect().width,
+      detail.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight),
+    ];
+  });
+  assert(Math.abs(readingWidth - panelWidth) < 2, `reading ${readingWidth}px of ${panelWidth}px`);
+  // Vocabulary: term and definition columns side by side. A wrong pair is flagged; right pairs lock.
+  const match = p.locator('.la-card').filter({ has: p.locator('.la-match') });
+  const rounds = termRounds(lesson);
+  const terms = match.locator('.la-terms > li');
+  const openDef = (i) =>
+    match
+      .locator('.la-defs > li:not([data-state="right"])')
+      .filter({ has: p.getByText(rounds[i].answer, { exact: true }) })
+      .first();
+  await expect(terms).toHaveCount(rounds.length);
+  await expect(match.locator('.la-defs > li')).toHaveCount(rounds.length);
+  const [termBox, defBox] = await Promise.all(
+    ['.la-terms', '.la-defs'].map((c) => match.locator(c).boundingBox()),
+  );
+  assert(defBox.x > termBox.x + termBox.width - 1, 'definitions sit beside the terms');
+  const wrong = rounds.findIndex((r) => r.answer !== rounds[0].answer);
+  await terms.first().click();
+  await openDef(wrong).click();
+  await expect(terms.first()).toHaveAttribute('data-state', 'wrong');
+  await terms.first().dragTo(openDef(0));
+  await expect(terms.first()).toHaveAttribute('data-state', 'right');
+  for (let i = 1; i < rounds.length; i++) {
+    await openDef(i).focus();
+    await p.keyboard.press('Enter');
+    await terms.nth(i).focus();
+    await p.keyboard.press('Enter');
+    await expect(terms.nth(i)).toHaveAttribute('data-state', 'right');
+  }
+  await expect(match.locator('.la-match-item[data-state="right"]')).toHaveCount(rounds.length * 2);
+  await expect(match).toContainText(`All ${rounds.length} matched with 1 miss.`);
   const steps = p.locator('.la-order > li');
   const initial = await steps.locator(':scope > span').allTextContents();
   await p.locator('.la-order').scrollIntoViewIfNeeded();
@@ -239,7 +285,11 @@ try {
       '0.24s',
     ),
   );
+  const lessonMotion = () =>
+    p.locator('.lesson-detail').evaluate((el) => getComputedStyle(el).animationName);
+  assert.equal(await lessonMotion(), 'lm-rise');
   await p.evaluate(() => (document.documentElement.dataset.motion = 'off'));
+  assert.equal(await lessonMotion(), 'none');
   assert.equal(await animatedShape.evaluate((el) => getComputedStyle(el).transitionDuration), '0s');
   await p.emulateMedia({ reducedMotion: 'reduce' });
   for (const theme of ['dark', 'light']) {
@@ -252,11 +302,12 @@ try {
       );
       await lab.screenshot({ path: `${out}/${division}-${theme}-${width}-lab.png` });
       await sort.screenshot({ path: `${out}/${division}-${theme}-${width}-sort.png` });
+      await match.screenshot({ path: `${out}/${division}-${theme}-${width}-match.png` });
     }
   }
   assert.deepEqual(errors, []);
   console.log(
-    `Division ${division}: drag, keyboard placement, reorder/reset, diagram zoom, walkthrough and lab animation verified in both themes at desktop and mobile widths.`,
+    `Division ${division}: full-width reading, vocabulary matching, lesson motion, drag, keyboard placement, reorder/reset, diagram zoom, walkthrough and lab animation verified in both themes at desktop and mobile widths.`,
   );
 } finally {
   await browser.close();

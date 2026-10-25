@@ -81,9 +81,6 @@
     var(--surface)
   );
 }
-.lessons-intro > p {
-  max-width: 78ch;
-}
 .lesson-slot-dot {
   width: 8px;
   height: 8px;
@@ -265,7 +262,7 @@
 .lesson-reading {
   display: grid;
   gap: 30px;
-  max-width: 82ch;
+  min-width: 0;
 }
 .lesson-section {
   display: grid;

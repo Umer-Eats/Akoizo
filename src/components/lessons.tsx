@@ -27,6 +27,7 @@ import { LessonActivities, InlineCheck } from './lesson-activities';
 import { TopicLabPreview, TopicLabView } from './topic-lab';
 import { PhetSim } from './phet-sim';
 import './lessons.css';
+import './lesson-motion.css';
 import { akoLessonLines, akoLessonPlan } from '@/lib/ako-lesson';
 import { askAkoAbout, setAkoStudy } from '@/lib/ako-study';
 import { useSettings } from './providers';

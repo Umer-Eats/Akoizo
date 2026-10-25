@@ -143,15 +143,18 @@ try {
         if (extras.sort) {
           sortsSeen++;
           const board = activities.locator('.la-card', { hasText: extras.sort.title });
-          await expect(board.locator('.la-sort > li')).toHaveCount(extras.sort.items.length);
-          for (const [text, bin] of extras.sort.items)
+          await expect(board.locator('.la-sort-card')).toHaveCount(extras.sort.items.length);
+          for (const [text, bin] of extras.sort.items) {
             await board
-              .locator('.la-sort > li', { hasText: text })
+              .locator('.la-sort > .la-sort-card')
+              .filter({ has: p.getByText(text, { exact: true }) })
               .first()
-              .getByRole('button', { name: extras.sort.bins[bin], exact: true })
               .click();
+            // Bins render in authored order.
+            await board.locator('.la-drop-bin').nth(bin).locator('.la-bin-title').click();
+          }
           await board.getByRole('button', { name: 'Check classification' }).click();
-          await expect(board.locator('.la-sort > li[data-state="right"]')).toHaveCount(
+          await expect(board.locator('.la-sort-card[data-state="right"]')).toHaveCount(
             extras.sort.items.length,
           );
         }

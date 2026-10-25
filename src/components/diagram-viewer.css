@@ -102,12 +102,12 @@
       opacity 240ms ease;
   }
   .process-focus,
-  .la-mark,
   .tl-feedback {
     animation: lesson-reveal 220ms ease-out;
   }
   .process-index,
-  .la-chip,
+  .la-sort-card,
+  .la-match-item,
   .la-drop-bin {
     transition:
       background-color 180ms ease,
@@ -129,10 +129,10 @@
   :is(
     .process-step-detail,
     .process-focus,
-    .la-mark,
     .tl-feedback,
     .process-index,
-    .la-chip,
+    .la-sort-card,
+    .la-match-item,
     .la-drop-bin
   ) {
   transition: none;
