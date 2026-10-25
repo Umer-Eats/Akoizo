@@ -149,6 +149,54 @@ try {
   assert.deepEqual(await steps.locator(':scope > span').allTextContents(), initial);
   await p.getByRole('button', { name: 'Move step 1 down', exact: true }).click();
   await expect(steps.nth(1).locator(':scope > span')).toHaveText(initial[0]);
+  // Drag feedback contains only the name, and edge scrolling continues while held still.
+  await card.scrollIntoViewIfNeeded();
+  await card.dispatchEvent('dragstart', {
+    dataTransfer: await p.evaluateHandle(() => new DataTransfer()),
+  });
+  await expect(p.locator('.lesson-drag-preview')).toHaveText(cardText);
+  await expect(p.locator('.lesson-drag-preview button')).toHaveCount(0);
+  const startY = await p.evaluate(() => window.scrollY);
+  await p.locator('body').dispatchEvent('dragover', { clientY: 1 });
+  await expect.poll(() => p.evaluate(() => window.scrollY)).toBeLessThan(startY - 40);
+  await card.dispatchEvent('dragend');
+  await expect(p.locator('.lesson-drag-preview')).toHaveCount(0);
+  const stoppedY = await p.evaluate(() => window.scrollY);
+  await p.waitForTimeout(100);
+  assert.equal(await p.evaluate(() => window.scrollY), stoppedY);
+
+  const quiz = p.locator('#lesson-practice');
+  const jump = quiz.getByLabel('Choose question');
+  await expect(quiz.locator('.quiz-question')).toHaveCount(1);
+  await expect(quiz.getByRole('button', { name: 'Previous question' })).toBeDisabled();
+  for (let i = 0; i < lesson.practice.length; i++) {
+    const question = lesson.practice[i];
+    await jump.selectOption(String(i));
+    if (question.type === 'mcq')
+      await quiz.getByRole('radio', { name: question.answer, exact: true }).check();
+    else await quiz.getByRole('textbox').fill(question.answer);
+  }
+  await expect(quiz.getByRole('button', { name: 'Next question' })).toBeDisabled();
+  await quiz.getByRole('button', { name: 'Previous question' }).click();
+  await expect(jump).toHaveValue(String(lesson.practice.length - 2));
+  await quiz.getByRole('button', { name: 'Next question' }).click();
+  await quiz.getByRole('button', { name: 'Check my answers' }).click();
+  for (let i = 0; i < lesson.practice.length; i++) {
+    await jump.selectOption(String(i));
+    await expect(quiz.locator('.quiz-review')).toContainText(lesson.practice[i].answer);
+    if (lesson.practice[i].type === 'short') {
+      await expect(quiz.getByRole('textbox')).toHaveValue(lesson.practice[i].answer);
+      await quiz.getByRole('checkbox').check();
+    }
+  }
+  await expect(quiz.getByRole('button', { name: 'Submit lesson', exact: true })).toBeEnabled();
+  await expect(quiz.locator('.quiz-result')).toContainText('Practice complete');
+  for (const width of [1440, 390]) {
+    await p.setViewportSize({ width, height: 1000 });
+    await quiz.screenshot({ path: `${out}/${division}-${width}-slides.png` });
+    assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  }
+  await p.setViewportSize({ width: 1440, height: 1000 });
   const inspector = p.locator('.diagram-inspector').first();
   await inspector.getByRole('button', { name: 'Zoom diagram in' }).click();
   await expect(inspector.locator('output')).toHaveText('125%');

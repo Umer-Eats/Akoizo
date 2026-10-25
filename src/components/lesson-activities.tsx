@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { ArrowDown, ArrowUp, Check, RotateCcw } from 'lucide-react';
+import { useLessonDrag } from './use-lesson-drag';
 import type { Lesson } from '@/lib/lessons';
 import {
   solutionSequence,
@@ -53,6 +54,7 @@ export function InlineCheck({ check }: { check: QuickCheck }) {
 }
 
 export function SortBoard({ activity, lessonId }: { activity: SortActivity; lessonId: string }) {
+  const startDrag = useLessonDrag();
   const [order] = useState(() => stableShuffle(activity.items, lessonId));
   const [placed, setPlaced] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
@@ -117,8 +119,7 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
               data-dragging={dragged === i}
               draggable={!(checked && state === 'right')}
               onDragStart={(e) => {
-                e.dataTransfer.setData('text/plain', text);
-                e.dataTransfer.effectAllowed = 'move';
+                if (!startDrag(e, text)) return;
                 setDragged(i);
               }}
               onDragEnd={() => {
@@ -239,6 +240,7 @@ function TermMatch({ lesson }: { lesson: Lesson }) {
 }
 
 function SolutionOrder({ lesson }: { lesson: Lesson }) {
+  const startDrag = useLessonDrag();
   const sequence = solutionSequence(lesson);
   const [order, setOrder] = useState<string[]>(() => sequence?.scrambled ?? []);
   const [checked, setChecked] = useState(false);
@@ -272,8 +274,7 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
             data-dragging={dragged === i}
             data-over={over === i}
             onDragStart={(e) => {
-              e.dataTransfer.setData('text/plain', step);
-              e.dataTransfer.effectAllowed = 'move';
+              if (!startDrag(e, step)) return;
               setDragged(i);
             }}
             onDragOver={(e) => {

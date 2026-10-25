@@ -287,6 +287,15 @@ function QuizView({
 }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const slideRef = useRef<HTMLDivElement>(null);
+  const goToQuestion = (index: number) => {
+    setQuestionIndex(index);
+    requestAnimationFrame(() => {
+      slideRef.current?.focus({ preventScroll: true });
+      slideRef.current?.scrollIntoView({ block: 'nearest' });
+    });
+  };
   const resultRef = useRef<HTMLDivElement>(null);
   const score = scorePractice(lesson.practice, attempt.answers);
   const complete = practiceComplete(attempt, lesson.practice);
@@ -301,11 +310,54 @@ function QuizView({
         automatically. For written responses, compare your reasoning with the model answer, then
         mark each review complete.
       </p>
-      {lesson.practice.map((q, index) => (
-        <div key={q.id} className="quiz-question">
+      <nav className="quiz-slide-nav" aria-label="Practice questions">
+        <button
+          className="button button-small button-glass"
+          disabled={questionIndex === 0}
+          onClick={() => goToQuestion(questionIndex - 1)}
+        >
+          <ChevronLeft size={16} aria-hidden="true" /> Previous question
+        </button>
+        <label>
+          <span className="sr-only">Choose question</span>
+          <select
+            value={questionIndex}
+            onChange={(event) => goToQuestion(Number(event.target.value))}
+          >
+            {lesson.practice.map((q, index) => (
+              <option key={q.id} value={index}>
+                Question {index + 1} of {lesson.practice.length}
+                {attempt.submitted && q.type === 'short'
+                  ? attempt.reviewed.includes(q.id)
+                    ? ' · Reviewed'
+                    : ' · Needs review'
+                  : attempt.answers[q.id]?.trim()
+                    ? ' · Answered'
+                    : ' · Unanswered'}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button
+          className="button button-small button-glass"
+          disabled={questionIndex === lesson.practice.length - 1}
+          onClick={() => goToQuestion(questionIndex + 1)}
+        >
+          Next question <ChevronRight size={16} aria-hidden="true" />
+        </button>
+      </nav>
+      {lesson.practice.slice(questionIndex, questionIndex + 1).map((q) => (
+        <div
+          key={q.id}
+          ref={slideRef}
+          className="quiz-question"
+          tabIndex={-1}
+          role="group"
+          aria-label={`Question ${questionIndex + 1} of ${lesson.practice.length}`}
+        >
           <fieldset disabled={attempt.submitted}>
             <legend>
-              <span className="question-number">{String(index + 1).padStart(2, '0')}</span>
+              <span className="question-number">{String(questionIndex + 1).padStart(2, '0')}</span>
               {q.prompt}
               <small>
                 {q.type === 'short'
@@ -392,7 +444,7 @@ function QuizView({
             Written responses reviewed: {attempt.reviewed.length} / {score.written}.{' '}
             {complete
               ? 'Practice complete. Revisit any answer you want to strengthen.'
-              : 'Compare and review every written response above to complete this practice.'}
+              : 'Use the question navigation to compare and review every written response.'}
           </p>
           <div className="lesson-actions">
             <button
@@ -664,6 +716,7 @@ function LessonDetail({
       )}
       <SimView sim={lesson.simulation} lessonId={lesson.id} pathway={lesson.visual} />
       <QuizView
+        key={lesson.id}
         lesson={lesson}
         attempt={attempt}
         onChange={onChange}

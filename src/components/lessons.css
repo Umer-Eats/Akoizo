@@ -607,6 +607,31 @@
 .quiz-result button {
   justify-self: start;
 }
+.quiz-slide-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.quiz-slide-nav label {
+  min-width: 0;
+  max-width: 100%;
+}
+.quiz-slide-nav select {
+  max-width: 100%;
+  padding: 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+}
+.quiz-question:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 .lesson-pagination {
   display: flex;
   justify-content: space-between;

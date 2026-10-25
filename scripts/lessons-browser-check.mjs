@@ -118,7 +118,8 @@ try {
         const lesson = course.lessons.find((x) => x.id === course.units[u].lessonIds[l]);
         await p.locator('.lesson-button').nth(l).click();
         await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);
-        await expect(p.locator('.quiz-question')).toHaveCount(7);
+        await expect(p.locator('.quiz-question')).toHaveCount(1);
+        await expect(p.getByLabel('Choose question').locator('option')).toHaveCount(7);
         await expect(p.locator('.lesson-sim h3')).toHaveText(lesson.simulation.title);
         await expect(p.locator('.lesson-reading .process-atlas')).toHaveCount(1);
         await expect(p.locator('.lesson-reading .comparison-atlas tbody tr')).toHaveCount(3);
@@ -265,8 +266,9 @@ try {
     .first()
     .screenshot({ path: 'documents/qa/lessons/mcq-selected.png' });
   for (let i = 0; i < first.practice.length; i++) {
+    await p.getByLabel('Choose question').selectOption(String(i));
     const q = first.practice[i],
-      field = p.locator('.quiz-question').nth(i);
+      field = p.locator('.quiz-question');
     if (q.type === 'mcq') await field.getByRole('radio', { name: q.answer, exact: true }).check();
     else await field.getByRole('textbox').fill(q.answer);
   }
@@ -275,7 +277,8 @@ try {
   await expect(check).toBeDisabled();
   await lastWritten.fill(first.practice.at(-1).answer);
   await check.click();
-  await expect(p.locator('.quiz-question .practice-option.correct')).toHaveCount(3);
+  await p.getByLabel('Choose question').selectOption('0');
+  await expect(p.locator('.quiz-question .practice-option.correct')).toHaveCount(1);
   await expect(firstRadio).toBeDisabled();
   await p
     .locator('.quiz-question')
@@ -283,7 +286,11 @@ try {
     .screenshot({ path: 'documents/qa/lessons/mcq-reviewed.png' });
   await expect(p.locator('.quiz-result')).toContainText('Multiple choice: 3 / 3 points');
   await expect(p.locator('.course-progress label')).toHaveText('0 of 20 practices complete');
-  for (const box of await p.locator('.quiz-self-review input').all()) await box.check();
+  for (let i = 0; i < first.practice.length; i++) {
+    if (first.practice[i].type !== 'short') continue;
+    await p.getByLabel('Choose question').selectOption(String(i));
+    await p.locator('.quiz-self-review input').check();
+  }
   await expect(p.locator('.course-progress label')).toHaveText('1 of 20 practices complete');
   await p.getByRole('button', { name: 'Next lesson', exact: true }).click();
   await expect(p.locator('#current-lesson-title')).toHaveText(anatomyLessons.lessons[1].title);
@@ -294,6 +301,9 @@ try {
   await expect(p.locator('.course-progress label')).toHaveText('1 of 20 practices complete');
   await p.getByRole('button', { name: 'Revise answers', exact: true }).click();
   await expect(p.locator('.course-progress label')).toHaveText('0 of 20 practices complete');
+  await p
+    .getByLabel('Choose question')
+    .selectOption(String(first.practice.findIndex((q) => q.type === 'short')));
   await expect(p.locator('.quiz-written textarea').first()).not.toHaveValue('');
   // Test calculated outputs and notebook with the respiratory unit.
   await p.locator('.unit-button').nth(2).click();
@@ -419,6 +429,9 @@ try {
   profile.id = 'qa-student-two';
   await p.reload();
   await expect(p.locator('#current-lesson-title')).toHaveText(first.title);
+  await p
+    .getByLabel('Choose question')
+    .selectOption(String(first.practice.findIndex((q) => q.type === 'short')));
   await expect(p.locator('.quiz-written textarea').first()).toHaveValue('');
   profile.id = 'qa-student';
   profile.division = 'B';
