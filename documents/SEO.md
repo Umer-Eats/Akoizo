@@ -10,7 +10,13 @@ public guide and event catalog; dashboard lessons still require school membershi
 Next.js generates `https://akoizo.app/sitemap.xml` from the same public-page registry
 used for metadata in `src/lib/seo.ts`. It contains only public canonical pages, excluding
 login, dashboard, settings, and API routes. It deliberately omits modification dates
-because no reliable content-modification timestamps are tracked. `/robots.txt` advertises
+because no reliable content-modification timestamps are tracked.
+
+It also lists one public study guide per event and division at
+`/study-tools/division-{a,b,c}/{event-id}` (`src/app/study-tools/[division]/[eventId]/page.tsx`).
+These pages are statically generated from the event list, lesson units, and practice-test
+catalog, carry BreadcrumbList and LearningResource structured data, and are linked from the
+`/study-tools` catalog. New events appear in the sitemap automatically. `/robots.txt` advertises
 the sitemap. Account pages use `noindex` and remain crawlable so search engines can read it.
 
 ## Deploy and submit

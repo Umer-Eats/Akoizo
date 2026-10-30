@@ -1,17 +1,18 @@
 import type { Metadata } from 'next';
+import { eventsForDivision, type Division, type ScienceEvent } from './events.ts';
 
 // Always use the primary domain, including in preview deployments.
 export const siteUrl = 'https://akoizo.app';
 export const siteDescription =
-  'Free Science Olympiad study tools from Akoizo: event lessons, practice tests, and school study groups for Division A, B, and C preparation.';
+  'Free Science Olympiad (SciOly) study resources from Akoizo: event lessons, practice tests, and school study groups for Division A, B, and C students and teams.';
 
 export const publicPages = [
   { path: '/', title: 'Akoizo | Free Science Olympiad Study Tools', description: siteDescription },
   {
     path: '/study-tools',
-    title: 'Science Olympiad Study Tools, Lessons & Practice Tests',
+    title: 'Free Science Olympiad Study Resources: SciOly Lessons & Practice Tests',
     description:
-      'Explore Akoizo’s free Science Olympiad study tools, event lessons, practice tests, and 2027 Division A, B, and C event catalog.',
+      'Browse free SciOly study guides for every 2027 Science Olympiad event in Division A, B, and C, with lessons, practice tests, rules, and tools for school teams.',
   },
   {
     path: '/mission',
@@ -61,5 +62,54 @@ export function pageMetadata(path: (typeof publicPages)[number]['path']): Metada
       description: page.description,
     },
     twitter: { card: 'summary', title, description: page.description },
+  };
+}
+
+export const divisionLevel: Record<Division, string> = {
+  A: 'elementary school',
+  B: 'middle school',
+  C: 'high school',
+};
+
+/** Public study-guide pages: one per event in each division. */
+export function eventPagePath(division: Division, eventId: string) {
+  return `/study-tools/division-${division.toLowerCase()}/${eventId}`;
+}
+
+export const eventPages = (['A', 'B', 'C'] as const).flatMap((division) =>
+  eventsForDivision(division).map((event) => ({
+    division,
+    event,
+    path: eventPagePath(division, event.id),
+  })),
+);
+
+export function findEventPage(divisionParam: string, eventId: string) {
+  return eventPages.find((page) => page.path === `/study-tools/${divisionParam}/${eventId}`);
+}
+
+export function eventPageMetadata(
+  division: Division,
+  event: ScienceEvent,
+  hasLessons: boolean,
+): Metadata {
+  const path = eventPagePath(division, event.id);
+  const title = `${event.name} Science Olympiad Study Guide (Division ${division}) | Akoizo`;
+  const description = hasLessons
+    ? `Free ${event.name} study guide for Science Olympiad Division ${division} (${divisionLevel[division]}): SciOly lessons, practice tests, key topics, and rules for students and school teams.`
+    : `Free ${event.name} Science Olympiad Division ${division} (${divisionLevel[division]}) study resources: event focus, rules, and SciOly study tools for students and school teams.`;
+  return {
+    title: { absolute: title },
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: 'article',
+      siteName: 'Akoizo',
+      locale: 'en_US',
+      url: path,
+      title,
+      description,
+    },
+    twitter: { card: 'summary', title, description },
   };
 }

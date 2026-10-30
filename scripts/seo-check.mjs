@@ -6,6 +6,12 @@ const origin = 'https://akoizo.app';
 // Support and donate pages only exist once a PayPal button ID is configured.
 const donations = process.env.NEXT_PUBLIC_PAYPAL_DONATE_ID ? ['/support', '/donate'] : [];
 const paths = ['/', '/study-tools', '/mission', ...donations, '/contact', '/rankings'];
+// Sample of the per-event study guides; the sitemap must list one per event and division.
+const eventPaths = [
+  '/study-tools/division-c/anatomy-and-physiology',
+  '/study-tools/division-b/codebusters',
+  '/study-tools/division-a/rock-hound',
+];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
   const page = await browser.newPage();
@@ -21,7 +27,11 @@ try {
     }
     return Array.from(document.querySelectorAll('url > loc'), (node) => node.textContent);
   }, xml);
-  assert.deepEqual(urls.sort(), paths.map((path) => new URL(path, origin).href).sort());
+  const staticUrls = urls.filter((url) => !url.startsWith(`${origin}/study-tools/division-`));
+  assert.deepEqual(staticUrls.sort(), paths.map((path) => new URL(path, origin).href).sort());
+  for (const path of eventPaths) assert.ok(urls.includes(`${origin}${path}`), path);
+  assert.ok(urls.length - staticUrls.length > 60, 'Expected event study-guide pages');
+  assert.equal(new Set(urls).size, urls.length, 'Duplicate sitemap URLs');
   const robotsResponse = await page.request.get(`${base}/robots.txt`);
   assert.equal(robotsResponse.status(), 200);
   const robots = await robotsResponse.text();
@@ -31,7 +41,7 @@ try {
 
   const titles = new Set();
   const descriptions = new Set();
-  for (const path of paths) {
+  for (const path of [...paths, ...eventPaths]) {
     // Inspect original HTML too: metadata and study content must be server-rendered.
     const response = await page.request.get(`${base}${path}`);
     assert.equal(response.status(), 200, path);

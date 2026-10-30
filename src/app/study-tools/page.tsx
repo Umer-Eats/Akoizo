@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { eventsForDivision } from '@/lib/events';
-import { pageMetadata } from '@/lib/seo';
+import { eventPagePath, pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata('/study-tools');
 
@@ -11,9 +11,9 @@ export default function StudyToolsPage() {
         <p className="eyebrow">AKOIZO / THE OPEN STUDY LAB</p>
         <h1>Free Science Olympiad study tools</h1>
         <p>
-          Prepare for Science Olympiad with Akoizo: a free study space for event lessons, practice
-          tests, and learning with your school community. Explore the event catalog below, then sign
-          in to study in your division.
+          Prepare for Science Olympiad (SciOly) with Akoizo: a free study resource for students and
+          schools, with event lessons, practice tests, rules, and study groups for your team. Pick
+          your event below to see its free study guide, then sign in to study in your division.
         </p>
         <Link href="/login/student" className="button button-primary">
           Start studying with Akoizo
@@ -69,7 +69,7 @@ export default function StudyToolsPage() {
               <ul>
                 {eventsForDivision(division).map((event) => (
                   <li key={event.id}>
-                    {event.name}
+                    <Link href={eventPagePath(division, event.id)}>{event.name}</Link>
                     {event.special ? ' (special event)' : ''}
                   </li>
                 ))}

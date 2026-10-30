@@ -15,7 +15,9 @@ export default function Page() {
                 '@id': `${siteUrl}/#website`,
                 url: `${siteUrl}/`,
                 name: 'Akoizo',
+                alternateName: ['Akoizo Science Olympiad', 'Akoizo SciOly'],
                 description: siteDescription,
+                publisher: { '@id': `${siteUrl}/#organization` },
                 inLanguage: 'en',
               },
               {
@@ -24,6 +26,9 @@ export default function Page() {
                 name: 'Akoizo',
                 url: `${siteUrl}/`,
                 logo: `${siteUrl}/akoizo-logo.svg`,
+                description:
+                  'Akoizo is a free Science Olympiad study platform for students and schools, built by a high school student.',
+                knowsAbout: ['Science Olympiad', 'SciOly', 'STEM education', 'Test preparation'],
               },
             ],
           }).replace(/</g, '\\u003c'),
