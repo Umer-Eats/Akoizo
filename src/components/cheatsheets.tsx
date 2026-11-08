@@ -645,7 +645,7 @@ export function CheatSheets({ eventId }: { eventId?: string }) {
         ) : (
           <div className="sheet-card-grid">
             {library.sheets.map((s) => (
-              <article className="sheet-card" key={s.id}>
+              <article className="sheet-card cheatsheet-card" key={s.id}>
                 <div className="sheet-card-top">
                   <FileText size={24} />
                   <span>2 SIDES</span>

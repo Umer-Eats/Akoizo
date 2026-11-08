@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import type { Database } from './school-service.ts';
 import { AppError, type Profile } from './domain.ts';
+import { getSchoolCommunity } from './school-communities.ts';
 import {
   binderContentPages,
   binderEvent,
@@ -15,8 +16,10 @@ import type { Binder, BinderCard, BinderInput, BinderPlan } from './binder-types
 import type { BinderDivision } from './binders.ts';
 
 type Row = Record<string, string | number | null>;
-const columns =
-  'id,event_id,title,level,page_count,completed_pages,status,school_name,created_at,generated_at,division';
+// Resolve older internal school names through the original school record, rather than
+// the creator's current school, so attribution stays correct if the creator moves.
+const communityColumn = `(SELECT sc.community_id FROM schools s JOIN school_communities sc ON sc.school_id=s.id WHERE s.name=binders.school_name) AS school_community_id`;
+const columns = `id,event_id,title,level,page_count,completed_pages,status,school_name,created_at,generated_at,division,${communityColumn}`;
 function card(r: Row): BinderCard {
   return {
     id: String(r.id),
@@ -27,7 +30,7 @@ function card(r: Row): BinderCard {
     pageCount: Number(r.page_count),
     completedPages: Number(r.completed_pages),
     status: r.status as BinderCard['status'],
-    schoolName: String(r.school_name),
+    schoolName: getSchoolCommunity(r.school_community_id)?.name || String(r.school_name),
     createdAt: String(r.created_at),
     generatedAt: r.generated_at ? String(r.generated_at) : null,
   };
@@ -72,7 +75,7 @@ export async function listBinders(
 }
 export async function readBinder(db: Database, profile: Profile, id: string): Promise<Binder> {
   const row = await db.get(
-    `SELECT * FROM binders WHERE id=? AND (status='published' OR creator_id=?)`,
+    `SELECT *,${communityColumn} FROM binders WHERE id=? AND (status='published' OR creator_id=?)`,
     id,
     profile.id,
   );
@@ -107,7 +110,7 @@ export async function createBinder(db: Database, profile: Profile, value: Binder
           input.title,
           input.level,
           input.pageCount,
-          profile.schoolName,
+          profile.schoolCommunityName || profile.schoolName,
           now,
           JSON.stringify(input),
           JSON.stringify(input.uploads.filter((u) => u.mime.startsWith('image/'))),

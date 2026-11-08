@@ -28,6 +28,7 @@ import { binderDiagramSvg, binderDocument } from '../src/lib/binder-document.ts'
 import { outlineBinder, writeBinderPages } from '../src/lib/binder-ai.ts';
 import { findBinderPhoto } from '../src/lib/binder-images.ts';
 import type { BinderInput, BinderPage, BinderPlan } from '../src/lib/binder-types.ts';
+import { getSchoolCommunity } from '../src/lib/school-communities.ts';
 
 const profile: Profile = {
   id: 'student',
@@ -226,6 +227,32 @@ test('six binder events per division; integer page cap and real file signatures'
     1,
   );
 });
+test('binder attribution uses recognizable school names and resolves older internal names', async () => {
+  const { db, raw } = fixture();
+  try {
+    const name = getSchoolCommunity('ppchs')!.name;
+    const named = await createBinder(db, { ...profile, schoolCommunityName: name }, input);
+    assert.equal(named.schoolName, name);
+    assert.equal((await readBinder(db, profile, named.id)).schoolName, name);
+    await cancelBinder(db, profile, named.id);
+    raw
+      .prepare('INSERT INTO schools(id,name,password_hash) VALUES (?,?,?)')
+      .run('original-school', 'School-938A5D61DE', 'fixture');
+    raw
+      .prepare('INSERT INTO school_communities(school_id,community_id) VALUES (?,?)')
+      .run('original-school', 'ppchs');
+    const legacy = await createBinder(db, { ...profile, schoolName: 'School-938A5D61DE' }, input);
+    assert.equal(legacy.schoolName, name);
+    assert.equal(
+      (await readBinder(db, { ...profile, schoolName: 'Different School' }, legacy.id)).schoolName,
+      name,
+    );
+    assert.equal((await listBinders(db, profile, null, null)).jobs[0].schoolName, name);
+  } finally {
+    raw.close();
+  }
+});
+
 test('page guidance separates compact events from large study events, all within 10–400', () => {
   for (const event of [...binderEventsByDivision.B, ...binderEventsByDivision.C]) {
     const r = binderRecommendations[event.id];
