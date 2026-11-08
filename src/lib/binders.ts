@@ -293,13 +293,15 @@ function parseDiagram(value: unknown): BinderDiagram {
 }
 export function parseBinderPage(value: unknown, heading: string, imageCount: number): BinderPage {
   const p = fields(value);
-  const paragraphs = list(p.paragraphs)
+  const rawParagraphs = list(p.paragraphs)
     .map((v) => clip(v, 900))
     .filter(Boolean)
-    .slice(0, 7);
+    .slice(0, 8);
+  // Accept legacy long-form pages as well as new compact reference entries. Do not
+  // truncate an existing paragraph into a bullet and silently lose its science.
+  const paragraphs = rawParagraphs;
   const length = () => paragraphs.reduce((n, t) => n + t.length, 0);
   while (paragraphs.length > 2 && length() > 3300) paragraphs.pop();
-  if (paragraphs.length < 2 || length() < 1200) throw new Error('Page is too thin to study from');
   const table = fields(p.table);
   const headers = list(table.headers)
     .map((v) => clip(v, 45))
@@ -320,15 +322,28 @@ export function parseBinderPage(value: unknown, heading: string, imageCount: num
     .map((v) => clip(v, 160))
     .filter(Boolean)
     .slice(0, 4);
+  const takeaways = list(p.takeaways)
+    .map((v) => clip(v, 150))
+    .filter(Boolean)
+    .slice(0, 5);
+  const diagram = parseDiagram(p.diagram);
+  const referenceLength =
+    length() +
+    takeaways.join('').length +
+    rows.flat().join('').length +
+    diagram.items.map((item) => item.detail).join('').length;
+  if (
+    paragraphs.length < 2 ||
+    referenceLength < 650 ||
+    (length() < 1200 && (paragraphs.length < 5 || takeaways.length < 3))
+  )
+    throw new Error('Page is too thin to study from');
   return {
     heading,
     paragraphs,
-    takeaways: list(p.takeaways)
-      .map((v) => clip(v, 150))
-      .filter(Boolean)
-      .slice(0, 4),
+    takeaways,
     table: { headers: rows.length ? headers : [], rows },
-    diagram: parseDiagram(p.diagram),
+    diagram,
     imageIndex,
     imageCaption: imageIndex < 0 ? '' : clip(p.imageCaption, 180) || 'Uploaded reference image',
     photoQuery: clip(p.photoQuery, 80)

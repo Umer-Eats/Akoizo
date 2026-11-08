@@ -15,8 +15,8 @@ import {
   type ModelId,
 } from '../src/lib/lesson-models.ts';
 import {
+  checkpointProgress,
   lessonStorageKey,
-  practiceComplete,
   readAttempt,
   scorePractice,
 } from '../src/lib/lesson-practice.ts';
@@ -185,23 +185,29 @@ test('practice scores weighted multiple-choice answers and never keyword-grades 
   assert.equal(scorePractice(questions, answers).earned, score.earned - (mcq.points ?? 1));
 });
 
-test('saved practice requires valid answers and explicit written review, scoped to each student and event', () => {
+test('a saved checkpoint is complete only when every question is checked, scoped to each student and event', () => {
   const questions = anatomyLessons.lessons[0].practice;
   const answers = Object.fromEntries(questions.map((q) => [q.id, q.answer]));
-  assert.equal(practiceComplete({ answers, submitted: true, reviewed: [] }, questions), false);
-  const reviewed = questions.filter((q) => q.type === 'short').map((q) => q.id);
+  // Answering is not enough: each question has to be checked.
+  assert.equal(checkpointProgress(readAttempt({ answers }, questions), questions).complete, false);
+  const checks = Object.fromEntries(
+    questions.map((q) => [q.id, { correct: true, by: q.type === 'mcq' ? 'key' : 'ai' }]),
+  );
   const restored = readAttempt(
-    { answers, submitted: true, reviewed: [...reviewed, 'invented', reviewed[0]] },
+    { answers, checks: { ...checks, invented: checks[questions[0].id] } },
     questions,
   );
-  assert.equal(practiceComplete(restored, questions), true);
-  assert.equal(restored.reviewed.length, reviewed.length);
-  assert.deepEqual(readAttempt(null, questions), { answers: {}, submitted: false, reviewed: [] });
-  const missing = { ...answers, [questions[0].id]: 'Invalid choice' };
-  assert.equal(
-    readAttempt({ answers: missing, submitted: true, reviewed }, questions).submitted,
-    false,
-  );
+  assert.deepEqual(checkpointProgress(restored, questions), {
+    checked: questions.length,
+    correct: questions.length,
+    total: questions.length,
+    complete: true,
+  });
+  assert.deepEqual(readAttempt(null, questions), { answers: {}, checks: {} });
+  const invalid = { ...answers, [questions[0].id]: 'Invalid choice' };
+  const dropped = readAttempt({ answers: invalid, checks }, questions);
+  assert.equal(dropped.answers[questions[0].id], undefined);
+  assert.equal(dropped.checks[questions[0].id], undefined);
   assert.notEqual(
     lessonStorageKey('student-a', 'forensics'),
     lessonStorageKey('student-b', 'forensics'),

@@ -1,5 +1,7 @@
 import { failure, json, memberFor } from '@/lib/api';
 import { AppError } from '@/lib/domain';
+import { saveCourse } from '@/lib/course-service';
+import type { BuildCourse } from '@/lib/build-events';
 import { buildEvent, MAX_VIDEO_BYTES, VIDEO_MIMES, parseCourse } from '@/lib/build-events';
 import {
   GEMINI_ROOT,
@@ -38,7 +40,7 @@ function validUploadUrl(value: string) {
 }
 export async function POST(request: Request) {
   try {
-    const { profile } = await memberFor(request, 'student');
+    const { db, profile } = await memberFor(request, 'student');
     const division = profile.division;
     if (division !== 'B' && division !== 'C')
       throw new AppError(403, 'Build tools are available to Division B and C students.');
@@ -137,7 +139,16 @@ export async function POST(request: Request) {
     } catch (e) {
       throw new AppError(400, (e as Error).message);
     }
-    if (body.action === 'course') return json({ course: await runBuildAI(course, 'course') });
+    if (body.action === 'course') {
+      const generated = (await runBuildAI(course, 'course')) as BuildCourse;
+      try {
+        const saved = await saveCourse(db, profile, generated);
+        return json({ course: generated, savedCourseId: saved.id });
+      } catch {
+        // Preserve a successful model response even if storage needs a retry.
+        return json({ course: generated, saveError: 'Course generated; saving needs a retry.' });
+      }
+    }
     if (body.action !== 'grade') throw new AppError(400, 'Choose a build tool action.');
     if (Object.values(course.parameters).some((v) => !v.trim()))
       throw new AppError(400, 'Complete every setup field. Use “not applicable” where needed.');

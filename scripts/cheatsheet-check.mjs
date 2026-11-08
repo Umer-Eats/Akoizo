@@ -229,7 +229,7 @@ try {
   await expect(printed.locator('.col figure.ref')).toHaveCount(1);
   await expect(printed.locator('.col figure.ref figcaption')).toContainText(goodFigure.credit);
   const download = p.waitForEvent('download');
-  await p.getByRole('button', { name: 'Download sheet', exact: true }).click();
+  await p.getByRole('button', { name: 'Download HTML', exact: true }).click();
   await (await download).saveAs(`${out}/ui-export.html`);
   await p.getByLabel('Sheet title').fill('My custom sheet');
   await p

@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { practiceTests, publicPracticePaper } from '../src/lib/practice-catalog.ts';
+import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 
 // Browser-only sign-in for QA and marketing captures. Firebase and every /api call are mocked
 // in the page, so no real account or database is touched.
@@ -71,12 +72,17 @@ export async function mockSession(page, { role = 'student', theme = 'dark', api 
           },
     }),
   );
+  const lessonAnswers = [];
   await page.route('**/api/**', async (route) => {
     const url = new URL(route.request().url());
     if (api) {
       const json = await api(url, route.request());
       if (json !== undefined) return route.fulfill({ json });
     }
+    if (url.pathname.startsWith('/api/lessons/') && url.pathname !== '/api/lessons/ako')
+      return route.fulfill({
+        json: mockLessonApi(url, route.request(), profile.division, lessonAnswers),
+      });
     if (url.pathname === '/api/auth/profile') return route.fulfill({ json: profile });
     if (url.pathname === '/api/dashboard')
       return route.fulfill({
@@ -95,6 +101,51 @@ export async function mockSession(page, { role = 'student', theme = 'dark', api 
     return route.fulfill({ json: [] });
   });
   return profile;
+}
+
+/**
+ * Lesson checkpoint API, held in memory for one page. Multiple choice is marked by the key; a
+ * written answer stands in for AI marking (six or more words count as correct), unless the
+ * answer starts with "self:" which exercises the self-mark path.
+ */
+export function mockLessonApi(url, request, division, answers) {
+  const body = request.method() === 'GET' ? {} : JSON.parse(request.postData() || '{}');
+  if (url.pathname === '/api/lessons/progress')
+    return request.method() === 'GET' ? { answers, parts: [] } : { recorded: body.part };
+  const lesson = lessonsForEvent(body.eventId, division)?.lessons.find((l) => l.id === body.lessonId);
+  if (!lesson) return { error: 'Lesson not found.' };
+  if (request.method() === 'DELETE') {
+    for (let i = answers.length - 1; i >= 0; i--)
+      if (answers[i].lessonId === lesson.id) answers.splice(i, 1);
+    return { reset: true };
+  }
+  const q = lesson.practice.find((item) => item.id === body.questionId);
+  const existing = answers.find((a) => a.lessonId === lesson.id && a.questionId === q.id);
+  if (existing)
+    return { status: 'checked', result: { correct: existing.correct, by: existing.by } };
+  let result;
+  if (q.type === 'mcq') result = { correct: body.answer === q.answer, by: 'key' };
+  else if (typeof body.selfMark === 'boolean') result = { correct: body.selfMark, by: 'self' };
+  else if (body.answer.startsWith('self:')) return { status: 'self-mark' };
+  else {
+    const correct = body.answer.trim().split(/\s+/).length >= 6;
+    result = {
+      correct,
+      by: 'ai',
+      feedback: correct
+        ? 'You named the key idea and gave a reason for it.'
+        : 'This names the topic but not the mechanism. Say why it happens, not just what.',
+    };
+  }
+  answers.push({ lessonId: lesson.id, questionId: q.id, answer: body.answer, ...result });
+  const done = answers.filter((a) => a.lessonId === lesson.id);
+  return done.length === lesson.practice.length
+    ? {
+        status: 'checked',
+        result,
+        lesson: { score: done.filter((a) => a.correct).length, maxScore: done.length },
+      }
+    : { status: 'checked', result };
 }
 
 export async function signIn(page, base, role = 'student') {

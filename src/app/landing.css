@@ -1312,6 +1312,14 @@
   }
 
   /* ---------- Responsive ---------- */
+  @media (max-width: 1400px) {
+    .lx-nav .lx-nav-extra {
+      display: none !important;
+    }
+    .lx-nav .lx-menu-btn {
+      display: inline-grid;
+    }
+  }
   @media (max-width: 1180px) {
     :root {
       --lx-margin: 150px;

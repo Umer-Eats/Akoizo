@@ -94,6 +94,20 @@ export function LandingNav() {
               </Link>
               <Link
                 className="lx-nav-text lx-nav-hide lx-nav-extra"
+                href="/dashboard/courses"
+                aria-current={current('/dashboard/courses')}
+              >
+                Courses
+              </Link>
+              <Link
+                className="lx-nav-text lx-nav-hide lx-nav-extra"
+                href="/dashboard/cheatsheets"
+                aria-current={current('/dashboard/cheatsheets')}
+              >
+                Cheat sheets
+              </Link>
+              <Link
+                className="lx-nav-text lx-nav-hide lx-nav-extra"
                 href={`/settings/${profile.role}`}
                 aria-current={current(`/settings/${profile.role}`)}
               >
@@ -102,7 +116,10 @@ export function LandingNav() {
               <button className="lx-nav-text lx-nav-hide" onClick={logout}>
                 Sign out
               </button>
-              <Link className="lx-btn lx-btn-primary lx-nav-hide" href={`/dashboard/${profile.role}`}>
+              <Link
+                className="lx-btn lx-btn-primary lx-nav-hide"
+                href={`/dashboard/${profile.role}`}
+              >
                 My dashboard
               </Link>
             </>
@@ -116,7 +133,11 @@ export function LandingNav() {
               </Link>
             </>
           )}
-          <button className="lx-icon-btn lx-theme" onClick={toggleTheme} aria-label="Switch color theme">
+          <button
+            className="lx-icon-btn lx-theme"
+            onClick={toggleTheme}
+            aria-label="Switch color theme"
+          >
             <Sun className="lx-sun" size={18} />
             <Moon className="lx-moon" size={18} />
           </button>
@@ -148,6 +169,12 @@ export function LandingNav() {
               </Link>
               <Link href="/dashboard/binders">
                 Binders <ArrowRight size={20} aria-hidden="true" />
+              </Link>
+              <Link href="/dashboard/courses">
+                Courses <ArrowRight size={20} aria-hidden="true" />
+              </Link>
+              <Link href="/dashboard/cheatsheets">
+                Cheat sheets <ArrowRight size={20} aria-hidden="true" />
               </Link>
             </>
           )}

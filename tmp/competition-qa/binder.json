@@ -1,0 +1,384 @@
+{
+  "eventId": "dynamic-planet",
+  "title": "dynamic-planet live check",
+  "level": "national",
+  "pageCount": 10,
+  "notes": "",
+  "uploads": [],
+  "id": "qa",
+  "status": "ready",
+  "completedPages": 9,
+  "schoolName": "QA School",
+  "createdAt": "2026-10-12T12:00:00.000Z",
+  "generatedAt": null,
+  "plan": {
+    "sections": [
+      {
+        "title": "Hydrologic Cycle Water Budgets and Climatic Controls",
+        "focus": "Covers rule areas 3a and 3b including precipitation evaporation transpiration evapotranspiration infiltration runoff condensation storage reservoirs residence times orographic lift rain shadow continentality lake effect arid semiarid humid spectrum",
+        "pages": 3,
+        "topics": [
+          "Components Fluxes and Residence Time Calculations in Global Water Budgets",
+          "Orographic Precipitation Mechanisms and the Rain Shadow Effect",
+          "Hydrologic and Geomorphic Expression along the Arid-Semiarid-Humid Spectrum"
+        ]
+      },
+      {
+        "title": "Drainage Basins Fluvial Processes and Geomorphology",
+        "focus": "Covers rule areas 3c, 3d, and 3e including watersheds stream order drainage networks planform sinuosity sediment properties transport bed load suspended load dissolved load competence capacity bedforms longitudinal profiles base level dynamic equilibrium and channel landforms",
+        "pages": 3,
+        "topics": [
+          "Calculation of Stream Sinuosity and Quantitative Channel Planform Classification",
+          "Sediment Transport Mechanics and Competence-Capacity Relationships in Open Channels",
+          "Longitudinal Profiles Graded Streams and Knickpoint Migration Dynamics"
+        ]
+      },
+      {
+        "title": "Streamflow Groundwater Karst Lakes Wetlands and Monitoring",
+        "focus": "Covers rule areas 3f, 3g, 3h, 3i, 3j, and 3k including open-channel flow recurrence intervals aquifers porosity permeability hydraulic gradient karst features lake stratification paleochannels anthropogenic impacts water quality topographic maps hydrographs and gauging",
+        "pages": 3,
+        "topics": [
+          "Calculation of Flood Recurrence Intervals and Exceedance Probability from Peak Discharge Data",
+          "Darcy's Law and Groundwater Flow Velocity Determination from Hydraulic Gradient and Porosity",
+          "Interpretation of Lake Thermal Stratification Epilimnion Metalimnion and Seasonal Turnover"
+        ]
+      }
+    ]
+  },
+  "pages": [
+    {
+      "heading": "Components Fluxes and Residence Time Calculations in Global Water Budgets",
+      "paragraphs": [
+        "Reservoir Size: Oceans hold ~1,338,000,000 cubic kilometers of water, representing approximately 96.5 percent of all global water resources.",
+        "Flux Balance: Global precipitation equals global evaporation in steady-state models, calculated at ~505,000 cubic kilometers per year.",
+        "Residence Time Calculation: Residence time equals reservoir volume divided by the flux rate, yielding roughly 3,700 years for the ocean.",
+        "Atmospheric Turnover: Atmosphere holds ~12,900 cubic kilometers with a rapid flux of ~505,000 cubic kilometers per year, giving ~9 days residence.",
+        "Icecap Storage: Glaciers and permanent snow contain ~24,064,000 cubic kilometers, holding about 68.7 percent of Earth's total freshwater.",
+        "Groundwater Pool: Groundwater represents ~30.1 percent of freshwater, with deep fossil aquifers exhibiting residence times exceeding 10,000 years."
+      ],
+      "takeaways": [
+        "Residence time = Volume / Flux rate; always ensure consistent volume and time units before dividing.",
+        "Oceans dominate volume (~96.5 percent) but the atmosphere dominates turnover speed (~9-day residence).",
+        "Trap: Confusing renewable shallow groundwater with deep fossil groundwater having multikincentury residence times."
+      ],
+      "table": {
+        "headers": [
+          "Reservoir",
+          "Volume Percent",
+          "Mean Residence Time"
+        ],
+        "rows": [
+          [
+            "Oceans",
+            "96.5 percent",
+            "3,700 years"
+          ],
+          [
+            "Glaciers and Ice Caps",
+            "68.7 percent of freshwater",
+            "20 to 100+ years"
+          ],
+          [
+            "Groundwater",
+            "30.1 percent of freshwater",
+            "2 weeks to 10,000+ years"
+          ],
+          [
+            "Atmosphere",
+            "0.001 percent",
+            "9 to 10 days"
+          ]
+        ]
+      },
+      "diagram": {
+        "kind": "cycle",
+        "title": "Global Hydrologic Cycle Reservoirs and Fluxes",
+        "caption": "Primary water distribution and mass-balance fluxes across Earth's major global storage compartments.",
+        "items": [
+          {
+            "label": "Ocean Storage",
+            "detail": "Holds 96.5 percent of global water; evaporation exceeds precipitation over marine basins."
+          },
+          {
+            "label": "Atmospheric Flux",
+            "detail": "Transports ~505,000 cubic kilometers annually via advection from oceans to landmasses."
+          },
+          {
+            "label": "Terrestrial Precipitation",
+            "detail": "Delivers freshwater onto land, partitioned into runoff, infiltration, and evapotranspiration."
+          },
+          {
+            "label": "Groundwater Discharge",
+            "detail": "Slow subsurface return flow completing the closed global hydrological mass balance."
+          }
+        ],
+        "xLabel": "",
+        "yLabel": "",
+        "series": []
+      },
+      "imageIndex": -1,
+      "imageCaption": "",
+      "photoQuery": "global water cycle diagram",
+      "photo": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/The_Water_Cycle_%28SVS30580%29.png/500px-The_Water_Cycle_%28SVS30580%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Water_Cycle_(SVS30580).png",
+        "title": "The Water Cycle (SVS30580)",
+        "author": "NASA's Scientific Visualization Studio - Marit Jentoft-Nilsen, Global Science an",
+        "license": "Public domain"
+      },
+      "sources": [
+        "Rule Section 3.a.i - Hydrologic cycle components and fluxes",
+        "Rule Section 3.a.ii - Storage reservoirs and residence times"
+      ]
+    },
+    {
+      "heading": "Orographic Precipitation Mechanisms and the Rain Shadow Effect",
+      "paragraphs": [
+        "Lifting Mechanism: Forced ascent of moist marine air over mountain barriers causes adiabatic cooling at the moist adiabatic lapse rate.",
+        "Saturation Threshold: Cooling reduces air temperature to its dew point, leading to cloud formation and heavy windward orographic precipitation.",
+        "Adiabatic Warming: Descending air on the leeward side undergoes compression and warms at the dry adiabatic lapse rate of ~9.8 degrees Celsius per kilometer.",
+        "Relative Humidity Drop: Leeward warming increases saturation vapor pressure, drastically dropping relative humidity and creating an arid rain shadow.",
+        "Formula Application: Temperature change equals vertical displacement multiplied by lapse rate, calculated in degrees Celsius per kilometer.",
+        "Quantitative Example: A 2000 m rise cools air by ~13 degrees Celsius (moist rate ~6.5 degrees Celsius per kilometer), dropping vapor capacity."
+      ],
+      "takeaways": [
+        "Windward slopes experience high precipitation and dense vegetation; leeward slopes form arid rain shadows.",
+        "Use moist adiabatic lapse rate (~5-6 degrees Celsius per kilometer) on the windward rising side after condensation begins.",
+        "Trap: Assuming dry adiabatic lapse rate below cloud base instead of the saturated/moist adiabatic lapse rate."
+      ],
+      "table": {
+        "headers": [
+          "Slope Position",
+          "Thermal Gradient",
+          "Hydrologic Impact"
+        ],
+        "rows": [
+          [
+            "Windward Base",
+            "Ambient surface temperature",
+            "Moisture-laden air influx"
+          ],
+          [
+            "Windward Slope",
+            "Moist adiabatic lapse rate",
+            "Heavy orographic rainfall and snow"
+          ],
+          [
+            "Summit Crest",
+            "Minimum temperature",
+            "Maximum cloud condensation"
+          ],
+          [
+            "Leeward Shadow",
+            "Dry adiabatic lapse rate",
+            "Arid conditions, ephemeral streams"
+          ]
+        ]
+      },
+      "diagram": {
+        "kind": "layers",
+        "title": "Orographic Lift and Rain Shadow Cross Section",
+        "caption": "Atmospheric moisture profile showing windward cloud condensation and leeward adiabatic warming.",
+        "items": [
+          {
+            "label": "Windward Air Mass",
+            "detail": "Warm, humid maritime air approaches mountain barrier."
+          },
+          {
+            "label": "Condensation Level",
+            "detail": "Elevation where air reaches saturation and precipitation initiates."
+          },
+          {
+            "label": "Mountain Summit",
+            "detail": "Point of maximum adiabatic cooling and minimum temperature."
+          },
+          {
+            "label": "Leeward Rain Shadow",
+            "detail": "Descending compressed air creates dry desert conditions."
+          }
+        ],
+        "xLabel": "",
+        "yLabel": "",
+        "series": []
+      },
+      "imageIndex": -1,
+      "imageCaption": "",
+      "photoQuery": "orographic lift rain shadow diagram",
+      "photo": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Rain_Shadow_Effect_caused_by_Orographic_Lift.png/500px-Rain_Shadow_Effect_caused_by_Orographic_Lift.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "source": "https://commons.wikimedia.org/wiki/File:Rain_Shadow_Effect_caused_by_Orographic_Lift.png",
+        "title": "Rain Shadow Effect caused by Orographic Lift",
+        "author": "Thebiologyprimer",
+        "license": "CC0"
+      },
+      "sources": [
+        "Rule Section 3.b.ii - Topographic controls on precipitation and orographic lift"
+      ]
+    },
+    {
+      "heading": "Hydrologic and Geomorphic Expression along the Arid-Semiarid-Humid Spectrum",
+      "paragraphs": [
+        "Arid Classification: Aridity index (precipitation divided by potential evapotranspiration) falls below 0.20, featuring ephemeral streams and playas.",
+        "Semiarid Expression: Index ranges from 0.20 to 0.50, characterized by intermittent streams, grasslands, and moderate caliche soil horizons.",
+        "Humid Environment: Index exceeds 0.65, dominated by perennial streams, high drainage density, and intense chemical weathering processes.",
+        "Evaporite Deposition: Arid closed basins concentrate dissolved ions through high evaporation, precipitating gypsum, halite, and borate minerals.",
+        "Stream Regimes: Ephemeral channels flow exclusively during flash floods; perennial channels maintain baseflow supplied by the local water table.",
+        "Geomorphic Clues: Alluvial fans, bajadas, and inselbergs dominate arid landscapes, whereas V-shaped valleys and floodplains dominate humid regions."
+      ],
+      "takeaways": [
+        "Arid-semiarid-humid spectrum is governed by the ratio of annual precipitation to potential evapotranspiration.",
+        "Perennial streams intersect the water table; ephemeral streams sit above the water table and flow only post-precipitation.",
+        "Trap: Confusing intermittent streams (seasonal baseflow) with ephemeral streams (strictly storm-flow driven)."
+      ],
+      "table": {
+        "headers": [
+          "Climate Zone",
+          "Aridity Index Ratio",
+          "Primary Stream Regime"
+        ],
+        "rows": [
+          [
+            "Arid",
+            "LessThan 0.20",
+            "Ephemeral (flash flood only)"
+          ],
+          [
+            "Semiarid",
+            "0.20 to 0.50",
+            "Intermittent (seasonal flow)"
+          ],
+          [
+            "Subhumid",
+            "0.50 to 0.65",
+            "Perennial to Intermittent"
+          ],
+          [
+            "Humid",
+            "GreaterThan 0.65",
+            "Perennial (continuous baseflow)"
+          ]
+        ]
+      },
+      "diagram": {
+        "kind": "scale",
+        "title": "Arid to Humid Hydrologic Spectrum",
+        "caption": "Gradation of climatic aridity index, dominant geomorphic features, and stream hydrological regimes.",
+        "items": [
+          {
+            "label": "Arid Extreme",
+            "detail": "Playas, evaporites, ephemeral washes, high potential evapotranspiration."
+          },
+          {
+            "label": "Semiarid Transition",
+            "detail": "Alluvial fans, intermittent arroyos, grasslands, caliche horizons."
+          },
+          {
+            "label": "Humid Extreme",
+            "detail": "Perennial meandering rivers, thick soil profiles, dense vegetation."
+          }
+        ],
+        "xLabel": "Aridity Index (P / PET)",
+        "yLabel": "",
+        "series": []
+      },
+      "imageIndex": -1,
+      "imageCaption": "",
+      "photoQuery": "desert playa evaporite deposit",
+      "photo": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Black_Rock_Desert_Playa_in_Nevada_%2835428075856%29.jpg/500px-Black_Rock_Desert_Playa_in_Nevada_%2835428075856%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "source": "https://commons.wikimedia.org/wiki/File:Black_Rock_Desert_Playa_in_Nevada_(35428075856).jpg",
+        "title": "Black Rock Desert Playa in Nevada (35428075856)",
+        "author": "mypubliclands",
+        "license": "Public domain"
+      },
+      "sources": [
+        "Rule Section 3.b.iii - Arid-semiarid-humid spectrum and geomorphic expression"
+      ]
+    },
+    {
+      "heading": "Calculation of Stream Sinuosity and Quantitative Channel Planform Classification",
+      "paragraphs": [
+        "Sinuosity Equation: Sinuosity equals channel length divided by valley length (P equals L_c divided by L_v), being dimensionless.",
+        "Straight Threshold: Channels with sinuosity between 1.0 and 1.05 are classified as straight channels, typically constrained by bedrock.",
+        "Meandering Criterion: Channels with sinuosity greater than 1.50 are classified as meandering, featuring distinct cut banks and point bars.",
+        "Braided Planform: Characterized by multiple active channels separated by unvegetated bars, high sediment load, and steep gradient.",
+        "Anastomosing Rivers: Multiple interconnected stable channels divided by heavily vegetated floodplains and low gradient settings.",
+        "Worked Example: A stream channel length of 12.5 km in a valley length of 8.0 km yields sinuosity equal to 12.5 divided by 8.0 equal to 1.56."
+      ],
+      "takeaways": [
+        "Sinuosity P is strictly greater than or equal to 1.0; P greater than 1.5 defines meandering channel planform.",
+        "Braided systems require high bedload supply and fluctuating discharge, unlike stable anastomosing channels.",
+        "Trap: Measuring straight-line map distance instead of valley length when computing sinuosity ratios."
+      ],
+      "table": {
+        "headers": [
+          "Channel Planform",
+          "Sinuosity Threshold",
+          "Sediment Load Character"
+        ],
+        "rows": [
+          [
+            "Straight",
+            "1.00 to 1.05",
+            "Low bedload, often bedrock controlled"
+          ],
+          [
+            "Sinuous",
+            "1.05 to 1.50",
+            "Moderate load, transitional form"
+          ],
+          [
+            "Meandering",
+            "GreaterThan 1.50",
+            "Suspended load dominant, lateral migration"
+          ],
+          [
+            "Braided",
+            "1.00 to 1.30",
+            "High bedload, multiple shifting channels"
+          ]
+        ]
+      },
+      "diagram": {
+        "kind": "compare",
+        "title": "Stream Planform Types and Sinuosity Comparison",
+        "caption": "Comparison of straight, meandering, braided, and anastomosing channel planform geometries.",
+        "items": [
+          {
+            "label": "Straight Planform",
+            "detail": "Sinuosity 1.0 to 1.05; rare in nature, often structurally controlled."
+          },
+          {
+            "label": "Meandering Planform",
+            "detail": "Sinuosity greater than 1.5; exhibits systematic point bar and cut bank erosion."
+          },
+          {
+            "label": "Braided Planform",
+            "detail": "Multiple unstable channels weaving around temporary sand and gravel bars."
+          },
+          {
+            "label": "Anastomosing Planform",
+            "detail": "Stable, interconnected multiple channels separated by vegetated islands."
+          }
+        ],
+        "xLabel": "",
+        "yLabel": "",
+        "series": []
+      },
+      "imageIndex": -1,
+      "imageCaption": "",
+      "photoQuery": "braided river aerial photography",
+      "photo": {
+        "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Braided_River_outwash_plain_-_DPLA_-_77b84f7fb91b5f6bf7c0b7d01a3e0e3c.jpg/500px-Braided_River_outwash_plain_-_DPLA_-_77b84f7fb91b5f6bf7c0b7d01a3e0e3c.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "source": "https://commons.wikimedia.org/wiki/File:Braided_River_outwash_plain_-_DPLA_-_77b84f7fb91b5f6bf7c0b7d01a3e0e3c.jpg",
+        "title": "Braided River outwash plain - DPLA - 77b84f7fb91b5f6bf7c0b7d01a3e0e3c",
+        "author": "Department of the Interior. U.S. Fish and Wildlife Service. National Conservatio",
+        "license": "Public domain"
+      },
+      "sources": [
+        "Rule Section 3.d.i - Channel types planform and sinuosity calculation"
+      ]
+    }
+  ],
+  "images": []
+}

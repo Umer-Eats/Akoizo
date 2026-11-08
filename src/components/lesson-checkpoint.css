@@ -1,0 +1,329 @@
+/* Lesson checkpoint: numbered circles, one question card, instant marking and explanations. */
+.lc {
+  --lc-good: #3ccf86;
+  --lc-good-soft: color-mix(in srgb, #3ccf86 14%, transparent);
+  --lc-bad: #ff6b6b;
+  --lc-bad-soft: color-mix(in srgb, #ff6b6b 14%, transparent);
+  display: grid;
+  gap: 18px;
+}
+:root[data-theme='light'] .lc {
+  --lc-good: #17834a;
+  --lc-good-soft: #e3f6eb;
+  --lc-bad: #c4322b;
+  --lc-bad-soft: #fde8e7;
+}
+.lc-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.lc-head > div {
+  display: grid;
+  gap: 6px;
+  max-width: 62ch;
+}
+.lc-head h3,
+.lc-head p {
+  margin: 0;
+}
+.lc-head > div > p:last-child {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.lc-tally {
+  display: grid;
+  justify-items: end;
+  margin: 0;
+  line-height: 1.2;
+}
+.lc-tally strong {
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.lc-tally span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* Numbered circles */
+.lc-nav {
+  display: grid;
+  gap: 10px;
+}
+.lc-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lc-dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  min-height: 0;
+  padding: 0;
+  border: 2px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+.lc-dot:hover {
+  transform: translateY(-1px);
+}
+.lc-dot[data-state='answered'] {
+  border-color: var(--accent);
+}
+.lc-dot[data-state='correct'] {
+  border-color: var(--lc-good);
+  background: var(--lc-good);
+  color: #04180d;
+}
+.lc-dot[data-state='incorrect'] {
+  border-color: var(--lc-bad);
+  background: var(--lc-bad);
+  color: #fff;
+}
+:root[data-theme='light'] .lc-dot[data-state='correct'] {
+  color: #fff;
+}
+.lc-dot[aria-current='step'] {
+  box-shadow:
+    0 0 0 3px var(--bg),
+    0 0 0 5px var(--text);
+}
+.lc-badge {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+}
+.lc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.lc-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.lc-legend span::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+.lc-legend [data-state='correct']::before {
+  border-color: var(--lc-good);
+  background: var(--lc-good);
+}
+.lc-legend [data-state='incorrect']::before {
+  border-color: var(--lc-bad);
+  background: var(--lc-bad);
+}
+
+/* Question card */
+.lc-card {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  padding: clamp(16px, 2.6vw, 26px);
+  background: var(--surface);
+  scroll-margin-top: 8px;
+}
+.lc-card:focus {
+  outline: none;
+}
+.lc-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.lc-card[data-result='correct'] {
+  border-color: color-mix(in srgb, var(--lc-good) 55%, var(--line-strong));
+}
+.lc-card[data-result='incorrect'] {
+  border-color: color-mix(in srgb, var(--lc-bad) 55%, var(--line-strong));
+}
+.lc-meta {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lc-prompt {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  max-width: 70ch;
+}
+.lc-answer {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.lc-answer:disabled .practice-option {
+  cursor: default;
+}
+.lc-card[data-result] .practice-option.selected:not(.correct) {
+  border-color: var(--lc-bad);
+  background: var(--lc-bad-soft);
+  color: var(--lc-bad);
+}
+.lc-card[data-result] .practice-option.correct {
+  border-color: var(--lc-good);
+  background: var(--lc-good-soft);
+  color: var(--lc-good);
+}
+.lc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.lc-hint {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* Marking and explanation */
+.lc-feedback {
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.lc-verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.lc-verdict[data-result='correct'] {
+  background: var(--lc-good-soft);
+  color: var(--lc-good);
+}
+.lc-verdict[data-result='incorrect'] {
+  background: var(--lc-bad-soft);
+  color: var(--lc-bad);
+}
+.lc-verdict small {
+  margin-left: auto;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.74rem;
+}
+.lc-chosen,
+.lc-verdict-note {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.lc-verdict-note {
+  color: var(--muted);
+}
+.lc-block {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--line-strong);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  border-radius: 0 8px 8px 0;
+}
+.lc-block h5 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.lc-block p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.lc-model {
+  border-left-color: var(--accent);
+}
+
+/* Results */
+.lc-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface-2, var(--surface));
+}
+.lc-summary h4,
+.lc-summary p {
+  margin: 0 0 6px;
+}
+.lc-summary p {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.lc-summary-score {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 5px solid var(--lc-bad);
+  text-align: center;
+  line-height: 1.1;
+}
+.lc-summary-score[data-pass] {
+  border-color: var(--lc-good);
+}
+.lc-summary-score strong {
+  font-size: 1.4rem;
+}
+.lc-summary-score span {
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+@media (max-width: 600px) {
+  .lc-dot {
+    width: 38px;
+    height: 38px;
+  }
+  .lc-verdict small {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}

@@ -13,6 +13,13 @@ export const divisionIndexes = [
 ];
 
 export const schema = [
+  `CREATE TABLE IF NOT EXISTS saved_courses (
+    id TEXT PRIMARY KEY, creator_id TEXT NOT NULL, event_id TEXT NOT NULL,
+    division TEXT NOT NULL CHECK(division IN ('B','C')), title TEXT NOT NULL,
+    level TEXT NOT NULL CHECK(level IN ('regional','state','national')),
+    school_name TEXT NOT NULL, created_at TEXT NOT NULL, content_json TEXT NOT NULL,
+    content_hash TEXT NOT NULL, UNIQUE(creator_id,content_hash))`,
+  'CREATE INDEX IF NOT EXISTS idx_courses_library ON saved_courses(division,event_id,created_at,id)',
   `CREATE TABLE IF NOT EXISTS binders (
     id TEXT PRIMARY KEY, creator_id TEXT NOT NULL, event_id TEXT NOT NULL,
     title TEXT NOT NULL, level TEXT NOT NULL, page_count INTEGER NOT NULL CHECK(page_count BETWEEN 10 AND 400),
@@ -94,6 +101,16 @@ export const schema = [
   `CREATE TABLE IF NOT EXISTS study_results (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
     kind TEXT NOT NULL CHECK(kind IN ('Lesson','Lab')), target_id TEXT NOT NULL, score REAL NOT NULL, max_score REAL NOT NULL,
     submitted_at TEXT NOT NULL, PRIMARY KEY(student_id, event_id, kind, target_id))`,
+  // Checkpoint answers, checked one question at a time. Multiple choice is graded by the key,
+  // written answers by AI, or by the student against the model answer when AI is unavailable.
+  `CREATE TABLE IF NOT EXISTS lesson_answers (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
+    lesson_id TEXT NOT NULL, question_id TEXT NOT NULL, answer TEXT NOT NULL, correct INTEGER NOT NULL CHECK(correct IN (0,1)),
+    graded_by TEXT NOT NULL CHECK(graded_by IN ('key','ai','self')), feedback TEXT, checked_at TEXT NOT NULL,
+    PRIMARY KEY(student_id, event_id, lesson_id, question_id))`,
+  // Each lesson stage a student has finished; graded stages also keep their accuracy.
+  `CREATE TABLE IF NOT EXISTS lesson_parts (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
+    lesson_id TEXT NOT NULL, part TEXT NOT NULL CHECK(part IN ('learn','practice','labs','checkpoint')),
+    score REAL, max_score REAL, completed_at TEXT NOT NULL, PRIMARY KEY(student_id, event_id, lesson_id, part))`,
   'CREATE INDEX IF NOT EXISTS idx_teams_school ON teams(school_id)',
   'CREATE INDEX IF NOT EXISTS idx_team_slots_student ON team_slots(student_id)',
   'CREATE INDEX IF NOT EXISTS idx_ranked_tests_school ON ranked_tests(school_id)',

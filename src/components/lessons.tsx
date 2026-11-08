@@ -1,19 +1,26 @@
 'use client';
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { BookOpen, Check, ChevronLeft, ChevronRight, FlaskConical, RotateCcw } from 'lucide-react';
 import type { EventLessons, Lesson, LessonSim } from '@/lib/lessons';
 import type { WorkRecord } from '@/lib/domain';
 import { calculateModel, modelControls, modelDefaults } from '@/lib/lesson-models';
 import { modelGuides } from '@/lib/lesson-model-guides';
 import {
+  checkChoice,
+  checkpointProgress,
+  emptyAttempt,
   lessonStorageKey,
-  practiceComplete,
   readAttempt,
-  scorePractice,
   type LessonAttempt,
 } from '@/lib/lesson-practice';
+import type {
+  CheckedAnswer,
+  CheckResponse,
+  LessonPart,
+  LessonPartRecord,
+} from '@/lib/lesson-checkpoint-service';
 import { useAuth, authMessage } from './auth-context';
-import { ChoiceOptions } from './choice-options';
+import { CheckpointView, type CheckOutcome } from './lesson-checkpoint';
 import { ModelDiagram } from './lesson-diagrams';
 import { ComparisonAtlas, LessonSectionVisuals, lessonComparison } from './lesson-atlas';
 import { EvidenceWorkbench } from './evidence-workbench';
@@ -24,7 +31,7 @@ import { lessonReferenceFigures } from '@/lib/lesson-reference-figures';
 import { slotForEvent } from '@/lib/event-slots';
 import { extrasFor, topicLabs } from '@/lib/extras';
 import { LessonActivities, InlineCheck } from './lesson-activities';
-import { TopicLabPreview, TopicLabView } from './topic-lab';
+import { TopicLabView } from './topic-lab';
 import {
   AkoReading,
   KeyTermsGrid,
@@ -285,224 +292,6 @@ function SimView({
 }
 
 type LessonRecord = { score: number; maxScore: number };
-function QuizView({
-  lesson,
-  attempt,
-  onChange,
-  record,
-  onSubmit,
-}: {
-  lesson: Lesson;
-  attempt: LessonAttempt;
-  onChange: (attempt: LessonAttempt) => void;
-  /** The graded submission your instructor sees, once this lesson has been submitted. */
-  record?: LessonRecord;
-  onSubmit: () => Promise<void>;
-}) {
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const slideRef = useRef<HTMLDivElement>(null);
-  const goToQuestion = (index: number) => {
-    setQuestionIndex(index);
-    requestAnimationFrame(() => {
-      slideRef.current?.focus({ preventScroll: true });
-      slideRef.current?.scrollIntoView({ block: 'nearest' });
-    });
-  };
-  const resultRef = useRef<HTMLDivElement>(null);
-  const score = scorePractice(lesson.practice, attempt.answers);
-  const complete = practiceComplete(attempt, lesson.practice);
-  const updateAnswer = (id: string, answer: string) =>
-    onChange({ ...attempt, answers: { ...attempt.answers, [id]: answer } });
-  return (
-    <section id="lesson-practice" className="lesson-quiz" aria-labelledby="lesson-practice-title">
-      <p className="eyebrow">CHECKPOINT · SAVED FOR YOUR INSTRUCTOR</p>
-      <h3 id="lesson-practice-title">Show what you learned</h3>
-      <p>
-        Answer all {lesson.practice.length} questions. Multiple-choice responses are checked
-        automatically. For written responses, compare your reasoning with the model answer, then
-        mark each review complete.
-      </p>
-      <nav className="quiz-slide-nav" aria-label="Practice questions">
-        <button
-          className="button button-small button-glass"
-          disabled={questionIndex === 0}
-          onClick={() => goToQuestion(questionIndex - 1)}
-        >
-          <ChevronLeft size={16} aria-hidden="true" /> Previous question
-        </button>
-        <label>
-          <span className="sr-only">Choose question</span>
-          <select
-            value={questionIndex}
-            onChange={(event) => goToQuestion(Number(event.target.value))}
-          >
-            {lesson.practice.map((q, index) => (
-              <option key={q.id} value={index}>
-                Question {index + 1} of {lesson.practice.length}
-                {attempt.submitted && q.type === 'short'
-                  ? attempt.reviewed.includes(q.id)
-                    ? ' · Reviewed'
-                    : ' · Needs review'
-                  : attempt.answers[q.id]?.trim()
-                    ? ' · Answered'
-                    : ' · Unanswered'}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button
-          className="button button-small button-glass"
-          disabled={questionIndex === lesson.practice.length - 1}
-          onClick={() => goToQuestion(questionIndex + 1)}
-        >
-          Next question <ChevronRight size={16} aria-hidden="true" />
-        </button>
-      </nav>
-      {lesson.practice.slice(questionIndex, questionIndex + 1).map((q) => (
-        <div
-          key={q.id}
-          ref={slideRef}
-          className="quiz-question"
-          tabIndex={-1}
-          role="group"
-          aria-label={`Question ${questionIndex + 1} of ${lesson.practice.length}`}
-        >
-          <fieldset disabled={attempt.submitted}>
-            <legend>
-              <span className="question-number">{String(questionIndex + 1).padStart(2, '0')}</span>
-              {q.prompt}
-              <small>
-                {q.type === 'short'
-                  ? 'Written · self-review'
-                  : `${q.points ?? 1} ${(q.points ?? 1) === 1 ? 'point' : 'points'}`}
-              </small>
-            </legend>
-            {q.type === 'mcq' && q.options ? (
-              <ChoiceOptions
-                name={q.id}
-                label={q.prompt}
-                options={q.options.map((option) => ({ id: option, text: option }))}
-                value={attempt.answers[q.id] ?? ''}
-                correctOptions={attempt.submitted ? [q.answer] : []}
-                onChange={(answer) => updateAnswer(q.id, answer)}
-              />
-            ) : (
-              <label className="quiz-written">
-                <span>Your answer</span>
-                <textarea
-                  rows={4}
-                  maxLength={10000}
-                  value={attempt.answers[q.id] ?? ''}
-                  onChange={(event) => updateAnswer(q.id, event.target.value)}
-                  placeholder="Explain the mechanism, show calculations, and include units where needed."
-                />
-              </label>
-            )}
-          </fieldset>
-          {attempt.submitted && (
-            <div className="quiz-review">
-              {q.type === 'mcq' && (
-                <strong className="quiz-verdict">
-                  {attempt.answers[q.id] === q.answer ? 'Correct' : 'Review this answer'}
-                </strong>
-              )}
-              <p>
-                <strong>Model answer:</strong> {q.answer}
-              </p>
-              <p>{q.explanation}</p>
-              {q.type === 'short' && (
-                <label className="quiz-self-review">
-                  <input
-                    type="checkbox"
-                    checked={attempt.reviewed.includes(q.id)}
-                    onChange={(event) =>
-                      onChange({
-                        ...attempt,
-                        reviewed: event.target.checked
-                          ? [...attempt.reviewed, q.id]
-                          : attempt.reviewed.filter((id) => id !== q.id),
-                      })
-                    }
-                  />
-                  I compared my reasoning with this model answer.
-                </label>
-              )}
-            </div>
-          )}
-        </div>
-      ))}
-      {!attempt.submitted ? (
-        <div className="lesson-actions">
-          <button
-            className="button button-primary"
-            disabled={score.answered !== lesson.practice.length}
-            onClick={() => {
-              onChange({ ...attempt, submitted: true });
-              requestAnimationFrame(() => resultRef.current?.focus());
-            }}
-          >
-            Check my answers
-          </button>
-          <span aria-live="polite">
-            {score.answered}/{lesson.practice.length} answered
-          </span>
-        </div>
-      ) : (
-        <div ref={resultRef} className="quiz-result" role="status" tabIndex={-1}>
-          <strong>
-            Multiple choice: {score.earned} / {score.possible} points
-          </strong>
-          <p>
-            Written responses reviewed: {attempt.reviewed.length} / {score.written}.{' '}
-            {complete
-              ? 'Practice complete. Revisit any answer you want to strengthen.'
-              : 'Use the question navigation to compare and review every written response.'}
-          </p>
-          <div className="lesson-actions">
-            <button
-              className="button button-primary"
-              disabled={!complete || submitting}
-              onClick={async () => {
-                setSubmitting(true);
-                setSubmitError('');
-                try {
-                  await onSubmit();
-                } catch (error) {
-                  setSubmitError(authMessage(error));
-                } finally {
-                  setSubmitting(false);
-                }
-              }}
-            >
-              {submitting ? 'Submitting…' : record ? 'Submit lesson again' : 'Submit lesson'}
-            </button>
-            <button
-              className="button button-small button-glass"
-              onClick={() => onChange({ ...attempt, submitted: false, reviewed: [] })}
-            >
-              Revise answers
-            </button>
-          </div>
-          {record && (
-            <p className="lesson-submitted">
-              <Check size={16} aria-hidden="true" /> Lesson submitted and marked complete.
-              {record.maxScore > 0 &&
-                ` Recorded score: ${record.score} / ${record.maxScore} multiple-choice points.`}
-            </p>
-          )}
-          {submitError && (
-            <p className="form-error" role="alert">
-              {submitError} Your answers are still saved in this browser.
-            </p>
-          )}
-        </div>
-      )}
-    </section>
-  );
-}
-
 type LabEntry = { id: string; kind: string; title: string; blurb: string; render: () => ReactNode };
 
 function LabsStage({
@@ -569,17 +358,25 @@ function LessonDetail({
   eventId,
   unitNumber,
   attempt,
-  onChange,
-  record,
-  onSubmit,
+  completed,
+  parts,
+  onAnswer,
+  onCheck,
+  onRetake,
+  onPart,
 }: {
   lesson: Lesson;
   eventId: string;
   unitNumber: number;
   attempt: LessonAttempt;
-  onChange: (attempt: LessonAttempt) => void;
-  record?: LessonRecord;
-  onSubmit: () => Promise<void>;
+  /** Recorded as complete for the instructor (from any device). */
+  completed: boolean;
+  /** Stages already recorded for the instructor. */
+  parts: LessonPart[];
+  onAnswer: (questionId: string, answer: string) => void;
+  onCheck: (questionId: string, answer: string, selfMark?: boolean) => Promise<CheckOutcome>;
+  onRetake: () => Promise<void>;
+  onPart: (part: Exclude<LessonPart, 'checkpoint'>, score?: number, maxScore?: number) => void;
 }) {
   const { ako, updateAko } = useSettings();
   const [teachingLine, setTeachingLine] = useState('');
@@ -636,11 +433,13 @@ function LessonDetail({
     const el = endRef.current;
     if (!el || readingDone || stage !== 'learn') return;
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) setReadingDone(true);
+      if (!entry.isIntersecting) return;
+      setReadingDone(true);
+      onPart('learn');
     });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [readingDone, stage]);
+  }, [readingDone, stage, onPart]);
 
   const extras = extrasFor(lesson.id, lesson);
   const labs = (extras.labs ?? []).map((id) => topicLabs[id]).filter(Boolean);
@@ -682,12 +481,11 @@ function LessonDetail({
         stagesRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
     });
   };
-  const checkpointDone = practiceComplete(attempt, lesson.practice) || !!record;
   const done: Record<LessonStage, boolean> = {
-    learn: readingDone,
-    practice: visited.includes('practice'),
-    labs: visited.includes('labs'),
-    checkpoint: checkpointDone,
+    learn: readingDone || parts.includes('learn'),
+    practice: parts.includes('practice') || visited.includes('practice'),
+    labs: parts.includes('labs') || visited.includes('labs'),
+    checkpoint: completed || checkpointProgress(attempt, lesson.practice).complete,
   };
   const mcq = lesson.practice.filter((q) => q.type === 'mcq').length;
   const tocItems = [
@@ -831,31 +629,6 @@ function LessonDetail({
                     .map((figure) => (
                       <LessonReferenceFigure key={figure.src} figure={figure} />
                     ))}
-                  {index === Math.min(3, lesson.sections.length - 1) && sim.kind === 'explorer' && (
-                    <SubjectExplorer sim={sim} preview />
-                  )}
-                  {index === Math.min(3, lesson.sections.length - 1) && sim.kind !== 'model' && (
-                    <aside className="lf-lab-teaser">
-                      <FlaskConical size={18} aria-hidden="true" />
-                      <div>
-                        <strong>Try it in the lab</strong>
-                        <p>{sim.kind === 'investigation' ? sim.question : sim.challenge}</p>
-                      </div>
-                      <button
-                        type="button"
-                        className="button button-small button-glass"
-                        onClick={() => goTo('labs', 'lesson-lab')}
-                      >
-                        Open the lab →
-                      </button>
-                    </aside>
-                  )}
-                  {index === Math.min(4, lesson.sections.length - 1) && labs[0] && (
-                    <TopicLabPreview
-                      lab={labs[0]}
-                      onOpen={() => goTo('labs', `topic-lab-${labs[0].id}`)}
-                    />
-                  )}
                   {(extras.checks ?? [])
                     .filter((item) => item.after === index)
                     .map((item) => (
@@ -921,23 +694,25 @@ function LessonDetail({
         className="lf-stage"
         hidden={stage !== 'checkpoint'}
       >
-        <QuizView
+        <CheckpointView
           key={lesson.id}
           lesson={lesson}
           attempt={attempt}
-          onChange={onChange}
-          record={record}
-          onSubmit={onSubmit}
+          completed={completed}
+          onAnswer={onAnswer}
+          onCheck={onCheck}
+          onRetake={onRetake}
         />
       </div>
     </article>
   );
 }
 
-const emptyAttempt: LessonAttempt = { answers: {}, submitted: false, reviewed: [] };
+type LessonProgress = { answers: CheckedAnswer[]; parts: LessonPartRecord[] };
 export function LessonsView({ course, studentId }: { course: EventLessons; studentId: string }) {
   const { request } = useAuth();
   const [records, setRecords] = useState<Record<string, LessonRecord>>({});
+  const [parts, setParts] = useState<Record<string, LessonPart[]>>({});
   const ordered = course.units
     .flatMap((unit) => unit.lessonIds)
     .map((id) => course.lessons.find((lesson) => lesson.id === id)!);
@@ -985,15 +760,17 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   const lesson = course.lessons.find((item) => item.id === lessonId) ?? ordered[0];
   const unit = course.units.find((item) => item.id === lesson.unitId)!;
   const currentIndex = ordered.findIndex((item) => item.id === lesson.id);
-  const completed = course.lessons.filter((item) =>
-    practiceComplete(attempts[item.id], item.practice),
-  ).length;
-  // Lessons already submitted from any browser; a failed read only hides the "submitted" marks.
+  // A lesson is complete once its checkpoint is finished, on this device or recorded from another.
+  const isComplete = (id: string) =>
+    !!records[id] ||
+    checkpointProgress(attempts[id], course.lessons.find((l) => l.id === id)!.practice).complete;
+  const completed = course.lessons.filter((item) => isComplete(item.id)).length;
+  // Lessons already completed from any browser; a failed read only hides those marks.
   useEffect(() => {
     let active = true;
     request<WorkRecord[]>('/api/progress')
       .then((work) => {
-        if (active)
+        if (active && Array.isArray(work))
           setRecords((current) => ({
             ...Object.fromEntries(
               work
@@ -1008,17 +785,127 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
       active = false;
     };
   }, [request, course.eventId]);
-  async function submitLesson(id: string) {
-    const record = await request<LessonRecord>('/api/progress', {
-      method: 'POST',
-      body: JSON.stringify({
-        eventId: course.eventId,
-        lessonId: id,
-        answers: attempts[id]?.answers ?? {},
-      }),
-    });
-    setRecords((current) => ({ ...current, [id]: record }));
+  // Checked answers and finished stages from any device. The server's marks replace this
+  // browser's, so a retake or check elsewhere shows here too; unchecked drafts are kept.
+  useEffect(() => {
+    let active = true;
+    request<LessonProgress>(`/api/lessons/progress?eventId=${encodeURIComponent(course.eventId)}`)
+      .then((progress) => {
+        if (!active || !progress || !Array.isArray(progress.answers)) return;
+        setAttempts((current) =>
+          Object.fromEntries(
+            course.lessons.map((item) => {
+              const local = current[item.id] ?? emptyAttempt;
+              const rows = progress.answers.filter((row) => row.lessonId === item.id);
+              return [
+                item.id,
+                {
+                  answers: {
+                    ...local.answers,
+                    ...Object.fromEntries(rows.map((row) => [row.questionId, row.answer])),
+                  },
+                  checks: Object.fromEntries(
+                    rows.map((row) => [
+                      row.questionId,
+                      {
+                        correct: row.correct,
+                        by: row.by,
+                        ...(row.feedback ? { feedback: row.feedback } : {}),
+                      },
+                    ]),
+                  ),
+                },
+              ];
+            }),
+          ),
+        );
+        if (Array.isArray(progress.parts))
+          setParts((current) => {
+            const next = { ...current };
+            for (const row of progress.parts)
+              next[row.lessonId] = [...new Set([...(next[row.lessonId] ?? []), row.part])];
+            return next;
+          });
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, [request, course]);
+  const updateAttempt = (id: string, update: (attempt: LessonAttempt) => LessonAttempt) =>
+    setAttempts((current) => ({ ...current, [id]: update(current[id] ?? emptyAttempt) }));
+  async function checkAnswer(
+    id: string,
+    questionId: string,
+    answer: string,
+    selfMark?: boolean,
+  ): Promise<CheckOutcome> {
+    try {
+      const response = await request<CheckResponse>('/api/lessons/check', {
+        method: 'POST',
+        body: JSON.stringify({
+          eventId: course.eventId,
+          lessonId: id,
+          questionId,
+          answer,
+          ...(selfMark === undefined ? {} : { selfMark }),
+        }),
+      });
+      if (response?.status === 'self-mark') return response;
+      if (response?.status !== 'checked') throw new Error('The answer could not be checked.');
+      updateAttempt(id, (attempt) => ({
+        answers: { ...attempt.answers, [questionId]: answer },
+        checks: { ...attempt.checks, [questionId]: response.result },
+      }));
+      if (response.lesson) {
+        const summary = response.lesson;
+        setRecords((current) => ({ ...current, [id]: summary }));
+        setParts((current) => ({
+          ...current,
+          [id]: [...new Set([...(current[id] ?? []), 'checkpoint' as const])],
+        }));
+      }
+      return { status: 'checked', result: response.result };
+    } catch (error) {
+      return { status: 'error', message: authMessage(error) };
+    }
   }
+  async function retake(id: string) {
+    await request('/api/lessons/check', {
+      method: 'DELETE',
+      body: JSON.stringify({ eventId: course.eventId, lessonId: id }),
+    });
+    updateAttempt(id, () => emptyAttempt);
+  }
+  // Stage completion is best effort: a failed save is retried the next time the stage finishes.
+  const sentParts = useRef(new Set<string>());
+  const recordPart = useCallback(
+    (id: string, part: Exclude<LessonPart, 'checkpoint'>, score?: number, maxScore?: number) => {
+      const key = `${id}:${part}`;
+      if (sentParts.current.has(key)) return;
+      sentParts.current.add(key);
+      setParts((current) =>
+        current[id]?.includes(part)
+          ? current
+          : { ...current, [id]: [...(current[id] ?? []), part] },
+      );
+      request('/api/lessons/progress', {
+        method: 'POST',
+        body: JSON.stringify({
+          eventId: course.eventId,
+          lessonId: id,
+          part,
+          ...(maxScore ? { score, maxScore } : {}),
+        }),
+      }).catch(() => sentParts.current.delete(key));
+    },
+    [request, course.eventId],
+  );
+  const onPart = useCallback(
+    (part: Exclude<LessonPart, 'checkpoint'>, score?: number, maxScore?: number) =>
+      recordPart(lessonId, part, score, maxScore),
+    [recordPart, lessonId],
+  );
   function selectLesson(id: string, focus = false) {
     setLessonId(id);
     if (focus)
@@ -1050,15 +937,14 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
         </div>
         <div className="course-progress">
           <label htmlFor="course-progress">
-            {completed} of {course.lessons.length} practices complete ·{' '}
-            {course.lessons.filter((item) => records[item.id]).length} submitted
+            {completed} of {course.lessons.length} lessons complete
           </label>
           <progress id="course-progress" value={completed} max={course.lessons.length} />
         </div>
         <p className="lesson-save-note" role="status">
           {storageUnavailable
             ? 'Browser storage is unavailable. You can keep studying, but this session’s progress may not survive a reload.'
-            : 'Answers are saved for your account in this browser. Submit a lesson to record it as completed for your instructor.'}
+            : 'Each checkpoint answer is marked as you check it and saved for your instructor. A lesson is complete once its checkpoint is finished.'}
         </p>
       </div>
       {!loaded ? (
@@ -1072,9 +958,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             </div>
             <div className="lessons-units" role="group" aria-label="Unit sections">
               {course.units.map((item, i) => {
-                const count = item.lessonIds.filter((id) =>
-                  practiceComplete(attempts[id], course.lessons.find((l) => l.id === id)!.practice),
-                ).length;
+                const count = item.lessonIds.filter(isComplete).length;
                 return (
                   <button
                     key={item.id}
@@ -1086,7 +970,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
                     <span>
                       {item.title.replace(/^Unit \d+:\s*/, '')}
                       <small>
-                        {count}/{item.lessonIds.length} practices complete
+                        {count}/{item.lessonIds.length} lessons complete
                       </small>
                     </span>
                     {count === item.lessonIds.length && <Check size={16} aria-label="Complete" />}
@@ -1102,7 +986,8 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             <div className="lessons-list" role="group" aria-label="Lessons in this unit">
               {unit.lessonIds.map((id, i) => {
                 const item = course.lessons.find((candidate) => candidate.id === id)!;
-                const done = practiceComplete(attempts[id], item.practice);
+                const done = isComplete(id);
+                const record = records[id];
                 return (
                   <button
                     key={id}
@@ -1112,7 +997,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
                   >
                     <span className="lesson-index">
                       {done ? (
-                        <Check size={18} aria-label="Practice complete" />
+                        <Check size={18} aria-label="Lesson complete" />
                       ) : (
                         String(i + 1).padStart(2, '0')
                       )}
@@ -1120,9 +1005,9 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
                     <span>
                       {item.title}
                       <small>
-                        {item.durationMin} min · Text + interactive lab · {item.practice.length}{' '}
-                        questions{item.extension ? ' · Extension' : ''}
-                        {records[id] ? ' · Submitted' : ''}
+                        {item.durationMin} min · {item.practice.length} checkpoint questions
+                        {item.extension ? ' · Extension' : ''}
+                        {record ? ` · Complete · ${record.score}/${record.maxScore} correct` : ''}
                       </small>
                     </span>
                     <ChevronRight size={18} aria-hidden="true" />
@@ -1137,9 +1022,20 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             eventId={course.eventId}
             unitNumber={course.units.findIndex((item) => item.id === lesson.unitId) + 1}
             attempt={attempts[lesson.id] ?? emptyAttempt}
-            onChange={(attempt) => setAttempts((current) => ({ ...current, [lesson.id]: attempt }))}
-            record={records[lesson.id]}
-            onSubmit={() => submitLesson(lesson.id)}
+            completed={!!records[lesson.id]}
+            parts={parts[lesson.id] ?? []}
+            onAnswer={(questionId, answer) =>
+              updateAttempt(lesson.id, (attempt) =>
+                attempt.checks[questionId]
+                  ? attempt
+                  : { ...attempt, answers: { ...attempt.answers, [questionId]: answer } },
+              )
+            }
+            onCheck={(questionId, answer, selfMark) =>
+              checkAnswer(lesson.id, questionId, answer, selfMark)
+            }
+            onRetake={() => retake(lesson.id)}
+            onPart={onPart}
           />
           <nav className="lesson-pagination" aria-label="Course lesson navigation">
             <button

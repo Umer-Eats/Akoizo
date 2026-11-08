@@ -8,6 +8,19 @@ import { eventPagePath } from '@/lib/seo';
 type Item = { label: string; hint: string; href: string; kind: 'page' | 'event' };
 
 const pages: Item[] = [
+  { label: 'Binder library', hint: 'Shared references', href: '/dashboard/binders', kind: 'page' },
+  {
+    label: 'Course library',
+    hint: 'Saved practice setups',
+    href: '/dashboard/courses',
+    kind: 'page',
+  },
+  {
+    label: 'Cheat sheet library',
+    hint: 'Two-sided references',
+    href: '/dashboard/cheatsheets',
+    kind: 'page',
+  },
   { label: 'Home', hint: 'Page', href: '/', kind: 'page' },
   { label: 'Study tools', hint: 'Every event guide', href: '/study-tools', kind: 'page' },
   { label: 'Global rankings', hint: 'Page', href: '/rankings', kind: 'page' },
@@ -64,20 +77,20 @@ export function CommandPalette() {
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [...pages.slice(1, 5), ...events.slice(0, 6)];
-    return [...pages, ...events]
-      .filter((item) => `${item.label} ${item.hint}`.toLowerCase().includes(q))
-      // Name matches first, then matches on division or subject.
-      .sort(
-        (a, b) =>
-          Number(!a.label.toLowerCase().includes(q)) - Number(!b.label.toLowerCase().includes(q)),
-      )
-      .slice(0, 12);
+    return (
+      [...pages, ...events]
+        .filter((item) => `${item.label} ${item.hint}`.toLowerCase().includes(q))
+        // Name matches first, then matches on division or subject.
+        .sort(
+          (a, b) =>
+            Number(!a.label.toLowerCase().includes(q)) - Number(!b.label.toLowerCase().includes(q)),
+        )
+        .slice(0, 12)
+    );
   }, [query]);
 
   useEffect(() => {
-    list.current
-      ?.querySelector(`[data-index="${active}"]`)
-      ?.scrollIntoView({ block: 'nearest' });
+    list.current?.querySelector(`[data-index="${active}"]`)?.scrollIntoView({ block: 'nearest' });
   }, [active]);
 
   if (!open) return null;

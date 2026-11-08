@@ -25,6 +25,7 @@ import type { Binder, BinderCard, BinderLibrary } from '@/lib/binder-types';
 import type { SheetLevel, SheetUpload } from '@/lib/cheatsheet-types';
 import './cheatsheets.css';
 import './binders.css';
+import { ReferenceLibraryTabs } from './reference-library-tabs';
 
 const fileTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/webp'];
 async function uploadFile(file: File): Promise<SheetUpload> {
@@ -764,6 +765,7 @@ export function BinderLibraryPage() {
         <h1>The binder library.</h1>
         <p>Explore Division B and C study binders across every school community.</p>
       </section>
+      <ReferenceLibraryTabs current="binders" />
       {loading ? (
         <p role="status">Loading your account…</p>
       ) : profile ? (

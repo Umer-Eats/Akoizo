@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "season": 2027,
+  "division": "B",
+  "eventId": "scrambler",
+  "title": "Regional Scrambler Practice Course Setup",
+  "level": "regional",
+  "parameters": {
+    "Target distance (m)": "8.50 m",
+    "Target time (s, if applicable)": "Not applicable — Scrambler timing is a recorded metric, not a fixed target time",
+    "Barrier position": "Placed at 8.50 m exactly over the Target Point",
+    "Bonus attempt (yes/no)": "yes",
+    "Inside/outside can positions and gap (cm)": "Outside can inside edge is 100.0 cm from the imaginary center line; inside can placed by competitors with outside edge between 0.0 and 100.0 cm from the inside edge of the outside can",
+    "Track width and surface": "Smooth, level, hard surface, 2.0 m wide track extending at least 1.0 m behind the Start Point"
+  },
+  "notes": "Ensure floor protection pads are used beneath any falling mass to prevent surface damage, and verify that the Terminal Barrier is hard, flat, vertical, at least 25.0 cm tall, and 1.00 m long.",
+  "setup": [
+    "Mark a smooth, level, hard floor with an imaginary center line connecting the Start Point and Target Point.",
+    "Place the Start Point tape (approximately 5 cm x 2.5 cm) centered on the imaginary center line.",
+    "Place the Target Point tape at the selected Target Distance of 8.50 m from the Start Point.",
+    "Erect the Terminal Barrier (TB) at the Target Point perpendicular to the imaginary center line, ensuring it is at least 25.0 cm tall and 1.00 m long.",
+    "Mark the Bonus Line halfway between the Start Point and Target Point, extending perpendicular at least 1.0 m to the left.",
+    "Place the Outside Bonus Can on the Bonus Line with its inside edge exactly 100.0 cm from the track's imaginary center line."
+  ],
+  "ruleReferences": [
+    "Section 2.e",
+    "Section 3.c.iii",
+    "Section 5.f",
+    "Section 7.c.i",
+    "Section 7.c.ii.(1)",
+    "Section 7.c.ii.(2)",
+    "Section 7.c.ii.(3)",
+    "Section 7.c.iii",
+    "Section 7.c.iv.(1)",
+    "Section 7.c.v",
+    "Section 8.c"
+  ],
+  "diagram": {
+    "view": "schematic",
+    "nodes": [
+      {
+        "label": "Start Point",
+        "x": 10,
+        "y": 50
+      },
+      {
+        "label": "Bonus Line",
+        "x": 50,
+        "y": 50
+      },
+      {
+        "label": "Outside Can",
+        "x": 50,
+        "y": 20
+      },
+      {
+        "label": "Inside Can",
+        "x": 50,
+        "y": 35
+      },
+      {
+        "label": "Target Point and Terminal Barrier",
+        "x": 90,
+        "y": 50
+      }
+    ],
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "label": "4.25 m"
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "label": "4.25 m"
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "label": "100.0 cm"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "label": "Gap variable"
+      }
+    ]
+  }
+}

@@ -49,7 +49,7 @@ function titleOf(division: Division, eventId: string, kind: WorkKind, targetId: 
 }
 
 /** Complete the pending lesson and unit assignments that these students' lesson progress covers. */
-async function settleLessons(db: Database, key: string, course: EventLessons, students: string[]) {
+export async function settleLessons(db: Database, key: string, course: EventLessons, students: string[]) {
   const marks = students.map(() => '?').join(',');
   const pending = await db.all(
     `SELECT id,student_id,kind,target_id FROM study_assignments
@@ -157,7 +157,7 @@ export async function removeStudyAssignment(db: Database, instructor: Profile, i
   return result[0].rowsAffected > 0;
 }
 
-function studentEvent(student: Profile, eventId: unknown) {
+export function studentEvent(student: Profile, eventId: unknown) {
   if (student.role !== 'student' || !student.division)
     throw new AppError(403, 'A student account is required.');
   const event = eventsForDivision(student.division).find((candidate) => candidate.id === eventId);
@@ -165,7 +165,7 @@ function studentEvent(student: Profile, eventId: unknown) {
   return { division: student.division, eventId: event.id };
 }
 
-const saveResult = (
+export const saveResult = (
   student: Profile,
   key: string,
   kind: 'Lesson' | 'Lab',

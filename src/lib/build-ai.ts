@@ -137,7 +137,9 @@ export async function runBuildAI(
 ) {
   const key = buildKey();
   const model =
-    process.env.GEMINI_VIDEO_MODEL || process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
+    (mode === 'course' ? process.env.GEMINI_COURSE_MODEL : process.env.GEMINI_VIDEO_MODEL) ||
+    process.env.GEMINI_MODEL ||
+    'gemini-3.5-flash-lite';
   if (!/^gemini-[a-zA-Z0-9.-]+$/.test(model))
     throw new AppError(503, 'The build tools model is not configured.');
   buildEvent(course.division, course.eventId);

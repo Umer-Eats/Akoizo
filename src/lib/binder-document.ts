@@ -127,41 +127,47 @@ function grid(d: BinderDiagram, base: number, flow: boolean) {
     .join('');
 }
 function cycle(d: BinderDiagram, base: number) {
-  const n = d.items.length,
-    w = n <= 4 ? 190 : n === 5 ? 168 : 150,
-    h = 74,
-    cx = W / 2,
-    cy = 128,
-    rx = 205,
-    ry = 88,
-    point = (deg: number) => {
-      const a = (deg * Math.PI) / 180;
-      return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)] as const;
-    };
-  canvas = 256;
-  let out = `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="${muted}" stroke-width="2" stroke-dasharray="5 4"/>`;
-  for (let i = 0; i < n; i++) {
-    // Arrowheads sit on the ring midway between neighbouring stages, pointing clockwise.
-    const mid = -90 + ((i + 0.5) * 360) / n,
-      [x, y] = point(mid),
-      [x0, y0] = point(mid - 4);
-    out += arrow(
-      [
-        [x0, y0],
-        [x, y],
-      ],
-      muted,
-    ).replace(/<polyline[^>]+>/, '');
-  }
-  return (
-    out +
-    d.items
-      .map((item, i) => {
-        const [x, y] = point(-90 + (i * 360) / n);
-        return `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" fill="#fff"/>${card(item, x - w / 2, y - h / 2, w, h, tone(base, i), String(i + 1))}`;
-      })
-      .join('')
-  );
+  // Card dimensions determine spacing, so long stage labels never collide on a fixed ring.
+  const w = 240,
+    gap = 28,
+    leftCount = Math.ceil(d.items.length / 2);
+  const h = Math.max(...d.items.map((item) => cardHeight(item, w, true)));
+  const at = (i: number) => ({
+    x: i < leftCount ? 8 : W - w - 8,
+    y: 24 + (i < leftCount ? i : d.items.length - 1 - i) * (h + gap),
+  });
+  canvas = 48 + leftCount * h + (leftCount - 1) * gap;
+  return d.items
+    .map((item, i) => {
+      const p = at(i),
+        next = at((i + 1) % d.items.length);
+      let path: [number, number][];
+      if (i === d.items.length - 1) {
+        path = [
+          [p.x + w / 2, p.y - 2],
+          [p.x + w / 2, 10],
+          [next.x + w / 2, 10],
+          [next.x + w / 2, next.y - 3],
+        ];
+      } else if (p.x !== next.x) {
+        path = [
+          [p.x + w + 2, p.y + h / 2],
+          [next.x - 3, next.y + h / 2],
+        ];
+      } else if (next.y > p.y) {
+        path = [
+          [p.x + w / 2, p.y + h + 2],
+          [next.x + w / 2, next.y - 3],
+        ];
+      } else {
+        path = [
+          [p.x + w / 2, p.y - 2],
+          [next.x + w / 2, next.y + h + 3],
+        ];
+      }
+      return card(item, p.x, p.y, w, h, tone(base, i), String(i + 1)) + arrow(path, muted);
+    })
+    .join('');
 }
 function layers(d: BinderDiagram, base: number) {
   let next = 4;
@@ -334,7 +340,7 @@ export function binderDocument(binder: Binder) {
   const tocPages = Array.from({ length: toc }, (_, page) => {
     const intro =
       page === 0
-        ? `<p class="eyebrow">AKOIZO / DIVISION ${binder.division ?? 'C'} / 2027</p><h1>${esc(binder.title)}</h1><p class="subtitle">${esc(binder.level)} study binder · ${total} pages · ${sections.length} color-coded sections</p><aside><p><strong>Using this binder.</strong> ${esc(guide.resources)} Each section has its own tab color on the page edge; section numbers and titles still work when printed without color.</p><p>AI-generated study material: verify details and tournament clarifications against the 2027 event rules. Diagrams are drawn from the text as labeled schematics. Photographs are unmodified Wikimedia Commons files credited beside each use.</p></aside><h2>Table of contents</h2>`
+        ? `<p class="eyebrow">AKOIZO / DIVISION ${binder.division ?? 'C'} / 2027</p><h1>${esc(binder.title)}</h1><p class="subtitle">${esc(binder.level)} study binder · ${total} pages · ${sections.length} color-coded sections</p><aside><p><strong>Using this binder.</strong> ${esc(guide.resources)} For timed tests, use the topic index first, then the diagram, quick-lookup bullets, comparison table and critical facts. Each section has its own tab color on the page edge; section numbers and titles still work when printed without color.</p><p>AI-generated study material: verify details and tournament clarifications against the 2027 event rules. Diagrams are drawn from the text as labeled schematics. Photographs are unmodified Wikimedia Commons files credited beside each use.</p></aside><h2>Table of contents</h2>`
         : `<h2>Table of contents <small>continued</small></h2>`;
     return `<section class="page toc" id="page-${page + 1}"><div class="toc-body">${intro}<div class="toc-columns"><div>${columns[page * 2].join('')}</div><div>${columns[page * 2 + 1].join('')}</div></div></div><footer>CONTENTS<span>${page + 1} / ${total}</span></footer></section>`;
   }).join('');
@@ -350,12 +356,19 @@ export function binderDocument(binder: Binder) {
           ? `<figure><img src="${esc(p.photo.src)}" alt="${esc(p.photo.title)}" loading="lazy" referrerpolicy="no-referrer"/><figcaption><strong>${esc(p.photo.title)}</strong> <em>${esc(p.photo.author)} · ${esc(p.photo.license)} · <a href="${esc(p.photo.source)}">Wikimedia Commons</a></em></figcaption></figure>`
           : '';
       const takeaways = p.takeaways.length
-        ? `<aside class="takeaways"><strong>Know this cold</strong><ul>${p.takeaways.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></aside>`
+        ? `<aside class="takeaways"><strong>Critical facts &amp; traps</strong><ul>${p.takeaways.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></aside>`
         : '';
       const table = p.table.rows.length
         ? `<table><thead><tr>${p.table.headers.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${p.table.rows.map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
         : '';
-      return `<section class="page" id="page-${number}" style="--section:${s.color}"><div class="tab" style="top:${(0.4 + s.index * tabHeight).toFixed(2)}in;height:${tabHeight.toFixed(2)}in">${s.index + 1}</div><div class="page-body"><div class="fit"><header><span>${s.index + 1} · ${esc(s.title)}</span><a href="#page-1">Contents ↑</a></header><h2>${esc(p.heading)}</h2><div class="prose">${p.paragraphs.map((t) => `<p>${esc(t)}</p>`).join('')}</div>${table}<figure class="diagram">${binderDiagramSvg(p.diagram, s.index)}<figcaption><strong>${esc(p.diagram.title)}.</strong> ${esc(p.diagram.caption)}</figcaption></figure>${figure || takeaways ? `<div class="extras${figure && takeaways ? '' : ' solo'}">${figure}${takeaways}</div>` : ''}<p class="sources">Sources: ${p.sources.map(esc).join(' · ')}</p></div></div><footer>${esc(s.title)}<span>${number} / ${total}</span></footer></section>`;
+      return `<section class="page" id="page-${number}" style="--section:${s.color}"><div class="tab" style="top:${(0.4 + s.index * tabHeight).toFixed(2)}in;height:${tabHeight.toFixed(2)}in">${s.index + 1}</div><div class="page-body"><div class="fit"><header><span>${s.index + 1} · ${esc(s.title)}</span><a href="#page-1">Contents ↑</a></header><h2>${esc(p.heading)}</h2><figure class="diagram">${binderDiagramSvg(p.diagram, s.index)}<figcaption><strong>${esc(p.diagram.title)}.</strong> ${esc(p.diagram.caption)}</figcaption></figure><div class="reference-grid${p.paragraphs.some((t) => t.length > 300) ? ' legacy' : ''}"><section class="reference-notes"><h3>Quick lookup</h3><ul class="reference-bullets">${p.paragraphs
+        .map((t) => {
+          const colon = t.indexOf(':');
+          return `<li>${colon > 0 && colon < 45 ? `<strong>${esc(t.slice(0, colon))}:</strong>${esc(t.slice(colon + 1))}` : esc(t)}</li>`;
+        })
+        .join(
+          '',
+        )}</ul></section>${table ? `<section class="reference-table"><h3>Compare / identify</h3>${table}</section>` : ''}</div>${figure || takeaways ? `<div class="extras${figure && takeaways ? '' : ' solo'}">${figure}${takeaways}</div>` : ''}<p class="sources">Sources: ${p.sources.map(esc).join(' · ')}</p></div></div><footer>${esc(s.title)}<span>${number} / ${total}</span></footer></section>`;
     })
     .join('');
   const nav = `<nav aria-label="Color-coded sections"><a href="#page-1">Contents</a>${sections.map((s) => `<a style="--section:${s.color}" href="#page-${s.start}">${s.index + 1}. ${esc(s.title)}</a>`).join('')}</nav>`;
@@ -367,7 +380,7 @@ nav{display:flex;gap:6px;flex-wrap:wrap;max-width:8.5in;margin:16px auto;padding
 .page-body{height:9.72in;font-size:10pt;line-height:1.42;overflow-wrap:anywhere}
 header{display:flex;justify-content:space-between;gap:16px;font-size:9pt;padding-bottom:7px;border-bottom:2.5px solid var(--section);color:var(--section);font-weight:700}header a{color:inherit;white-space:nowrap}
 h1{font-size:26pt;line-height:1.1;margin:8px 0 8px;letter-spacing:-.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}h2{font-size:1.75em;line-height:1.15;margin:.7em 0 .55em;color:var(--section)}p{margin:0 0 .75em}
-.prose{columns:2;column-gap:22px;text-align:left}.prose p{break-inside:avoid}
+.reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:.5em 0 .7em}.reference-notes:only-child{grid-column:1/-1}.reference-notes:only-child ul{columns:2;column-gap:22px}.reference-grid h3{font-size:.9em;color:var(--section);margin:0 0 .4em;border-bottom:1px solid #cbd5df;padding-bottom:3px;text-transform:uppercase;letter-spacing:.4px}.reference-bullets{margin:0;padding-left:1.1em;line-height:1.35}.reference-bullets li{margin:0 0 .45em;break-inside:avoid}.reference-table table{margin:0}.reference-grid.legacy{display:block}.legacy .reference-bullets{columns:2;column-gap:22px}.legacy .reference-table{margin-top:12px}
 table{border-collapse:collapse;width:100%;table-layout:fixed;font-size:.88em;margin:.4em 0 .9em}th,td{padding:4px 6px;border:1px solid #cbd5df;vertical-align:top;text-align:left}th{background:var(--section);color:#fff}tr:nth-child(even){background:#f5f8fa}
 figure{margin:0}figcaption{font-size:.8em;line-height:1.35;margin-top:5px;color:#33485c}figcaption em{color:${muted}}figcaption a{color:inherit}
 .diagram{margin:.3em 0 .8em;border:1px solid #d5dde5;border-radius:6px;padding:8px 8px 6px;background:#fbfcfd}.diagram svg{display:block;width:100%;height:auto}
@@ -386,15 +399,34 @@ footer{position:absolute;left:.5in;right:.62in;bottom:.22in;display:flex;justify
 // Runs in the preview frame. Every page keeps its full content: text steps down in size first,
 // then the page content is scaled as a whole, so nothing is clipped or dropped.
 export async function fitBinderDocument(doc: Document): Promise<boolean> {
-  for (const image of Array.from(doc.images)) {
-    const drop = () => image.closest('figure')?.classList.add('missing');
-    image.addEventListener('error', drop);
-    if (image.src.startsWith('data:') && image.complete && !image.naturalWidth) drop();
-  }
+  await Promise.all(
+    Array.from(doc.images, async (image) => {
+      const drop = () => image.closest('figure')?.classList.add('missing');
+      image.addEventListener('error', drop, { once: true });
+      image.loading = 'eager';
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      try {
+        // Resolve failed images before fitting; otherwise their empty slots shrink text
+        // permanently even after the image error removes the slot.
+        await Promise.race([
+          image.decode(),
+          new Promise<never>((_, reject) => {
+            timer = setTimeout(() => reject(new Error('Image timed out')), 5000);
+          }),
+        ]);
+      } catch {
+        drop();
+      } finally {
+        clearTimeout(timer);
+      }
+    }),
+  );
   let fits = true,
     count = 0;
   for (const body of Array.from(doc.querySelectorAll<HTMLElement>('.page-body'))) {
     const inner = body.firstElementChild as HTMLElement;
+    body.style.fontSize = '10pt';
+    inner.style.removeProperty('zoom');
     const over = () => body.scrollHeight > body.clientHeight + 1;
     for (let size = 10; over() && size >= 8.6; size -= 0.35)
       body.style.fontSize = `${size.toFixed(2)}pt`;

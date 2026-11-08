@@ -15,6 +15,9 @@ import {
   type BuildGrade,
 } from '@/lib/build-events';
 import './build-tools.css';
+import Link from 'next/link';
+import { CoursePreview } from './course-preview';
+import type { SavedCourse } from '@/lib/course-types';
 
 type CourseMap = { name: string; mime: string; data: string };
 function saveFile(name: string, data: string, type: string) {
@@ -61,6 +64,8 @@ export function BuildTools({
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [loaded, setLoaded] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [savedContent, setSavedContent] = useState('');
   const controller = useRef<AbortController | null>(null);
   const key = `akoizo:build:2027:${profile?.id}:${division}:${eventId}`;
   const svg = course.diagram.nodes.length ? courseSvg(course) : '';
@@ -68,6 +73,27 @@ export function BuildTools({
     setGrade(null);
   }, [course, map, video]);
   useEffect(() => {
+    let cancelled = false;
+    const id = new URLSearchParams(window.location.search).get('course');
+    if (id) {
+      void request<SavedCourse>(`/api/courses?id=${encodeURIComponent(id)}`)
+        .then((saved) => {
+          if (cancelled) return;
+          const next = parseCourse(saved.course, division, eventId);
+          setCourse(next);
+          setSavedContent(JSON.stringify(next));
+          setLoaded(true);
+        })
+        .catch((e) => {
+          if (!cancelled) {
+            setError(e instanceof Error ? e.message : 'Could not open this saved course.');
+            setLoaded(true);
+          }
+        });
+      return () => {
+        cancelled = true;
+      };
+    }
     try {
       const saved = localStorage.getItem(key);
       if (saved) setCourse(parseCourse(JSON.parse(saved), division, eventId));
@@ -75,7 +101,7 @@ export function BuildTools({
       setNotice('Your saved setup could not be opened. You can start a new one.');
     }
     setLoaded(true);
-  }, [key, division, eventId]);
+  }, [key, division, eventId, request]);
   useEffect(() => {
     if (!loaded) return;
     try {
@@ -111,11 +137,30 @@ export function BuildTools({
     setNotice('');
     try {
       if (file.size > 200_000) throw new Error('Choose an Akoizo course JSON file up to 200 KB.');
-      setCourse(parseCourse(JSON.parse(await file.text()), division, eventId));
+      const next = parseCourse(JSON.parse(await file.text()), division, eventId);
+      setCourse(next);
       setMap(null);
       setNotice('Course imported with its parameters and diagram.');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'This course could not be imported.');
+    }
+  }
+  async function persist(next: BuildCourse) {
+    setSaving(true);
+    setError('');
+    try {
+      await request<SavedCourse>('/api/courses', {
+        method: 'POST',
+        body: JSON.stringify({ course: next }),
+      });
+      setSavedContent(JSON.stringify(next));
+      setNotice('Course saved to the shared library. You can reopen it from any device.');
+    } catch (e) {
+      setError(
+        `Your course is ready, but saving failed. Use Save & share to retry. ${e instanceof Error ? e.message : ''}`,
+      );
+    } finally {
+      setSaving(false);
     }
   }
   async function generate() {
@@ -126,16 +171,24 @@ export function BuildTools({
     const abort = new AbortController();
     controller.current = abort;
     try {
-      const result = await request<{ course: BuildCourse }>('/api/build-tools', {
-        method: 'POST',
-        signal: abort.signal,
-        body: JSON.stringify({ action: 'course', eventId, course }),
-      });
-      setCourse(parseCourse(result.course, division, eventId));
+      const result = await request<{ course: BuildCourse; savedCourseId?: string }>(
+        '/api/build-tools',
+        {
+          method: 'POST',
+          signal: abort.signal,
+          body: JSON.stringify({ action: 'course', eventId, course }),
+        },
+      );
+      const next = parseCourse(result.course, division, eventId);
+      setCourse(next);
       setMap(null);
       setNotice(
         'Your course is ready. Review the dimensions and setup instructions before building.',
       );
+      if (result.savedCourseId) {
+        setSavedContent(JSON.stringify(next));
+        setNotice('Course saved to the shared library. You can reopen it from any device.');
+      } else await persist(next);
     } catch (e) {
       if (!abort.signal.aborted)
         setError(e instanceof Error ? e.message : 'Could not generate your course.');
@@ -507,6 +560,23 @@ export function BuildTools({
                 course.
               </p>
               <div className="build-actions">
+                {profile?.role === 'student' && (
+                  <button
+                    className="button button-secondary"
+                    type="button"
+                    disabled={saving || busy || savedContent === JSON.stringify(course)}
+                    onClick={() => void persist(course)}
+                  >
+                    {saving
+                      ? 'Saving…'
+                      : savedContent === JSON.stringify(course)
+                        ? 'Saved to library'
+                        : 'Save & share course'}
+                  </button>
+                )}
+                <Link className="button button-secondary" href="/dashboard/courses">
+                  Course library
+                </Link>
                 <button
                   className="button button-secondary"
                   type="button"
@@ -538,6 +608,7 @@ export function BuildTools({
                   </button>
                 )}
               </div>
+              <CoursePreview key={JSON.stringify(course)} course={course} />
             </section>
           )}
           {!svg && mode === 'grade' && (

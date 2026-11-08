@@ -100,14 +100,29 @@ async function exportImagePages(
 async function imageBytes(
   element: Element,
 ): Promise<{ bytes: Uint8Array; width: number; height: number } | null> {
+  let svgSource = '';
+  if (element.tagName.toLowerCase() === 'svg') {
+    const svg = element.cloneNode(true) as SVGSVGElement;
+    const box = (element as SVGSVGElement).viewBox.baseVal;
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.setAttribute('width', String(box.width || 900));
+    svg.setAttribute('height', String(box.height || 600));
+    svgSource = new XMLSerializer().serializeToString(svg);
+  }
   const src =
     element.tagName.toLowerCase() === 'img'
       ? (element as HTMLImageElement).src
-      : `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(element))}`;
+      : `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgSource)}`;
+  let objectUrl: string | undefined;
   try {
     const response = await fetch(src, { referrerPolicy: 'no-referrer' });
     if (!response.ok) return null;
-    const bitmap = await createImageBitmap(await response.blob());
+    // Chromium cannot reliably createImageBitmap from an SVG Blob. Decode through an
+    // image with explicit intrinsic dimensions so Word retains generated diagrams.
+    const bitmap = new Image();
+    objectUrl = URL.createObjectURL(await response.blob());
+    bitmap.src = objectUrl;
+    await bitmap.decode();
     const canvas = document.createElement('canvas');
     const scale = Math.min(1, 900 / bitmap.width, 900 / bitmap.height);
     canvas.width = Math.max(1, Math.round(bitmap.width * scale));
@@ -127,6 +142,8 @@ async function imageBytes(
       : null;
   } catch {
     return null;
+  } finally {
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
   }
 }
 

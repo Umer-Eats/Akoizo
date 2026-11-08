@@ -1,4 +1,6 @@
 'use client';
+import Link from 'next/link';
+import { ReferenceLibraryTabs } from './reference-library-tabs';
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import {
   Download,
@@ -20,6 +22,38 @@ import type { CheatSheet, SheetCard, SheetLevel, SheetUpload } from '@/lib/cheat
 import './cheatsheets.css';
 
 type Library = { sheets: SheetCard[]; drafts?: SheetCard[]; nextCursor: string | null };
+
+export function CheatSheetLibraryPage() {
+  const { loading, profile, sessionError } = useAuth();
+  const eligible =
+    profile?.role === 'student' && (profile.division === 'B' || profile.division === 'C');
+  return (
+    <main id="main" className="page-container">
+      <section className="page-heading">
+        <p className="eyebrow">AKOIZO / SHARED REFERENCES</p>
+        <h1>The cheat sheet library.</h1>
+        <p>Find two-sided event references, shared across your division’s school communities.</p>
+      </section>
+      <ReferenceLibraryTabs current="cheatsheets" />
+      {loading ? (
+        <p role="status">Loading your account…</p>
+      ) : eligible ? (
+        <CheatSheets key={profile.id} />
+      ) : (
+        <div className="empty-state">
+          <p>
+            {sessionError || 'Cheat sheets are available to Division B and C student accounts.'}
+          </p>
+          {!profile && (
+            <Link href="/login/student" className="button button-primary">
+              Student sign in
+            </Link>
+          )}
+        </div>
+      )}
+    </main>
+  );
+}
 
 async function readUpload(file: File): Promise<SheetUpload> {
   const mime =
@@ -89,13 +123,13 @@ function loadFigure(id: string) {
   return pending;
 }
 
-export function CheatSheets({ eventId }: { eventId: string }) {
+export function CheatSheets({ eventId }: { eventId?: string }) {
   const { request, profile } = useAuth();
   // Each division has its own rules and shared library; the server enforces the same split.
   const division = profile?.division === 'B' ? 'B' : 'C';
   const sheetEvents = sheetEventsByDivision[division];
   const [library, setLibrary] = useState<Library>({ sheets: [], nextCursor: null });
-  const [filter, setFilter] = useState(eventId);
+  const [filter, setFilter] = useState(eventId ?? '');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -260,7 +294,7 @@ export function CheatSheets({ eventId }: { eventId: string }) {
   }
   async function generate(e: FormEvent) {
     e.preventDefault();
-    if (generating || reading) return;
+    if (generating || reading || !eventId) return;
     setGenerating(true);
     setError('');
     setNotice('');
@@ -336,128 +370,134 @@ export function CheatSheets({ eventId }: { eventId: string }) {
 
   return (
     <div className="cheatsheets">
-      <section className="sheet-create" aria-labelledby="sheet-create-title">
-        <div className="sheet-intro">
-          <span className="sheet-icon">
-            <Sparkles size={23} />
-          </span>
-          <div>
-            <span className="eyebrow">ONE SHEET. BOTH SIDES.</span>
-            <h2 id="sheet-create-title">Your event, condensed.</h2>
-            <p>
-              Build a dense {event.name} reference with Akoizo, grounded in the 2027 Division{' '}
-              {division} rules.
-            </p>
+      {eventId && (
+        <section className="sheet-create" aria-labelledby="sheet-create-title">
+          <div className="sheet-intro">
+            <span className="sheet-icon">
+              <Sparkles size={23} />
+            </span>
+            <div>
+              <span className="eyebrow">ONE SHEET. BOTH SIDES.</span>
+              <h2 id="sheet-create-title">Your event, condensed.</h2>
+              <p>
+                Build a dense {event.name} reference with Akoizo, grounded in the 2027 Division{' '}
+                {division} rules.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="sheet-spec">
-          <span>8.5 × 11 in</span>
-          <span>2 sides · 4 columns</span>
-          <span>Figures, tables + diagrams</span>
-        </div>
-        <form onSubmit={generate}>
-          <div className="sheet-fields">
+          <div className="sheet-spec">
+            <span>8.5 × 11 in</span>
+            <span>2 sides · 4 columns</span>
+            <span>Figures, tables + diagrams</span>
+          </div>
+          <form onSubmit={generate}>
+            <div className="sheet-fields">
+              <label>
+                Sheet title <span>(optional)</span>
+                <input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  maxLength={100}
+                  placeholder={`${event.name} reference`}
+                />
+              </label>
+              <label>
+                Tournament level
+                <select value={level} onChange={(e) => setLevel(e.target.value as SheetLevel)}>
+                  <option value="regional">Regional</option>
+                  <option value="state">State</option>
+                  <option value="national">National</option>
+                </select>
+              </label>
+            </div>
             <label>
-              Sheet title <span>(optional)</span>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                maxLength={100}
-                placeholder={`${event.name} reference`}
+              What should it focus on? <span>(optional)</span>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                maxLength={6000}
+                rows={3}
+                placeholder="Add priorities, observations, formulas, or data to include. Leave blank for complete event coverage."
               />
+              <small>{notes.length.toLocaleString()} / 6,000</small>
             </label>
-            <label>
-              Tournament level
-              <select value={level} onChange={(e) => setLevel(e.target.value as SheetLevel)}>
-                <option value="regional">Regional</option>
-                <option value="state">State</option>
-                <option value="national">National</option>
-              </select>
-            </label>
-          </div>
-          <label>
-            What should it focus on? <span>(optional)</span>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              maxLength={6000}
-              rows={3}
-              placeholder="Add priorities, observations, formulas, or data to include. Leave blank for complete event coverage."
-            />
-            <small>{notes.length.toLocaleString()} / 6,000</small>
-          </label>
-          <label className="sheet-exclusions">
-            Leave out what I already know <span>(optional)</span>
-            <textarea
-              value={exclusions}
-              onChange={(e) => setExclusions(e.target.value)}
-              maxLength={4000}
-              rows={3}
-              placeholder="For example: basic definitions, parts of the microscope, or formulas I know by heart. Be specific about the topics to exclude."
-            />
-            <small>
-              Akoizo will skip these topics and use the space for other material.{' '}
-              {exclusions.length.toLocaleString()} / 4,000
-            </small>
-          </label>
-          <div className="sheet-upload">
-            <label>
-              <Upload size={18} /> Add supplementary images or data
-              <input
-                type="file"
-                multiple
-                accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.csv"
-                disabled={reading || generating}
-                onChange={(e) => {
-                  void addFiles(e.target.files);
-                  e.target.value = '';
-                }}
+            <label className="sheet-exclusions">
+              Leave out what I already know <span>(optional)</span>
+              <textarea
+                value={exclusions}
+                onChange={(e) => setExclusions(e.target.value)}
+                maxLength={4000}
+                rows={3}
+                placeholder="For example: basic definitions, parts of the microscope, or formulas I know by heart. Be specific about the topics to exclude."
               />
+              <small>
+                Akoizo will skip these topics and use the space for other material.{' '}
+                {exclusions.length.toLocaleString()} / 4,000
+              </small>
             </label>
-            <p>
-              Up to 4 files, 2 MB total. Images/PDFs: 900 KB each. TXT/CSV: 100 KB each. Images
-              appear on the sheet; Akoizo condenses PDF and text content.
+            <div className="sheet-upload">
+              <label>
+                <Upload size={18} /> Add supplementary images or data
+                <input
+                  type="file"
+                  multiple
+                  accept=".png,.jpg,.jpeg,.webp,.pdf,.txt,.csv"
+                  disabled={reading || generating}
+                  onChange={(e) => {
+                    void addFiles(e.target.files);
+                    e.target.value = '';
+                  }}
+                />
+              </label>
+              <p>
+                Up to 4 files, 2 MB total. Images/PDFs: 900 KB each. TXT/CSV: 100 KB each. Images
+                appear on the sheet; Akoizo condenses PDF and text content.
+              </p>
+            </div>
+            {uploads.length > 0 && (
+              <ul className="sheet-files">
+                {uploads.map((u, i) => (
+                  <li key={`${i}-${u.name}`}>
+                    <FileText size={15} />
+                    <span>{u.name}</span>
+                    <button
+                      type="button"
+                      aria-label={`Remove ${u.name}`}
+                      disabled={generating}
+                      onClick={() => setUploads(uploads.filter((_, j) => i !== j))}
+                    >
+                      <X size={15} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p className="sheet-sharing">
+              <Globe2 size={17} /> Every generated sheet is shared across Division {division}{' '}
+              communities. Your school and generation date appear on the card. Notes and files go to
+              Akoizo; included content and images are visible to other students.
             </p>
-          </div>
-          {uploads.length > 0 && (
-            <ul className="sheet-files">
-              {uploads.map((u, i) => (
-                <li key={`${i}-${u.name}`}>
-                  <FileText size={15} />
-                  <span>{u.name}</span>
-                  <button
-                    type="button"
-                    aria-label={`Remove ${u.name}`}
-                    disabled={generating}
-                    onClick={() => setUploads(uploads.filter((_, j) => i !== j))}
-                  >
-                    <X size={15} />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-          <p className="sheet-sharing">
-            <Globe2 size={17} /> Every generated sheet is shared across Division {division}{' '}
-            communities. Your school and generation date appear on the card. Notes and files go to
-            Akoizo; included content and images are visible to other students.
-          </p>
-          <button type="submit" className="button button-primary" disabled={generating || reading}>
-            {generating ? (
-              <LoaderCircle className="sheet-spin" size={17} />
-            ) : (
-              <Sparkles size={17} />
-            )}{' '}
-            {generating ? 'Building your two-sided sheet…' : 'Generate & share sheet'}
-          </button>
-          {generating && (
-            <p role="status">
-              Akoizo is choosing high-value content, figures and diagrams. This can take about two
-              minutes. Keep this page open for the two-page fit check.
-            </p>
-          )}
-        </form>
-      </section>
+            <button
+              type="submit"
+              className="button button-primary"
+              disabled={generating || reading}
+            >
+              {generating ? (
+                <LoaderCircle className="sheet-spin" size={17} />
+              ) : (
+                <Sparkles size={17} />
+              )}{' '}
+              {generating ? 'Building your two-sided sheet…' : 'Generate & share sheet'}
+            </button>
+            {generating && (
+              <p role="status">
+                Akoizo is choosing high-value content, figures and diagrams. This can take about two
+                minutes. Keep this page open for the two-page fit check.
+              </p>
+            )}
+          </form>
+        </section>
+      )}
       {error && (
         <div className="sheet-error" role="alert">
           {error}
@@ -596,7 +636,11 @@ export function CheatSheets({ eventId }: { eventId: string }) {
           <div className="sheet-empty">
             <FileText size={30} />
             <h3>Make the first reference.</h3>
-            <p>Generate a sheet above to start this event’s shared collection.</p>
+            <p>
+              {eventId
+                ? 'Generate a sheet above to start this event’s shared collection.'
+                : 'Open an event’s Cheat Sheet Generator to add a reference.'}
+            </p>
           </div>
         ) : (
           <div className="sheet-card-grid">

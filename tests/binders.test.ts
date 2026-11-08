@@ -526,6 +526,41 @@ test('photo search keeps only reusable licences and falls back to the subject wo
     null,
   );
 });
+test('compact competition pages retain detailed bullets, lookup tables and critical traps', () => {
+  const compact = {
+    ...page('Water budget'),
+    paragraphs: Array.from(
+      { length: 6 },
+      (_, i) =>
+        `${i + 1}. Basin balance: ΔS = P − ET − Q; convert all fluxes to the same depth/time units before substitution.`,
+    ),
+    takeaways: [
+      'Trap: discharge is a volume per time, not a depth.',
+      'Exception: groundwater flow can cross a surface divide.',
+      'Check: include storage changes in a transient budget.',
+    ],
+    table: {
+      headers: ['Term', 'Units'],
+      rows: [
+        ['Precipitation', 'mm/day'],
+        ['Discharge', 'm³/s'],
+        ['Storage', 'mm'],
+      ],
+    },
+  };
+  const parsed = parseBinderPage(compact, 'Water budget', 0);
+  assert.equal(parsed.paragraphs.length, 6);
+  assert.equal(parsed.table.rows.length, 3);
+  assert.deepEqual(parsed.takeaways, compact.takeaways);
+  assert.throws(() =>
+    parseBinderPage(
+      { ...compact, paragraphs: ['Thin', 'Page'], takeaways: [], table: {} },
+      'Thin',
+      0,
+    ),
+  );
+});
+
 test('every diagram kind renders escaped, labeled SVG', () => {
   const items = ['<b>Epilimnion</b>', 'Metalimnion', 'Hypolimnion', 'Sediment'].map((label) => ({
     label,

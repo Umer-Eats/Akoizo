@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "season": 2027,
+  "division": "C",
+  "eventId": "electric-vehicle",
+  "title": "Electric Vehicle Regional Practice Course",
+  "level": "regional",
+  "parameters": {
+    "Target time (s)": "14.0",
+    "Target distance (m)": "6.00",
+    "Water bottle position (m from start)": "2.0",
+    "Bottle line distance (m beyond target)": "2.00",
+    "Cups (yes/no)": "No",
+    "Cup positions and gap (cm)": "Not applicable — cups are not part of Electric Vehicle rules",
+    "Track width and surface": "2.0 m wide smooth, level, and hard surface"
+  },
+  "notes": "Regional tournament setup with standard 6.00 m target distance, 14.0 s target time, 2.0 m water bottle placement from start, and 2.00 m bottle line distance beyond target.",
+  "setup": [
+    "Ensure the track surface is smooth, level, and hard, with a width of at least 2.0 m.",
+    "Mark the Start Point with an approximately 5 cm x 2.5 cm tape.",
+    "Mark the Target Point at 6.00 m from the Start Point along the imaginary center line with a 5 cm x 2.5 cm tape.",
+    "Place the non-optional 500ml Water Bottle centered on the imaginary center line at 2.0 m from the Start Point.",
+    "Mark the Bottle Line with an approximately 2.5 cm width tape at 2.00 m beyond the Target Point, perpendicular and centered to the imaginary center line, spanning at least 1.0 meter wide."
+  ],
+  "ruleReferences": [
+    "Section 7.c.i",
+    "Section 7.c.ii.(1)",
+    "Section 7.c.ii.(2)",
+    "Section 7.c.ii.(4)",
+    "Section 7.c.ii.(5)",
+    "Section 7.c.iii",
+    "Section 8.h",
+    "Section 8.i",
+    "Section 8.j",
+    "Section 8.k"
+  ],
+  "diagram": {
+    "view": "schematic",
+    "nodes": [
+      {
+        "label": "Start Point",
+        "x": 10,
+        "y": 50
+      },
+      {
+        "label": "Water Bottle",
+        "x": 35,
+        "y": 50
+      },
+      {
+        "label": "Target Point",
+        "x": 70,
+        "y": 50
+      },
+      {
+        "label": "Bottle Line",
+        "x": 90,
+        "y": 50
+      }
+    ],
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "label": "2.0 m"
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "label": "6.00 m"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "label": "2.00 m"
+      }
+    ]
+  }
+}

@@ -259,6 +259,9 @@ const xml = (s: string) =>
   );
 /** Text is escaped, so uploaded/generated labels can never become executable SVG. */
 export function courseSvg(c: BuildCourse) {
+  // Reserve room even for wide glyphs and unbroken imported labels.
+  const columnLimit = (width: number, size: number) =>
+    Math.min(width, Math.floor(840 / (size * 0.96)));
   const wrap = (value: string, width: number) =>
     value
       .replace(/\s+/g, ' ')
@@ -274,19 +277,50 @@ export function courseSvg(c: BuildCourse) {
   ) =>
     `<text x="${x}" y="${y}" font-size="${size}"${center ? ' text-anchor="middle"' : ''}>${wrap(
       value,
-      width,
+      columnLimit(width, size),
     )
       .map((line, i) => `<tspan x="${x}" dy="${i ? size + 5 : 0}">${xml(line)}</tspan>`)
       .join('')}</text>`;
-  const titleLines = wrap(c.title, 64).length;
+  const titleLines = wrap(c.title, columnLimit(64, 22)).length;
   const mapTop = 100 + (titleLines - 1) * 27;
   const pos = (n: CourseNode) => ({ x: 125 + n.x * 6.5, y: mapTop + 35 + n.y * 3 });
+  // Keep scientific geometry intact. Labels live in a separate key; only short numbered
+  // callouts are placed on the map, with leaders when close points need separation.
+  const markers: { x: number; y: number }[] = [];
+  for (const node of c.diagram.nodes) {
+    const point = pos(node);
+    let placed = point;
+    search: for (let radius = 0; radius <= 400; radius += 28) {
+      for (let angle = 0; angle < 360; angle += 30) {
+        const x = point.x + radius * Math.cos((angle * Math.PI) / 180);
+        const y = point.y + radius * Math.sin((angle * Math.PI) / 180);
+        if (x < 54 || x > 846 || y < mapTop + 24 || y > mapTop + 396) continue;
+        if (markers.every((m) => Math.hypot(m.x - x, m.y - y) >= 38)) {
+          placed = { x, y };
+          break search;
+        }
+      }
+    }
+    markers.push(placed);
+  }
   let nextY = mapTop + 460;
+  const key = [
+    'COURSE KEY',
+    ...c.diagram.nodes.map((n, i) => `${i + 1}. ${n.label}`),
+    ...c.diagram.edges.map((e) => `${e.from + 1} → ${e.to + 1}: ${e.label || 'Connection'}`),
+    'SETUP PARAMETERS',
+  ]
+    .map((value) => {
+      const result = lines(value, 30, nextY, 100, 14);
+      nextY += wrap(value, columnLimit(100, 14)).length * 19 + 10;
+      return result;
+    })
+    .join('');
   const params = Object.entries(c.parameters)
     .map(([k, v]) => {
       const value = `${k}: ${v || 'Not supplied'}`;
       const result = lines(value, 30, nextY, 105, 14);
-      nextY += wrap(value, 105).length * 19 + 12;
+      nextY += wrap(value, columnLimit(105, 14)).length * 19 + 12;
       return result;
     })
     .join('');
@@ -296,14 +330,14 @@ export function courseSvg(c: BuildCourse) {
   ${lines(c.title, 30, 38, 64, 22)}<text x="30" y="${mapTop - 20}" font-size="14">Division ${c.division} · 2027 · ${c.level} · Schematic — not to scale</text>
   <rect x="30" y="${mapTop}" width="840" height="420" fill="#eef3fb" stroke="#c5d2e4" rx="12"/>
   ${c.diagram.edges
-    .map((e, i) => {
+    .map((e) => {
       const a = pos(c.diagram.nodes[e.from]),
         b = pos(c.diagram.nodes[e.to]);
-      return `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#5378bc" stroke-width="3"/>${lines(e.label, (a.x + b.x) / 2, (a.y + b.y) / 2 - 16 - (i % 3) * 22, 28, 12, true)}`;
+      return `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#5378bc" stroke-width="3"/>`;
     })
     .join('')}
   ${c.diagram.nodes
-    .map((n) => {
+    .map((n, i) => {
       const p = pos(n);
       const label = n.label.toLowerCase();
       const symbol = /bottle|cup|can\b/.test(label)
@@ -315,9 +349,10 @@ export function courseSvg(c: BuildCourse) {
             : /target|finish/.test(label)
               ? `<circle cx="${p.x}" cy="${p.y}" r="12" fill="#fff" stroke="#b95949" stroke-width="3"/><circle cx="${p.x}" cy="${p.y}" r="4" fill="#b95949"/>`
               : `<circle cx="${p.x}" cy="${p.y}" r="9" fill="#3b69af"/>`;
-      return `${symbol}${lines(n.label, p.x, p.y + 35, 24, 12, true)}`;
+      const marker = markers[i];
+      return `${symbol}<path d="M${p.x} ${p.y}L${marker.x} ${marker.y}" stroke="#15253a" fill="none"/><g data-course-marker="${i + 1}"><circle cx="${marker.x}" cy="${marker.y}" r="15" fill="#fff" stroke="#15253a" stroke-width="2"/>${lines(String(i + 1), marker.x, marker.y + 5, 3, 14, true)}</g>`;
     })
     .join('')}
-  ${params}
+  ${key}${params}
   </g></svg>`;
 }

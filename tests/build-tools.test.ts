@@ -76,6 +76,33 @@ test('SVG export escapes imported labels and includes every setup parameter', ()
   assert.ok(svg.includes('&lt;script&gt;'));
   for (const label of Object.keys(course.parameters)) assert.ok(svg.includes(label));
 });
+test('crowded course points retain geometry and receive separated markers and a complete label key', () => {
+  const course = blankCourse('B', 'scrambler');
+  course.diagram.nodes = Array.from({ length: 20 }, (_, i) => ({
+    label: `Station ${i + 1}: a long label with dimensions and apparatus details`,
+    x: 50,
+    y: 50,
+  }));
+  course.diagram.edges = Array.from({ length: 19 }, (_, i) => ({
+    from: i,
+    to: i + 1,
+    label: 'Distance 5.00 m',
+  }));
+  const svg = courseSvg(course);
+  const markers = [
+    ...svg.matchAll(/data-course-marker="\d+"><circle cx="([\d.]+)" cy="([\d.]+)"/g),
+  ].map((m) => ({ x: Number(m[1]), y: Number(m[2]) }));
+  assert.equal(markers.length, 20);
+  markers.forEach((m, i) =>
+    markers.slice(i + 1).forEach((other) => {
+      assert.ok(Math.hypot(m.x - other.x, m.y - other.y) >= 38);
+    }),
+  );
+  for (let i = 1; i <= 20; i++) assert.ok(svg.includes(`${i}. Station ${i}:`));
+  assert.equal((svg.match(/Distance 5.00 m/g) ?? []).length, 19);
+  assert.ok(!svg.includes('NaN'));
+});
+
 test('grading cannot return a numeric score with missing evidence or invalid criterion status', () => {
   assert.deepEqual(parseGrade(grade), grade);
   assert.throws(() => parseGrade({ ...grade, score: 0 }));
