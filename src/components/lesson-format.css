@@ -1,0 +1,732 @@
+/* Lesson layout: header → stage tabs → Learn (reading + contents rail) / Practice / Labs /
+   Checkpoint. Reading text keeps a comfortable line length; diagrams and labs use full width. */
+/* While a lesson is open the site header and the stage bar both stick, so anything scrolled
+   into view (keyboard focus, find-in-page, contents links) has to clear both. */
+:root:has(.lf-lesson) {
+  --lf-clear: 170px;
+  scroll-padding-top: var(--lf-clear);
+}
+.lf-lesson {
+  --lf-sticky-top: 82px;
+  --lf-accent: var(--lesson-pink, var(--accent));
+  gap: 22px;
+  border-radius: 16px;
+}
+.lf-lesson [hidden] {
+  display: none !important;
+}
+
+/* Header */
+.lf-header {
+  gap: 14px;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.lf-header h2 {
+  max-width: 28ch;
+}
+.lf-big-idea {
+  display: grid;
+  gap: 4px;
+  max-width: 70ch;
+  margin: 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--lf-accent);
+  border-radius: 0 10px 10px 0;
+  background: color-mix(in srgb, var(--lf-accent) 9%, var(--surface));
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.lf-big-idea > span {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lf-accent);
+}
+.lf-header-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(240px, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+.lf-objectives {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.lf-objectives h3 {
+  font-size: 0.95rem !important;
+  margin: 0 0 10px;
+}
+.lf-objectives ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.lf-objectives li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+}
+.lf-objectives li svg {
+  margin-top: 3px;
+  color: var(--lf-accent);
+}
+.lf-ako {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  margin: 0;
+}
+.lf-ako p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.lf-ako .button {
+  justify-self: start;
+}
+
+/* Stage tabs */
+.lf-stages-anchor {
+  /* The bar sits 26px below this anchor; land it exactly where it sticks, under the header. */
+  scroll-margin-top: calc(var(--lf-sticky-top) - 26px - var(--lf-clear, 0px));
+}
+.lf-stages {
+  position: sticky;
+  top: var(--lf-sticky-top);
+  z-index: 13;
+  margin: -6px 0 0;
+  padding: 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px #0000001a;
+}
+.lf-stages [role='tablist'] {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.lf-stages [role='tab'] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.lf-stages [role='tab']:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.lf-stages [role='tab'][aria-selected='true'] {
+  border-color: color-mix(in srgb, var(--lf-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--lf-accent) 13%, var(--surface));
+  color: var(--text);
+}
+.lf-stage-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+[aria-selected='true'] > .lf-stage-icon {
+  border-color: var(--lf-accent);
+  color: var(--lf-accent);
+}
+[data-done] > .lf-stage-icon {
+  border-color: var(--lf-accent);
+  background: var(--lf-accent);
+  color: var(--bg);
+}
+.lf-stage-text {
+  display: grid;
+  min-width: 0;
+}
+.lf-stage-text strong {
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+.lf-stage-num {
+  display: none;
+}
+.lf-stage-text small {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.lf-stage {
+  display: grid;
+  gap: 26px;
+  min-width: 0;
+}
+
+/* Learn: reading column + sticky contents rail */
+.lf-learn {
+  grid-template-columns: minmax(0, 1fr) 230px;
+  align-items: start;
+  gap: 40px;
+}
+.lf-learn-main {
+  display: grid;
+  gap: 34px;
+  min-width: 0;
+}
+.lf-rail {
+  position: sticky;
+  top: calc(var(--lf-sticky-top) + 92px);
+  max-height: calc(100vh - var(--lf-sticky-top) - 110px);
+  overflow: auto;
+}
+.lf-toc-title {
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.lf-toc ol {
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0 0 0 2px;
+  border-left: 1px solid var(--line-strong);
+}
+.lf-toc a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  margin-left: -2px;
+  padding: 6px 10px;
+  border-left: 3px solid transparent;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.lf-toc a span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding-top: 1px;
+}
+.lf-toc a:hover {
+  color: var(--text);
+}
+.lf-toc a[aria-current='location'] {
+  border-left-color: var(--lf-accent);
+  color: var(--text);
+  font-weight: 600;
+}
+.is-ako-guided .lf-learn {
+  grid-template-columns: minmax(0, 1fr);
+}
+.is-ako-guided .lf-rail {
+  display: none;
+}
+
+/* Sections */
+.lf-lesson .lesson-reading {
+  gap: 0;
+}
+.lf-section {
+  gap: 14px;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 8px;
+}
+.lf-section:first-child {
+  padding-top: 4px;
+  border-top: 0;
+}
+.lf-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.lf-section-head .lesson-section-number {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--lf-accent) 15%, transparent);
+  color: var(--lf-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  transform: translateY(-2px);
+}
+.lf-section-head h3 {
+  margin: 0;
+}
+.lf-section > p,
+.lf-section > .lf-formula,
+.lf-section > .lf-callouts {
+  max-width: 72ch;
+}
+.lf-section > *,
+.lf-section .lf-callout > * {
+  margin-block: 0;
+}
+.lf-lesson .lesson-section p {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--text) 84%, var(--muted));
+}
+.lf-lesson .lesson-section p.lf-lead {
+  font-size: 1.08rem;
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--text);
+}
+.lf-formula {
+  display: grid;
+  gap: 6px;
+  padding: 12px 16px;
+  border: 1px dashed color-mix(in srgb, var(--lf-accent) 60%, var(--line-strong));
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.lf-lesson .lf-formula p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+.lf-callouts {
+  display: grid;
+  gap: 10px;
+}
+.lf-callout {
+  display: grid;
+  gap: 6px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+}
+.lf-callout-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lf-callout p,
+.lf-callout li {
+  margin: 0;
+  font-size: 0.92rem !important;
+  line-height: 1.65 !important;
+}
+.lf-callout ul,
+.lf-callout ol {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+}
+.lf-apply {
+  border-left-color: #3b82f6;
+  background: color-mix(in srgb, #3b82f6 7%, var(--surface));
+}
+.lf-apply .lf-callout-label {
+  color: color-mix(in srgb, #3b82f6 75%, var(--text));
+}
+.lf-exam {
+  border-left-color: #a855f7;
+  background: color-mix(in srgb, #a855f7 7%, var(--surface));
+}
+.lf-exam .lf-callout-label {
+  color: color-mix(in srgb, #a855f7 75%, var(--text));
+}
+.lf-caution {
+  border-left-color: #f59e0b;
+  background: color-mix(in srgb, #f59e0b 8%, var(--surface));
+}
+.lf-caution .lf-callout-label {
+  color: color-mix(in srgb, #d97706 80%, var(--text));
+}
+
+/* Inline key terms */
+.lf-term {
+  position: relative;
+  border-bottom: 1.5px dotted var(--lf-accent);
+  font-weight: 600;
+  color: var(--text);
+  cursor: help;
+}
+.lf-term:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.lf-term-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  z-index: 20;
+  width: max-content;
+  max-width: min(300px, 80vw);
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 10px 28px #0000003a;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  white-space: normal;
+  transform: translate(-50%, 4px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+.lf-term-tip strong {
+  display: block;
+  color: var(--text);
+}
+.lf-term:hover .lf-term-tip,
+.lf-term:focus .lf-term-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* Lab teaser inside the reading */
+.lf-lab-teaser {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  max-width: 72ch;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--lf-accent) 45%, var(--line));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--lf-accent) 7%, var(--surface));
+}
+.lf-lab-teaser > svg {
+  color: var(--lf-accent);
+}
+.lf-lab-teaser strong {
+  font-size: 0.9rem;
+}
+.lf-lesson .lf-lab-teaser p {
+  margin: 2px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.tl-preview-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.lf-lesson .lesson-visual {
+  margin: 4px 0;
+}
+
+/* Worked example */
+.lf-example {
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--lf-accent) 6%, var(--surface));
+}
+.lf-example-problem {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.lf-example-try {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.lf-example-steps {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.lf-example-steps li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  animation: lf-in 200ms ease-out;
+}
+.lf-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding-top: 3px;
+  color: var(--lf-accent);
+}
+.lf-example-steps p {
+  margin: 0;
+  line-height: 1.65;
+}
+.lf-example-answer {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--lf-accent) 50%, var(--line));
+  background: var(--surface);
+  animation: lf-in 200ms ease-out;
+}
+.lf-example-answer strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--lf-accent);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.lf-example-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Review */
+.lf-review {
+  display: grid;
+  gap: 14px;
+}
+.lf-review h3 {
+  margin: 0;
+}
+.lf-terms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.lf-terms > div {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.lf-terms dt {
+  font-weight: 650;
+  color: var(--text);
+}
+.lf-terms dd {
+  margin: 4px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Stage footer */
+.lf-stage-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.lf-stage-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* Labs */
+.lf-labs {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.lf-labs-intro {
+  display: grid;
+  gap: 6px;
+}
+.lf-labs-intro h3,
+.lf-labs-intro p {
+  margin: 0;
+}
+.lf-labs-intro > p:last-child {
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 72ch;
+}
+.lf-lab-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 10px;
+}
+.lf-lab-picker [role='tab'] {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.lf-lab-picker [role='tab']:hover {
+  border-color: var(--lf-accent);
+}
+.lf-lab-picker [role='tab'][aria-selected='true'] {
+  border-color: var(--lf-accent);
+  background: color-mix(in srgb, var(--lf-accent) 11%, var(--surface));
+  box-shadow: inset 0 0 0 1px var(--lf-accent);
+}
+.lf-lab-kind {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lf-accent);
+}
+.lf-lab-picker strong {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.lf-lab-picker small {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.lf-lab-panel {
+  min-width: 0;
+}
+.lf-lab-panel > .lesson-sim,
+.lf-lab-panel > .tl-lab,
+.lf-lab-panel > .phet-sim {
+  margin: 0;
+}
+.lf-lesson .lesson-activities,
+.lf-lesson .lesson-quiz {
+  margin: 0;
+}
+
+@keyframes lf-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lf-example-steps li,
+  .lf-example-answer {
+    animation: none;
+  }
+}
+:root[data-motion='off'] :is(.lf-example-steps li, .lf-example-answer) {
+  animation: none;
+}
+
+@media (max-width: 1099px) {
+  .lf-learn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lf-rail {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .lf-header-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lf-stages [role='tab'] {
+    flex-direction: column;
+    gap: 4px;
+    padding: 7px 4px;
+    text-align: center;
+  }
+  .lf-stage-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .lf-stage-text small {
+    display: none;
+  }
+  .lf-stage-text strong {
+    font-size: 0.74rem;
+  }
+  .lf-lab-teaser {
+    grid-template-columns: auto 1fr;
+  }
+  .lf-lab-teaser .button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+  .lf-example-steps li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+@media (max-width: 600px) {
+  .lf-lesson {
+    --lf-sticky-top: 64px;
+  }
+}
+
+/* Paired lab charts sit side by side on wide screens. */
+@media (min-width: 1000px) {
+  .lf-lab-panel .subject-explorer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lf-lab-panel .subject-explorer > * {
+    grid-column: 1 / -1;
+  }
+  .lf-lab-panel .subject-explorer > .subject-figure:has(+ .subject-figure),
+  .lf-lab-panel .subject-explorer > .subject-figure + .subject-figure {
+    grid-column: auto;
+  }
+}

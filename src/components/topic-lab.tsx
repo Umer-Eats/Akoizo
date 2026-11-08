@@ -321,17 +321,24 @@ export function LabFigure({ result, title }: { result: LabResult; title: string 
 }
 
 // Static first-look figure placed inside the reading; the full lab appears in the lab section.
-export function TopicLabPreview({ lab }: { lab: TopicLab }) {
+export function TopicLabPreview({ lab, onOpen }: { lab: TopicLab; onOpen?: () => void }) {
   const result = runLab(lab, labDefaults(lab));
   return (
     <figure className="lesson-visual tl-preview">
       <figcaption>
-        <span className="eyebrow">MODEL PREVIEW</span>
+        <span className="eyebrow">SEE IT IN A MODEL</span>
         <strong>{lab.title}</strong>
       </figcaption>
       <LabFigure result={result} title={lab.title} />
-      <p>
-        {lab.lead} <a href={`#topic-lab-${lab.id}`}>Open this lab and change the variables ↓</a>
+      <p className="tl-preview-foot">
+        <span>{lab.lead}</span>
+        {onOpen ? (
+          <button type="button" className="button button-small button-glass" onClick={onOpen}>
+            Change the variables in the lab →
+          </button>
+        ) : (
+          <a href={`#topic-lab-${lab.id}`}>Open this lab and change the variables ↓</a>
+        )}
       </p>
     </figure>
   );

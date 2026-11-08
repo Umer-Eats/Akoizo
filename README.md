@@ -10,6 +10,7 @@ Firebase handles email/password and Google authentication. Turso stores schools,
 - `/dashboard/student`: saved A/B/C division, searchable event catalog, assignments, and progress.
 - `/dashboard/student/events/[eventId]`: redirects to Lessons. Event cards link directly to Lessons; Rules is always last in the event toolkit.
 - `/dashboard/student/events/[eventId]/[toolId]`: study-tool pages, including a locally hosted event PDF section for Rules, with its original PDF page range beside the title.
+- Video Grader and Course Generator: all 17 supported Division B/C build-event combinations now have rule-grounded Gemini video feedback, generated course diagrams, exports/imports, and direct course handoff. See [build event tools](documents/BUILD_TOOLS.md).
 - `/dashboard/instructor`: school credentials, student roster, lesson/test/points totals, progress by event, and saved practice/ranked assignments with due dates.
 - `/rankings`: earned points only, using generated public learner names. Empty until students earn points in ranked tests.
 - `/` and `/mission`: public landing and mission pages.

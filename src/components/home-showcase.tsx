@@ -31,7 +31,7 @@ export const clips = [
     icon: BookOpen,
     event: { id: 'anatomy-and-physiology', name: 'Anatomy and Physiology' },
     title: 'Read it, see it, then try it.',
-    body: 'Every event is a course of units. Short reading and figures sit beside interactive models you can push and pull.',
+    body: 'Every lesson moves from Learn to Practice to Labs to a Checkpoint. Key ideas, diagrams and step-by-step examples come first, then models you push and pull yourself.',
     address: 'akoizo / anatomy-and-physiology / lessons',
   },
   {

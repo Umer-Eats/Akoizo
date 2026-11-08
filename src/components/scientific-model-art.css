@@ -25,6 +25,6 @@
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-.scientific-model .diagram-inspector-canvas {
+.scientific-model .diagram-dialog-canvas {
   min-width: 720px;
 }

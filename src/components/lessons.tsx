@@ -1,5 +1,5 @@
 'use client';
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { BookOpen, Check, ChevronLeft, ChevronRight, FlaskConical, RotateCcw } from 'lucide-react';
 import type { EventLessons, Lesson, LessonSim } from '@/lib/lessons';
 import type { WorkRecord } from '@/lib/domain';
@@ -15,7 +15,7 @@ import {
 import { useAuth, authMessage } from './auth-context';
 import { ChoiceOptions } from './choice-options';
 import { ModelDiagram } from './lesson-diagrams';
-import { LessonSectionVisuals } from './lesson-atlas';
+import { ComparisonAtlas, LessonSectionVisuals, lessonComparison } from './lesson-atlas';
 import { EvidenceWorkbench } from './evidence-workbench';
 import { ExperimentControls, TrialComparison, type LabTrial } from './lesson-experiments';
 import { SubjectExplorer } from './subject-explorer';
@@ -25,6 +25,19 @@ import { slotForEvent } from '@/lib/event-slots';
 import { extrasFor, topicLabs } from '@/lib/extras';
 import { LessonActivities, InlineCheck } from './lesson-activities';
 import { TopicLabPreview, TopicLabView } from './topic-lab';
+import {
+  AkoReading,
+  KeyTermsGrid,
+  LessonToc,
+  SectionContent,
+  StageFooter,
+  StageNav,
+  WorkedExampleSteps,
+  useScrollSpy,
+  type LessonStage,
+} from './lesson-format';
+import { formatLesson, lessonBigIdea } from '@/lib/lesson-format';
+import './lesson-format.css';
 import { PhetSim } from './phet-sim';
 import './lessons.css';
 import './lesson-motion.css';
@@ -304,8 +317,8 @@ function QuizView({
     onChange({ ...attempt, answers: { ...attempt.answers, [id]: answer } });
   return (
     <section id="lesson-practice" className="lesson-quiz" aria-labelledby="lesson-practice-title">
-      <p className="eyebrow">APPLY WHAT YOU LEARNED</p>
-      <h3 id="lesson-practice-title">Practice assignment</h3>
+      <p className="eyebrow">CHECKPOINT · SAVED FOR YOUR INSTRUCTOR</p>
+      <h3 id="lesson-practice-title">Show what you learned</h3>
       <p>
         Answer all {lesson.practice.length} questions. Multiple-choice responses are checked
         automatically. For written responses, compare your reasoning with the model answer, then
@@ -490,9 +503,71 @@ function QuizView({
   );
 }
 
+type LabEntry = { id: string; kind: string; title: string; blurb: string; render: () => ReactNode };
+
+function LabsStage({
+  entries,
+  selected,
+  onSelect,
+}: {
+  entries: LabEntry[];
+  selected: string;
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <div className="lf-labs">
+      <div className="lf-labs-intro">
+        <p className="eyebrow">
+          <FlaskConical size={16} aria-hidden="true" /> {entries.length}{' '}
+          {entries.length === 1 ? 'LAB' : 'LABS'} FOR THIS LESSON
+        </p>
+        <h3>Test the ideas</h3>
+        <p>
+          Predict first, change one variable at a time, and record what happens. Labs are not
+          graded; their state resets when you leave the lesson.
+        </p>
+      </div>
+      {entries.length > 1 && (
+        <div className="lf-lab-picker" role="tablist" aria-label="Choose a lab">
+          {entries.map((entry, i) => (
+            <button
+              key={entry.id}
+              id={`lab-tab-${entry.id}`}
+              type="button"
+              role="tab"
+              aria-selected={selected === entry.id}
+              aria-controls={`lab-panel-${entry.id}`}
+              onClick={() => onSelect(entry.id)}
+            >
+              <span className="lf-lab-kind">
+                {i + 1} · {entry.kind}
+              </span>
+              <strong>{entry.title}</strong>
+              <small>{entry.blurb}</small>
+            </button>
+          ))}
+        </div>
+      )}
+      {entries.map((entry) => (
+        <div
+          key={entry.id}
+          id={`lab-panel-${entry.id}`}
+          className="lf-lab-panel"
+          role={entries.length > 1 ? 'tabpanel' : undefined}
+          aria-labelledby={entries.length > 1 ? `lab-tab-${entry.id}` : undefined}
+          hidden={selected !== entry.id}
+        >
+          {entry.render()}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function LessonDetail({
   lesson,
   eventId,
+  unitNumber,
   attempt,
   onChange,
   record,
@@ -500,6 +575,7 @@ function LessonDetail({
 }: {
   lesson: Lesson;
   eventId: string;
+  unitNumber: number;
   attempt: LessonAttempt;
   onChange: (attempt: LessonAttempt) => void;
   record?: LessonRecord;
@@ -508,8 +584,13 @@ function LessonDetail({
   const { ako, updateAko } = useSettings();
   const [teachingLine, setTeachingLine] = useState('');
   const lastTeachingLine = useRef('');
+  const stagesRef = useRef<HTMLDivElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+  const [stage, setStage] = useState<LessonStage>('learn');
+  const [visited, setVisited] = useState<LessonStage[]>([]);
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
   const plan = useMemo(() => akoLessonPlan(lesson), [lesson]);
+  const formatted = useMemo(() => formatLesson(lesson, lines), [lesson, lines]);
   const activeStep = plan.find((step) => step.id === teachingLine);
   useEffect(() => {
     setAkoStudy({
@@ -523,6 +604,8 @@ function LessonDetail({
         onLine: (id) => {
           lastTeachingLine.current = id;
           setTeachingLine(id);
+          // Ako teaches from the reading, so bring it back into view.
+          setStage('learn');
           requestAnimationFrame(() => {
             const sentence = document.getElementById(
               `ako-line-${plan.find((step) => step.id === id)?.anchorId}`,
@@ -531,8 +614,8 @@ function LessonDetail({
             const panel = document.getElementById('ako-chat')?.getBoundingClientRect();
             const bottom =
               panel && rect && panel.left < rect.right ? panel.top - 20 : innerHeight - 40;
-            if (rect && (rect.top < (innerWidth < 600 ? 125 : 175) || rect.bottom > bottom))
-              sentence?.scrollIntoView({ block: 'start', behavior: 'instant' });
+            if (rect && (rect.top < (innerWidth < 600 ? 175 : 235) || rect.bottom > bottom))
+              sentence?.scrollIntoView({ block: 'center', behavior: 'instant' });
           });
         },
         onPause: () => setTeachingLine(''),
@@ -542,59 +625,148 @@ function LessonDetail({
   }, [eventId, lesson, plan]);
   const teachLine = (id: string) => {
     if (!ako.visible) updateAko({ visible: true });
+    setStage('learn');
     setTeachingLine(id);
     askAkoAbout(id);
   };
+
+  // The reading counts as done once its end has been on screen.
+  const [readingDone, setReadingDone] = useState(false);
+  useEffect(() => {
+    const el = endRef.current;
+    if (!el || readingDone || stage !== 'learn') return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setReadingDone(true);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [readingDone, stage]);
+
   const extras = extrasFor(lesson.id, lesson);
   const labs = (extras.labs ?? []).map((id) => topicLabs[id]).filter(Boolean);
   const phetSims = extras.phet ?? [];
-  const hasLessonLabs = labs.length + phetSims.length > 0;
+  const sim = lesson.simulation;
+  const labEntries: LabEntry[] = [
+    {
+      id: 'lesson-lab',
+      kind: sim.kind === 'investigation' ? 'Investigation' : 'Lesson lab',
+      title: sim.title.replace(/^[^:]*:\s*/, ''),
+      blurb: sim.kind === 'investigation' ? sim.question : sim.challenge,
+      render: () => <SimView sim={sim} lessonId={lesson.id} pathway={lesson.visual} />,
+    },
+    ...labs.map((lab) => ({
+      id: `topic-lab-${lab.id}`,
+      kind: 'Virtual lab',
+      title: lab.title,
+      blurb: lab.lead,
+      render: () => <TopicLabView lab={lab} />,
+    })),
+    ...phetSims.map((embed) => ({
+      id: `phet-${embed.sim}`,
+      kind: 'PhET simulation',
+      title: embed.title,
+      blurb: embed.why,
+      render: () => <PhetSim embed={embed} lessonId={lesson.id} />,
+    })),
+  ];
+  const [selectedLab, setSelectedLab] = useState(labEntries[0].id);
+
+  const goTo = (next: LessonStage, labId?: string) => {
+    if (next !== stage)
+      setVisited((current) => (current.includes(stage) ? current : [...current, stage]));
+    if (labId) setSelectedLab(labId);
+    setStage(next);
+    requestAnimationFrame(() => {
+      const top = stagesRef.current?.getBoundingClientRect().top ?? 0;
+      if (top < 0 || top > innerHeight * 0.6)
+        stagesRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
+  };
+  const checkpointDone = practiceComplete(attempt, lesson.practice) || !!record;
+  const done: Record<LessonStage, boolean> = {
+    learn: readingDone,
+    practice: visited.includes('practice'),
+    labs: visited.includes('labs'),
+    checkpoint: checkpointDone,
+  };
+  const mcq = lesson.practice.filter((q) => q.type === 'mcq').length;
+  const tocItems = [
+    ...lesson.sections.map((section, i) => ({
+      id: `lesson-section-${i}`,
+      number: String(i + 1).padStart(2, '0'),
+      label: section.heading,
+    })),
+    ...(lesson.workedExample ? [{ id: 'lesson-example', label: 'Worked example' }] : []),
+    { id: 'lesson-review', label: 'Review: key terms' },
+  ];
+  const activeToc = useScrollSpy(
+    tocItems.map((item) => item.id),
+    stage === 'learn',
+  );
+  const bigIdea = lessonBigIdea(lesson);
+  const comparison = lessonComparison(lesson);
+  const figures =
+    lesson.referenceFigures ??
+    lessonReferenceFigures.filter((figure) => figure.lessonId === lesson.id);
   return (
     <article
-      className={`lesson-detail${teachingLine ? ' is-ako-guided' : ''}`}
+      className={`lesson-detail lf-lesson${teachingLine ? ' is-ako-guided' : ''}`}
       aria-labelledby="current-lesson-title"
     >
-      <header className="lesson-title-block">
+      <header className="lesson-title-block lf-header">
         <p className="eyebrow">
-          <BookOpen size={16} aria-hidden="true" /> TEXT LESSON · {lesson.durationMin} MIN
+          <BookOpen size={16} aria-hidden="true" /> UNIT {unitNumber} · {lesson.sections.length}{' '}
+          TOPICS · ~{lesson.durationMin} MIN
           {lesson.extension ? ' · EXTENSION' : ''}
         </p>
         <h2 id="current-lesson-title" tabIndex={-1}>
           {lesson.title}
         </h2>
-        <div className="lesson-ako-intro">
-          <strong>Learn with Ako</strong>
-          <p>
-            I’ll teach the main ideas, walk through examples, and check your understanding. I’ll
-            keep the lesson moving — pause me or ask for help whenever you need.
+        {bigIdea && (
+          <p className="lf-big-idea">
+            <span>Big idea</span>
+            {bigIdea}
           </p>
-          <button
-            type="button"
-            className="button button-small button-glass"
-            onClick={() => teachLine(teachingLine || lastTeachingLine.current || plan[0].id)}
-          >
-            {teachingLine || lastTeachingLine.current
-              ? 'Continue with Ako'
-              : 'Teach me this lesson'}
-          </button>
+        )}
+        <div className="lf-header-grid">
+          <section className="lf-objectives" aria-labelledby="lf-objectives-title">
+            <h3 id="lf-objectives-title">By the end, you can</h3>
+            <ul>
+              {lesson.objectives.map((objective) => (
+                <li key={objective}>
+                  <Check size={15} aria-hidden="true" />
+                  <span>{objective}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <div className="lesson-ako-intro lf-ako">
+            <strong>Learn with Ako</strong>
+            <p>Ako walks you through each topic, gives an example, then checks you understood.</p>
+            <button
+              type="button"
+              className="button button-small button-glass"
+              onClick={() => teachLine(teachingLine || lastTeachingLine.current || plan[0].id)}
+            >
+              {teachingLine || lastTeachingLine.current
+                ? 'Continue with Ako'
+                : 'Teach me this lesson'}
+            </button>
+          </div>
         </div>
-        <nav className="lesson-jumps" aria-label="Jump within this lesson">
-          <a href="#lesson-reading">Read</a>
-          <a href="#lesson-example">Worked example</a>
-          <a href="#lesson-activities">Activities</a>
-          {hasLessonLabs && <a href="#lesson-topic-labs">Lesson labs</a>}
-          <a href="#lesson-lab">{hasLessonLabs ? 'Course lab' : 'Interactive lab'}</a>
-          <a href="#lesson-practice">Practice assignment</a>
-        </nav>
       </header>
-      <section className="lesson-objectives">
-        <h3>By the end of this lesson</h3>
-        <ul>
-          {lesson.objectives.map((objective) => (
-            <li key={objective}>{objective}</li>
-          ))}
-        </ul>
-      </section>
+      <div ref={stagesRef} className="lf-stages-anchor" />
+      <StageNav
+        stage={stage}
+        onChange={(next) => goTo(next)}
+        done={done}
+        counts={{
+          learn: `${lesson.sections.length} topics + example`,
+          practice: `${extras.sort ? 3 : 2} activities`,
+          labs: `${labEntries.length} ${labEntries.length === 1 ? 'lab' : 'labs'}`,
+          checkpoint: `${lesson.practice.length} questions`,
+        }}
+      />
       {teachingLine && (
         <nav className="lesson-ako-guide" aria-label="Ako reading guide">
           <strong>Ako is teaching</strong>
@@ -623,107 +795,141 @@ function LessonDetail({
           </button>
         </nav>
       )}
-      <div id="lesson-reading" className="lesson-reading">
-        {lesson.sections.map((section, index) => (
-          <section key={section.heading} className="lesson-section">
-            <p className="lesson-section-number">{String(index + 1).padStart(2, '0')}</p>
-            <h3>{section.heading}</h3>
-            {section.body.map((paragraph, i) => (
-              <p key={i}>
-                {lines
-                  .filter((line) => line.sectionIndex === index && line.paragraphIndex === i)
-                  .map((line) => (
-                    <Fragment key={line.id}>
-                      <span
-                        id={`ako-line-${line.id}`}
-                        data-ako-sentence={line.id}
-                        aria-current={activeStep?.anchorId === line.id ? 'step' : undefined}
-                        className={`lesson-ako-sentence${activeStep?.highlightIds.includes(line.id) ? ' is-teaching' : ''}`}
+
+      <div
+        id="lesson-stage-learn"
+        role="tabpanel"
+        aria-labelledby="lesson-tab-learn"
+        className="lf-stage lf-learn"
+        hidden={stage !== 'learn'}
+      >
+        <div className="lf-learn-main">
+          <AkoReading.Provider
+            value={{
+              anchorId: activeStep?.anchorId,
+              highlightIds: activeStep?.highlightIds ?? [],
+            }}
+          >
+            <div id="lesson-reading" className="lesson-reading">
+              {lesson.sections.map((section, index) => (
+                <section
+                  key={section.heading}
+                  id={`lesson-section-${index}`}
+                  className="lesson-section lf-section"
+                  aria-labelledby={`lesson-section-${index}-title`}
+                >
+                  <header className="lf-section-head">
+                    <span className="lesson-section-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3 id={`lesson-section-${index}-title`}>{section.heading}</h3>
+                  </header>
+                  <SectionContent section={formatted[index]} />
+                  <LessonSectionVisuals lesson={lesson} index={index} />
+                  {figures
+                    .filter((figure) => figure.section === index)
+                    .map((figure) => (
+                      <LessonReferenceFigure key={figure.src} figure={figure} />
+                    ))}
+                  {index === Math.min(3, lesson.sections.length - 1) && sim.kind === 'explorer' && (
+                    <SubjectExplorer sim={sim} preview />
+                  )}
+                  {index === Math.min(3, lesson.sections.length - 1) && sim.kind !== 'model' && (
+                    <aside className="lf-lab-teaser">
+                      <FlaskConical size={18} aria-hidden="true" />
+                      <div>
+                        <strong>Try it in the lab</strong>
+                        <p>{sim.kind === 'investigation' ? sim.question : sim.challenge}</p>
+                      </div>
+                      <button
+                        type="button"
+                        className="button button-small button-glass"
+                        onClick={() => goTo('labs', 'lesson-lab')}
                       >
-                        {line.text.trimEnd()}
-                      </span>
-                      {line.text.slice(line.text.trimEnd().length)}
-                    </Fragment>
-                  ))}
-              </p>
-            ))}
-            <LessonSectionVisuals lesson={lesson} index={index} />
-            {(
-              lesson.referenceFigures ??
-              lessonReferenceFigures.filter((figure) => figure.lessonId === lesson.id)
-            )
-              .filter((figure) => figure.section === index)
-              .map((figure) => (
-                <LessonReferenceFigure key={figure.src} figure={figure} />
+                        Open the lab →
+                      </button>
+                    </aside>
+                  )}
+                  {index === Math.min(4, lesson.sections.length - 1) && labs[0] && (
+                    <TopicLabPreview
+                      lab={labs[0]}
+                      onOpen={() => goTo('labs', `topic-lab-${labs[0].id}`)}
+                    />
+                  )}
+                  {(extras.checks ?? [])
+                    .filter((item) => item.after === index)
+                    .map((item) => (
+                      <InlineCheck key={item.q} check={item} />
+                    ))}
+                </section>
               ))}
-            {index === 3 && lesson.simulation.kind === 'explorer' && (
-              <SubjectExplorer sim={lesson.simulation} preview />
-            )}
-            {index === 4 && labs[0] && <TopicLabPreview lab={labs[0]} />}
-            {(extras.checks ?? [])
-              .filter((item) => item.after === index)
-              .map((item) => (
-                <InlineCheck key={item.q} check={item} />
-              ))}
-          </section>
-        ))}
-      </div>
-      {lesson.workedExample && (
-        <section id="lesson-example" className="lesson-example">
-          <p className="eyebrow">WORKED EXAMPLE</p>
-          <h3>{lesson.workedExample.title}</h3>
-          <p>{lesson.workedExample.problem}</p>
-          <details className="lesson-disclosure">
-            <summary>Show the step-by-step solution</summary>
-            <ol>
-              {lesson.workedExample.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-            <p className="example-conclusion">{lesson.workedExample.conclusion}</p>
-          </details>
-        </section>
-      )}
-      <details className="lesson-terms lesson-disclosure">
-        <summary>Key terms · {lesson.keyTerms.length}</summary>
-        <dl>
-          {lesson.keyTerms.map((term) => (
-            <div key={term.term}>
-              <dt>{term.term}</dt>
-              <dd>{term.definition}</dd>
             </div>
-          ))}
-        </dl>
-      </details>
-      <LessonActivities lesson={lesson} sortActivity={extras.sort} />
-      {hasLessonLabs && (
-        <section id="lesson-topic-labs" className="lesson-labs" aria-labelledby="lesson-labs-title">
-          <p className="eyebrow">
-            <FlaskConical size={16} aria-hidden="true" /> LESSON LABS ·{' '}
-            {labs.length + phetSims.length} FOR THIS UNIT
-          </p>
-          <h3 id="lesson-labs-title">Investigate this lesson’s ideas</h3>
-          <p>
-            Predict first, then test. Each lab tracks goals you reach by changing its variables;
-            nothing here is graded, and lab state resets when you leave the lesson.
-          </p>
-          {labs.map((lab) => (
-            <TopicLabView key={lab.id} lab={lab} />
-          ))}
-          {phetSims.map((embed) => (
-            <PhetSim key={embed.sim} embed={embed} lessonId={lesson.id} />
-          ))}
-        </section>
-      )}
-      <SimView sim={lesson.simulation} lessonId={lesson.id} pathway={lesson.visual} />
-      <QuizView
-        key={lesson.id}
-        lesson={lesson}
-        attempt={attempt}
-        onChange={onChange}
-        record={record}
-        onSubmit={onSubmit}
-      />
+          </AkoReading.Provider>
+          {lesson.workedExample && <WorkedExampleSteps example={lesson.workedExample} />}
+          <section id="lesson-review" className="lf-review" aria-labelledby="lf-review-title">
+            <p className="eyebrow">REVIEW</p>
+            <h3 id="lf-review-title">Key terms · {lesson.keyTerms.length}</h3>
+            <KeyTermsGrid terms={lesson.keyTerms} />
+            {comparison && <ComparisonAtlas entry={comparison} />}
+          </section>
+          <div ref={endRef} />
+          <StageFooter
+            label="Practice"
+            detail="Next: quick recall activities to lock in the ideas before the labs."
+            onNext={() => goTo('practice')}
+          />
+        </div>
+        <aside className="lf-rail">
+          <LessonToc items={tocItems} active={activeToc} />
+        </aside>
+      </div>
+
+      <div
+        id="lesson-stage-practice"
+        role="tabpanel"
+        aria-labelledby="lesson-tab-practice"
+        className="lf-stage"
+        hidden={stage !== 'practice'}
+      >
+        <LessonActivities lesson={lesson} sortActivity={extras.sort} />
+        <StageFooter
+          label="Labs"
+          detail={`Next: ${labEntries.length === 1 ? 'a lab' : `${labEntries.length} labs`} where you change the variables yourself.`}
+          onNext={() => goTo('labs')}
+        />
+      </div>
+
+      <div
+        id="lesson-stage-labs"
+        role="tabpanel"
+        aria-labelledby="lesson-tab-labs"
+        className="lf-stage"
+        hidden={stage !== 'labs'}
+      >
+        <LabsStage entries={labEntries} selected={selectedLab} onSelect={setSelectedLab} />
+        <StageFooter
+          label="Checkpoint"
+          detail={`Next: ${lesson.practice.length} checkpoint questions (${mcq} multiple choice, ${lesson.practice.length - mcq} written).`}
+          onNext={() => goTo('checkpoint')}
+        />
+      </div>
+
+      <div
+        id="lesson-stage-checkpoint"
+        role="tabpanel"
+        aria-labelledby="lesson-tab-checkpoint"
+        className="lf-stage"
+        hidden={stage !== 'checkpoint'}
+      >
+        <QuizView
+          key={lesson.id}
+          lesson={lesson}
+          attempt={attempt}
+          onChange={onChange}
+          record={record}
+          onSubmit={onSubmit}
+        />
+      </div>
     </article>
   );
 }
@@ -929,6 +1135,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             key={lesson.id}
             lesson={lesson}
             eventId={course.eventId}
+            unitNumber={course.units.findIndex((item) => item.id === lesson.unitId) + 1}
             attempt={attempts[lesson.id] ?? emptyAttempt}
             onChange={(attempt) => setAttempts((current) => ({ ...current, [lesson.id]: attempt }))}
             record={records[lesson.id]}

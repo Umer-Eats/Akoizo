@@ -5,6 +5,7 @@ import { lessonAtlas } from '../src/lib/lesson-atlas.ts';
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
+import { openStage } from './lib-lesson-stage.mjs';
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 await mkdir('documents/qa/lessons', { recursive: true });
@@ -122,12 +123,12 @@ try {
         await expect(p.getByLabel('Choose question').locator('option')).toHaveCount(7);
         await expect(p.locator('.lesson-sim h3')).toHaveText(lesson.simulation.title);
         await expect(p.locator('.lesson-reading .process-atlas')).toHaveCount(1);
-        await expect(p.locator('.lesson-reading .comparison-atlas tbody tr')).toHaveCount(3);
+        await expect(p.locator('#lesson-review .comparison-cards > div')).toHaveCount(3);
         const process = p.locator('.lesson-reading .process-atlas');
         await process.locator('.process-path button').last().click();
         await expect(process.locator('.process-focus strong')).toContainText('Step 3');
         if (lessonAtlas[lesson.id].image) {
-          const figure = p.locator('.lesson-reading .source-image');
+          const figure = p.locator('.lesson-reading .source-image:not(.online-reference)');
           await figure.scrollIntoViewIfNeeded();
           await expect
             .poll(() =>
@@ -140,12 +141,16 @@ try {
         if (lesson.simulation.kind === 'model') {
           const chart = p.locator('.lesson-reading .relationship-chart');
           await expect(chart).toHaveCount(1);
-          const initialLabel = await chart.locator('svg').getAttribute('aria-label');
+          const initialLabel = await chart.locator('svg[role="img"]').getAttribute('aria-label');
           const slider = chart.getByRole('slider');
           await slider.fill(await slider.getAttribute('max'));
-          assert.notEqual(await chart.locator('svg').getAttribute('aria-label'), initialLabel);
+          assert.notEqual(
+            await chart.locator('svg[role="img"]').getAttribute('aria-label'),
+            initialLabel,
+          );
           await slider.fill(await slider.getAttribute('min'));
         }
+        await openStage(p, 'labs');
         await expect(p.locator('.lab-figure')).toHaveCount(1);
         await expect(p.locator('.lab-diagram')).toHaveAccessibleName(/.+/);
         if (lesson.simulation.kind === 'model' && !checkedModels.has(lesson.simulation.model)) {
@@ -183,7 +188,9 @@ try {
           await p.getByRole('button', { name: 'Restart investigation' }).click();
           assert.equal(await p.locator('.lab-diagram').innerHTML(), initial);
         }
+        await openStage(p, 'learn');
         await expect(p.locator('.lesson-example')).toBeVisible();
+        await openStage(p, 'checkpoint');
         await expect(
           p.getByRole('button', { name: 'Check my answers', exact: true }),
         ).toBeDisabled();
@@ -196,7 +203,7 @@ try {
   // Local source images enlarge without external network requests, and close with Escape.
   await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
   await p.locator('.unit-button').nth(1).click();
-  const imageFigure = p.locator('.lesson-reading .source-image');
+  const imageFigure = p.locator('.lesson-reading .source-image:not(.online-reference)');
   await imageFigure.getByRole('button', { name: /^Enlarge/ }).click();
   await expect(imageFigure.locator('dialog')).toBeVisible();
   await imageFigure.getByRole('slider', { name: /Image zoom/ }).fill('200');
@@ -205,6 +212,7 @@ try {
   await expect(imageFigure.locator('dialog')).not.toBeVisible();
   // A scenario tests a prediction; a sweep can pause; reset clears its state and trials.
   await p.locator('.unit-button').nth(2).click();
+  await openStage(p, 'labs');
   await p.getByLabel('Your prediction', { exact: true }).selectOption('decrease');
   await p.getByRole('button', { name: 'Run scenario', exact: true }).click();
   await expect(p.locator('.experiment-feedback')).toContainText('Prediction supported');
@@ -223,6 +231,7 @@ try {
   // Specimen controls change the view; notes and findings reset with the investigation.
   await p.goto(`${base}/dashboard/student/events/forensics/lessons`);
   await p.locator('.unit-button').nth(3).click();
+  await openStage(p, 'labs');
   await p.getByLabel('Working hypothesis', { exact: true }).selectOption({ index: 1 });
   await p.locator('.investigation-tests button').first().click();
   const specimenBefore = await p.locator('.specimen-drawing').innerHTML();
@@ -249,6 +258,7 @@ try {
   await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
   await p.locator('.unit-button').first().click();
   const first = anatomyLessons.lessons[0];
+  await openStage(p, 'labs');
   const conclusion = p.locator('.lab-conclusion button');
   await expect(conclusion.first()).toBeDisabled();
   for (const button of await p.locator('.investigation-tests button').all()) await button.click();
@@ -256,6 +266,7 @@ try {
   await expect(p.locator('.sim-feedback')).toContainText('Supported by the evidence');
   await p.getByRole('button', { name: 'Restart investigation' }).click();
   await expect(conclusion.first()).toBeDisabled();
+  await openStage(p, 'checkpoint');
   const check = p.getByRole('button', { name: 'Check my answers', exact: true });
   const firstRadio = p.locator('.quiz-question input[type="radio"]').first();
   await firstRadio.focus();
@@ -285,28 +296,30 @@ try {
     .first()
     .screenshot({ path: 'documents/qa/lessons/mcq-reviewed.png' });
   await expect(p.locator('.quiz-result')).toContainText('Multiple choice: 3 / 3 points');
-  await expect(p.locator('.course-progress label')).toHaveText('0 of 20 practices complete');
+  await expect(p.locator('.course-progress label')).toHaveText(/^0 of 20 practices complete/);
   for (let i = 0; i < first.practice.length; i++) {
     if (first.practice[i].type !== 'short') continue;
     await p.getByLabel('Choose question').selectOption(String(i));
     await p.locator('.quiz-self-review input').check();
   }
-  await expect(p.locator('.course-progress label')).toHaveText('1 of 20 practices complete');
+  await expect(p.locator('.course-progress label')).toHaveText(/^1 of 20 practices complete/);
   await p.getByRole('button', { name: 'Next lesson', exact: true }).click();
   await expect(p.locator('#current-lesson-title')).toHaveText(anatomyLessons.lessons[1].title);
   await p.reload();
   await expect(p.locator('#current-lesson-title')).toHaveText(anatomyLessons.lessons[1].title);
   await p.getByRole('button', { name: 'Previous lesson', exact: true }).click();
+  await openStage(p, 'checkpoint');
   await expect(p.locator('.quiz-result')).toContainText('Multiple choice: 3 / 3 points');
-  await expect(p.locator('.course-progress label')).toHaveText('1 of 20 practices complete');
+  await expect(p.locator('.course-progress label')).toHaveText(/^1 of 20 practices complete/);
   await p.getByRole('button', { name: 'Revise answers', exact: true }).click();
-  await expect(p.locator('.course-progress label')).toHaveText('0 of 20 practices complete');
+  await expect(p.locator('.course-progress label')).toHaveText(/^0 of 20 practices complete/);
   await p
     .getByLabel('Choose question')
     .selectOption(String(first.practice.findIndex((q) => q.type === 'short')));
   await expect(p.locator('.quiz-written textarea').first()).not.toHaveValue('');
   // Test calculated outputs and notebook with the respiratory unit.
   await p.locator('.unit-button').nth(2).click();
+  await openStage(p, 'labs');
   await expect(p.locator('.lab-metrics')).toContainText('4.2');
   await p.getByRole('slider', { name: 'Tidal volume', exact: true }).fill('250');
   await p.getByRole('slider', { name: 'Breathing rate', exact: true }).fill('24');
@@ -329,6 +342,7 @@ try {
         false,
         `Overflow ${width} ${theme}`,
       );
+      await openStage(p, 'checkpoint');
       for (const option of await p.locator('.quiz-question .practice-option').all()) {
         const bounds = await option.evaluate((node) => {
           const input = node.querySelector('input').getBoundingClientRect();
@@ -351,6 +365,7 @@ try {
           .locator('.quiz-question')
           .first()
           .screenshot({ path: `documents/qa/lessons/mcq-${theme}-390.png` });
+        await openStage(p, 'labs');
         const viewer = p.locator('.lab-diagram-viewport');
         await expect(p.locator('.lab-diagram-scroll-hint')).toBeVisible();
         await viewer.focus();
@@ -364,6 +379,7 @@ try {
       await p.evaluate(() => window.scrollTo(0, 0));
       if (width !== 320)
         await p.screenshot({ path: `documents/qa/lessons/course-${theme}-${width}.png` });
+      await openStage(p, 'labs');
       if (width === 390)
         await p
           .locator('.lesson-sim')
@@ -396,7 +412,7 @@ try {
       );
       await p.goto(base + '/dashboard/student/events/anatomy-and-physiology/lessons');
       await p.locator('.unit-button').nth(1).click();
-      const fig = p.locator('.lesson-reading .source-image');
+      const fig = p.locator('.lesson-reading .source-image:not(.online-reference)');
       await fig.getByRole('button', { name: /^Enlarge/ }).click();
       await fig.getByRole('slider', { name: 'Image zoom', exact: true }).fill('250');
       assert.equal(

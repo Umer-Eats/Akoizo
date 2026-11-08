@@ -518,10 +518,10 @@ export function LessonActivities({
       aria-labelledby="lesson-activities-title"
     >
       <p className="eyebrow">ACTIVE RECALL · NOT GRADED</p>
-      <h3 id="lesson-activities-title">Practice the ideas before the lab</h3>
+      <h3 id="lesson-activities-title">Recall it before you test it</h3>
       <p>
-        Short activities built from this lesson. They give immediate feedback and reset when you
-        leave the lesson; only the practice assignment below is saved.
+        Short activities built from this lesson. They give instant feedback and reset when you leave
+        the lesson; only the Checkpoint is saved and sent to your instructor.
       </p>
       {sortActivity && <SortBoard activity={sortActivity} lessonId={lesson.id} />}
       <SolutionOrder lesson={lesson} />

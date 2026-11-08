@@ -6,6 +6,7 @@ import { mkdir } from 'node:fs/promises';
 import { topicLabs, extrasFor } from '../src/lib/extras/index.ts';
 import { solutionSequence, termRounds } from '../src/lib/lesson-extras.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
+import { openStage } from './lib-lesson-stage.mjs';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const division = process.env.DIVISION || 'C';
@@ -124,6 +125,7 @@ try {
   await p.goto(`${base}/dashboard/student/events/${eventId}/lessons`);
   await p.locator('.unit-button').nth(unitIndex).click();
   await p.locator('.lesson-button', { hasText: lesson.title }).first().click();
+  await openStage(p, 'practice');
   const sort = p.locator('.la-card').filter({ has: p.locator('.la-drop-bins') });
   const card = sort.locator('.la-sort > .la-sort-card').first();
   const cardText = await card.locator(':scope > span').first().innerText();
@@ -144,16 +146,14 @@ try {
   await expect(sort.locator('.la-drop-bin .la-sort-card')).toHaveCount(0);
   // Sort cards carry only their text.
   await expect(sort.locator('.la-sort-card button')).toHaveCount(0);
-  // The reading uses the full width of the lesson panel.
-  const [readingWidth, panelWidth] = await p.evaluate(() => {
-    const detail = document.querySelector('.lesson-detail');
-    const style = getComputedStyle(detail);
-    return [
-      document.querySelector('.lesson-reading').getBoundingClientRect().width,
-      detail.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight),
-    ];
-  });
+  // The reading fills the main column beside the contents rail.
+  await openStage(p, 'learn');
+  const [readingWidth, panelWidth] = await p.evaluate(() => [
+    document.querySelector('.lesson-reading').getBoundingClientRect().width,
+    document.querySelector('.lf-learn-main').getBoundingClientRect().width,
+  ]);
   assert(Math.abs(readingWidth - panelWidth) < 2, `reading ${readingWidth}px of ${panelWidth}px`);
+  await openStage(p, 'practice');
   // Vocabulary: term and definition columns side by side. A wrong pair is flagged; right pairs lock.
   const match = p.locator('.la-card').filter({ has: p.locator('.la-match') });
   const rounds = termRounds(lesson);
@@ -211,6 +211,7 @@ try {
   await p.waitForTimeout(100);
   assert.equal(await p.evaluate(() => window.scrollY), stoppedY);
 
+  await openStage(p, 'checkpoint');
   const quiz = p.locator('#lesson-practice');
   const jump = quiz.getByLabel('Choose question');
   await expect(quiz.locator('.quiz-question')).toHaveCount(1);
@@ -243,11 +244,14 @@ try {
     assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
   }
   await p.setViewportSize({ width: 1440, height: 1000 });
-  const inspector = p.locator('.diagram-inspector').first();
+  await openStage(p, 'learn');
+  const inspector = p.locator('#lesson-stage-learn .diagram-inspector').first();
+  await inspector.getByRole('button', { name: /^Enlarge diagram/ }).click();
+  await expect(inspector.locator('dialog')).toBeVisible();
   await inspector.getByRole('button', { name: 'Zoom diagram in' }).click();
-  await expect(inspector.locator('output')).toHaveText('125%');
-  await inspector.getByRole('button', { name: 'Reset zoom' }).click();
-  await expect(inspector.locator('output')).toHaveText('100%');
+  await expect(inspector.locator('dialog output')).toHaveText('125%');
+  await p.keyboard.press('Escape');
+  await expect(inspector.locator('dialog')).not.toBeVisible();
   const process = p.locator('.process-atlas').first();
   if (await process.count()) {
     await process.getByRole('button', { name: 'Play walkthrough' }).click();
@@ -256,12 +260,16 @@ try {
     await process.getByRole('button', { name: 'Restart walkthrough' }).click();
     await expect(process.locator('.process-focus')).toContainText('Step 1:');
   }
+  await openStage(p, 'labs');
   const lab = p
     .locator('.tl-lab')
     .filter({ has: p.locator('.tl-sweep') })
     .first();
-  const variable = await lab.getByLabel('Variable to animate').inputValue();
   const labId = (await lab.getAttribute('id')).replace('topic-lab-', '');
+  // Labs show one at a time; open this one in the lab picker.
+  const labTab = p.locator(`#lab-tab-topic-lab-${labId}`);
+  if (await labTab.count()) await labTab.click();
+  const variable = await lab.getByLabel('Variable to animate').inputValue();
   const control = topicLabs[labId].controls.find((c) => c.key === variable);
   const input = lab.getByLabel(control.label, { exact: true });
   await lab.getByRole('button', { name: 'Animate variable', exact: true }).click();
@@ -300,7 +308,9 @@ try {
         await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
         `${division} ${theme} ${width}: page overflow`,
       );
+      await openStage(p, 'labs');
       await lab.screenshot({ path: `${out}/${division}-${theme}-${width}-lab.png` });
+      await openStage(p, 'practice');
       await sort.screenshot({ path: `${out}/${division}-${theme}-${width}-sort.png` });
       await match.screenshot({ path: `${out}/${division}-${theme}-${width}-match.png` });
     }

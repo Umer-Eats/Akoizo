@@ -2,22 +2,92 @@
   min-width: 0;
   max-width: 100%;
 }
+/* Inline: the diagram fits its column and never grows taller than most of a laptop screen. */
+.diagram-frame {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  padding: 10px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+.diagram-inspector .diagram-inspector-canvas > svg {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: min(440px, 62vh);
+  margin: 0 auto;
+}
+.diagram-expand {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 150ms ease;
+}
+.diagram-frame:hover .diagram-expand,
+.diagram-expand:focus-visible {
+  opacity: 1;
+}
+/* On phones the diagram fills the frame edge to edge, so the button sits below it instead of
+   covering a label. */
+@media (max-width: 640px) {
+  .diagram-expand {
+    position: static;
+    display: flex;
+    width: max-content;
+    margin: 8px 0 0 auto;
+    opacity: 1;
+  }
+}
+.diagram-dialog {
+  width: min(1200px, 96vw);
+  max-width: 96vw;
+  max-height: 94vh;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+}
+.diagram-dialog::backdrop {
+  background: rgb(0 0 0 / 0.65);
+}
 .diagram-toolbar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 12px 0;
+  margin: 0 0 12px;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
 }
-.diagram-toolbar > span {
+.diagram-toolbar > strong {
   margin-right: auto;
+  color: var(--text);
+  font-size: 0.9rem;
 }
 .diagram-toolbar button {
+  display: inline-grid;
+  place-items: center;
   min-width: 36px;
   min-height: 36px;
-  padding: 6px 10px;
+  padding: 6px;
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   background: var(--surface);
@@ -36,28 +106,29 @@
 }
 .diagram-inspector-scroll {
   overflow: auto;
-  max-height: 80vh;
+  max-height: calc(94vh - 120px);
   overscroll-behavior: contain;
   border: 1px solid var(--line);
   border-radius: 10px;
+  background: var(--bg);
 }
 .diagram-inspector-scroll:focus-visible,
-.diagram-toolbar button:focus-visible {
+.diagram-toolbar button:focus-visible,
+.diagram-expand:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-.diagram-inspector-canvas {
-  min-width: 560px;
+.diagram-dialog-canvas {
+  min-width: 100%;
+  padding: 12px;
 }
-.diagram-inspector .diagram-inspector-canvas > svg {
+.diagram-dialog-canvas > svg {
   display: block;
   width: 100%;
-  max-width: none;
   height: auto;
-  margin: 0;
 }
-.diagram-inspector .diagram-inspector-hint {
-  margin: 8px 0 12px;
+.diagram-inspector-hint {
+  margin: 10px 0 0;
   font-size: 0.75rem;
   line-height: 1.6;
   color: var(--muted);
@@ -137,4 +208,14 @@
   ) {
   transition: none;
   animation: none;
+}
+/* Chart rules such as `.x svg { width: 100% }` must not stretch the control icons. */
+.diagram-inspector :is(.diagram-expand, .diagram-toolbar button) svg {
+  display: block;
+  flex: none;
+  width: 14px !important;
+  min-width: 0 !important;
+  height: 14px !important;
+  max-height: none;
+  margin: 0;
 }

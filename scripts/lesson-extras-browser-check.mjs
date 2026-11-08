@@ -7,6 +7,7 @@ import { mkdir } from 'node:fs/promises';
 import { eventExtras, topicLabs, extrasFor } from '../src/lib/extras/index.ts';
 import { phetUrl, solutionSequence, termRounds } from '../src/lib/lesson-extras.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
+import { openStage } from './lib-lesson-stage.mjs';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const only = process.env.EVENTS?.split(',');
@@ -128,6 +129,7 @@ try {
         await p.locator('.lesson-button', { hasText: lesson.title }).first().click();
         await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);
 
+        await openStage(p, 'practice');
         const activities = p.locator('#lesson-activities');
         await expect(activities).toBeVisible();
         if (termRounds(lesson).length)
@@ -158,6 +160,7 @@ try {
             extras.sort.items.length,
           );
         }
+        await openStage(p, 'learn');
         for (const check of extras.checks ?? []) {
           checksSeen++;
           const card = p.locator('.lesson-reading .la-check', { hasText: check.q });
@@ -168,6 +171,8 @@ try {
         for (const id of extras.labs ?? []) {
           labsSeen++;
           const lab = topicLabs[id];
+          await openStage(p, 'labs');
+          await p.locator(`#lab-tab-topic-lab-${id}`).click();
           const view = p.locator(`#topic-lab-${id}`);
           await expect(view).toBeVisible();
           await expect(view.locator('.tl-missions li')).toHaveCount(lab.missions.length);
@@ -197,6 +202,8 @@ try {
         }
         for (const embed of extras.phet ?? []) {
           phetSeen++;
+          await openStage(p, 'labs');
+          await p.locator(`#lab-tab-phet-${embed.sim}`).click();
           const sim = p.locator(`#phet-${lessonId}-${embed.sim}`);
           await expect(sim).toBeVisible();
           await expect(sim.locator('.phet-tasks label')).toHaveCount(embed.tasks.length);
@@ -219,7 +226,8 @@ try {
         }
         await p.setViewportSize({ width: 1440, height: 1000 });
         if (shots && unitIndex < 3) {
-          for (const sel of ['#lesson-topic-labs', '#lesson-activities']) {
+          await openStage(p, 'practice');
+          for (const sel of ['#lesson-activities']) {
             const target = p.locator(sel);
             if (await target.count())
               await target.screenshot({ path: `${out}/${lessonId}-${sel.slice(8)}.png` });

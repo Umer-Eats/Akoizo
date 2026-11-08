@@ -53,6 +53,7 @@ import { DivisionCLabs } from './division-c-labs';
 import { labsForEvent } from '@/lib/division-c-labs';
 import { CheatSheets } from './cheatsheets';
 import { Binders } from './binders';
+import { BuildTools } from './build-tools';
 import { RankedTestList } from './ranked';
 import { InstructorRanked } from './instructor-ranked';
 import { InstructorTeams } from './instructor-teams';
@@ -973,6 +974,13 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
             <CheatSheets key={`${profile!.id}:${event.id}`} eventId={event.id} />
           ) : division !== 'A' && toolId === 'binder-generator' ? (
             <Binders key={`${profile!.id}:${event.id}`} eventId={event.id} />
+          ) : division !== 'A' && (toolId === 'video-grader' || toolId === 'course-generator') ? (
+            <BuildTools
+              key={`${profile!.id}:${division}:${event.id}:${toolId}`}
+              eventId={event.id}
+              division={division}
+              mode={toolId === 'video-grader' ? 'grade' : 'course'}
+            />
           ) : hasDivisionCLabs ? (
             <DivisionCLabs
               key={`${profile!.id}:${division}:${event.id}`}

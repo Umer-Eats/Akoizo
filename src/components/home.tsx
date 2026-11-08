@@ -207,7 +207,7 @@ const tools = [
     icon: BookOpen,
     file: 'lessons',
     title: 'Event lessons',
-    body: 'A course of units for every event: reading, figures, a worked example, an interactive model and practice.',
+    body: 'A course of units for every event. Each lesson goes Learn, Practice, Labs, Checkpoint: key ideas and diagrams, recall activities, interactive models, then questions.',
   },
   {
     icon: FileText,
@@ -375,7 +375,13 @@ export function Home() {
           ].map(([title, body], i) => (
             <li key={title} data-reveal style={delay(i)}>
               <span>
-                <input type="checkbox" checked={i === 0} readOnly tabIndex={-1} aria-hidden="true" />
+                <input
+                  type="checkbox"
+                  checked={i === 0}
+                  readOnly
+                  tabIndex={-1}
+                  aria-hidden="true"
+                />
               </span>
               <div>
                 <h3>{title}</h3>

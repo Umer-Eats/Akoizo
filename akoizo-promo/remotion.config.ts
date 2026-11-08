@@ -11,3 +11,15 @@ Config.setRspack(true);
 Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
 Config.setDefaultPremountInSeconds(2);
+
+// The Reel renders real Akoizo components (rank badges), which import from "@/...".
+Config.overrideBundlerConfig((config) => ({
+  ...config,
+  resolve: {
+    ...config.resolve,
+    alias: {
+      ...(config.resolve?.alias ?? {}),
+      "@": require("node:path").resolve(process.cwd(), "../src"),
+    },
+  },
+}));

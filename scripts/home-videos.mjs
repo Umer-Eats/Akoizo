@@ -83,7 +83,7 @@ const clips = {
     await glide(page, page.locator('.event-feature-link').nth(1));
     await page.waitForTimeout(1800);
   },
-  // Open a unit, read it, and try the interactive model.
+  // Open a unit, read the formatted lesson, reveal the worked example, then try the lab.
   async lessons(page) {
     await page.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
     await page.locator('.unit-button').first().waitFor();
@@ -91,20 +91,39 @@ const clips = {
     await page.waitForTimeout(700);
     await glide(page, page.locator('.unit-button').nth(2));
     await expect(page.locator('.lesson-reading')).toBeVisible();
+    await page.waitForTimeout(1400);
+    // Key idea, explanation and callouts; the stage bar sticks under the header.
+    await scrollBy(page, 640, 1600);
     await page.waitForTimeout(900);
-    await scrollBy(page, 900, 2200);
-    await page.waitForTimeout(600);
-    const slider = page.locator('.lesson-sim input[type=range]').first();
+    const term = page.locator('#lesson-stage-learn .lf-term').first();
+    if (await term.count()) {
+      await glide(page, term, { click: false });
+      await page.waitForTimeout(1700);
+    }
+    await scrollBy(page, 520, 1400);
+    await page.waitForTimeout(700);
+    // Jump with the contents rail, then reveal the solution one step at a time.
+    await glide(page, page.locator('.lf-toc a', { hasText: 'Worked example' }));
+    await page.waitForTimeout(1300);
+    await glide(page, page.getByRole('button', { name: 'Show the first step', exact: true }));
+    await page.waitForTimeout(800);
+    await glide(page, page.getByRole('button', { name: 'Show the next step', exact: true }));
+    await page.waitForTimeout(1100);
+    // Labs stage: drag a control and watch the model respond.
+    await glide(page, page.locator('#lesson-tab-labs'));
+    await page.waitForTimeout(1000);
+    const slider = page.locator('#lesson-stage-labs .lesson-sim input[type=range]').first();
     if (await slider.count()) {
       await slider.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(500);
       const box = await slider.boundingBox();
       await page.mouse.move(box.x + box.width * 0.3, box.y + box.height / 2, { steps: 20 });
       await page.mouse.down();
       await page.mouse.move(box.x + box.width * 0.85, box.y + box.height / 2, { steps: 40 });
       await page.mouse.move(box.x + box.width * 0.5, box.y + box.height / 2, { steps: 30 });
       await page.mouse.up();
-      await page.waitForTimeout(1200);
-    } else await scrollBy(page, 700, 1600);
+      await page.waitForTimeout(1300);
+    }
   },
   // Answer questions on a real past paper beside the original test.
   async test(page) {

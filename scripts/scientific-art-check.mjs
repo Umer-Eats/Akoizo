@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { topicLabs, extrasFor } from '../src/lib/extras/index.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
+import { openStage } from './lib-lesson-stage.mjs';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const division = process.env.DIVISION || 'C';
@@ -118,6 +119,7 @@ try {
         .nth(course.units.findIndex((u) => u.lessonIds.includes(lesson.id)))
         .click();
       await p.locator('.lesson-button', { hasText: lesson.title }).first().click();
+      await openStage(p, 'labs');
       const art = p.locator('.scientific-model');
       await expect(art).toBeVisible();
       for (const control of modelControls[model]) {
@@ -127,10 +129,10 @@ try {
         for (const value of [control.min, control.max, control.initial]) {
           await slider.fill(String(value));
           assert(
-            !/NaN|Infinity/.test(await art.locator('svg').innerHTML()),
+            !/NaN|Infinity/.test(await art.locator('.diagram-inspector-canvas > svg').innerHTML()),
             `${model}: finite geometry`,
           );
-          const clipped = await art.locator('svg').evaluate((svg) =>
+          const clipped = await art.locator('.diagram-inspector-canvas > svg').evaluate((svg) =>
             [...svg.querySelectorAll('text')]
               .filter((el) => {
                 const b = el.getBBox();
@@ -173,6 +175,8 @@ try {
       .nth(course.units.findIndex((u) => u.lessonIds.includes(lesson.id)))
       .click();
     await p.locator('.lesson-button', { hasText: lesson.title }).first().click();
+    await openStage(p, 'labs');
+    await p.locator(`#lab-tab-topic-lab-${labId}`).click();
     const art = p.locator(`#topic-lab-${labId} .tl-stage .diagram-inspector`).first();
     await expect(art).toBeVisible();
     await art.screenshot({ path: `${out}/${labId}.png` });
@@ -188,6 +192,7 @@ try {
     .nth(proteinCourse.units.findIndex((u) => u.lessonIds.includes(proteinLesson.id)))
     .click();
   await p.locator('.lesson-button', { hasText: proteinLesson.title }).first().click();
+  await openStage(p, 'labs');
   const protein = p.locator('#lesson-lab .subject-figure').first();
   await expect(protein).toBeVisible();
   await protein.screenshot({ path: out + '/protein-chain.png' });

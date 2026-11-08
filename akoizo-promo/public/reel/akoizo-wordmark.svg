@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1130 330" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Akoizo — rounded liquid chrome wordmark</title>
+  <defs>
+    <g id="letters" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M61 241L115 89Q124 67 132 89L186 241M83 181H164"/>
+      <path d="M264 84V243M379 86L264 165L389 244"/>
+      <path d="M499 80C455 80 437 110 437 165S455 250 499 250S561 220 561 165S543 80 499 80Z"/>
+      <path d="M649 83V246"/>
+      <path d="M738 85H864L735 245H868"/>
+      <path d="M1008 80C962 80 944 110 944 165S962 250 1008 250S1072 220 1072 165S1054 80 1008 80Z"/>
+    </g>
+    <linearGradient id="rim" x1="0" y1="43" x2="0" y2="284" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f7fcff"/><stop offset=".16" stop-color="#6a83a7"/>
+      <stop offset=".34" stop-color="#e2f1ff"/><stop offset=".49" stop-color="#0b1426"/>
+      <stop offset=".54" stop-color="#a9c7ed"/><stop offset=".74" stop-color="#fff"/>
+      <stop offset=".9" stop-color="#486585"/><stop offset="1" stop-color="#eaf6ff"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="25" y1="58" x2="75" y2="282" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#daeaff"/><stop offset=".1" stop-color="#fff"/>
+      <stop offset=".23" stop-color="#9fb4d1"/><stop offset=".39" stop-color="#334960"/>
+      <stop offset=".46" stop-color="#0a1627"/><stop offset=".49" stop-color="#b1d5fc"/>
+      <stop offset=".54" stop-color="#fff"/><stop offset=".63" stop-color="#e4f0f8"/>
+      <stop offset=".8" stop-color="#7d9bbb"/><stop offset=".94" stop-color="#263c59"/>
+      <stop offset="1" stop-color="#d3edff"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="70" x2="0" y2="263" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f5faff"/><stop offset=".2" stop-color="#849fbe"/>
+      <stop offset=".41" stop-color="#182b43"/><stop offset=".5" stop-color="#425a78"/>
+      <stop offset=".55" stop-color="#f2fbff"/><stop offset=".73" stop-color="#bad4ec"/>
+      <stop offset="1" stop-color="#516e90"/>
+    </linearGradient>
+  </defs>
+  <use href="#letters" stroke="#071321" stroke-width="76" transform="translate(0 5)" opacity=".8"/>
+  <use href="#letters" stroke="url(#rim)" stroke-width="74"/>
+  <use href="#letters" stroke="#f2f9ff" stroke-width="66"/>
+  <use href="#letters" stroke="#314763" stroke-width="62"/>
+  <use href="#letters" stroke="url(#chrome)" stroke-width="57"/>
+  <use href="#letters" stroke="url(#core)" stroke-width="39"/>
+</svg>

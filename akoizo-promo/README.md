@@ -13,3 +13,12 @@ The interactive player is the deliverable. A flat MP4 retains the film and music
 Messaging follows https://akoizo.app and existing app source. The 400+ students impacted metric was supplied by the user. School contact points to https://akoizo.app/contact. Original soundtrack: scripts/soundtrack.mjs. No third-party music samples.
 
 Design notes: DESIGN.md. Scene preview images: output/. The main application remains separate from this video project.
+
+## Instagram Reel (fast cut)
+
+`Akoizo-Reel`: a separate 30-second, 1080 × 1920 fast-paced Reel in `src/reel/`. Thirteen beat-synced scenes (120 BPM): curiosity hook, free, the scattered-PDF problem, logo drop, then events, lessons, labs, past tests, ranked tests (the site's real rank badges, Iron → Radiant), binders, coaches, 400+ students and the akoizo.app call to action. Important text stays inside Instagram's safe area.
+
+- Re-record app clips (dev server running, everything mocked): from the Akoizo root, `TEST_BASE_URL=http://127.0.0.1:3006 node akoizo-promo/scripts/reel-capture.mjs`
+- Regenerate the original soundtrack: `node scripts/reel-soundtrack.mjs`. Cut timing lives in `src/reel/timeline.json` and drives both picture and sound.
+- Render: `npx remotion render Akoizo-Reel output/akoizo-reel.mp4 --codec=h264 --crf=18 --audio-codec=aac --audio-bitrate=320k`
+- `Akoizo-Reel-SFX-Only` keeps the hits and whooshes but drops the music, so a trending Instagram sound can go underneath.

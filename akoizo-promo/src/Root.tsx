@@ -6,6 +6,7 @@ import { Tools } from "./Tools";
 import { Impact } from "./Impact";
 import { Community } from "./Community";
 import { Closing } from "./Closing";
+import { Reel } from "./reel/Reel";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -17,6 +18,24 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         fps={30}
         durationInFrames={900}
+      />
+      <Composition
+        id="Akoizo-Reel"
+        component={Reel}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={900}
+        defaultProps={{ music: true }}
+      />
+      <Composition
+        id="Akoizo-Reel-SFX-Only"
+        component={Reel}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={900}
+        defaultProps={{ music: false }}
       />
       <Folder name="Scenes">
         <Composition

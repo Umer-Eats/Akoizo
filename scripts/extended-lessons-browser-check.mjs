@@ -1,6 +1,7 @@
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
+import { openStage } from './lib-lesson-stage.mjs';
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 await mkdir('documents/qa/lessons', { recursive: true });
@@ -120,7 +121,7 @@ try {
       await p.locator('.unit-button').nth(i).click();
       await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);
       await expect(p.locator('.lesson-reading .process-atlas')).toHaveCount(1);
-      await expect(p.locator('.lesson-reading .comparison-atlas tbody tr')).toHaveCount(3);
+      await expect(p.locator('#lesson-review .comparison-cards > div')).toHaveCount(3);
       await expect(p.locator('.lesson-reading .subject-preview')).toHaveCount(1);
       await expect(p.locator('.quiz-question')).toHaveCount(7);
       await expect(p.locator('.online-reference')).toHaveCount(

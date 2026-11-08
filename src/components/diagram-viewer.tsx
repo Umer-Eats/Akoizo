@@ -1,50 +1,83 @@
 'use client';
-import { useId, useState, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
+import { Maximize2, Minus, Plus, X } from 'lucide-react';
 import './diagram-viewer.css';
 
-/** Shared inspection controls keep small labels readable without widening the page. */
+/**
+ * Shared frame for lesson and lab diagrams. Inline, the diagram fits its column; "Enlarge"
+ * opens a full-screen viewer with zoom so small labels stay readable on any screen.
+ */
 export function DiagramViewer({ label, children }: { label: string; children: ReactNode }) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState(100);
-  const hintId = useId();
+  const close = () => dialog.current?.close();
   return (
     <div className="diagram-inspector">
-      <div className="diagram-toolbar" role="group" aria-label={`${label} inspection controls`}>
-        <span>Inspect the diagram</span>
+      <div className="diagram-frame">
+        <div className="diagram-inspector-canvas">{children}</div>
         <button
           type="button"
-          disabled={zoom === 100}
-          aria-label="Zoom diagram out"
-          onClick={() => setZoom((z) => Math.max(100, z - 25))}
+          className="diagram-expand"
+          aria-label={`Enlarge diagram: ${label}`}
+          onClick={() => {
+            setZoom(100);
+            setOpen(true);
+            dialog.current?.showModal();
+          }}
         >
-          −
-        </button>
-        <output aria-live="polite">{zoom}%</output>
-        <button
-          type="button"
-          disabled={zoom === 200}
-          aria-label="Zoom diagram in"
-          onClick={() => setZoom((z) => Math.min(200, z + 25))}
-        >
-          +
-        </button>
-        <button type="button" disabled={zoom === 100} onClick={() => setZoom(100)}>
-          Reset zoom
+          <Maximize2 size={14} aria-hidden="true" /> <span>Enlarge</span>
         </button>
       </div>
-      <div
-        className="diagram-inspector-scroll"
-        role="region"
-        tabIndex={0}
-        aria-label={`${label} enlarged diagram`}
-        aria-describedby={hintId}
+      <dialog
+        ref={dialog}
+        className="diagram-dialog"
+        aria-label={label}
+        onClose={() => setOpen(false)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) close();
+        }}
       >
-        <div className="diagram-inspector-canvas" style={{ width: `${zoom}%` }}>
-          {children}
+        <div className="diagram-toolbar" role="group" aria-label={`${label} zoom controls`}>
+          <strong>{label}</strong>
+          <button
+            type="button"
+            disabled={zoom === 100}
+            aria-label="Zoom diagram out"
+            onClick={() => setZoom((z) => Math.max(100, z - 25))}
+          >
+            <Minus size={15} aria-hidden="true" />
+          </button>
+          <output aria-live="polite">{zoom}%</output>
+          <button
+            type="button"
+            disabled={zoom === 250}
+            aria-label="Zoom diagram in"
+            onClick={() => setZoom((z) => Math.min(250, z + 25))}
+          >
+            <Plus size={15} aria-hidden="true" />
+          </button>
+          <button type="button" aria-label="Close enlarged diagram" onClick={close}>
+            <X size={15} aria-hidden="true" />
+          </button>
         </div>
-      </div>
-      <p id={hintId} className="diagram-inspector-hint">
-        Zoom to read labels; scroll sideways or focus the diagram and use arrow keys to explore.
-      </p>
+        <div
+          className="diagram-inspector-scroll"
+          role="region"
+          tabIndex={0}
+          aria-label={`${label} enlarged diagram`}
+        >
+          {open && (
+            <div className="diagram-dialog-canvas" style={{ width: `${zoom}%` }}>
+              {children}
+            </div>
+          )}
+        </div>
+        <p className="diagram-inspector-hint">
+          Zoom in to read small labels; scroll or use the arrow keys to move around. Press Escape to
+          close.
+        </p>
+      </dialog>
     </div>
   );
 }

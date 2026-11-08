@@ -1,0 +1,25 @@
+{
+  "fps": 30,
+  "bpm": 120,
+  "duration": 900,
+  "drop": 180,
+  "scenes": [
+    { "id": "hook", "from": 0, "dur": 60 },
+    { "id": "free", "from": 60, "dur": 60 },
+    { "id": "chaos", "from": 120, "dur": 60 },
+    { "id": "logo", "from": 180, "dur": 45 },
+    { "id": "events", "from": 225, "dur": 75 },
+    { "id": "lessons", "from": 300, "dur": 75 },
+    { "id": "labs", "from": 375, "dur": 75 },
+    { "id": "tests", "from": 450, "dur": 75 },
+    { "id": "ranked", "from": 525, "dur": 120 },
+    { "id": "binder", "from": 645, "dur": 60 },
+    { "id": "coaches", "from": 705, "dur": 60 },
+    { "id": "proof", "from": 765, "dur": 60 },
+    { "id": "cta", "from": 825, "dur": 75 }
+  ],
+  "hits": [16, 68, 75, 82, 90, 180, 795, 831],
+  "ticks": [124, 131, 138, 146, 153, 160, 241, 245, 249, 253, 257, 261],
+  "rankSteps": [6, 18, 29, 39, 48, 56, 63, 70, 80],
+  "taps": [863]
+}

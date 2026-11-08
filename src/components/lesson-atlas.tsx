@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { ChevronLeft, ChevronRight, Pause, Play, RotateCcw } from 'lucide-react';
 import type { Lesson } from '@/lib/lessons';
 import { atlasImages, lessonAtlas, type AtlasEntry, type AtlasImage } from '@/lib/lesson-atlas';
 import { calculateModel, modelControls, modelDefaults, type ModelId } from '@/lib/lesson-models';
@@ -8,78 +9,98 @@ import { DiagramViewer } from './diagram-viewer';
 export function ProcessAtlas({ entry, compact = false }: { entry: AtlasEntry; compact?: boolean }) {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const last = entry.steps.length - 1;
   useEffect(() => {
     if (!playing) return;
     const timer = window.setTimeout(() => {
-      if (active >= entry.steps.length - 1) setPlaying(false);
+      if (active >= last) setPlaying(false);
       else setActive((step) => step + 1);
     }, 3000);
     return () => window.clearTimeout(timer);
-  }, [playing, active, entry.steps.length]);
+  }, [playing, active, last]);
+  const go = (step: number) => {
+    setPlaying(false);
+    setActive(Math.max(0, Math.min(last, step)));
+  };
+  const step = entry.steps[active];
   return (
-    <figure className={`lesson-visual process-atlas${compact ? ' compact' : ''}`}>
+    <figure
+      className={`lesson-visual process-atlas${compact ? ' compact' : ''}`}
+      style={{ '--steps': entry.steps.length } as CSSProperties}
+    >
       <figcaption>
-        <span className="eyebrow">TRACE THE MECHANISM</span>
+        <span className="eyebrow">HOW IT WORKS · {entry.steps.length} STEPS</span>
         <strong>{entry.title}</strong>
       </figcaption>
-      <div className="lesson-actions process-playback">
-        <button
-          type="button"
-          className="button button-small button-glass"
-          aria-pressed={playing}
-          onClick={() => {
-            if (!playing && active === entry.steps.length - 1) setActive(0);
-            setPlaying((p) => !p);
-          }}
-        >
-          {playing ? 'Pause walkthrough' : 'Play walkthrough'}
-        </button>
-        <button
-          type="button"
-          className="button button-small button-glass"
-          onClick={() => {
-            setPlaying(false);
-            setActive(0);
-          }}
-        >
-          Restart walkthrough
-        </button>
-        <span>
-          Step {active + 1} of {entry.steps.length} · 3 seconds per step
-        </span>
-      </div>
-      <ol className="process-path">
-        {entry.steps.map((step, i) => (
-          <li key={step.label}>
-            <button
-              type="button"
-              aria-pressed={active === i}
-              onClick={() => {
-                setPlaying(false);
-                setActive(i);
-              }}
-            >
+      <ol className="process-path" aria-label="Steps">
+        {entry.steps.map((item, i) => (
+          <li key={item.label} data-state={i < active ? 'done' : i === active ? 'active' : 'next'}>
+            <button type="button" aria-pressed={active === i} onClick={() => go(i)}>
               <span className="process-index">{i + 1}</span>
-              <strong>{step.label}</strong>
-              {!compact && <span>{step.detail}</span>}
+              <strong>{item.label}</strong>
             </button>
           </li>
         ))}
       </ol>
       <div className="process-focus" aria-live="polite" aria-atomic="true">
         <div key={active} className="process-step-detail">
+          <span className="process-step-count">
+            Step {active + 1} of {entry.steps.length}
+          </span>
           <strong>
-            Step {active + 1}: {entry.steps[active].label}
+            Step {active + 1}: {step.label}
           </strong>
-          <p>{entry.steps[active].detail}</p>
-          {active < entry.steps.length - 1 && (
-            <small>Trace the connection to {entry.steps[active + 1].label.toLowerCase()}.</small>
-          )}
-          {active > 0 && (
+          <p>{step.detail}</p>
+          {active < last && (
             <small>
-              Connect back: {entry.steps[active - 1].label} → {entry.steps[active].label}.
+              Leads to → <b>{entry.steps[active + 1].label}</b>
             </small>
           )}
+        </div>
+        <div className="process-playback" role="group" aria-label="Walkthrough controls">
+          <button
+            type="button"
+            className="process-icon"
+            aria-label="Previous step"
+            disabled={active === 0}
+            onClick={() => go(active - 1)}
+          >
+            <ChevronLeft size={16} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="process-play"
+            aria-pressed={playing}
+            aria-label={playing ? 'Pause walkthrough' : 'Play walkthrough'}
+            onClick={() => {
+              if (!playing && active === last) setActive(0);
+              setPlaying((p) => !p);
+            }}
+          >
+            {playing ? (
+              <Pause size={14} aria-hidden="true" />
+            ) : (
+              <Play size={14} aria-hidden="true" />
+            )}
+            {playing ? 'Pause' : 'Play'}
+          </button>
+          <button
+            type="button"
+            className="process-icon"
+            aria-label="Next step"
+            disabled={active === last}
+            onClick={() => go(active + 1)}
+          >
+            <ChevronRight size={16} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="process-icon"
+            aria-label="Restart walkthrough"
+            onClick={() => go(0)}
+          >
+            <RotateCcw size={14} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </figure>
@@ -90,34 +111,21 @@ export function ComparisonAtlas({ entry }: { entry: AtlasEntry }) {
   return (
     <figure className="lesson-visual comparison-atlas">
       <figcaption>
-        <span className="eyebrow">COMPARE & DISTINGUISH</span>
-        <strong>Mechanism, evidence, and limits</strong>
+        <span className="eyebrow">DON’T MIX THESE UP</span>
+        <strong>What each idea means, and its limit</strong>
       </figcaption>
-      <div
-        className="atlas-table-scroll"
-        tabIndex={0}
-        role="region"
-        aria-label={`${entry.title} comparison table`}
-      >
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Feature or case</th>
-              <th scope="col">What it tells you</th>
-              <th scope="col">Keep in mind</th>
-            </tr>
-          </thead>
-          <tbody>
-            {entry.contrasts.map((row) => (
-              <tr key={row.label}>
-                <th scope="row">{row.label}</th>
-                <td>{row.mechanism}</td>
-                <td>{row.limit}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <dl className="comparison-cards">
+        {entry.contrasts.map((row) => (
+          <div key={row.label}>
+            <dt>{row.label}</dt>
+            <dd>{row.mechanism}</dd>
+            <dd className="comparison-limit">
+              <span>Watch out</span>
+              {row.limit}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </figure>
   );
 }
@@ -351,15 +359,21 @@ export function RelationshipChart({ model }: { model: ModelId }) {
   );
 }
 
+/** The lesson's comparison of easily confused ideas, shown in the review after the reading. */
+export function lessonComparison(lesson: Lesson): AtlasEntry | undefined {
+  const atlas = lesson.visual ?? lessonAtlas[lesson.id];
+  return atlas?.contrasts.length ? atlas : undefined;
+}
+
 export function LessonSectionVisuals({ lesson, index }: { lesson: Lesson; index: number }) {
   const atlas: AtlasEntry | undefined = lesson.visual ?? lessonAtlas[lesson.id];
   if (!atlas) return null;
+  const last = lesson.sections.length - 1;
   return (
     <>
-      {index === atlas.section && <ProcessAtlas entry={atlas} />}
-      {index === 2 && atlas.image && <SourceImage image={atlas.image} />}
-      {index === 4 && <ComparisonAtlas entry={atlas} />}
-      {index === 6 && lesson.simulation.kind === 'model' && (
+      {index === Math.min(atlas.section, last) && <ProcessAtlas entry={atlas} />}
+      {index === Math.min(2, last) && atlas.image && <SourceImage image={atlas.image} />}
+      {index === Math.min(6, last) && lesson.simulation.kind === 'model' && (
         <RelationshipChart model={lesson.simulation.model} />
       )}
     </>

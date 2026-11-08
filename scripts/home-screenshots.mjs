@@ -143,12 +143,13 @@ async function capture(theme) {
   await shot('lab-workbench', '.archive-workbench');
   await shot('lab-overview');
 
-  // Lesson format: a course of units, illustrated reading, and an interactive model.
+  // Lesson format: a course of units, formatted reading, and an interactive model in Labs.
   await p.goto(`${base}/dashboard/student/events/anatomy-and-physiology/lessons`);
   await p.locator('.unit-button').nth(2).click();
   await expect(p.locator('.lesson-reading')).toBeVisible();
   await shot('lesson-course');
   await shot('lesson-reading', '.lesson-title-block');
+  await p.locator('#lesson-tab-labs').click();
   await shot('lesson-model', '.lesson-sim');
   await context.close();
 }
