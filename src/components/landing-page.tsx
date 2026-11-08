@@ -2,15 +2,13 @@ import type { CSSProperties, ReactNode } from 'react';
 
 const delay = (d: number) => ({ '--d': d }) as CSSProperties;
 
-// The opening page of a sub-page: a ruled sheet with a margin label.
+// Shared introduction for public pages.
 export function PageHero({
-  lecture,
   label,
   title,
   lead,
   children,
 }: {
-  lecture: string;
   label: string;
   title: ReactNode;
   lead: ReactNode;
@@ -19,11 +17,6 @@ export function PageHero({
   return (
     <section className="lx-page-hero">
       <div className="lx-hero-grid lx-wrap">
-        <div className="lx-hero-margin" data-enter>
-          <span className="lx-mono" style={delay(0)}>
-            {lecture}
-          </span>
-        </div>
         <div data-enter>
           <p className="lx-mono" style={delay(0)}>
             {label}
@@ -43,7 +36,7 @@ export function PageHero({
   );
 }
 
-// A numbered page of notes with its label in the margin.
+// Shared content section for public pages.
 export function Notes({
   id,
   num,
@@ -60,12 +53,16 @@ export function Notes({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="lx-sheet lx-wrap" aria-labelledby={title ? `${id}-title` : undefined} aria-label={title ? undefined : label}>
-      <div className="lx-margin">
-        <div className="lx-margin-inner">
-          <b aria-hidden="true">{String(num).padStart(2, '0')}</b>
-          <span className="lx-mono">{label}</span>
-        </div>
+    <section
+      id={id}
+      className="lx-sheet lx-wrap"
+      aria-labelledby={title ? `${id}-title` : undefined}
+      aria-label={title ? undefined : label}
+    >
+      <div className="lx-section-label">
+        <span className="lx-mono">
+          {String(num).padStart(2, '0')} / {label}
+        </span>
       </div>
       <div>
         {title && (

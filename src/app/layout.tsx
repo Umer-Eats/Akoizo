@@ -6,6 +6,8 @@ import '@fontsource/ibm-plex-mono/400.css';
 import './globals.css';
 import './theme.css';
 import './landing.css';
+import './study-landing.css';
+import './vault.css';
 import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/site-shell';
 import { AkoCompanion } from '@/components/ako-companion';

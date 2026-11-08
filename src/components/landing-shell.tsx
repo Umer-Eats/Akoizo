@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Menu, Moon, Pause, Play, Sun, X } from 'lucide-react';
+import { ArrowRight, Menu, Moon, Pause, Play, Search, Sun, X } from 'lucide-react';
+import { CommandPalette, openCommandPalette } from './command-palette';
 import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
 import { donationsOpen } from '@/lib/donate';
@@ -55,6 +56,11 @@ export function LandingNav() {
           ))}
         </nav>
         <div className="lx-nav-right">
+          <button className="vx-nav-search" type="button" onClick={openCommandPalette}>
+            <Search size={14} aria-hidden="true" />
+            <span>Search</span>
+            <kbd>Ctrl K</kbd>
+          </button>
           {profile ? (
             <>
               <Link className="lx-nav-text lx-nav-hide lx-nav-extra" href="/community">
@@ -135,6 +141,7 @@ export function LandingNav() {
           </div>
         </nav>
       )}
+      <CommandPalette />
       {error && (
         <p className="form-error lx-nav-error" role="alert">
           {error}

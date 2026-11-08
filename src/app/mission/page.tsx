@@ -70,7 +70,6 @@ export default function Page() {
         }}
       />
       <PageHero
-        lecture="Lecture 02 · Mission"
         label="Our mission"
         title={
           <>
@@ -104,12 +103,7 @@ export default function Page() {
               school student who believes good Science Olympiad study tools should reach every
               student, whatever their circumstances.
             </p>
-            <a
-              className="lx-link"
-              href={personalSite}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="lx-link" href={personalSite} target="_blank" rel="noopener noreferrer">
               Visit heyumerqureshi.com <ArrowUpRight size={16} aria-hidden="true" />
             </a>
           </>

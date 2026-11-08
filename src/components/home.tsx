@@ -5,184 +5,199 @@ import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
-  Check,
+  ChevronDown,
   FileText,
   FlaskConical,
+  Folder,
   FolderOpen,
   Plus,
   Search,
   Trophy,
-  Zap,
 } from 'lucide-react';
 import { eventsForDivision, type Division } from '@/lib/events';
 import { eventPagePath } from '@/lib/seo';
 import { HomeShowcase } from './home-showcase';
 import { groupBySlot } from './landing-data';
-
-const chapters = [
-  { id: 'syllabus', label: 'Event syllabus' },
-  { id: 'toolkit', label: 'Study toolkit' },
-  { id: 'inside', label: 'Inside Akoizo' },
-  { id: 'method', label: 'How it works' },
-  { id: 'questions', label: 'Questions' },
-];
+import { openCommandPalette } from './command-palette';
+import { VaultGraph } from './vault-graph';
+import { VaultWorkspace } from './vault-workspace';
 
 const delay = (d: number) => ({ '--d': d }) as CSSProperties;
 
-function Shot({ file, alt, eager = false }: { file: string; alt: string; eager?: boolean }) {
-  // Both themes are rendered; CSS shows the one matching the site theme.
-  return (
-    <span className="lx-shot">
-      {(['dark', 'light'] as const).map((theme) => (
-        <img
-          key={theme}
-          className={`lx-shot-${theme}`}
-          src={`/home/${file}-${theme}.png`}
-          alt={theme === 'dark' ? alt : ''}
-          width={1440}
-          height={900}
-          loading={eager ? 'eager' : 'lazy'}
-        />
-      ))}
-    </span>
-  );
+// Elements marked data-reveal fade in once as they scroll into view.
+function useReveal() {
+  useEffect(() => {
+    const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.setAttribute('data-in', '');
+          observer.unobserve(entry.target);
+        }),
+      { rootMargin: '0px 0px -12% 0px' },
+    );
+    items.forEach((item) => observer.observe(item));
+    document.documentElement.dataset.reveal = 'ready';
+    // Cards and buttons glow where the pointer is.
+    const onMove = (e: PointerEvent) => {
+      const el = (e.target as HTMLElement).closest<HTMLElement>('.vx-card, .vx-btn');
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    };
+    window.addEventListener('pointermove', onMove);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('pointermove', onMove);
+      delete document.documentElement.dataset.reveal;
+    };
+  }, []);
 }
 
-// A section is a page of notes: the margin holds its number and the contents rail.
-function Sheet({
+function Section({
   id,
-  active,
+  path,
+  title,
+  lead,
   children,
 }: {
   id: string;
-  active: string;
+  path: string;
+  title: ReactNode;
+  lead?: ReactNode;
   children: ReactNode;
 }) {
-  const index = chapters.findIndex((chapter) => chapter.id === id);
   return (
-    <section id={id} className="lx-sheet lx-wrap" aria-labelledby={`${id}-title`}>
-      <div className="lx-margin">
-        <div className="lx-margin-inner">
-          <b aria-hidden="true">{String(index + 1).padStart(2, '0')}</b>
-          <span className="lx-mono">{chapters[index].label}</span>
-          <ul className="lx-rail" aria-label="On this page">
-            {chapters.map((chapter) => (
-              <li key={chapter.id}>
-                <a href={`#${chapter.id}`} aria-current={active === chapter.id || undefined}>
-                  {chapter.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section id={id} className="vx-section" aria-labelledby={`${id}-title`}>
+      <div className="lx-wrap">
+        <header className="vx-section-head" data-reveal>
+          <p className="vx-path">
+            <FileText size={12} aria-hidden="true" /> akoizo / <b>{path}</b>
+          </p>
+          <h2 id={`${id}-title`}>{title}</h2>
+          {lead && <p className="vx-lead">{lead}</p>}
+        </header>
+        {children}
       </div>
-      <div>{children}</div>
     </section>
   );
 }
 
-function Syllabus() {
+// A big statement whose words light up as it scrolls past.
+function Statement({ text }: { text: string }) {
+  return (
+    <section className="vx-statement" aria-label="What Akoizo is">
+      <p className="lx-wrap">
+        {text.split(' ').map((word, i) => (
+          <span key={i} className={word.startsWith('[[') ? 'vx-st-link' : undefined}>
+            {word.replace(/\[\[|\]\]/g, '')}{' '}
+          </span>
+        ))}
+      </p>
+    </section>
+  );
+}
+
+function Explorer() {
   const [division, setDivision] = useState<Division>('C');
   const [query, setQuery] = useState('');
+  const [closed, setClosed] = useState<string[]>([]);
   const groups = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const events = eventsForDivision(division).filter((event) =>
-      event.name.toLowerCase().includes(q),
+    return groupBySlot(
+      eventsForDivision(division).filter((event) => event.name.toLowerCase().includes(q)),
     );
-    return groupBySlot(events);
   }, [division, query]);
   const slotted = groups.some((group) => group.color !== 'unassigned');
+  const total = groups.reduce((n, g) => n + g.events.length, 0);
   return (
-    <>
-      <div className="lx-syllabus-bar">
-        <div className="lx-seg" role="group" aria-label="Division">
+    <div className="vx-explorer" data-reveal>
+      <div className="vx-explorer-bar">
+        <div className="vx-vaults" role="group" aria-label="Division">
           {(['A', 'B', 'C'] as const).map((d) => (
-            <button key={d} type="button" aria-pressed={division === d} onClick={() => setDivision(d)}>
+            <button
+              key={d}
+              type="button"
+              aria-pressed={division === d}
+              onClick={() => setDivision(d)}
+            >
               Division {d}
             </button>
           ))}
         </div>
-        <label className="lx-search">
-          <Search size={16} aria-hidden="true" />
-          <span className="sr-only">Search events</span>
+        <label className="vx-filter">
+          <Search size={14} aria-hidden="true" />
+          <span className="sr-only">Filter events</span>
           <input
             type="search"
-            placeholder="Search events"
+            placeholder="Filter events"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
         </label>
+        <span className="vx-count">{total} notes</span>
       </div>
       {groups.length ? (
-        <div className="lx-slots" aria-live="polite">
-          {groups.map((group) => (
-            <div className="lx-slot" key={group.color} data-slot={group.color}>
-              <h3>
-                <i aria-hidden="true" />
-                {slotted ? group.label : `Division ${division} events`}
-              </h3>
-              <ul>
-                {group.events.map((event) => (
-                  <li key={event.id}>
-                    <Link className="lx-event" href={eventPagePath(division, event.id)}>
-                      {event.name}
-                      {event.type !== 'Study' && <small>{event.type}</small>}
-                      <ArrowUpRight size={15} aria-hidden="true" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="vx-tree" aria-live="polite">
+          {groups.map((group) => {
+            const isClosed = closed.includes(group.color) && !query;
+            return (
+              <div className="vx-folder" key={group.color} data-slot={group.color}>
+                <button
+                  type="button"
+                  className="vx-folder-head"
+                  aria-expanded={!isClosed}
+                  onClick={() =>
+                    setClosed((c) =>
+                      c.includes(group.color)
+                        ? c.filter((x) => x !== group.color)
+                        : [...c, group.color],
+                    )
+                  }
+                >
+                  <ChevronDown size={14} aria-hidden="true" />
+                  {isClosed ? (
+                    <Folder size={15} aria-hidden="true" />
+                  ) : (
+                    <FolderOpen size={15} aria-hidden="true" />
+                  )}
+                  <i aria-hidden="true" />
+                  {slotted ? group.label : `Division ${division} events`}
+                  <span>{group.events.length}</span>
+                </button>
+                {!isClosed && (
+                  <ul>
+                    {group.events.map((event, i) => (
+                      <li key={event.id} style={delay(i)}>
+                        <Link href={eventPagePath(division, event.id)}>
+                          <FileText size={13} aria-hidden="true" />
+                          {event.name}
+                          {event.type !== 'Study' && <small>{event.type}</small>}
+                          <ArrowUpRight size={13} aria-hidden="true" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
         </div>
       ) : (
-        <p className="lx-empty">No {`Division ${division}`} event matches “{query}”.</p>
+        <p className="vx-empty">
+          No Division {division} event matches “{query}”.
+        </p>
       )}
-      <div className="lx-syllabus-foot">
-        <span>Colours mark tournament timeslot groups. Always confirm current rules with your organisers.</span>
+      <p className="vx-explorer-foot">
+        <span>
+          Folders follow tournament timeslot groups. Confirm your schedule with your organisers.
+        </span>
         <Link className="lx-link" href="/study-tools">
-          Full event catalog <ArrowUpRight size={16} aria-hidden="true" />
+          Full event catalog <ArrowUpRight size={15} aria-hidden="true" />
         </Link>
-      </div>
-    </>
-  );
-}
-
-function Worksheet() {
-  const [answer, setAnswer] = useState('');
-  const right = answer === 'Force';
-  return (
-    <div className="lx-worksheet">
-      <div className="lx-worksheet-top">
-        <span className="lx-mono">Practice · Question 01</span>
-        <span className="lx-mono">Physics</span>
-      </div>
-      <h3>Which quantity is measured in newtons?</h3>
-      <div className="lx-options">
-        {['Force', 'Energy', 'Power'].map((a, i) => (
-          <button
-            key={a}
-            type="button"
-            onClick={() => setAnswer(a)}
-            aria-pressed={answer === a}
-            data-right={answer === a && a === 'Force'}
-          >
-            <span>{String.fromCharCode(65 + i)}</span>
-            {a}
-            {answer === a && a === 'Force' && <Check size={18} aria-hidden="true" />}
-          </button>
-        ))}
-      </div>
-      <p className="lx-feedback" aria-live="polite" data-state={right ? 'right' : undefined}>
-        {answer
-          ? right
-            ? 'Correct. A newton is the SI unit of force.'
-            : 'Not quite. Think about a push or a pull.'
-          : 'Pick an answer to check it.'}
       </p>
-      <Link className="lx-link" href="/login/student">
-        Try a full practice test <ArrowRight size={16} aria-hidden="true" />
-      </Link>
     </div>
   );
 }
@@ -190,27 +205,32 @@ function Worksheet() {
 const tools = [
   {
     icon: BookOpen,
+    file: 'lessons',
     title: 'Event lessons',
-    body: 'Every event is a course of units: short reading, reference figures, a worked example, an interactive model and a practice assignment.',
+    body: 'A course of units for every event: reading, figures, a worked example, an interactive model and practice.',
   },
   {
     icon: FileText,
+    file: 'past-tests',
     title: 'Real past tests',
-    body: 'The original paper sits beside a timed answer sheet. Drafts save as you go, and scoring follows the published key.',
+    body: 'The original paper beside a timed answer sheet. Drafts save as you go, scored on the published key.',
   },
   {
     icon: FlaskConical,
+    file: 'labs',
     title: 'Virtual labs',
-    body: 'Write a hypothesis, move the controls, watch the readings change, and keep your trials in a notebook you can export.',
+    body: 'Write a hypothesis, move the controls, record trials in a lab notebook you can export.',
   },
   {
     icon: FolderOpen,
-    title: 'Binders, cheatsheets and vocab',
-    body: 'Build the binder and cheatsheet you bring to the tournament, and drill vocabulary in quick rounds.',
+    file: 'binders',
+    title: 'Binders and cheatsheets',
+    body: 'Build the binder and cheatsheet you bring to the tournament, and drill vocab in quick rounds.',
   },
   {
     icon: Trophy,
-    title: 'Ranked tests and rankings',
+    file: 'ranked',
+    title: 'Ranked tests',
     body: 'Sit ranked tests and see how you and your school compare with students everywhere.',
   },
 ];
@@ -218,7 +238,7 @@ const tools = [
 const questions = [
   [
     'Is Akoizo really free?',
-    'Yes. There are no paywalls and no ads. Every lesson and every practice test stays free, for every school.',
+    'Yes. No paywalls and no ads. Every lesson and every practice test stays free, for every school.',
   ],
   [
     'Who can use it?',
@@ -230,7 +250,7 @@ const questions = [
   ],
   [
     'Can I look around before signing in?',
-    'Yes. Every event has a public study guide in the event catalog, and the screens on this page come from a real student account.',
+    'Yes. Every event has a public study guide, and the screens on this page come from a real student account.',
   ],
   [
     'Is Akoizo part of Science Olympiad?',
@@ -239,226 +259,182 @@ const questions = [
 ];
 
 export function Home() {
-  const [active, setActive] = useState(chapters[0].id);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
-      },
-      { rootMargin: '-40% 0px -55% 0px' },
-    );
-    chapters.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
-
+  useReveal();
   return (
-    <main id="main" className="lx-page">
-      <section className="lx-hero" aria-labelledby="hero-title">
-        <div className="lx-hero-grid lx-wrap">
-          <div className="lx-hero-margin" data-enter>
-            <span className="lx-mono" style={delay(0)}>
-              Lecture 00 · Introduction
-            </span>
-            <ul aria-label="In these notes" style={delay(2)}>
-              {chapters.map((chapter, i) => (
-                <li key={chapter.id}>
-                  <a href={`#${chapter.id}`}>
-                    <b>{String(i + 1).padStart(2, '0')}</b>
-                    {chapter.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+    <main id="main" className="lx-page vx-page">
+      <section className="vx-hero" aria-labelledby="hero-title">
+        <VaultGraph />
+        <div className="vx-hero-fade" aria-hidden="true" />
+        <div className="lx-wrap vx-hero-inner" data-enter>
+          <p className="vx-eyebrow" style={delay(0)}>
+            Akoizo
+          </p>
+          <h1 id="hero-title" style={delay(1)}>
+            Study like
+            <br />
+            everything <em>connects.</em>
+          </h1>
+          <p className="vx-lead" style={delay(2)}>
+            Lessons, notes, past papers and labs in one quiet workspace. Read it, write it in your
+            words, and watch your knowledge link up.
+          </p>
+          <div className="vx-actions" style={delay(3)}>
+            <Link className="vx-btn" href="/login/student">
+              Open your study space <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <button type="button" className="vx-btn vx-btn-ghost" onClick={openCommandPalette}>
+              <Search size={15} aria-hidden="true" /> Search events <kbd>Ctrl K</kbd>
+            </button>
           </div>
-          <div className="lx-hero-main">
-            <div data-enter>
-              <p className="lx-mono" style={delay(0)}>
-                Science Olympiad · Divisions A, B and C
-              </p>
-              <h1 id="hero-title" style={delay(1)}>
-                Science Olympiad prep, <span className="lx-mark">free</span> for every student.
-              </h1>
-              <p className="lx-lead" style={delay(2)}>
-                Event lessons, real past tests and virtual labs in one study space your whole school
-                team can share. No ads and no paywalls.
-              </p>
-              <div className="lx-actions" style={delay(3)}>
-                <Link className="lx-btn" href="/login/student">
-                  Start studying free <ArrowRight size={18} aria-hidden="true" />
-                </Link>
-                <Link className="lx-btn lx-btn-line" href="#syllabus">
-                  Find your event
-                </Link>
-              </div>
-              <p className="lx-hero-note" style={delay(4)}>
-                Coaching a team? <Link href="/contact">Add your school</Link>
-              </p>
-            </div>
-            <figure className="lx-figure" data-enter>
-              <div style={delay(3)}>
-                <span className="lx-note lx-note-a" aria-hidden="true">
-                  <span>Your toolkit</span>
-                  <i />
-                </span>
-                <span className="lx-note lx-note-b" aria-hidden="true">
-                  <span>Live model</span>
-                  <i />
-                </span>
-                <div className="lx-window">
-                  <div className="lx-window-bar" aria-hidden="true">
-                    <span className="lx-dots">
-                      <i />
-                      <i />
-                      <i />
-                    </span>
-                    <span className="lx-address">akoizo.app / anatomy-and-physiology / lessons</span>
-                  </div>
-                  <Shot
-                    file="lesson-model"
-                    alt="Ventilation simulator with sliders for tidal volume, breathing rate, and dead space beside a live lung diagram."
-                    eager
-                  />
-                </div>
-              </div>
-              <figcaption className="lx-mono" style={delay(4)}>
-                <span>Fig. 1 · A lesson’s interactive model</span>
-                <span>Anatomy and Physiology</span>
-              </figcaption>
-            </figure>
-          </div>
+        </div>
+        <div className="lx-wrap vx-hero-foot" aria-hidden="true">
+          <span>Free for every student. Always.</span>
+          <span>Hover the graph · click a note to open it</span>
         </div>
       </section>
 
-      <Sheet id="syllabus" active={active}>
-        <div className="lx-intro">
-          <h2 id="syllabus-title" className="lx-h2">
-            Find your event. Open its study guide.
-          </h2>
-          <p className="lx-lead">
-            Every 2027 event, sorted into the timeslot groups your tournament runs them in. Pick a
-            division, search, and jump straight to a free guide.
-          </p>
-        </div>
-        <Syllabus />
-      </Sheet>
+      <Statement text="Not a pile of PDFs. A [[vault]] of ideas that link, grow and stay yours — one event at a time." />
 
-      <Sheet id="toolkit" active={active}>
-        <div className="lx-intro">
-          <h2 id="toolkit-title" className="lx-h2">
-            Everything for the season, in one study space.
-          </h2>
-          <p className="lx-lead">
-            Learn the material, test yourself on real papers, then practice the hands-on parts.
-            Try the sample question while you read.
-          </p>
-        </div>
-        <div className="lx-tool-grid">
-          <div className="lx-tool-list">
-            {tools.map((tool) => (
-              <div className="lx-tool" key={tool.title}>
-                <tool.icon size={22} aria-hidden="true" />
-                <h3>{tool.title}</h3>
-                <p>{tool.body}</p>
-              </div>
-            ))}
-          </div>
-          <Worksheet />
-        </div>
-      </Sheet>
+      <Section
+        id="workspace"
+        path="workspace"
+        title={
+          <>
+            Read. Write. <em>Connect.</em> Recall.
+          </>
+        }
+        lead="Four moves, one window. Scroll through a study session the way it happens in Akoizo."
+      >
+        <VaultWorkspace />
+      </Section>
 
-      <Sheet id="inside" active={active}>
-        <HomeShowcase />
-      </Sheet>
+      <Section
+        id="events"
+        path="events"
+        title="Every event, a folder of its own."
+        lead="Explore the 2027 events grouped by tournament timeslot, then open a free guide."
+      >
+        <Explorer />
+      </Section>
 
-      <Sheet id="method" active={active}>
-        <div className="lx-intro">
-          <h2 id="method-title" className="lx-h2">
-            From sign-up to tournament day.
-          </h2>
-          <p className="lx-lead">
-            Akoizo is organised around your school team, so coaches can assign work and follow
-            progress while students study at their own pace.
-          </p>
+      <Section
+        id="toolkit"
+        path="toolkit"
+        title="Everything for the season."
+        lead="Learn the material, test yourself on real papers, then practise the hands-on parts."
+      >
+        <div className="vx-cards">
+          {tools.map((tool, i) => (
+            <article className="vx-card" key={tool.file} data-reveal style={delay(i)}>
+              <p className="vx-card-path">
+                <tool.icon size={14} aria-hidden="true" /> {tool.file}.md
+              </p>
+              <h3>{tool.title}</h3>
+              <p>{tool.body}</p>
+            </article>
+          ))}
+          <Link className="vx-card vx-card-cta" href="/login/student" data-reveal style={delay(5)}>
+            <Plus size={18} aria-hidden="true" />
+            <h3>Start your own vault</h3>
+            <p>Free, with your school’s joining password.</p>
+          </Link>
         </div>
-        <div className="lx-points">
+      </Section>
+
+      <Section id="inside" path="screens" title="See it before you sign in.">
+        <div data-reveal>
+          <HomeShowcase />
+        </div>
+      </Section>
+
+      <Section
+        id="method"
+        path="getting-started"
+        title="From sign-up to tournament day."
+        lead="Akoizo is organised around your school team, so coaches can assign work while students study at their own pace."
+      >
+        <ol className="vx-steps">
           {[
             [
               'Pick your events',
-              'Choose your division and the events you compete in. Each one opens its own course, tests and rules.',
+              'Choose your division and events. Each one opens its own course, tests and rules.',
             ],
             [
               'Join your school',
               'Enter the joining password from your coach to land in your school’s study group.',
             ],
             [
-              'Learn and practice',
-              'Work through lessons, sit past papers, review your mistakes and watch your ranking move.',
+              'Learn and practise',
+              'Work through lessons, sit past papers, review mistakes and watch your ranking move.',
             ],
           ].map(([title, body], i) => (
-            <div className="lx-point" key={title}>
-              <span>Step {String(i + 1).padStart(2, '0')}</span>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </div>
+            <li key={title} data-reveal style={delay(i)}>
+              <span>
+                <input type="checkbox" checked={i === 0} readOnly tabIndex={-1} aria-hidden="true" />
+              </span>
+              <div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
+            </li>
           ))}
-        </div>
-        <div className="lx-callout">
+        </ol>
+        <div className="vx-callout-wide" data-reveal>
           <p>
-            <strong>Note for coaches</strong>
-            Your school is added for free, with instructor tools for assignments, ranked tests and
-            progress.
+            <b>For coaches</b>
+            Your school is added for free, with tools for assignments, ranked tests and progress.
           </p>
-          <Link className="lx-btn" href="/contact">
-            Add your school <ArrowRight size={18} aria-hidden="true" />
+          <Link className="vx-btn" href="/contact">
+            Add your school <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
-      </Sheet>
+      </Section>
 
-      <Sheet id="questions" active={active}>
-        <div className="lx-intro">
-          <h2 id="questions-title" className="lx-h2">
-            Questions, answered.
-          </h2>
-          <p className="lx-lead">
+      <Section
+        id="questions"
+        path="faq"
+        title="Questions, answered."
+        lead={
+          <>
             Something else on your mind?{' '}
             <Link className="lx-link" href="/contact">
-              Write to us <ArrowUpRight size={16} aria-hidden="true" />
+              Write to us <ArrowUpRight size={15} aria-hidden="true" />
             </Link>
-          </p>
-        </div>
-        <div className="lx-faq">
+          </>
+        }
+      >
+        <div className="vx-faq" data-reveal>
           {questions.map(([q, a]) => (
             <details key={q}>
               <summary>
+                <ChevronDown size={16} aria-hidden="true" />
                 {q}
-                <Plus size={20} aria-hidden="true" />
               </summary>
               <p>{a}</p>
             </details>
           ))}
         </div>
-      </Sheet>
+      </Section>
 
-      <section className="lx-close" aria-labelledby="free-title">
-        <div className="lx-wrap">
-          <p className="lx-mono">
-            <Zap size={12} aria-hidden="true" /> Our promise
+      <section className="vx-close" aria-labelledby="free-title">
+        <div className="lx-wrap" data-reveal>
+          <p className="vx-path">
+            <FileText size={12} aria-hidden="true" /> akoizo / <b>promise</b>
           </p>
           <h2 id="free-title">
-            No paywalls. No ads. <span className="lx-blue">Always free.</span>
+            No paywalls. No ads.
+            <br />
+            <em>Always free.</em>
           </h2>
-          <p className="lx-lead">
-            Akoizo is built and run by one high school student who thinks good study tools should
-            open doors, wherever your school is and whatever it can spend.
+          <p className="vx-lead">
+            Built and run by one high school student who thinks good study tools should open doors,
+            wherever your school is and whatever it can spend.
           </p>
-          <div className="lx-actions">
-            <Link className="lx-btn" href="/login/student">
-              Start studying free <ArrowRight size={18} aria-hidden="true" />
+          <div className="vx-actions">
+            <Link className="vx-btn" href="/login/student">
+              Start studying free <ArrowRight size={16} aria-hidden="true" />
             </Link>
-            <Link className="lx-btn lx-btn-line" href="/mission">
+            <Link className="vx-btn vx-btn-ghost" href="/mission">
               Read our mission
             </Link>
           </div>

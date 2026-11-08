@@ -26,7 +26,6 @@ export default function ContactPage() {
   return (
     <main id="main" className="lx-page">
       <PageHero
-        lecture="Office hours · Contact"
         label="Teachers and schools"
         title="Add your school to Akoizo."
         lead="Teachers, coaches, and schools: Akoizo is free for your whole Science Olympiad team. Email Umer Qureshi to have your school added, and your students can start studying together."

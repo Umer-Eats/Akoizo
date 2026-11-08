@@ -5,9 +5,9 @@ import type { ScienceEvent } from '@/lib/events';
 export type SlotGroup = { color: string; label: string; events: ScienceEvent[] };
 
 export function groupBySlot(events: ScienceEvent[]): SlotGroup[] {
-  const groups: SlotGroup[] = eventSlots.map((slot) => ({
+  const groups: SlotGroup[] = eventSlots.map((slot, index) => ({
     color: slot.color,
-    label: `${slot.label} timeslot`,
+    label: `Timeslot ${String(index + 1).padStart(2, '0')}`,
     events: events.filter((event) => (slot.events as readonly string[]).includes(event.id)),
   }));
   const placed = new Set(groups.flatMap((group) => group.events.map((event) => event.id)));

@@ -26,7 +26,6 @@ export default function DonatePage() {
   return (
     <main id="main" className="lx-page">
       <PageHero
-        lecture="Appendix · Donate"
         label="PayPal or card"
         title="Donate to Akoizo."
         lead="Donations go straight to Umer Qureshi, who builds and pays for Akoizo. PayPal handles the payment, so Akoizo never sees or stores your card or banking details."

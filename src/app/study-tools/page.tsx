@@ -32,7 +32,6 @@ export default function StudyToolsPage() {
   return (
     <main id="main" className="lx-page">
       <PageHero
-        lecture="Lecture 01 · Study tools"
         label="Akoizo study tools"
         title="Free Science Olympiad study tools"
         lead="Prepare for Science Olympiad (SciOly) with event lessons, practice tests, rules and study groups for your team. Pick your event below to see its free study guide, then sign in to study in your division."
@@ -62,11 +61,15 @@ export default function StudyToolsPage() {
         num={2}
         label="Event catalog"
         title="2027 Science Olympiad event catalog"
-        lead="Find your event in Division A, B, or C. Colours mark tournament timeslot groups. Lesson and practice coverage varies by event; always confirm current rules with your tournament organisers."
+        lead="Find your event in Division A, B, or C. Blue shades identify tournament timeslot groups. Lesson and practice coverage varies by event; always confirm current rules with your tournament organisers."
       >
         <div className="lx-divisions">
           {divisions.map(([division, level, note]) => (
-            <section className="lx-division" key={division} aria-labelledby={`division-${division}`}>
+            <section
+              className="lx-division"
+              key={division}
+              aria-labelledby={`division-${division}`}
+            >
               <h3 id={`division-${division}`}>
                 Division {division} <small>{level}</small>
               </h3>

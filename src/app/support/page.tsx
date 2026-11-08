@@ -26,7 +26,6 @@ export default function SupportPage() {
   return (
     <main id="main" className="lx-page">
       <PageHero
-        lecture="Appendix · Support"
         label="Support Akoizo"
         title={
           <>

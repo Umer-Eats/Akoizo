@@ -72,14 +72,14 @@ const formats = [
   },
 ];
 
-function ShotImages({ file, alt }: { file: string; alt: string }) {
+function ShotImages({ file }: { file: string }) {
   // Both themes are rendered; CSS shows the one matching the site theme.
   return (['dark', 'light'] as const).map((theme) => (
     <img
       key={`${file}-${theme}`}
       className={`lx-shot-${theme}`}
       src={`/home/${file}-${theme}.png`}
-      alt={theme === 'dark' ? alt : ''}
+      alt=""
       width={1440}
       height={900}
       loading="lazy"
@@ -94,12 +94,6 @@ export function HomeShowcase() {
   const current = format.shots[shot];
   return (
     <>
-      <div className="lx-intro">
-        <h2 id="inside-title" className="lx-h2">
-          See it before you sign in.
-        </h2>
-        <p className="lx-lead">Real screens from a student account. Nothing here is a mock-up.</p>
-      </div>
       <div className="lx-seg" role="tablist" aria-label="Study formats">
         {formats.map((item, index) => (
           <button
@@ -109,6 +103,22 @@ export function HomeShowcase() {
             type="button"
             aria-selected={index === active}
             aria-controls="showcase-panel"
+            tabIndex={index === active ? 0 : -1}
+            onKeyDown={(event) => {
+              const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+              if (!keys.includes(event.key)) return;
+              event.preventDefault();
+              const next =
+                event.key === 'Home'
+                  ? 0
+                  : event.key === 'End'
+                    ? formats.length - 1
+                    : (index + (event.key === 'ArrowRight' ? 1 : -1) + formats.length) %
+                      formats.length;
+              setActive(next);
+              setShot(0);
+              document.getElementById(`showcase-tab-${formats[next].id}`)?.focus();
+            }}
             onClick={() => {
               setActive(index);
               setShot(0);
@@ -135,8 +145,8 @@ export function HomeShowcase() {
               </span>
               <span className="lx-address">{format.address}</span>
             </div>
-            <span className="lx-shot">
-              <ShotImages file={current.file} alt={current.alt} />
+            <span className="lx-shot" role="img" aria-label={current.alt}>
+              <ShotImages file={current.file} />
             </span>
           </div>
           <figcaption className="lx-mono">
@@ -160,7 +170,7 @@ export function HomeShowcase() {
                 <b>{String(index + 1).padStart(2, '0')}</b>
                 {item.label}
                 <span className="lx-shot">
-                  <ShotImages file={item.file} alt="" />
+                  <ShotImages file={item.file} />
                 </span>
               </button>
             ))}

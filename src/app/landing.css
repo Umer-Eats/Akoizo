@@ -1,7 +1,5 @@
-/* Landing pages: home, study tools, mission, contact, support and donate.
-   A lecture-notes look in Akoizo's own fonts: black, white and cobalt only, ruled paper,
-   margin notes and thin rules. Slot colours appear only on events, which are grouped by timeslot.
-   Everything is namespaced with lx- so the signed-in app keeps its own look. */
+/* Shared public-page foundations. study-landing.css defines the current workspace design.
+   The lx- namespace keeps these styles separate from the signed-in app. */
 @layer landing {
   :root {
     --lx-bg: #08090c;
