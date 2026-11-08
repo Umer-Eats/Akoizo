@@ -1,185 +1,199 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
-import { ArrowUpRight, BookOpen, FileText, FlaskConical } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  ArrowUpRight,
+  BookOpen,
+  FileText,
+  FlaskConical,
+  LayoutGrid,
+  Pause,
+  Play,
+} from 'lucide-react';
+import { slotForEvent } from '@/lib/event-slots';
+import { useSettings } from './providers';
 
-// Screens are captured from the signed-in app by scripts/home-screenshots.mjs.
-const formats = [
+// Clips are recorded from a signed-in student account by scripts/home-videos.mjs.
+// Each one follows a real event, so it carries that event's timeslot colour.
+export const clips = [
+  {
+    id: 'dashboard',
+    label: 'Your events',
+    icon: LayoutGrid,
+    event: null,
+    title: 'Every event, colour-coded by timeslot.',
+    body: 'Filter your study space by tournament timeslot, then open an event and its toolkit of lessons, tests, labs and rules.',
+    address: 'akoizo / dashboard',
+  },
   {
     id: 'lessons',
     label: 'Lessons',
     icon: BookOpen,
+    event: { id: 'anatomy-and-physiology', name: 'Anatomy and Physiology' },
     title: 'Read it, see it, then try it.',
-    body: 'Every event is a course of units. Each lesson pairs short reading and reference figures with a worked example, an interactive model, and a practice assignment.',
+    body: 'Every event is a course of units. Short reading and figures sit beside interactive models you can push and pull.',
     address: 'akoizo / anatomy-and-physiology / lessons',
-    shots: [
-      {
-        file: 'lesson-course',
-        label: 'Course',
-        alt: 'Anatomy and Physiology course page listing ten units with progress for each one.',
-      },
-      {
-        file: 'lesson-reading',
-        label: 'Reading',
-        alt: 'Lesson on ventilation, volumes, and spirometry with learning goals, reading, and a reference figure.',
-      },
-      {
-        file: 'lesson-model',
-        label: 'Interactive model',
-        alt: 'Ventilation simulator with sliders for tidal volume, breathing rate, and dead space beside a live lung diagram.',
-      },
-    ],
   },
   {
-    id: 'tests',
-    label: 'Tests',
+    id: 'test',
+    label: 'Past tests',
     icon: FileText,
+    event: { id: 'astronomy', name: 'Astronomy' },
     title: 'The real paper, next to your answer sheet.',
-    body: 'Past competition tests open with the original paper on the left and a timed answer sheet on the right. Drafts save as you go, and scoring follows the published key.',
+    body: 'Past competition tests open beside a timed answer sheet. Drafts save as you go, and scoring follows the published key.',
     address: 'akoizo / astronomy / practice-tests',
-    shots: [
-      {
-        file: 'test-paper',
-        label: 'Paper and answers',
-        alt: 'Astronomy practice test showing the original competition paper beside multiple-choice answer fields.',
-      },
-      {
-        file: 'test-overview',
-        label: 'Test overview',
-        alt: 'Practice test heading with answer count, points, suggested time, and topics and scoring notes.',
-      },
-    ],
   },
   {
-    id: 'labs',
+    id: 'lab',
     label: 'Labs',
     icon: FlaskConical,
+    event: { id: 'chemistry-lab', name: 'Chemistry Lab' },
     title: 'Change a variable. Record what happens.',
-    body: 'Virtual labs follow archived tasks. Write a hypothesis, move the controls, watch the readings update, and keep your trials in a notebook you can export.',
+    body: 'Write a hypothesis, move the controls, and keep every trial in a lab notebook you can export.',
     address: 'akoizo / chemistry-lab / lab-practice',
-    shots: [
-      {
-        file: 'lab-workbench',
-        label: 'Workbench',
-        alt: 'Chemistry lab workbench with experiment sliders, a spectrophotometer diagram, live readings, and an absorbance plot.',
-      },
-      {
-        file: 'lab-overview',
-        label: 'Lab list',
-        alt: 'Lab Practice page for Chemistry Lab listing two investigations and the opening of the first one.',
-      },
-    ],
   },
-];
+] as const;
 
-function ShotImages({ file }: { file: string }) {
-  // Both themes are rendered; CSS shows the one matching the site theme.
-  return (['dark', 'light'] as const).map((theme) => (
-    <img
-      key={`${file}-${theme}`}
-      className={`lx-shot-${theme}`}
-      src={`/home/${file}-${theme}.png`}
-      alt=""
-      width={1440}
-      height={900}
-      loading="lazy"
-    />
-  ));
+export function ClipPlayer({ id, label }: { id: string; label: string }) {
+  const video = useRef<HTMLVideoElement>(null);
+  const { motion } = useSettings();
+  const [playing, setPlaying] = useState(false);
+  const [userPaused, setUserPaused] = useState(false);
+
+  // Plays only while on screen, and never on its own when motion is off.
+  useEffect(() => {
+    const el = video.current;
+    if (!el) return;
+    const reduce = !motion || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !reduce && !userPaused) el.play().catch(() => {});
+        else el.pause();
+      },
+      { threshold: 0.35 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [id, motion, userPaused]);
+
+  const toggle = () => {
+    const el = video.current;
+    if (!el) return;
+    if (el.paused) {
+      setUserPaused(false);
+      el.play().catch(() => {});
+    } else {
+      setUserPaused(true);
+      el.pause();
+    }
+  };
+
+  return (
+    <div className="vx-clip">
+      <video
+        ref={video}
+        key={id}
+        src={`/home/videos/${id}.mp4`}
+        poster={`/home/videos/${id}.jpg`}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={`${label}: a screen recording from a demo student account`}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      />
+      <button
+        type="button"
+        className="vx-clip-toggle"
+        onClick={toggle}
+        aria-label={playing ? `Pause ${label} clip` : `Play ${label} clip`}
+      >
+        {playing ? <Pause size={14} /> : <Play size={14} />}
+      </button>
+    </div>
+  );
 }
 
 export function HomeShowcase() {
   const [active, setActive] = useState(0);
-  const [shot, setShot] = useState(0);
-  const format = formats[active];
-  const current = format.shots[shot];
+  const clip = clips[active];
+  const slot = clip.event ? slotForEvent(clip.event.id) : undefined;
   return (
-    <>
-      <div className="lx-seg" role="tablist" aria-label="Study formats">
-        {formats.map((item, index) => (
-          <button
-            key={item.id}
-            id={`showcase-tab-${item.id}`}
-            role="tab"
-            type="button"
-            aria-selected={index === active}
-            aria-controls="showcase-panel"
-            tabIndex={index === active ? 0 : -1}
-            onKeyDown={(event) => {
-              const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
-              if (!keys.includes(event.key)) return;
-              event.preventDefault();
-              const next =
-                event.key === 'Home'
-                  ? 0
-                  : event.key === 'End'
-                    ? formats.length - 1
-                    : (index + (event.key === 'ArrowRight' ? 1 : -1) + formats.length) %
-                      formats.length;
-              setActive(next);
-              setShot(0);
-              document.getElementById(`showcase-tab-${formats[next].id}`)?.focus();
-            }}
-            onClick={() => {
-              setActive(index);
-              setShot(0);
-            }}
-          >
-            <item.icon size={16} aria-hidden="true" />
-            {item.label}
-          </button>
-        ))}
+    <div className="vx-showcase" data-slot={slot?.color}>
+      <div className="vx-showcase-tabs" role="tablist" aria-label="Study formats">
+        {clips.map((item, index) => {
+          const itemSlot = item.event ? slotForEvent(item.event.id) : undefined;
+          return (
+            <button
+              key={item.id}
+              id={`showcase-tab-${item.id}`}
+              role="tab"
+              type="button"
+              aria-selected={index === active}
+              aria-controls="showcase-panel"
+              tabIndex={index === active ? 0 : -1}
+              data-slot={itemSlot?.color}
+              onKeyDown={(event) => {
+                const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+                if (!keys.includes(event.key)) return;
+                event.preventDefault();
+                const next =
+                  event.key === 'Home'
+                    ? 0
+                    : event.key === 'End'
+                      ? clips.length - 1
+                      : (index + (event.key === 'ArrowRight' ? 1 : -1) + clips.length) %
+                        clips.length;
+                setActive(next);
+                document.getElementById(`showcase-tab-${clips[next].id}`)?.focus();
+              }}
+              onClick={() => setActive(index)}
+            >
+              <item.icon size={15} aria-hidden="true" />
+              {item.label}
+              {item.event && <i aria-hidden="true" />}
+            </button>
+          );
+        })}
       </div>
       <div
         id="showcase-panel"
-        className="lx-screens"
+        className="vx-showcase-panel"
         role="tabpanel"
-        aria-labelledby={`showcase-tab-${format.id}`}
+        aria-labelledby={`showcase-tab-${clip.id}`}
       >
-        <figure className="lx-figure">
-          <div className="lx-window">
-            <div className="lx-window-bar" aria-hidden="true">
-              <span className="lx-dots">
-                <i />
-                <i />
-                <i />
-              </span>
-              <span className="lx-address">{format.address}</span>
-            </div>
-            <span className="lx-shot" role="img" aria-label={current.alt}>
-              <ShotImages file={current.file} />
+        <figure className="vx-window">
+          <div className="vx-window-bar" aria-hidden="true">
+            <span className="vx-lights">
+              <i />
+              <i />
+              <i />
+            </span>
+            <span className="vx-window-address">{clip.address}</span>
+            <span className="vx-window-live">
+              <i /> Recorded in Akoizo
             </span>
           </div>
-          <figcaption className="lx-mono">
-            <span>
-              Fig. {active + 2}.{shot + 1} · {current.label}
-            </span>
-            <span>{format.label}</span>
-          </figcaption>
+          <ClipPlayer id={clip.id} label={clip.label} />
         </figure>
-        <div className="lx-screens-side">
-          <h3>{format.title}</h3>
-          <p>{format.body}</p>
-          <div className="lx-thumbs" role="group" aria-label={`${format.label} screens`}>
-            {format.shots.map((item, index) => (
-              <button
-                key={item.file}
-                type="button"
-                aria-pressed={index === shot}
-                onClick={() => setShot(index)}
-              >
-                <b>{String(index + 1).padStart(2, '0')}</b>
-                {item.label}
-                <span className="lx-shot">
-                  <ShotImages file={item.file} />
-                </span>
-              </button>
-            ))}
-          </div>
+        <div className="vx-showcase-side" key={clip.id}>
+          {clip.event && slot ? (
+            <p className="vx-showcase-event">
+              <i aria-hidden="true" /> {clip.event.name} · {slot.label} timeslot
+            </p>
+          ) : (
+            <p className="vx-showcase-event">
+              <i aria-hidden="true" /> Student dashboard
+            </p>
+          )}
+          <h3>{clip.title}</h3>
+          <p>{clip.body}</p>
           <Link href="/login/student" className="lx-link">
             Open your study space <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,17 @@
+/* Component stylesheets load unlayered, so these rounded shapes use :root to outrank them. */
+:root .unit-button,
+:root .lesson-button {
+  border-radius: 10px;
+}
+:root .unit-button[aria-pressed='true'] {
+  box-shadow: inset 2px 0 var(--lesson-pink);
+}
+:root .global-ranking-card,
+:root .ranked-progress-panel,
+:root .ranked-analytics-panel {
+  border-radius: 14px;
+}
+:root .ranked-profile-metrics {
+  border-radius: 14px;
+  overflow: hidden;
+}

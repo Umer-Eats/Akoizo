@@ -1497,3 +1497,181 @@
     }
   }
 }
+
+/* Recorded clips from the signed-in app */
+@layer landing {
+  .vx-showcase {
+    --clip: var(--slot, var(--vx-accent));
+  }
+  .vx-showcase:not([data-slot]) {
+    --clip: var(--vx-accent);
+  }
+  .vx-showcase-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 3px;
+    margin-bottom: 18px;
+    border-radius: 11px;
+    background: var(--vx-raised);
+  }
+  .vx-showcase-tabs button {
+    --dot: var(--slot, var(--vx-accent));
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--vx-muted);
+    font: 600 0.8rem/1 var(--font-body);
+    cursor: pointer;
+    transition:
+      background 0.25s,
+      color 0.25s;
+  }
+  .vx-showcase-tabs button:not([data-slot]) {
+    --dot: var(--vx-accent);
+  }
+  .vx-showcase-tabs button > svg {
+    color: var(--dot);
+  }
+  .vx-showcase-tabs button > i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--dot);
+  }
+  .vx-showcase-tabs button[aria-selected='true'] {
+    background: var(--vx-surface);
+    color: var(--vx-ink);
+    box-shadow:
+      0 1px 3px #0000002a,
+      inset 0 -2px var(--dot);
+  }
+  .vx-showcase-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.75fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+  }
+  .vx-window {
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--vx-surface);
+    box-shadow:
+      var(--vx-shadow),
+      0 0 0 1px color-mix(in srgb, var(--clip) 30%, transparent);
+    transition: box-shadow 0.5s;
+  }
+  .vx-window-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 38px;
+    padding: 0 12px;
+    background: var(--vx-bg);
+    border-bottom: 1px solid var(--vx-line);
+    font: 400 0.68rem/1 var(--font-mono);
+    color: var(--vx-faint);
+  }
+  .vx-window-address {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .vx-window-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .vx-window-live i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--clip);
+    animation: vx-pulse 2.4s ease-in-out infinite;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--clip) 20%, transparent);
+  }
+  .vx-clip {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: #050505;
+  }
+  .vx-clip video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: vx-fade 0.5s ease both;
+  }
+  .vx-clip-toggle {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid #ffffff30;
+    background: #000000a0;
+    color: #fff;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .vx-clip:hover .vx-clip-toggle,
+  .vx-clip-toggle:focus-visible {
+    opacity: 1;
+  }
+  .vx-showcase-side {
+    display: grid;
+    gap: 14px;
+    animation: vx-in 0.5s var(--vx-ease) both;
+  }
+  .vx-showcase-event {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 500 0.72rem/1.4 var(--font-mono);
+    color: var(--clip);
+  }
+  .vx-showcase-event i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--clip);
+  }
+  .vx-showcase-side h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--vx-ink);
+  }
+  .vx-showcase-side > p:not(.vx-showcase-event) {
+    color: var(--vx-muted);
+    line-height: 1.7;
+  }
+  @media (max-width: 900px) {
+    .vx-showcase-panel {
+      grid-template-columns: 1fr;
+    }
+    .vx-window-live {
+      display: none;
+    }
+  }
+  :root[data-motion='off'] .vx-window-live i {
+    animation: none;
+  }
+}

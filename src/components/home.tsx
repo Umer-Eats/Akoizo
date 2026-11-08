@@ -341,7 +341,12 @@ export function Home() {
         </div>
       </Section>
 
-      <Section id="inside" path="screens" title="See it before you sign in.">
+      <Section
+        id="inside"
+        path="recordings"
+        title="See it before you sign in."
+        lead="Real screen recordings of Akoizo from a demo student account. Each event keeps its tournament timeslot colour."
+      >
         <div data-reveal>
           <HomeShowcase />
         </div>

@@ -7,10 +7,8 @@ import { CommandPalette, openCommandPalette } from './command-palette';
 import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
 import { donationsOpen } from '@/lib/donate';
-
-// Public pages that use the landing design. Signed-in feature pages keep the app shell.
-const landingPaths = ['/', '/study-tools', '/mission', '/contact', '/support', '/donate'];
-export const isLandingPath = (path: string) => landingPaths.includes(path);
+import { eventsForDivision } from '@/lib/events';
+import { slotForEvent } from '@/lib/event-slots';
 
 const links = [
   { href: '/study-tools', label: 'Study tools' },
@@ -26,6 +24,12 @@ export function LandingNav() {
   const [error, setError] = useState('');
   const { toggleTheme } = useSettings();
   const { profile, logOut } = useAuth();
+  // Inside an event, the event name (in its timeslot colour) takes the place of the main links.
+  const eventId = path.match(/^\/dashboard\/student\/events\/([^/]+)(?:\/|$)/)?.[1];
+  const event =
+    profile?.division && eventId
+      ? eventsForDivision(profile.division).find((item) => item.id === eventId)
+      : undefined;
   const logout = () => logOut().catch((e) => setError(authMessage(e)));
   useEffect(() => setOpen(false), [path]);
   useEffect(() => {
@@ -48,13 +52,24 @@ export function LandingNav() {
           <span className="lx-brand-mark" aria-hidden="true" />
           akoizo
         </Link>
-        <nav className="lx-nav-links" aria-label="Main navigation">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} aria-current={current(link.href)}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {event ? (
+          <Link
+            className="lx-nav-event"
+            data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}
+            href={`/dashboard/student/events/${event.id}`}
+          >
+            <i aria-hidden="true" />
+            {event.name}
+          </Link>
+        ) : (
+          <nav className="lx-nav-links" aria-label="Main navigation">
+            {links.map((link) => (
+              <Link key={link.href} href={link.href} aria-current={current(link.href)}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        )}
         <div className="lx-nav-right">
           <button className="vx-nav-search" type="button" onClick={openCommandPalette}>
             <Search size={14} aria-hidden="true" />
@@ -63,8 +78,26 @@ export function LandingNav() {
           </button>
           {profile ? (
             <>
-              <Link className="lx-nav-text lx-nav-hide lx-nav-extra" href="/community">
+              <Link
+                className="lx-nav-text lx-nav-hide lx-nav-extra"
+                href="/community"
+                aria-current={current('/community')}
+              >
                 Community
+              </Link>
+              <Link
+                className="lx-nav-text lx-nav-hide lx-nav-extra"
+                href="/dashboard/binders"
+                aria-current={current('/dashboard/binders')}
+              >
+                Binders
+              </Link>
+              <Link
+                className="lx-nav-text lx-nav-hide lx-nav-extra"
+                href={`/settings/${profile.role}`}
+                aria-current={current(`/settings/${profile.role}`)}
+              >
+                Settings
               </Link>
               <button className="lx-nav-text lx-nav-hide" onClick={logout}>
                 Sign out
@@ -88,7 +121,7 @@ export function LandingNav() {
             <Moon className="lx-moon" size={18} />
           </button>
           <button
-            className="lx-icon-btn lx-menu-btn"
+            className={`lx-icon-btn lx-menu-btn${event ? ' lx-menu-always' : ''}`}
             aria-label={open ? 'Close navigation' : 'Open navigation'}
             aria-expanded={open}
             aria-controls="lx-drawer"

@@ -1,49 +1,48 @@
 /* The open study lab: cobalt, paper, chrome, and precise scientific notation.
    This layer changes the interface without modifying the brand or Ako artwork. */
 @layer theme {
+  /* Study-vault palette: black, white and blue. Timeslot colours live in the spectrum below. */
   :root {
-    --bg: #08090c;
-    --surface: #101216;
-    --surface-2: #191d24;
-    --text: #f4f5f8;
-    --muted: #a6acb8;
-    --faint: #8c94a4;
-    --line: #ffffff1c;
-    --line-strong: #ffffff35;
-    --accent: #8aaeff;
-    --accent-strong: #a6c1ff;
-    --accent-soft: #759aff10;
+    --bg: #050505;
+    --surface: #0e0e0e;
+    --surface-2: #171717;
+    --text: #ffffff;
+    --muted: #a3a3a3;
+    --faint: #8a8a8a;
+    --line: #ffffff14;
+    --line-strong: #ffffff26;
+    --accent: #4d7cff;
+    --accent-strong: #7a9dff;
+    --accent-soft: #4d7cff1a;
     --blue: #2455f5;
-    --grid: #829dff13;
-    --glass: #101216;
-    --shadow: #00000030;
-    --nav: #08090cf2;
-    --panel-top: #1b202c;
+    --grid: transparent;
+    --glass: #0e0e0e;
+    --shadow: #00000060;
+    --nav: #050505d9;
+    --panel-top: #141414;
   }
 
   :root[data-theme='light'] {
-    --bg: #f5f6f8;
+    --bg: #ffffff;
     --surface: #ffffff;
-    --surface-2: #e9ecf2;
-    --text: #111319;
-    --muted: #505967;
-    --faint: #646d7c;
-    --line: #14204720;
-    --line-strong: #14204738;
-    --accent: #214fdf;
-    --accent-strong: #153bad;
-    --accent-soft: #2455f50a;
-    --grid: #2455f511;
+    --surface-2: #f4f4f4;
+    --text: #0a0a0a;
+    --muted: #525252;
+    --faint: #6b6b6b;
+    --line: #0000000f;
+    --line-strong: #00000021;
+    --accent: #2455f5;
+    --accent-strong: #1a3fc0;
+    --accent-soft: #2455f512;
+    --grid: transparent;
     --glass: #ffffff;
-    --shadow: #1c305b0d;
-    --nav: #f5f6f8f2;
-    --panel-top: #e9edf5;
+    --shadow: #0a1a4a14;
+    --nav: #ffffffd9;
+    --panel-top: #f7f7f7;
   }
 
   body {
-    background-image: linear-gradient(90deg, transparent calc(100% - 1px), var(--grid) 1px);
-    background-size: calc((100vw - 112px) / 4) 100%;
-    background-position: 56px 0;
+    background-image: none;
   }
 
   h1,

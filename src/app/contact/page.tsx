@@ -20,7 +20,7 @@ export default function ContactPage() {
     ],
     [
       'Get set up',
-      'Umer replies with instructor access. From there you create your school’s study group and share its joining password with your students.',
+      'The Registration Team replies with instructor access. From there you create your school’s study group and share its joining password with your students.',
     ],
   ];
   return (
@@ -28,7 +28,7 @@ export default function ContactPage() {
       <PageHero
         label="Teachers and schools"
         title="Add your school to Akoizo."
-        lead="Teachers, coaches, and schools: Akoizo is free for your whole Science Olympiad team. Email Umer Qureshi to have your school added, and your students can start studying together."
+        lead="Teachers, coaches, and schools: Akoizo is free for your whole Science Olympiad team. Email the Registration Team to have your school added, and your students can start studying together."
       />
 
       <Notes id="email" num={1} label="Write to us">

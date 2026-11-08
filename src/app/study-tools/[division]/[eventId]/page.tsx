@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { eventFocus, eventsForDivision, toolCatalog } from '@/lib/events';
 import { eventToolIds, rulesForEvent } from '@/lib/event-rules';
 import { lessonsForEvent } from '@/lib/lessons-registry';
+import { slotForEvent } from '@/lib/event-slots';
 import { listPracticeTests } from '@/lib/practice-catalog';
 import {
   divisionLevel,
@@ -92,7 +93,11 @@ export default async function EventStudyGuidePage({ params }: { params: Promise<
   };
 
   return (
-    <main id="main" className="page-container event-study-guide">
+    <main
+      id="main"
+      className="page-container event-study-guide"
+      data-slot={slotForEvent(event.id)?.color}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

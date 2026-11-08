@@ -4,6 +4,7 @@ import { eventsForDivision } from '@/lib/events';
 import { eventPagePath, pageMetadata } from '@/lib/seo';
 import { slotColor } from '@/components/landing-data';
 import { Notes, PageHero } from '@/components/landing-page';
+import { HomeShowcase } from '@/components/home-showcase';
 
 export const metadata = pageMetadata('/study-tools');
 
@@ -57,11 +58,21 @@ export default function StudyToolsPage() {
       </Notes>
 
       <Notes
-        id="catalog"
+        id="in-action"
         num={2}
+        label="See it in action"
+        title="Recorded in Akoizo"
+        lead="Short screen recordings of the dashboard, lessons, past tests and labs. Each event keeps its tournament timeslot colour."
+      >
+        <HomeShowcase />
+      </Notes>
+
+      <Notes
+        id="catalog"
+        num={3}
         label="Event catalog"
         title="2027 Science Olympiad event catalog"
-        lead="Find your event in Division A, B, or C. Blue shades identify tournament timeslot groups. Lesson and practice coverage varies by event; always confirm current rules with your tournament organisers."
+        lead="Find your event in Division A, B, or C. Colours identify tournament timeslot groups. Lesson and practice coverage varies by event; always confirm current rules with your tournament organisers."
       >
         <div className="lx-divisions">
           {divisions.map(([division, level, note]) => (

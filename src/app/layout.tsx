@@ -8,6 +8,8 @@ import './theme.css';
 import './landing.css';
 import './study-landing.css';
 import './vault.css';
+import './app-vault.css';
+import './app-shapes.css';
 import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/site-shell';
 import { AkoCompanion } from '@/components/ako-companion';

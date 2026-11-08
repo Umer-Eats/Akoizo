@@ -933,6 +933,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     <main
       id="main"
       className={`page-container event-workspace${course ? ' event-with-lessons' : ''}${hasDivisionCLabs ? ' event-with-archive-labs' : ''}`}
+      data-slot={slotForEvent(event.id)?.color}
     >
       <div className="event-workspace-grid">
         <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
