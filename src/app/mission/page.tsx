@@ -118,10 +118,6 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <figure className="lx-quote lx-mt">
-          <blockquote>“I am very free and education-access-based.”</blockquote>
-          <figcaption className="lx-mono">Umer, in his own words</figcaption>
-        </figure>
       </Notes>
 
       <Notes

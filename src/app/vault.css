@@ -116,7 +116,11 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(120px circle at var(--mx, 50%) 50%, var(--vx-accent), transparent 70%);
+    background: radial-gradient(
+      120px circle at var(--mx, 50%) 50%,
+      var(--vx-accent),
+      transparent 70%
+    );
     opacity: 0;
     transition: opacity 0.35s;
   }
@@ -204,7 +208,12 @@
     inset: 0;
     pointer-events: none;
     background:
-      linear-gradient(90deg, var(--vx-bg) 24%, color-mix(in srgb, var(--vx-bg) 55%, transparent) 46%, transparent 70%),
+      linear-gradient(
+        90deg,
+        var(--vx-bg) 24%,
+        color-mix(in srgb, var(--vx-bg) 55%, transparent) 46%,
+        transparent 70%
+      ),
       linear-gradient(0deg, var(--vx-bg), transparent 30%),
       radial-gradient(60% 50% at 70% 45%, var(--vx-accent-soft), transparent 70%);
   }
@@ -230,7 +239,7 @@
     font-family: var(--font-display);
     font-weight: 500;
     font-size: clamp(3rem, 7.6vw, 7.4rem);
-    line-height: 0.94;
+    line-height: 1.04;
     letter-spacing: -0.045em;
     color: var(--vx-ink);
   }
@@ -243,7 +252,7 @@
     justify-content: space-between;
     gap: 20px;
     padding-block: 22px;
-    font: 400 0.7rem/1 var(--font-mono);
+    font: 400 0.7rem/1.5 var(--font-mono);
     color: var(--vx-faint);
     pointer-events: none;
   }
@@ -1226,10 +1235,56 @@
   }
 
   /* Subpages share the workspace feel */
+  .lx-page :is(h1, h2, h3, p, a) {
+    overflow-wrap: break-word;
+  }
+  .lx-btn,
+  .vx-btn {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.5;
+    padding-block: 12px;
+  }
+  :is(.lx-btn, .vx-btn, .lx-link, .lx-event) svg {
+    flex-shrink: 0;
+  }
+  .lx-nav-links a,
+  .lx-nav-right > :is(a, button),
+  .lx-brand {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .lx-nav-right .lx-btn {
+    padding-block: 8px;
+  }
+  .lx-divisions {
+    row-gap: 40px;
+  }
+  .lx-point :is(h2, h3) {
+    line-height: 1.35;
+  }
+  .lx-intro > .lx-lead > * + * {
+    margin-top: 16px;
+  }
+  .lx-mail > p {
+    line-height: 1.75;
+  }
+  .lx-faq summary {
+    padding-block: 20px;
+    line-height: 1.4;
+  }
+  .lx-index a {
+    gap: 16px;
+    padding-block: 12px;
+    line-height: 1.5;
+  }
+  .lx-section-label,
+  .vx-section {
+    scroll-margin-top: 100px;
+  }
   .lx-page-hero {
     background:
-      radial-gradient(50% 70% at 85% 0%, var(--vx-accent-soft), transparent 70%),
-      var(--vx-bg);
+      radial-gradient(50% 70% at 85% 0%, var(--vx-accent-soft), transparent 70%), var(--vx-bg);
   }
 
   /* Scroll reveal */
@@ -1328,6 +1383,10 @@
     }
   }
   @media (max-width: 900px) {
+    .lx-intro {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
     .vx-story {
       grid-template-columns: 1fr;
     }
@@ -1358,6 +1417,41 @@
     }
   }
   @media (max-width: 640px) {
+    .vx-hero h1 {
+      font-size: clamp(2.4rem, 10.5vw, 4.2rem);
+    }
+    .vx-hero {
+      min-height: calc(100svh - 66px);
+    }
+    .vx-graph {
+      bottom: auto;
+      height: 40vh;
+    }
+    .lx-seg button {
+      min-width: 0;
+      gap: 6px;
+      padding-inline: 8px;
+      min-height: 44px;
+    }
+    .vx-vaults {
+      width: 100%;
+    }
+    .vx-vaults button {
+      flex: 1;
+      min-height: 40px;
+      padding-inline: 8px;
+    }
+    .vx-folder li a {
+      flex-wrap: wrap;
+      line-height: 1.5;
+    }
+    .lx-division h3 {
+      flex-wrap: wrap;
+    }
+    .lx-mail,
+    .lx-callout {
+      padding: 24px;
+    }
     .vx-hero-fade {
       background:
         linear-gradient(0deg, var(--vx-bg) 35%, transparent 75%),

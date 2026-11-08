@@ -104,8 +104,8 @@ export function VaultGraph() {
     if (!el) return;
     const ctx = el.getContext('2d');
     if (!ctx) return;
-    const still =
-      !motion || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let still = !motion || reducedMotion.matches;
     let width = 0;
     let height = 0;
     let graph = buildGraph(1, 1);
@@ -114,6 +114,10 @@ export function VaultGraph() {
     let pointer = { x: -9999, y: -9999 };
     let frame = 0;
     let tick = 0;
+    let previousTime = 0;
+    let anchors: { x: number; y: number }[] = [];
+    const offset = { x: 0, y: 0 };
+    let inView = false;
     let colors = { ink: '#fff', accent: '#8b9cff', faint: '#888' };
 
     const readColors = () => {
@@ -128,6 +132,8 @@ export function VaultGraph() {
     const resize = () => {
       const rect = el.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // ResizeObserver also fires on attachment. Do not rebuild an unchanged layout.
+      if (width === rect.width && height === rect.height) return;
       width = rect.width;
       height = rect.height;
       el.width = width * dpr;
@@ -141,6 +147,23 @@ export function VaultGraph() {
       });
       // Settle the layout before the first paint.
       for (let i = 0; i < 260; i++) step(1);
+      if (width < 720) {
+        // Keep the complete web and its category labels inside the mobile artwork.
+        const xs = graph.nodes.map((node) => node.x);
+        const ys = graph.nodes.map((node) => node.y);
+        const left = Math.min(...xs);
+        const top = Math.min(...ys);
+        const spanX = Math.max(...xs) - left;
+        const spanY = Math.max(...ys) - top;
+        const scale = Math.max(0.1, Math.min(1, (width - 120) / spanX, (height - 70) / spanY));
+        for (const node of graph.nodes) {
+          node.x = width / 2 + (node.x - left - spanX / 2) * scale;
+          node.y = height / 2 + (node.y - top - spanY / 2) * scale;
+          if (node.orbit) node.orbit *= scale;
+        }
+      }
+      anchors = graph.nodes.map(({ x, y }) => ({ x, y }));
+      animate(0);
       readColors();
       draw();
     };
@@ -156,7 +179,7 @@ export function VaultGraph() {
           if (b.kind === 'dust') continue;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
-          const d2 = dx * dx + dy * dy + 0.01;
+          const d2 = Math.max(dx * dx + dy * dy, 400);
           if (d2 > 40000) continue;
           const f = (mobile ? 110 : 220) / d2;
           a.vx += dx * f;
@@ -189,14 +212,6 @@ export function VaultGraph() {
         }
         n.vx += (cx - n.x) * 0.0016;
         n.vy += (cy - n.y) * 0.002;
-        // The pointer gently parts the graph.
-        const px = n.x - pointer.x;
-        const py = n.y - pointer.y;
-        const pd = px * px + py * py;
-        if (pd < 9000) {
-          n.vx += px * 0.0016;
-          n.vy += py * 0.0016;
-        }
         n.vx *= 0.82;
         n.vy *= 0.82;
         n.x += n.vx * heat;
@@ -204,13 +219,34 @@ export function VaultGraph() {
       }
     };
 
+    // Physics is only used to arrange the initial graph. Bounded, time-based drift
+    // keeps close nodes from repeatedly repelling and snapping back on every frame.
+    const animate = (dt: number) => {
+      const ease = 1 - Math.exp(-dt * 4);
+      const targetX = !still && pointer.x > -999 ? (pointer.x / width - 0.5) * 8 : 0;
+      const targetY = !still && pointer.y > -999 ? (pointer.y / height - 0.5) * 8 : 0;
+      offset.x += (targetX - offset.x) * ease;
+      offset.y += (targetY - offset.y) * ease;
+      graph.nodes.forEach((n, i) => {
+        if (n.kind === 'dust') {
+          const parent = graph.nodes[n.parent];
+          const angle = n.angle! + tick * 0.0006;
+          n.x = parent.x + Math.cos(angle) * n.orbit!;
+          n.y = parent.y + Math.sin(angle) * n.orbit! * 0.8;
+        } else {
+          n.x = anchors[i].x + Math.sin(tick / 240 + i) * 3 + offset.x;
+          n.y = anchors[i].y + Math.cos(tick / 300 + i) * 3 + offset.y;
+        }
+      });
+    };
+
     const draw = () => {
       const { nodes, links } = graph;
       ctx.clearRect(0, 0, width, height);
       // Depth: faint particles drift at different speeds and lean away from the pointer.
       ctx.fillStyle = colors.ink;
-      const ox = pointer.x > -999 ? (pointer.x - width / 2) * 0.02 : 0;
-      const oy = pointer.y > -999 ? (pointer.y - height / 2) * 0.02 : 0;
+      const ox = offset.x;
+      const oy = offset.y;
       for (const s of graph.stars) {
         const x = (((s.x - ox * s.z + tick * 0.08 * s.z) % width) + width) % width;
         const y = s.y - oy * s.z;
@@ -246,7 +282,8 @@ export function VaultGraph() {
         ctx.beginPath();
         ctx.arc(n.x, n.y, i === hover ? n.r + 2 : n.r, 0, Math.PI * 2);
         ctx.fill();
-        if (n.kind === 'hub' || (lit && n.label)) {
+        // Category captions become crowded in the compact mobile artwork.
+        if ((n.kind === 'hub' && width >= 720) || (n.kind === 'event' && lit && n.label)) {
           ctx.fillStyle = n.kind === 'hub' ? colors.ink : colors.ink;
           ctx.globalAlpha = focus && !lit ? 0.18 : n.kind === 'hub' ? 0.8 : 1;
           ctx.fillText(n.label!.toUpperCase(), n.x, n.y - n.r - 12);
@@ -255,16 +292,20 @@ export function VaultGraph() {
       ctx.globalAlpha = 1;
     };
 
-    const loop = () => {
-      tick++;
-      // Slow drift so the vault always feels alive.
-      for (const n of graph.nodes) {
-        n.vx += Math.sin(tick / 90 + n.y / 80) * 0.012;
-        n.vy += Math.cos(tick / 110 + n.x / 90) * 0.012;
-      }
-      step(1);
+    const loop = (time: number) => {
+      const dt = previousTime ? Math.min((time - previousTime) / 1000, 0.05) : 0;
+      previousTime = time;
+      tick += dt * 60;
+      animate(dt);
       draw();
       frame = requestAnimationFrame(loop);
+    };
+
+    const updatePlayback = () => {
+      cancelAnimationFrame(frame);
+      previousTime = 0;
+      still = !motion || reducedMotion.matches;
+      if (inView && !document.hidden && !still) frame = requestAnimationFrame(loop);
     };
 
     const nearest = (x: number, y: number) => {
@@ -317,10 +358,12 @@ export function VaultGraph() {
     themeObserver.observe(document.documentElement, { attributeFilter: ['data-theme'] });
     // Pause off-screen to save battery.
     const visible = new IntersectionObserver(([entry]) => {
-      cancelAnimationFrame(frame);
-      if (entry.isIntersecting && !still) frame = requestAnimationFrame(loop);
+      inView = entry.isIntersecting;
+      updatePlayback();
     });
     visible.observe(el);
+    reducedMotion.addEventListener('change', updatePlayback);
+    document.addEventListener('visibilitychange', updatePlayback);
     el.addEventListener('pointermove', onMove);
     el.addEventListener('pointerleave', onLeave);
     el.addEventListener('click', onClick);
@@ -329,6 +372,8 @@ export function VaultGraph() {
       observer.disconnect();
       themeObserver.disconnect();
       visible.disconnect();
+      reducedMotion.removeEventListener('change', updatePlayback);
+      document.removeEventListener('visibilitychange', updatePlayback);
       el.removeEventListener('pointermove', onMove);
       el.removeEventListener('pointerleave', onLeave);
       el.removeEventListener('click', onClick);

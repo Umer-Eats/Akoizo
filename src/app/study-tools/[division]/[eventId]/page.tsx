@@ -92,7 +92,7 @@ export default async function EventStudyGuidePage({ params }: { params: Promise<
   };
 
   return (
-    <main id="main" className="page-container">
+    <main id="main" className="page-container event-study-guide">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

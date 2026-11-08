@@ -718,16 +718,6 @@
     border: 1px solid var(--lx-rule-strong);
     border-radius: 10px;
   }
-  .lx-quote {
-    padding: 30px;
-    background: var(--lx-paper);
-    border: 1px solid var(--lx-rule);
-    border-radius: 9px;
-  }
-  .lx-quote blockquote {
-    line-height: 1.15;
-    font-weight: 500;
-  }
   .lx-footer-top {
     grid-template-columns: 1fr 1.5fr;
     gap: 80px;

@@ -3310,6 +3310,42 @@
   max-width: 75ch;
   margin-block: 1rem;
 }
+.event-study-guide > .eyebrow {
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.event-study-guide .page-heading h1 {
+  overflow-wrap: anywhere;
+}
+.event-study-guide .page-heading > .button {
+  margin-top: 24px;
+  max-width: 100%;
+  white-space: normal;
+}
+.event-study-guide .study-catalog {
+  line-height: 1.8;
+}
+.event-study-guide .study-catalog > h2 {
+  margin-bottom: 24px;
+  line-height: 1.25;
+}
+.event-study-guide .study-catalog > div + div {
+  margin-top: 32px;
+}
+.event-study-guide .study-catalog h3 {
+  margin-block: 24px 12px;
+  line-height: 1.4;
+}
+.event-study-guide .study-catalog ul {
+  padding-left: 24px;
+  margin-block: 16px;
+}
+.event-study-guide .study-catalog li + li {
+  margin-top: 8px;
+}
+.event-study-guide .study-catalog a {
+  overflow-wrap: anywhere;
+}
 .study-division-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
