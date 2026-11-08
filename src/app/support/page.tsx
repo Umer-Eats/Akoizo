@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowRight } from 'lucide-react';
 import { pageMetadata } from '@/lib/seo';
-import { Reveal } from '@/components/art';
 import { donationsOpen } from '@/lib/donate';
+import { Notes, PageHero } from '@/components/landing-page';
 
 export const metadata = pageMetadata('/support');
 
@@ -23,43 +24,45 @@ export default function SupportPage() {
     ],
   ];
   return (
-    <main id="main" className="page-container">
-      <section className="mission-hero">
-        <p className="eyebrow">SUPPORT AKOIZO / KEEP IT FREE</p>
-        <h1>
-          Free to learn.
-          <br />
-          <span className="chrome">Not free to run.</span>
-        </h1>
-        <p>
-          Akoizo will never charge students for Science Olympiad preparation, show ads, or lock
-          lessons behind a paywall. It is built and paid for by one student. If Akoizo has helped
-          you or your team, a donation helps keep it online for everyone else.
-        </p>
-        <div className="support-actions">
-          <Link className="button button-primary" href="/donate">
-            Donate <span aria-hidden="true">↗</span>
-          </Link>
-          <Link className="text-link" href="/mission#who-we-are">
-            Who runs Akoizo? <span>↗</span>
+    <main id="main" className="lx-page">
+      <PageHero
+        lecture="Appendix · Support"
+        label="Support Akoizo"
+        title={
+          <>
+            Free to learn. <span className="lx-mark">Not free to run.</span>
+          </>
+        }
+        lead="Akoizo will never charge students for Science Olympiad preparation, show ads, or lock lessons behind a paywall. It is built and paid for by one student. If Akoizo has helped you or your team, a donation helps keep it online for everyone else."
+      >
+        <Link className="lx-btn" href="/donate">
+          Donate <ArrowRight size={18} aria-hidden="true" />
+        </Link>
+        <Link className="lx-btn lx-btn-line" href="/mission#who-we-are">
+          Who runs Akoizo?
+        </Link>
+      </PageHero>
+
+      <Notes id="costs" num={1} label="Where it goes">
+        <div className="lx-points">
+          {costs.map(([title, body], i) => (
+            <div className="lx-point" key={title}>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              <h2 className="lx-point-title">{title}</h2>
+              <p>{body}</p>
+            </div>
+          ))}
+        </div>
+        <div className="lx-callout">
+          <p>
+            <strong>Every amount helps</strong>
+            Studying on Akoizo stays free whether you give or not.
+          </p>
+          <Link className="lx-btn" href="/donate">
+            Donate with PayPal or card <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
-      </section>
-      <section className="mission-values" aria-label="What donations pay for">
-        {costs.map(([title, body], i) => (
-          <Reveal className="mission-value" key={title}>
-            <span className="eyebrow">0{i + 1}</span>
-            <h2>{title}</h2>
-            <p>{body}</p>
-          </Reveal>
-        ))}
-      </section>
-      <div className="mission-bottom">
-        <p>Every amount helps. Studying on Akoizo stays free whether you give or not.</p>
-        <Link className="button button-primary" href="/donate">
-          Donate with PayPal or card
-        </Link>
-      </div>
+      </Notes>
     </main>
   );
 }

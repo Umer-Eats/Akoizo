@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Akoizo — Stay curious. Go further.</title>
+    <style>
+      @font-face {
+        font-family: Space;
+        src: url("/public/display.woff2");
+      }
+      @font-face {
+        font-family: Manrope;
+        src: url("/public/body.woff2");
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #08090c;
+        color: #f4f5f8;
+        font-family: Manrope, Arial, sans-serif;
+      }
+      main {
+        max-width: 1250px;
+        margin: auto;
+        padding: 28px 40px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        font: 12px monospace;
+        letter-spacing: 2px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #ffffff20;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 420px) 1fr;
+        gap: 80px;
+        align-items: center;
+        margin-top: 30px;
+      }
+      .stage {
+        border: 1px solid #ffffff25;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 24px 100px #2455f512;
+      }
+      .eyebrow {
+        font: 11px monospace;
+        letter-spacing: 2px;
+        color: #a6c1ff;
+      }
+      h1 {
+        font-family: Space;
+        font-size: 64px;
+        line-height: 1;
+        letter-spacing: -4px;
+        font-weight: 600;
+        margin: 24px 0;
+      }
+      em {
+        font-style: normal;
+        color: #8aaeff;
+      }
+      aside p {
+        max-width: 430px;
+        color: #a6acb8;
+        font-size: 17px;
+        line-height: 1.6;
+      }
+      .primary {
+        width: 100%;
+        max-width: 430px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px;
+        background: #2455f5;
+        border: 1px solid #8aaeff;
+        color: white;
+        text-decoration: none;
+        font: 600 16px Manrope;
+        cursor: pointer;
+      }
+      .primary:hover {
+        background: #1643d6;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 24px 0;
+      }
+      nav button {
+        border: 1px solid #ffffff30;
+        background: #101216;
+        color: #c4cada;
+        padding: 10px 12px;
+        cursor: pointer;
+        font: 12px Manrope;
+      }
+      nav button:hover {
+        border-color: #8aaeff;
+        color: white;
+      }
+      .school {
+        display: block;
+        color: #a6c1ff;
+        margin-top: 24px;
+        font-size: 16px;
+        text-underline-offset: 6px;
+      }
+      .small {
+        font-size: 12px !important;
+        margin-top: 26px;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #a6c1ff;
+        outline-offset: 4px;
+      }
+      @media (max-width: 700px) {
+        main {
+          padding: 18px 16px;
+        }
+        header {
+          font-size: 9px;
+          letter-spacing: 1px;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+          gap: 28px;
+          margin-top: 20px;
+        }
+        .stage {
+          width: min(100%, 400px);
+          margin: auto;
+        }
+        aside {
+          padding: 0 8px 32px;
+        }
+        h1 {
+          font-size: 52px;
+        }
+        aside p {
+          font-size: 16px;
+        }
+        .primary {
+          max-width: none;
+        }
+        nav {
+          gap: 7px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/player.js"></script>
+  </body>
+</html>

@@ -5,6 +5,7 @@ import '@fontsource-variable/space-grotesk';
 import '@fontsource/ibm-plex-mono/400.css';
 import './globals.css';
 import './theme.css';
+import './landing.css';
 import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/site-shell';
 import { AkoCompanion } from '@/components/ako-companion';

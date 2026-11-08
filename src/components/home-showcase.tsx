@@ -1,15 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
-import { BookOpen, FileText, FlaskConical } from 'lucide-react';
-import { Reveal } from './art';
-import './home-showcase.css';
+import { ArrowUpRight, BookOpen, FileText, FlaskConical } from 'lucide-react';
 
 // Screens are captured from the signed-in app by scripts/home-screenshots.mjs.
 const formats = [
   {
     id: 'lessons',
-    label: 'Lesson format',
+    label: 'Lessons',
     icon: BookOpen,
     title: 'Read it, see it, then try it.',
     body: 'Every event is a course of units. Each lesson pairs short reading and reference figures with a worked example, an interactive model, and a practice assignment.',
@@ -34,7 +32,7 @@ const formats = [
   },
   {
     id: 'tests',
-    label: 'Testing format',
+    label: 'Tests',
     icon: FileText,
     title: 'The real paper, next to your answer sheet.',
     body: 'Past competition tests open with the original paper on the left and a timed answer sheet on the right. Drafts save as you go, and scoring follows the published key.',
@@ -54,7 +52,7 @@ const formats = [
   },
   {
     id: 'labs',
-    label: 'Lab format',
+    label: 'Labs',
     icon: FlaskConical,
     title: 'Change a variable. Record what happens.',
     body: 'Virtual labs follow archived tasks. Write a hypothesis, move the controls, watch the readings update, and keep your trials in a notebook you can export.',
@@ -74,23 +72,35 @@ const formats = [
   },
 ];
 
+function ShotImages({ file, alt }: { file: string; alt: string }) {
+  // Both themes are rendered; CSS shows the one matching the site theme.
+  return (['dark', 'light'] as const).map((theme) => (
+    <img
+      key={`${file}-${theme}`}
+      className={`lx-shot-${theme}`}
+      src={`/home/${file}-${theme}.png`}
+      alt={theme === 'dark' ? alt : ''}
+      width={1440}
+      height={900}
+      loading="lazy"
+    />
+  ));
+}
+
 export function HomeShowcase() {
   const [active, setActive] = useState(0);
   const [shot, setShot] = useState(0);
   const format = formats[active];
   const current = format.shots[shot];
   return (
-    <section id="inside" className="showcase container" aria-labelledby="showcase-title">
-      <Reveal className="showcase-heading">
-        <p className="eyebrow">INSIDE AKOIZO</p>
-        <h2 id="showcase-title">
-          See it before
-          <br />
-          <span className="muted">you sign in.</span>
+    <>
+      <div className="lx-intro">
+        <h2 id="inside-title" className="lx-h2">
+          See it before you sign in.
         </h2>
-        <p>Real screens from a student account. Nothing here is a mock-up.</p>
-      </Reveal>
-      <div className="showcase-tabs" role="tablist" aria-label="Study formats">
+        <p className="lx-lead">Real screens from a student account. Nothing here is a mock-up.</p>
+      </div>
+      <div className="lx-seg" role="tablist" aria-label="Study formats">
         {formats.map((item, index) => (
           <button
             key={item.id}
@@ -99,7 +109,6 @@ export function HomeShowcase() {
             type="button"
             aria-selected={index === active}
             aria-controls="showcase-panel"
-            className={index === active ? 'active' : ''}
             onClick={() => {
               setActive(index);
               setShot(0);
@@ -112,70 +121,55 @@ export function HomeShowcase() {
       </div>
       <div
         id="showcase-panel"
-        className="showcase-panel"
+        className="lx-screens"
         role="tabpanel"
         aria-labelledby={`showcase-tab-${format.id}`}
       >
-        <figure className="showcase-frame">
-          <div className="showcase-bar" aria-hidden="true">
-            <span className="window-dots">
-              <i />
-              <i />
-              <i />
+        <figure className="lx-figure">
+          <div className="lx-window">
+            <div className="lx-window-bar" aria-hidden="true">
+              <span className="lx-dots">
+                <i />
+                <i />
+                <i />
+              </span>
+              <span className="lx-address">{format.address}</span>
+            </div>
+            <span className="lx-shot">
+              <ShotImages file={current.file} alt={current.alt} />
             </span>
-            <span className="showcase-address">{format.address}</span>
           </div>
-          {/* Both themes are rendered; CSS shows the one matching the site theme. */}
-          <div className="showcase-viewport">
-            {['dark', 'light'].map((theme) => (
-              <img
-                key={`${current.file}-${theme}`}
-                className={`showcase-shot showcase-shot-${theme}`}
-                src={`/home/${current.file}-${theme}.png`}
-                alt={current.alt}
-                width={1440}
-                height={900}
-                loading="lazy"
-              />
-            ))}
-          </div>
+          <figcaption className="lx-mono">
+            <span>
+              Fig. {active + 2}.{shot + 1} · {current.label}
+            </span>
+            <span>{format.label}</span>
+          </figcaption>
         </figure>
-        <div className="showcase-details">
-          <div className="showcase-copy">
-            <h3>{format.title}</h3>
-            <p>{format.body}</p>
-            <Link href="/login/student" className="text-link">
-              Open your study space <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-          <div className="showcase-thumbs" role="group" aria-label={`${format.label} screens`}>
+        <div className="lx-screens-side">
+          <h3>{format.title}</h3>
+          <p>{format.body}</p>
+          <div className="lx-thumbs" role="group" aria-label={`${format.label} screens`}>
             {format.shots.map((item, index) => (
               <button
                 key={item.file}
                 type="button"
-                className={index === shot ? 'active' : ''}
                 aria-pressed={index === shot}
                 onClick={() => setShot(index)}
               >
-                {['dark', 'light'].map((theme) => (
-                  <img
-                    key={theme}
-                    className={`showcase-shot-${theme}`}
-                    src={`/home/${item.file}-${theme}.png`}
-                    alt=""
-                    width={1440}
-                    height={900}
-                    loading="lazy"
-                  />
-                ))}
-                <span>
-                  {String(index + 1).padStart(2, '0')} / {item.label}
+                <b>{String(index + 1).padStart(2, '0')}</b>
+                {item.label}
+                <span className="lx-shot">
+                  <ShotImages file={item.file} alt="" />
                 </span>
               </button>
             ))}
           </div>
+          <Link href="/login/student" className="lx-link">
+            Open your study space <ArrowUpRight size={16} aria-hidden="true" />
+          </Link>
         </div>
       </div>
-    </section>
+    </>
   );
 }

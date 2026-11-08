@@ -1,9 +1,11 @@
 import Link from 'next/link';
+import { ArrowUpRight, Mail } from 'lucide-react';
 import { pageMetadata } from '@/lib/seo';
+import { Notes, PageHero } from '@/components/landing-page';
 
 export const metadata = pageMetadata('/contact');
 
-const contactEmail = 'umerqure475@gmail.com';
+const contactEmail = 'akoizo.registration@gmail.com';
 const mailto = `mailto:${contactEmail}?subject=${encodeURIComponent('Add our school to Akoizo')}`;
 
 export default function ContactPage() {
@@ -22,44 +24,48 @@ export default function ContactPage() {
     ],
   ];
   return (
-    <main id="main" className="page-container">
-      <section className="page-heading">
-        <p className="eyebrow">CONTACT US / TEACHERS & SCHOOLS</p>
-        <h1>Add your school to Akoizo</h1>
-        <p>
-          Teachers, coaches, and schools: Akoizo is free for your whole Science Olympiad team. Email
-          Umer Qureshi to have your school added, and your students can start studying together.
-        </p>
-      </section>
-      <div className="donate-card">
-        <p className="eyebrow">EMAIL</p>
-        <dl className="donate-details">
-          <div>
-            <dt>Write to</dt>
-            <dd className="donate-recipient">{contactEmail}</dd>
+    <main id="main" className="lx-page">
+      <PageHero
+        lecture="Office hours · Contact"
+        label="Teachers and schools"
+        title="Add your school to Akoizo."
+        lead="Teachers, coaches, and schools: Akoizo is free for your whole Science Olympiad team. Email Umer Qureshi to have your school added, and your students can start studying together."
+      />
+
+      <Notes id="email" num={1} label="Write to us">
+        <div className="lx-mail">
+          <p className="lx-mono">Email</p>
+          <span className="lx-big">{contactEmail}</span>
+          <p>Questions, corrections, or ideas for a lesson are welcome at the same address.</p>
+          <div className="lx-actions">
+            <a className="lx-btn" href={mailto}>
+              <Mail size={18} aria-hidden="true" /> Email us
+            </a>
           </div>
-        </dl>
-        <div className="donate-actions">
-          <a className="button button-primary" href={mailto}>
-            Email us <span aria-hidden="true">↗</span>
-          </a>
         </div>
-      </div>
-      <section className="mission-values" aria-label="How to add your school">
-        {steps.map(([title, body], i) => (
-          <div className="mission-value" key={title}>
-            <span className="eyebrow">0{i + 1}</span>
-            <h2>{title}</h2>
-            <p>{body}</p>
-          </div>
-        ))}
-      </section>
-      <div className="mission-bottom">
-        <p>Questions, corrections, or ideas for a lesson are welcome at the same address.</p>
-        <Link className="text-link" href="/mission#who-we-are">
-          Who runs Akoizo? <span>↗</span>
-        </Link>
-      </div>
+      </Notes>
+
+      <Notes
+        id="steps"
+        num={2}
+        label="What to include"
+        title="Three things to put in your email."
+        lead={
+          <Link className="lx-link" href="/mission#who-we-are">
+            Who runs Akoizo? <ArrowUpRight size={16} aria-hidden="true" />
+          </Link>
+        }
+      >
+        <div className="lx-points">
+          {steps.map(([title, body], i) => (
+            <div className="lx-point" key={title}>
+              <span>Step {String(i + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </div>
+          ))}
+        </div>
+      </Notes>
     </main>
   );
 }

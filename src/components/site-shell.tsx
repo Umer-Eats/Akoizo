@@ -8,7 +8,12 @@ import { useAuth, authMessage } from './auth-context';
 import { eventsForDivision } from '@/lib/events';
 import { slotForEvent } from '@/lib/event-slots';
 import { donationsOpen } from '@/lib/donate';
+import { LandingNav, LandingFooter, isLandingPath } from './landing-shell';
 export function Header() {
+  const path = usePathname();
+  return isLandingPath(path) ? <LandingNav /> : <AppHeader />;
+}
+function AppHeader() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const { toggleTheme } = useSettings();
@@ -156,6 +161,10 @@ export function Header() {
   );
 }
 export function Footer() {
+  const path = usePathname();
+  return isLandingPath(path) ? <LandingFooter /> : <AppFooter />;
+}
+function AppFooter() {
   const { motion, toggleMotion } = useSettings();
   return (
     <footer className="site-footer">

@@ -1,7 +1,8 @@
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
-import { Orbit, Reveal } from '@/components/art';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { donationsOpen } from '@/lib/donate';
+import { Notes, PageHero } from '@/components/landing-page';
 export const metadata = pageMetadata('/mission');
 
 const personalSite = 'https://www.heyumerqureshi.com';
@@ -54,7 +55,7 @@ export default function Page() {
     ],
   ];
   return (
-    <main id="main" className="page-container">
+    <main id="main" className="lx-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -68,104 +69,108 @@ export default function Page() {
           }).replace(/</g, '\\u003c'),
         }}
       />
-      <section className="mission-hero">
-        <p className="eyebrow">OUR MISSION / YOUR POSSIBILITIES</p>
-        <h1>
-          More curiosity.
-          <br />
-          More possibility.
-          <br />
-          <span className="chrome">Always free.</span>
-        </h1>
-        <Orbit />
+      <PageHero
+        lecture="Lecture 02 · Mission"
+        label="Our mission"
+        title={
+          <>
+            More curiosity. More possibility. <span className="lx-mark">Always free.</span>
+          </>
+        }
+        lead="Akoizo helps students grow in their Science Olympiad journey through free lessons, practice, and a community that learns together. We’re here to make preparation feel a little less overwhelming, and a lot more possible."
+      />
 
-        <p>
-          Akoizo helps students grow in their Science Olympiad journey through free lessons,
-          practice, and a community that learns together. We’re here to make preparation feel a
-          little less overwhelming—and a lot more possible.
-        </p>
-      </section>
-      <section className="mission-values" aria-label="Our values">
-        {values.map(([title, body], i) => (
-          <Reveal className="mission-value" key={title}>
-            <span className="eyebrow">0{i + 1}</span>
-            <h2>{title}</h2>
-            <p>{body}</p>
-          </Reveal>
-        ))}
-      </section>
-      <section id="who-we-are" className="about-work" aria-labelledby="who-we-are-title">
-        <p className="eyebrow">WHO ARE WE? / THE PERSON BEHIND AKOIZO</p>
-        <h2 id="who-we-are-title">
-          One student. <span className="chrome">Built for everyone.</span>
-        </h2>
-        <p>
-          Akoizo is not a company. It is designed, written, and run by Umer Qureshi, a high school
-          student who believes good Science Olympiad study tools should reach every student,
-          whatever their circumstances.
-        </p>
-        <div className="support-actions">
-          <a
-            className="button button-primary"
-            href={personalSite}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit heyumerqureshi.com <span aria-hidden="true">↗</span>
-          </a>
+      <Notes id="values" num={1} label="What we believe">
+        <div className="lx-points">
+          {values.map(([title, body], i) => (
+            <div className="lx-point" key={title}>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              <h2 className="lx-point-title">{title}</h2>
+              <p>{body}</p>
+            </div>
+          ))}
         </div>
-      </section>
-      <section className="mission-values" aria-label="About Umer Qureshi">
-        {story.map(([title, body], i) => (
-          <Reveal className="mission-value" key={title}>
-            <span className="eyebrow">0{i + 1}</span>
-            <h2>{title}</h2>
-            <p>{body}</p>
-          </Reveal>
-        ))}
-      </section>
-      <section className="about-quote">
-        <blockquote>“I am very free and education-access-based.”</blockquote>
-        <p>Umer, in his own words</p>
-      </section>
-      <section className="about-work" aria-labelledby="about-work-title">
-        <p className="eyebrow">BEYOND AKOIZO</p>
-        <h2 id="about-work-title">The same idea, in other places.</h2>
-        <p>
-          Akoizo is one of several projects Umer has built for people who are usually left out.
-          Along the way he has taken part in MIT’s MITES Semester, where he researched stem cell
-          regeneration, and earned two VEX Robotics Worlds awards.
-        </p>
-        <div className="about-work-grid">
+      </Notes>
+
+      <Notes
+        id="who-we-are"
+        num={2}
+        label="The person behind Akoizo"
+        title="One student. Built for everyone."
+        lead={
+          <>
+            <p>
+              Akoizo is not a company. It is designed, written, and run by Umer Qureshi, a high
+              school student who believes good Science Olympiad study tools should reach every
+              student, whatever their circumstances.
+            </p>
+            <a
+              className="lx-link"
+              href={personalSite}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit heyumerqureshi.com <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </>
+        }
+      >
+        <div className="lx-points">
+          {story.map(([title, body], i) => (
+            <div className="lx-point" key={title}>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </div>
+          ))}
+        </div>
+        <figure className="lx-quote lx-mt">
+          <blockquote>“I am very free and education-access-based.”</blockquote>
+          <figcaption className="lx-mono">Umer, in his own words</figcaption>
+        </figure>
+      </Notes>
+
+      <Notes
+        id="beyond"
+        num={3}
+        label="Beyond Akoizo"
+        title="The same idea, in other places."
+        lead="Akoizo is one of several projects Umer has built for people who are usually left out. Along the way he took part in MIT’s MITES Semester, researching stem cell regeneration, and earned two VEX Robotics Worlds awards."
+      >
+        <div className="lx-points lx-points-4">
           {work.map(([title, body]) => (
-            <div key={title}>
+            <div className="lx-point" key={title}>
               <h3>{title}</h3>
               <p>{body}</p>
             </div>
           ))}
         </div>
         <a
-          className="text-link"
+          className="lx-link lx-mt"
           href={`${personalSite}/projects`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          See all of Umer’s projects <span>↗</span>
+          See all of Umer’s projects <ArrowUpRight size={16} aria-hidden="true" />
         </a>
-      </section>
-      <div className="mission-bottom">
-        <p>Built for curious minds. Open to every school.</p>
-        <div className="support-actions">
-          {donationsOpen && (
-            <Link className="text-link" href="/support">
-              Support Akoizo <span>↗</span>
+      </Notes>
+
+      <section className="lx-close" aria-labelledby="mission-close-title">
+        <div className="lx-wrap">
+          <p className="lx-mono">Open to every school</p>
+          <h2 id="mission-close-title">Built for curious minds.</h2>
+          <div className="lx-actions">
+            <Link className="lx-btn" href="/login/student">
+              Start your journey <ArrowRight size={18} aria-hidden="true" />
             </Link>
-          )}
-          <Link className="button button-primary" href="/login/student">
-            Start your journey
-          </Link>
+            {donationsOpen && (
+              <Link className="lx-btn lx-btn-line" href="/support">
+                Support Akoizo
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
