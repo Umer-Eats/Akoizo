@@ -200,8 +200,38 @@
   max-height: calc(100vh - var(--lf-sticky-top) - 110px);
   overflow: auto;
 }
-.lf-toc-title {
+.lf-learn.is-toc-collapsed {
+  grid-template-columns: minmax(0, 1fr) 32px;
+}
+.lf-toc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   margin: 0 0 10px;
+}
+.is-toc-collapsed .lf-toc-head {
+  justify-content: center;
+}
+.lf-toc-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.lf-toc-toggle:hover,
+.lf-toc-toggle:focus-visible {
+  color: var(--text);
+  border-color: var(--lf-accent);
+}
+.lf-toc-title {
+  margin: 0;
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.1em;

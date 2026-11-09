@@ -14,6 +14,82 @@ import type { Note, NoteContext, NoteSummary } from '@/lib/note-types';
 import './notes.css';
 
 const storeKey = 'akoizo-notes-dock';
+const widthKey = 'akoizo-notes-dock-width';
+const minWidth = 300;
+const maxWidth = () => Math.max(minWidth, Math.min(900, Math.round(window.innerWidth * 0.7)));
+const clampWidth = (width: number) => Math.round(Math.min(maxWidth(), Math.max(minWidth, width)));
+
+/** Sets the dock width for the whole page (the page also pads itself by this amount). */
+function applyWidth(width: number | null) {
+  const root = document.documentElement;
+  if (width === null) root.style.removeProperty('--nb-dock-w');
+  else root.style.setProperty('--nb-dock-w', `${width}px`);
+}
+
+/** The dock's left edge: drag it (or use the arrow keys) to make the panel wider or narrower. */
+function DockResizer() {
+  const [width, setWidth] = useState<number | null>(null);
+  const set = useCallback((next: number | null, remember = true) => {
+    const value = next === null ? null : clampWidth(next);
+    setWidth(value);
+    applyWidth(value);
+    if (!remember) return;
+    try {
+      if (value === null) localStorage.removeItem(widthKey);
+      else localStorage.setItem(widthKey, String(value));
+    } catch {}
+  }, []);
+  useEffect(() => {
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(widthKey);
+    } catch {}
+    if (saved && Number(saved) > 0) set(Number(saved), false);
+  }, [set]);
+  const current = () =>
+    width ?? document.querySelector<HTMLElement>('.nb-dock')?.offsetWidth ?? 420;
+  return (
+    <div
+      className="nb-dock-resize"
+      role="separator"
+      aria-orientation="vertical"
+      aria-label="Resize notes panel"
+      aria-valuemin={minWidth}
+      aria-valuemax={900}
+      aria-valuenow={width ?? undefined}
+      tabIndex={0}
+      title="Drag to resize · double-click to reset"
+      onPointerDown={(event) => {
+        if (event.button !== 0) return;
+        event.preventDefault();
+        const handle = event.currentTarget;
+        handle.setPointerCapture(event.pointerId);
+        document.documentElement.dataset.notesResizing = '';
+        const move = (e: PointerEvent) => set(window.innerWidth - e.clientX, false);
+        const end = (e: PointerEvent) => {
+          handle.removeEventListener('pointermove', move);
+          handle.removeEventListener('pointerup', end);
+          handle.removeEventListener('pointercancel', end);
+          delete document.documentElement.dataset.notesResizing;
+          set(window.innerWidth - e.clientX);
+        };
+        handle.addEventListener('pointermove', move);
+        handle.addEventListener('pointerup', end);
+        handle.addEventListener('pointercancel', end);
+      }}
+      onDoubleClick={() => set(null)}
+      onKeyDown={(event) => {
+        const step = event.shiftKey ? 80 : 20;
+        if (event.key === 'ArrowLeft') set(current() + step);
+        else if (event.key === 'ArrowRight') set(current() - step);
+        else if (event.key === 'Home') set(maxWidth());
+        else if (event.key === 'End') set(minWidth);
+        else return;
+        event.preventDefault();
+      }}
+    />
+  );
+}
 type Clip = { text: string; x: number; y: number; range: Range };
 
 export function NotesDock() {
@@ -268,6 +344,7 @@ export function NotesDock() {
       )}
       {open && (
         <aside className="nb-dock" aria-label="Notes" data-slot={data?.notebook.color}>
+          <DockResizer />
           <header className="nb-dock-head">
             <p className="nb-dock-book">
               <i aria-hidden="true" /> {data?.notebook.title ?? context!.eventName}

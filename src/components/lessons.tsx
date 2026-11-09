@@ -505,6 +505,27 @@ function LabsStage({
   );
 }
 
+/** A per-browser on/off preference; storage failures fall back to the default. */
+function useRememberedFlag(key: string, initial: boolean) {
+  const [value, setValue] = useState(initial);
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved !== null) setValue(saved === '1');
+    } catch {}
+  }, [key]);
+  const update = useCallback(
+    (next: boolean) => {
+      setValue(next);
+      try {
+        localStorage.setItem(key, next ? '1' : '0');
+      } catch {}
+    },
+    [key],
+  );
+  return [value, update] as const;
+}
+
 function LessonDetail({
   lesson,
   eventId,
@@ -538,6 +559,7 @@ function LessonDetail({
   const stagesRef = useRef<HTMLDivElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const [stage, setStage] = useState<LessonStage>('learn');
+  const [tocOpen, setTocOpen] = useRememberedFlag('akoizo:lesson-toc-open', true);
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
   const plan = useMemo(() => akoLessonPlan(lesson), [lesson]);
   const formatted = useMemo(() => formatLesson(lesson, lines, glossary), [lesson, lines, glossary]);
@@ -751,7 +773,7 @@ function LessonDetail({
         id="lesson-stage-learn"
         role="tabpanel"
         aria-labelledby="lesson-tab-learn"
-        className="lf-stage lf-learn"
+        className={`lf-stage lf-learn${tocOpen ? '' : ' is-toc-collapsed'}`}
         hidden={stage !== 'learn'}
       >
         <div className="lf-learn-main">
@@ -808,7 +830,12 @@ function LessonDetail({
           />
         </div>
         <aside className="lf-rail">
-          <LessonToc items={tocItems} active={activeToc} />
+          <LessonToc
+            items={tocItems}
+            active={activeToc}
+            collapsed={!tocOpen}
+            onToggle={() => setTocOpen(!tocOpen)}
+          />
         </aside>
       </div>
 

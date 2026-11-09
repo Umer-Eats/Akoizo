@@ -11,6 +11,8 @@ import {
   FlaskConical,
   Lightbulb,
   ListChecks,
+  PanelRightClose,
+  PanelRightOpen,
   PenLine,
   Sigma,
   Trophy,
@@ -354,14 +356,33 @@ export function KeyTermsGrid({ terms }: { terms: Lesson['keyTerms'] }) {
 export function LessonToc({
   items,
   active,
+  collapsed = false,
+  onToggle,
 }: {
   items: { id: string; label: string; number?: string }[];
   active: string;
+  collapsed?: boolean;
+  onToggle?: () => void;
 }) {
   return (
     <nav className="lf-toc" aria-label="In this lesson">
-      <p className="lf-toc-title">In this lesson</p>
-      <ol>
+      <div className="lf-toc-head">
+        {!collapsed && <p className="lf-toc-title">In this lesson</p>}
+        {onToggle && (
+          <button
+            type="button"
+            className="lf-toc-toggle"
+            aria-expanded={!collapsed}
+            aria-controls="lf-toc-list"
+            aria-label={collapsed ? 'Show lesson contents' : 'Hide lesson contents'}
+            title={collapsed ? 'Show lesson contents' : 'Hide lesson contents'}
+            onClick={onToggle}
+          >
+            {collapsed ? <PanelRightOpen size={15} /> : <PanelRightClose size={15} />}
+          </button>
+        )}
+      </div>
+      <ol id="lf-toc-list" hidden={collapsed}>
         {items.map((item) => (
           <li key={item.id}>
             <a

@@ -1619,6 +1619,39 @@
   font-size: 0.86rem;
   animation: nb-dock-in 0.3s var(--vx-ease);
 }
+.nb-dock-resize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -5px;
+  z-index: 2;
+  width: 10px;
+  cursor: col-resize;
+  touch-action: none;
+}
+.nb-dock-resize::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 2px;
+  background: transparent;
+  transition: background 0.15s;
+}
+.nb-dock-resize:hover::after,
+.nb-dock-resize:focus-visible::after,
+:root[data-notes-resizing] .nb-dock-resize::after {
+  background: var(--vx-accent);
+}
+.nb-dock-resize:focus-visible {
+  outline: none;
+}
+/* While dragging, keep text from being selected and the cursor steady across the page. */
+:root[data-notes-resizing] body {
+  cursor: col-resize;
+  user-select: none;
+}
 @keyframes nb-dock-in {
   from {
     transform: translateX(30px);
