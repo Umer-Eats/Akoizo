@@ -47,14 +47,14 @@ test('event toolkits follow the competition format and keep Lessons first and Ru
       'C',
       eventsForDivision('C').find((event) => event.id === 'engineering-cad')!,
     ),
-    ['lessons', 'cad-file-grader', 'rules'],
+    ['lessons', 'practice-tests', 'cad-file-grader', 'rules'],
   );
   assert.deepEqual(
     eventToolIds(
       'C',
       eventsForDivision('C').find((event) => event.id === 'experimental-design')!,
     ),
-    ['lessons', 'lab-generator', 'rules'],
+    ['lessons', 'practice-tests', 'lab-generator', 'rules'],
   );
   const thermodynamics = eventsForDivision('C').find((event) => event.id === 'thermodynamics')!;
   assert.ok(eventToolIds('C', thermodynamics).includes('video-grader'));

@@ -165,9 +165,9 @@ const cheatsheetEvents: Record<Division, Set<string>> = {
 
 const specialTools: Record<string, EventToolId[]> = {
   'A/experimental-design': ['lessons', 'lab-generator', 'rules'],
-  'B/experimental-design': ['lessons', 'lab-generator', 'rules'],
-  'C/experimental-design': ['lessons', 'lab-generator', 'rules'],
-  'C/engineering-cad': ['lessons', 'cad-file-grader', 'rules'],
+  'B/experimental-design': ['lessons', 'practice-tests', 'lab-generator', 'rules'],
+  'C/experimental-design': ['lessons', 'practice-tests', 'lab-generator', 'rules'],
+  'C/engineering-cad': ['lessons', 'practice-tests', 'cad-file-grader', 'rules'],
 };
 
 export function eventToolIds(division: Division, event: ScienceEvent): EventToolId[] {
@@ -179,6 +179,9 @@ export function eventToolIds(division: Division, event: ScienceEvent): EventTool
     ids.push('practice-tests', 'ranked-tests');
     if (binderEvents[division].has(event.id)) ids.push('binder-generator');
     else if (cheatsheetEvents[division].has(event.id)) ids.push('cheatsheet-generator');
+  }
+  if ((division === 'B' || division === 'C') && !ids.includes('practice-tests')) {
+    ids.splice(1, 0, 'practice-tests');
   }
   if (labEvents[division].has(event.id)) ids.push('lab-practice');
   if (buildEvents[division].has(event.id)) ids.push('video-grader', 'course-generator');

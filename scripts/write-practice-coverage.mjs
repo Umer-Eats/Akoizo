@@ -7,9 +7,9 @@ import { eventToolIds } from '../src/lib/event-rules.ts';
 const rows = [
   '# Practice coverage',
   '',
-  'Reviewed October 13, 2026 against the local 2027 rules.',
+  'Coverage updated November 8, 2026. New additions reviewed against the local 2027 rules; individual source limitations are recorded below.',
   '',
-  `${practiceTests.length} converted papers, ${practiceTests.reduce((n, t) => n + t.questionCount, 0).toLocaleString('en-US')} answer fields. Every Division B and C event with a Practice Tests tab has at least one paper. This does not mean that all 909 indexed archive sources have been converted. Division A is outside this B/C import.`,
+  `${practiceTests.length} ready practice papers, ${practiceTests.reduce((n, t) => n + t.questionCount, 0).toLocaleString('en-US')} answer fields. Every one of the 46 Division B/C events has at least five current-topic papers. Includes ${practiceTests.filter((t) => t.origin === 'original').length} original curriculum forms and ${practiceTests.filter((t) => t.origin === 'adapted').length} repaired editions; remaining papers are archived competition conversions. Original editions superseded by repairs remain available through saved-attempt links. Division A is outside this expansion.`,
   '',
   'Difficulty estimates reflect question content within the test’s division. Competition tiers use reported evidence; an unconfirmed tier does not prevent conversion. Historical rotations are labeled separately from current-topic papers.',
   '',
@@ -20,7 +20,10 @@ for (const division of ['B', 'C']) {
   for (const event of eventsForDivision(division)) {
     if (!eventToolIds(division, event).includes('practice-tests')) continue;
     const tests = practiceTests.filter((t) => t.division === division && t.eventId === event.id);
-    if (!tests.length) throw new Error(`Empty practice tab: ${division}/${event.id}`);
+    if (tests.length < 5)
+      throw new Error(`Fewer than five practice papers: ${division}/${event.id}`);
+    if (tests.filter((t) => t.topicMatch === 'current').length < 5)
+      throw new Error(`Fewer than five 2027-topic papers: ${division}/${event.id}`);
     rows.push(
       `| ${division} | ${event.name} | ${tests.length} | ${tests.filter((t) => t.topicMatch === 'current').length} | ${tests.filter((t) => t.topicMatch === 'different').length} |`,
     );
@@ -30,7 +33,7 @@ rows.push(
   '',
   '## Papers and scoring notes',
   '',
-  'The point totals below apply to the converted written questions. Source PDFs retain the complete original paper; excluded physical stations, missing images, and scoring discrepancies are disclosed before a student starts.',
+  'The point totals apply to the available written questions. Original curriculum forms include their own authored keys. Repaired editions retain archived pages and append clearly marked authored corrections or self-contained substitutes; historical source pages and saved-attempt editions remain unchanged. Physical performance is practiced separately.',
   '',
   '| Division / event | Competition / year | Level | Difficulty | Fields / points | Source and scoring |',
   '| --- | --- | --- | --- | --- | --- |',

@@ -1,0 +1,95 @@
+
+> akoizo@0.1.0 prebuild
+> npm run communities:sync
+
+
+> akoizo@0.1.0 communities:sync
+> node scripts/sync-communities.mjs
+
+
+> akoizo@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.3.8 (webpack)
+- Environments: .env.local
+✓ Running next.config.ts took 54ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 8.2s
+  Running TypeScript ...
+  Finished TypeScript in 1314ms ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/112) ...
+  Generating static pages using 15 workers (28/112) 
+  Generating static pages using 15 workers (56/112) 
+  Generating static pages using 15 workers (84/112) 
+✓ Generating static pages using 15 workers (112/112) in 2.6s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/analytics
+├ ƒ /api/assignments
+├ ƒ /api/auth/enrollment-check
+├ ƒ /api/auth/profile
+├ ƒ /api/auth/register
+├ ƒ /api/binders
+├ ƒ /api/build-tools
+├ ƒ /api/cheatsheets
+├ ƒ /api/cheatsheets/figure
+├ ƒ /api/community
+├ ƒ /api/courses
+├ ƒ /api/dashboard
+├ ƒ /api/event-selections
+├ ƒ /api/lessons/ako
+├ ƒ /api/lessons/check
+├ ƒ /api/lessons/progress
+├ ƒ /api/practice
+├ ƒ /api/practice/ako
+├ ƒ /api/practice/auto-grade
+├ ƒ /api/practice/review
+├ ƒ /api/progress
+├ ƒ /api/ranked
+├ ƒ /api/ranked/attempt
+├ ƒ /api/rankings
+├ ƒ /api/school/password
+├ ƒ /api/settings
+├ ƒ /api/students
+├ ƒ /api/students/[studentId]
+├ ƒ /api/teams
+├ ○ /community
+├ ○ /contact
+├ ○ /dashboard/binders
+├ ○ /dashboard/cheatsheets
+├ ○ /dashboard/courses
+├ ○ /dashboard/instructor
+├ ○ /dashboard/student
+├ ƒ /dashboard/student/events/[eventId]
+├ ƒ /dashboard/student/events/[eventId]/[toolId]
+├ ƒ /dashboard/student/events/[eventId]/[toolId]/[testId]
+├ ○ /donate
+├   /login/[role]
+│ ├ ● /login/student
+│ └ ● /login/instructor
+├ ○ /mission
+├ ○ /rankings
+├ ○ /robots.txt
+├ ○ /settings/instructor
+├ ○ /settings/student
+├ ○ /sitemap.xml
+├ ƒ /students/[studentId]
+├ ○ /study-tools
+├   /study-tools/[division]/[eventId]
+│ ├ ● /study-tools/division-a/aerodynamics
+│ ├ ● /study-tools/division-a/a-matter-of-matter
+│ ├ ● /study-tools/division-a/chew-the-fat
+│ └ ● [+60 more paths]
+└ ○ /support
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

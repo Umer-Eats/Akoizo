@@ -1,0 +1,3215 @@
+[
+  {
+    "id": "akoizo-2027-b-anatomy-and-physiology-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7112c402c8910783e9669c298c62fb71077aa92a390c098470ad70a2ef76d69c",
+        "pages": 6,
+        "bytes": 83222
+      },
+      {
+        "role": "key",
+        "sha256": "d802650c4c06db1bda2e8f1662cecc81f3a0e655c53fab173703483444eb6b4f",
+        "pages": 6,
+        "bytes": 83301
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-anatomy-and-physiology-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "15c0c87ff3472865c3c17da724db4de4e74125aafcf94b8383362a841de0bfe0",
+        "pages": 6,
+        "bytes": 82614
+      },
+      {
+        "role": "key",
+        "sha256": "946883c123e823f8af8aa7b426aa232caff38e25e90d267807d8b6f405ee1bdc",
+        "pages": 6,
+        "bytes": 82624
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-botany-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5853ca0751f028d74a4e3fce1769e4e26c0e133bd3556368fd6a70ccfdbbdeb0",
+        "pages": 5,
+        "bytes": 80715
+      },
+      {
+        "role": "key",
+        "sha256": "98be910b2ef70aef1ca3136a2860d960c331e6d192616cf77b407d46dbe444cc",
+        "pages": 5,
+        "bytes": 81100
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-botany-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6d18fc9d1942c93756d108e2af48c66c6134054496c654fe48973990ddc4b65e",
+        "pages": 5,
+        "bytes": 81072
+      },
+      {
+        "role": "key",
+        "sha256": "681fe499a32e1f6a3a887a411adc9924a9e058cfe7310fabb43038b10601590d",
+        "pages": 5,
+        "bytes": 81752
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-botany-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "174403b44be0cf4750d7b51ea23ed1c7185d740b07594b6d9522bfef4661973f",
+        "pages": 5,
+        "bytes": 81183
+      },
+      {
+        "role": "key",
+        "sha256": "1ec27fd8404934d096ea98227c60446d18636ac89dd24118a31a0641334edd9e",
+        "pages": 5,
+        "bytes": 81797
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-disease-detectives-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "03cdfc66426f06c9774653c9589d845eb62a4b0fed829d2d54a767578309430e",
+        "pages": 4,
+        "bytes": 79494
+      },
+      {
+        "role": "key",
+        "sha256": "1cbdf28173db4e079e646be3b1baece2be102d2d832d4dd93f90e807d3ccc799",
+        "pages": 5,
+        "bytes": 80849
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-disease-detectives-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "bf40c7629f064625bb988e90a25031b766cb64f804931f4ae9a93364b48c8576",
+        "pages": 5,
+        "bytes": 80449
+      },
+      {
+        "role": "key",
+        "sha256": "d7347e63bb3af5fd24863a9a202f3e2c31802dcf66a94afa012a710292fdb77d",
+        "pages": 5,
+        "bytes": 81077
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-disease-detectives-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "9212f35d057a9903435ecbb192878a19b85c29c572f7f30cfae594eb61e7f1ac",
+        "pages": 5,
+        "bytes": 80564
+      },
+      {
+        "role": "key",
+        "sha256": "60e2b95e639ef9b0d264017a3b2691e39cd23c4ebec7359f9b46e78cccc8faa2",
+        "pages": 5,
+        "bytes": 80977
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-dynamic-planet-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "cee4d2e5cc83196bbc5b7a001e1568dbf46031a14e64e758a6fa92cba316bc71",
+        "pages": 6,
+        "bytes": 81470
+      },
+      {
+        "role": "key",
+        "sha256": "9971580b17291f0d74bb9868b705417f52748a8051801605f39bce6f28647fd1",
+        "pages": 6,
+        "bytes": 81627
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-dynamic-planet-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ac6680a0c5c67e856f11264e778e7c1b90dfd0197f14df6e05a6f3b0f950f36b",
+        "pages": 5,
+        "bytes": 80738
+      },
+      {
+        "role": "key",
+        "sha256": "d956dbcb278675f2f8c96957cccd104d19be17ab181d18430afedfcc262d38c3",
+        "pages": 5,
+        "bytes": 80865
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-meteorology-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "afc9bd15e1552c4f71144659a99d5e049bec3cce3802964de18a2a529c163024",
+        "pages": 7,
+        "bytes": 85669
+      },
+      {
+        "role": "key",
+        "sha256": "384e74a9018928333b67eead35a1257d24568f164363ac0acbfbb4a57e5549c0",
+        "pages": 6,
+        "bytes": 85457
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-meteorology-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f1c4c7df66cdd3afabde101469809f29633394d86dcc7070082620452e95d492",
+        "pages": 7,
+        "bytes": 84924
+      },
+      {
+        "role": "key",
+        "sha256": "5bc41ba511f8f72d91a48c007b63bb92f28c242bd14964f536562527c811cc3b",
+        "pages": 7,
+        "bytes": 85237
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-remote-sensing-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "03500a0f4e818bc0d10dc0017592a3f88b282803e861000ff8c5ce228d69aec3",
+        "pages": 7,
+        "bytes": 83915
+      },
+      {
+        "role": "key",
+        "sha256": "1933f317df2e1683d371cf615d27ab8890d7edacdd3aa1ce2a611ce9d8a48999",
+        "pages": 6,
+        "bytes": 83319
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-rocks-and-minerals-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "8e3c96f6a1596b301d526389d8b23cf606fd469f158fa6e46c36c8fca3e4572a",
+        "pages": 5,
+        "bytes": 80460
+      },
+      {
+        "role": "key",
+        "sha256": "8c2d65a22aa971824b3e4ad0a0dc07348a3f1939a4ab4dcd3dfae14560560b52",
+        "pages": 4,
+        "bytes": 80282
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-rocks-and-minerals-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "393d5c756c96321d406308a62bac3d5fb18cdd78b55aea71043025bb00c98f85",
+        "pages": 5,
+        "bytes": 80589
+      },
+      {
+        "role": "key",
+        "sha256": "a443bbaa46dd3deda9eb925203597518c953f87384dd367f7e53754d4b8fc191",
+        "pages": 4,
+        "bytes": 80268
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-rocks-and-minerals-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "053d5f9dfd869421a281632e17c51a18409213d635f75f3e681f1177c167e8c7",
+        "pages": 5,
+        "bytes": 80555
+      },
+      {
+        "role": "key",
+        "sha256": "0b898a8afa58b871bc2e04757dacc749bb72d058b09dd8b6a6dd2febc286f8ff",
+        "pages": 4,
+        "bytes": 80353
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-solar-system-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b975300187524da292a3b11cd87b2cd5729c946ee2ef96e611012e7e597d0dcc",
+        "pages": 5,
+        "bytes": 82274
+      },
+      {
+        "role": "key",
+        "sha256": "cdb52cff19275cbbf55a4b5952bcc8a71f6442c7990130537809b8fbe8f4efff",
+        "pages": 5,
+        "bytes": 83708
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-solar-system-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b6bb8da1ae4f7357e5bc5ecf0608311568d34dacaf2d9d08d3a5f9c10aae5c97",
+        "pages": 6,
+        "bytes": 83774
+      },
+      {
+        "role": "key",
+        "sha256": "ffdabce5250db2a16aa5cf7b7ea4bd7f4f401056972d1ea165fe98370e946ae8",
+        "pages": 6,
+        "bytes": 84760
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-solar-system-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "4dd44b28ca4dcd5500b18b6693758515a273ba2f026ac4d117ad21814e59fd30",
+        "pages": 5,
+        "bytes": 82054
+      },
+      {
+        "role": "key",
+        "sha256": "04709b36fe6644939e3cef163ef8ca7fc2c1122f5642b27c655e085ff9f7123d",
+        "pages": 5,
+        "bytes": 83376
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-circuit-lab-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b1438602a83ebfa62bb569e408ff2041edfbdfab96fde4ee150c8f1b4e4e4cdc",
+        "pages": 5,
+        "bytes": 80476
+      },
+      {
+        "role": "key",
+        "sha256": "001e5807bc9848ad02a5cffbaba67b7b66c07c0646519c5d3dfa4ed181724480",
+        "pages": 4,
+        "bytes": 80305
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-circuit-lab-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "83b282e71d68916322491e7bf836eb48c7d625506eaf1cae2105a0d167f875ed",
+        "pages": 4,
+        "bytes": 79517
+      },
+      {
+        "role": "key",
+        "sha256": "54329439aee840c592bc90e1c4133569394ea45759f59141e61617d4b3f1d900",
+        "pages": 4,
+        "bytes": 79818
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-circuit-lab-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "e4747927e7ef63e41f7ab0b3d409615016413b4a651312daa39ab202aa7231ce",
+        "pages": 5,
+        "bytes": 81157
+      },
+      {
+        "role": "key",
+        "sha256": "497e5d0c51e4e1d767c7bc6854e9b6f5f4dca7af14a083fd6ea79bfacb38ac21",
+        "pages": 5,
+        "bytes": 81708
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-crime-busters-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "cf5c1b6f81a23b749529339f4354832f3317ab8412947f235cb73e279c31f2bb",
+        "pages": 7,
+        "bytes": 85372
+      },
+      {
+        "role": "key",
+        "sha256": "8c8c88dfd370bf23abffdca378c5321deb354f0aff7a84457401d9d74703e1cc",
+        "pages": 7,
+        "bytes": 85854
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-crime-busters-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5bfac2cbf5fbdd984f3782b1c860fdfced7bc3d813e3cdec133018aa17d141f1",
+        "pages": 6,
+        "bytes": 83063
+      },
+      {
+        "role": "key",
+        "sha256": "35e3275bb151500e45800eabc70722e84831a7e10567f9de9c950c099d596510",
+        "pages": 6,
+        "bytes": 83673
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-food-science-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ef16192ab665fbc704cf4ab5d666724fe35e08006122c3fcbb4441e3fd9c304b",
+        "pages": 6,
+        "bytes": 83972
+      },
+      {
+        "role": "key",
+        "sha256": "67e02c361854cdefaa162fbea2aa32cbcf638368c6d7a671205bba0e09d34234",
+        "pages": 6,
+        "bytes": 84438
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-food-science-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "29d6ec8c8eedec903dd4b577b5c5bbe3cd1a544182b7fbf6ead55a11e5323dc8",
+        "pages": 6,
+        "bytes": 84007
+      },
+      {
+        "role": "key",
+        "sha256": "4f31aa2af36ddeb0809d94e38dbd6d488d9c88b39d6e9f12c0e5ee0c4e6aaa08",
+        "pages": 7,
+        "bytes": 85368
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-hovercraft-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "02599240eae91a8c73a268f0258bea2e4aa38fba1d2a687f07575f3d5fd788eb",
+        "pages": 4,
+        "bytes": 79244
+      },
+      {
+        "role": "key",
+        "sha256": "a176776b23fd27b870e9ddc810fa68f1cc143d20cb57282b7ef4632d0be6674b",
+        "pages": 4,
+        "bytes": 80344
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-hovercraft-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "fdecc526ba3a5046a91ad0cfce6a7f27382382ebea3bbd0e722abc469b37e486",
+        "pages": 5,
+        "bytes": 80534
+      },
+      {
+        "role": "key",
+        "sha256": "0484355e9061661fb975757a68e6259cb22105d2a88457616b7c94a7007c23a1",
+        "pages": 4,
+        "bytes": 80802
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-hovercraft-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f791f97f57aa4120bf1a65bc87d37377998d8de33f41c0342d6491e539568521",
+        "pages": 5,
+        "bytes": 81089
+      },
+      {
+        "role": "key",
+        "sha256": "d9a49e4c78e6afebd8d0bdb137c4aaba49feda6393de916e75a198cd523ab89f",
+        "pages": 4,
+        "bytes": 81181
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-hovercraft-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "4f4defa3aafe27d16664313d4c2c6d4b50bd6452975b53fdf243123ab7a367f4",
+        "pages": 4,
+        "bytes": 79958
+      },
+      {
+        "role": "key",
+        "sha256": "7a8f9393159dd7055bd4649b74aa2b423224692f9bb77a7be4e34b02dc4a21a7",
+        "pages": 4,
+        "bytes": 80961
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-hovercraft-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "2f40639112181801fbcd581631d81f4e5753583b430135bb3de60832d61a8a7f",
+        "pages": 4,
+        "bytes": 79797
+      },
+      {
+        "role": "key",
+        "sha256": "a673850b45a70b321bafd7dc2255496dfc4d419124069f85378a53c1f6d38d83",
+        "pages": 4,
+        "bytes": 80869
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-thermodynamics-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6bd0382cf10588b476a87cd7030911cece4e932bf9eea405e1627d651b1fe402",
+        "pages": 6,
+        "bytes": 81954
+      },
+      {
+        "role": "key",
+        "sha256": "83a908e4be106caafb481a748387de55675daa009d20c0c1c1e3a12fd4951a43",
+        "pages": 5,
+        "bytes": 81509
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-thermodynamics-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "98f8a74816d3d811d220e5d636dbad446241c4c25cf2e45efe16e83cfb76294e",
+        "pages": 6,
+        "bytes": 81523
+      },
+      {
+        "role": "key",
+        "sha256": "2a6a03b6c3b1ba3f931d51da03a671548c9b4bdae5f9d8d90323eceff6884b4f",
+        "pages": 5,
+        "bytes": 81078
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-boomilever-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d02f6d905f1327738dd5490cae87d9f57ea408744edd3b8d905113e29e65c0a7",
+        "pages": 4,
+        "bytes": 79226
+      },
+      {
+        "role": "key",
+        "sha256": "8c735412b12a1bf213474fe18bbe385c2ab6fecd73330365943b43996b5fb9dc",
+        "pages": 4,
+        "bytes": 80141
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-boomilever-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "55ccb37cd08c87e109d6d40ad720737cadedc69251ddade1ad248d09d4b98502",
+        "pages": 4,
+        "bytes": 79514
+      },
+      {
+        "role": "key",
+        "sha256": "e6763121030d2bbc7a76966d880aa8a78c026350a8b0e8926af625cd75cf03f2",
+        "pages": 4,
+        "bytes": 80649
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-boomilever-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "feed92fae0801f85d07d2f81fff70575d429769e6d9a0906e742c888717b55a3",
+        "pages": 4,
+        "bytes": 78791
+      },
+      {
+        "role": "key",
+        "sha256": "c96d8cc39b4635ae261503576a98cbb9498f43571484dc624a99635154eb5691",
+        "pages": 4,
+        "bytes": 80129
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-boomilever-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "15fbe124436478b89b0fae355ae5f2ad887eed7430c96050d9f82f3574a46f7d",
+        "pages": 5,
+        "bytes": 80899
+      },
+      {
+        "role": "key",
+        "sha256": "fff7a58115a9ab6efa2d57d6104acf6a389fcc95ad0114b0511d3f53bd013773",
+        "pages": 4,
+        "bytes": 81155
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-boomilever-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d682e5595c2a85f11ad0fb8a0f43accfe7a66ce10de187ad89cf8116cbe8cfc7",
+        "pages": 4,
+        "bytes": 79768
+      },
+      {
+        "role": "key",
+        "sha256": "5808e6f4b62380e707ac302000fda0ccf3433cf491b0df2c5ce3bc1d3604d2ff",
+        "pages": 4,
+        "bytes": 80923
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-elastic-launched-gliders-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "298d9ed9cb39f114ea921eef2625714e90b648e87daa8b2bffde8185f32413ac",
+        "pages": 5,
+        "bytes": 81236
+      },
+      {
+        "role": "key",
+        "sha256": "a096b0706896f66166cd6290aaa1e29221fb32a26e4e932ed3dc640bb969375f",
+        "pages": 5,
+        "bytes": 82470
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-elastic-launched-gliders-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "0caff82ab10ae7b48a3089233a5090dfda659d6bb8082ff86b309e3edc54a0c8",
+        "pages": 5,
+        "bytes": 80693
+      },
+      {
+        "role": "key",
+        "sha256": "a8570a320858cdcec400cb934292a5cda98a28b7e84b88f15f1f0647dbcf96a9",
+        "pages": 5,
+        "bytes": 81895
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-elastic-launched-gliders-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "211fcfa0bd174660e8848a7cd9b110d5910354fc0617636e17cb1ba037c079d6",
+        "pages": 5,
+        "bytes": 80319
+      },
+      {
+        "role": "key",
+        "sha256": "d18b0793cea4b511479a497f2cba5b7ec1c7563954060332a92fea3db2b1124b",
+        "pages": 4,
+        "bytes": 80475
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-elastic-launched-gliders-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7e93bb9a5802b2f72011b11a6ea1ea3ec428975ccf4548e944d34c3d682f34eb",
+        "pages": 5,
+        "bytes": 80525
+      },
+      {
+        "role": "key",
+        "sha256": "d85b2653d3ba09407c019f99f10427ee0d90f63aeae5ed2a36b4e43a4f561a39",
+        "pages": 5,
+        "bytes": 81337
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-elastic-launched-gliders-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5fdff4b9c12a9036ea16e7c7f07446ce5077158005907376e58a07666604973a",
+        "pages": 5,
+        "bytes": 80739
+      },
+      {
+        "role": "key",
+        "sha256": "9eab05c8f1e0f72fb373163e3d2ebef8aa81bef3320a540198b3650cda822e0e",
+        "pages": 5,
+        "bytes": 81710
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-roller-coaster-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "17fd3067639d59edee66183cba74afe089eacbfab146e55e4844b9fe1bac75ca",
+        "pages": 5,
+        "bytes": 80145
+      },
+      {
+        "role": "key",
+        "sha256": "7ac28e7d2a686784c59b783b096d28b1ea8f698ff8c0099decb4ac240f1b6f15",
+        "pages": 4,
+        "bytes": 80154
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-roller-coaster-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b831092c4f29888888d740e6c40ec6bdaa5b10779ce8da38f7913ddd7bd62df2",
+        "pages": 4,
+        "bytes": 79431
+      },
+      {
+        "role": "key",
+        "sha256": "2d012710ababe1b359c0bab130f5c95fa7bc78555bd639b11bdf22febec2673d",
+        "pages": 4,
+        "bytes": 80179
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-roller-coaster-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "9f9abaa88d754471bbfed3522ea411c7d7c2a0ab68e6b5b62b4acab845402a63",
+        "pages": 4,
+        "bytes": 79181
+      },
+      {
+        "role": "key",
+        "sha256": "3ca7b31ae753d2bf44a0a71a29a02ad72dbde0a748fe8ffe57bfbf194069543b",
+        "pages": 4,
+        "bytes": 80015
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-roller-coaster-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5326c0a49639c9680facf9ec9ba12c230f7ec9a6b06c23b12528b7cdaf4d4369",
+        "pages": 4,
+        "bytes": 79545
+      },
+      {
+        "role": "key",
+        "sha256": "dd522318dade894f94119bc7eac5328c53a3258b6fd0b0143820a4548b85c953",
+        "pages": 4,
+        "bytes": 80568
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-roller-coaster-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a15a39c275af2bfb16e0a748387954fbedf0ed37907f6d042da47283bddecd42",
+        "pages": 4,
+        "bytes": 79411
+      },
+      {
+        "role": "key",
+        "sha256": "240c0bf3d81e29b75e2beaf0b0613753d52db8aaf216ec9d1d0b622ef8ccb199",
+        "pages": 4,
+        "bytes": 80502
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-scrambler-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "4e0ac7b8598203800488c392e34788252f9859fb85600f6799aaeb8b680f56d4",
+        "pages": 5,
+        "bytes": 80643
+      },
+      {
+        "role": "key",
+        "sha256": "56ff90f91e635f617b16196eb4413b86a0e3b4ae7ee1870606ffc4e51c1232a8",
+        "pages": 5,
+        "bytes": 81431
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-scrambler-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "40ac6f498af354da2b118280b2de773c7c854ea53ecca1f5d7ed90e50194b87d",
+        "pages": 5,
+        "bytes": 80571
+      },
+      {
+        "role": "key",
+        "sha256": "084d75a0c780c63a8e0256b630430b45ed1ce704b1b1fdc0597f0f77fe624583",
+        "pages": 4,
+        "bytes": 81076
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-scrambler-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "e5fbca8244aff361d97e0e74a4e56f8722a0551b35a2209553b3868c769e5f25",
+        "pages": 5,
+        "bytes": 80627
+      },
+      {
+        "role": "key",
+        "sha256": "1b560942c8a841d8af81b5a9cb331faa5a74991a7ee29ce51a768fb1575b3031",
+        "pages": 5,
+        "bytes": 81582
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-scrambler-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "1d33860c8a5414e2d11298f97fc8df114f22695c844f3f1797846ee5169a3f8f",
+        "pages": 5,
+        "bytes": 80255
+      },
+      {
+        "role": "key",
+        "sha256": "aa3a4de89d24b729552f386ac841f0d8ce7491416c5853f81499719a87c63e2a",
+        "pages": 4,
+        "bytes": 81123
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-scrambler-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5b942db754f0ad932662be9054f99eb69c47e91db87b1a4c7d2bbcb09a6f4c64",
+        "pages": 5,
+        "bytes": 80684
+      },
+      {
+        "role": "key",
+        "sha256": "bf918c524976e3ea12d6d46feca552f9a225dac6262265517e6bcf75d42b3b39",
+        "pages": 4,
+        "bytes": 81044
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-codebusters-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "08b84b028bc3bf5fa192de6bc4be730fbde47daa51f063b17076d86479b3e2f3",
+        "pages": 4,
+        "bytes": 79790
+      },
+      {
+        "role": "key",
+        "sha256": "0be60d3a9ee71c06e273714916a00f1e86a7af97023a6c4d35f1b4f5680e7707",
+        "pages": 4,
+        "bytes": 80640
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-codebusters-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "0a83c88aaa526812bfbc38e33e6e0dc9985cba01cfc940a7e92de3857c081288",
+        "pages": 5,
+        "bytes": 80533
+      },
+      {
+        "role": "key",
+        "sha256": "21df18f6d2d90d19fb09780f65436731dac941bc4c057cc114a6bce157047c55",
+        "pages": 5,
+        "bytes": 80938
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-codebusters-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ac0f92f56f0eb140d3a47efddea407393f0e4d4ad5bef0b376a04ccb085526fd",
+        "pages": 4,
+        "bytes": 79303
+      },
+      {
+        "role": "key",
+        "sha256": "267120aeeaf80453f1c921aefb521a77c757f509052674c785f41eec16a0aa3e",
+        "pages": 4,
+        "bytes": 80168
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-experimental-design-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a553257c4615a856a9c9713d4a9cf94611d27a4cc92399485292a00333746d86",
+        "pages": 4,
+        "bytes": 79445
+      },
+      {
+        "role": "key",
+        "sha256": "4bc8d5fdc6b0a559abd6c6d6e45c9f81aa84aa20163051bf8b3f7fce8dfa0a1b",
+        "pages": 4,
+        "bytes": 80337
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-experimental-design-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "253981e14901a73b7439883a487dc0095e03d0c68ab77d0a85d07ccbc4be24c5",
+        "pages": 4,
+        "bytes": 79580
+      },
+      {
+        "role": "key",
+        "sha256": "03eaa984fce5221c0331866e1b91a4c53fa80d61e9e2ce5a5bebe9472bcd33c8",
+        "pages": 4,
+        "bytes": 80377
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-experimental-design-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7dbcd19536355846257aab0f9b308fd49a1301d1481127e7abdf44bb16485b62",
+        "pages": 4,
+        "bytes": 79526
+      },
+      {
+        "role": "key",
+        "sha256": "fd50ae934e6b7b6543aa0ab975d39559596b880ffc43f5ea86fbd1d1380c04dd",
+        "pages": 3,
+        "bytes": 79586
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-experimental-design-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d1d0e9c5103daf56b86df3cfe497ccf109d62eb08c2c1aa446cc5a2eee3380fc",
+        "pages": 4,
+        "bytes": 79432
+      },
+      {
+        "role": "key",
+        "sha256": "e3e09e405bb4061e29471fde854cc1af2544be22fe0dca3a52d34b1ce1d8df37",
+        "pages": 4,
+        "bytes": 80096
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-experimental-design-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "0e8fc9bdec1714bd05015e64394290225338a8b61c4041d5d4312932059445d2",
+        "pages": 4,
+        "bytes": 79399
+      },
+      {
+        "role": "key",
+        "sha256": "836eac4fec6dc06e3962a6530a417ae9860914abfba89638664331e1ff76d00a",
+        "pages": 4,
+        "bytes": 80355
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-ping-pong-parachute-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "cea3abb4ebeaafbf201b4c93ce56eb9c0025c997bf8cefe13f0249456e44ebbe",
+        "pages": 5,
+        "bytes": 81417
+      },
+      {
+        "role": "key",
+        "sha256": "20e9b3339e53cfa7602129502f72a2f05c81cee4e42333e8aa37d0d753313502",
+        "pages": 5,
+        "bytes": 82420
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-ping-pong-parachute-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "0b2ecba2227b870bdc28dd7dfe3a105d56388f8c4d99e3c0286f139d61cbee0e",
+        "pages": 5,
+        "bytes": 81686
+      },
+      {
+        "role": "key",
+        "sha256": "9ce7a0138334c023f62ace29114f9b7d4d194b2248fef76aa568bfe40ccae854",
+        "pages": 5,
+        "bytes": 82216
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-ping-pong-parachute-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "0f32c065161f25d9b46e62653e14c84e53eb62254125a5c8c98a68dc86740356",
+        "pages": 5,
+        "bytes": 81705
+      },
+      {
+        "role": "key",
+        "sha256": "0afddd91f6373e1860fde4c909b682f2c372dccaac8659cc8904de252ef56be1",
+        "pages": 5,
+        "bytes": 82559
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-ping-pong-parachute-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d017f9dccea643b08fe6f58c1e8d131083c435815120f29d4e5f99fb06d471f4",
+        "pages": 4,
+        "bytes": 79827
+      },
+      {
+        "role": "key",
+        "sha256": "25afe9deb114a20208b19058e3a73b2c30d7ae869ce472461a60cef8b71b6f28",
+        "pages": 4,
+        "bytes": 81024
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-ping-pong-parachute-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5313c8aaa5ba5ec6f384ab46e43e16da1903e8a15a19b559d008e12eb8845429",
+        "pages": 4,
+        "bytes": 79634
+      },
+      {
+        "role": "key",
+        "sha256": "ca63957a60dd33ba2ec7ae640094f8490048c01a864fbd30c77a2aeab38f4a36",
+        "pages": 4,
+        "bytes": 80783
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-write-it-do-it-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "e9dc19ff644f801be2fcead7e03a609b51ff151acf7946ad331c806db00d9ec9",
+        "pages": 5,
+        "bytes": 80915
+      },
+      {
+        "role": "key",
+        "sha256": "da1c74824d6809b65e7c127697043a1e3568392b5289a4f26013372a4af92243",
+        "pages": 5,
+        "bytes": 82243
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-write-it-do-it-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "3e3c6f47bd2ad1bcc22a7dd18181501a017f25963627cdffb225e46754e130a3",
+        "pages": 5,
+        "bytes": 80836
+      },
+      {
+        "role": "key",
+        "sha256": "e55786dfc7f03e540a01d828b8d5e7cc5f57a8abbe123a4a94dad23f3438e76b",
+        "pages": 5,
+        "bytes": 82186
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-write-it-do-it-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "9d49e92f904106e437237b1311dea2681cc827750bc189b567b7285088e9f473",
+        "pages": 5,
+        "bytes": 80831
+      },
+      {
+        "role": "key",
+        "sha256": "bb25558ce71f02a9415b9097cd918b956eeb1579e28be35619d0a1ce2efb59a9",
+        "pages": 5,
+        "bytes": 82175
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-write-it-do-it-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ca342c3aa991f2c471814044c547852a920310de84dd1e9b4657c5b93c939850",
+        "pages": 5,
+        "bytes": 80846
+      },
+      {
+        "role": "key",
+        "sha256": "124eb68a000e23d89b7d2be6e93e2c650307c0129517bdfbfb232fd9bffaf0c5",
+        "pages": 5,
+        "bytes": 82174
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-b-write-it-do-it-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "9720beffac2766f331a39c241c6808db28dad85753165951684d8bc1f8dadfa8",
+        "pages": 5,
+        "bytes": 80849
+      },
+      {
+        "role": "key",
+        "sha256": "68d9148b3b85bca460f5018da16d7d6e93e2215a62c39bc79b205d21fb02a620",
+        "pages": 5,
+        "bytes": 82191
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-botany-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "23937b2ea0d1663b9e34fd23f0a8df01e9ec607ea01ea5243c70adbcfef0c632",
+        "pages": 5,
+        "bytes": 80649
+      },
+      {
+        "role": "key",
+        "sha256": "c04e6955f676279628f437255f6bd1b24e1c22214c5b0c9842cebf33e31ba5f1",
+        "pages": 5,
+        "bytes": 81036
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-botany-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "c1b12ab8b1a583127ee3f7271895917943b21557fbf89638d38f3e790d4b58f0",
+        "pages": 5,
+        "bytes": 80986
+      },
+      {
+        "role": "key",
+        "sha256": "70d52f0b1cef1dafbfed81f5c02c544ced5157973495e04a054fa508f657e01e",
+        "pages": 5,
+        "bytes": 81546
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-botany-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "29492ef8e72861559e8893e760bbbbdf7d3ce307208ee41517bcdc66d94f6d38",
+        "pages": 5,
+        "bytes": 81054
+      },
+      {
+        "role": "key",
+        "sha256": "87b86ec499c440fb4d7471c7a1f4df3706a87fee7c2bdfdeb28da2e7617db7b7",
+        "pages": 5,
+        "bytes": 81520
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-rocks-and-minerals-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "67c93e3575865292fbd54e903d135172f4347a53976a2d206269c14c158c58ac",
+        "pages": 6,
+        "bytes": 82014
+      },
+      {
+        "role": "key",
+        "sha256": "646d227abd87b2624e9bb33e430480945e76cae2fa31678bf1b068c5f4f002ae",
+        "pages": 6,
+        "bytes": 82037
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-circuit-lab-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "10d1c43e2fcb49363a2ec1bb174a22a29b83ff6b38ae9098e93ef2d7d6706062",
+        "pages": 5,
+        "bytes": 81394
+      },
+      {
+        "role": "key",
+        "sha256": "cf6bafde1fcb79cbcca04e73175d46d4fbbe4036571675759ed6f8c26ef5c756",
+        "pages": 5,
+        "bytes": 81392
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-forensics-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "c4405cd4df90fafeafd5dda4e9ee07cf6beeee4b608ace81c0093d4a069bf74c",
+        "pages": 6,
+        "bytes": 83165
+      },
+      {
+        "role": "key",
+        "sha256": "679abad7127d187627c2e3292c0c724d122efea7c51d2412b48604a3601a3a23",
+        "pages": 6,
+        "bytes": 83464
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-hovercraft-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "00ba81bd57f4e4af8a35c05747672edde6c5712c11f5c197a42d1a6cca6c55ce",
+        "pages": 4,
+        "bytes": 79244
+      },
+      {
+        "role": "key",
+        "sha256": "29b32a33d66132042101e7bf65e8a3261751f928b75eece964201ef610745ca5",
+        "pages": 4,
+        "bytes": 80344
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-hovercraft-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "798e1d5dd309fac8507207030fb42883fb19b5844cb0e65b0d896c6d8bda7bfa",
+        "pages": 5,
+        "bytes": 80535
+      },
+      {
+        "role": "key",
+        "sha256": "03fca90816ec548da2b3d4340c79c1b89a7f3883167777b83fcc40eba948382a",
+        "pages": 4,
+        "bytes": 80802
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-hovercraft-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "82111d32a9526bdbaf71ba119090578667607728a5bc078d73e9ab951495a3c5",
+        "pages": 5,
+        "bytes": 81090
+      },
+      {
+        "role": "key",
+        "sha256": "e03321a166e66b89f33951420fbae450ad6d0ae9398e477ce6415d8e769834ee",
+        "pages": 4,
+        "bytes": 81184
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-hovercraft-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ba5e00d84fb88b26e81b2b74f79afc4ebd531cc013b1632ab4530fc71656d1ae",
+        "pages": 4,
+        "bytes": 79957
+      },
+      {
+        "role": "key",
+        "sha256": "ecaa622b615a0be793ed4dd6f6a32fd81adecdd248b43278e0aedac782249509",
+        "pages": 4,
+        "bytes": 80960
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-hovercraft-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "e3a55960d7186a4afac5fe8237dc7a124e3bb1e186af096a9014f5d4008d94fb",
+        "pages": 4,
+        "bytes": 79797
+      },
+      {
+        "role": "key",
+        "sha256": "2a1a40f680eea659770040bd3b27d311829af72cda8afb954488fc225fd2c4cc",
+        "pages": 4,
+        "bytes": 80870
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-protein-modeling-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "963336e237fd5d1b3b218f34c812953de533b35ffc52bd6f40d46efbe34b89f3",
+        "pages": 5,
+        "bytes": 80696
+      },
+      {
+        "role": "key",
+        "sha256": "bb0a16ff13e1d28abcc2b786c2f61356b3e13a1cd4f507a6de2258e870a2a4c3",
+        "pages": 4,
+        "bytes": 80374
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-protein-modeling-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "250cd91bf9c615f70a8097e32b3839d4a8b80e0d59b6cf26c8da06fd31f243fc",
+        "pages": 5,
+        "bytes": 80764
+      },
+      {
+        "role": "key",
+        "sha256": "d8568f114ef3ceaf694b5b4ebb41cfbc85eff566e72c3635a736e13cff67241d",
+        "pages": 4,
+        "bytes": 80472
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-protein-modeling-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "376762da080af330e09187f9b11aeea6b41bd0b5792e646a4e63e18c7eb53265",
+        "pages": 5,
+        "bytes": 80802
+      },
+      {
+        "role": "key",
+        "sha256": "70057ab9deaf834f7c6c88675fd840ce27453645f6efb684412aa61e27983e7f",
+        "pages": 4,
+        "bytes": 80508
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-boomilever-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "056dd98129818579567d1fcf19e68ca83812150977b712dba36cb71742d1f907",
+        "pages": 4,
+        "bytes": 79225
+      },
+      {
+        "role": "key",
+        "sha256": "297ccb3d305b14c6035c2993db2c9c51f6d0f5681ddd637691bfbfe921d16405",
+        "pages": 4,
+        "bytes": 80141
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-boomilever-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6b909573b40e45d7e4d8d6964d7673eac6b2498b2632d1a7e234ce5575ef7a2d",
+        "pages": 4,
+        "bytes": 79510
+      },
+      {
+        "role": "key",
+        "sha256": "71b943b9be5b6de6713c1e1abbc29d1d1f12c418ee9858bd9221b8c471cc3ff7",
+        "pages": 4,
+        "bytes": 80649
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-boomilever-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "3438ca79043379f2c160e9667b041c376d07acceb57b7006a67179b5b3d52fd8",
+        "pages": 4,
+        "bytes": 78790
+      },
+      {
+        "role": "key",
+        "sha256": "9d3fb33746a205189e29278597985faa470089322b7c9c4ff8b1e1635244f320",
+        "pages": 4,
+        "bytes": 80127
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-boomilever-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "e7936c703156c1745f9e225167197c0a948a36b45680bb3e574f9272fc8ff58d",
+        "pages": 5,
+        "bytes": 80893
+      },
+      {
+        "role": "key",
+        "sha256": "244fd637f09e8f5cb3798bb829ec1b17c0ba673e8e64c8bf1cc86833d7f2d75b",
+        "pages": 4,
+        "bytes": 81151
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-boomilever-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "aebf0b6d60a764041e94309dc6fff3ef6a7b3db1ce89efc6edd4939ae95cdbbd",
+        "pages": 4,
+        "bytes": 79763
+      },
+      {
+        "role": "key",
+        "sha256": "51ba3425705547e09c89d0b47e851d3f856bf0c6f923070e24d704b291d86661",
+        "pages": 4,
+        "bytes": 80921
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-electric-vehicle-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "03ce40fa2a27d29d53a4413e0ab016a335cc59fc15a8138eb4a50e267495cf1c",
+        "pages": 5,
+        "bytes": 81438
+      },
+      {
+        "role": "key",
+        "sha256": "f1ad4e2a930c893a5106629aaf23c9d3ba4f22e42c820525b11431b888b481cd",
+        "pages": 5,
+        "bytes": 82631
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-electric-vehicle-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ccf6175a0bce808e6fddab650e091e3daeba44e6b5e6bf56f32c49978e2e9b45",
+        "pages": 5,
+        "bytes": 81267
+      },
+      {
+        "role": "key",
+        "sha256": "faee9d8921894bb86623ece101b0f3be92413bd7e376a9a84691f2ce23074c2c",
+        "pages": 4,
+        "bytes": 81675
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-electric-vehicle-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "8446213cdf2d7e9da73f3215517e3f0f97c8d8a0ec173279c2dd59952bac1f68",
+        "pages": 5,
+        "bytes": 81341
+      },
+      {
+        "role": "key",
+        "sha256": "8c4ad367c605ced4471627a55c4c1cdf56347bb6c8a560e2d65ac61e58813761",
+        "pages": 4,
+        "bytes": 81280
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-electric-vehicle-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5b1b06c30abe159e248def21fbf8eb050830d1c7d5b6a0369874cf3b792a9afb",
+        "pages": 5,
+        "bytes": 81103
+      },
+      {
+        "role": "key",
+        "sha256": "707db1d52695834011da06119bfbfbcf1ed404ae34365f7aa022bed2176bfcc5",
+        "pages": 4,
+        "bytes": 81228
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-electric-vehicle-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b739fe8de2ba5d6112d5fdd3a4588847868058ff660c6567d7d77c896f3fdc3c",
+        "pages": 4,
+        "bytes": 80128
+      },
+      {
+        "role": "key",
+        "sha256": "49850a8e2f7db6c26cf26a390b82319320448c6826aebcdc67b4e8ccc8579008",
+        "pages": 4,
+        "bytes": 81037
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-mission-possible-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f6a4f47867795d2dfa40e7d55adc8fe8032be98816d5176fa53466396a5e4c1d",
+        "pages": 5,
+        "bytes": 81810
+      },
+      {
+        "role": "key",
+        "sha256": "30e48ffae63619cb038be3591cb540c1c11eb4643729409e0657cc48b5b6d512",
+        "pages": 5,
+        "bytes": 82619
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-mission-possible-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "70862a7e639a1e85da152ad1bf9b97a423d12eb652bf51ed3d4997536e9b20d4",
+        "pages": 4,
+        "bytes": 79822
+      },
+      {
+        "role": "key",
+        "sha256": "62e0302df8ba65cc6f2d216d4ce3df0f65fb6ddaefa60c8d06035ca23f93bbe6",
+        "pages": 4,
+        "bytes": 80830
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-mission-possible-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "68ff063901d90b1126301e3fcc5df4200dd5337a46c7efeb915d7e6397559220",
+        "pages": 4,
+        "bytes": 79396
+      },
+      {
+        "role": "key",
+        "sha256": "2fc65f1bc6f16d0b47887fa7a6a81fec6f79a8c8cd57b3a759cabb2b177c0524",
+        "pages": 4,
+        "bytes": 80245
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-mission-possible-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "5f59febdda134b74516e5ed4fe568b64960d4ad0f5325c64ee1a236c9df22132",
+        "pages": 4,
+        "bytes": 79644
+      },
+      {
+        "role": "key",
+        "sha256": "2f71d2d0570ed07e12709db9d3d3be09d831594d7c184658e2832390d3355f10",
+        "pages": 4,
+        "bytes": 80744
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-mission-possible-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "95156d1af602b36a46608b7e8df95e683dd1afc534ed9c1401eae36ffc1926be",
+        "pages": 4,
+        "bytes": 79386
+      },
+      {
+        "role": "key",
+        "sha256": "3f3733193f90338b8ea9cce639c4b1f317e222131a454c3bac361fe744967e97",
+        "pages": 4,
+        "bytes": 80385
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-wright-stuff-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a2bd7b73d0c56eb3afafdfb6959a01bbd83a7abe7282a23446c22d0a6d01dd88",
+        "pages": 5,
+        "bytes": 81572
+      },
+      {
+        "role": "key",
+        "sha256": "60cbda1898b00fcb7fbf40810dca614f7c30e2640b046efce71ecf7c3e9622e7",
+        "pages": 5,
+        "bytes": 82518
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-wright-stuff-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "01ff90491800e2fc8e1546445d381b76540531b9fdaafb9da7ce7233b999b019",
+        "pages": 5,
+        "bytes": 81004
+      },
+      {
+        "role": "key",
+        "sha256": "a2596267eb067d8e414f004b4bd857c46549fe3b66c703ec3f7aae028e91d10b",
+        "pages": 5,
+        "bytes": 82062
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-wright-stuff-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "eb88b180c75e96656e85ae55e8fc227583b7c06242e8859adf70d44b1db2d344",
+        "pages": 5,
+        "bytes": 80581
+      },
+      {
+        "role": "key",
+        "sha256": "1ddef77c1ff9b2838cc9aaa299520af5d8f82b5f85737604402f62782ef0921d",
+        "pages": 4,
+        "bytes": 80919
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-wright-stuff-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6b05debfbbd2c9cd4c918438fa82b38ad632788eee08002ec39acca0751e8f3d",
+        "pages": 5,
+        "bytes": 81448
+      },
+      {
+        "role": "key",
+        "sha256": "b13125480f0a517f5076a8944c293af44ab02bea70f0333d380c50527250dcf0",
+        "pages": 5,
+        "bytes": 82308
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-wright-stuff-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d690f5e8fe2ca00970c442ac3ff5eafd4d8e283b7edc5cb52e6bbe5cff22e34a",
+        "pages": 5,
+        "bytes": 81243
+      },
+      {
+        "role": "key",
+        "sha256": "5f6b744fa87bc9d12f319de0488f692c37038219883d3ee3851ddbccba2ae416",
+        "pages": 5,
+        "bytes": 82346
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-engineering-cad-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "77c3e333a3922376763c6b24dcd20ff397fef34975a0d3f1f76d276f2bb32c86",
+        "pages": 5,
+        "bytes": 79643
+      },
+      {
+        "role": "key",
+        "sha256": "a678431edbc8e3308aaa566a06698271f145b0d2be7ac09323c2bf952c899685",
+        "pages": 4,
+        "bytes": 79906
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-engineering-cad-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "1a933486fb31f66ba3be2f50c1fa1119b1bf6e31c49106b45823613a021058ff",
+        "pages": 5,
+        "bytes": 79647
+      },
+      {
+        "role": "key",
+        "sha256": "9fa23c7fe087c0bf506552a30f1b45123e500ba736efd9a4d261ebe8f7d5c4b6",
+        "pages": 4,
+        "bytes": 79909
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-engineering-cad-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6651f17456af3f82898396efb6625e590dd4aa54d2653e3d54c8d553ee0e50fb",
+        "pages": 5,
+        "bytes": 79657
+      },
+      {
+        "role": "key",
+        "sha256": "5578a2933afd8372d72afcb1e44d095ce6580c4ce2c4d367424c12341ae76559",
+        "pages": 4,
+        "bytes": 79907
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-engineering-cad-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "70c105dac13849049dee8668ff9fae31a9adbf3b986181b173e2b749ab52c9e3",
+        "pages": 5,
+        "bytes": 79644
+      },
+      {
+        "role": "key",
+        "sha256": "8a12f9abcd905b28cd75ada4664050aeef7e618aefb339b38e5c3a8ce8cbf7bb",
+        "pages": 4,
+        "bytes": 79917
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-engineering-cad-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b3f376bc448b21e09d90c555ec16581125b520972f7893555597d6368b09fcab",
+        "pages": 5,
+        "bytes": 79660
+      },
+      {
+        "role": "key",
+        "sha256": "efd60bbb518f85009f9df1c85edd0ebd398015ec72ee0c0c6cea9d78aa44f6c1",
+        "pages": 4,
+        "bytes": 79928
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-experimental-design-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a74a6f1212af46e8dbf427efcbdf10e0b94206b12cce13407a7859bf2953a30a",
+        "pages": 4,
+        "bytes": 79511
+      },
+      {
+        "role": "key",
+        "sha256": "f0a1852b4726343f700065b4e6b03f7fc531e500a9849c9a88ca9deb65ec6241",
+        "pages": 4,
+        "bytes": 80466
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-experimental-design-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "75d7be4c752c3046206dcc6ca44f97f081ff8399706df93a7625036f6ecf8e6c",
+        "pages": 4,
+        "bytes": 79709
+      },
+      {
+        "role": "key",
+        "sha256": "b46a1be1f819b212710f96f5eb450494c6df7e968a832480b81e81a5ad20dae5",
+        "pages": 4,
+        "bytes": 80660
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-experimental-design-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "1e8a3e428d94c25735e155d5f7daae6a06cf13357ef309cf852823a1e280e8b6",
+        "pages": 4,
+        "bytes": 79618
+      },
+      {
+        "role": "key",
+        "sha256": "4b6793db499904c4007ea226c2e854bd356206318bae0e09a54e1d17bd574c84",
+        "pages": 4,
+        "bytes": 80388
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-experimental-design-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "890c017d026599f338c49835e92cba6d3a649934c774449b3acf511ec4059a5f",
+        "pages": 4,
+        "bytes": 79531
+      },
+      {
+        "role": "key",
+        "sha256": "ad6fe2065fc8fc96b1446bacb20cf78861ebbe9f3fc89e9edd4e3f6fd0da29ed",
+        "pages": 4,
+        "bytes": 80309
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-experimental-design-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f59c9bad8d939d2b7a1ae0cbc427a0894c1678711f4a034ee96f9f8a6d4779f1",
+        "pages": 4,
+        "bytes": 79359
+      },
+      {
+        "role": "key",
+        "sha256": "d2b39cf0fb8902e8ef9f4711588977a3fbc2158e049d0ebfc85789e4150b2a56",
+        "pages": 3,
+        "bytes": 79435
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-ping-pong-parachute-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a1acc2c6108453ec7d564928a52500e8b93ae992937a78ec4e5a5d7b69e2c665",
+        "pages": 5,
+        "bytes": 81409
+      },
+      {
+        "role": "key",
+        "sha256": "41c2bb019be273c4b1110c64e9b55a46cf96184a654f363eb199d0a142d13606",
+        "pages": 5,
+        "bytes": 82413
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-ping-pong-parachute-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "218551aae46a0f8ecd8ddff0ef8c2c50e5cb46a94910b1f4dde2b7950965ace8",
+        "pages": 5,
+        "bytes": 81680
+      },
+      {
+        "role": "key",
+        "sha256": "fcf3e57cdb253d764492eda0d59972aed443c9239103a63898528597eae4d3eb",
+        "pages": 5,
+        "bytes": 82210
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-ping-pong-parachute-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "334c67b07eb568bf087167f49f1f711829a670b3b1e1ee05451d355b1eab0000",
+        "pages": 5,
+        "bytes": 81703
+      },
+      {
+        "role": "key",
+        "sha256": "84833578d84b35c3a69a672ea03443be718df0b540eca167bc196f953feda785",
+        "pages": 5,
+        "bytes": 82556
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-ping-pong-parachute-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b9df74265ff57b1d28c4dcdebc5c86fea0bf4696ed324fef25b5afcad4821180",
+        "pages": 4,
+        "bytes": 79823
+      },
+      {
+        "role": "key",
+        "sha256": "22218979f2cd77cdfa9254d6d4e0f003a25cb67599d5e2c65c54504a988e4a84",
+        "pages": 4,
+        "bytes": 81020
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-c-ping-pong-parachute-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "58fef750423fd46204b6bfaa069e77a999cfba5d316259ce123b1f002fb38a62",
+        "pages": 4,
+        "bytes": 79630
+      },
+      {
+        "role": "key",
+        "sha256": "45921414de4d73de0c044d5d1b3f4ffda5eb1be5844f69dd824e1003fc4a2399",
+        "pages": 4,
+        "bytes": 80777
+      }
+    ]
+  },
+  {
+    "id": "kenston-2018-anatomy-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "38541ede475be2248bb536d3106e03105851f91243e6a858239a3424e094da2a",
+        "pages": 13,
+        "bytes": 605173
+      },
+      {
+        "role": "key",
+        "sha256": "0f53d30784d25c6b4b33e3a7fc1b80988cbfc6e17c0c45a7462f6bcec8cfdad3",
+        "pages": 3,
+        "bytes": 145745
+      }
+    ]
+  },
+  {
+    "id": "kraemer-2017-anatomy-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "79d7a7d15b5cb69b5e051c933830c2c0d3c1af07d4f61e19b91941a2e496c957",
+        "pages": 14,
+        "bytes": 464935
+      },
+      {
+        "role": "key",
+        "sha256": "e6cec029d370593efae6acc14bc3296cd643fd4fd960645e46da00cebdaccd44",
+        "pages": 5,
+        "bytes": 339903
+      }
+    ]
+  },
+  {
+    "id": "scioly-wpknin0qxmq-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6aa39da13865af64d2f6a538c056a97718fc8653580e3f1a397c4127f95a6981",
+        "pages": 18,
+        "bytes": 7375367
+      },
+      {
+        "role": "key",
+        "sha256": "11eb18654772ff52b00bed09931039c8b6f2f0824496e29bcc7cf29f86f11d7a",
+        "pages": 3,
+        "bytes": 114322
+      }
+    ]
+  },
+  {
+    "id": "phoenix-2012-disease-detectives-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "4ed04a5297cda4e57efee21100d5c0d7b1f2c02532c855289005cac3a569f409",
+        "pages": 6,
+        "bytes": 255405
+      },
+      {
+        "role": "key",
+        "sha256": "aaa412c85f4d576996e56ce2eaa7357eb368c9a4210fa234f7406ef8e6f91781",
+        "pages": 2,
+        "bytes": 127213
+      }
+    ]
+  },
+  {
+    "id": "gopher-2019-heredity-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "14a4aa8011b1a96316db8e86defc627277260545ed6b96d1afbd1796036a5f27",
+        "pages": 17,
+        "bytes": 1256491
+      },
+      {
+        "role": "key",
+        "sha256": "5172d1b559c05d7bca12ba01958c391a059ab687d0a62970fb55caa548da702a",
+        "pages": 3,
+        "bytes": 179315
+      }
+    ]
+  },
+  {
+    "id": "scioly-qelfgcs87uy-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "ce10e2cde4fa38f18c5cf6149139bb0c0ef39b15614784c8e07ab768f8ff55ea",
+        "pages": 10,
+        "bytes": 432397
+      },
+      {
+        "role": "key",
+        "sha256": "b86fce549570d522aad7b2f9047e961ecf435e59a00628392f9b68cf9913e025",
+        "pages": 7,
+        "bytes": 181337
+      }
+    ]
+  },
+  {
+    "id": "scioly-veyv8odzxa8-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "4a5ef2b03adfddc99227b9c9052dca49a0f9290a450cddb86deef5de860ae152",
+        "pages": 8,
+        "bytes": 1780379
+      },
+      {
+        "role": "key",
+        "sha256": "946e6a6c1ca38e2fb2921ec30cd301aa00c70d7865e782b13b02a84b9a2ed6ff",
+        "pages": 8,
+        "bytes": 3988468
+      }
+    ]
+  },
+  {
+    "id": "milpitas-2026-water-quality-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7b816b940b7646a81dcbe72012843fe60121e48e4083909d427b4c79a1196a26",
+        "pages": 13,
+        "bytes": 782572
+      },
+      {
+        "role": "key",
+        "sha256": "b14822c6d60208f3d784879aa561c07cf670a1778a2728f2e9aa475ee9a3951f",
+        "pages": 6,
+        "bytes": 168035
+      }
+    ]
+  },
+  {
+    "id": "texas-am-2026-water-quality-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d73ebe3a21499c9cbf9f5576dde18500b431bcf61972bdff067f7dd111c3a25c",
+        "pages": 7,
+        "bytes": 987456
+      },
+      {
+        "role": "key",
+        "sha256": "786e5265d3fe3bb0fd9fbfa388edb64b98546da512558d3711eaefefd8885d1c",
+        "pages": 3,
+        "bytes": 126060
+      }
+    ]
+  },
+  {
+    "id": "scioly-hskzkf6pfpy-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "2dfc62e065474e4b03e177ea4e6144037d55a9b390419ddbdd7a74d78cbadcfe",
+        "pages": 7,
+        "bytes": 380891
+      },
+      {
+        "role": "key",
+        "sha256": "3a38649221c190d7b1a124bbc9588bea664debd8d71f7e6ef7ff9ed5e92f56eb",
+        "pages": 3,
+        "bytes": 287714
+      }
+    ]
+  },
+  {
+    "id": "nationals-2011-dynamic-planet-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "32b4b4ea15ca7e48dba7caaf2ec4f6aab0ae79dad826e2a2feca3a70a7b67be8",
+        "pages": 11,
+        "bytes": 334777
+      },
+      {
+        "role": "key",
+        "sha256": "29774a106df819b74edeabb4923c20a14021f3e654e1e53da0d28a0112569b6e",
+        "pages": 5,
+        "bytes": 252876
+      }
+    ]
+  },
+  {
+    "id": "ssss-2021-dynamic-planet-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7ba46939f92a5ecf3a3aeb45bf0293614a011ac125bff1d938e669e5e1f0a069",
+        "pages": 9,
+        "bytes": 481632
+      },
+      {
+        "role": "key",
+        "sha256": "411bf1110f93e85c1f2bffd64fa41a71b8fd13d1aeb6e7dc553087320068680b",
+        "pages": 13,
+        "bytes": 3387769
+      }
+    ]
+  },
+  {
+    "id": "scioly-6hj-3avsuye-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "8ad1d00d47d2be573f8b8ee764bd530b80a387809fdbaa36600d973226f36e65",
+        "pages": 10,
+        "bytes": 231010
+      },
+      {
+        "role": "key",
+        "sha256": "655c4a392d620b30b54eb07783b9e4a709f76efe1e96bf680c1463b09b187d36",
+        "pages": 9,
+        "bytes": 220355
+      }
+    ]
+  },
+  {
+    "id": "scioly-9gdab8vmnhi-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "cd1150e88f75963710ea424d8c56315550db16863c95378b0df3200e9d8b14c0",
+        "pages": 30,
+        "bytes": 2796483
+      },
+      {
+        "role": "key",
+        "sha256": "027451b218d7dfbd62dba8bd75e28e7fcc80c88da7c6f242b139cac8d3f80a5f",
+        "pages": 32,
+        "bytes": 5437156
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-circuit-lab-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "88af8a5241b121cfbde83e74497c3950ee42f239ce20c0a891b7bb89d63cceb0",
+        "pages": 12,
+        "bytes": 415350
+      },
+      {
+        "role": "key",
+        "sha256": "a0d8b5817da24a4e741dd52944d355eb509d523afcf299ae54af77f7d5298373",
+        "pages": 3,
+        "bytes": 162206
+      }
+    ]
+  },
+  {
+    "id": "scioly-dz8-ypn7zj8-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "08df70ec2c788b9550f6706e359aaf52a072be4b616ac235f16a95892229f829",
+        "pages": 8,
+        "bytes": 183931
+      },
+      {
+        "role": "key",
+        "sha256": "b1f03b851028a5aaa3cc71338f0c3bc0f9aadc3e3ef5f6e9884957f3f9b36c6f",
+        "pages": 3,
+        "bytes": 169360
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-crime-busters-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f7ee0f6cbf9d1c089dfdaa35ff39fb88cf24bee6bafebaa52fc4e15353f85010",
+        "pages": 13,
+        "bytes": 2039001
+      },
+      {
+        "role": "key",
+        "sha256": "c9e7defae77815c15a8b2a33ee1e5a15f3fff3e9874b3180abec2ea1ca536941",
+        "pages": 13,
+        "bytes": 2056205
+      }
+    ]
+  },
+  {
+    "id": "greenbrier-2026-crime-busters-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d306249e113715285bab55b5b07237dac4866aaa0d7ca19caf991d82bbe1ad37",
+        "pages": 10,
+        "bytes": 13765393
+      },
+      {
+        "role": "key",
+        "sha256": "62cb98de59a76a89d7892b7696e3f0153bff17bdcec53f2eb26197bbe721197c",
+        "pages": 11,
+        "bytes": 14088073
+      }
+    ]
+  },
+  {
+    "id": "scioly-tj8pj0wzt-s-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "38d87753821955cd3c9ba9bfa1719c909b32785b33dbeedabf206c66c2e0a4ee",
+        "pages": 3,
+        "bytes": 124999
+      },
+      {
+        "role": "key",
+        "sha256": "b96f83bcafaf750cc72f805b22da19b65b7a45b977f473cb7de9d089040df26f",
+        "pages": 2,
+        "bytes": 88763
+      }
+    ]
+  },
+  {
+    "id": "kraemer-2017-thermodynamics-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "306c5882cb907b001a30860300345355a08f8536e4d5c629abbf55fd2ec65f3b",
+        "pages": 6,
+        "bytes": 776736
+      },
+      {
+        "role": "key",
+        "sha256": "003a2985edeb6e7b63c57486bdd1a15059119b557456fb4d73557c236d28e017",
+        "pages": 5,
+        "bytes": 577908
+      }
+    ]
+  },
+  {
+    "id": "scioly-p6s6szpywts-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "31f463ebec40216353f3513cb2a82d10f9ce4dda30155ffe64a02087b462c85c",
+        "pages": 10,
+        "bytes": 356344
+      },
+      {
+        "role": "key",
+        "sha256": "00f6305a82eded3704d9447a5aa5a54267789e5db5852398bb541aaf19c60422",
+        "pages": 3,
+        "bytes": 230571
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-codebusters-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "481a1e4399b47b2f035f1e0fe4b1dc7df6004fed73c51903f19cbc5adc308251",
+        "pages": 16,
+        "bytes": 1609680
+      },
+      {
+        "role": "key",
+        "sha256": "0adc6af71ba992772765014262a7780f63e895b06a140fee3950b7e8ba99dc20",
+        "pages": 18,
+        "bytes": 2882038
+      }
+    ]
+  },
+  {
+    "id": "scioly-os4feum0a2o-b-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "caa69fb8e552b6e8b16752cb7e325fe837251ef83dd984e0e55ccd1d950952ec",
+        "pages": 10,
+        "bytes": 819785
+      },
+      {
+        "role": "key",
+        "sha256": "8754e4fcfef10076dd11f8119dc512cba88c40607b296cc38ec35138be8e11f4",
+        "pages": 3,
+        "bytes": 149783
+      }
+    ]
+  },
+  {
+    "id": "scioly-z1tqamhu3cw-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "190a347fca8f912000ebf1eaa5ac7d073c021169ecbc23229c79de9f4a530201",
+        "pages": 18,
+        "bytes": 634809
+      },
+      {
+        "role": "key",
+        "sha256": "53976366735a63b497e34e75996cd296476204490b081407f5cd3e1fdd7948d7",
+        "pages": 7,
+        "bytes": 350823
+      }
+    ]
+  },
+  {
+    "id": "scioly-ajzmepy-1v8-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a6a342a5ef1f7117f51bc3c57135a10f8f5d543ef63eb13f5363029c69f8cf11",
+        "pages": 13,
+        "bytes": 880630
+      },
+      {
+        "role": "key",
+        "sha256": "9fdc96a9d7feb04855ae5355e1f46574a24c293fa054733e51312f134a2eafa8",
+        "pages": 11,
+        "bytes": 1047000
+      }
+    ]
+  },
+  {
+    "id": "mit-2020-botany-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f6ad02524fa612683becff1cb082a992c0b2071ed2ee44e00c5566dbc4b3655a",
+        "pages": 10,
+        "bytes": 1218027
+      },
+      {
+        "role": "key",
+        "sha256": "44d2ad65cbedb316a33bf9c97d444d97bba99fd1d0af5ea0c1add6bb6b11bdf4",
+        "pages": 10,
+        "bytes": 1251662
+      }
+    ]
+  },
+  {
+    "id": "scioly-golgkcarvyw-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "af76842f023c602a482c2f49312ee41d497b0c8c8a782434fe6c552011af356f",
+        "pages": 18,
+        "bytes": 603949
+      },
+      {
+        "role": "key",
+        "sha256": "bc708dddac20d5dd64147fb34abbeb2b7909e918713392fe76331d178f7818e0",
+        "pages": 6,
+        "bytes": 199172
+      }
+    ]
+  },
+  {
+    "id": "scioly-oyws8qhr8-s-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "65e92c44cce2fa3101fc7e05d9fb2a011464311f70e12896e9748d2aca5eb2b9",
+        "pages": 10,
+        "bytes": 3271240
+      },
+      {
+        "role": "key",
+        "sha256": "dc89e924155450d4a0775b5a0e546e35718dfb4b3e019ab663a0211cfdd1dade",
+        "pages": 9,
+        "bytes": 1637435
+      }
+    ]
+  },
+  {
+    "id": "scioly-9idzuozwmxm-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "0437135deebec45b732384c0b15f85b01a83ca1d9cfee7e9796b489dfe90abc0",
+        "pages": 9,
+        "bytes": 289384
+      },
+      {
+        "role": "key",
+        "sha256": "2301f75147f57d592eaad8e405d3a8a5a391a2570813945cd5c1d3f3aab5fb0f",
+        "pages": 4,
+        "bytes": 132661
+      }
+    ]
+  },
+  {
+    "id": "scioly-37x5bgyxapo-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "dea498fea32f7c7071f35fe020b0f93cc2290d06080c24fe66fb9e08ac85a7cc",
+        "pages": 8,
+        "bytes": 284239
+      },
+      {
+        "role": "key",
+        "sha256": "bacfb9184c97cacfbacabc02973d624b3da2b05e091e66ce2b93eed1433b8c36",
+        "pages": 5,
+        "bytes": 203065
+      }
+    ]
+  },
+  {
+    "id": "scioly-d9cpysudn-y-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "89483589af0e6166643f207c3b51c92e0674e6f27f7653e0a249b5fbb8039568",
+        "pages": 11,
+        "bytes": 351480
+      },
+      {
+        "role": "key",
+        "sha256": "e06dd628e4535c87333cbd9e10ed58ef8f44ae0a02bd12604391b9818592f10a",
+        "pages": 4,
+        "bytes": 159021
+      }
+    ]
+  },
+  {
+    "id": "scioly-nchmgorixfs-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6972346c3ab20e4482058a3a48a546b0cfdc91f95552c42b1023f8c5fafd4f34",
+        "pages": 6,
+        "bytes": 279996
+      },
+      {
+        "role": "key",
+        "sha256": "3a6c261463dc017a26ea26fa6602d2daa241c9ce601a4a205c4e01570bc6a7b9",
+        "pages": 5,
+        "bytes": 195827
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-water-quality-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6ee6c6cd2c1f16249db80ab720aa5e95295505d16c57e742e98b557b8b4895f7",
+        "pages": 11,
+        "bytes": 251492
+      },
+      {
+        "role": "key",
+        "sha256": "3dfe182b58794218c9c3b06dd95e9da5632d3b9718094bd2acae58bbeae6559d",
+        "pages": 3,
+        "bytes": 140019
+      }
+    ]
+  },
+  {
+    "id": "scioly-hskzkf6pfpy-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6df9d6f663b1f68a95a91e9e9d798c6cb5a31fe3f6668b2cfb9650f270223dbc",
+        "pages": 7,
+        "bytes": 380902
+      },
+      {
+        "role": "key",
+        "sha256": "2712d54819e2f87197721b2f938320074d27f22c51cfb5773ee99db44af3132a",
+        "pages": 3,
+        "bytes": 287584
+      }
+    ]
+  },
+  {
+    "id": "scioly-rzshay9v4d8-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "d28e870a235532292e1af8214a2f0c8fe21cf8ae627acd221aaf887d60f206e4",
+        "pages": 13,
+        "bytes": 1090491
+      },
+      {
+        "role": "key",
+        "sha256": "a83c598a50e7aac211b0e935c4f52a6165180c5c6045f808ec4ab3c32bdebfad",
+        "pages": 7,
+        "bytes": 611257
+      }
+    ]
+  },
+  {
+    "id": "scioly-7zo0gqqt8fe-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "e7d3a523826b2e2a84a2aedaa4116aaf8ebb2ad13d2786575860cd76bb4ccbfe",
+        "pages": 6,
+        "bytes": 456739
+      },
+      {
+        "role": "key",
+        "sha256": "fce3204ffdcbc65206d610a20eb47f6745fbffdc18eaae27cffc77a68952c976",
+        "pages": 2,
+        "bytes": 89433
+      }
+    ]
+  },
+  {
+    "id": "scioly-ptotyqnngbw-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "212225ae294fd5727bfba7d3aa5c69002ade4c3e5d5392904c95b48487717f76",
+        "pages": 8,
+        "bytes": 398709
+      },
+      {
+        "role": "key",
+        "sha256": "c5ef7d2bfac317677c2945db4e6692c68292d87ea26b58abb17dbf99ee8186d2",
+        "pages": 8,
+        "bytes": 400534
+      }
+    ]
+  },
+  {
+    "id": "scioly-aparfcgz998-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "3b4c40408f55ff3c1ce67c139729eb3ea630ea952019443fe104eb4b5d3cade6",
+        "pages": 6,
+        "bytes": 4286982
+      },
+      {
+        "role": "key",
+        "sha256": "ae35972c89c8d81eb5e0397aa7a626cd983b27ef4cc2c4fabfc4e4388b1cddc3",
+        "pages": 4,
+        "bytes": 152465
+      }
+    ]
+  },
+  {
+    "id": "scioly-pwdimce2vt4-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7c8bb60fec0503e70a3c26bcfd3dc90c0e523e5083f99e3d07e16b3fadc99b1b",
+        "pages": 5,
+        "bytes": 352310
+      },
+      {
+        "role": "key",
+        "sha256": "d30fa6af3b97f78f997d829ec9e93fb1c51ad060ce8911b83e39d1f80735146b",
+        "pages": 2,
+        "bytes": 224685
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-astronomy-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "3cee91ee0521f88bffeca36a6b3d2a02949b80941b487cdf67d819fe4edbee0f",
+        "pages": 20,
+        "bytes": 358134
+      },
+      {
+        "role": "key",
+        "sha256": "3edb4dad3f558fe54584a87b6c18a1dd1a41f42ab1c5f2783e0640a35e4a56c8",
+        "pages": 28,
+        "bytes": 328763
+      }
+    ]
+  },
+  {
+    "id": "scioly-cwraai1cga4-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "2535e8326d3eb3a483c50cf1700a0535fc6653169c4b1611e36eed49be44c453",
+        "pages": 7,
+        "bytes": 263044
+      },
+      {
+        "role": "key",
+        "sha256": "f1184df9c1da50bf511e354339dcce7dfd2e3f8467560ac7c61594c6cb83469b",
+        "pages": 6,
+        "bytes": 428714
+      }
+    ]
+  },
+  {
+    "id": "ssss-2021-dynamic-planet-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "9d76ab817febcb7bf307d19bdeee88de36d6d6e3384998482942a536e1aa7ad7",
+        "pages": 9,
+        "bytes": 481632
+      },
+      {
+        "role": "key",
+        "sha256": "c88764f8cd3a1733e4bd3e7294b6bee92ecef0ef92f7687bd2c82aa12ecfaa9a",
+        "pages": 13,
+        "bytes": 3387769
+      }
+    ]
+  },
+  {
+    "id": "scioly-najkggc-oem-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "2db5347120cd83dcb1bad9e48b199f14faf78af017c98ffb2693608c82b01f50",
+        "pages": 13,
+        "bytes": 379797
+      },
+      {
+        "role": "key",
+        "sha256": "f2dd98bc11d9bc94e6d279619292a6a863601a01e47464d1a124e44be5fe1a5b",
+        "pages": 5,
+        "bytes": 349058
+      }
+    ]
+  },
+  {
+    "id": "scioly-9zqmxc7scpq-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "97e91517a0224f497067a2583fe3c2f581ee7289e4969ace5301827b2cd3de79",
+        "pages": 4,
+        "bytes": 379086
+      },
+      {
+        "role": "key",
+        "sha256": "37be6c0999453122a79f77dad0b086eaf4e3d6761b1bebd0f0e66ecafc1369f6",
+        "pages": 4,
+        "bytes": 316501
+      }
+    ]
+  },
+  {
+    "id": "scioly-q7mxc-lyt3q-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "25795a3199374d49e873864da38520b312d8f8a8f7f8a9873f86a969612042d2",
+        "pages": 12,
+        "bytes": 235660
+      },
+      {
+        "role": "key",
+        "sha256": "fddb764003f0d3374155b0f5d61c1a77694e0036ad7e3f8fbe99bc4e12d7bade",
+        "pages": 12,
+        "bytes": 266488
+      }
+    ]
+  },
+  {
+    "id": "scioly-lqsqfowwqcu-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6c1e7606f09eb80713ff91f6373b0b66c75f5a3beffc13ffa38999442a71d157",
+        "pages": 9,
+        "bytes": 224649
+      },
+      {
+        "role": "key",
+        "sha256": "f4d43f4dcde101f7296efcb21ec8db40c98473c92fcea2b3770c8cff30cd30cc",
+        "pages": 5,
+        "bytes": 190746
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-rocks-and-minerals-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "246b9b28506f4bb4a03519efd4fddb6996fb1b42973ac0ee34dbb18e55c2b85f",
+        "pages": 17,
+        "bytes": 6595307
+      },
+      {
+        "role": "key",
+        "sha256": "33156340f80e2d50aecae22db65d73e903de93ddcbd059466771e617ff25c3e9",
+        "pages": 10,
+        "bytes": 310941
+      }
+    ]
+  },
+  {
+    "id": "scioly-msr9ze54iku-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "8e9d965af4c18df46c47f95e8db19f8bf540513d3d0086ac8fd6973e4604f276",
+        "pages": 19,
+        "bytes": 34106187
+      },
+      {
+        "role": "key",
+        "sha256": "25ec18c5055e4a8d3a6ba3a1b5716074f121c9f370fe5d1fab8b6b3f4ec94415",
+        "pages": 19,
+        "bytes": 34134779
+      }
+    ]
+  },
+  {
+    "id": "scioly-pgz8ogkxhr0-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "39416597f3884786422441add894175282de587f0cd56b12cced3acfc0db7559",
+        "pages": 12,
+        "bytes": 19375396
+      },
+      {
+        "role": "key",
+        "sha256": "c99de8d5051e80316ae8beee962997b8394615452703d56bfc99bde1bbd61737",
+        "pages": 7,
+        "bytes": 10231065
+      }
+    ]
+  },
+  {
+    "id": "scioly-fmnnyytasp0-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "b91a8e24de0232ed01777d7e9e1a7e93b9f4e35aff0f3d6d1d9e67b587ec56ba",
+        "pages": 20,
+        "bytes": 55828123
+      },
+      {
+        "role": "key",
+        "sha256": "e3256e65737241b7c8ea1021e4a6b8d4a6f1d7080e50545801da2633ef2603a0",
+        "pages": 6,
+        "bytes": 963040
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-chemistry-lab-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "896650e2248a6ba1e8007dcb2c354d3a6f63fed59d9f583388d82b728b6cb237",
+        "pages": 14,
+        "bytes": 629800
+      },
+      {
+        "role": "key",
+        "sha256": "076cfc689e0a3a71f5ba947c5bfcfdf5a98f7b991b2d361efddf66934ba93ffc",
+        "pages": 16,
+        "bytes": 684735
+      }
+    ]
+  },
+  {
+    "id": "scioly-2dvbw1ll-v0-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f3b0e6929d6ced4e83ee045737e578a99ffa4b2f050c7a80ed5b794296a4daad",
+        "pages": 8,
+        "bytes": 254360
+      },
+      {
+        "role": "key",
+        "sha256": "966706caf429fb22b38ddbc365026bb9b34793db46eedf67e95a1688107262b3",
+        "pages": 8,
+        "bytes": 298809
+      }
+    ]
+  },
+  {
+    "id": "scioly-cvyp5-ionrm-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a2870b660c6995037a5328a146c21b4d0a8888129f10ad91f299da2c1be90ba6",
+        "pages": 10,
+        "bytes": 399839
+      },
+      {
+        "role": "key",
+        "sha256": "f3416ccf7a97ecda346ca6be9aaefcf3d81a47b231e68c6dc058570be3f8dd42",
+        "pages": 10,
+        "bytes": 549163
+      }
+    ]
+  },
+  {
+    "id": "virginia-2013-circuit-lab-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "6d8957ffc97555df5b0909191085355e96de289b62feaa63116bdbc130c77442",
+        "pages": 9,
+        "bytes": 323548
+      },
+      {
+        "role": "key",
+        "sha256": "f886923d7938c6d0a60b7f0fcf356e5733ac0d97e9bcc7c3419f8aa3447ab2bc",
+        "pages": 3,
+        "bytes": 467899
+      }
+    ]
+  },
+  {
+    "id": "lake-erie-niagara-2018-circuit-lab-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f1957dfa04193e3c6c2a50968a3dbe5f1ae794e4d4651451f1c3a0f2d354c18e",
+        "pages": 6,
+        "bytes": 286476
+      },
+      {
+        "role": "key",
+        "sha256": "f87ed056bc0198f12270226efd948beb4dcae867aed90f42f25ff531427eaef5",
+        "pages": 2,
+        "bytes": 268845
+      }
+    ]
+  },
+  {
+    "id": "scioly-kgvd6o10hou-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "2fa90741a9e18779573cd0db8db6339b6fe505c05511fdaa52c9537531938455",
+        "pages": 7,
+        "bytes": 770469
+      },
+      {
+        "role": "key",
+        "sha256": "608123bbb59b417618b5b387c78a2b43d5b52dbbc2ebee9f3a5622144eff72ce",
+        "pages": 5,
+        "bytes": 788412
+      }
+    ]
+  },
+  {
+    "id": "scioly-fehps-jnwpk-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "40dd3d633ac7d8c18a691f1eab1e0d0c0134a39e5f1d5d3158d3e6468cd82c4a",
+        "pages": 5,
+        "bytes": 1208047
+      },
+      {
+        "role": "key",
+        "sha256": "1e6ea022405a52adb03e240d822608b07f41b2412f8b7f1e3fc4ddd867eefef7",
+        "pages": 4,
+        "bytes": 282027
+      }
+    ]
+  },
+  {
+    "id": "scioly-zrvevxmrlcc-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "25a4effec9384e2ae6ce25347f33ad1ac6f02321a3911130c699de6f08b3e7ea",
+        "pages": 7,
+        "bytes": 2379675
+      },
+      {
+        "role": "key",
+        "sha256": "797a8c0efcbca59c34c4310dc6334a6961adb40759e6bc92aa7330083f885ed1",
+        "pages": 8,
+        "bytes": 4607256
+      }
+    ]
+  },
+  {
+    "id": "scioly-t-bhel1zl1m-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "03c4ac79a8fdbe00751b12cfa74a96990078279d0f3f419f6ea7d80a1db0b75b",
+        "pages": 13,
+        "bytes": 366021
+      },
+      {
+        "role": "key",
+        "sha256": "5999d8f6aca4f77aff170aa916c85b81b311ef8b2adf78a011e77cd8e98b4394",
+        "pages": 12,
+        "bytes": 710440
+      }
+    ]
+  },
+  {
+    "id": "nationals-2010-protein-modeling-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "578b0f5f4b50852805a66afd2a6440ab5e8f7c373cf625e86bc35778e9552371",
+        "pages": 6,
+        "bytes": 443274
+      },
+      {
+        "role": "key",
+        "sha256": "913e735a2312bd326ba6d2a871a851a1e75734626cc9d5f0f50f455bd1cd21af",
+        "pages": 6,
+        "bytes": 477525
+      }
+    ]
+  },
+  {
+    "id": "ut-austin-2019-protein-modeling-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "cd8024721f1b9d6813f9f18ce4939a8823c6083a9be8a8f3483c527de77099b7",
+        "pages": 12,
+        "bytes": 262658
+      },
+      {
+        "role": "key",
+        "sha256": "f3ac9e811b04a0ce1a973c0c2d43efdcc1046c5c34ebc349402289094b6b08eb",
+        "pages": 16,
+        "bytes": 580842
+      }
+    ]
+  },
+  {
+    "id": "scioly-g5jcu2kgktg-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "7963c4142ec622125f21836058bd7c9bfd0ca01925f0154dd5e37bb70967fea6",
+        "pages": 5,
+        "bytes": 143751
+      },
+      {
+        "role": "key",
+        "sha256": "a5e88272cc16837e089b8147baac3a93f780878989ac815baa3125880b2b85b2",
+        "pages": 5,
+        "bytes": 187760
+      }
+    ]
+  },
+  {
+    "id": "scioly-8hoey-b0s6o-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "f37c503c756e88b415aa616beba09e6d19c536bd63fc9044349da81eebc9665c",
+        "pages": 7,
+        "bytes": 249806
+      },
+      {
+        "role": "key",
+        "sha256": "013311cdbf2a0c1e140a9cc9e430f4f3c597be3272cdf9df2224616492b9e006",
+        "pages": 3,
+        "bytes": 163761
+      }
+    ]
+  },
+  {
+    "id": "bullso-2026-codebusters-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "381327cc7121b6d84273645acefa766f173a51880b0bc77144eb9dc4258b0fe4",
+        "pages": 18,
+        "bytes": 1803872
+      },
+      {
+        "role": "key",
+        "sha256": "3f4c91804ff212baec2b6c4f833ad90865ad5e82ad348bf4b3507d43b2a1c7b5",
+        "pages": 18,
+        "bytes": 3060029
+      }
+    ]
+  },
+  {
+    "id": "scioly-usvyop3nitg-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "bd4c7dfb2eff42bc8f6088152974cd2430f50430991e61c01d14be117a64f3fb",
+        "pages": 19,
+        "bytes": 237326
+      },
+      {
+        "role": "key",
+        "sha256": "dfb1aa837eab9769cde95fa64ed50429f16ad3b62fdc78bbfacf9084a34533b2",
+        "pages": 17,
+        "bytes": 252412
+      }
+    ]
+  },
+  {
+    "id": "scioly-o2yccdutssw-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "8f353cf7ab38722552edccdedc0871952a6405e2a9d866028597f1ea63e38e90",
+        "pages": 4,
+        "bytes": 373145
+      },
+      {
+        "role": "key",
+        "sha256": "34ded536ff6b63537be72bdfdfb8558080fc735868d7eac56b718ac30c7a1281",
+        "pages": 4,
+        "bytes": 347381
+      }
+    ]
+  },
+  {
+    "id": "scioly-51mtaevlop0-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "dc1c5d388c6052a699d5e2526f60ac0666003d3df3d7c59920e3ba695e6cda4e",
+        "pages": 24,
+        "bytes": 497876
+      },
+      {
+        "role": "key",
+        "sha256": "00c541de616be3645df5feef29905218f320fb123d9cdb1feb7a6a4d1c8250f5",
+        "pages": 3,
+        "bytes": 140859
+      }
+    ]
+  },
+  {
+    "id": "scioly-yyjk7oyaqzi-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "2e66b3f8da3e065fcb8eb17393c46ef9f1e67ef1f9f3952560d76da6a299dcfd",
+        "pages": 23,
+        "bytes": 574863
+      },
+      {
+        "role": "key",
+        "sha256": "64f4d421dadf43023d7eb0b8829ec6fd03c0b09f4edc77acf1e12bbd85335c4e",
+        "pages": 3,
+        "bytes": 197695
+      }
+    ]
+  },
+  {
+    "id": "scioly-nt3v7oj3rjc-c-repaired",
+    "assets": [
+      {
+        "role": "test",
+        "sha256": "a186f633e4ade6878b170c5f8e317b528709bca7d23aff0b3eb8989b4418facf",
+        "pages": 23,
+        "bytes": 1675094
+      },
+      {
+        "role": "key",
+        "sha256": "556e9e33388e4099b0aaa28f5f8701962b159d274d332e00b8fad9d4f4c89cea",
+        "pages": 3,
+        "bytes": 209704
+      }
+    ]
+  }
+]

@@ -1,0 +1,5634 @@
+[
+  {
+    "id": "akoizo-2027-rotation-b-water-quality-form-1",
+    "division": "B",
+    "eventId": "water-quality",
+    "scope": "Marine and estuary ecology, coral-reef organisms, monitoring and salinometer design (30/30/30/10 written points)",
+    "rulesUrl": "/rules/2027/b/water-quality.pdf",
+    "rulesSha256": "356034a629a4b06bc205dd5bc1cf94b280eef5a730b68ca9ebd678e31218de8b",
+    "questionFingerprint": "f41fd36194ae0622fe2f1cbc7e3cacd856e5d9fb7e73d5c2bd03d636be6dff8b",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-water-quality-form-2",
+    "division": "B",
+    "eventId": "water-quality",
+    "scope": "Marine and estuary ecology, coral-reef organisms, monitoring and salinometer design (30/30/30/10 written points)",
+    "rulesUrl": "/rules/2027/b/water-quality.pdf",
+    "rulesSha256": "356034a629a4b06bc205dd5bc1cf94b280eef5a730b68ca9ebd678e31218de8b",
+    "questionFingerprint": "4ab92c78ce00fb6aa401681722e5f471f82fda7190a3c577224438853fcb880e",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-water-quality-form-3",
+    "division": "B",
+    "eventId": "water-quality",
+    "scope": "Marine and estuary ecology, coral-reef organisms, monitoring and salinometer design (30/30/30/10 written points)",
+    "rulesUrl": "/rules/2027/b/water-quality.pdf",
+    "rulesSha256": "356034a629a4b06bc205dd5bc1cf94b280eef5a730b68ca9ebd678e31218de8b",
+    "questionFingerprint": "33b56fa07987d817f28fc737f70f9503d79c7bd52dbca92115f55f5cae4c0711",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-dynamic-planet-form-1",
+    "division": "B",
+    "eventId": "dynamic-planet",
+    "scope": "Fresh waters: hydrologic budgets, streams, lakes, groundwater and human impacts",
+    "rulesUrl": "/rules/2027/b/dynamic-planet.pdf",
+    "rulesSha256": "eb4b2ef0b43d42e60c7c0d0d2055f0cb7ee62f6884065de963fa5ef55158ca67",
+    "questionFingerprint": "c3ae9359906e8eed5576c29545762a301242120b5171e77721f610ee32d0289d",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u1-l1",
+        "lessonQuestionId": "dyn-u1-l1-q1",
+        "unit": "Water movement and water budgets",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u2-l1",
+        "lessonQuestionId": "dyn-u2-l1-q1",
+        "unit": "Freshwater distribution, precipitation, and climate",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u3-l1",
+        "lessonQuestionId": "dyn-u3-l1-q1",
+        "unit": "Watersheds, stream order, and drainage patterns",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u4-l1",
+        "lessonQuestionId": "dyn-u4-l1-q1",
+        "unit": "Sediment transport and channel forms",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u5-l1",
+        "lessonQuestionId": "dyn-u5-l1-q1",
+        "unit": "Fluvial landforms and river history",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u6-l1",
+        "lessonQuestionId": "dyn-u6-l1-q1",
+        "unit": "Streamflow, hydrographs, and floods",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u7-l1",
+        "lessonQuestionId": "dyn-u7-l1-q1",
+        "unit": "Groundwater, aquifers, karst, and Darcy flow",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u8-l1",
+        "lessonQuestionId": "dyn-u8-l1-q1",
+        "unit": "Lakes, wetlands, and freshwater storage",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u9-l1",
+        "lessonQuestionId": "dyn-u9-l1-q1",
+        "unit": "Land use, water pollution, and hydrological impacts",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u10-l1",
+        "lessonQuestionId": "dyn-u10-l1-q1",
+        "unit": "Maps, monitoring, and integrated freshwater investigations",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.a.ii, 3.h.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.j–k",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.g, 3.j",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-meteorology-form-1",
+    "division": "B",
+    "eventId": "meteorology",
+    "scope": "Severe weather and storms; at least half the fields interpret supplied tabulated observations",
+    "rulesUrl": "/rules/2027/b/meteorology.pdf",
+    "rulesSha256": "25dec9f4a48e9d5686c274d605e40ec08be287ffa8a07485f2fe62570609e8bf",
+    "questionFingerprint": "92891caa554bc751ea71668ec2789c674705461dc06279f6e35bacd47797f9e2",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.c",
+        "lessonId": "met-u1-l1",
+        "lessonQuestionId": "met-u1-l1-q1",
+        "unit": "Observing severe weather: stations, balloons, radar, and satellites",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.c",
+        "lessonId": "met-u3-l1",
+        "lessonQuestionId": "met-u3-l1-q1",
+        "unit": "Stability on Stüve and Skew-T diagrams",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.c",
+        "lessonId": "met-u5-l1",
+        "lessonQuestionId": "met-u5-l1-q1",
+        "unit": "Thunderstorms and lightning",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.c",
+        "lessonId": "met-u7-l1",
+        "lessonQuestionId": "met-u7-l1-q1",
+        "unit": "Hurricanes, typhoons, and cyclones",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.c",
+        "lessonId": "met-u1-l1",
+        "lessonQuestionId": "met-u1-l1-q2",
+        "unit": "Observing severe weather: stations, balloons, radar, and satellites",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.c",
+        "lessonId": "met-u3-l1",
+        "lessonQuestionId": "met-u3-l1-q2",
+        "unit": "Stability on Stüve and Skew-T diagrams",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.c",
+        "lessonId": "met-u5-l1",
+        "lessonQuestionId": "met-u5-l1-q2",
+        "unit": "Thunderstorms and lightning",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.c",
+        "lessonId": "met-u7-l1",
+        "lessonQuestionId": "met-u7-l1-q2",
+        "unit": "Hurricanes, typhoons, and cyclones",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.c",
+        "lessonId": "met-u1-l1",
+        "lessonQuestionId": "met-u1-l1-q3",
+        "unit": "Observing severe weather: stations, balloons, radar, and satellites",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.c",
+        "lessonId": "met-u3-l1",
+        "lessonQuestionId": "met-u3-l1-q3",
+        "unit": "Stability on Stüve and Skew-T diagrams",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.c.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.c.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-meteorology-form-2",
+    "division": "B",
+    "eventId": "meteorology",
+    "scope": "Severe weather and storms; at least half the fields interpret supplied tabulated observations",
+    "rulesUrl": "/rules/2027/b/meteorology.pdf",
+    "rulesSha256": "25dec9f4a48e9d5686c274d605e40ec08be287ffa8a07485f2fe62570609e8bf",
+    "questionFingerprint": "be86c82260e20f595989873623b2336d3ad2ea2e95950c22d7868f323fd54f44",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.c",
+        "lessonId": "met-u2-l1",
+        "lessonQuestionId": "met-u2-l1-q1",
+        "unit": "Reading weather data: station models, METARs, hodographs, and models",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.c",
+        "lessonId": "met-u4-l1",
+        "lessonQuestionId": "met-u4-l1-q1",
+        "unit": "Ingredients for severe weather: air masses, fronts, jets, and terrain",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.c",
+        "lessonId": "met-u6-l1",
+        "lessonQuestionId": "met-u6-l1-q1",
+        "unit": "Damaging winds and tornadoes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.c",
+        "lessonId": "met-u8-l1",
+        "lessonQuestionId": "met-u8-l1-q1",
+        "unit": "Precipitation, floods, winter storms, drought, and safety",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.c",
+        "lessonId": "met-u2-l1",
+        "lessonQuestionId": "met-u2-l1-q2",
+        "unit": "Reading weather data: station models, METARs, hodographs, and models",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.c",
+        "lessonId": "met-u4-l1",
+        "lessonQuestionId": "met-u4-l1-q2",
+        "unit": "Ingredients for severe weather: air masses, fronts, jets, and terrain",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.c",
+        "lessonId": "met-u6-l1",
+        "lessonQuestionId": "met-u6-l1-q2",
+        "unit": "Damaging winds and tornadoes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.c",
+        "lessonId": "met-u8-l1",
+        "lessonQuestionId": "met-u8-l1-q2",
+        "unit": "Precipitation, floods, winter storms, drought, and safety",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.c",
+        "lessonId": "met-u2-l1",
+        "lessonQuestionId": "met-u2-l1-q3",
+        "unit": "Reading weather data: station models, METARs, hodographs, and models",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.c",
+        "lessonId": "met-u4-l1",
+        "lessonQuestionId": "met-u4-l1-q3",
+        "unit": "Ingredients for severe weather: air masses, fronts, jets, and terrain",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.c.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.c.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-remote-sensing-form-1",
+    "division": "B",
+    "eventId": "remote-sensing",
+    "scope": "B: Observable Earth (30% concepts, 70% interpretation); C: climate change (25% instrumentation, 35% interpretation, 20% climate, 20% energy)",
+    "rulesUrl": "/rules/2027/b/remote-sensing.pdf",
+    "rulesSha256": "5df461593f9c3676a8c3bcbd9e59c023c1a37b59dbcccc8ee41e99625c8cffb8",
+    "questionFingerprint": "ef6216ef9560366a017e9ebf0d7ecae351cc1b90f08f7716232e73d06c6fc910",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a.i.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a.i.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a.ii.2",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.b.ii.2",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.b.ii.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b.ii.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.b.i.2",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.b.ii.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.b.ii.2",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-remote-sensing-form-2",
+    "division": "B",
+    "eventId": "remote-sensing",
+    "scope": "B: Observable Earth (30% concepts, 70% interpretation); C: climate change (25% instrumentation, 35% interpretation, 20% climate, 20% energy)",
+    "rulesUrl": "/rules/2027/b/remote-sensing.pdf",
+    "rulesSha256": "5df461593f9c3676a8c3bcbd9e59c023c1a37b59dbcccc8ee41e99625c8cffb8",
+    "questionFingerprint": "d2a458440544e3fd65ff42635964bed7dc12170c29850f4aafb6f51a84f58122",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a.i.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a.i.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a.ii.2",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.b.ii.2",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.b.ii.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b.ii.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.b.i.3",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.b.i.2",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.b.ii.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.b.ii.2",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-solar-system-form-1",
+    "division": "B",
+    "eventId": "solar-system",
+    "scope": "Habitability and the listed Solar System bodies, missions and exoplanets",
+    "rulesUrl": "/rules/2027/b/solar-system.pdf",
+    "rulesSha256": "f5ef2676988997fce2827916f830af501133c6e4f9234d7cbed04dfe0c7fe531",
+    "questionFingerprint": "0689b904ec151217a4bcd00d559057310ad8b66671066e43c495a5c636f05b84",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u1-l1",
+        "lessonQuestionId": "sol-u1-l1-q1",
+        "unit": "What makes a world habitable?",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u2-l1",
+        "lessonQuestionId": "sol-u2-l1-q1",
+        "unit": "Light, radiation, and temperature",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u3-l1",
+        "lessonQuestionId": "sol-u3-l1-q1",
+        "unit": "Gravity, orbits, and tides",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u4-l1",
+        "lessonQuestionId": "sol-u4-l1-q1",
+        "unit": "Venus and Mars: rocky neighbors",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u5-l1",
+        "lessonQuestionId": "sol-u5-l1-q1",
+        "unit": "Ocean worlds: Europa, Ganymede, Enceladus, and Titan",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u6-l1",
+        "lessonQuestionId": "sol-u6-l1-q1",
+        "unit": "Small bodies and the building blocks of life",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u7-l1",
+        "lessonQuestionId": "sol-u7-l1-q1",
+        "unit": "Exoplanets: detection and the named systems",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u1-l1",
+        "lessonQuestionId": "sol-u1-l1-q2",
+        "unit": "What makes a world habitable?",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u2-l1",
+        "lessonQuestionId": "sol-u2-l1-q2",
+        "unit": "Light, radiation, and temperature",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–d",
+        "lessonId": "sol-u3-l1",
+        "lessonQuestionId": "sol-u3-l1-q2",
+        "unit": "Gravity, orbits, and tides",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b.vi.1",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b.iv, vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a.i, 3.b.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a.i, 3.b.i–iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.a.i, 3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.a.i, 3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.a.ii, 3.b.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.b.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.b.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.b.i–iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-crime-busters-form-1",
+    "division": "B",
+    "eventId": "crime-busters",
+    "scope": "Listed powders, polymers, fibers, chromatography and evidence interpretation",
+    "rulesUrl": "/rules/2027/b/crime-busters.pdf",
+    "rulesSha256": "a0343c910a5cdfb89621d40b2232d7a88432c6a9676503448cbaf89a9c47c678",
+    "questionFingerprint": "dec781473cd4c848b6ee2e52d68752f130c2d99184479ed4a49d45538f23a03c",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u1-l1",
+        "lessonQuestionId": "cb-u1-l1-q1",
+        "unit": "Identifying white powders",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u2-l1",
+        "lessonQuestionId": "cb-u2-l1-q1",
+        "unit": "Metals and liquids",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u3-l1",
+        "lessonQuestionId": "cb-u3-l1-q1",
+        "unit": "Hair and fibers",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u4-l1",
+        "lessonQuestionId": "cb-u4-l1-q1",
+        "unit": "Recyclable plastics",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u5-l1",
+        "lessonQuestionId": "cb-u5-l1-q1",
+        "unit": "Paper chromatography",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u6-l1",
+        "lessonQuestionId": "cb-u6-l1-q1",
+        "unit": "Fingerprints, DNA, prints, soil, and spatter",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u7-l1",
+        "lessonQuestionId": "cb-u7-l1-q1",
+        "unit": "Writing the crime scene analysis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u1-l1",
+        "lessonQuestionId": "cb-u1-l1-q2",
+        "unit": "Identifying white powders",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u2-l1",
+        "lessonQuestionId": "cb-u2-l1-q2",
+        "unit": "Metals and liquids",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I–III",
+        "lessonId": "cb-u3-l1",
+        "lessonQuestionId": "cb-u3-l1-q2",
+        "unit": "Hair and fibers",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.d, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.g",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-food-science-form-1",
+    "division": "B",
+    "eventId": "food-science",
+    "scope": "Dairy chemistry, nutrition, curd, butter and ice cream tasks",
+    "rulesUrl": "/rules/2027/b/food-science.pdf",
+    "rulesSha256": "0f88fb89d66682f2222529d5b82bf195fae5314627505a88b5a7b082471c885b",
+    "questionFingerprint": "bd3a3606f1951dbaadda26c529b85f057970375ac996551175c5f4ca6cd19250",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u1-l1",
+        "lessonQuestionId": "food-u1-l1-q1",
+        "unit": "What milk is made of: sugars, fats, and proteins",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u3-l1",
+        "lessonQuestionId": "food-u3-l1-q1",
+        "unit": "Proteins and curds",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u5-l1",
+        "lessonQuestionId": "food-u5-l1-q1",
+        "unit": "Processing, cooking, and preservation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u7-l1",
+        "lessonQuestionId": "food-u7-l1-q1",
+        "unit": "Lactose intolerance, allergies, alternatives, and the notebook",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u2-l1",
+        "lessonQuestionId": "food-u2-l1-q2",
+        "unit": "Fats: saturation, esters, and emulsions",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u4-l1",
+        "lessonQuestionId": "food-u4-l1-q2",
+        "unit": "Freezing point depression and ice cream",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u6-l1",
+        "lessonQuestionId": "food-u6-l1-q2",
+        "unit": "Nutrition and food labels",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u1-l1",
+        "lessonQuestionId": "food-u1-l1-q3",
+        "unit": "What milk is made of: sugars, fats, and proteins",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u3-l1",
+        "lessonQuestionId": "food-u3-l1-q3",
+        "unit": "Proteins and curds",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u5-l1",
+        "lessonQuestionId": "food-u5-l1-q3",
+        "unit": "Processing, cooking, and preservation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.b.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "4.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b.i, 4.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b.i, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.b.ii, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.b.ii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-food-science-form-2",
+    "division": "B",
+    "eventId": "food-science",
+    "scope": "Dairy chemistry, nutrition, curd, butter and ice cream tasks",
+    "rulesUrl": "/rules/2027/b/food-science.pdf",
+    "rulesSha256": "0f88fb89d66682f2222529d5b82bf195fae5314627505a88b5a7b082471c885b",
+    "questionFingerprint": "eaae7425fa03cd9131fe4ba6566119ce1e9156bba639b07828d13e71e1c8b747",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u2-l1",
+        "lessonQuestionId": "food-u2-l1-q1",
+        "unit": "Fats: saturation, esters, and emulsions",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u4-l1",
+        "lessonQuestionId": "food-u4-l1-q1",
+        "unit": "Freezing point depression and ice cream",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u6-l1",
+        "lessonQuestionId": "food-u6-l1-q1",
+        "unit": "Nutrition and food labels",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u1-l1",
+        "lessonQuestionId": "food-u1-l1-q2",
+        "unit": "What milk is made of: sugars, fats, and proteins",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u3-l1",
+        "lessonQuestionId": "food-u3-l1-q2",
+        "unit": "Proteins and curds",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u5-l1",
+        "lessonQuestionId": "food-u5-l1-q2",
+        "unit": "Processing, cooking, and preservation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u7-l1",
+        "lessonQuestionId": "food-u7-l1-q2",
+        "unit": "Lactose intolerance, allergies, alternatives, and the notebook",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u2-l1",
+        "lessonQuestionId": "food-u2-l1-q3",
+        "unit": "Fats: saturation, esters, and emulsions",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u4-l1",
+        "lessonQuestionId": "food-u4-l1-q3",
+        "unit": "Freezing point depression and ice cream",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.b–c",
+        "lessonId": "food-u6-l1",
+        "lessonQuestionId": "food-u6-l1-q3",
+        "unit": "Nutrition and food labels",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.b.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "4.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b.i, 4.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b.i, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.b.ii, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.b.ii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-circuit-lab-form-1",
+    "division": "B",
+    "eventId": "circuit-lab",
+    "scope": "DC circuits, listed devices, logic and written hands-on diagnostics",
+    "rulesUrl": "/rules/2027/b/circuit-lab.pdf",
+    "rulesSha256": "ecd4aa99f54a77e926a5f4ef37f7c1da0f85da0b0ff0e6b9215128ff7439ba75",
+    "questionFingerprint": "efee1bfb14a087dd60160061a376eb70b6e89c419e470678e13bd108986b4b92",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q1",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q1",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q1",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q2",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q2",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q2",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q3",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q3",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q3",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q4",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part I.c.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part I.c.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part I.c.v, 3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part I.c.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part I.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.c.iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-circuit-lab-form-2",
+    "division": "B",
+    "eventId": "circuit-lab",
+    "scope": "DC circuits, listed devices, logic and written hands-on diagnostics",
+    "rulesUrl": "/rules/2027/b/circuit-lab.pdf",
+    "rulesSha256": "ecd4aa99f54a77e926a5f4ef37f7c1da0f85da0b0ff0e6b9215128ff7439ba75",
+    "questionFingerprint": "f291f4d2c143f722fdbf4173d5fe22f627173b9351e08384fdfe0153824d750c",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q1",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q1",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q1",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q2",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q2",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q2",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q3",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q3",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q3",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q4",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part I.c.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part I.c.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part I.c.v, 3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part I.c.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part I.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.c.iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-anatomy-and-physiology-form-1",
+    "division": "C",
+    "eventId": "anatomy-and-physiology",
+    "scope": "Respiratory, digestive and immune systems",
+    "rulesUrl": "/rules/2027/c/anatomy-and-physiology.pdf",
+    "rulesSha256": "e0824c9b7e7c9f665c3955fc64c4d317bf38c7fd7a54427c066d47508c40b064",
+    "questionFingerprint": "325d85c548cf67c47ec97793b1814dd238a8558533255ba39404f6388e3cd30e",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u2-l1",
+        "lessonQuestionId": "anat-u2-l1-q1",
+        "unit": "Airways: From Nose to Bronchioles",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u3-l1",
+        "lessonQuestionId": "anat-u3-l1-q1",
+        "unit": "Ventilation, Volumes, and Spirometry",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u4-l1",
+        "lessonQuestionId": "anat-u4-l1-q1",
+        "unit": "Obstructive Disease: Asthma, Bronchitis, Emphysema, COPD",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u5-l1",
+        "lessonQuestionId": "anat-u5-l1-q1",
+        "unit": "Alimentary Canal: Mouth to Stomach",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u6-l1",
+        "lessonQuestionId": "anat-u6-l1-q1",
+        "unit": "Ulcers, GI Bleeding, and GI Cancers",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u7-l1",
+        "lessonQuestionId": "anat-u7-l1-q1",
+        "unit": "Central Immune Organs and Lymph Flow",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u8-l1",
+        "lessonQuestionId": "anat-u8-l1-q1",
+        "unit": "Innate Immunity and Complement",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u9-l1",
+        "lessonQuestionId": "anat-u9-l1-q1",
+        "unit": "Immunodeficiency: HIV, SCID, and CVID",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u2-l1",
+        "lessonQuestionId": "anat-u2-l1-q2",
+        "unit": "Airways: From Nose to Bronchioles",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u3-l1",
+        "lessonQuestionId": "anat-u3-l1-q2",
+        "unit": "Ventilation, Volumes, and Spirometry",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-anatomy-and-physiology-form-2",
+    "division": "C",
+    "eventId": "anatomy-and-physiology",
+    "scope": "Respiratory, digestive and immune systems",
+    "rulesUrl": "/rules/2027/c/anatomy-and-physiology.pdf",
+    "rulesSha256": "e0824c9b7e7c9f665c3955fc64c4d317bf38c7fd7a54427c066d47508c40b064",
+    "questionFingerprint": "a2cb4ad2223b99a4c678217d8c1503a41b9873d855397c7713aa0ffd82bc93c1",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u2-l2",
+        "lessonQuestionId": "anat-u2-l2-q1",
+        "unit": "Lungs, Alveoli, Pleura, and Breathing Muscles",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u3-l2",
+        "lessonQuestionId": "anat-u3-l2-q1",
+        "unit": "Gas Exchange, Hemoglobin, and pH Control",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u4-l2",
+        "lessonQuestionId": "anat-u4-l2-q1",
+        "unit": "Infection and Restriction: Pneumonia, TB, Fibrosis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u5-l2",
+        "lessonQuestionId": "anat-u5-l2-q1",
+        "unit": "Small Intestine, Liver, Pancreas, and Absorption",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u6-l2",
+        "lessonQuestionId": "anat-u6-l2-q1",
+        "unit": "Lactose Intolerance, Obesity, and Exercise Metabolism",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u7-l2",
+        "lessonQuestionId": "anat-u7-l2-q1",
+        "unit": "Spleen, Nodes, and Barriers in Defense",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u8-l2",
+        "lessonQuestionId": "anat-u8-l2-q1",
+        "unit": "Adaptive Immunity, Antibodies, and Allergy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u9-l2",
+        "lessonQuestionId": "anat-u9-l2-q1",
+        "unit": "Autoimmunity, MS, RA, and Systemic Allergy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u2-l2",
+        "lessonQuestionId": "anat-u2-l2-q2",
+        "unit": "Lungs, Alveoli, Pleura, and Breathing Muscles",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "anat-u3-l2",
+        "lessonQuestionId": "anat-u3-l2-q2",
+        "unit": "Gas Exchange, Hemoglobin, and pH Control",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-water-quality-form-1",
+    "division": "C",
+    "eventId": "water-quality",
+    "scope": "Marine and estuary ecology, coral-reef organisms, monitoring and salinometer design (30/30/30/10 written points)",
+    "rulesUrl": "/rules/2027/c/water-quality.pdf",
+    "rulesSha256": "2ac2aae3ed6fdbd1622a902244fea8eba8abfe0f37fdf693a3e3b379a5a35f58",
+    "questionFingerprint": "f41fd36194ae0622fe2f1cbc7e3cacd856e5d9fb7e73d5c2bd03d636be6dff8b",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-water-quality-form-2",
+    "division": "C",
+    "eventId": "water-quality",
+    "scope": "Marine and estuary ecology, coral-reef organisms, monitoring and salinometer design (30/30/30/10 written points)",
+    "rulesUrl": "/rules/2027/c/water-quality.pdf",
+    "rulesSha256": "2ac2aae3ed6fdbd1622a902244fea8eba8abfe0f37fdf693a3e3b379a5a35f58",
+    "questionFingerprint": "4ab92c78ce00fb6aa401681722e5f471f82fda7190a3c577224438853fcb880e",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part III",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part IV",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-1",
+    "division": "C",
+    "eventId": "astronomy",
+    "scope": "Stellar evolution in normal and starburst galaxies, quantitative methods and named 2027 objects",
+    "rulesUrl": "/rules/2027/c/astronomy.pdf",
+    "rulesSha256": "0f0787fe937d36eb60b11002e7f0fc7c0bd00c93538feca48196270181426947",
+    "questionFingerprint": "06f2003426297433b0203e70a93cebd5281d251f0747775f03689941a1a343ec",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q1",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "lessonQuestionId": "astro-u7-l1-q1",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q2",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q3",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q3",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q4",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q5",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q6",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "lessonQuestionId": "astro-u7-l1-q7",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q7",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.a–c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-2",
+    "division": "C",
+    "eventId": "astronomy",
+    "scope": "Stellar evolution in normal and starburst galaxies, quantitative methods and named 2027 objects",
+    "rulesUrl": "/rules/2027/c/astronomy.pdf",
+    "rulesSha256": "0f0787fe937d36eb60b11002e7f0fc7c0bd00c93538feca48196270181426947",
+    "questionFingerprint": "6f4d02caf51d0426c09d7cc6f4c9446e1493a1bedac859357ef523ec719543b6",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q1",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q1",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q2",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q3",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q4",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "lessonQuestionId": "astro-u7-l1-q4",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q5",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q6",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q6",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q7",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.a–c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-3",
+    "division": "C",
+    "eventId": "astronomy",
+    "scope": "Stellar evolution in normal and starburst galaxies, quantitative methods and named 2027 objects",
+    "rulesUrl": "/rules/2027/c/astronomy.pdf",
+    "rulesSha256": "0f0787fe937d36eb60b11002e7f0fc7c0bd00c93538feca48196270181426947",
+    "questionFingerprint": "fc01ae0fffdf249e52e1b110d8860d3daa3d6f51ebc3dd83aa4fd02f333ca641",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q1",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q2",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "lessonQuestionId": "astro-u7-l1-q2",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q3",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q4",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q4",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q5",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q6",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q7",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.a–c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-4",
+    "division": "C",
+    "eventId": "astronomy",
+    "scope": "Stellar evolution in normal and starburst galaxies, quantitative methods and named 2027 objects",
+    "rulesUrl": "/rules/2027/c/astronomy.pdf",
+    "rulesSha256": "0f0787fe937d36eb60b11002e7f0fc7c0bd00c93538feca48196270181426947",
+    "questionFingerprint": "c6a98680f2b923a64331ae537e865159e8793996e7662b670d4450cbea011262",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q1",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q2",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q2",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q3",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q4",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q5",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "lessonQuestionId": "astro-u7-l1-q6",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q6",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q7",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q7",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.a–c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-5",
+    "division": "C",
+    "eventId": "astronomy",
+    "scope": "Stellar evolution in normal and starburst galaxies, quantitative methods and named 2027 objects",
+    "rulesUrl": "/rules/2027/c/astronomy.pdf",
+    "rulesSha256": "0f0787fe937d36eb60b11002e7f0fc7c0bd00c93538feca48196270181426947",
+    "questionFingerprint": "b156887e1f8d468e4856dc3b6a1322bc01930297164252c5b7b4088c5d9bc004",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q1",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q2",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "lessonQuestionId": "astro-u2-l1-q3",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u7-l1",
+        "lessonQuestionId": "astro-u7-l1-q3",
+        "unit": "Advanced graph and image interpretation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u5-l1",
+        "lessonQuestionId": "astro-u5-l1-q4",
+        "unit": "Supernovae, white dwarfs, neutron stars, and black holes",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u3-l1",
+        "lessonQuestionId": "astro-u3-l1-q5",
+        "unit": "Stellar properties, fusion, and the H–R diagram",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u8-l1",
+        "lessonQuestionId": "astro-u8-l1-q5",
+        "unit": "Astrophysics equations and quantitative synthesis",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u6-l1",
+        "lessonQuestionId": "astro-u6-l1-q6",
+        "unit": "Galaxies, stellar populations, and the interstellar medium",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u4-l1",
+        "lessonQuestionId": "astro-u4-l1-q7",
+        "unit": "Cloud collapse and mass-dependent stellar evolution",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–c",
+        "lessonId": "astro-u2-l1",
+        "unit": "Observational astronomy and the electromagnetic spectrum",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.a–b",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.a–c",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.a, 3.c",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-dynamic-planet-form-1",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "scope": "Fresh waters: hydrologic budgets, streams, lakes, groundwater and human impacts",
+    "rulesUrl": "/rules/2027/c/dynamic-planet.pdf",
+    "rulesSha256": "be9a760db678cfb374e1157d53bb1fc8960e9ab4805faa3e84c014fd8737b7c7",
+    "questionFingerprint": "2184f4ca7f4bfd0df157327a92d4883f830911930627cfdde1a7274d21f3e1f0",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u1-l1",
+        "lessonQuestionId": "dyn-u1-l1-q1",
+        "unit": "Water movement and water budgets",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u4-l1",
+        "lessonQuestionId": "dyn-u4-l1-q1",
+        "unit": "Sediment transport and channel forms",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u7-l1",
+        "lessonQuestionId": "dyn-u7-l1-q1",
+        "unit": "Groundwater, aquifers, karst, and Darcy flow",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u1-l1",
+        "lessonQuestionId": "dyn-u1-l1-q2",
+        "unit": "Water movement and water budgets",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u4-l1",
+        "lessonQuestionId": "dyn-u4-l1-q2",
+        "unit": "Sediment transport and channel forms",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u7-l1",
+        "lessonQuestionId": "dyn-u7-l1-q2",
+        "unit": "Groundwater, aquifers, karst, and Darcy flow",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u1-l1",
+        "lessonQuestionId": "dyn-u1-l1-q3",
+        "unit": "Water movement and water budgets",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u4-l1",
+        "lessonQuestionId": "dyn-u4-l1-q3",
+        "unit": "Sediment transport and channel forms",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u7-l1",
+        "lessonQuestionId": "dyn-u7-l1-q3",
+        "unit": "Groundwater, aquifers, karst, and Darcy flow",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u1-l1",
+        "lessonQuestionId": "dyn-u1-l1-q4",
+        "unit": "Water movement and water budgets",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.a.ii, 3.h.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.j–k",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.g, 3.j",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-dynamic-planet-form-2",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "scope": "Fresh waters: hydrologic budgets, streams, lakes, groundwater and human impacts",
+    "rulesUrl": "/rules/2027/c/dynamic-planet.pdf",
+    "rulesSha256": "be9a760db678cfb374e1157d53bb1fc8960e9ab4805faa3e84c014fd8737b7c7",
+    "questionFingerprint": "093efa69bc132637c821744ab56e25616634f1add9ef0ae094a17a3c1d92d973",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u2-l1",
+        "lessonQuestionId": "dyn-u2-l1-q1",
+        "unit": "Freshwater distribution, precipitation, and climate",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u5-l1",
+        "lessonQuestionId": "dyn-u5-l1-q1",
+        "unit": "Fluvial landforms and river history",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u8-l1",
+        "lessonQuestionId": "dyn-u8-l1-q1",
+        "unit": "Lakes, wetlands, and freshwater storage",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u2-l1",
+        "lessonQuestionId": "dyn-u2-l1-q2",
+        "unit": "Freshwater distribution, precipitation, and climate",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u5-l1",
+        "lessonQuestionId": "dyn-u5-l1-q2",
+        "unit": "Fluvial landforms and river history",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u8-l1",
+        "lessonQuestionId": "dyn-u8-l1-q2",
+        "unit": "Lakes, wetlands, and freshwater storage",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u2-l1",
+        "lessonQuestionId": "dyn-u2-l1-q3",
+        "unit": "Freshwater distribution, precipitation, and climate",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u5-l1",
+        "lessonQuestionId": "dyn-u5-l1-q3",
+        "unit": "Fluvial landforms and river history",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u8-l1",
+        "lessonQuestionId": "dyn-u8-l1-q3",
+        "unit": "Lakes, wetlands, and freshwater storage",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u2-l1",
+        "lessonQuestionId": "dyn-u2-l1-q4",
+        "unit": "Freshwater distribution, precipitation, and climate",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.a.ii, 3.h.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.j–k",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.g, 3.j",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-dynamic-planet-form-3",
+    "division": "C",
+    "eventId": "dynamic-planet",
+    "scope": "Fresh waters: hydrologic budgets, streams, lakes, groundwater and human impacts",
+    "rulesUrl": "/rules/2027/c/dynamic-planet.pdf",
+    "rulesSha256": "be9a760db678cfb374e1157d53bb1fc8960e9ab4805faa3e84c014fd8737b7c7",
+    "questionFingerprint": "90ac10b113fee5f226dd76a58df57f52c1f659531b41fb32cccbc28adcc65543",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u3-l1",
+        "lessonQuestionId": "dyn-u3-l1-q1",
+        "unit": "Watersheds, stream order, and drainage patterns",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u6-l1",
+        "lessonQuestionId": "dyn-u6-l1-q1",
+        "unit": "Streamflow, hydrographs, and floods",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u9-l1",
+        "lessonQuestionId": "dyn-u9-l1-q1",
+        "unit": "Land use, water pollution, and hydrological impacts",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u3-l1",
+        "lessonQuestionId": "dyn-u3-l1-q2",
+        "unit": "Watersheds, stream order, and drainage patterns",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u6-l1",
+        "lessonQuestionId": "dyn-u6-l1-q2",
+        "unit": "Streamflow, hydrographs, and floods",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u9-l1",
+        "lessonQuestionId": "dyn-u9-l1-q2",
+        "unit": "Land use, water pollution, and hydrological impacts",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u3-l1",
+        "lessonQuestionId": "dyn-u3-l1-q3",
+        "unit": "Watersheds, stream order, and drainage patterns",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u6-l1",
+        "lessonQuestionId": "dyn-u6-l1-q3",
+        "unit": "Streamflow, hydrographs, and floods",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u9-l1",
+        "lessonQuestionId": "dyn-u9-l1-q3",
+        "unit": "Land use, water pollution, and hydrological impacts",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.a–f",
+        "lessonId": "dyn-u3-l1",
+        "lessonQuestionId": "dyn-u3-l1-q4",
+        "unit": "Watersheds, stream order, and drainage patterns",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.g.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.a.ii, 3.h.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.j–k",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.g, 3.j",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-1",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "scope": "B: Observable Earth (30% concepts, 70% interpretation); C: climate change (25% instrumentation, 35% interpretation, 20% climate, 20% energy)",
+    "rulesUrl": "/rules/2027/c/remote-sensing.pdf",
+    "rulesSha256": "8fba197a83363627f69c04b3882078572c760f657cb5bd380ee1a79c5ef73283",
+    "questionFingerprint": "d9dbe03ca053e4147a97b288b171f1e2065b2dd7e050f455bdd180b36f87c513",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.c.v, viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.d.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.d.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.e.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f.i, iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-2",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "scope": "B: Observable Earth (30% concepts, 70% interpretation); C: climate change (25% instrumentation, 35% interpretation, 20% climate, 20% energy)",
+    "rulesUrl": "/rules/2027/c/remote-sensing.pdf",
+    "rulesSha256": "8fba197a83363627f69c04b3882078572c760f657cb5bd380ee1a79c5ef73283",
+    "questionFingerprint": "103990f9ad748d117ceb9667b8f83d53debaf3fb041ae57f9f0b44436b30a014",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.c.v, viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.d.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.d.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.e.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f.i, iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-3",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "scope": "B: Observable Earth (30% concepts, 70% interpretation); C: climate change (25% instrumentation, 35% interpretation, 20% climate, 20% energy)",
+    "rulesUrl": "/rules/2027/c/remote-sensing.pdf",
+    "rulesSha256": "8fba197a83363627f69c04b3882078572c760f657cb5bd380ee1a79c5ef73283",
+    "questionFingerprint": "8c8bf06ee0188b17eeeb738dc3a0506426c9affa380f11b6e694943382749633",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.c.v, viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.d.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.d.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.e.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f.i, iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-4",
+    "division": "C",
+    "eventId": "remote-sensing",
+    "scope": "B: Observable Earth (30% concepts, 70% interpretation); C: climate change (25% instrumentation, 35% interpretation, 20% climate, 20% energy)",
+    "rulesUrl": "/rules/2027/c/remote-sensing.pdf",
+    "rulesSha256": "8fba197a83363627f69c04b3882078572c760f657cb5bd380ee1a79c5ef73283",
+    "questionFingerprint": "38278531bb6bf8e863768304b9f22d731f5f2d6bf58c6f43acf0c299645a28db",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.c.i–ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.c.v, viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.c.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.d.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.d.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.d.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.e.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f.i, iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-1",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "scope": "Gases and kinetics (equal written points); advanced rate-law work labeled State/National",
+    "rulesUrl": "/rules/2027/c/chemistry-lab.pdf",
+    "rulesSha256": "069aae570ff2707968d0015127153c8d20d2ecb0e5c23191429b6cac4e1b947f",
+    "questionFingerprint": "e276e8d9d81c72532b1d4ff8be86935b19732a33f9bac20178308ad2331275bd",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.c, 3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-2",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "scope": "Gases and kinetics (equal written points); advanced rate-law work labeled State/National",
+    "rulesUrl": "/rules/2027/c/chemistry-lab.pdf",
+    "rulesSha256": "069aae570ff2707968d0015127153c8d20d2ecb0e5c23191429b6cac4e1b947f",
+    "questionFingerprint": "e49ec5383bcc91d9034dbedbb0558e076d35208d5809cfc27d0a395b91811a92",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.c, 3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-3",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "scope": "Gases and kinetics (equal written points); advanced rate-law work labeled State/National",
+    "rulesUrl": "/rules/2027/c/chemistry-lab.pdf",
+    "rulesSha256": "069aae570ff2707968d0015127153c8d20d2ecb0e5c23191429b6cac4e1b947f",
+    "questionFingerprint": "cc201b45829fec0f1fd61ee0292c93fd5ca6e3d3fe661a91cd11fe7df0068f1f",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.c, 3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-4",
+    "division": "C",
+    "eventId": "chemistry-lab",
+    "scope": "Gases and kinetics (equal written points); advanced rate-law work labeled State/National",
+    "rulesUrl": "/rules/2027/c/chemistry-lab.pdf",
+    "rulesSha256": "069aae570ff2707968d0015127153c8d20d2ecb0e5c23191429b6cac4e1b947f",
+    "questionFingerprint": "6c3a715560dd34c510e68f72414f4f33272dacdcb8ebc89263a2f3354fa2bf75",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.c, 3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.f.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.f (State/National where rate laws are used)",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-1",
+    "division": "C",
+    "eventId": "circuit-lab",
+    "scope": "DC circuits, listed devices, logic and written hands-on diagnostics",
+    "rulesUrl": "/rules/2027/c/circuit-lab.pdf",
+    "rulesSha256": "afc033a7b87e6bcc4b40173e170ca32530b2bfd7e1e0ad869798c032bd41b0a9",
+    "questionFingerprint": "85119c0ad8d43c66bbba79500b78c196a8bec5ed465334687e6065136136ce07",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q1",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q1",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q2",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q3",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q3",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q4",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q5",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q5",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q6",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q7",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part I.c.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part I.c.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part I.c.v, 3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part I.c.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part I.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.c.iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-2",
+    "division": "C",
+    "eventId": "circuit-lab",
+    "scope": "DC circuits, listed devices, logic and written hands-on diagnostics",
+    "rulesUrl": "/rules/2027/c/circuit-lab.pdf",
+    "rulesSha256": "afc033a7b87e6bcc4b40173e170ca32530b2bfd7e1e0ad869798c032bd41b0a9",
+    "questionFingerprint": "b5f88ce743ae24311467ce989369c3bc45faf3b21cfc036baab8be0fee9ef54b",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q1",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q1",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q2",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q3",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q3",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q4",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q5",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q5",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q6",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q7",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part I.c.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part I.c.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part I.c.v, 3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part I.c.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part I.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.c.iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-3",
+    "division": "C",
+    "eventId": "circuit-lab",
+    "scope": "DC circuits, listed devices, logic and written hands-on diagnostics",
+    "rulesUrl": "/rules/2027/c/circuit-lab.pdf",
+    "rulesSha256": "afc033a7b87e6bcc4b40173e170ca32530b2bfd7e1e0ad869798c032bd41b0a9",
+    "questionFingerprint": "03f6462ee0e250b8c326c931e8512a2cdb474adca5f35856f8a236a5f323349b",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q1",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q2",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q2",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q3",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q4",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q4",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q5",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u2-l1",
+        "lessonQuestionId": "circ-u2-l1-q6",
+        "unit": "Current, voltage, resistance, power, and energy",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u6-l1",
+        "lessonQuestionId": "circ-u6-l1-q6",
+        "unit": "Kirchhoff laws and network problem solving",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u4-l1",
+        "lessonQuestionId": "circ-u4-l1-q7",
+        "unit": "Switches, relays, diodes, and LEDs",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part I.c.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part I.c.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part I.c.v, 3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part I.c.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part I.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.c.iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-4",
+    "division": "C",
+    "eventId": "circuit-lab",
+    "scope": "DC circuits, listed devices, logic and written hands-on diagnostics",
+    "rulesUrl": "/rules/2027/c/circuit-lab.pdf",
+    "rulesSha256": "afc033a7b87e6bcc4b40173e170ca32530b2bfd7e1e0ad869798c032bd41b0a9",
+    "questionFingerprint": "b511100642178985e4647c33389ce77ac120c6dfc9c0568d770620cf7c890ded",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q1",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q2",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q2",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q3",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q4",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q4",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q5",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u3-l1",
+        "lessonQuestionId": "circ-u3-l1-q6",
+        "unit": "Diagrams, nodes, series, parallel, and Ohm’s law",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u7-l1",
+        "lessonQuestionId": "circ-u7-l1-q6",
+        "unit": "Breadboards, multimeters, and a first virtual build",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3.Part I.c, Part II",
+        "lessonId": "circ-u5-l1",
+        "lessonQuestionId": "circ-u5-l1-q7",
+        "unit": "Digital logic and combinational circuits",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "3.Part I.c.iv–v",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.Part I.c.v",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part I.c.iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part I.c.v, 3.Part II",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part I.c.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part I.c.vi",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.c.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.c.iii",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-protein-modeling-form-1",
+    "division": "C",
+    "eventId": "protein-modeling",
+    "scope": "Influenza hemagglutinin, structure/folding, JUDE, 3UBE chain A residues 153–252",
+    "rulesUrl": "/rules/2027/c/protein-modeling.pdf",
+    "rulesSha256": "6f8a1fd394975d45b6a0bd407cff6209a2c546f9fd80acffc8a24d2b1535af8a",
+    "questionFingerprint": "95e949b0e1ef3c7a02fa8f13b88262f826d230a547175d04dd1b75d6715b38fc",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u3-l1",
+        "lessonQuestionId": "prot-u3-l1-q1",
+        "unit": "Structural levels and denaturation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u5-l1",
+        "lessonQuestionId": "prot-u5-l1-q1",
+        "unit": "Viruses, entry, and immune recognition",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u7-l1",
+        "lessonQuestionId": "prot-u7-l1-q1",
+        "unit": "Molecular viewing and reproducible JUDE/Jmol workflows",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u3-l1",
+        "lessonQuestionId": "prot-u3-l1-q2",
+        "unit": "Structural levels and denaturation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u5-l1",
+        "lessonQuestionId": "prot-u5-l1-q2",
+        "unit": "Viruses, entry, and immune recognition",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u7-l1",
+        "lessonQuestionId": "prot-u7-l1-q2",
+        "unit": "Molecular viewing and reproducible JUDE/Jmol workflows",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u3-l1",
+        "lessonQuestionId": "prot-u3-l1-q3",
+        "unit": "Structural levels and denaturation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u5-l1",
+        "lessonQuestionId": "prot-u5-l1-q3",
+        "unit": "Viruses, entry, and immune recognition",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u7-l1",
+        "lessonQuestionId": "prot-u7-l1-q3",
+        "unit": "Molecular viewing and reproducible JUDE/Jmol workflows",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u3-l1",
+        "lessonQuestionId": "prot-u3-l1-q4",
+        "unit": "Structural levels and denaturation",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "2.c, 3.Part I.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "2.c, 3.Part I.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part II.c.iii–iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part II.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part II.c.i–ii, d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part II.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part II.d.ii–iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.e, 4.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.d",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-protein-modeling-form-2",
+    "division": "C",
+    "eventId": "protein-modeling",
+    "scope": "Influenza hemagglutinin, structure/folding, JUDE, 3UBE chain A residues 153–252",
+    "rulesUrl": "/rules/2027/c/protein-modeling.pdf",
+    "rulesSha256": "6f8a1fd394975d45b6a0bd407cff6209a2c546f9fd80acffc8a24d2b1535af8a",
+    "questionFingerprint": "0b472d71926cc40de061c01023ce9ad925c316129a9086094d2d1fde64066f2a",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u4-l1",
+        "lessonQuestionId": "prot-u4-l1-q1",
+        "unit": "Amino-acid chemistry, folding, and stability",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u6-l1",
+        "lessonQuestionId": "prot-u6-l1-q1",
+        "unit": "Influenza H1N1 and hemagglutinin",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u8-l1",
+        "lessonQuestionId": "prot-u8-l1-q1",
+        "unit": "Pre-build planning, annotation, and model review",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u4-l1",
+        "lessonQuestionId": "prot-u4-l1-q2",
+        "unit": "Amino-acid chemistry, folding, and stability",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u6-l1",
+        "lessonQuestionId": "prot-u6-l1-q2",
+        "unit": "Influenza H1N1 and hemagglutinin",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u8-l1",
+        "lessonQuestionId": "prot-u8-l1-q2",
+        "unit": "Pre-build planning, annotation, and model review",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u4-l1",
+        "lessonQuestionId": "prot-u4-l1-q3",
+        "unit": "Amino-acid chemistry, folding, and stability",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u6-l1",
+        "lessonQuestionId": "prot-u6-l1-q3",
+        "unit": "Influenza H1N1 and hemagglutinin",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "9",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u8-l1",
+        "lessonQuestionId": "prot-u8-l1-q3",
+        "unit": "Pre-build planning, annotation, and model review",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "10",
+        "ruleClause": "3–4",
+        "lessonId": "prot-u4-l1",
+        "lessonQuestionId": "prot-u4-l1-q4",
+        "unit": "Amino-acid chemistry, folding, and stability",
+        "kind": "scoped-curriculum"
+      },
+      {
+        "id": "11",
+        "ruleClause": "2.c, 3.Part I.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.Part I.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "2.c, 3.Part I.a",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.Part II.c.iii–iv",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.Part II.d.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "3.Part II.c.i–ii, d.ii",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.Part II.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.Part II.d.ii–iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "3.Part I.e, 4.b",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.Part II.d",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-1",
+    "division": "C",
+    "eventId": "codebusters",
+    "scope": "Permitted C ciphers, K2 Patristocrat/Xenocrypt alphabets, supplied cribs/tables and current scoring",
+    "rulesUrl": "/rules/2027/c/codebusters.pdf",
+    "rulesSha256": "3260bbf52da31945719924337a3a1eccb227f23155ded664c9c9ea9eb0e86f94",
+    "questionFingerprint": "b5389aa6c516a7ee6c0f784696f7b1bdd47cce23e0557b7259d93ca0fbe794b5",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e.i, 3.g–h",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e.i.2, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e.iv, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e.ix",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e.x",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e.xi",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "4.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "4.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.v, 3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "4.d–e",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.h.v, 4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "4.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.e.i.2",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-2",
+    "division": "C",
+    "eventId": "codebusters",
+    "scope": "Permitted C ciphers, K2 Patristocrat/Xenocrypt alphabets, supplied cribs/tables and current scoring",
+    "rulesUrl": "/rules/2027/c/codebusters.pdf",
+    "rulesSha256": "3260bbf52da31945719924337a3a1eccb227f23155ded664c9c9ea9eb0e86f94",
+    "questionFingerprint": "7c8303e98de46c870f935ccf8f62eff17323bb5078472f86a500b2d445c59f5f",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e.i, 3.g–h",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e.i.2, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e.iv, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e.ix",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e.x",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e.xi",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "4.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "4.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.v, 3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "4.d–e",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.h.v, 4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "4.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.e.i.2",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-3",
+    "division": "C",
+    "eventId": "codebusters",
+    "scope": "Permitted C ciphers, K2 Patristocrat/Xenocrypt alphabets, supplied cribs/tables and current scoring",
+    "rulesUrl": "/rules/2027/c/codebusters.pdf",
+    "rulesSha256": "3260bbf52da31945719924337a3a1eccb227f23155ded664c9c9ea9eb0e86f94",
+    "questionFingerprint": "ba738cbac3e7a42d73f7a2558e80f8bdbd395e9d2a8e41b217188aeddb4f91c6",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e.i, 3.g–h",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e.i.2, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e.iv, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e.ix",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e.x",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e.xi",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "4.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "4.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.v, 3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "4.d–e",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.h.v, 4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "4.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.e.i.2",
+        "kind": "original-case"
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-4",
+    "division": "C",
+    "eventId": "codebusters",
+    "scope": "Permitted C ciphers, K2 Patristocrat/Xenocrypt alphabets, supplied cribs/tables and current scoring",
+    "rulesUrl": "/rules/2027/c/codebusters.pdf",
+    "rulesSha256": "3260bbf52da31945719924337a3a1eccb227f23155ded664c9c9ea9eb0e86f94",
+    "questionFingerprint": "5d6c74be767a3d9954deb5383af71699f24647cd7d923f93bfe03546f8428b07",
+    "fields": [
+      {
+        "id": "1",
+        "ruleClause": "3.e.i, 3.g–h",
+        "kind": "original-case"
+      },
+      {
+        "id": "2",
+        "ruleClause": "3.e.i.2, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "3",
+        "ruleClause": "3.e.iv, 3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "4",
+        "ruleClause": "3.e.iii",
+        "kind": "original-case"
+      },
+      {
+        "id": "5",
+        "ruleClause": "3.e.ix",
+        "kind": "original-case"
+      },
+      {
+        "id": "6",
+        "ruleClause": "3.e.x",
+        "kind": "original-case"
+      },
+      {
+        "id": "7",
+        "ruleClause": "3.e.viii",
+        "kind": "original-case"
+      },
+      {
+        "id": "8",
+        "ruleClause": "3.e.xi",
+        "kind": "original-case"
+      },
+      {
+        "id": "9",
+        "ruleClause": "4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "10",
+        "ruleClause": "4.d",
+        "kind": "original-case"
+      },
+      {
+        "id": "11",
+        "ruleClause": "4.e",
+        "kind": "original-case"
+      },
+      {
+        "id": "12",
+        "ruleClause": "3.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "13",
+        "ruleClause": "3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "14",
+        "ruleClause": "3.e.v, 3.j",
+        "kind": "original-case"
+      },
+      {
+        "id": "15",
+        "ruleClause": "3.e.vii",
+        "kind": "original-case"
+      },
+      {
+        "id": "16",
+        "ruleClause": "4.d–e",
+        "kind": "original-case"
+      },
+      {
+        "id": "17",
+        "ruleClause": "3.e.i",
+        "kind": "original-case"
+      },
+      {
+        "id": "18",
+        "ruleClause": "3.h.v, 4.f",
+        "kind": "original-case"
+      },
+      {
+        "id": "19",
+        "ruleClause": "4.g",
+        "kind": "original-case"
+      },
+      {
+        "id": "20",
+        "ruleClause": "3.e.i.2",
+        "kind": "original-case"
+      }
+    ]
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "scioly-wpknin0qxmq-b",
+    "sourceUrl": "https://scioly.org/tests/WPKNIN0qXmQ",
+    "assets": [
+      {
+        "role": "test",
+        "name": "Botany 2026 Division B Invitational Test.pdf",
+        "sha256": "941253a691e9ecd41e7cb1916ee5bcc70a4a46cdccc46fc88621bde41a6f4002"
+      },
+      {
+        "role": "key",
+        "name": "Copy of Botany 2026 Division B Invitational Test ANSWERS (TO BE PRINTED).pdf",
+        "sha256": "154f74b323de51ba64a78d1be6e52d515bea4c2277b9514b62dd846e53a8aca6"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "Practice weighting: one point per scored response; the source does not specify item weights. All 70 questions retained. Questions 4, 9, 14, 21, 57, 60 and 66 are unscored because of multiple defensible answers, ambiguous regional/time-dependent claims, or imprecise wording. Figure questions use the original PDF. Broad subject alignment only; original restrictions differ.",
+    "excluded": []
+  },
+  {
+    "id": "scioly-dz8-ypn7zj8-b",
+    "sourceUrl": "https://scioly.org/tests/dz8-ypn7zJ8",
+    "assets": [
+      {
+        "role": "test",
+        "name": "PHI_Circuit Lab Test_12.6.2025_Final.pdf",
+        "sha256": "590c2c1a838c981cf185a21d2b7568a5829fd76450686f562ce9dca61f714b47"
+      },
+      {
+        "role": "key",
+        "name": "PHI_Circuit Lab_Answer Key_12.6.2025.pdf",
+        "sha256": "882e8dbad61276f483fe8e1aba8dc998d4371b70389928b19cf550ac7cfa4ec6"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "Written questions 1–35 retained, with printed weights; hands-on 36–39 excluded (physical apparatus and measurements required). Q33 accepts both B and D: W/A and J/C both equal volts. Q35 is unscored because its published D answer conflicts with the dependence on number of turns. Q29 uses the source idealization, not a prediction about a real fuse. 2025 cover date overrides the 2026 archive season. Unrelated raw-score PDF omitted; blank answer sheet is not needed for the written questions.",
+    "excluded": []
+  },
+  {
+    "id": "scioly-p6s6szpywts-b",
+    "sourceUrl": "https://scioly.org/tests/p6S6SZPYwts",
+    "assets": [
+      {
+        "role": "test",
+        "name": "20_Little Tiger Thermodynamics Test.pdf",
+        "sha256": "effa93fec300a58cd6dcb8fa808290a22f45676c1d1ff054c29ac55957421ab7"
+      },
+      {
+        "role": "key",
+        "name": "20_Thermo Little Tiger Test Answer Key.pdf",
+        "sha256": "acfb290aca4f39ac730eba592eb53615c0eeb03ad9028ed5de404c9dc61a5744"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "All 33 numbered items retained. Printed weights: MCQ 1 each and written 3 each. Q24, Q30 and Q32 unscored for inconsistent key/wording or missing melting-temperature data. The unrelated football tiebreaker is omitted. Q33 follows expansion from installation at 20 °C to 50 °C. Full original heating-curve diagram retained.",
+    "excluded": []
+  },
+  {
+    "id": "scioly-tj8pj0wzt-s-b",
+    "sourceUrl": "https://scioly.org/tests/Tj8Pj0Wzt_s",
+    "assets": [
+      {
+        "role": "test",
+        "name": "minitest1 - FoodScienceMinitest1.pdf",
+        "sha256": "101ebf4851763d707c83c26ceb55783f7b2c830cc69ca1288ff8de6cff0a6040"
+      },
+      {
+        "role": "key",
+        "name": "minitest1 - 20130207193904!FoodScienceMinitest1answers.pdf",
+        "sha256": "ee21ec4fd68decb75cd9b7eb991e74d8dbf2b4fb45f9b049358c9fe4c1381adc"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "Practice weighting: one point per reliable response; source item weights not specified. All nine items retained. Q2, Q6 and Q8 unscored because the published key is inconsistent with the paper or its arithmetic. Historical general food chemistry/baking, not the 2027 dairy rotation. No tournament name is claimed; the archive does not report one.",
+    "excluded": []
+  },
+  {
+    "id": "scioly-os4feum0a2o-b",
+    "sourceUrl": "https://scioly.org/tests/oS4feUm0a2o",
+    "assets": [
+      {
+        "role": "test",
+        "name": "Archimedean Codebusters Exam.pdf",
+        "sha256": "a789698dd8d80ea0919c99a500c76b626457a02644ca0343490ca9e26d5fefa0"
+      },
+      {
+        "role": "key",
+        "name": "Archimedean Codebusters Answer Key.pdf",
+        "sha256": "9aa6e16d121f9ca45618c32e4fd6987084df5908e4ee16ef6e6342c1f15785cf"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "Published base puzzle weights from the scanned student paper. Puzzle 2 is absent from the supplied student PDF and is excluded despite appearing in the key. Includes timed puzzle base score only; no proctor-dependent timing or aggregate special bonuses. Current plaintext scoring: two free character errors, then 100-point deductions; spacing, punctuation and case ignored. Key-only answers are never shown before submission. Original cipher grids remain in the embedded source PDF.",
+    "excluded": [2]
+  },
+  {
+    "id": "scioly-fmnnyytasp0-c",
+    "sourceUrl": "https://scioly.org/tests/fMNnyYtAsP0",
+    "assets": [
+      {
+        "role": "test",
+        "name": "TEST_ROCKSANDMINERALS_StatenIslandTech_CSE2025.pdf",
+        "sha256": "4916e82b763159607ca8e12f79182ad778cb882c2c3060dcc6caa5e118825654"
+      },
+      {
+        "role": "key",
+        "name": "KEY_ROCKSANDMINERALS_StatenIslandTech_CSE2025.pdf",
+        "sha256": "64bcd63fe4fa4aa2a973826635236adec21bab077a852d1b3a6219bd85a1d1ae"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "All 86 numbered questions and original illustrations retained. Printed item weights total 195 before exclusions; Q9 (piezoelectric mismatch), Q34 (sulfur/H₂S confusion), and Q63 (volcanic-neck classification) are unscored. Matching and multipart answers use the published rubric; drawings accept equivalent labeled text. The source uses 2025 mineral lists; 2027 species/subtopic coverage may differ. Source cover is CSE 2025, overriding the archive’s 2026 season label.",
+    "excluded": []
+  },
+  {
+    "id": "scioly-t-bhel1zl1m-c",
+    "sourceUrl": "https://scioly.org/tests/T_BhEl1zl1M",
+    "assets": [
+      {
+        "role": "test",
+        "name": "forensics_2017_c_fairfax_test.pdf",
+        "sha256": "081d33bd0668d80f1f4c8f4105e59e12ab3f780fdd8187806abf1adc586e1652"
+      },
+      {
+        "role": "key",
+        "name": "forensics_2017_c_fairfax_key.pdf",
+        "sha256": "79182c7b4e56a692006484d2bb88980f58046d09be9affbebc60440c9eea8649"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "Self-contained written section, using printed raw item points rather than the original section-weighted /100 total. Excludes the three physical powders, three suspect hair IDs, three suspect fiber IDs, suspect DNA comparison, shoe-comparison tasks and final suspect analyses: required samples/electropherograms/impressions are not supplied. Original microscopy, polymer and chromatogram figures remain in the full PDF. Chemistry item 7 is unscored for multiple basic substances; mass-spectrum numerical keys appear reversed and are unscored. Source third suspect-fiber question repeats “suspect 1”; it is excluded. No absent physical observations are fabricated.",
+    "excluded": ["hair-1", "hair-2", "hair-3", "fiber-1", "fiber-2", "fiber-3", "dna-1"]
+  },
+  {
+    "id": "scioly-9gdab8vmnhi-b",
+    "sourceUrl": "https://scioly.org/tests/9GdaB8VmnHI",
+    "assets": [
+      {
+        "role": "test",
+        "name": "Rocks and Minerals Exam Division B 2025-26_compressed.pdf",
+        "sha256": "27273e81de1fbcf0b7ec4fe02f31ed9fff7bd10836c79138289e8fb0145c364e"
+      },
+      {
+        "role": "key",
+        "name": "Rocks and Minerals Answer Key Division B 2025-26_compressed.pdf",
+        "sha256": "306f16d5bbb3adbdef32a72fa5229020f82c619c5b61fe89ef604ddbcff564f1"
+      }
+    ],
+    "review": "Offline source transcription and scoring review",
+    "reviewedOn": "2026-11-08",
+    "scoringBasis": "All 124 station questions retained with original illustrated test. Student-paper weights control where key annotations differ (for example station 1 question 2). Key subpart numbering restarts for stations 2, 4 and 6; answer mappings follow source order. Station 2 questions 10–11 have a mismatched key. Station 6 questions 3 and 5 have unreliable polymorphism/lead-detection claims. Station 15 question 1, station 16 question 1 and station 17 questions 1–2 remain unscored pending reliable diagram/rubric reconciliation. Source “Fluoraparite” spelling remains in station 11 rubric. Written rubrics require semantic/instructor review; original image identifications are not replaced by invented specimens. Cover date December 7, 2025 overrides 2026 season label.",
+    "excluded": []
+  }
+]

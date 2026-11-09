@@ -180,7 +180,13 @@ test('the builder combines standalone questions from several tests and repairs m
   assert.ok(rankedPoolSummary('C').some((event) => event.eventId === 'water-quality'));
   // The converted Yale paper supplies standalone MCQs; the older letter-only paper still does not.
   const diseasePool = rankedQuestionPool('C', 'disease-detectives');
-  assert.ok(diseasePool.some((candidate) => candidate.test.id === 'scioly-9idzuozwmxm-c'));
+  assert.ok(
+    diseasePool.some(
+      (candidate) =>
+        candidate.test.id === 'scioly-9idzuozwmxm-c' ||
+        candidate.test.supersedesTestId === 'scioly-9idzuozwmxm-c',
+    ),
+  );
   assert.ok(
     diseasePool.every((candidate) => candidate.test.id !== 'bullso-2026-disease-detectives-c'),
   );

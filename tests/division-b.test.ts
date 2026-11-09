@@ -29,7 +29,10 @@ test('every Division B tool that Division C fills has content in Division B too'
     const bOnly = divisionBCourses.some((course) => course.eventId === event.id);
     const buildCourse = buildCoursesB.some((course) => course.eventId === event.id);
     // Study events and build events get a course.
-    const studyEvent = tools.includes('practice-tests') || tools.includes('lab-generator');
+    // WIDI now has written practice forms without a separate lesson course.
+    const studyEvent =
+      (tools.includes('practice-tests') && event.id !== 'write-it-do-it') ||
+      tools.includes('lab-generator');
     assert.equal(
       !!lessonsForEvent(event.id, 'B'),
       studyEvent || event.type === 'Build',

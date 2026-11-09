@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { AppError, eventKey, type Profile } from './domain.ts';
-import { findPracticeTest, practiceTests } from './practice-catalog.ts';
+import { findPracticeTest, allPracticeTests } from './practice-catalog.ts';
 import { gradePractice, validateAnswers } from './practice-grading.ts';
 import { autoGradePracticeResult, type PracticeAIConfig } from './practice-ai.ts';
 import { practiceTitle, type PracticeResult, type PracticeReview } from './practice-types.ts';
@@ -153,7 +153,7 @@ export async function pendingPracticeReviews(
   );
   return rows.flatMap((row) => {
     const result = JSON.parse(String(row.result_json)) as PracticeResult;
-    const test = practiceTests.find((t) => t.id === result.testId);
+    const test = allPracticeTests.find((t) => t.id === result.testId);
     return test
       ? [
           {

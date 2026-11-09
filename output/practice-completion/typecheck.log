@@ -1,0 +1,12 @@
+
+> akoizo@0.1.0 pretypecheck
+> npm run communities:sync
+
+
+> akoizo@0.1.0 communities:sync
+> node scripts/sync-communities.mjs
+
+
+> akoizo@0.1.0 typecheck
+> tsc --noEmit
+

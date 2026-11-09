@@ -2,6 +2,7 @@
 // the same event. Gemini chooses which questions to combine; it never writes or rewords them.
 import { AppError } from './domain.ts';
 import { eventsForDivision, type Division } from './events.ts';
+import { eventToolIds } from './event-rules.ts';
 import { practiceTests } from './practice-catalog.ts';
 import type { PracticeAIConfig } from './practice-ai.ts';
 import { generatePracticeReferences } from './practice-reference.ts';
@@ -87,6 +88,8 @@ function standsAlone(question: PracticeQuestion) {
 
 /** Questions that stand on their own, without the original paper beside them. */
 export function rankedQuestionPool(division: Division, eventId: string): Candidate[] {
+  const event = eventsForDivision(division).find((event) => event.id === eventId);
+  if (!event || !eventToolIds(division, event).includes('ranked-tests')) return [];
   return practiceTests
     .filter(
       (test) =>

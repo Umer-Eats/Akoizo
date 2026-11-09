@@ -1,0 +1,255 @@
+
+> akoizo@0.1.0 pretest
+> npm run communities:sync
+
+
+> akoizo@0.1.0 communities:sync
+> node scripts/sync-communities.mjs
+
+
+> akoizo@0.1.0 test
+> node --import ./tests/enrollment-env.mjs --experimental-strip-types --test --test-isolation=none tests/*.test.ts
+
+✔ all pixel clips loop within their declared frame counts (3.5543ms)
+✔ every action interpolates between poses at both 60Hz and 120Hz without changing clip timing (1.8114ms)
+✔ walking and running travel the same distance at different display refresh rates (0.7155ms)
+✔ movement arrives exactly without overshoot, including zero distance (0.3085ms)
+✔ resize and cheese targets keep the whole character on screen (0.3653ms)
+✔ Ako sees only the open question and its key, without student identity data (27.2302ms)
+✔ a wrong "why" makes Ako mad until he gives up and explains (2.0809ms)
+✔ Ako rejects malformed chat input and unusable model replies (3.7259ms)
+✔ each student gets a bounded number of Ako messages per window (0.3698ms)
+✔ lesson teaching uses the canonical line, surrounding context and glossary without assignment keys (3.9714ms)
+✔ lesson checks support mistakes, clarification and explanation without angry reactions (3.7446ms)
+✔ sentence anchors preserve source paragraphs and advance only on readiness or understanding (0.6251ms)
+✔ lesson progression returns only the following canonical sentence and stops at the end (1.8695ms)
+✔ the teacher covers topics with explanation, application and checks, then a final recap (0.9009ms)
+✔ teaching advances automatically through explanations but waits at an understanding check (3.2031ms)
+✔ community members can read live data from only their community and cannot edit teams (284.5209ms)
+✔ school analytics itemize accuracy, points and assigned work per student and event (405.8839ms)
+✔ six binder events per division; integer page cap and real file signatures (1.7234ms)
+✔ binder attribution uses recognizable school names and resolves older internal names (6.7099ms)
+✔ page guidance separates compact events from large study events, all within 10–400 (0.2424ms)
+✔ contents pages scale with the binder and leave the rest for content (0.2161ms)
+✔ outline shares pages exactly; topics merge without repeats or overflow (1.0643ms)
+✔ pages are trimmed to fit instead of rejected, but thin pages and label-free diagrams fail (2.3867ms)
+✔ resumable generation, school attribution, complete-only publish, global access and private uploads (13.2586ms)
+✔ Division B binders follow Division B rules and can be filtered by division (3.6824ms)
+✔ atomic lease prevents duplicate batches; cancel invalidates in-flight results (4.8084ms)
+✔ Gemini receives rule scope and exact tasks; truncation fails; pages gain credited photos (4.1748ms)
+✔ photo search keeps only reusable licences and falls back to the subject words (1.6197ms)
+✔ compact competition pages retain detailed bullets, lookup tables and critical traps (0.4685ms)
+✔ every diagram kind renders escaped, labeled SVG (2.5468ms)
+✔ every B/C event with either build tab has a division-bound course and a bundled rules PDF (10.8591ms)
+✔ course imports reject cross-division, season, malformed geometry and unexpected parameter keys (0.5529ms)
+✔ SVG export escapes imported labels and includes every setup parameter (1.114ms)
+✔ crowded course points retain geometry and receive separated markers and a complete label key (2.0609ms)
+✔ grading cannot return a numeric score with missing evidence or invalid criterion status (0.3908ms)
+✔ upload tickets reject tampering, expiry and another student (0.9817ms)
+✔ Gemini receives the server PDF for the right division and validates complete structured output (57.1815ms)
+✔ eight events per division qualify; input and upload bounds are enforced (1.8759ms)
+✔ drafts remain private, publication shares across schools and preserves school/date metadata (6.0388ms)
+✔ reservations prevent parallel work, failed generations never enter the library, quota is persistent (4.3107ms)
+✔ Gemini receives the correct rulebook, exclusions and uploads; invalid drafts get one revision (2.7365ms)
+✔ Division B sheets use the Division B rulebook and a separate shared library (4.3585ms)
+✔ model text is escaped in standalone sheets; diagram edge references are validated (0.7567ms)
+✔ catalog figures: every event has choices, unknown ids are dropped, credits are printed (2.4316ms)
+✔ five placements establish a rank with 50 RR; placement is capped at Ascendant 3 (0.7049ms)
+✔ RR responds to scores, can fall, and promotes with a buffer (0.2312ms)
+✔ zero RR protects until another loss, then two shields protect tier 1 (0.2317ms)
+✔ rating replays deterministically after score corrections and removal (0.4481ms)
+✔ paper difficulty influences the skill estimate (0.2197ms)
+✔ Immortal RR is uncapped and Radiant is limited to five eligible students (1.7137ms)
+✔ courses persist across members, deduplicate retries, and save edits as separate snapshots (4.1289ms)
+✔ course library pagination and division/event filters never repeat or omit records (7.9554ms)
+✔ printable course includes all geometry keys, dimensions, parameters, setup and rule sources safely (0.9079ms)
+✔ rewritten B lessons retain working practice, evidence, visuals and inline activities (1.264ms)
+✔ B scope removes excluded courses and keeps required monitoring and pollution topics core (0.3394ms)
+✔ lesson progress remains isolated by student, event, and division (0.1765ms)
+✔ B Water Quality exposes salinometer preparation and calibrates the full percent range (1.0259ms)
+✖ every Division B tool that Division C fills has content in Division B too (3.4295ms)
+✔ shared Division B courses have independent B scope without changing C (0.3552ms)
+✔ Division B-only courses meet the lesson quality bar (3.3091ms)
+✔ build-event courses meet the lesson quality bar in both divisions (3.5792ms)
+✔ instructor pages open on the roster division, falling back to the community level (0.3736ms)
+✔ every Division B and C Lab tab has an event-specific simulation; A receives none (0.5702ms)
+✔ archive sources refer to real questions from the lab’s own division and existing papers (53.6621ms)
+✔ all sample variants and slider boundaries yield finite readings, answers, and plot points (43.7962ms)
+✔ kinetics is first order and Beer–Lambert calibration scales with path length (0.2846ms)
+✔ circuit conserves current and bridge balance recovers each unknown independent of voltage (0.2437ms)
+✔ Rf is invariant with solvent travel; salinity calibration obeys buoyancy (0.1415ms)
+✔ BOD recovers the same demand at different dilutions and waits for day five (0.1433ms)
+✔ absorption mean matches independent replicates and responds to controlled area changes (0.1736ms)
+✔ answer checking rejects blanks, nonfinite values and incorrect results (0.162ms)
+✔ curd yield plateaus once all casein curdles and scales with milk mass (0.1285ms)
+✔ division slates follow the two national lists and the supplied Florida manual (0.4374ms)
+✔ event toolkits follow the competition format and keep Lessons first and Rules last (0.6368ms)
+✔ every catalog event has its own local PDF section and complete rulebook (234.3391ms)
+✔ assignments reject wrong divisions, invalid test types, and past or impossible dates (8.6366ms)
+✔ enrollment input validation excludes unsupported roles and divisions (0.9461ms)
+✔ all 74 blue/green/orange units are distinct, substantive Division C lessons with 518 valid practice questions (17.9896ms)
+✔ online figures have verified source, credit, license, original reading prompt and valid lesson placement (2.3762ms)
+✔ titration covers acid, equivalence, base and finite concentrations without cancellation (0.3524ms)
+✔ gas paths conserve energy and match their physical constraints over all controls (0.5227ms)
+✔ water heating tracks phase fractions, boundary continuity and mass scaling (0.2471ms)
+✔ network, logic, and inheritance calculations preserve conservation and probabilities (0.6823ms)
+✔ hydrograph volume, Darcy units and geometric contacts have transparent invariants (0.5914ms)
+✔ multiple choice is marked by the key as each question is checked, then locked (109.5989ms)
+✔ written answers are marked by AI, or by the student only when AI is unavailable (108.8172ms)
+✔ the last checked question completes the lesson and records its accuracy (113.3247ms)
+✔ lesson stages keep their first completion and reject impossible scores (116.367ms)
+✔ stored attempts are re-marked by the key and malformed checks are dropped (0.4115ms)
+✔ the AI grader returns nothing for any unusable response (1.0513ms)
+✔ every topic lab is finite across its control range and every goal is reachable but not pre-solved (233.3503ms)
+✔ all sixteen Division C and five Division B-only courses receive lesson-specific labs, activities, and checks (2.4005ms)
+✔ generated activities are stable, complete, and never give the answer away (7.7717ms)
+✔ sentences are sorted into key idea, explanation, apply-it, limits and test tips (1.7875ms)
+✔ the key idea stays first even when it states a limit (0.1682ms)
+✔ instruction and caution detection (0.1643ms)
+✔ key terms are marked once, at their first appearance (0.9798ms)
+✔ every course keeps every sentence exactly once after formatting (246.7248ms)
+✔ pink, yellow and purple courses serve Division C and the matching Division B events (0.4918ms)
+✔ all syllabus units have substantive lessons, worked examples, simulations, and answerable practice (3.9212ms)
+✔ numerical models reproduce worked examples and preserve physical boundaries (1.6116ms)
+✔ each lesson has a contextual visual atlas and experiments stay within the teaching model ranges (6.9386ms)
+✔ practice scores weighted multiple-choice answers and never keyword-grades written answers (0.2368ms)
+✔ a saved checkpoint is complete only when every question is checked, scoped to each student and event (0.3748ms)
+✔ every checkpoint question has its own written explanation (7.2834ms)
+✔ November expansion preserves eight source pairs and hides converted archive entries (118.2361ms)
+✔ Pembroke accepts both equivalent volt definitions and grades the written calculations (27.1452ms)
+✔ Archimedean excludes the absent puzzle and scores published plaintext without AI (0.8423ms)
+✔ inconsistent source answers remain unscored rather than teaching the original errors (0.5421ms)
+✔ October 13 adds 20 complete C papers across eight smaller libraries, without duplicate archive cards (11.9764ms)
+✔ Codebusters grades requested keywords and decoded cryptarithms without an AI request (4.4209ms)
+✔ new remote papers retain all image packets and exclude incompatible source answers (1.2408ms)
+✔ Thermodynamics covers every missing state and work/heat cell with signed free numeric checks (1.2892ms)
+✔ new genetics and anatomy papers keep source corrections and matching banks usable (1.0157ms)
+✔ every Division B and C event with a practice tab has a converted paper (2.3336ms)
+✔ converted archive sources disappear from unconverted listings and disclose unavailable portions (1.0195ms)
+✔ public Scioly conversions preserve source exclusions, partial credit and actual cover dates (2.3268ms)
+✔ Codebusters honors letter penalties, keyword exceptions, and preserves exact input (1.7853ms)
+✔ every archived paper has a complete rubric and coherent point total (158.904ms)
+✔ difficulty is assessed independently of competition level and combines with every filter (1.9645ms)
+✖ catalog enforces the current season, event and student division (6.7488ms)
+✔ Scioly archive levels use only reported competition tiers (0.564ms)
+✔ grading preserves exact text, awards only matched answers, and queues prose (0.5325ms)
+✔ multi-select grades the complete selected set; fractions, units and ranges are respected (1.1152ms)
+✔ new Division C archive conversions preserve source weights, aliases and partial selection credit (1.7065ms)
+✔ reviewed astronomy papers retain single-choice partial credit and complete FRQ sections (1.2694ms)
+✔ SSSS cipher grading applies the published error allowance without AI review (1.16ms)
+✔ complete Brookwood extraction includes irregular and starred numbering; flawed chemistry items stay unscored (0.5209ms)
+✔ Clements cipher solutions use free full-solution checks and disclose the inconsistent Hill key (0.5877ms)
+✔ Greenbrier Circuit Lab includes its separate hands-on packet and keeps ambiguous items unscored (0.3793ms)
+✔ October 12 conversions preserve complete sections, restored prompts, and corrected free checks (1.065ms)
+✔ SSSS Astronomy retains all 67 weighted parts and the actual cover year (0.4726ms)
+✔ Gemini rubric responses are bounded, validated, and applied without student identity data (2.5842ms)
+✔ submitting with Gemini configured uses only free grading until Auto Grade is clicked (225.9167ms)
+✔ Auto Grade spends no tokens when the free grader has resolved every answer (227.2812ms)
+✔ Auto Grade updates the owned saved attempt once without granting more credit (249.7007ms)
+✔ Auto Grade preserves instructor review that finishes during the AI request (220.4206ms)
+✔ keyless Auto Grade solves independently, keeps uncertain items pending, and labels references (3.4218ms)
+✔ submission saves once, rejects forged scores, completes one assignment, and scopes history (218.8244ms)
+✔ instructors can finalize only their own school rubric reviews with bounded scores (216.1715ms)
+✔ team sheets seat partners per event and stay inside one school (380.4337ms)
+✖ the builder combines standalone questions from several tests and repairs model output (75.8145ms)
+✔ ranked tests reach every seated student, lock results until release, and award points once (554.4737ms)
+✔ a configuration entry creates a working community without additional enrollment or schema edits (459.7726ms)
+✔ generated public community directory includes no password settings and rejects invalid entries (0.5421ms)
+✔ RCSA instructor invitation is campus-specific and works without the default invitation setting (122.929ms)
+✔ community directory migration expands the old CHECK constraint and preserves existing rosters (423.9678ms)
+✔ high school password migration upgrades existing rosters once without changing other campuses (603.4734ms)
+✔ enrollment gates, hashing, duplicate recovery, and fixed campus password reveal (376.1453ms)
+✔ each campus password joins only its shared roster and instructors cannot access other campuses (1053.3931ms)
+✔ existing campus groups merge once while preserving assignments, progress and closed memberships (780.6255ms)
+✔ real assignments are scoped by school, role, and current student division (325.6395ms)
+✔ progress totals reflect stored activity without multiplying joins or leaking another school (323.3215ms)
+✔ settings names are validated and scoped to the current community (345.367ms)
+✔ leaving revokes membership, removes assignments, and preserves progress on re-enrollment (370.5622ms)
+✔ community deletion requires its instructor and confirmation and invalidates access/password (367.1433ms)
+✔ competition selections persist per student and division, validate input, and can be removed (320.4541ms)
+✔ public rankings show first name, last initial, and the registered school (319.9029ms)
+✔ members can browse another community, unranked students, and safe statistics (8.0649ms)
+✔ unreleased and pending scores stay hidden; releasing, correcting and reopening recalculates (7.0137ms)
+✔ departed students, closed communities and instructors have no student profiles (4.3573ms)
+✔ lessons reach everyone seated in the event, or chosen students and their partners (326.8386ms)
+✔ assignments reject work outside the event, division, or school (445.9475ms)
+✔ submitted lessons are graded and complete lesson and unit assignments (377.6462ms)
+✔ lab simulations are assigned by event and submitted for accuracy (379.9409ms)
+✔ practice tests use the same recipients and are not assigned twice (319.7982ms)
+✔ all 53 yellow/purple syllabus units have developed Division C lessons and 371 valid practice questions (3.4452ms)
+✔ cipher transformations reverse known messages and reject invalid conventions (3.0366ms)
+✔ remote sensing, epidemiology and stellar models reproduce worked examples and undefined denominators (0.4211ms)
+✔ plant tradeoffs and synthetic experiments distinguish noise, fixed offset and time confounding (0.797ms)
+ℹ tests 170
+ℹ suites 0
+ℹ pass 167
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14018.7758
+
+✖ failing tests:
+
+test at tests\division-b.test.ts:25:1
+✖ every Division B tool that Division C fills has content in Division B too (3.4295ms)
+  AssertionError [ERR_ASSERTION]: write-it-do-it lessons
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/umerq/Downloads/Akoizo/tests/division-b.test.ts:33:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\practice.test.ts:217:1
+✖ catalog enforces the current season, event and student division (6.7488ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(heredity.some((paper) => paper.id === 'gopher-2019-heredity-b'))
+  
+      at TestContext.<anonymous> (file:///C:/Users/umerq/Downloads/Akoizo/tests/practice.test.ts:222:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\ranked.test.ts:176:1
+✖ the builder combines standalone questions from several tests and repairs model output (75.8145ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(diseasePool.some((candidate) => candidate.test.id === 'scioly-9idzuozwmxm-c'))
+  
+      at TestContext.<anonymous> (file:///C:/Users/umerq/Downloads/Akoizo/tests/ranked.test.ts:183:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

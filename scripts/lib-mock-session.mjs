@@ -46,6 +46,8 @@ const token = (id) =>
 export async function mockSession(page, { role = 'student', theme = 'dark', api } = {}) {
   const profile = profiles[role];
   await page.addInitScript((theme) => {
+    // Preferences belong to the app document, not Chrome's embedded PDF viewer.
+    if (window.self !== window.top || !window.localStorage) return;
     localStorage.setItem('ako-preferences', JSON.stringify({ visible: false, muted: true }));
     localStorage.setItem('akoizo-theme', theme);
   }, theme);

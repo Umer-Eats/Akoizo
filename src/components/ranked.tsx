@@ -146,9 +146,8 @@ export function RankedTestList({ eventId }: { eventId: string }) {
         </p>
       )}
       <p className="practice-note">
-        Ranked tests combine questions from several past competition tests. Your score appears as
-        soon as you submit and earns ranking points. Your instructor decides when the full results
-        open.
+        Ranked tests combine questions from several practice papers. Your score appears as soon as
+        you submit and earns ranking points. Your instructor decides when the full results open.
       </p>
     </section>
   );

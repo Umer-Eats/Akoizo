@@ -38,6 +38,8 @@ export type QuestionKey = {
 };
 export type PracticeSummary = {
   id: string;
+  origin?: 'original' | 'adapted';
+  supersedesTestId?: string;
   eventId: string;
   division: Division;
   competition: string;
@@ -114,8 +116,13 @@ export type PracticeReview = {
   result: PracticeResult;
   questions: PracticeQuestion[];
 };
-export const practiceTitle = (test: Pick<PracticeSummary, 'competition' | 'level' | 'year'>) =>
-  `${test.competition} · ${test.level ?? 'Level not reported'} · ${test.year}`;
+export const practiceTitle = (
+  test: Pick<PracticeSummary, 'competition' | 'level' | 'year'> &
+    Partial<Pick<PracticeSummary, 'origin' | 'season'>>,
+) =>
+  test.origin === 'original'
+    ? `${test.competition} · ${test.season ?? PRACTICE_SEASON} practice`
+    : `${test.competition} · ${test.level ?? 'Level not reported'} · ${test.year}`;
 
 export type ArchiveSource = {
   sourceId: string;
@@ -138,7 +145,8 @@ export function matchesPracticeFilters(
   filters: { query: string; level: string; year: string; topic: string; difficulty?: string },
 ) {
   return (
-    (!filters.level || (filters.level === 'unreported' ? test.level === null : test.level === filters.level)) &&
+    (!filters.level ||
+      (filters.level === 'unreported' ? test.level === null : test.level === filters.level)) &&
     (!filters.difficulty || test.difficulty === filters.difficulty) &&
     (!filters.year || String(test.year) === filters.year) &&
     (!filters.topic || test.topics.includes(filters.topic)) &&

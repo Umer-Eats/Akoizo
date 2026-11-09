@@ -1,0 +1,25 @@
+scripts/build-complete-practice.mjs 158ms
+scripts/practice-skill-forms.mjs 21ms
+scripts/practice-source-repairs.mjs 8ms
+scripts/practice-browser-check.mjs 101ms
+scripts/write-practice-coverage.mjs 11ms
+src/components/practice.tsx 231ms
+src/components/ranked.tsx 112ms
+src/lib/practice-catalog.ts 33ms
+src/lib/practice-service.ts 36ms
+src/lib/practice-types.ts 19ms
+src/lib/ranked-builder.ts 56ms (unchanged)
+src/lib/study-assignment-service.ts 51ms
+src/lib/event-rules.ts 14ms (unchanged)
+tests/practice-completion.test.ts 26ms
+tests/practice-nov2026.test.ts 13ms
+tests/domain.test.ts 20ms (unchanged)
+tests/division-b.test.ts 41ms
+tests/practice.test.ts 155ms
+tests/ranked.test.ts 93ms
+src/data/original-practice-tests.json 877ms
+src/data/repaired-practice-tests.json 1731ms
+documents/practice-completion-audit.json 174ms
+documents/practice-completion-assets.json 50ms
+README.md 110ms (unchanged)
+documents/PRACTICE_TESTS.md 97ms (unchanged)

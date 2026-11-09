@@ -1,0 +1,80 @@
+import { chromium, expect } from '@playwright/test';
+import assert from 'node:assert/strict';
+import { mkdir } from 'node:fs/promises';
+import { mockSession, signIn } from './lib-mock-session.mjs';
+import { practiceTests, listPracticeTests } from '../src/lib/practice-catalog.ts';
+
+const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3002';
+const ids = [
+  'akoizo-2027-b-hovercraft-form-1',
+  'akoizo-2027-b-write-it-do-it-form-1',
+  'akoizo-2027-c-engineering-cad-form-1',
+  'scioly-z1tqamhu3cw-c-repaired',
+  'scioly-oyws8qhr8-s-c-repaired',
+  'scioly-golgkcarvyw-c-repaired',
+  'scioly-najkggc-oem-c-repaired',
+  'scioly-tj8pj0wzt-s-b-repaired',
+];
+await mkdir('output/practice-completion/qa', { recursive: true });
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const errors = [];
+try {
+  for (const division of ['B', 'C']) {
+    const context = await browser.newContext({
+      viewport: { width: 1440, height: 1000 },
+      reducedMotion: 'reduce',
+    });
+    const page = await context.newPage();
+    page.on('pageerror', (e) => errors.push(e.message));
+    const profile = await mockSession(page, {
+      api: (url) =>
+        url.pathname === '/api/practice' && url.searchParams.has('eventId')
+          ? { tests: listPracticeTests(division, url.searchParams.get('eventId')), archive: [] }
+          : undefined,
+    });
+    profile.division = division;
+    await signIn(page, base);
+    for (const id of ids) {
+      const p = practiceTests.find((p) => p.id === id);
+      if (p.division !== division) continue;
+      await page.goto(`${base}/dashboard/student/events/${p.eventId}/practice-tests`);
+      await expect(page.locator('.practice-test-list li')).toHaveCount(
+        listPracticeTests(division, p.eventId).length,
+      );
+      await page.goto(`${base}/dashboard/student/events/${p.eventId}/practice-tests/${id}`);
+      await expect(page.locator('.practice-question')).toHaveCount(p.questionCount);
+      await expect(page.locator('iframe[title^="Complete test:"]')).toHaveAttribute(
+        'src',
+        p.paperUrl,
+      );
+      await expect(
+        page.getByText(
+          p.origin === 'original'
+            ? 'Original Akoizo curriculum practice with an authored answer key.'
+            : 'Repaired edition: the appendix identifies authored replacements. Archived pages are preserved for reference.',
+        ),
+      ).toBeVisible();
+      for (const url of [p.paperUrl, p.keyUrl]) {
+        const response = await page.request.get(base + url);
+        assert.equal(response.status(), 200);
+        assert.equal((await response.body()).subarray(0, 5).toString(), '%PDF-');
+      }
+      if (p.origin === 'original') {
+        await page.screenshot({ path: `output/practice-completion/qa/${p.eventId}-desktop.png` });
+        await page.setViewportSize({ width: 390, height: 844 });
+        assert.ok(
+          await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2),
+        );
+        await page.screenshot({ path: `output/practice-completion/qa/${p.eventId}-mobile.png` });
+        await page.setViewportSize({ width: 1440, height: 1000 });
+      }
+    }
+    await context.close();
+  }
+  assert.deepEqual(errors, []);
+  console.log(
+    'Completion browser checks passed: written build/skill forms, four latest repaired editions, original/repaired labels, PDF assets, field counts and mobile layouts.',
+  );
+} finally {
+  await browser.close();
+}

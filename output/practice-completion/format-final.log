@@ -1,0 +1,5 @@
+scripts/practice-completion-browser-check.mjs 83ms
+scripts/practice-source-repairs.mjs 21ms
+scripts/build-complete-practice.mjs 57ms (unchanged)
+tests/practice-completion.test.ts 114ms
+documents/PRACTICE_TESTS.md 148ms

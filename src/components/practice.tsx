@@ -38,6 +38,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
   const [year, setYear] = useState('');
   const [topic, setTopic] = useState('');
   const [difficulty, setDifficulty] = useState('');
+  const [rotation, setRotation] = useState('');
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
   useEffect(() => {
@@ -49,6 +50,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
     setYear('');
     setTopic('');
     setDifficulty('');
+    setRotation('');
     setError('');
     request<{ tests: PracticeSummary[]; archive?: ArchiveSource[] }>(
       `/api/practice?eventId=${encodeURIComponent(eventId)}`,
@@ -67,8 +69,15 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
     };
   }, [request, eventId, profile?.division, retry]);
   const filters = { query, level, year, topic, difficulty };
-  const matches = tests?.filter((test) => matchesPracticeFilters(test, filters)) ?? [];
-  const archiveMatches = archive.filter((test) => matchesPracticeFilters(test, filters));
+  const matches =
+    tests?.filter(
+      (test) =>
+        matchesPracticeFilters(test, filters) && (!rotation || test.topicMatch === rotation),
+    ) ?? [];
+  // Unconverted archive listings have no reviewed rotation classification.
+  const archiveMatches = rotation
+    ? []
+    : archive.filter((test) => matchesPracticeFilters(test, filters));
   const availableTopics = [
     ...new Set([...(tests ?? []), ...archive].flatMap((test) => test.topics)),
   ].sort();
@@ -78,9 +87,10 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
     setYear('');
     setTopic('');
     setDifficulty('');
+    setRotation('');
   };
   return (
-    <section className="practice-library" aria-label="Past competition tests">
+    <section className="practice-library" aria-label="Practice tests">
       <div className="practice-search">
         <Search size={20} aria-hidden="true" />
         <input
@@ -96,6 +106,18 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
         )}
       </div>
       <div className="practice-filters">
+        <label>
+          Topic rotation
+          <select
+            aria-label="Topic rotation"
+            value={rotation}
+            onChange={(e) => setRotation(e.target.value)}
+          >
+            <option value="">All rotations</option>
+            <option value="current">2027 topics</option>
+            <option value="different">Historical topics</option>
+          </select>
+        </label>
         <label>
           Level
           <select aria-label="Level" value={level} onChange={(e) => setLevel(e.target.value)}>
@@ -141,7 +163,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
             ))}
           </select>
         </label>
-        {(query || level || year || topic || difficulty) && (
+        {(query || level || year || topic || difficulty || rotation) && (
           <button className="text-link" onClick={clearFilters}>
             Clear filters
           </button>
@@ -158,7 +180,7 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
           </button>
         </div>
       ) : !tests ? (
-        <p role="status">Loading past competition tests…</p>
+        <p role="status">Loading practice tests…</p>
       ) : (
         <>
           <p className="practice-count" aria-live="polite">
@@ -174,6 +196,13 @@ export function PracticeLibrary({ eventId }: { eventId: string }) {
                     </span>
                     <div>
                       <h2>{practiceTitle(test)}</h2>
+                      {test.origin && (
+                        <p>
+                          {test.origin === 'original'
+                            ? 'Akoizo original practice'
+                            : 'Repaired practice edition · authored replacements included'}
+                        </p>
+                      )}
                       <span
                         className={`practice-difficulty practice-difficulty-${test.difficulty.toLowerCase()}`}
                         title={`Estimated difficulty: ${test.difficultyReason}`}
@@ -482,6 +511,13 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               <Check size={16} /> Topics & scoring
             </summary>
             <p>{paper.alignment}</p>
+            {paper.origin && (
+              <p>
+                {paper.origin === 'original'
+                  ? 'Original Akoizo curriculum practice with an authored answer key.'
+                  : 'Repaired edition: the appendix identifies authored replacements. Archived pages are preserved for reference.'}
+              </p>
+            )}
             {paper.gradingMode === 'ai-generated' && (
               <p>
                 No published answer key is available. Auto Grade creates AI reference answers from
@@ -497,7 +533,8 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               <strong>{paper.scoringBasis}.</strong> {paper.instructions}
             </p>
             <a href={paper.sourceUrl} target="_blank" rel="noreferrer">
-              Competition source <ArrowUpRight size={14} />
+              {paper.origin === 'original' ? 'Event study guide' : 'Competition source'}{' '}
+              <ArrowUpRight size={14} />
             </a>
           </details>
           {attempts.length > 0 && (
@@ -623,9 +660,15 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
             </button>
           )}
           <div className="practice-workspace">
-            <section className="practice-paper" aria-label="Complete competition paper">
+            <section className="practice-paper" aria-label="Complete practice paper">
               <div className="practice-paper-heading">
-                <h2>Original test</h2>
+                <h2>
+                  {paper.origin === 'adapted'
+                    ? 'Repaired test'
+                    : paper.origin === 'original'
+                      ? 'Practice paper'
+                      : 'Original test'}
+                </h2>
                 <span className="practice-timer" role="timer" aria-label="Time spent">
                   <Clock3 size={16} aria-hidden="true" />
                   <span>Time spent</span>
@@ -641,8 +684,10 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 allowFullScreen
               />
               <p>
-                Scroll through the original paper here. Check the scoring notes for any excluded
-                questions. If your browser cannot display it, use Open paper.
+                {paper.origin === 'adapted'
+                  ? 'The archived pages are followed by the authored repair appendix. Use each answer field’s page reference to find the corrected item.'
+                  : 'Scroll through the complete paper here. Check its topics and scoring notes before starting.'}{' '}
+                If your browser cannot display it, use Open paper.
               </p>
               {paper.supplementUrl && (
                 <details className="practice-supplement">

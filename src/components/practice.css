@@ -95,11 +95,15 @@
   }
   .practice-filters label {
     display: grid;
+    min-width: 0;
+    max-width: 100%;
     gap: 5px;
     font-size: 0.78rem;
     color: var(--muted);
   }
   .practice-filters select {
+    min-width: 0;
+    max-width: min(26rem, 100%);
     padding: 9px 30px 9px 10px;
     border: 1px solid var(--line);
     border-radius: 6px;

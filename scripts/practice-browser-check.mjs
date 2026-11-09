@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import {
   practiceTests,
+  allPracticeTests,
   listPracticeTests,
   publicPracticePaper,
 } from '../src/lib/practice-catalog.ts';
@@ -140,7 +141,7 @@ async function account(role, division = 'B') {
             studentName: 'Practice Learner',
             title: 'UT Austin · Regionals · 2014',
             result,
-            questions: practiceTests.find((t) => t.id === result.testId).questions,
+            questions: allPracticeTests.find((t) => t.id === result.testId).questions,
           })),
       });
     }
@@ -154,7 +155,7 @@ async function account(role, division = 'B') {
           });
         }
         const body = route.request().postDataJSON();
-        const paper = practiceTests.find((t) => t.id === body.testId);
+        const paper = allPracticeTests.find((t) => t.id === body.testId);
         const result = {
           ...gradePractice(paper, validateAnswers(paper, body.answers)),
           id: crypto.randomUUID(),
@@ -165,7 +166,7 @@ async function account(role, division = 'B') {
       }
       const id = url.searchParams.get('testId');
       if (id) {
-        const test = practiceTests.find((t) => t.id === id);
+        const test = allPracticeTests.find((t) => t.id === id);
         return route.fulfill({
           json: {
             test: publicPracticePaper(test),
@@ -379,7 +380,7 @@ try {
     }
     // Open the newly imported papers through the same event routes and verify their local assets.
     for (const id of [
-      ...practiceTests.filter((t) => t.id.startsWith('scioly-')).map((t) => t.id),
+      ...practiceTests.filter((t) => t.id.startsWith('scioly-') || t.origin).map((t) => t.id),
       'west-ottawa-2026-remote-sensing-b',
       'chem2000-2016-chemistry-lab-c',
       'lake-erie-niagara-2018-circuit-lab-c',
@@ -392,8 +393,8 @@ try {
       'gopher-2019-heredity-b',
       'kraemer-2017-thermodynamics-b',
     ]) {
-      const paper = practiceTests.find((t) => t.id === id);
-      if (paper.division !== division) continue;
+      const paper = allPracticeTests.find((t) => t.id === id);
+      if (!paper || paper.division !== division) continue;
       await eventPage.goto(
         `${base}/dashboard/student/events/${paper.eventId}/practice-tests/${id}`,
       );
@@ -445,7 +446,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    'Practice browser checks passed: all 30 B/C libraries, difficulty and topic filters, multi-select drafts, count-up timer, Auto Grade retry and saved results, grading colors, history, instructor review, mobile layouts, PDF embedding headers, unauthenticated APIs.',
+    'Practice browser checks passed: all 46 B/C libraries, original and repaired papers, difficulty and topic filters, multi-select drafts, count-up timer, Auto Grade retry and saved results, grading colors, history, instructor review, mobile layouts, PDF embedding headers, unauthenticated APIs.',
   );
 } finally {
   await browser.close();

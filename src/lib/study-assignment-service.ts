@@ -14,7 +14,7 @@ import { scorePractice } from './lesson-practice.ts';
 import { eventsForDivision, type Division } from './events.ts';
 import type { EventLessons } from './lessons.ts';
 import { lessonsForEvent } from './lessons-registry.ts';
-import { findPracticeTest, practiceTests } from './practice-catalog.ts';
+import { findPracticeTest, allPracticeTests } from './practice-catalog.ts';
 import { practiceTitle } from './practice-types.ts';
 import type { Database } from './school-service.ts';
 
@@ -49,7 +49,12 @@ function titleOf(division: Division, eventId: string, kind: WorkKind, targetId: 
 }
 
 /** Complete the pending lesson and unit assignments that these students' lesson progress covers. */
-export async function settleLessons(db: Database, key: string, course: EventLessons, students: string[]) {
+export async function settleLessons(
+  db: Database,
+  key: string,
+  course: EventLessons,
+  students: string[],
+) {
   const marks = students.map(() => '?').join(',');
   const pending = await db.all(
     `SELECT id,student_id,kind,target_id FROM study_assignments
@@ -322,7 +327,7 @@ export async function studentWork(
     const type = row.type as WorkRecord['type'];
     const targetId = String(row.target_id);
     const practice =
-      type === 'Practice' ? practiceTests.find((test) => test.id === targetId) : undefined;
+      type === 'Practice' ? allPracticeTests.find((test) => test.id === targetId) : undefined;
     const title =
       type === 'Lesson'
         ? lessonsForEvent(eventId, division)?.lessons.find((lesson) => lesson.id === targetId)
