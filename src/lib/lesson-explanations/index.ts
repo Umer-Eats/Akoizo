@@ -2,6 +2,7 @@ import type { EventLessons } from '../lessons';
 import { anat } from './anat.ts';
 import { astronomy } from './astro.ts';
 import { botany } from './bot.ts';
+import { buildEvents } from './build.ts';
 import { crimeBusters } from './cb.ts';
 import { chemistry } from './chem.ts';
 import { circuitLab } from './circ.ts';
@@ -26,6 +27,7 @@ export const lessonExplanations: Record<string, string> = {
   ...anat,
   ...astronomy,
   ...botany,
+  ...buildEvents,
   ...crimeBusters,
   ...chemistry,
   ...circuitLab,

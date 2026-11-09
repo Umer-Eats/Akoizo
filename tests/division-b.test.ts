@@ -4,6 +4,7 @@ import { eventsForDivision } from '../src/lib/events.ts';
 import { eventToolIds } from '../src/lib/event-rules.ts';
 import { lessonsForEvent, sharedDivisionBEvents } from '../src/lib/lessons-registry.ts';
 import { divisionBCourses } from '../src/lib/lessons-division-b.ts';
+import { buildCoursesB, buildCoursesC } from '../src/lib/lessons-build.ts';
 import { yellowPurpleCourses } from '../src/lib/lessons-yellow-purple.ts';
 import { blueGreenOrangeCourses } from '../src/lib/lessons-blue-green-orange.ts';
 import { sheetEventsByDivision } from '../src/lib/cheatsheets.ts';
@@ -26,10 +27,19 @@ test('every Division B tool that Division C fills has content in Division B too'
     const tools = eventToolIds('B', event);
     const cCourse = lessonsForEvent(event.id, 'C');
     const bOnly = divisionBCourses.some((course) => course.eventId === event.id);
-    // Study events get a course; build events have none in either division, as in Division C.
+    const buildCourse = buildCoursesB.some((course) => course.eventId === event.id);
+    // Study events and build events get a course.
     const studyEvent = tools.includes('practice-tests') || tools.includes('lab-generator');
-    assert.equal(!!lessonsForEvent(event.id, 'B'), studyEvent, `${event.id} lessons`);
-    assert.equal(!!lessonsForEvent(event.id, 'B'), !!cCourse || bOnly, `${event.id} course source`);
+    assert.equal(
+      !!lessonsForEvent(event.id, 'B'),
+      studyEvent || event.type === 'Build',
+      `${event.id} lessons`,
+    );
+    assert.equal(
+      !!lessonsForEvent(event.id, 'B'),
+      !!cCourse || bOnly || buildCourse,
+      `${event.id} course source`,
+    );
     if (tools.includes('practice-tests'))
       assert.ok(listPracticeTests('B', event.id).length > 0, `${event.id} practice tests`);
     if (tools.includes('cheatsheet-generator')) {
@@ -134,6 +144,59 @@ test('Division B-only courses meet the lesson quality bar', () => {
     }
   }
   assert.equal(ids.size, 37);
+});
+
+test('build-event courses meet the lesson quality bar in both divisions', () => {
+  const builds = (division: 'B' | 'C') =>
+    eventsForDivision(division)
+      .filter((e) => e.type === 'Build' && e.id !== 'protein-modeling')
+      .map((e) => e.id)
+      .sort();
+  assert.deepEqual(buildCoursesB.map((c) => c.eventId).sort(), builds('B'));
+  assert.deepEqual(buildCoursesC.map((c) => c.eventId).sort(), builds('C'));
+  const ids = new Set<string>();
+  // Shared events may reuse prose across divisions, but never within one.
+  for (const [division, courses] of [
+    ['B', buildCoursesB],
+    ['C', buildCoursesC],
+  ] as const) {
+    const proseSeen = new Set<string>();
+    for (const course of courses) {
+      assert.equal(course.division, division, course.eventId);
+      const served = lessonsForEvent(course.eventId, division);
+      assert.deepEqual(
+        served?.lessons.map((l) => l.id),
+        course.lessons.map((l) => l.id),
+      );
+      assert.ok(
+        course.references.some(
+          (r) => r.url === `/rules/2027/${division.toLowerCase()}/${course.eventId}.pdf`,
+        ),
+        course.eventId,
+      );
+      assert.ok(course.units.length >= 7, course.eventId);
+      for (const lesson of course.lessons) {
+        assert.ok(!ids.has(lesson.id), lesson.id);
+        ids.add(lesson.id);
+        const prose = lesson.sections.flatMap((s) => s.body).join(' ');
+        assert.ok(!proseSeen.has(prose), `duplicate prose ${lesson.id}`);
+        proseSeen.add(prose);
+        assert.equal(lesson.sections.length, 6, lesson.id);
+        assert.ok(prose.split(/\s+/).length >= 345, lesson.id);
+        assert.equal(lesson.keyTerms.length, 6, lesson.id);
+        assert.equal(lesson.practice.length, 7, lesson.id);
+        assert.equal(lesson.practice.filter((q) => q.type === 'mcq').length, 3, lesson.id);
+        for (const q of lesson.practice) {
+          if (q.type !== 'mcq') continue;
+          assert.equal(new Set(q.options).size, 4, q.id);
+          assert.equal(q.options!.filter((o) => o === q.answer).length, 1, q.id);
+        }
+        const sim = lesson.simulation;
+        assert.equal(sim.kind, 'investigation', lesson.id);
+      }
+    }
+  }
+  assert.equal(ids.size, 84);
 });
 
 test('instructor pages open on the roster division, falling back to the community level', () => {

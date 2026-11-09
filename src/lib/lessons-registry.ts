@@ -6,12 +6,17 @@ import { yellowPurpleCourses } from './lessons-yellow-purple.ts';
 import { blueGreenOrangeCourses } from './lessons-blue-green-orange.ts';
 import { divisionBCourses } from './lessons-division-b.ts';
 import { adaptBCourse } from './lessons-b-adaptations.ts';
+import { buildCoursesB, buildCoursesC } from './lessons-build.ts';
 import { withExplanations } from './lesson-explanations/index.ts';
 
 const registry: Record<string, EventLessons> = Object.fromEntries(
-  [anatomyLessons, forensicsLessons, ...yellowPurpleCourses, ...blueGreenOrangeCourses].map(
-    (course) => [course.eventId, withExplanations(course)],
-  ),
+  [
+    anatomyLessons,
+    forensicsLessons,
+    ...yellowPurpleCourses,
+    ...blueGreenOrangeCourses,
+    ...buildCoursesC,
+  ].map((course) => [course.eventId, withExplanations(course)]),
 );
 
 // Shared subjects retain applicable content and receive B-specific scope and replacements.
@@ -37,7 +42,10 @@ const divisionBRegistry: Record<string, EventLessons> = {
     }),
   ),
   ...Object.fromEntries(
-    divisionBCourses.map((course) => [course.eventId, withExplanations(course)]),
+    [...divisionBCourses, ...buildCoursesB].map((course) => [
+      course.eventId,
+      withExplanations(course),
+    ]),
   ),
 };
 
