@@ -16,7 +16,7 @@ import {
   Trophy,
 } from 'lucide-react';
 import type { Lesson } from '@/lib/lessons';
-import type { FormattedLine, FormattedSection } from '@/lib/lesson-format';
+import { highlightTerms, type FormattedLine, type FormattedSection } from '@/lib/lesson-format';
 
 export type LessonStage = 'learn' | 'practice' | 'labs' | 'checkpoint';
 export const lessonStages: {
@@ -109,6 +109,22 @@ export function TermTip({
         <strong>{term}</strong> {definition}
       </span>
     </span>
+  );
+}
+
+/** Plain text with its event terms underlined (first appearance of each in this text). */
+export function TermText({ text, terms }: { text: string; terms?: Lesson['keyTerms'] }) {
+  if (!terms?.length) return <>{text}</>;
+  return (
+    <>
+      {highlightTerms(text, terms, new Set()).map((part, i) =>
+        part.term ? (
+          <TermTip key={i} text={part.text} term={part.term} definition={part.definition!} />
+        ) : (
+          <Fragment key={i}>{part.text}</Fragment>
+        ),
+      )}
+    </>
   );
 }
 
@@ -238,7 +254,13 @@ export function SectionContent({ section }: { section: FormattedSection }) {
 }
 
 /** Worked example revealed one step at a time, after the student tries it. */
-export function WorkedExampleSteps({ example }: { example: Lesson['workedExample'] }) {
+export function WorkedExampleSteps({
+  example,
+  terms,
+}: {
+  example: Lesson['workedExample'];
+  terms?: Lesson['keyTerms'];
+}) {
   const [shown, setShown] = useState(0);
   const total = example.steps.length;
   const finished = shown > total;
@@ -252,7 +274,9 @@ export function WorkedExampleSteps({ example }: { example: Lesson['workedExample
         <Lightbulb size={14} aria-hidden="true" /> WORKED EXAMPLE
       </p>
       <h3 id="lf-example-title">{example.title}</h3>
-      <p className="lf-example-problem">{example.problem}</p>
+      <p className="lf-example-problem">
+        <TermText text={example.problem} terms={terms} />
+      </p>
       {shown === 0 && (
         <p className="lf-example-try">Try it on paper first, then reveal one step at a time.</p>
       )}
@@ -261,14 +285,16 @@ export function WorkedExampleSteps({ example }: { example: Lesson['workedExample
           {example.steps.slice(0, Math.min(shown, total)).map((step, i) => (
             <li key={i}>
               <span className="lf-step-num">Step {i + 1}</span>
-              <p>{step}</p>
+              <p>
+                <TermText text={step} terms={terms} />
+              </p>
             </li>
           ))}
         </ol>
       )}
       {finished && (
         <p className="example-conclusion lf-example-answer">
-          <strong>Conclusion</strong> {example.conclusion}
+          <strong>Conclusion</strong> <TermText text={example.conclusion} terms={terms} />
         </p>
       )}
       <div className="lesson-actions">

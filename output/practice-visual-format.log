@@ -1,0 +1,19 @@
+scripts/practice-figure-primitives.mjs 121ms
+scripts/rotation-visual-cases.mjs 11ms
+scripts/rotation-visual-ciphers.mjs 30ms
+scripts/rotation-visual-earth-space.mjs 42ms
+scripts/rotation-visual-life-lab.mjs 26ms
+scripts/rotation-visual-science.mjs 29ms
+scripts/build-rotation-practice.mjs 44ms
+scripts/practice-rotation-browser-check.mjs 25ms
+scripts/write-practice-coverage.mjs 11ms (unchanged)
+src/lib/practice-types.ts 122ms (unchanged)
+src/lib/practice-catalog.ts 74ms
+src/lib/practice-ai.ts 46ms (unchanged)
+src/lib/practice-reference.ts 22ms (unchanged)
+src/components/practice.tsx 158ms
+src/components/practice.css 118ms
+tests/practice-figures.test.ts 36ms
+tests/practice-rotation.test.ts 30ms
+README.md 97ms (unchanged)
+documents/PRACTICE_TESTS.md 96ms (unchanged)

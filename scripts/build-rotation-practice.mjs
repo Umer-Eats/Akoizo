@@ -4,6 +4,7 @@ import { eventsForDivision } from '../src/lib/events.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { topicCases } from './rotation-2027-cases.mjs';
 import { codebustersCases } from './rotation-2027-codebusters.mjs';
+import { visualCases, sectionFor } from './rotation-visual-cases.mjs';
 const normalize = (v) => v.normalize('NFKC').replace(/\s+/g, ' ').trim();
 const digest = (v) => createHash('sha256').update(v).digest('hex');
 function allowedLesson(event, l) {
@@ -219,6 +220,11 @@ for (const [division, events] of Object.entries(deficits))
       const id = `akoizo-2027-rotation-${division.toLowerCase()}-${eventId}-form-${f}`,
         questions = [],
         keys = {};
+      const visual = visualCases({ id, eventId, division }, f);
+      await fs.mkdir(`public/practice/${id}/figures`, { recursive: true });
+      for (const figure of visual.figures)
+        await fs.writeFile(`public/practice/${id}/figures/${figure.id}.svg`, figure.svg);
+      entries.push(...visual.entries);
       for (const [i, e] of entries.entries()) {
         if (
           e.clause?.includes('State/National') ||
@@ -229,6 +235,7 @@ for (const [division, events] of Object.entries(deficits))
           e.prompt = '[State/National] ' + e.prompt;
         if (e.options) e.kind = 'choice';
         const { q, key } = convert(e, String(i + 1), f + i);
+        if (e.figure) q.figure = e.figure;
         if (e.solution)
           key.criteria[0].cipher = {
             solution: e.solution,
@@ -253,14 +260,14 @@ for (const [division, events] of Object.entries(deficits))
         levelEvidence: null,
         year: 2026,
         season: 2027,
-        reviewedOn: '2026-11-08',
+        reviewedOn: '2026-11-09',
         difficulty: 'Medium',
         difficultyReason:
           'Combines 2027-scoped concepts with fully supplied original data exercises. Advanced State/National material is identified where used.',
         topics: [scopes[eventId]],
         topicMatch: 'current',
         alignment: `Reviewed against the checked-in 2027 Division ${division} rules. ${scopes[eventId]}. Written exercises supplement practical work.`,
-        questionCount: 20,
+        questionCount: questions.length,
         maxScore: questions.reduce((s, q) => s + q.points, 0),
         minutes: 50,
         scoringBasis:
@@ -271,7 +278,7 @@ for (const [division, events] of Object.entries(deficits))
         keyUrl: `/practice/${id}/key.pdf`,
         rulesUrl,
         instructions:
-          'Use the supplied data and cipher tables. Show reasoning for written questions. Some conceptual questions are drawn from scoped Akoizo lessons; new case exercises use synthetic data. State/National extensions are identified. Practical tasks require separate hands-on preparation.',
+          'Use the supplied data, figures and cipher charts. Questions21–32 require interpreting the displayed figures. Click a figure to enlarge it; a data-only text equivalent is available for accessibility. Show reasoning for written questions. Original figures are synthetic teaching diagrams, not actual mission images, specimen photographs or experimental protein coordinates. State/National extensions are identified. Practical tasks require separate hands-on preparation.',
         questions,
         keys,
       });
@@ -283,7 +290,7 @@ for (const [division, events] of Object.entries(deficits))
         rulesUrl,
         rulesSha256: rulesHash,
         questionFingerprint: digest(
-          JSON.stringify(questions.map((q) => [q.prompt, q.context, q.options])),
+          JSON.stringify(questions.map((q) => [q.prompt, q.context, q.options, q.figure])),
         ),
         fields: entries.map((e, i) => ({
           id: String(i + 1),
@@ -292,6 +299,8 @@ for (const [division, events] of Object.entries(deficits))
           lessonQuestionId: e.sourceQuestionId,
           unit: e.unit,
           kind: e.sourceLessonId ? 'scoped-curriculum' : 'original-case',
+          section: e.section ?? sectionFor(eventId, division, i),
+          figureUrl: e.figure?.url,
         })),
       });
     }

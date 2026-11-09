@@ -43,7 +43,7 @@ import {
   useScrollSpy,
   type LessonStage,
 } from './lesson-format';
-import { formatLesson, lessonBigIdea } from '@/lib/lesson-format';
+import { formatLesson, lessonBigIdea, mergeTerms } from '@/lib/lesson-format';
 import './lesson-format.css';
 import { PhetSim } from './phet-sim';
 import {
@@ -507,6 +507,7 @@ function LabsStage({
 function LessonDetail({
   lesson,
   eventId,
+  glossary,
   unitNumber,
   attempt,
   completed,
@@ -518,6 +519,7 @@ function LessonDetail({
 }: {
   lesson: Lesson;
   eventId: string;
+  glossary?: Lesson['keyTerms'];
   unitNumber: number;
   attempt: LessonAttempt;
   /** Recorded as complete for the instructor (from any device). */
@@ -537,7 +539,8 @@ function LessonDetail({
   const [stage, setStage] = useState<LessonStage>('learn');
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
   const plan = useMemo(() => akoLessonPlan(lesson), [lesson]);
-  const formatted = useMemo(() => formatLesson(lesson, lines), [lesson, lines]);
+  const formatted = useMemo(() => formatLesson(lesson, lines, glossary), [lesson, lines, glossary]);
+  const terms = useMemo(() => mergeTerms(lesson.keyTerms, glossary), [lesson, glossary]);
   const activeStep = plan.find((step) => step.id === teachingLine);
   useEffect(() => {
     setAkoStudy({
@@ -787,7 +790,9 @@ function LessonDetail({
               ))}
             </div>
           </AkoReading.Provider>
-          {lesson.workedExample && <WorkedExampleSteps example={lesson.workedExample} />}
+          {lesson.workedExample && (
+            <WorkedExampleSteps example={lesson.workedExample} terms={terms} />
+          )}
           <section id="lesson-review" className="lf-review" aria-labelledby="lf-review-title">
             <p className="eyebrow">REVIEW</p>
             <h3 id="lf-review-title">Key terms · {lesson.keyTerms.length}</h3>
@@ -1178,6 +1183,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             key={lesson.id}
             lesson={lesson}
             eventId={course.eventId}
+            glossary={course.glossary}
             unitNumber={course.units.findIndex((item) => item.id === lesson.unitId) + 1}
             attempt={attempts[lesson.id] ?? emptyAttempt}
             completed={!!records[lesson.id]}

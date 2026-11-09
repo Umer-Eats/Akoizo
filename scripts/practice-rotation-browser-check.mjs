@@ -53,6 +53,26 @@ try {
       );
       await page.goto(`${base}/dashboard/student/events/${p.eventId}/practice-tests/${id}`);
       await expect(page.locator('.practice-question')).toHaveCount(p.questionCount);
+      await expect(page.locator('.practice-figure img')).toHaveCount(12);
+      const visualImages = page.locator('.practice-figure img');
+      await visualImages.evaluateAll((images) => images.forEach((img) => (img.loading = 'eager')));
+      await expect
+        .poll(() =>
+          visualImages.evaluateAll((images) =>
+            images.every(
+              (img) => img.complete && img.naturalWidth === 1440 && img.naturalHeight === 800,
+            ),
+          ),
+        )
+        .toBe(true);
+      for (const url of new Set(p.questions.filter((q) => q.figure).map((q) => q.figure.url))) {
+        const response = await page.request.get(base + url);
+        assert.equal(response.status(), 200);
+        assert.equal((await response.body()).subarray(1, 4).toString(), 'PNG');
+      }
+      await expect(page.locator('.practice-figure a').first()).toHaveAttribute('target', '_blank');
+      await page.locator('.practice-figure details').first().locator('summary').click();
+      await expect(page.locator('.practice-figure details').first().locator('p')).toBeVisible();
       await expect(page.locator('iframe[title^="Complete test:"]')).toHaveAttribute(
         'src',
         p.paperUrl,
@@ -70,10 +90,24 @@ try {
         assert.equal((await response.body()).subarray(0, 5).toString(), '%PDF-');
       }
       if (id.endsWith('form-1')) {
+        await page.locator('.practice-figure').first().scrollIntoViewIfNeeded();
+        assert.ok(
+          await page
+            .locator('.practice-figure details p')
+            .first()
+            .evaluate((p) => p.scrollWidth <= p.clientWidth + 1),
+        );
         await page.screenshot({
           path: `output/practice-rotation/browser-qa/${p.eventId}-desktop.png`,
         });
         await page.setViewportSize({ width: 390, height: 844 });
+        await page.locator('.practice-figure').first().scrollIntoViewIfNeeded();
+        assert.ok(
+          await page
+            .locator('.practice-figure details p')
+            .first()
+            .evaluate((p) => p.scrollWidth <= p.clientWidth + 1),
+        );
         assert.ok(
           await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2),
         );
@@ -87,7 +121,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    'Rotation browser checks passed: all 44 new forms, current/historical filters, provenance labels, 88 PDF responses, answer fields and mobile layouts.',
+    'Visual browser checks passed: all44 expanded forms,528 inline figures,176 PNG responses,88 PDF responses,enlargement links,text alternatives,and desktop/phone layouts.',
   );
 } finally {
   await browser.close();

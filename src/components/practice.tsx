@@ -756,6 +756,29 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                     {question.context && (
                       <p className="practice-question-context">{question.context}</p>
                     )}
+                    {question.figure && (
+                      <figure className="practice-figure">
+                        <a
+                          href={question.figure.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${question.figure.caption} at full size`}
+                        >
+                          <img
+                            src={question.figure.url}
+                            alt={question.figure.alt}
+                            width={1440}
+                            height={800}
+                            loading="lazy"
+                          />
+                        </a>
+                        <figcaption>{question.figure.caption}</figcaption>
+                        <details>
+                          <summary>Text description of figure</summary>
+                          <p>{question.figure.description}</p>
+                        </details>
+                      </figure>
+                    )}
                     {question.type === 'mcq' ? (
                       <>
                         <p className="practice-question-reference">

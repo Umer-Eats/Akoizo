@@ -1,0 +1,19 @@
+✔ all44 rotation papers retain original IDs and add12 figure-dependent questions with complete keys (5.7387ms)
+✔ every embedded figure has verified original SVG and high-resolution PNG assets (140.7862ms)
+✔ adding visual stations preserves required section point weightings (1.8479ms)
+✔ new checkerboard diagrams include every row and column label and independently decode all messages (3.3128ms)
+✔ diagram-dependent explanations supply figure observations to Auto Grade (31.13ms)
+✔ catalog rejects unsafe or incomplete figure references (1.2993ms)
+✔ all 46 B/C libraries have five current-topic papers independently of historical papers (2.0206ms)
+✔ each new field has rule evidence tied to the actual 2027 rules and a verified PDF/key (125.5642ms)
+✔ rotation-specific exclusions and section weights survive catalog generation (3.1413ms)
+✔ substitution puzzles independently decode with allowed deranged K2 alphabets (1.3665ms)
+✔ columnar, Polybius and Porta puzzles independently recover their supplied plaintext (2.3233ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 661.3765

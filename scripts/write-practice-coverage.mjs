@@ -7,7 +7,7 @@ import { eventToolIds } from '../src/lib/event-rules.ts';
 const rows = [
   '# Practice coverage',
   '',
-  'Coverage updated November 8, 2026. New additions reviewed against the local 2027 rules; individual source limitations are recorded below.',
+  'Coverage updated November 9, 2026. New additions reviewed against the local 2027 rules; individual source limitations are recorded below.',
   '',
   `${practiceTests.length} ready practice papers, ${practiceTests.reduce((n, t) => n + t.questionCount, 0).toLocaleString('en-US')} answer fields. Every one of the 46 Division B/C events has at least five current-topic papers. Includes ${practiceTests.filter((t) => t.origin === 'original').length} original curriculum forms and ${practiceTests.filter((t) => t.origin === 'adapted').length} repaired editions; remaining papers are archived competition conversions. Original editions superseded by repairs remain available through saved-attempt links. Division A is outside this expansion.`,
   '',

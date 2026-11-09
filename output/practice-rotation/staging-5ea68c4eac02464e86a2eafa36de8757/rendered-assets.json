@@ -1,0 +1,2070 @@
+[
+  {
+    "id": "akoizo-2027-rotation-b-water-quality-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 337429,
+        "sha256": "ea3b250f02911c1297e82378c9f80b531172b199c401676de07c86acaeec3e3d"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 339335,
+        "sha256": "777f13829a9713be7e3e379b8cabb695bda01aefc6193cf61f697bb04689cf05"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-1/figures/F1.png",
+        "sha256": "c3196819a113939cb73de66540f148e25dd868101a32486283adce4766526d44",
+        "sourceSha256": "6d4ff95a1c771b9cc5bde5e1afb329e42183a459e6e64593dbeb5881d39e8225",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-1/figures/F2.png",
+        "sha256": "da52524ac009974e4e3a3339fefbd137f8526c2c23b948471b1b0d760cb9cd9e",
+        "sourceSha256": "450304c520b94b9c228ecc55f6177723d7eee010fbbe48aa2b4a0ae7bf75a911",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-1/figures/F3.png",
+        "sha256": "729caaf8a6c18551344a9910913d7dd75f283fb11da258a43baf562db7683985",
+        "sourceSha256": "9169075883b739ae709f798de6a7abe298249a7efd46f57984b76e3ab2a3088f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-1/figures/F4.png",
+        "sha256": "fd1d7346f8721f62052607928e52ac1a6665ecf02a465d2cab2a3f5cf951b467",
+        "sourceSha256": "8c9e97d25fc9343412ce4f9747e42b510f5dc43774c8d1c964b573b27cb4677a",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-water-quality-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 337654,
+        "sha256": "d3fcf25234b402c76a4a7ef0283d659b00d84e794d48f1306a0c8c65b8d10ee1"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 339543,
+        "sha256": "7e4d65b3c166a526f17fcc9161da7d67ba4903b2efd68d75ef6be1a473cbcb80"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-2/figures/F1.png",
+        "sha256": "371328c5a8983b97e607db9fe8c70630a46ba5a7c14722a6ee6b3ffe2e0e32f1",
+        "sourceSha256": "88614a03c740c706feb43cf44974a0ee9d7e58bf9c1777b4df71c9cb83ba7788",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-2/figures/F2.png",
+        "sha256": "da52524ac009974e4e3a3339fefbd137f8526c2c23b948471b1b0d760cb9cd9e",
+        "sourceSha256": "450304c520b94b9c228ecc55f6177723d7eee010fbbe48aa2b4a0ae7bf75a911",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-2/figures/F3.png",
+        "sha256": "c96e45ac8000566da94fae5137c8342138279c5e842bc2b7effe1bb0dee7cec8",
+        "sourceSha256": "37658c50c038d3e3961dc9797371ccbb252e43c9e532b8baa148c64cc0bfde70",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-2/figures/F4.png",
+        "sha256": "fd1d7346f8721f62052607928e52ac1a6665ecf02a465d2cab2a3f5cf951b467",
+        "sourceSha256": "8c9e97d25fc9343412ce4f9747e42b510f5dc43774c8d1c964b573b27cb4677a",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-water-quality-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 337524,
+        "sha256": "5c81cb41d1af21ce17148a74469c10ba8e6312a543651d93c5a64c7acf96faca"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 339607,
+        "sha256": "b89c5ac7208cc3588abeb6ee88e21d72e8b0d7dec361b6febd7e02600314fea4"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-3/figures/F1.png",
+        "sha256": "bf65074c3a8026bfd904ef5fddad2607ed0cf87caa0f7cf6e51a13dfa5b78bf1",
+        "sourceSha256": "bccb6ce840df627678ff92a1c25c5e4e675cd87ee6f5cb21877b1652559d8393",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-3/figures/F2.png",
+        "sha256": "da52524ac009974e4e3a3339fefbd137f8526c2c23b948471b1b0d760cb9cd9e",
+        "sourceSha256": "450304c520b94b9c228ecc55f6177723d7eee010fbbe48aa2b4a0ae7bf75a911",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-3/figures/F3.png",
+        "sha256": "6e1d6f6fb69ebc0d11885685e2ac585dadd9550d11b77c77207793898e0df6e9",
+        "sourceSha256": "5618402aceba54623faa814e8a9cbf2a9f9094139b3b7890ef06813dab27f7ad",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-water-quality-form-3/figures/F4.png",
+        "sha256": "fd1d7346f8721f62052607928e52ac1a6665ecf02a465d2cab2a3f5cf951b467",
+        "sourceSha256": "8c9e97d25fc9343412ce4f9747e42b510f5dc43774c8d1c964b573b27cb4677a",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-dynamic-planet-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 9,
+        "bytes": 264628,
+        "sha256": "10d3f889ad5d688f1c5a4635b083abc73700f6c31d0c442cb542d4fe7eb9e50c"
+      },
+      {
+        "role": "key",
+        "pages": 9,
+        "bytes": 265704,
+        "sha256": "8b3959f8598d5436b844ba63242f6af38532339364033acb2620827eecde9347"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-dynamic-planet-form-1/figures/F1.png",
+        "sha256": "13a9ec29c99414b7ed2d1e03032a458fff08054b4905812a725c786f84abac19",
+        "sourceSha256": "02a12e5f60f3d4c2be27017c5fba6aa5305086d740ce15ce0874ce181b81f816",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-dynamic-planet-form-1/figures/F2.png",
+        "sha256": "a59b5c7585f95bd5777b0d2a477ff7362019fb84ce3b5e7ca1d12969d49104a7",
+        "sourceSha256": "ae3f11a79a0d20d36d7ade9b9bc5ead0baae2f1ac083ef576011012b9e849bc1",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-dynamic-planet-form-1/figures/F3.png",
+        "sha256": "d7fc4709b260c7df3f01bd3721524acf4077d368522b1d606d3d412148dddfed",
+        "sourceSha256": "7bc140d0a483160be630b2e18a42cba44a6f89c4fa4fe254530cf370a3fbe530",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-dynamic-planet-form-1/figures/F4.png",
+        "sha256": "1b0e0ed56ce69fe3800c51aad30b344fad8f0bf64dd6210e97040420eef37b10",
+        "sourceSha256": "08400e24bbbd0b020674fddba137efc91284baab9c66c15934bc12c345ad9ddf",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-meteorology-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 11,
+        "bytes": 319701,
+        "sha256": "c00496ae4671d4fb0e66708a462a55a6284b2cf3c27574120b94ad58bb39ad48"
+      },
+      {
+        "role": "key",
+        "pages": 11,
+        "bytes": 321139,
+        "sha256": "a915d9757626084f38d3f463e150b657269e026cd6e0f5d7234e0ebb5cbe5cf1"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-1/figures/F1.png",
+        "sha256": "a70ff0778532acd3f1fe12313ef1f94684fc0430308f149dc4fe7423a40b580c",
+        "sourceSha256": "5f7dc64fc089e28fdfeb66bcf5050ad6f22dcee9460ef2c5c68c068e76947a1d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-1/figures/F2.png",
+        "sha256": "7afda4031928b747c23a815b7ae60646ddccf7002a019cf3dc345b0141b4eb60",
+        "sourceSha256": "113dfec3b1f109ce44c618f1bb5aa91cd9065c5f8d57de1dd86aeb6aa240239c",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-1/figures/F3.png",
+        "sha256": "960b17458c44bb98f7e3c0f84852b2e0367a69ef39510538a131bd36c9548835",
+        "sourceSha256": "e503ce2d16454bf087d70ce1282c10aaba407ac87ac76efb81f7eb0aa4c8ad7d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-1/figures/F4.png",
+        "sha256": "ecf2df3df996d5c9d8563b636cef8eced82e64af611ac3b5904fc2140f096ab3",
+        "sourceSha256": "28bd98703e1d75a85171d8793b4969ce191a4115a5b34cc3d34852556292b005",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-meteorology-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 11,
+        "bytes": 320189,
+        "sha256": "ba2209ad6d67421a43f0fed5e85adc35b440e58b953d994b8f3186acb29e011b"
+      },
+      {
+        "role": "key",
+        "pages": 11,
+        "bytes": 321645,
+        "sha256": "24653d5b4187d3dd298bcecd735b2c6c2750c9d3262ac0b9ae40fc010bcd16cd"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-2/figures/F1.png",
+        "sha256": "a70ff0778532acd3f1fe12313ef1f94684fc0430308f149dc4fe7423a40b580c",
+        "sourceSha256": "5f7dc64fc089e28fdfeb66bcf5050ad6f22dcee9460ef2c5c68c068e76947a1d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-2/figures/F2.png",
+        "sha256": "7afda4031928b747c23a815b7ae60646ddccf7002a019cf3dc345b0141b4eb60",
+        "sourceSha256": "113dfec3b1f109ce44c618f1bb5aa91cd9065c5f8d57de1dd86aeb6aa240239c",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-2/figures/F3.png",
+        "sha256": "8188d28d18868587e034ca125fec089674693c154d4196c5d3706c0c4d7b0b74",
+        "sourceSha256": "1f0820b0643aef4023b7f6207ddc87ceff483225cc02b54a2e794f514f8cf7c7",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-meteorology-form-2/figures/F4.png",
+        "sha256": "ecf2df3df996d5c9d8563b636cef8eced82e64af611ac3b5904fc2140f096ab3",
+        "sourceSha256": "28bd98703e1d75a85171d8793b4969ce191a4115a5b34cc3d34852556292b005",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-remote-sensing-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 329294,
+        "sha256": "fa3ccea6997bd1f73af8ef5063bee8aaed5eebaba0f82177100ce488632daa30"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 330256,
+        "sha256": "626b72b317e1ea65cf826dc612831cda526e3284b5a30dad1e791a33b5931fae"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-1/figures/F1.png",
+        "sha256": "4ccaafd7d0cde2fe3cc3fd953635e241177f4761e1f25b592b3d0c8ab82e0354",
+        "sourceSha256": "cc581ae9fbfa5ab40526bda62087f6af904e2e0fc076d32e89b241d31226d958",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-1/figures/F2.png",
+        "sha256": "568d5e1c9ba811b0c3b73cebb54c7ddb96732b44fe0ca002fb4f935e1f3c186c",
+        "sourceSha256": "6d283a6cbaf7ef6ed4a76d95a223371d0db14a0f6b5c40f7315b3dc3fb11afc9",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-1/figures/F3.png",
+        "sha256": "35ab83105f8a04657138c18d3dda6a06e74893844789b70713794f2d50564922",
+        "sourceSha256": "36b4bfa55794d8c0b7ee8d95c1fce32016cb7ecddfae8b246bda1032fbaefd22",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-1/figures/F4.png",
+        "sha256": "981f360ed17f57c918bf8986ccc6970a69b41a273c5c2b012db5020cf1efb2c0",
+        "sourceSha256": "33850067783da7e16404643ee684bf8a3e7cfa8e94ab091d83d86bf58d50abda",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-remote-sensing-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 329661,
+        "sha256": "1efcc7b37ed0e6380cccfb3cc63a4ff93003b0e3aac8c59fcfb8c387b0012814"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 330611,
+        "sha256": "770a53e1a8234cb0ffc2c76dba1fcbb4fe2e3cf627a8b083c9aead0944f04955"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-2/figures/F1.png",
+        "sha256": "4ccaafd7d0cde2fe3cc3fd953635e241177f4761e1f25b592b3d0c8ab82e0354",
+        "sourceSha256": "cc581ae9fbfa5ab40526bda62087f6af904e2e0fc076d32e89b241d31226d958",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-2/figures/F2.png",
+        "sha256": "c58f4704e6193fdd9a90795fa5c046eb3993b38c18288e0a542ab99f6f9ec016",
+        "sourceSha256": "b4b1c6f0f6dcfb7385f74ec3fed058df4620499a0ad9fb32ac42b536ef82a575",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-2/figures/F3.png",
+        "sha256": "35ab83105f8a04657138c18d3dda6a06e74893844789b70713794f2d50564922",
+        "sourceSha256": "36b4bfa55794d8c0b7ee8d95c1fce32016cb7ecddfae8b246bda1032fbaefd22",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-remote-sensing-form-2/figures/F4.png",
+        "sha256": "981f360ed17f57c918bf8986ccc6970a69b41a273c5c2b012db5020cf1efb2c0",
+        "sourceSha256": "33850067783da7e16404643ee684bf8a3e7cfa8e94ab091d83d86bf58d50abda",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-solar-system-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 10,
+        "bytes": 366124,
+        "sha256": "cc4977d8976ec0d9847588deee52d667349fb4453e18431025ea6368d5a4dc61"
+      },
+      {
+        "role": "key",
+        "pages": 10,
+        "bytes": 367417,
+        "sha256": "2ebee55775964cea099c6bbd1c961de1aaf4f5cbb1aa575a1f7328719d2be33d"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-solar-system-form-1/figures/F1.png",
+        "sha256": "5faa1fb3a4925c7d240ebb4758172abe4cffa4ae7d9f5dc52fd1a0758da41365",
+        "sourceSha256": "48f8f4e0c6533a5c74832878837a7a902952b969c5ae3bb55ee818d438496d71",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-solar-system-form-1/figures/F2.png",
+        "sha256": "696c3855cfde49e43eab8064c7cee3d622fff0b762dece19d6fa4fe61665cd3e",
+        "sourceSha256": "d7736693b53de4735926cc029c042e9a90f2090e51d923d54a0881a7a017310b",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-solar-system-form-1/figures/F3.png",
+        "sha256": "4f406d318b9f808c599a82055dcf3388f4d9c835e35e406fea3688a0398ccc93",
+        "sourceSha256": "79b5d63116b75fe70c3b3555990be7268992dea3dc9b409c6daa66b5af0c6c6c",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-solar-system-form-1/figures/F4.png",
+        "sha256": "b0baa6b6b5544288c9f7d194a173c11e9468b37f112a7e66187194b5c68f3165",
+        "sourceSha256": "8740c3d8195ad4c427556bdf6b06d1b8d86e211d72a1fc2e26dbf81f06c74dec",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-crime-busters-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 11,
+        "bytes": 295578,
+        "sha256": "28324a21ffd518bda38e0f34ac92b094356dacb6f4444246181990004fe4e2ce"
+      },
+      {
+        "role": "key",
+        "pages": 11,
+        "bytes": 296840,
+        "sha256": "a502d6a6fca1f00fd3f924e55fcd1310e400a80a6b1155a407defc29d197b7e7"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-crime-busters-form-1/figures/F1.png",
+        "sha256": "42561039a03b0e8ce0d75b27744c9d602a6705741df05905a68646f166be42c7",
+        "sourceSha256": "a4cf719ec3d3d019bda13e24c06490ff2f2a375239532d8886f3fd428c5a6df1",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-crime-busters-form-1/figures/F2.png",
+        "sha256": "d31ca76e9dace0531ea4296bab2b98ed101c6dfd825f8e8636d1bc2f5d6c4fd0",
+        "sourceSha256": "4084a70e4d7012eeba35bc1d5750f9066d75df86e0bef5a9de24b96deb1478a0",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-crime-busters-form-1/figures/F3.png",
+        "sha256": "7c69c8a216aef4fb0cdb26a3b6014a1fbda927808d190000fef9b7deed08d11c",
+        "sourceSha256": "59ea6825a98b30a6f9df7567f840a8c428f3f389d52b64be07de399e86b3c185",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-crime-busters-form-1/figures/F4.png",
+        "sha256": "0aa8dea5b734f440d33e29a5030f0dd01eae297995c03b13a9a6230fe79e9996",
+        "sourceSha256": "29a80b0edb7b5c3c77d369b261af30fe7e9440c17503097a87f6eeadb3c4db0d",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-food-science-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 10,
+        "bytes": 333800,
+        "sha256": "cb4064f44ad5db2e4586d2ebc06f037964c724162a5473c48e1811bfb6e378eb"
+      },
+      {
+        "role": "key",
+        "pages": 10,
+        "bytes": 334971,
+        "sha256": "91819589ff6fdb34f84ac6610adc7f836240aa465b853a19ae95184ea0529e92"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-1/figures/F1.png",
+        "sha256": "694420ca804f9e95efb8bc91b467b597eaf0b7c33c4aa1e17eb6cf36e36ac541",
+        "sourceSha256": "a59f535fc379225135f3b181d191f1d6167f6a85ebaad8f667f3ff0b590c1f22",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-1/figures/F2.png",
+        "sha256": "69f8468e8a846f67861aea5df18f407760153c38193886f8c781511371d3af36",
+        "sourceSha256": "a02f499a3c3bf12d2168af108fd5a236998d9444145c196b8dde13a65bddbe90",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-1/figures/F3.png",
+        "sha256": "ba67cee898f2a986b73b946b70ba1b1baa128eca8f43f9ae9c92db4e1c2bbd01",
+        "sourceSha256": "9042e57448f463c79f5fbf4a73e39e1e09802f91a073b8e7f7f104a24f8bfe02",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-1/figures/F4.png",
+        "sha256": "216685e799f19fa35292104ea19984977480dde596746d0a5a2de2a11a76d62b",
+        "sourceSha256": "07ae15f1ff3195d89eff6fe25f4ab52ed3227e55d8c76ac30120754cd1499306",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-food-science-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 10,
+        "bytes": 333101,
+        "sha256": "d3423889f2bcec0d021c08fffc47a19dd43cdac608acd34000ae608368bcb8de"
+      },
+      {
+        "role": "key",
+        "pages": 10,
+        "bytes": 334304,
+        "sha256": "a83ff96b36bcb54bd5574db45308b7dc54d7addd1455e020c25d32749a6d3876"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-2/figures/F1.png",
+        "sha256": "2024c0fc3c8f86814b7083b0af36e11771c4fa2750ed118d47d036d9fe8f77ca",
+        "sourceSha256": "d387439a36da368e7177ff24c5bf36cee709613d383714d22b5c4377dcfb0c0c",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-2/figures/F2.png",
+        "sha256": "0564f9762851884674498870eb84acd7b4a8f664bbc645877d6f27dfebc2973d",
+        "sourceSha256": "9f72c4ffa1ec181f713fdb92ee1c919bde1cce6efa2bee7bbdfc9995629324e8",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-2/figures/F3.png",
+        "sha256": "ba67cee898f2a986b73b946b70ba1b1baa128eca8f43f9ae9c92db4e1c2bbd01",
+        "sourceSha256": "9042e57448f463c79f5fbf4a73e39e1e09802f91a073b8e7f7f104a24f8bfe02",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-food-science-form-2/figures/F4.png",
+        "sha256": "216685e799f19fa35292104ea19984977480dde596746d0a5a2de2a11a76d62b",
+        "sourceSha256": "07ae15f1ff3195d89eff6fe25f4ab52ed3227e55d8c76ac30120754cd1499306",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-circuit-lab-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 222430,
+        "sha256": "76e391a2fa96da8a1f6a2996330ae39a71a51efe63334d4b5169d8cf9c773ab3"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 223511,
+        "sha256": "fc26e3c015bfc879a68a2ad0f3c3881c4e7bb30224b64a0e4ea0a2f26cb690a2"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-1/figures/F1.png",
+        "sha256": "2a213e5e3d80e3d82d7b7acb71a674235ee92df62961319d35f5d0e7c1e6ea29",
+        "sourceSha256": "32e3c38c2f28159d3793107b74c09d0987c1eb1c1c8232d928019af73148363c",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-1/figures/F2.png",
+        "sha256": "fee709f13f7c4aeb59647c7dc3a6f1d8c8e7965205d5b12e84831fb45403a787",
+        "sourceSha256": "bfa5ab36f4deb6c18e464274a4dcf02bd1b842c8212fd921b7faaf587a0279fd",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-1/figures/F3.png",
+        "sha256": "0449371026e5e3177f50317e0fa67baf63203b7c3b24643ea24fd2f10c03e139",
+        "sourceSha256": "016037335b7e39c45b19cbf830f7808c6c1997b703b442655315ae3b6dbd9125",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-1/figures/F4.png",
+        "sha256": "29cabf27943651ff7e0a6f449b63375712f60c3f2c9191f2db6b600d2e769461",
+        "sourceSha256": "094020a658fdad5a877ff7780ffd89cfe2c4940fc60b53811f1cd89cde50574f",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-b-circuit-lab-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 223703,
+        "sha256": "820104c35798fcb7d35e0bc958f72a935f6ae5df49b2ae4bae4f653dd777f02a"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 224775,
+        "sha256": "73e9e66a2f57653431af5528f572a48e59e72f8241caa6f9245e1dbe7f8d0d13"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-2/figures/F1.png",
+        "sha256": "b2f9f9117473504bb06279325f5e04bfc4ff2c802931dbaacd7d56225ef262f2",
+        "sourceSha256": "af6b182b0087ca122e69da75657ad8d7982b8007769231c3961bc481e302c0c5",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-2/figures/F2.png",
+        "sha256": "a64fcbc61df1bf4b98d312fd667af18d22e52298bcfd076db21cdfc2ee77fe85",
+        "sourceSha256": "3ea39f8dd4653c6e11d7f11e70df5083d4f28965fee46fe4fd700d16528efe5f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-2/figures/F3.png",
+        "sha256": "0449371026e5e3177f50317e0fa67baf63203b7c3b24643ea24fd2f10c03e139",
+        "sourceSha256": "016037335b7e39c45b19cbf830f7808c6c1997b703b442655315ae3b6dbd9125",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-b-circuit-lab-form-2/figures/F4.png",
+        "sha256": "29cabf27943651ff7e0a6f449b63375712f60c3f2c9191f2db6b600d2e769461",
+        "sourceSha256": "094020a658fdad5a877ff7780ffd89cfe2c4940fc60b53811f1cd89cde50574f",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-anatomy-and-physiology-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 9,
+        "bytes": 375282,
+        "sha256": "321456be00e13e7e65f9c5b574423cf694e782cec57149f41a3401d5082bc4a3"
+      },
+      {
+        "role": "key",
+        "pages": 9,
+        "bytes": 376653,
+        "sha256": "25d1a38ad5d1e2b9c8fed9f2392f882ce49c9aac9c35d308662023a4cee9ea8c"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-1/figures/F1.png",
+        "sha256": "a47ba7edfac0841ffd752cc4909e76e5f41ff8edd061bcf611a486c00c42340c",
+        "sourceSha256": "c78628cf7e78bfdd10f9ec137ceaca68accda14f01dc763210e150165af0f642",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-1/figures/F2.png",
+        "sha256": "1c45129216296051ab5bed79891ca43984366995c8b2fe139b44d39d85d76e91",
+        "sourceSha256": "3c11b3c506296d90e40edabb83bcaef85f3f7c46bd89280de99de58d5af817cb",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-1/figures/F3.png",
+        "sha256": "0408296f4fb1a1207de6497eb29764455f246f5caa67d176fb77ad9f725fad30",
+        "sourceSha256": "6220584623dab19f7b7fb3b7630ee722c1b5e7fef05690a94e3f400000781e94",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-1/figures/F4.png",
+        "sha256": "de1e493b821098fbc1ac1cd1a31a1980aecadb3ddd18659eb397a7bcefc86c10",
+        "sourceSha256": "72b5e73d64726afa08cd5229daba36706519c96e2963c7b20f5df79bfab1a3cf",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-anatomy-and-physiology-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 9,
+        "bytes": 374891,
+        "sha256": "f8545befeb5a95260d3061c7f8294f88526e2bb3518a0080bf8b6761e7e0fcae"
+      },
+      {
+        "role": "key",
+        "pages": 9,
+        "bytes": 376134,
+        "sha256": "f4cae7d741bbfabd798a3170347eb3a07f041f4f9c0a8577947e02312e1b838c"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-2/figures/F1.png",
+        "sha256": "a47ba7edfac0841ffd752cc4909e76e5f41ff8edd061bcf611a486c00c42340c",
+        "sourceSha256": "c78628cf7e78bfdd10f9ec137ceaca68accda14f01dc763210e150165af0f642",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-2/figures/F2.png",
+        "sha256": "1c45129216296051ab5bed79891ca43984366995c8b2fe139b44d39d85d76e91",
+        "sourceSha256": "3c11b3c506296d90e40edabb83bcaef85f3f7c46bd89280de99de58d5af817cb",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-2/figures/F3.png",
+        "sha256": "0408296f4fb1a1207de6497eb29764455f246f5caa67d176fb77ad9f725fad30",
+        "sourceSha256": "6220584623dab19f7b7fb3b7630ee722c1b5e7fef05690a94e3f400000781e94",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-anatomy-and-physiology-form-2/figures/F4.png",
+        "sha256": "de1e493b821098fbc1ac1cd1a31a1980aecadb3ddd18659eb397a7bcefc86c10",
+        "sourceSha256": "72b5e73d64726afa08cd5229daba36706519c96e2963c7b20f5df79bfab1a3cf",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-water-quality-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 337429,
+        "sha256": "3cb5f13e2ec84cdc83b25ff74e1164c77b7a879d19905ca859905822597694df"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 339335,
+        "sha256": "9e672e42fd7bbd551836e3a3c6cd9988e51e5146f78db7ebb554de92bb106256"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-1/figures/F1.png",
+        "sha256": "c3196819a113939cb73de66540f148e25dd868101a32486283adce4766526d44",
+        "sourceSha256": "6d4ff95a1c771b9cc5bde5e1afb329e42183a459e6e64593dbeb5881d39e8225",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-1/figures/F2.png",
+        "sha256": "da52524ac009974e4e3a3339fefbd137f8526c2c23b948471b1b0d760cb9cd9e",
+        "sourceSha256": "450304c520b94b9c228ecc55f6177723d7eee010fbbe48aa2b4a0ae7bf75a911",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-1/figures/F3.png",
+        "sha256": "729caaf8a6c18551344a9910913d7dd75f283fb11da258a43baf562db7683985",
+        "sourceSha256": "9169075883b739ae709f798de6a7abe298249a7efd46f57984b76e3ab2a3088f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-1/figures/F4.png",
+        "sha256": "fd1d7346f8721f62052607928e52ac1a6665ecf02a465d2cab2a3f5cf951b467",
+        "sourceSha256": "8c9e97d25fc9343412ce4f9747e42b510f5dc43774c8d1c964b573b27cb4677a",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-water-quality-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 337654,
+        "sha256": "bfeaf93d156f8b4387b51f7af2ff6e1456204380392d970e544d6aa78b478d51"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 339543,
+        "sha256": "a580b6b4641b489c8b90c10756c9cff6146f4771c4d8320b2fbb33bb8bffda7c"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-2/figures/F1.png",
+        "sha256": "371328c5a8983b97e607db9fe8c70630a46ba5a7c14722a6ee6b3ffe2e0e32f1",
+        "sourceSha256": "88614a03c740c706feb43cf44974a0ee9d7e58bf9c1777b4df71c9cb83ba7788",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-2/figures/F2.png",
+        "sha256": "da52524ac009974e4e3a3339fefbd137f8526c2c23b948471b1b0d760cb9cd9e",
+        "sourceSha256": "450304c520b94b9c228ecc55f6177723d7eee010fbbe48aa2b4a0ae7bf75a911",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-2/figures/F3.png",
+        "sha256": "c96e45ac8000566da94fae5137c8342138279c5e842bc2b7effe1bb0dee7cec8",
+        "sourceSha256": "37658c50c038d3e3961dc9797371ccbb252e43c9e532b8baa148c64cc0bfde70",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-water-quality-form-2/figures/F4.png",
+        "sha256": "fd1d7346f8721f62052607928e52ac1a6665ecf02a465d2cab2a3f5cf951b467",
+        "sourceSha256": "8c9e97d25fc9343412ce4f9747e42b510f5dc43774c8d1c964b573b27cb4677a",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 298460,
+        "sha256": "871450be5cf62466476f6de8d9f6819b8d36aa636135e1cf785df522f512d97b"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 299912,
+        "sha256": "73772dab0ebdc5eb1329060c9d7c3ddf46f5b8e23907dcbdfcbf33380a8bde21"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-1/figures/F1.png",
+        "sha256": "628bc38f94ff67916f9a75ba7292d5083c159d3b3d282c0dd4a6ebaa88e4e298",
+        "sourceSha256": "8b3f96333e86420ddd49701e1239161587b9a89a474cd8843226fc73960207de",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-1/figures/F2.png",
+        "sha256": "58f5d6aba27e548a415664d87318b07b358c1ac870ad0a7197f9c6d7981697d5",
+        "sourceSha256": "c54d8c8dba727bcc49a04ab92889c5d61ae17c90fd98ffe351448187e9d4b21f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-1/figures/F3.png",
+        "sha256": "ac369d131a1b4318d192648860bba65ab32d501f785a13d8ed5435b295a60fd8",
+        "sourceSha256": "f49f21b5b221228006f74752b8b976dfd4b6e58a438c94c83216c3cc35b9525a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-1/figures/F4.png",
+        "sha256": "612990f6edc3f9fe6b4f74ad05900543f5b3bae3f39b8ffb1b1d806f5f1d5be7",
+        "sourceSha256": "c6ba13274949d4575729ce7bcc2ffacbb8bef93e4f9eede7bd695ca946cab8ef",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 298370,
+        "sha256": "ddd06883c8c977b46d895f355602520311b90f5df8c44a8848c72c6307235a20"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 299775,
+        "sha256": "b79a666dbd3e01b0ef47a24be14fcc919d9ecb0676bf1a5b74c2275e7ffbcf99"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-2/figures/F1.png",
+        "sha256": "628bc38f94ff67916f9a75ba7292d5083c159d3b3d282c0dd4a6ebaa88e4e298",
+        "sourceSha256": "8b3f96333e86420ddd49701e1239161587b9a89a474cd8843226fc73960207de",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-2/figures/F2.png",
+        "sha256": "ef64f5049e43381dabbfb8e1f5d8aff41724a66f2f9886237c52f4917d210fd3",
+        "sourceSha256": "721fe2d83de4e2b8536fcb695a570b00a27f02e5f246208cc48727a64342d988",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-2/figures/F3.png",
+        "sha256": "ac369d131a1b4318d192648860bba65ab32d501f785a13d8ed5435b295a60fd8",
+        "sourceSha256": "f49f21b5b221228006f74752b8b976dfd4b6e58a438c94c83216c3cc35b9525a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-2/figures/F4.png",
+        "sha256": "612990f6edc3f9fe6b4f74ad05900543f5b3bae3f39b8ffb1b1d806f5f1d5be7",
+        "sourceSha256": "c6ba13274949d4575729ce7bcc2ffacbb8bef93e4f9eede7bd695ca946cab8ef",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 298627,
+        "sha256": "ecb2422c96c1ad4c808dae163dccdf073dd75a4b85d60ae156f74129dc9efe08"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 300045,
+        "sha256": "f7b775ad369439cd2d0d40b79ee6f236cd7446d04827d16b13e3763b6aea0be1"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-3/figures/F1.png",
+        "sha256": "628bc38f94ff67916f9a75ba7292d5083c159d3b3d282c0dd4a6ebaa88e4e298",
+        "sourceSha256": "8b3f96333e86420ddd49701e1239161587b9a89a474cd8843226fc73960207de",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-3/figures/F2.png",
+        "sha256": "30fd32ea8a8a83ca008e50b71fc124324892002ac9cb45d482709a28cc3a2df4",
+        "sourceSha256": "de4234bc6b071efd00446c705555de014e7549cee026cb0ace699207feb5b7f5",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-3/figures/F3.png",
+        "sha256": "ac369d131a1b4318d192648860bba65ab32d501f785a13d8ed5435b295a60fd8",
+        "sourceSha256": "f49f21b5b221228006f74752b8b976dfd4b6e58a438c94c83216c3cc35b9525a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-3/figures/F4.png",
+        "sha256": "612990f6edc3f9fe6b4f74ad05900543f5b3bae3f39b8ffb1b1d806f5f1d5be7",
+        "sourceSha256": "c6ba13274949d4575729ce7bcc2ffacbb8bef93e4f9eede7bd695ca946cab8ef",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 298603,
+        "sha256": "801b633bd52e750a2fdd74bd9b0feb60b2ed944a46baf2bb0815278d5c721df8"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 300073,
+        "sha256": "4f1492e39aa0e9b10bf9c135edb7e474f15126d76dc1fed871376c4d86cdd975"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-4/figures/F1.png",
+        "sha256": "628bc38f94ff67916f9a75ba7292d5083c159d3b3d282c0dd4a6ebaa88e4e298",
+        "sourceSha256": "8b3f96333e86420ddd49701e1239161587b9a89a474cd8843226fc73960207de",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-4/figures/F2.png",
+        "sha256": "bf82299a4cb2cff1cb8e6ffe1cb739cd2049d2eab84248d72056416ff4afb195",
+        "sourceSha256": "f0b77a8be3254a44249a394e973888731ae830dae505e6365195e98a7c8cde16",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-4/figures/F3.png",
+        "sha256": "ac369d131a1b4318d192648860bba65ab32d501f785a13d8ed5435b295a60fd8",
+        "sourceSha256": "f49f21b5b221228006f74752b8b976dfd4b6e58a438c94c83216c3cc35b9525a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-4/figures/F4.png",
+        "sha256": "612990f6edc3f9fe6b4f74ad05900543f5b3bae3f39b8ffb1b1d806f5f1d5be7",
+        "sourceSha256": "c6ba13274949d4575729ce7bcc2ffacbb8bef93e4f9eede7bd695ca946cab8ef",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-astronomy-form-5",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 298768,
+        "sha256": "b1fc81a5b083dd0f75cd3f71dc47679be7557ce47fd47439f6ed8f9babe75ab9"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 300422,
+        "sha256": "c4d4d5f9cbb9ef7955ecc04544b29c0179cbdb4466327fc51ce8aec123e3a05f"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-5/figures/F1.png",
+        "sha256": "628bc38f94ff67916f9a75ba7292d5083c159d3b3d282c0dd4a6ebaa88e4e298",
+        "sourceSha256": "8b3f96333e86420ddd49701e1239161587b9a89a474cd8843226fc73960207de",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-5/figures/F2.png",
+        "sha256": "44ea3002ed6e1beb9137414d41cbbbd7b8c9621254045adf7ab5bc477b0ab506",
+        "sourceSha256": "d17a8a7b54de48df3afcead0e68e50037fc798076078e8855a6583b727b67815",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-5/figures/F3.png",
+        "sha256": "ac369d131a1b4318d192648860bba65ab32d501f785a13d8ed5435b295a60fd8",
+        "sourceSha256": "f49f21b5b221228006f74752b8b976dfd4b6e58a438c94c83216c3cc35b9525a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-astronomy-form-5/figures/F4.png",
+        "sha256": "612990f6edc3f9fe6b4f74ad05900543f5b3bae3f39b8ffb1b1d806f5f1d5be7",
+        "sourceSha256": "c6ba13274949d4575729ce7bcc2ffacbb8bef93e4f9eede7bd695ca946cab8ef",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-dynamic-planet-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 263753,
+        "sha256": "1b0641130a236653e842fec481684d619ebfe3d0cb662a96ee51a83c7ce725b4"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 264825,
+        "sha256": "6f3c6e29e6cafb21941ff8e73eeda177025a8b77717057e231f98ee9255229ae"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-1/figures/F1.png",
+        "sha256": "13a9ec29c99414b7ed2d1e03032a458fff08054b4905812a725c786f84abac19",
+        "sourceSha256": "02a12e5f60f3d4c2be27017c5fba6aa5305086d740ce15ce0874ce181b81f816",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-1/figures/F2.png",
+        "sha256": "a59b5c7585f95bd5777b0d2a477ff7362019fb84ce3b5e7ca1d12969d49104a7",
+        "sourceSha256": "ae3f11a79a0d20d36d7ade9b9bc5ead0baae2f1ac083ef576011012b9e849bc1",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-1/figures/F3.png",
+        "sha256": "d7fc4709b260c7df3f01bd3721524acf4077d368522b1d606d3d412148dddfed",
+        "sourceSha256": "7bc140d0a483160be630b2e18a42cba44a6f89c4fa4fe254530cf370a3fbe530",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-1/figures/F4.png",
+        "sha256": "1b0e0ed56ce69fe3800c51aad30b344fad8f0bf64dd6210e97040420eef37b10",
+        "sourceSha256": "08400e24bbbd0b020674fddba137efc91284baab9c66c15934bc12c345ad9ddf",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-dynamic-planet-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 265710,
+        "sha256": "686c7b0ccda8988f993a6fd70b0b3cbf65d67d1c34ed0e21abb751a9812ca6f4"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 266725,
+        "sha256": "8092b5c9ed0703068f84dcb5943f1b0ae27100d817f4a83451d584b87d7c5357"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-2/figures/F1.png",
+        "sha256": "ee9dc81ea07ddfc844ed5bd74d0cbb8fe60b003612f6858a3b4e589a3bb24624",
+        "sourceSha256": "878144345d512af03c1171ced8b7947a94922695d47a6c22c32a7c6cc53a5210",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-2/figures/F2.png",
+        "sha256": "cf6fcfac78dc48291d097c1734a22e0e647af785d98ef8ccfb0e1a7819f66a63",
+        "sourceSha256": "41018e6cb2d2cbf8a92d1b4711a0e4c096cfcaf0f785988e0a75ce3f1c7e451d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-2/figures/F3.png",
+        "sha256": "8ee3cc5688b2a247f5a04d81d42a289a165d7984d9db95a3291c51cd4dba246e",
+        "sourceSha256": "08df5f97447488094d19ae9a8a72fa8cae0b925afbd3ff8c0b03dd44a93e029f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-2/figures/F4.png",
+        "sha256": "1b0e0ed56ce69fe3800c51aad30b344fad8f0bf64dd6210e97040420eef37b10",
+        "sourceSha256": "08400e24bbbd0b020674fddba137efc91284baab9c66c15934bc12c345ad9ddf",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-dynamic-planet-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 265768,
+        "sha256": "0773a9d671eceaa98b07fc818d6ca24dda80837e6acce0685b1fe89a5aa1cdc4"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 266833,
+        "sha256": "0d09712c0447a94686820cfba1fac5488850f6febd5f7c5f75b46e49c8fa2261"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-3/figures/F1.png",
+        "sha256": "3a2deafabbe7c2be4ab0de6528db62546932abfeb9ca6c2790b4ab4fab0c8fa0",
+        "sourceSha256": "8500e2b87e2c365fa257819be3b2149f815416d4a6525b45129fa8eaa5c2b194",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-3/figures/F2.png",
+        "sha256": "24dc0f49ddc307d29c4f4779c12fe617d8e98c9b8d7b07ce4fc056bb6b22b413",
+        "sourceSha256": "507b2cd05c26b485571723c4a1ae3e2e9213970140ff88dde04ad22843d7c35e",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-3/figures/F3.png",
+        "sha256": "b279fcaaceb0641560d81c9549a914fef2c2b2911e9396f131438e923e63bc3f",
+        "sourceSha256": "92b4e64c44539e9815a8b8c2d90dde8212bfdc2e85d30af23816a20d9354d16f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-dynamic-planet-form-3/figures/F4.png",
+        "sha256": "1b0e0ed56ce69fe3800c51aad30b344fad8f0bf64dd6210e97040420eef37b10",
+        "sourceSha256": "08400e24bbbd0b020674fddba137efc91284baab9c66c15934bc12c345ad9ddf",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 383062,
+        "sha256": "4a5d4b5b70180f6134e6b4ab00fe264d42bb46fb90ed5d9304495589b73d28c7"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 385155,
+        "sha256": "33dcec61be3cb2c8f3231427310ae484c8b25e7f864d5b98f31dee438f13d000"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-1/figures/F1.png",
+        "sha256": "cf02c8a16459c3b585bd146eec01ce2d1217772e9688eb92cecfef5d93bd6501",
+        "sourceSha256": "db048723f833a94e074c92fac456d908eb063c95c5fed812821fe9a5b04d66b0",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-1/figures/F2.png",
+        "sha256": "75cdf337c8ffb7760a146e1eb3e0b8de3169b6cb4864623baf0988b04f1701e6",
+        "sourceSha256": "a3e962fd8eaf0f05a344e649307748660406e43b5f5e49b5bc22ecdb96465e4f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-1/figures/F3.png",
+        "sha256": "e1bca5d30a86f2683ee381fdec1239da40b9b926e3ff11a5d6821aebe6e5d65a",
+        "sourceSha256": "64d2e857f403c79d499814e199b7a8cd5899c7c4f6c744d8b013445166e2e2ff",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-1/figures/F4.png",
+        "sha256": "4a708a11ffb44e783a840b0a13f0b922582834fc20c79368db3f5431a94aae20",
+        "sourceSha256": "7d745521124eceb6b9f2f0d38672e542ee2869f75a90365401ef9e0991d8f90c",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 384174,
+        "sha256": "49cd596166b8a1dc1f5207b9143b48fcd2b242719956df75addcceb703ca08ba"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 386239,
+        "sha256": "0fcdcbde30ca68258441f353242931f162c01e72981da7f19d31cfb7467ef434"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-2/figures/F1.png",
+        "sha256": "cf02c8a16459c3b585bd146eec01ce2d1217772e9688eb92cecfef5d93bd6501",
+        "sourceSha256": "db048723f833a94e074c92fac456d908eb063c95c5fed812821fe9a5b04d66b0",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-2/figures/F2.png",
+        "sha256": "c845259ab182c3dbc369dc82e672d24472063fc2ccbf0f4dfa73399b271307c6",
+        "sourceSha256": "6fad6c711f1ca1cc556e98b983b5ed712057a58d369402ca358990e8bad3507d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-2/figures/F3.png",
+        "sha256": "3de307d071ebdda0ffee7f2f4d75c102b4a4ceedd056ec69227c482697fec20c",
+        "sourceSha256": "b40dd0ecbcdbc957fb9c6eb2164fa9c482b13297cd1d09173303a8551a755050",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-2/figures/F4.png",
+        "sha256": "4a708a11ffb44e783a840b0a13f0b922582834fc20c79368db3f5431a94aae20",
+        "sourceSha256": "7d745521124eceb6b9f2f0d38672e542ee2869f75a90365401ef9e0991d8f90c",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 384346,
+        "sha256": "16bcf57cb4e6c1bd517ca6a51a124eef5d301afcdef8d4b49145aed326f24c5d"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 386439,
+        "sha256": "89178b3981717171ca997ca2307ddbacf717da899a92e7720484438be39fc258"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-3/figures/F1.png",
+        "sha256": "cf02c8a16459c3b585bd146eec01ce2d1217772e9688eb92cecfef5d93bd6501",
+        "sourceSha256": "db048723f833a94e074c92fac456d908eb063c95c5fed812821fe9a5b04d66b0",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-3/figures/F2.png",
+        "sha256": "3b3d763336509102218565e40260df5854173ada980227a75a79b8eba05553bb",
+        "sourceSha256": "fc59d750e8bc18b0373b8393102d0788243da451d3adf4dda91d1a0f4fb5b35a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-3/figures/F3.png",
+        "sha256": "081f2ae6d7af44c2f929c89b8cef1bf759d3751a401ed1890a652da01e0c764c",
+        "sourceSha256": "d5215e6d57eb643b3cddee892939ada59cc9334263cd295a0fe199717e4ec059",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-3/figures/F4.png",
+        "sha256": "4a708a11ffb44e783a840b0a13f0b922582834fc20c79368db3f5431a94aae20",
+        "sourceSha256": "7d745521124eceb6b9f2f0d38672e542ee2869f75a90365401ef9e0991d8f90c",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-remote-sensing-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 384905,
+        "sha256": "07da78bdc0f4403c026837454d1a5ae8974d932496e6b64ba3751e9846f55466"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 386995,
+        "sha256": "673ccb0b4a24245b1bd0f2515a6ae3ff1e9884f7d000119af4a2c3793f764eed"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-4/figures/F1.png",
+        "sha256": "cf02c8a16459c3b585bd146eec01ce2d1217772e9688eb92cecfef5d93bd6501",
+        "sourceSha256": "db048723f833a94e074c92fac456d908eb063c95c5fed812821fe9a5b04d66b0",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-4/figures/F2.png",
+        "sha256": "9ffef64d6b2e1c1600d0bc329208cef40e04c1614563b9708d5a8d41c8c1dcfc",
+        "sourceSha256": "c6b8d3c6c78e19f4cd46db42b1c5f1f5eba24dec39dde81a82f6e5cb247a298d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-4/figures/F3.png",
+        "sha256": "388607ffe7785a0c32474d71ce4ad8234de3ef4798e679c73b9ebccf8e505e5c",
+        "sourceSha256": "864ee58b0e3ce26c5c28503a148e2c7d06ee4ab68a583beff42f2d5865f87720",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-remote-sensing-form-4/figures/F4.png",
+        "sha256": "4a708a11ffb44e783a840b0a13f0b922582834fc20c79368db3f5431a94aae20",
+        "sourceSha256": "7d745521124eceb6b9f2f0d38672e542ee2869f75a90365401ef9e0991d8f90c",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 277009,
+        "sha256": "cd4a0a03b7a8839629df46bff3b07d0a67549d2594956ad6a52871ccdc9d5a5e"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 278377,
+        "sha256": "0e79ccdf010a8a906e60bdc93cf448926b8e9f79445b200caaec14f4470dfb44"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-1/figures/F1.png",
+        "sha256": "6dc33249299e5a423e46f90fface43bc8e2964953c75cfb54b3fb46c736b5a35",
+        "sourceSha256": "5009f31bff7612bae67adbffabb5227c59ceed428b518a666860156ec102ee04",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-1/figures/F2.png",
+        "sha256": "cb847360eaa39f6ee699172aa955a4c1ba6cc4627cb859869031a9dace48a0e1",
+        "sourceSha256": "367d5e2272de7ebbfbc06e101049066c2faeaaf5e99259822168c130cfa8f2ab",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-1/figures/F3.png",
+        "sha256": "db30dd84fd8ddb07acd8db8e86fb5fce206553e430ef71ecb5a8002309fd5d07",
+        "sourceSha256": "c58adda96c108e054c0170d61a424bb8262f9e58b3ea75f77faa89bbc679811d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-1/figures/F4.png",
+        "sha256": "7a0306c9c51b53757bb4a868a2bcf05d9127d910bd1f7de687c291a87e50410e",
+        "sourceSha256": "f036f7a67384f09a0dbf3ea5b7937495d666bf2a23f56c220c11036b83860125",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 276842,
+        "sha256": "dba7e2a7aa90e77d9581e3cd377cf2625c69fe35c5f019902ea2c57dbd31a98e"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 278213,
+        "sha256": "7d3137dd15c36f2636a2f2c05eec2e309d7fa0ece672c59435de2fa0b2cc1802"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-2/figures/F1.png",
+        "sha256": "2106368de973a06a94e9f06754a4ee9dc8e91ee02c9a1322d6641def5487fc36",
+        "sourceSha256": "9e4a6b09ac9b6dfdf30001cd9fca4722497ab8966b32174b96921434491b86c3",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-2/figures/F2.png",
+        "sha256": "cb847360eaa39f6ee699172aa955a4c1ba6cc4627cb859869031a9dace48a0e1",
+        "sourceSha256": "367d5e2272de7ebbfbc06e101049066c2faeaaf5e99259822168c130cfa8f2ab",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-2/figures/F3.png",
+        "sha256": "7b4f0e17ec83c4695272f12c5e20bc3ad84893fe30492db8219a116f3c5761cf",
+        "sourceSha256": "971e1fca66bafeccb0dd43bc3f34767b2b95c01ce50b984684dccbbc2bb04f55",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-2/figures/F4.png",
+        "sha256": "ac94298cc8e4a5ee6073610acf857f33cf8a297bdf893ce58452bcd1807912f0",
+        "sourceSha256": "81f85e0c975dd9ef617ca468cad800801c59d1dd5e444f2fd6058056a541d799",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 276816,
+        "sha256": "b6b8d92a582d2d42a92ab7857640370b9e4372e3d96715c2699a16d13e40f03a"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 278192,
+        "sha256": "37f11577108d8d8e5cefa071539f77bb59a0289ead308ee8e6975d855de48d75"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-3/figures/F1.png",
+        "sha256": "eadea0fab3f8a70a9f57620adf5e591dd1137bb59b31654a8925f08d90836e61",
+        "sourceSha256": "63bb038345e2db3aa5402337ffc7ff185f52d1d8c29bc519f006b3aaf581e389",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-3/figures/F2.png",
+        "sha256": "cb847360eaa39f6ee699172aa955a4c1ba6cc4627cb859869031a9dace48a0e1",
+        "sourceSha256": "367d5e2272de7ebbfbc06e101049066c2faeaaf5e99259822168c130cfa8f2ab",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-3/figures/F3.png",
+        "sha256": "7a79a2176f115e31fee40500e84b2e093526ec2479cd88e37798478dfc12fc20",
+        "sourceSha256": "29084201323aeca3a326f4b07fcb14761464f9d1c754ef69c5c93d4afe1c0b87",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-3/figures/F4.png",
+        "sha256": "345450753550f9d3d46cc0eccbb43e6e19ee6fa3622c32dcbca1c16942571158",
+        "sourceSha256": "684b4b6abe3ce9d77616b08822cf67174a85eeba3444b448dd1eac5b2c37499e",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-chemistry-lab-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 7,
+        "bytes": 277112,
+        "sha256": "850569a59ffbe72e22419614e9635c9f1e7224a50c19611f33d311d41f803316"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 278471,
+        "sha256": "c9274b83ca36f16ea0f66682167d0a8d59cd44fd8fe2f71382ee981c327561fd"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-4/figures/F1.png",
+        "sha256": "90f834b5621b461f5ee4eff466e330a4e6b4294f1e244971348d9a7c9044cd69",
+        "sourceSha256": "8969c6db307bd18d236d6b2ebbda5b088461b9f00ee79f4bf370232853ee5d64",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-4/figures/F2.png",
+        "sha256": "cb847360eaa39f6ee699172aa955a4c1ba6cc4627cb859869031a9dace48a0e1",
+        "sourceSha256": "367d5e2272de7ebbfbc06e101049066c2faeaaf5e99259822168c130cfa8f2ab",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-4/figures/F3.png",
+        "sha256": "1145913514352cd081d37401e838e83791299aa01a7eb46611faaedb48b8c026",
+        "sourceSha256": "891c2e4f05ec59aee69dd36bec01f97108abcf3229228866be07f3a0f09e23b5",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-chemistry-lab-form-4/figures/F4.png",
+        "sha256": "5e15b56f1e89d366dba0607fe4046f31ff97806440b63801d692fa5ceb1b0f3b",
+        "sourceSha256": "385dd53011a8444ab5b3c5000d6f86eb5a1f45980edc0895579801f87d9b2044",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 221830,
+        "sha256": "ee704be71237b9a61f3643df798a0568f3646bc7f126696ad64143ad3a656a91"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 223111,
+        "sha256": "f2413cc1ccb2d43db61266fad844587c2b80585b902863005cc84e65d8f29502"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-1/figures/F1.png",
+        "sha256": "2a213e5e3d80e3d82d7b7acb71a674235ee92df62961319d35f5d0e7c1e6ea29",
+        "sourceSha256": "32e3c38c2f28159d3793107b74c09d0987c1eb1c1c8232d928019af73148363c",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-1/figures/F2.png",
+        "sha256": "fee709f13f7c4aeb59647c7dc3a6f1d8c8e7965205d5b12e84831fb45403a787",
+        "sourceSha256": "bfa5ab36f4deb6c18e464274a4dcf02bd1b842c8212fd921b7faaf587a0279fd",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-1/figures/F3.png",
+        "sha256": "0449371026e5e3177f50317e0fa67baf63203b7c3b24643ea24fd2f10c03e139",
+        "sourceSha256": "016037335b7e39c45b19cbf830f7808c6c1997b703b442655315ae3b6dbd9125",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-1/figures/F4.png",
+        "sha256": "29cabf27943651ff7e0a6f449b63375712f60c3f2c9191f2db6b600d2e769461",
+        "sourceSha256": "094020a658fdad5a877ff7780ffd89cfe2c4940fc60b53811f1cd89cde50574f",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 223220,
+        "sha256": "ad7fd41c09e01db61d334e40fb7445b7c403c7004d8bddb1693de5aa2d53c5e2"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 224463,
+        "sha256": "816ffed723c56aa6b378b0d15b186f05cfe8a2ef333bb64cf72ba2f414f522f5"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-2/figures/F1.png",
+        "sha256": "b2f9f9117473504bb06279325f5e04bfc4ff2c802931dbaacd7d56225ef262f2",
+        "sourceSha256": "af6b182b0087ca122e69da75657ad8d7982b8007769231c3961bc481e302c0c5",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-2/figures/F2.png",
+        "sha256": "a64fcbc61df1bf4b98d312fd667af18d22e52298bcfd076db21cdfc2ee77fe85",
+        "sourceSha256": "3ea39f8dd4653c6e11d7f11e70df5083d4f28965fee46fe4fd700d16528efe5f",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-2/figures/F3.png",
+        "sha256": "0449371026e5e3177f50317e0fa67baf63203b7c3b24643ea24fd2f10c03e139",
+        "sourceSha256": "016037335b7e39c45b19cbf830f7808c6c1997b703b442655315ae3b6dbd9125",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-2/figures/F4.png",
+        "sha256": "29cabf27943651ff7e0a6f449b63375712f60c3f2c9191f2db6b600d2e769461",
+        "sourceSha256": "094020a658fdad5a877ff7780ffd89cfe2c4940fc60b53811f1cd89cde50574f",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 222658,
+        "sha256": "321f013b56f8084b7c2d0d93ac643d1bd92ad50a97284b8f694ac38ce03d154f"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 223232,
+        "sha256": "9679992d016e6fc093be12045f356dd4e4a1bdbb2fc475ac5fe3a7bd62083640"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-3/figures/F1.png",
+        "sha256": "73f20d595ffab6ff3d42b7038add480129ff744a5e71ccb5cdd223064788811e",
+        "sourceSha256": "f4f78f72cf306e06243bb87237a6b1772b4447ee573f7a7b4ebb8e32db0a9dd5",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-3/figures/F2.png",
+        "sha256": "6c5acadbed9ca7cb82082d8e3edf560599e244d3eec95d95dbcc7893c506a1a0",
+        "sourceSha256": "d60fe9620efbd13ea00845ad42be24f6915e14ef22f47347ac69503ffff6cc4a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-3/figures/F3.png",
+        "sha256": "0449371026e5e3177f50317e0fa67baf63203b7c3b24643ea24fd2f10c03e139",
+        "sourceSha256": "016037335b7e39c45b19cbf830f7808c6c1997b703b442655315ae3b6dbd9125",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-3/figures/F4.png",
+        "sha256": "29cabf27943651ff7e0a6f449b63375712f60c3f2c9191f2db6b600d2e769461",
+        "sourceSha256": "094020a658fdad5a877ff7780ffd89cfe2c4940fc60b53811f1cd89cde50574f",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-circuit-lab-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 224253,
+        "sha256": "973afe7692987b338676907c86550f0a3578b8d72da7f703139af0529d607c49"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 224815,
+        "sha256": "4435a3f7f4d46ffdeb7e7ef425fbf6593bf64a2dc7f4f4ce8a6b25f74e2cbb03"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-4/figures/F1.png",
+        "sha256": "75d42ba9ffe2c59c992f66ab28db3e4031d6b991ae8c20734349868682effda2",
+        "sourceSha256": "a27ab58ee78b4b4a72000e08db44d06af5f4e738ea5aec1c077bd4cffa531d7a",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-4/figures/F2.png",
+        "sha256": "a3c02e86e7902a0e764a8bbdb37c2938046d835016281c1d6473e891f1532a79",
+        "sourceSha256": "5ab235791ec98405e5ed4fbb28f2309e7607f3a73a37669836b1a9063aff7d1e",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-4/figures/F3.png",
+        "sha256": "0449371026e5e3177f50317e0fa67baf63203b7c3b24643ea24fd2f10c03e139",
+        "sourceSha256": "016037335b7e39c45b19cbf830f7808c6c1997b703b442655315ae3b6dbd9125",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-circuit-lab-form-4/figures/F4.png",
+        "sha256": "29cabf27943651ff7e0a6f449b63375712f60c3f2c9191f2db6b600d2e769461",
+        "sourceSha256": "094020a658fdad5a877ff7780ffd89cfe2c4940fc60b53811f1cd89cde50574f",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-protein-modeling-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 9,
+        "bytes": 324759,
+        "sha256": "2e5aba724d8c36a79830b4e601dc678c3624e5d0ddf7ce980870f377cc2ec37a"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 325584,
+        "sha256": "f918e99d79f7f37744e81ac1382ce269420cab1f73a59229a626a8d9881133ae"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-1/figures/F1.png",
+        "sha256": "168c0aba3ff8e3b5bee8ce21a7533e778bfea8b328fa37980adb99292000cd3d",
+        "sourceSha256": "5212108ce96b921a2297c2755178320d20f23d30004cad365ce6b14614ae7e80",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-1/figures/F2.png",
+        "sha256": "9897d391a250d4408327f9e269ff4aeef286b8067fad6dd960d812f29d4811c8",
+        "sourceSha256": "8564b9c64af0c150f39fbcc096f1d30f36122461bc1d82eb6e2bba64b712caba",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-1/figures/F3.png",
+        "sha256": "3e49cf21816248471a1e3a16da8c4afc7a31bc1a0037c1692baaf987e1743189",
+        "sourceSha256": "148aa8d17d749546334d0ce4efe5bd7c7b8ad43510894c09ac5ebf75b0cbbdd4",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-1/figures/F4.png",
+        "sha256": "38a7173e26784cfdb78c4b7f3ff6705274f8ffa24a8a27e78684c276f09ec696",
+        "sourceSha256": "5f91fa84773618701a2e93f1c08e5534b6698b5843a121e29e486ce97ee43f75",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-protein-modeling-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 9,
+        "bytes": 324760,
+        "sha256": "898761d8df12371425c92bc5b58a4c5a2efba853a960b6e6324df0e099ae0c06"
+      },
+      {
+        "role": "key",
+        "pages": 8,
+        "bytes": 325578,
+        "sha256": "1d1c417793559c0b04da713f29a01f9ed07f472b73db37cdeb38d75525e9f6a0"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-2/figures/F1.png",
+        "sha256": "0a398a2f8717b1c1083aab33d92c826b807603203008b08631b72f3cdc85b734",
+        "sourceSha256": "488fb9ac31cef866b5e7adee537159ad650876901420e4a0fad0487f55657455",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-2/figures/F2.png",
+        "sha256": "9897d391a250d4408327f9e269ff4aeef286b8067fad6dd960d812f29d4811c8",
+        "sourceSha256": "8564b9c64af0c150f39fbcc096f1d30f36122461bc1d82eb6e2bba64b712caba",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-2/figures/F3.png",
+        "sha256": "3e49cf21816248471a1e3a16da8c4afc7a31bc1a0037c1692baaf987e1743189",
+        "sourceSha256": "148aa8d17d749546334d0ce4efe5bd7c7b8ad43510894c09ac5ebf75b0cbbdd4",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-protein-modeling-form-2/figures/F4.png",
+        "sha256": "38a7173e26784cfdb78c4b7f3ff6705274f8ffa24a8a27e78684c276f09ec696",
+        "sourceSha256": "5f91fa84773618701a2e93f1c08e5534b6698b5843a121e29e486ce97ee43f75",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-1",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 527680,
+        "sha256": "baa04c5da1b188559182dcc79be05978323a3da8e2e4e9de7788db178a3e5d14"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 527923,
+        "sha256": "b113b4d6df8e86c7bf1114ef83ef8780f6baae8f9990923ace4025e3d91966cd"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-1/figures/F1.png",
+        "sha256": "4339c7203aa8f7a75fc1b5f86c58cabbf7781a84244828f17b91b80e8b613427",
+        "sourceSha256": "6f992ca501b8632ce29a459aa5040c096eceb1fd9ad59342314bbaa8b13ec8d7",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-1/figures/F2.png",
+        "sha256": "4bbb9880f97e44c959b5aed9775d01877f12b45f399bd2058438a6a675b5c212",
+        "sourceSha256": "074d0d33c3ae5e3b29008e6605b2528bf46d1a5bb77cb13f92336832b7bf403d",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-1/figures/F3.png",
+        "sha256": "887017cfcc542d448e62d297a0f3e44a36907aa7cd947e352823ca809deae9de",
+        "sourceSha256": "1314e4ef85940a4803aeb409291b17d3171d18862eada9cae8008101e31ef29b",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-1/figures/F4.png",
+        "sha256": "d0eddd060c6fe71550b0e57993c8594978f64c3b5a0c75ab38ded2d5abfb6650",
+        "sourceSha256": "51ba28e1149506a67210148b8484587156e5ad2e55354dd05d255bbab034cfbe",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-2",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 527030,
+        "sha256": "cb6719283172fa888806ac4485047e537e25f67aa6651e08fb7347e9d42b8968"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 527301,
+        "sha256": "8ea562e068e7e4dd15c01241755b6887dcdda7e641f01520f22c31f74806a06a"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-2/figures/F1.png",
+        "sha256": "2dba5342cd5eb9d8fbd12c15160a023c836a83c8e5573f768f594bd8f50801b5",
+        "sourceSha256": "4f1f33c4763d4c3d11aaec0c476c1278cc1b8025e07035bb601e6f872d8b121e",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-2/figures/F2.png",
+        "sha256": "06bf89ddd9e5674d765de8ba9e6f4815804537695cd02741492e625fa1f4caff",
+        "sourceSha256": "b6c1a58907d21ed29c5e16cfa2ead322d7eb3ee0d1a9c0689ea3cf612bd3bff4",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-2/figures/F3.png",
+        "sha256": "19dc11d2c07c9da68179851a7fc30204c574dedd23c3f5b8605e5ff4f5c79095",
+        "sourceSha256": "fd20087a1202e2c207bd6c69e8ce9e890a6d661e57ef6db93d4c274f60bccde9",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-2/figures/F4.png",
+        "sha256": "d0eddd060c6fe71550b0e57993c8594978f64c3b5a0c75ab38ded2d5abfb6650",
+        "sourceSha256": "51ba28e1149506a67210148b8484587156e5ad2e55354dd05d255bbab034cfbe",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-3",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 526818,
+        "sha256": "3a360e43cc24e139bdcd1a7e14cbbe776b836331f86e4178e18e3ebc8c2f6aad"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 527060,
+        "sha256": "ae2894375f2f2050cbc247fd5c77b6f17f13026269369de39aaf43f765b473f1"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-3/figures/F1.png",
+        "sha256": "08f96c4c715f39e0e3e029872c25d35f0789dd612c0d7c9f70a4a9c8a757f2a2",
+        "sourceSha256": "aceaec055249e8814ca35b916c583965873962e06bc0f3e5db5ee85eb882d644",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-3/figures/F2.png",
+        "sha256": "5ebe9a35221fac6c3d375d38866470a0fc351e5fc9119f3c75e5b195b8530251",
+        "sourceSha256": "55c0eb6e8002f90eeb088a592c4d68297fb8c923a1316f5dd13b238b05a8ca36",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-3/figures/F3.png",
+        "sha256": "23d437f8b31fbc87a8995c1d6abd71f04bbd310a6985f93532ade0f11be4daa5",
+        "sourceSha256": "cf7d1694dfda0d5f0546a77dbd2e19f4dc022a5ab6365c57365083082f0dd753",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-3/figures/F4.png",
+        "sha256": "d0eddd060c6fe71550b0e57993c8594978f64c3b5a0c75ab38ded2d5abfb6650",
+        "sourceSha256": "51ba28e1149506a67210148b8484587156e5ad2e55354dd05d255bbab034cfbe",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  },
+  {
+    "id": "akoizo-2027-rotation-c-codebusters-form-4",
+    "assets": [
+      {
+        "role": "test",
+        "pages": 8,
+        "bytes": 526282,
+        "sha256": "b0878ca9bfdb8bc3a65667fec3a69dd9926da7ce0ba98cff9ee0c9fd9eb672fe"
+      },
+      {
+        "role": "key",
+        "pages": 7,
+        "bytes": 526545,
+        "sha256": "0ff837ad03bdc1b2c7089b0ff98387f42db1165ba63e8b2d591fb3332fa6b705"
+      }
+    ],
+    "figures": [
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-4/figures/F1.png",
+        "sha256": "9fd6334c36e7d7c23717064c67a7edc7789b6e2dba4725b7319cd477c952a319",
+        "sourceSha256": "bbc13ed705ba5cebeaf1e5d86a6cc9668e93a2755f033d58a4a36948d63ab6b5",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-4/figures/F2.png",
+        "sha256": "d30d6b865fbebb7f2702c3b38d9d2f3e77924a46c8678a336af95a6825055d73",
+        "sourceSha256": "48c50652ed177924fe238dc6d037b59f5471b7c695dfa56646a2e64d0b0cf95e",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-4/figures/F3.png",
+        "sha256": "a6a7cfb83b4c118432b0c8c6125c02d3d5d03daf3e9504ad4b776022486e845a",
+        "sourceSha256": "2e51aaaee2e4db8149826495602cc5e331330ebbae30dfde63df6f0640f5903e",
+        "width": 1440,
+        "height": 800
+      },
+      {
+        "url": "/practice/akoizo-2027-rotation-c-codebusters-form-4/figures/F4.png",
+        "sha256": "d0eddd060c6fe71550b0e57993c8594978f64c3b5a0c75ab38ded2d5abfb6650",
+        "sourceSha256": "51ba28e1149506a67210148b8484587156e5ad2e55354dd05d255bbab034cfbe",
+        "width": 1440,
+        "height": 800
+      }
+    ]
+  }
+]

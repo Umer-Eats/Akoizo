@@ -16,6 +16,13 @@ export type PracticeQuestion = {
   prompt?: string;
   // Complete source context (including diagram/table descriptions) for AI grading.
   context?: string;
+  figure?: {
+    url: string;
+    caption: string;
+    alt: string;
+    // Data-only text equivalent for accessibility and written-answer grading.
+    description: string;
+  };
   options?: { id: string; text: string }[];
 };
 export type Criterion = {

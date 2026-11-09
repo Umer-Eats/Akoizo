@@ -85,6 +85,14 @@ export function validatePracticeCatalog(input: unknown): asserts input is Practi
       )
         return fail();
       questionIds.add(question.id);
+      if (
+        question.figure &&
+        (!/^\/practice\/[a-z0-9-]+\/figures\/F\d+\.png$/.test(question.figure.url) ||
+          !question.figure.caption?.trim() ||
+          !question.figure.alt?.trim() ||
+          !question.figure.description?.trim())
+      )
+        return fail();
       if (test.gradingMode === 'ai-generated') {
         if (
           typeof question.prompt !== 'string' ||

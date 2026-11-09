@@ -84,7 +84,8 @@ export type Lesson = {
   kind: 'text';
   objectives: string[];
   sections: { heading: string; body: string[] }[];
-  keyTerms: { term: string; definition: string }[];
+  /** `aliases` are other word forms that should also be underlined (buckle, buckled). */
+  keyTerms: { term: string; definition: string; aliases?: string[] }[];
   simulation: LessonSim;
   practice: LessonQuizQuestion[];
   workedExample: { title: string; problem: string; steps: string[]; conclusion: string };
@@ -114,4 +115,6 @@ export type EventLessons = {
   intro: string;
   units: LessonUnit[];
   lessons: Lesson[];
+  /** Every defined term for the event; any of them is underlined wherever it appears. */
+  glossary?: Lesson['keyTerms'];
 };

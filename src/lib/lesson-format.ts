@@ -64,23 +64,59 @@ export function termPatterns(term: string) {
   return [...new Set([term.trim(), base, inner].filter((t): t is string => !!t && t.length >= 2))];
 }
 
-/** Marks the first appearance of each key term; `used` carries across the whole lesson. */
+type Candidate = { pattern: RegExp; t: Lesson['keyTerms'][number] };
+const compiled = new WeakMap<Lesson['keyTerms'], Candidate[]>();
+
+/** Search patterns for a term list, longest form first, built once per list. */
+function candidatesFor(terms: Lesson['keyTerms']) {
+  let list = compiled.get(terms);
+  if (!list) {
+    list = terms
+      .flatMap((t) =>
+        [...termPatterns(t.term), ...(t.aliases ?? []).filter((a) => a.length >= 2)].map(
+          (form) => ({ form, t }),
+        ),
+      )
+      .sort((a, b) => b.form.length - a.form.length)
+      .map(({ form, t }) => ({
+        // Short forms are acronyms, so they only match in capitals.
+        pattern: new RegExp(
+          `(?<![\\w-])${escape(form)}(?:es|s)?(?![\\w-])`,
+          form.length <= 3 ? '' : 'i',
+        ),
+        t,
+      }));
+    compiled.set(terms, list);
+  }
+  return list;
+}
+
+/**
+ * One list of terms: the lesson's key terms first, then the event glossary. A repeated term
+ * keeps the first definition but gains the later entry's extra word forms.
+ */
+export function mergeTerms(...lists: (Lesson['keyTerms'] | undefined)[]) {
+  const byKey = new Map<string, Lesson['keyTerms'][number]>();
+  for (const t of lists.flatMap((list) => list ?? [])) {
+    const key = t.term.trim().toLowerCase();
+    const first = byKey.get(key);
+    if (!first) byKey.set(key, t);
+    else if (t.aliases?.length)
+      byKey.set(key, { ...first, aliases: [...new Set([...(first.aliases ?? []), ...t.aliases])] });
+  }
+  return [...byKey.values()];
+}
+
+/** Marks the first appearance of each term; `used` carries across the lines that share it. */
 export function highlightTerms(
   text: string,
   terms: Lesson['keyTerms'],
   used: Set<string>,
 ): Segment[] {
-  const candidates = terms
-    .filter((t) => !used.has(t.term))
-    .flatMap((t) => termPatterns(t.term).map((form) => ({ form, t })))
-    .sort((a, b) => b.form.length - a.form.length);
   const marks: { start: number; end: number; term: string; definition: string }[] = [];
-  for (const { form, t } of candidates) {
+  for (const { pattern, t } of candidatesFor(terms)) {
     if (used.has(t.term)) continue;
-    const match = new RegExp(
-      `(?<![\\w-])${escape(form)}(?:es|s)?(?![\\w-])`,
-      form.length <= 3 ? '' : 'i',
-    ).exec(text);
+    const match = pattern.exec(text);
     if (!match) continue;
     const start = match.index,
       end = start + match[0].length;
@@ -166,14 +202,21 @@ export function formatSection(
   };
 }
 
-/** Formats every section of a lesson; terms are highlighted once per lesson. */
-export function formatLesson(lesson: Pick<Lesson, 'sections' | 'keyTerms'>, lines: FormatLine[]) {
-  const used = new Set<string>();
+/**
+ * Formats every section of a lesson. Each key term and glossary term is marked at its first
+ * appearance in every section, so a student who jumps to any section can still look it up.
+ */
+export function formatLesson(
+  lesson: Pick<Lesson, 'sections' | 'keyTerms'>,
+  lines: FormatLine[],
+  glossary: Lesson['keyTerms'] = [],
+) {
+  const terms = mergeTerms(lesson.keyTerms, glossary);
   return lesson.sections.map((_, i) =>
     formatSection(
       lines.filter((l) => l.sectionIndex === i),
-      lesson.keyTerms,
-      used,
+      terms,
+      new Set(),
     ),
   );
 }

@@ -15,7 +15,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, Image
 
 ROOT = Path(__file__).resolve().parents[1]
 pdfmetrics.registerFont(TTFont('Practice', 'C:/Windows/Fonts/arial.ttf'))
@@ -64,17 +64,26 @@ def footer(canvas,doc):
     canvas.restoreState()
 
 
-def render(path,test,questions,key=False,repair=False):
+def render(path,test,questions,key=False,repair=False,asset_root=None):
     doc=PaperDoc(str(path),pagesize=(612,792),rightMargin=42,leftMargin=42,topMargin=43,bottomMargin=52,
                  title=test['competition'],author='Akoizo',pageCompression=1)
     story=[para(test['competition']+(' - Answer key' if key else ''),'title'),
            para(f'Division {test["division"]} | {test["eventId"].replace("-"," ").title()} | '+('Repair appendix' if repair else '50-minute written practice'),'sub'),
            para('This appendix contains authored replacements and supplied written alternatives. It does not reconstruct unpublished historical material. For the listed item IDs, use this appendix instead of the archived wording and key.' if repair else 'Original Akoizo curriculum practice. This is not a historical tournament paper. Written build, CAD, lab and communication exercises supplement real practical preparation.'),
            para('ANSWER KEY - Review only after submitting.' if key else 'Name: ____________________________    Date: _______________','sub')]
+    seen_figures=set()
     for q in questions:
         heading=para(f'{q["label"]}. ({q["points"]:g} points) {q["prompt"]}','question')
         heading.question_id=q['id']
         block=[heading]
+        if q.get('figure'):
+            figure=q['figure']
+            if figure['url'] not in seen_figures:
+                block.append(Image(str((asset_root or ROOT) / ('public'+figure['url'])),width=500,height=500*400/720))
+                block.append(para(figure['caption'],'context'))
+                seen_figures.add(figure['url'])
+            else:
+                block.append(para('Refer to '+figure['caption']+' shown with the first question in this figure group.','context'))
         if q.get('context'):block.append(para(q['context'],'context'))
         if q['type']=='mcq':
             block += [para(f'{o["id"]}. {o["text"]}') for o in q['options']]

@@ -55,7 +55,7 @@ export async function gradeWrittenWithGemini(
         questionId: q.id,
         criterionId: c.id,
         question: question.prompt ?? question.label,
-        context: question.context,
+        context: [question.context, question.figure?.description].filter(Boolean).join('\n'),
         rubric: test.keys[q.id].criteria!.find((candidate) => candidate.id === c.id)!,
         studentAnswer: q.answer,
       }));

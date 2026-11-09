@@ -68,7 +68,7 @@ export async function generatePracticeReferences(test: PracticeTest, config: Pra
             multiple: !!q.multiple,
             points: q.points,
             prompt: q.prompt,
-            context: q.context,
+            context: [q.context, q.figure?.description].filter(Boolean).join('\n'),
             options: q.options,
           })),
         });
