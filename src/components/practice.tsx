@@ -28,6 +28,7 @@ import {
 } from '@/lib/practice-types';
 import { ChoiceOptions } from './choice-options';
 import './practice.css';
+import { useStudyLayer } from './notes-store';
 
 export function PracticeLibrary({ eventId }: { eventId: string }) {
   const { request, profile } = useAuth();
@@ -324,6 +325,18 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
   const storageKey = `akoizo-practice:${profile!.id}:${profile!.division}:${testId}`;
   const event = eventsForDivision(profile!.division!).find((e) => e.id === eventId);
   const back = `/dashboard/student/events/${eventId}/practice-tests`;
+  useStudyLayer(
+    2,
+    event && paper
+      ? {
+          eventId: event.id,
+          eventName: event.name,
+          kind: 'practice',
+          refId: testId,
+          label: `${paper.competition} ${paper.year}`.trim(),
+        }
+      : null,
+  );
   useEffect(() => {
     let active = true;
     setPaper(null);

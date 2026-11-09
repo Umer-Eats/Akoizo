@@ -14,6 +14,7 @@ import { Providers } from '@/components/providers';
 import { Header, Footer } from '@/components/site-shell';
 import { AkoCompanion } from '@/components/ako-companion';
 import { ArtworkMotion } from '@/components/artwork-motion';
+import { NotesDock } from '@/components/notes-dock';
 import { siteUrl, siteDescription } from '@/lib/seo';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </a>
           <Header />
           {children}
+          <NotesDock />
           <Footer />
         </Providers>
         <Analytics />

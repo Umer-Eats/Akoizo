@@ -31,7 +31,7 @@ import {
 
 type Row = Record<string, string | number | null>;
 const now = () => new Date().toISOString();
-const parse = <T,>(value: unknown, fallback: T): T => {
+const parse = <T>(value: unknown, fallback: T): T => {
   try {
     return value ? (JSON.parse(String(value)) as T) : fallback;
   } catch {
@@ -90,7 +90,13 @@ function derived(html: unknown) {
   if (clean.length > noteLimits.html)
     throw new AppError(413, 'This page is too long. Split it into two pages.');
   const text = noteText(clean);
-  return { html: clean, text, tags: noteTags(text), links: noteLinks(clean), words: wordCount(text) };
+  return {
+    html: clean,
+    text,
+    tags: noteTags(text),
+    links: noteLinks(clean),
+    words: wordCount(text),
+  };
 }
 
 async function notebookRow(db: Database, profile: Profile, id: unknown) {
@@ -124,7 +130,12 @@ async function summary(db: Database, profile: Profile, id: string) {
 async function count(db: Database, sql: string, ...args: (string | number)[]) {
   return Number((await db.get(sql, ...args))?.n ?? 0);
 }
-async function nextPosition(db: Database, table: 'notes' | 'notebooks', profile: Profile, notebookId?: string) {
+async function nextPosition(
+  db: Database,
+  table: 'notes' | 'notebooks',
+  profile: Profile,
+  notebookId?: string,
+) {
   const row = await db.get(
     table === 'notes'
       ? 'SELECT MAX(position) AS p FROM notes WHERE owner_id=? AND notebook_id=?'
@@ -200,10 +211,17 @@ function color(value: unknown): NotebookColor {
     : 'blue';
 }
 
-export async function createNotebook(db: Database, profile: Profile, body: Record<string, unknown>) {
+export async function createNotebook(
+  db: Database,
+  profile: Profile,
+  body: Record<string, unknown>,
+) {
   const title = plainLabel(body.title, 60);
   if (!title) throw new AppError(400, 'Name your notebook.');
-  if ((await count(db, 'SELECT COUNT(*) AS n FROM notebooks WHERE owner_id=?', profile.id)) >= noteLimits.notebooks)
+  if (
+    (await count(db, 'SELECT COUNT(*) AS n FROM notebooks WHERE owner_id=?', profile.id)) >=
+    noteLimits.notebooks
+  )
     throw new AppError(409, `You can keep up to ${noteLimits.notebooks} notebooks.`);
   const id = randomUUID();
   const at = now();
@@ -211,7 +229,18 @@ export async function createNotebook(db: Database, profile: Profile, body: Recor
     [
       {
         sql: 'INSERT INTO notebooks (id,owner_id,title,event_id,division,color,sections_json,position,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)',
-        args: [id, profile.id, title, null, null, color(body.color), '[]', await nextPosition(db, 'notebooks', profile), at, at],
+        args: [
+          id,
+          profile.id,
+          title,
+          null,
+          null,
+          color(body.color),
+          '[]',
+          await nextPosition(db, 'notebooks', profile),
+          at,
+          at,
+        ],
       },
     ],
     'write',
@@ -228,7 +257,11 @@ const cleanSections = (sections: string[]) => {
   return kept.slice(0, noteLimits.sections);
 };
 
-export async function updateNotebook(db: Database, profile: Profile, body: Record<string, unknown>) {
+export async function updateNotebook(
+  db: Database,
+  profile: Profile,
+  body: Record<string, unknown>,
+) {
   const row = await notebookRow(db, profile, body.id);
   const notebook = asNotebook(row);
   let sections = notebook.sections;
@@ -263,7 +296,10 @@ export async function updateNotebook(db: Database, profile: Profile, body: Recor
     const order = cleanSections(body.sectionOrder.map(String)).filter((s) => sections.includes(s));
     sections = [...order, ...sections.filter((s) => !order.includes(s))];
   }
-  const position = typeof body.position === 'number' && Number.isFinite(body.position) ? body.position : notebook.position;
+  const position =
+    typeof body.position === 'number' && Number.isFinite(body.position)
+      ? body.position
+      : notebook.position;
   statements.push({
     sql: 'UPDATE notebooks SET title=?,color=?,sections_json=?,position=?,updated_at=? WHERE id=? AND owner_id=?',
     args: [
@@ -335,8 +371,14 @@ function insertNote(profile: Profile, input: Insert) {
   };
 }
 async function roomFor(db: Database, profile: Profile, pages: number) {
-  if ((await count(db, 'SELECT COUNT(*) AS n FROM notes WHERE owner_id=?', profile.id)) + pages > noteLimits.notes)
-    throw new AppError(409, `You can keep up to ${noteLimits.notes} pages. Empty the trash to make room.`);
+  if (
+    (await count(db, 'SELECT COUNT(*) AS n FROM notes WHERE owner_id=?', profile.id)) + pages >
+    noteLimits.notes
+  )
+    throw new AppError(
+      409,
+      `You can keep up to ${noteLimits.notes} pages. Empty the trash to make room.`,
+    );
 }
 
 export async function createNote(db: Database, profile: Profile, body: Record<string, unknown>) {
@@ -355,7 +397,12 @@ export async function createNote(db: Database, profile: Profile, body: Record<st
   if (section && !notebook.sections.includes(section))
     statements.push({
       sql: 'UPDATE notebooks SET sections_json=?,updated_at=? WHERE id=? AND owner_id=?',
-      args: [JSON.stringify(cleanSections([...notebook.sections, section])), now(), notebook.id, profile.id],
+      args: [
+        JSON.stringify(cleanSections([...notebook.sections, section])),
+        now(),
+        notebook.id,
+        profile.id,
+      ],
     });
   await db.batch(statements, 'write');
   return readNote(db, profile, id);
@@ -369,7 +416,13 @@ export async function updateNote(db: Database, profile: Profile, body: Record<st
   if (body.html !== undefined) {
     const page = derived(body.html);
     sets.push('html=?', 'text=?', 'tags_json=?', 'links_json=?', 'words=?');
-    args.push(page.html, page.text, JSON.stringify(page.tags), JSON.stringify(page.links), page.words);
+    args.push(
+      page.html,
+      page.text,
+      JSON.stringify(page.tags),
+      JSON.stringify(page.links),
+      page.words,
+    );
   }
   if (body.title !== undefined) {
     const title = plainLabel(body.title, noteLimits.title) || 'Untitled';
@@ -399,14 +452,23 @@ export async function updateNote(db: Database, profile: Profile, body: Record<st
     args.push(body.pinned ? 1 : 0);
   }
   if (body.notebookId !== undefined || body.section !== undefined) {
-    const notebook = asNotebook(await notebookRow(db, profile, body.notebookId ?? current.notebookId));
-    const section = plainLabel(body.section ?? (notebook.id === current.notebookId ? current.section : ''), noteLimits.section);
+    const notebook = asNotebook(
+      await notebookRow(db, profile, body.notebookId ?? current.notebookId),
+    );
+    const section = plainLabel(
+      body.section ?? (notebook.id === current.notebookId ? current.section : ''),
+      noteLimits.section,
+    );
     sets.push('notebook_id=?', 'section=?');
     args.push(notebook.id, section);
     if (section && !notebook.sections.includes(section))
       statements.push({
         sql: 'UPDATE notebooks SET sections_json=? WHERE id=? AND owner_id=?',
-        args: [JSON.stringify(cleanSections([...notebook.sections, section])), notebook.id, profile.id],
+        args: [
+          JSON.stringify(cleanSections([...notebook.sections, section])),
+          notebook.id,
+          profile.id,
+        ],
       });
   }
   if (typeof body.position === 'number' && Number.isFinite(body.position)) {
@@ -425,7 +487,11 @@ export async function updateNote(db: Database, profile: Profile, body: Record<st
 }
 
 async function restoreTarget(db: Database, profile: Profile, notebookId: string) {
-  const row = await db.get('SELECT id FROM notebooks WHERE id=? AND owner_id=?', notebookId, profile.id);
+  const row = await db.get(
+    'SELECT id FROM notebooks WHERE id=? AND owner_id=?',
+    notebookId,
+    profile.id,
+  );
   if (row) return notebookId;
   const existing = await db.get(
     "SELECT id FROM notebooks WHERE owner_id=? AND title='Restored pages' AND event_id IS NULL",
@@ -450,7 +516,12 @@ export async function trashNote(db: Database, profile: Profile, id: unknown, res
     );
   } else
     await db.batch(
-      [{ sql: 'UPDATE notes SET trashed_at=? WHERE id=? AND owner_id=?', args: [now(), note.id, profile.id] }],
+      [
+        {
+          sql: 'UPDATE notes SET trashed_at=? WHERE id=? AND owner_id=?',
+          args: [now(), note.id, profile.id],
+        },
+      ],
       'write',
     );
   return summary(db, profile, note.id);
@@ -460,7 +531,10 @@ export async function deleteNote(db: Database, profile: Profile, id: unknown) {
   const note = asNote(await noteRow(db, profile, id));
   await db.batch(
     [
-      { sql: 'DELETE FROM note_images WHERE owner_id=? AND note_id=?', args: [profile.id, note.id] },
+      {
+        sql: 'DELETE FROM note_images WHERE owner_id=? AND note_id=?',
+        args: [profile.id, note.id],
+      },
       { sql: 'DELETE FROM notes WHERE id=? AND owner_id=?', args: [note.id, profile.id] },
     ],
     'write',
@@ -487,10 +561,14 @@ export async function saveImage(db: Database, profile: Profile, body: Record<str
   const id = String(body.imageId ?? '');
   const data = String(body.data ?? '');
   if (!isImageId(id)) throw new AppError(400, 'That image could not be read.');
-  if (data.length > noteLimits.imageData) throw new AppError(413, 'That image is too large. Try a smaller one.');
+  if (data.length > noteLimits.imageData)
+    throw new AppError(413, 'That image is too large. Try a smaller one.');
   if (!imageData.test(data)) throw new AppError(400, 'Paste a PNG, JPEG, WebP or GIF image.');
   const note = asNote(await noteRow(db, profile, body.id));
-  if ((await count(db, 'SELECT COUNT(*) AS n FROM note_images WHERE owner_id=?', profile.id)) >= noteLimits.images)
+  if (
+    (await count(db, 'SELECT COUNT(*) AS n FROM note_images WHERE owner_id=?', profile.id)) >=
+    noteLimits.images
+  )
     throw new AppError(409, `You can keep up to ${noteLimits.images} images across your notes.`);
   await db.batch(
     [
@@ -537,9 +615,19 @@ export function sourceHref(kind: NoteSourceKind, eventId: string, refId: string)
 const sourceKey = (division: Division, eventId: string, kind: NoteSourceKind, refId: string) =>
   `${division}:${eventId}:${kind}:${refId}`;
 
-async function eventNotebook(db: Database, profile: Profile, division: Division, event: { id: string; name: string }) {
+async function eventNotebook(
+  db: Database,
+  profile: Profile,
+  division: Division,
+  event: { id: string; name: string },
+) {
   const find = () =>
-    db.get('SELECT * FROM notebooks WHERE owner_id=? AND division=? AND event_id=?', profile.id, division, event.id);
+    db.get(
+      'SELECT * FROM notebooks WHERE owner_id=? AND division=? AND event_id=?',
+      profile.id,
+      division,
+      event.id,
+    );
   const found = await find();
   if (found) return asNotebook(found as Row);
   const at = now();
@@ -573,11 +661,16 @@ const starters: Partial<Record<NoteSourceKind, string>> = {
 };
 
 /** Finds or creates the page for what the student is studying, in that event's notebook. */
-export async function contextNote(db: Database, profile: Profile, body: Record<string, unknown>): Promise<NoteContext> {
+export async function contextNote(
+  db: Database,
+  profile: Profile,
+  body: Record<string, unknown>,
+): Promise<NoteContext> {
   const division = requireDivision(profile);
   const event = eventFor(division, body.eventId);
   const kind = body.kind as NoteSourceKind;
-  if (!['lesson', 'practice', 'lab', 'tool'].includes(kind)) throw new AppError(400, 'Choose what these notes are for.');
+  if (!['lesson', 'practice', 'lab', 'tool'].includes(kind))
+    throw new AppError(400, 'Choose what these notes are for.');
   const refId = String(body.refId ?? '');
   if (!slug.test(refId)) throw new AppError(400, 'Choose what these notes are for.');
   let label = plainLabel(body.label, noteLimits.title) || event.name;
@@ -623,7 +716,11 @@ export async function contextNote(db: Database, profile: Profile, body: Record<s
     if (!notebook.sections.includes(section))
       statements.push({
         sql: 'UPDATE notebooks SET sections_json=? WHERE id=? AND owner_id=?',
-        args: [JSON.stringify(cleanSections([...notebook.sections, section])), notebook.id, profile.id],
+        args: [
+          JSON.stringify(cleanSections([...notebook.sections, section])),
+          notebook.id,
+          profile.id,
+        ],
       });
     try {
       await db.batch(statements, 'write');
@@ -660,7 +757,11 @@ export function lessonDraft(profile: Profile, body: Record<string, unknown>) {
 }
 
 /** Builds a whole notebook for an event: overview, units, lessons and a glossary. */
-export async function generateEventNotebook(db: Database, profile: Profile, body: Record<string, unknown>) {
+export async function generateEventNotebook(
+  db: Database,
+  profile: Profile,
+  body: Record<string, unknown>,
+) {
   const division = requireDivision(profile);
   const event = eventFor(division, body.eventId);
   const course = lessonsForEvent(event.id, division);
@@ -676,7 +777,9 @@ export async function generateEventNotebook(db: Database, profile: Profile, body
       )) as Row[]
     ).map((row) => [String(row.source_key), row]),
   );
-  const missing = pages.filter((page) => !existing.has(sourceKey(division, event.id, page.kind, page.refId)));
+  const missing = pages.filter(
+    (page) => !existing.has(sourceKey(division, event.id, page.kind, page.refId)),
+  );
   await roomFor(db, profile, missing.length);
   const statements: { sql: string; args: (string | number | null)[] }[] = [];
   let created = 0;
@@ -691,7 +794,16 @@ export async function generateEventNotebook(db: Database, profile: Profile, body
         const filledPage = derived(page.html);
         statements.push({
           sql: 'UPDATE notes SET html=?,text=?,tags_json=?,links_json=?,words=?,updated_at=? WHERE id=? AND owner_id=?',
-          args: [filledPage.html, filledPage.text, JSON.stringify(filledPage.tags), JSON.stringify(filledPage.links), filledPage.words, now(), String(found.id), profile.id],
+          args: [
+            filledPage.html,
+            filledPage.text,
+            JSON.stringify(filledPage.tags),
+            JSON.stringify(filledPage.links),
+            filledPage.words,
+            now(),
+            String(found.id),
+            profile.id,
+          ],
         });
         filled++;
       }
@@ -720,7 +832,12 @@ export async function generateEventNotebook(db: Database, profile: Profile, body
   const unitSections = course.units.map((unit) => unit.title);
   statements.push({
     sql: 'UPDATE notebooks SET sections_json=?,updated_at=? WHERE id=? AND owner_id=?',
-    args: [JSON.stringify(cleanSections([...unitSections, ...notebook.sections])), now(), notebook.id, profile.id],
+    args: [
+      JSON.stringify(cleanSections([...unitSections, ...notebook.sections])),
+      now(),
+      notebook.id,
+      profile.id,
+    ],
   });
   await db.batch(statements, 'write');
   return { notebook: asNotebook(await notebookRow(db, profile, notebook.id)), created, filled };

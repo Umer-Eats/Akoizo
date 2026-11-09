@@ -14,8 +14,7 @@ export type GeneratedPage = {
   html: string;
 };
 
-const link = (title: string) =>
-  `<a data-wikilink="${escapeHtml(title)}">${escapeHtml(title)}</a>`;
+const link = (title: string) => `<a data-wikilink="${escapeHtml(title)}">${escapeHtml(title)}</a>`;
 export const unitPageTitle = (title: string) => `${title} (unit)`;
 export const overviewTitle = (eventName: string) => `${eventName} overview`;
 export const glossaryTitle = (eventName: string) => `${eventName} glossary`;
@@ -59,7 +58,9 @@ export function lessonNoteHtml(course: EventLessons, lesson: Lesson) {
     const points = section.body.map(lead).filter(Boolean);
     if (!points.length) continue;
     parts.push(`<h2>${escapeHtml(section.heading)}</h2>`);
-    parts.push(`<ul>${points.map((point) => `<li>${marked(point, terms, used)}</li>`).join('')}</ul>`);
+    parts.push(
+      `<ul>${points.map((point) => `<li>${marked(point, terms, used)}</li>`).join('')}</ul>`,
+    );
   }
   if (lesson.keyTerms.length)
     parts.push(
@@ -133,14 +134,20 @@ export function eventNotePages(course: EventLessons): GeneratedPage[] {
   }
   const glossary = new Map<string, string>();
   for (const term of [...(course.glossary ?? []), ...course.lessons.flatMap((l) => l.keyTerms)])
-    if (!glossary.has(term.term.toLowerCase())) glossary.set(term.term.toLowerCase(), `<li><strong>${escapeHtml(term.term)}</strong>: ${escapeHtml(term.definition)}</li>`);
+    if (!glossary.has(term.term.toLowerCase()))
+      glossary.set(
+        term.term.toLowerCase(),
+        `<li><strong>${escapeHtml(term.term)}</strong>: ${escapeHtml(term.definition)}</li>`,
+      );
   pages.push({
     kind: 'event',
     refId: 'glossary',
     section: '',
     title: glossaryTitle(course.eventName),
     label: `${course.eventName} glossary`,
-    html: `<p>Every key term in ${link(overviewTitle(course.eventName))}, A to Z.</p><ul>${[...glossary.entries()]
+    html: `<p>Every key term in ${link(overviewTitle(course.eventName))}, A to Z.</p><ul>${[
+      ...glossary.entries(),
+    ]
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([, item]) => item)
       .join('')}</ul>`,

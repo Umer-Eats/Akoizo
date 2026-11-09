@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Menu, Moon, Pause, Play, Search, Sun, X } from 'lucide-react';
+import { ArrowRight, Menu, Moon, NotebookPen, Pause, Play, Search, Sun, X } from 'lucide-react';
 import { CommandPalette, openCommandPalette } from './command-palette';
 import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
@@ -78,6 +78,15 @@ export function LandingNav() {
           </button>
           {profile ? (
             <>
+              <Link
+                className="lx-nav-notes"
+                href="/notes"
+                aria-current={path.startsWith('/notes') ? 'page' : undefined}
+                title="Notes"
+              >
+                <NotebookPen size={15} aria-hidden="true" />
+                <span>Notes</span>
+              </Link>
               <Link
                 className="lx-nav-text lx-nav-hide lx-nav-extra"
                 href="/community"
@@ -161,6 +170,9 @@ export function LandingNav() {
           ))}
           {profile && (
             <>
+              <Link href="/notes">
+                Notes <ArrowRight size={20} aria-hidden="true" />
+              </Link>
               <Link href="/community">
                 Community <ArrowRight size={20} aria-hidden="true" />
               </Link>

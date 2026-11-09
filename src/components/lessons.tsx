@@ -60,6 +60,7 @@ import './lesson-motion.css';
 import { akoLessonLines, akoLessonPlan } from '@/lib/ako-lesson';
 import { askAkoAbout, setAkoStudy } from '@/lib/ako-study';
 import { useSettings } from './providers';
+import { useStudyLayer } from './notes-store';
 
 function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
   const [values, setValues] = useState(() => modelDefaults(sim.model));
@@ -923,6 +924,13 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   const lesson = course.lessons.find((item) => item.id === lessonId) ?? ordered[0];
   const unit = course.units.find((item) => item.id === lesson.unitId)!;
   const currentIndex = ordered.findIndex((item) => item.id === lesson.id);
+  useStudyLayer(2, {
+    eventId: course.eventId,
+    eventName: course.eventName,
+    kind: 'lesson',
+    refId: lesson.id,
+    label: lesson.title,
+  });
   // A lesson is complete once its checkpoint is finished, on this device or recorded from another.
   const isComplete = (id: string) =>
     !!records[id] ||

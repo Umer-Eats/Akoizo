@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useStudyLayer } from './notes-store';
 import { eventSlots, slotForEvent } from '@/lib/event-slots';
 import {
   BookOpen,
@@ -911,6 +912,18 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
   const tool = toolCatalog.find((candidate) => candidate.id === toolId);
   const isAvailable =
     !toolId || availableToolIds.includes(toolId as (typeof availableToolIds)[number]);
+  useStudyLayer(
+    1,
+    event && isAvailable
+      ? {
+          eventId: event.id,
+          eventName: event.name,
+          kind: toolId === 'lab-practice' || toolId === 'lab-generator' ? 'lab' : 'tool',
+          refId: toolId ?? 'overview',
+          label: tool?.name ?? 'Study space',
+        }
+      : null,
+  );
   if (!event || (toolId && (!tool || !isAvailable))) {
     return (
       <main id="main" className="page-container">

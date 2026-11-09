@@ -75,7 +75,7 @@ export const noteLimits = {
   sections: 60,
   html: 600_000,
   title: 120,
-  section: 60,
+  section: 120,
   images: 600,
   imageData: 1_500_000,
 } as const;
