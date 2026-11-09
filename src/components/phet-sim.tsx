@@ -9,6 +9,7 @@ import {
   type PhetEmbed,
 } from '@/lib/lesson-extras';
 import './lesson-extras.css';
+import { useLabReport } from './lab-progress';
 
 // The simulation is loaded only after the student asks for it, so a lesson page with several
 // embeds stays light. PhET's own page chrome and logo are left untouched inside the frame.
@@ -16,6 +17,12 @@ export function PhetSim({ embed, lessonId }: { embed: PhetEmbed; lessonId: strin
   const [running, setRunning] = useState(false);
   const [checked, setChecked] = useState<number[]>([]);
   const [previewFailed, setPreviewFailed] = useState(false);
+  const [started, setStarted] = useState(false);
+  // The tasks are the goals; the student ticks each one off after doing it in the simulation.
+  useLabReport([
+    { label: 'Start the simulation', done: started },
+    ...embed.tasks.map((task, i) => ({ label: task, done: checked.includes(i) })),
+  ]);
   const id = `phet-${lessonId}-${embed.sim}`;
   return (
     <section className="phet-sim" id={id} aria-labelledby={`${id}-title`}>
@@ -38,7 +45,10 @@ export function PhetSim({ embed, lessonId }: { embed: PhetEmbed; lessonId: strin
           <button
             type="button"
             className="phet-launch"
-            onClick={() => setRunning(true)}
+            onClick={() => {
+              setRunning(true);
+              setStarted(true);
+            }}
             aria-label={`Start the ${embed.title} simulation`}
           >
             {!previewFailed && (
@@ -78,7 +88,8 @@ export function PhetSim({ embed, lessonId }: { embed: PhetEmbed; lessonId: strin
       </div>
       <fieldset className="phet-tasks">
         <legend>
-          Investigate in order · {checked.length} of {embed.tasks.length} done
+          Lab goals · tick each one when you have done it · {checked.length} of {embed.tasks.length}{' '}
+          done
         </legend>
         {embed.tasks.map((task, i) => (
           <label key={task}>

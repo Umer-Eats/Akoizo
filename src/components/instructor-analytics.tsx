@@ -6,6 +6,10 @@ import {
   accuracy,
   analyticsGroups,
   completion,
+  lessonAccuracy,
+  lessonCompletion,
+  lessonStages,
+  stageCompletion,
   summarize,
   weeklyAccuracy,
   type AnalyticsGroup,
@@ -22,6 +26,7 @@ const metrics = [
     percent: true,
     of: (s: AnalyticsSummary) => accuracy(s.overall),
   },
+  { id: 'lessons', label: 'Lessons completed', percent: true, of: lessonCompletion },
   { id: 'points', label: 'Points', percent: false, of: (s: AnalyticsSummary) => s.points },
   {
     id: 'tests',
@@ -74,6 +79,12 @@ function MetricTabs({ value, onChange }: { value: MetricId; onChange: (id: Metri
 function Tiles({ summary, students }: { summary: AnalyticsSummary; students: number }) {
   const tiles = [
     ['Students', whole(students), 'On this roster'],
+    [
+      'Lessons completed',
+      percent(lessonCompletion(summary)),
+      `${summary.lessons} of ${summary.lessonTotal} lessons in their events`,
+    ],
+    ['Lesson accuracy', percent(lessonAccuracy(summary)), 'Checkpoint, practice, and labs'],
     ['Overall accuracy', percent(accuracy(summary.overall)), 'All graded test points'],
     [
       'Tests completed',
@@ -413,6 +424,100 @@ function HeatTable({
   );
 }
 
+const stageNames = {
+  learn: 'Learn',
+  practice: 'Practice',
+  labs: 'Labs',
+  checkpoint: 'Checkpoint',
+} as const;
+
+/**
+ * Lesson progress for each student: completion first, then accuracy inside the lessons.
+ * Completion counts the lessons in events a student is seated in or has started.
+ */
+function LessonProgress({
+  label,
+  members,
+  stats,
+  event,
+}: {
+  label: string;
+  members: { id: string; name: string }[];
+  stats: (studentId: string) => AnalyticsSummary;
+  event?: string;
+}) {
+  return (
+    <div className="an-card">
+      <div className="an-card-title">
+        <h3>Lesson progress</h3>
+        <span className="an-note">
+          {event ? `${event} lessons.` : 'All events.'} Choose an event in the student breakdown to
+          narrow this.
+        </span>
+      </div>
+      <div
+        className="an-table-wrap"
+        role="region"
+        aria-label={`${label} lesson progress`}
+        tabIndex={0}
+      >
+        <table className="an-table an-lesson-table">
+          <thead>
+            <tr>
+              <th scope="col">Student</th>
+              <th scope="col">Lessons completed</th>
+              {lessonStages.map((stage) => (
+                <th scope="col" key={stage}>
+                  {stageNames[stage]}
+                </th>
+              ))}
+              <th scope="col">Checkpoint accuracy</th>
+              <th scope="col">Practice accuracy</th>
+              <th scope="col">Lab accuracy</th>
+            </tr>
+          </thead>
+          <tbody>
+            {members.map((student) => {
+              const row = stats(student.id);
+              return (
+                <tr key={student.id}>
+                  <th scope="row">
+                    {student.name}
+                    <small>
+                      {row.lessons} of {row.lessonTotal} lessons
+                    </small>
+                  </th>
+                  <Meter value={lessonCompletion(row)} />
+                  {lessonStages.map((stage) => (
+                    <td key={stage}>
+                      {percent(stageCompletion(row, stage))}
+                      <small>{row.stages[stage]} done</small>
+                    </td>
+                  ))}
+                  <td>
+                    {percent(accuracy(row.checkpoint))}
+                    <small>
+                      {row.checkpoint.earned} of {row.checkpoint.possible} right
+                    </small>
+                  </td>
+                  <td>{percent(accuracy(row.lessonPractice))}</td>
+                  <td>{percent(accuracy(row.lessonLabs))}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p className="source-note">
+        A lesson is complete when its checkpoint is finished. Checkpoint accuracy counts every
+        checked answer: multiple choice is marked by the answer key, written answers by AI, or by
+        the student when AI is unavailable. Practice and lab accuracy are first tries, saved when a
+        student finishes that stage.
+      </p>
+    </div>
+  );
+}
+
 function Meter({ value }: { value: number | null }) {
   return (
     <td className="an-meter" data-empty={value === null}>
@@ -528,6 +633,13 @@ export function InstructorAnalytics({ data: suppliedData }: { data?: SchoolAnaly
           </p>
         )}
         <Tiles summary={summary} students={members.length} />
+
+        <LessonProgress
+          label={group.name}
+          members={members}
+          stats={(id) => stats([id], group.division, event?.id)}
+          event={event?.name}
+        />
 
         <div className="an-card">
           <div className="an-card-title">
@@ -656,7 +768,12 @@ export function InstructorAnalytics({ data: suppliedData }: { data?: SchoolAnaly
                         {percent(accuracy(row.ranked))}
                         <small>{row.rankedTests} taken</small>
                       </td>
-                      <td className="an-number">{row.lessons}</td>
+                      <td>
+                        {percent(lessonCompletion(row))}
+                        <small>
+                          {row.lessons} of {row.lessonTotal}
+                        </small>
+                      </td>
                       <td>
                         {percent(completion(row))}
                         <small>
@@ -671,7 +788,8 @@ export function InstructorAnalytics({ data: suppliedData }: { data?: SchoolAnaly
           </div>
           <p className="source-note">
             Accuracy is points earned out of points graded. Written answers still waiting for review
-            are left out until they are scored.
+            are left out until they are scored. Lessons show the share completed in this
+            student&rsquo;s events.
             {event ? ` Points are those earned in ${event.name}.` : ''}
           </p>
         </div>

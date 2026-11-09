@@ -1,11 +1,17 @@
-import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
-import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
+import { anatomyLessons as anatomyRaw } from '../src/lib/lessons-anatomy.ts';
+import { forensicsLessons as forensicsRaw } from '../src/lib/lessons-forensics.ts';
+import { withExplanations } from '../src/lib/lesson-explanations/index.ts';
 import { modelControls } from '../src/lib/lesson-models.ts';
 import { lessonAtlas } from '../src/lib/lesson-atlas.ts';
 import { chromium, expect } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
-import { openStage } from './lib-lesson-stage.mjs';
+import { openStage, playCheckpoint } from './lib-lesson-stage.mjs';
+import { mockLessonApi } from './lib-mock-session.mjs';
+
+// The site shows each question with its written explanation, so the checks do too.
+const anatomyLessons = withExplanations(anatomyRaw);
+const forensicsLessons = withExplanations(forensicsRaw);
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 await mkdir('documents/qa/lessons', { recursive: true });
@@ -100,8 +106,19 @@ await p.route('**/api/**', async (route) => {
     }
     return route.fulfill({ json: selections[url.searchParams.get('division')] });
   }
+  // Checkpoint answers are kept per student, like the real lesson_answers table.
+  if (url.pathname.startsWith('/api/lessons/'))
+    return route.fulfill({
+      json: mockLessonApi(
+        url,
+        route.request(),
+        profile.division,
+        (lessonAnswers[profile.id] ??= []),
+      ),
+    });
   return route.fulfill({ json: [] });
 });
+const lessonAnswers = {};
 
 try {
   await p.goto(base + '/login/student');
@@ -119,8 +136,9 @@ try {
         const lesson = course.lessons.find((x) => x.id === course.units[u].lessonIds[l]);
         await p.locator('.lesson-button').nth(l).click();
         await expect(p.locator('#current-lesson-title')).toHaveText(lesson.title);
-        await expect(p.locator('.quiz-question')).toHaveCount(1);
-        await expect(p.getByLabel('Choose question').locator('option')).toHaveCount(7);
+        // One numbered circle per checkpoint question, no question drop-down.
+        await expect(p.locator('#lesson-practice .lc-dot')).toHaveCount(lesson.practice.length);
+        await expect(p.getByLabel('Choose question')).toHaveCount(0);
         await expect(p.locator('.lesson-sim h3')).toHaveText(lesson.simulation.title);
         await expect(p.locator('.lesson-reading .process-atlas')).toHaveCount(1);
         await expect(p.locator('#lesson-review .comparison-cards > div')).toHaveCount(3);
@@ -191,9 +209,7 @@ try {
         await openStage(p, 'learn');
         await expect(p.locator('.lesson-example')).toBeVisible();
         await openStage(p, 'checkpoint');
-        await expect(
-          p.getByRole('button', { name: 'Check my answers', exact: true }),
-        ).toBeDisabled();
+        await expect(p.getByRole('button', { name: 'Check answer', exact: true })).toBeDisabled();
       }
     }
     assert.equal(await p.getByRole('button', { name: 'Video lesson', exact: true }).count(), 0);
@@ -217,7 +233,7 @@ try {
   await p.getByRole('button', { name: 'Run scenario', exact: true }).click();
   await expect(p.locator('.experiment-feedback')).toContainText('Prediction supported');
   await expect(p.locator('.lab-metrics')).toContainText('2.4');
-  await p.getByRole('button', { name: 'Record trial (0/6)', exact: true }).click();
+  await p.getByRole('button', { name: 'Record baseline (0/6)', exact: true }).click();
   await expect(p.locator('.trial-chart')).toHaveAccessibleName(/2.4/);
   await p.getByRole('button', { name: 'Run variable sweep', exact: true }).click();
   await expect(p.getByRole('button', { name: 'Pause sweep', exact: true })).toBeVisible();
@@ -263,60 +279,60 @@ try {
   await expect(conclusion.first()).toBeDisabled();
   for (const button of await p.locator('.investigation-tests button').all()) await button.click();
   await conclusion.first().click();
-  await expect(p.locator('.sim-feedback')).toContainText('Supported by the evidence');
+  await expect(p.locator('.lab-reveal')).toContainText('Supported by the evidence');
   await p.getByRole('button', { name: 'Restart investigation' }).click();
   await expect(conclusion.first()).toBeDisabled();
   await openStage(p, 'checkpoint');
-  const check = p.getByRole('button', { name: 'Check my answers', exact: true });
-  const firstRadio = p.locator('.quiz-question input[type="radio"]').first();
-  await firstRadio.focus();
-  await firstRadio.press('ArrowDown');
-  await expect(p.locator('.quiz-question input[type="radio"]').nth(1)).toBeChecked();
-  await p
-    .locator('.quiz-question')
-    .first()
-    .screenshot({ path: 'documents/qa/lessons/mcq-selected.png' });
-  for (let i = 0; i < first.practice.length; i++) {
-    await p.getByLabel('Choose question').selectOption(String(i));
-    const q = first.practice[i],
-      field = p.locator('.quiz-question');
-    if (q.type === 'mcq') await field.getByRole('radio', { name: q.answer, exact: true }).check();
-    else await field.getByRole('textbox').fill(q.answer);
-  }
-  const lastWritten = p.locator('.quiz-written textarea').last();
-  await lastWritten.fill('   ');
+  const quiz = p.locator('#lesson-practice');
+  const check = quiz.getByRole('button', { name: 'Check answer', exact: true });
   await expect(check).toBeDisabled();
-  await lastWritten.fill(first.practice.at(-1).answer);
-  await check.click();
-  await p.getByLabel('Choose question').selectOption('0');
-  await expect(p.locator('.quiz-question .practice-option.correct')).toHaveCount(1);
-  await expect(firstRadio).toBeDisabled();
-  await p
-    .locator('.quiz-question')
-    .first()
-    .screenshot({ path: 'documents/qa/lessons/mcq-reviewed.png' });
-  await expect(p.locator('.quiz-result')).toContainText('Multiple choice: 3 / 3 points');
-  await expect(p.locator('.course-progress label')).toHaveText(/^0 of 20 practices complete/);
-  for (let i = 0; i < first.practice.length; i++) {
-    if (first.practice[i].type !== 'short') continue;
-    await p.getByLabel('Choose question').selectOption(String(i));
-    await p.locator('.quiz-self-review input').check();
+  // Radios keep keyboard selection.
+  await p.getByRole('button', { name: /^Question 1,/ }).click();
+  const firstRadio = quiz.locator('input[type="radio"]').first();
+  if (first.practice[0].type === 'mcq') {
+    await firstRadio.focus();
+    await firstRadio.press('ArrowDown');
+    await expect(quiz.locator('input[type="radio"]').nth(1)).toBeChecked();
+    await expect(check).toBeEnabled();
+    await quiz
+      .locator('.quiz-question')
+      .screenshot({ path: 'documents/qa/lessons/mcq-selected.png' });
   }
-  await expect(p.locator('.course-progress label')).toHaveText(/^1 of 20 practices complete/);
+  // A blank written answer cannot be checked.
+  const shortAt = first.practice.findIndex((q) => q.type === 'short');
+  await p.getByRole('button', { name: new RegExp(`^Question ${shortAt + 1},`) }).click();
+  await quiz.getByRole('textbox').fill('   ');
+  await expect(check).toBeDisabled();
+  // Check each question as you go; question 1 is answered wrong on purpose.
+  await playCheckpoint(p, first, { wrong: [0] });
+  const total = first.practice.length;
+  await expect(quiz.locator('.lc-summary')).toContainText('Lesson complete');
+  await expect(p.locator('.course-progress label')).toHaveText(
+    new RegExp(`^1 of ${anatomyLessons.lessons.length} lessons complete`),
+  );
+  // A checked question is locked, shows the key, and its circle stays red.
+  await p.getByRole('button', { name: 'Question 1, incorrect', exact: true }).click();
+  await expect(quiz.locator('fieldset.lc-answer')).toHaveAttribute('disabled', '');
+  if (first.practice[0].type === 'mcq') {
+    await expect(quiz.locator('.practice-option.correct')).toHaveCount(1);
+    await expect(quiz.locator('.lc-chosen')).toContainText(first.practice[0].answer);
+  }
+  await quiz
+    .locator('.quiz-question')
+    .screenshot({ path: 'documents/qa/lessons/mcq-reviewed.png' });
+  // Results survive moving between lessons and a reload.
   await p.getByRole('button', { name: 'Next lesson', exact: true }).click();
   await expect(p.locator('#current-lesson-title')).toHaveText(anatomyLessons.lessons[1].title);
   await p.reload();
   await expect(p.locator('#current-lesson-title')).toHaveText(anatomyLessons.lessons[1].title);
   await p.getByRole('button', { name: 'Previous lesson', exact: true }).click();
   await openStage(p, 'checkpoint');
-  await expect(p.locator('.quiz-result')).toContainText('Multiple choice: 3 / 3 points');
-  await expect(p.locator('.course-progress label')).toHaveText(/^1 of 20 practices complete/);
-  await p.getByRole('button', { name: 'Revise answers', exact: true }).click();
-  await expect(p.locator('.course-progress label')).toHaveText(/^0 of 20 practices complete/);
-  await p
-    .getByLabel('Choose question')
-    .selectOption(String(first.practice.findIndex((q) => q.type === 'short')));
-  await expect(p.locator('.quiz-written textarea').first()).not.toHaveValue('');
+  await expect(quiz.locator('.lc-summary')).toContainText(`${total - 1} of ${total} correct`);
+  await expect(quiz.locator('.lc-dot[data-state="incorrect"]')).toHaveCount(1);
+  // A retake clears the answers and the circles.
+  await quiz.getByRole('button', { name: 'Retake checkpoint', exact: true }).click();
+  await expect(quiz.locator('.lc-summary')).toHaveCount(0);
+  await expect(quiz.locator('.lc-dot[data-state="empty"]')).toHaveCount(total);
   // Test calculated outputs and notebook with the respiratory unit.
   await p.locator('.unit-button').nth(2).click();
   await openStage(p, 'labs');
@@ -324,7 +340,7 @@ try {
   await p.getByRole('slider', { name: 'Tidal volume', exact: true }).fill('250');
   await p.getByRole('slider', { name: 'Breathing rate', exact: true }).fill('24');
   await expect(p.locator('.lab-metrics')).toContainText('2.4');
-  await p.getByRole('button', { name: 'Record trial (0/6)', exact: true }).click();
+  await p.getByRole('button', { name: 'Record baseline (0/6)', exact: true }).click();
   await expect(p.locator('.lab-notebook')).toContainText('2.4');
   await p.getByRole('button', { name: 'Reset experiment', exact: true }).click();
   await expect(p.locator('.lab-metrics')).toContainText('4.2');
@@ -366,15 +382,6 @@ try {
           .first()
           .screenshot({ path: `documents/qa/lessons/mcq-${theme}-390.png` });
         await openStage(p, 'labs');
-        const viewer = p.locator('.lab-diagram-viewport');
-        await expect(p.locator('.lab-diagram-scroll-hint')).toBeVisible();
-        await viewer.focus();
-        await viewer.press('ArrowRight');
-        await expect.poll(() => viewer.evaluate((node) => node.scrollLeft)).toBeGreaterThan(0);
-        await viewer.evaluate((node) => {
-          node.scrollLeft = 0;
-          node.blur();
-        });
       }
       await p.evaluate(() => window.scrollTo(0, 0));
       if (width !== 320)
@@ -393,6 +400,7 @@ try {
       await p.goto(base + '/dashboard/student/events/forensics/lessons');
       await p.evaluate((t) => (document.documentElement.dataset.theme = t), theme);
       await p.locator('.unit-button').nth(3).click();
+      await openStage(p, 'labs');
       await p.locator('.investigation-tests button').first().click();
       await p.getByRole('slider', { name: 'Exhibit zoom', exact: true }).fill('200');
       assert.equal(
@@ -438,6 +446,7 @@ try {
   await p.goto(base + '/dashboard/student/events/forensics/lessons');
   await p.locator('.unit-button').nth(4).click();
   await p.locator('.lesson-button').nth(1).click();
+  await openStage(p, 'labs');
   await p.locator('.investigation-tests button').first().click();
   await p.getByRole('button', { name: 'Inspect base peak m/z 91', exact: true }).press('Enter');
   await expect(p.locator('.specimen-drawing')).toContainText('Base peak');
@@ -445,19 +454,23 @@ try {
   profile.id = 'qa-student-two';
   await p.reload();
   await expect(p.locator('#current-lesson-title')).toHaveText(first.title);
-  await p
-    .getByLabel('Choose question')
-    .selectOption(String(first.practice.findIndex((q) => q.type === 'short')));
-  await expect(p.locator('.quiz-written textarea').first()).toHaveValue('');
+  // Another student on this browser starts with an empty checkpoint.
+  await openStage(p, 'checkpoint');
+  const shortIndex = first.practice.findIndex((q) => q.type === 'short');
+  await p.getByRole('button', { name: new RegExp(`^Question ${shortIndex + 1},`) }).click();
+  await expect(p.locator('.quiz-written textarea')).toHaveValue('');
+  await expect(p.locator('#lesson-practice .lc-dot[data-state="correct"]')).toHaveCount(0);
   profile.id = 'qa-student';
   profile.division = 'B';
   await p.reload();
-  await expect(p.locator('.lessons-intro')).toContainText('shared with Division C');
+  await expect(p.locator('.lessons-intro')).toContainText('Division B study path');
   profile.division = 'C';
   await p.goto(`${base}/dashboard/student/events/engineering-cad/lessons`);
   await expect(p.locator('.lessons-workspace')).toHaveCount(0);
   await p.goto(`${base}/dashboard/student/events/forensics/lessons`);
   await expect(p.locator('.unit-button')).toHaveCount(9);
+  // Let saved progress load first, so the page does not rewrite storage after it is corrupted.
+  await p.waitForLoadState('networkidle');
   await p.evaluate(() =>
     localStorage.setItem('akoizo:lessons:v2:qa-student:C:forensics', '{broken'),
   );
@@ -478,7 +491,7 @@ try {
   await expect(p.locator('#current-lesson-title')).toHaveText(forensicsLessons.lessons[2].title);
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: 40 lesson atlases, source image zoom, interactive charts, prediction scenarios, sweep playback, trial plots, specimen controls and notebooks, spectrum keyboard annotation, phone layouts; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; practice scoring/review; draft restoration; student isolation; shared Division B course; CAD scope; corrupted/blocked storage.',
+    'PASS: 40 lesson atlases, source image zoom, interactive charts, prediction scenarios, sweep playback, trial plots, specimen controls and notebooks, spectrum keyboard annotation, phone layouts; all 10 numerical diagrams update at slider limits and restore; tissue/STR/glass reveals reset; compact aligned MCQs in 320/390/1440 layouts and both themes; keyboard answers and diagram scrolling; calculations; investigations; check-as-you-go checkpoint with numbered circles, reload and retake; student isolation; Division B course; CAD scope; corrupted/blocked storage.',
   );
 } finally {
   await browser.close();

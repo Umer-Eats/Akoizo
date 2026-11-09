@@ -22,8 +22,7 @@ export const circuitLab: Record<string, string> = {
     'P = V²/R. At fixed resistance, doubling V multiplies V² by 4, so power is four times larger. Current also doubles, and P = VI = (2V)(2I) = 4VI.',
   'circ-u2-l1-q4':
     'Charge is conserved: the same current flows out of and back into the source. What a load uses is energy: charges lose potential energy in the resistor, which becomes heat or light. The charge itself keeps circulating.',
-  'circ-u2-l1-q5':
-    '1 Wh = 1 W × 3,600 s = 3,600 J. So 2 Wh = 2 × 3,600 = 7,200 J.',
+  'circ-u2-l1-q5': '1 Wh = 1 W × 3,600 s = 3,600 J. So 2 Wh = 2 × 3,600 = 7,200 J.',
   'circ-u2-l1-q6':
     'Amp-hours measure charge (current × time). Energy is charge × voltage, so Wh = Ah × V. A 2 Ah battery at 3.7 V stores about 7.4 Wh, while a 2 Ah battery at 12 V stores 24 Wh. Load, temperature and age also change usable energy.',
   'circ-u2-l1-q7':

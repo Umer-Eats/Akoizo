@@ -1,8 +1,9 @@
-import { AppError, type Profile } from './domain.ts';
+import { AppError, eventKey, type Profile } from './domain.ts';
 import type { Division } from './events.ts';
 import type { AnalyticsActivity, SchoolAnalytics } from './analytics.ts';
 import type { Database } from './school-service.ts';
 import { communityTeams } from './team-service.ts';
+import { lessonsForEvent } from './lessons-registry.ts';
 
 const active = 'NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)';
 const roster = `u.school_id=? AND u.role='student' AND ${active}`;
@@ -40,6 +41,7 @@ export async function communityAnalytics(db: Database, member: Profile): Promise
      WHERE ${roster} ORDER BY t.completed_at,t.id`,
     school,
   );
+  const studentIds = new Set(students.map((student) => String(student.id)));
   const activity = new Map<string, AnalyticsActivity>();
   const row = (studentId: unknown, event: unknown) => {
     const key = `${studentId}|${event}`;
@@ -49,6 +51,11 @@ export async function communityAnalytics(db: Database, member: Profile): Promise
         division: divisionOf(event),
         eventId: bareEvent(event),
         lessons: 0,
+        lessonTotal: lessonsForEvent(bareEvent(event), divisionOf(event))?.lessons.length ?? 0,
+        stages: { learn: 0, practice: 0, labs: 0, checkpoint: 0 },
+        checkpoint: { earned: 0, possible: 0 },
+        lessonPractice: { earned: 0, possible: 0 },
+        lessonLabs: { earned: 0, possible: 0 },
         points: 0,
         assigned: 0,
         completed: 0,
@@ -61,6 +68,39 @@ export async function communityAnalytics(db: Database, member: Profile): Promise
     school,
   ))
     row(lesson.student_id, lesson.event_id).lessons = Number(lesson.n);
+  // Finished lesson stages; practice and labs carry a first-try score.
+  for (const part of await db.all(
+    `SELECT l.student_id,l.event_id,l.part,COUNT(*) AS n,COALESCE(SUM(l.score),0) AS earned,
+      COALESCE(SUM(l.max_score),0) AS possible
+     FROM lesson_parts l JOIN users u ON u.id=l.student_id
+     WHERE ${roster} GROUP BY l.student_id,l.event_id,l.part`,
+    school,
+  )) {
+    const target = row(part.student_id, part.event_id);
+    const stage = String(part.part) as keyof AnalyticsActivity['stages'];
+    if (stage in target.stages) target.stages[stage] = Number(part.n);
+    const tally = { earned: Number(part.earned), possible: Number(part.possible) };
+    if (stage === 'practice') target.lessonPractice = tally;
+    if (stage === 'labs') target.lessonLabs = tally;
+  }
+  // Checkpoint accuracy counts every checked answer, including lessons still in progress.
+  for (const answers of await db.all(
+    `SELECT l.student_id,l.event_id,SUM(l.correct) AS earned,COUNT(*) AS possible
+     FROM lesson_answers l JOIN users u ON u.id=l.student_id
+     WHERE ${roster} GROUP BY l.student_id,l.event_id`,
+    school,
+  ))
+    row(answers.student_id, answers.event_id).checkpoint = {
+      earned: Number(answers.earned),
+      possible: Number(answers.possible),
+    };
+  // Events a student is seated in count toward their lesson total even before they start.
+  const teams = await communityTeams(db, member);
+  for (const team of teams)
+    for (const [eventId, seats] of Object.entries(team.slots))
+      for (const studentId of seats)
+        if (studentId && studentIds.has(studentId))
+          row(studentId, eventKey(team.division, eventId));
   for (const entry of await db.all(
     `SELECT l.student_id,l.event_id,SUM(l.points) AS n FROM points_ledger l JOIN users u ON u.id=l.student_id
      WHERE ${roster} AND l.event_id IS NOT NULL GROUP BY l.student_id,l.event_id`,
@@ -87,7 +127,7 @@ export async function communityAnalytics(db: Database, member: Profile): Promise
     target.completed += Number(work.completed);
   }
   return {
-    teams: await communityTeams(db, member),
+    teams,
     students: students.map((student) => ({
       id: String(student.id),
       name: String(student.display_name || 'Learner'),

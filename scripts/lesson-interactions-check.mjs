@@ -6,7 +6,8 @@ import { mkdir } from 'node:fs/promises';
 import { topicLabs, extrasFor } from '../src/lib/extras/index.ts';
 import { solutionSequence, termRounds } from '../src/lib/lesson-extras.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
-import { openStage } from './lib-lesson-stage.mjs';
+import { openStage, playCheckpoint } from './lib-lesson-stage.mjs';
+import { mockLessonApi } from './lib-mock-session.mjs';
 
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const division = process.env.DIVISION || 'C';
@@ -94,8 +95,13 @@ await p.route('**/api/**', async (route) => {
         progress: {},
       },
     });
+  if (url.pathname.startsWith('/api/lessons/'))
+    return route.fulfill({
+      json: mockLessonApi(url, route.request(), profile.division, lessonAnswers),
+    });
   return route.fulfill({ json: [] });
 });
+const lessonAnswers = [];
 // Remote figures and PhET content are not needed to verify structure; keep the run offline.
 await p.route(
   /phet\.colorado\.edu|wikimedia\.org|openstax\.org|opentextbc\.ca|rcsb\.org|noaa\.gov|nasa\.gov|usgs\.gov|cdc\.gov|libretexts\.org/,
@@ -212,32 +218,11 @@ try {
   assert.equal(await p.evaluate(() => window.scrollY), stoppedY);
 
   await openStage(p, 'checkpoint');
-  const quiz = p.locator('#lesson-practice');
-  const jump = quiz.getByLabel('Choose question');
-  await expect(quiz.locator('.quiz-question')).toHaveCount(1);
-  await expect(quiz.getByRole('button', { name: 'Previous question' })).toBeDisabled();
-  for (let i = 0; i < lesson.practice.length; i++) {
-    const question = lesson.practice[i];
-    await jump.selectOption(String(i));
-    if (question.type === 'mcq')
-      await quiz.getByRole('radio', { name: question.answer, exact: true }).check();
-    else await quiz.getByRole('textbox').fill(question.answer);
-  }
-  await expect(quiz.getByRole('button', { name: 'Next question' })).toBeDisabled();
-  await quiz.getByRole('button', { name: 'Previous question' }).click();
-  await expect(jump).toHaveValue(String(lesson.practice.length - 2));
-  await quiz.getByRole('button', { name: 'Next question' }).click();
-  await quiz.getByRole('button', { name: 'Check my answers' }).click();
-  for (let i = 0; i < lesson.practice.length; i++) {
-    await jump.selectOption(String(i));
-    await expect(quiz.locator('.quiz-review')).toContainText(lesson.practice[i].answer);
-    if (lesson.practice[i].type === 'short') {
-      await expect(quiz.getByRole('textbox')).toHaveValue(lesson.practice[i].answer);
-      await quiz.getByRole('checkbox').check();
-    }
-  }
-  await expect(quiz.getByRole('button', { name: 'Submit lesson', exact: true })).toBeEnabled();
-  await expect(quiz.locator('.quiz-result')).toContainText('Practice complete');
+  // No question drop-down: one numbered circle per question, marked as each is checked.
+  await expect(p.locator('#lesson-practice').getByLabel('Choose question')).toHaveCount(0);
+  await expect(p.locator('#lesson-practice .lc-dot')).toHaveCount(lesson.practice.length);
+  const quiz = await playCheckpoint(p, lesson, { wrong: [0] });
+  await expect(quiz.locator('.lc-summary')).toContainText('Lesson complete');
   for (const width of [1440, 390]) {
     await p.setViewportSize({ width, height: 1000 });
     await quiz.screenshot({ path: `${out}/${division}-${width}-slides.png` });
@@ -245,14 +230,20 @@ try {
   }
   await p.setViewportSize({ width: 1440, height: 1000 });
   await openStage(p, 'learn');
-  const inspector = p.locator('#lesson-stage-learn .diagram-inspector').first();
+  let inspector = p.locator('#lesson-stage-learn .diagram-inspector').first();
+  // Labs no longer sit in Learn, so some lessons' only zoomable diagram is in the open lab.
+  if (!(await inspector.count())) {
+    await openStage(p, 'labs');
+    inspector = p.locator('.lf-lab-panel:not([hidden]) .diagram-inspector').first();
+  }
   await inspector.getByRole('button', { name: /^Enlarge diagram/ }).click();
   await expect(inspector.locator('dialog')).toBeVisible();
   await inspector.getByRole('button', { name: 'Zoom diagram in' }).click();
   await expect(inspector.locator('dialog output')).toHaveText('125%');
   await p.keyboard.press('Escape');
   await expect(inspector.locator('dialog')).not.toBeVisible();
-  const process = p.locator('.process-atlas').first();
+  await openStage(p, 'learn');
+  const process = p.locator('#lesson-stage-learn .process-atlas').first();
   if (await process.count()) {
     await process.getByRole('button', { name: 'Play walkthrough' }).click();
     await expect(process.locator('.process-focus')).toContainText('Step 2:', { timeout: 5000 });

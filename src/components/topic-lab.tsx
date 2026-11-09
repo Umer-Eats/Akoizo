@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useId, useState } from 'react';
-import { Check, Lightbulb, RotateCcw, Target } from 'lucide-react';
+import { Lightbulb, RotateCcw } from 'lucide-react';
 import {
   labDefaults,
   runLab,
@@ -12,6 +12,7 @@ import {
 } from '@/lib/topic-lab-kit';
 import './lesson-extras.css';
 import { DiagramViewer } from './diagram-viewer';
+import { LabGoals, LabStep, useLabReport } from './lab-progress';
 
 const fmt = (n: number | string, digits = 3) =>
   typeof n === 'string'
@@ -202,20 +203,36 @@ function PlotView({ plot }: { plot: LabPlot }) {
             )}
           </g>
         ))}
-        {plot.curves.map((curve, n) => (
-          <path
-            key={n}
-            className={`tl-stroke tl-${curve.tone ?? (n ? 'cool' : 'accent')}`}
-            strokeWidth="2.75"
-            strokeDasharray={curve.dash ? '7 5' : undefined}
-            d={Array.from({ length: 161 }, (_, i) => {
-              const x = x0 + ((x1 - x0) * i) / 160;
-              return `${i ? 'L' : 'M'}${px(x).toFixed(1)},${py(curve.f(x)).toFixed(1)}`;
-            }).join('')}
-          />
-        ))}
+        {plot.curves.map((curve, n) => {
+          const tone = curve.tone ?? (n ? 'cool' : 'accent');
+          const line = Array.from({ length: 161 }, (_, i) => {
+            const x = x0 + ((x1 - x0) * i) / 160;
+            return `${i ? 'L' : 'M'}${px(x).toFixed(1)},${py(curve.f(x)).toFixed(1)}`;
+          }).join('');
+          return (
+            <g key={n}>
+              {/* A soft wash under the main curve makes its shape readable at a glance. */}
+              {n === 0 && !curve.dash && (
+                <path d={`${line}L610,286L74,286Z`} className={`tl-fill tl-${tone} tl-area`} />
+              )}
+              <path
+                className={`tl-stroke tl-${tone}`}
+                strokeWidth="3"
+                strokeDasharray={curve.dash ? '7 5' : undefined}
+                d={line}
+              />
+            </g>
+          );
+        })}
         {(plot.points ?? []).map((p, n) => (
           <g key={n}>
+            <line x1={px(p.x)} x2={px(p.x)} y1={py(p.y)} y2="286" className="tl-drop" />
+            <circle
+              cx={px(p.x)}
+              cy={py(p.y)}
+              r="14"
+              className={`tl-fill tl-${p.tone ?? 'slot'} tl-halo`}
+            />
             <circle
               cx={px(p.x)}
               cy={py(p.y)}
@@ -349,10 +366,11 @@ type Trial = { values: LabValues; metrics: LabResult['metrics'] };
 export function TopicLabView({ lab }: { lab: TopicLab }) {
   const uid = useId();
   const [values, setValues] = useState<LabValues>(() => labDefaults(lab));
-  const [done, setDone] = useState<number[]>([]);
-  const [hints, setHints] = useState<number[]>([]);
+  const [reached, setReached] = useState<number[]>([]);
   const [guess, setGuess] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
+  // The first checked prediction is what counts; a reset lets the student practise again.
+  const [firstTry, setFirstTry] = useState<boolean | null>(null);
   const [trials, setTrials] = useState<Trial[]>([]);
   const sweepControls = lab.controls.filter(
     (c) => !c.options && !c.toggle && c.min !== undefined && c.max !== undefined,
@@ -379,297 +397,295 @@ export function TopicLabView({ lab }: { lab: TopicLab }) {
   const result = runLab(lab, values);
   // Missions latch: once reached, a goal stays complete while the student keeps exploring.
   useEffect(() => {
-    const reached = lab.missions
+    const now = lab.missions
       .map((m, i) => (m.done(result.o, values) ? i : -1))
-      .filter((i) => i >= 0 && !done.includes(i));
-    if (reached.length) setDone((current) => [...current, ...reached]);
-  }, [lab, result.o, values, done]);
+      .filter((i) => i >= 0 && !reached.includes(i));
+    if (now.length) setReached((current) => [...current, ...now]);
+  }, [lab, result.o, values, reached]);
   const set = (key: string, value: number) => {
     setSweeping(false);
     setValues((current) => ({ ...current, [key]: value }));
   };
+  const goals = [
+    ...lab.missions.map((m, i) => ({ label: m.goal, hint: m.hint, done: reached.includes(i) })),
+    { label: 'Check your prediction against the model', done: revealed },
+  ];
+  useLabReport(goals, firstTry);
+  const missionsDone = reached.length === lab.missions.length;
   return (
-    <section className="tl-lab" id={`topic-lab-${lab.id}`} aria-labelledby={`${uid}-title`}>
+    <section
+      className="tl-lab lab-guided"
+      id={`topic-lab-${lab.id}`}
+      aria-labelledby={`${uid}-title`}
+    >
       <header>
         <p className="eyebrow">VIRTUAL LAB · CHANGE ONE VARIABLE AT A TIME</p>
         <h4 id={`${uid}-title`}>{lab.title}</h4>
         <p>{lab.lead}</p>
       </header>
-      {sweep && (
-        <div className="tl-sweep">
-          <label>
-            Animate one variable
-            <select
-              aria-label="Variable to animate"
-              value={sweepKey}
-              onChange={(e) => {
-                setSweeping(false);
-                setSweepKey(e.target.value);
-              }}
-            >
-              {sweepControls.map((c) => (
-                <option key={c.key} value={c.key}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <p>
-            Watch {sweep.label.toLowerCase()} change from {sweep.min} to {sweep.max}{' '}
-            {sweep.unit ?? ''}. All other inputs stay fixed. This is a variable sweep, not elapsed
-            experimental time.
-          </p>
-          <div className="lesson-actions">
-            <button
-              type="button"
-              className="button button-small button-glass"
-              aria-pressed={sweeping}
-              onClick={() => {
-                if (sweeping) setSweeping(false);
-                else {
-                  setValues((current) => ({ ...current, [sweep.key]: sweep.min! }));
-                  setSweeping(true);
+      <LabGoals goals={goals} />
+      <LabStep
+        n={1}
+        title="Predict"
+        hint="Commit to an answer before you run anything. Your first checked prediction is recorded."
+        done={guess !== null}
+      >
+        <fieldset className="tl-predict">
+          <legend>
+            <Lightbulb size={15} aria-hidden="true" /> {lab.predict.q}
+          </legend>
+          <div className="tl-options">
+            {lab.predict.options.map((option, i) => (
+              <button
+                key={option}
+                type="button"
+                className="tl-option"
+                aria-pressed={guess === i}
+                disabled={revealed}
+                data-state={
+                  !revealed
+                    ? undefined
+                    : i === lab.predict.correct
+                      ? 'right'
+                      : guess === i
+                        ? 'wrong'
+                        : undefined
                 }
-              }}
-            >
-              {sweeping ? 'Pause animation' : 'Animate variable'}
-            </button>
-            <button
-              type="button"
-              className="button button-small button-glass"
-              disabled={sweeping || values[sweep.key] >= sweep.max!}
-              onClick={() =>
-                set(
-                  sweep.key,
-                  Math.min(
-                    sweep.max!,
-                    Number((values[sweep.key] + (sweep.step ?? 1)).toPrecision(12)),
-                  ),
-                )
-              }
-            >
-              Advance variable one step
-            </button>
+                onClick={() => setGuess(i)}
+              >
+                {option}
+              </button>
+            ))}
           </div>
-        </div>
-      )}
-      <fieldset className="tl-predict">
-        <legend>
-          <Lightbulb size={15} aria-hidden="true" /> Predict before you test: {lab.predict.q}
-        </legend>
-        <div className="tl-options">
-          {lab.predict.options.map((option, i) => (
-            <button
-              key={option}
-              type="button"
-              className="tl-option"
-              aria-pressed={guess === i}
-              disabled={revealed}
-              onClick={() => setGuess(i)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-        {guess !== null && !revealed && (
-          <p className="tl-quiet">
-            Prediction saved. Use the controls to test it, then check your prediction.
-          </p>
-        )}
-      </fieldset>
-      <div className="tl-bench">
-        <div className="tl-stage">
-          <LabFigure result={result} title={lab.title} />
-        </div>
-        <div className="tl-controls">
-          {lab.controls.map((c) =>
-            c.options ? (
-              <label key={c.key} className="tl-control">
-                <span>{c.label}</span>
-                <select
-                  aria-label={c.label}
-                  value={values[c.key]}
-                  onChange={(e) => set(c.key, Number(e.target.value))}
+        </fieldset>
+      </LabStep>
+      <LabStep
+        n={2}
+        title="Experiment"
+        hint="Work through the lab goals above. Change one control at a time and watch the diagram and readings."
+        done={missionsDone}
+      >
+        <div className="tl-bench">
+          <div className="tl-stage">
+            <LabFigure result={result} title={lab.title} />
+          </div>
+          <div className="tl-controls">
+            {lab.controls.map((c) =>
+              c.options ? (
+                <label key={c.key} className="tl-control">
+                  <span>{c.label}</span>
+                  <select
+                    aria-label={c.label}
+                    value={values[c.key]}
+                    onChange={(e) => set(c.key, Number(e.target.value))}
+                  >
+                    {c.options.map((option, i) => (
+                      <option key={option} value={i}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : c.toggle ? (
+                <label key={c.key} className="tl-control tl-toggle">
+                  <input
+                    type="checkbox"
+                    checked={values[c.key] >= 0.5}
+                    onChange={(e) => set(c.key, e.target.checked ? 1 : 0)}
+                  />
+                  <span>{c.label}</span>
+                </label>
+              ) : (
+                <label key={c.key} className="tl-control">
+                  <span>{c.label}</span>
+                  <output>
+                    {fmt(values[c.key], 5)} {c.unit}
+                  </output>
+                  <input
+                    type="range"
+                    aria-label={c.label}
+                    min={c.min}
+                    max={c.max}
+                    step={c.step}
+                    value={values[c.key]}
+                    onChange={(e) => set(c.key, Number(e.target.value))}
+                  />
+                </label>
+              ),
+            )}
+            {sweep && (
+              <div className="tl-sweep">
+                <label>
+                  Animate
+                  <select
+                    aria-label="Variable to animate"
+                    value={sweepKey}
+                    onChange={(e) => {
+                      setSweeping(false);
+                      setSweepKey(e.target.value);
+                    }}
+                  >
+                    {sweepControls.map((c) => (
+                      <option key={c.key} value={c.key}>
+                        {c.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <button
+                  type="button"
+                  className="button button-small button-glass"
+                  aria-pressed={sweeping}
+                  onClick={() => {
+                    if (sweeping) setSweeping(false);
+                    else {
+                      setValues((current) => ({ ...current, [sweep.key]: sweep.min! }));
+                      setSweeping(true);
+                    }
+                  }}
                 >
-                  {c.options.map((option, i) => (
-                    <option key={option} value={i}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : c.toggle ? (
-              <label key={c.key} className="tl-control tl-toggle">
-                <input
-                  type="checkbox"
-                  checked={values[c.key] >= 0.5}
-                  onChange={(e) => set(c.key, e.target.checked ? 1 : 0)}
-                />
-                <span>{c.label}</span>
-              </label>
-            ) : (
-              <label key={c.key} className="tl-control">
-                <span>{c.label}</span>
-                <output>
-                  {fmt(values[c.key], 5)} {c.unit}
-                </output>
-                <input
-                  type="range"
-                  aria-label={c.label}
-                  min={c.min}
-                  max={c.max}
-                  step={c.step}
-                  value={values[c.key]}
-                  onChange={(e) => set(c.key, Number(e.target.value))}
-                />
-              </label>
-            ),
-          )}
-        </div>
-      </div>
-      <div className="tl-metrics" aria-live="polite" aria-atomic="true">
-        {result.metrics.map((m) => (
-          <div key={m.label}>
-            <span>{m.label}</span>
-            <strong>
-              {fmt(m.value)} {m.unit && <small>{m.unit}</small>}
-            </strong>
-          </div>
-        ))}
-      </div>
-      {result.note && (
-        <p className="tl-note" role="status">
-          {result.note}
-        </p>
-      )}
-      <div className="tl-missions">
-        <h5>
-          <Target size={15} aria-hidden="true" /> Lab goals · {done.length} of {lab.missions.length}{' '}
-          reached
-        </h5>
-        <ol>
-          {lab.missions.map((m, i) => (
-            <li key={m.goal} data-done={done.includes(i)}>
-              <span className="tl-mission-mark" aria-hidden="true">
-                {done.includes(i) ? <Check size={14} /> : i + 1}
-              </span>
-              <div>
+                  {sweeping ? 'Pause animation' : 'Animate variable'}
+                </button>
                 <p>
-                  {m.goal}
-                  <span className="sr-only">
-                    {done.includes(i) ? ' — reached' : ' — not yet reached'}
-                  </span>
+                  Steps {sweep.label.toLowerCase()} from {sweep.min} to {sweep.max}{' '}
+                  {sweep.unit ?? ''} with everything else fixed.
                 </p>
-                {!done.includes(i) &&
-                  (hints.includes(i) ? (
-                    <p className="tl-quiet">Hint: {m.hint}</p>
-                  ) : (
-                    <button
-                      type="button"
-                      className="tl-link"
-                      onClick={() => setHints((current) => [...current, i])}
-                    >
-                      Show a hint
-                    </button>
-                  ))}
               </div>
-            </li>
+            )}
+          </div>
+        </div>
+        <div className="tl-metrics" aria-live="polite" aria-atomic="true">
+          {result.metrics.map((m) => (
+            <div key={m.label}>
+              <span>{m.label}</span>
+              <strong>
+                {fmt(m.value)} {m.unit && <small>{m.unit}</small>}
+              </strong>
+            </div>
           ))}
-        </ol>
-        {done.length === lab.missions.length && (
-          <p className="tl-complete" role="status">
-            All goals reached. Check your prediction and explain the pattern in your own words.
+        </div>
+        {result.note && (
+          <p className="tl-note" role="status">
+            {result.note}
           </p>
         )}
-      </div>
-      <div className="lesson-actions">
-        <button
-          type="button"
-          className="button button-small button-glass"
-          disabled={guess === null || revealed}
-          onClick={() => setRevealed(true)}
-        >
-          Check my prediction
-        </button>
-        <button
-          type="button"
-          className="button button-small button-glass"
-          disabled={trials.length >= 8}
-          onClick={() => setTrials((current) => [...current, { values, metrics: result.metrics }])}
-        >
-          Record data row ({trials.length}/8)
-        </button>
-        <button
-          type="button"
-          className="button button-small button-glass"
-          onClick={() => {
-            setSweeping(false);
-            setValues(labDefaults(lab));
-            setDone([]);
-            setHints([]);
-            setGuess(null);
-            setRevealed(false);
-            setTrials([]);
-          }}
-        >
-          <RotateCcw size={15} aria-hidden="true" /> Reset lab
-        </button>
-      </div>
-      {revealed && guess !== null && (
-        <div className="tl-feedback" role="status" data-correct={guess === lab.predict.correct}>
-          <strong>
-            {guess === lab.predict.correct
-              ? 'Your prediction matches the model.'
-              : `The model supports: ${lab.predict.options[lab.predict.correct]}`}
-          </strong>
-          <p>{lab.predict.why}</p>
+        <div className="lab-actions">
+          <button
+            type="button"
+            className="button button-small button-glass"
+            disabled={trials.length >= 8}
+            onClick={() =>
+              setTrials((current) => [...current, { values, metrics: result.metrics }])
+            }
+          >
+            Record data row ({trials.length}/8)
+          </button>
+          <span>Optional: record rows to compare settings side by side.</span>
         </div>
-      )}
-      {trials.length > 0 && (
-        <div className="tl-table-scroll" tabIndex={0} role="region" aria-label="Recorded lab data">
-          <table className="tl-table">
-            <caption>Recorded data · compare rows to see what each variable changed</caption>
-            <thead>
-              <tr>
-                <th scope="col">Row</th>
-                {lab.controls.map((c) => (
-                  <th scope="col" key={c.key}>
-                    {c.label}
-                  </th>
-                ))}
-                {result.metrics.map((m) => (
-                  <th scope="col" key={m.label}>
-                    {m.label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {trials.map((trial, i) => (
-                <tr key={i}>
-                  <th scope="row">{i + 1}</th>
+        {trials.length > 0 && (
+          <div
+            className="tl-table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Recorded lab data"
+          >
+            <table className="tl-table">
+              <caption>Recorded data · compare rows to see what each variable changed</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Row</th>
                   {lab.controls.map((c) => (
-                    <td key={c.key}>
-                      {c.options
-                        ? c.options[trial.values[c.key]]
-                        : c.toggle
-                          ? trial.values[c.key]
-                            ? 'On'
-                            : 'Off'
-                          : `${fmt(trial.values[c.key], 5)} ${c.unit ?? ''}`}
-                    </td>
+                    <th scope="col" key={c.key}>
+                      {c.label}
+                    </th>
                   ))}
-                  {trial.metrics.map((m) => (
-                    <td key={m.label}>
-                      {fmt(m.value, 4)} {m.unit ?? ''}
-                    </td>
+                  {result.metrics.map((m) => (
+                    <th scope="col" key={m.label}>
+                      {m.label}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {trials.map((trial, i) => (
+                  <tr key={i}>
+                    <th scope="row">{i + 1}</th>
+                    {lab.controls.map((c) => (
+                      <td key={c.key}>
+                        {c.options
+                          ? c.options[trial.values[c.key]]
+                          : c.toggle
+                            ? trial.values[c.key]
+                              ? 'On'
+                              : 'Off'
+                            : `${fmt(trial.values[c.key], 5)} ${c.unit ?? ''}`}
+                      </td>
+                    ))}
+                    {trial.metrics.map((m) => (
+                      <td key={m.label}>
+                        {fmt(m.value, 4)} {m.unit ?? ''}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </LabStep>
+      <LabStep
+        n={3}
+        title="Conclude"
+        hint="Use what the experiment showed to check your prediction."
+        done={revealed}
+      >
+        <div className="lab-actions">
+          <button
+            type="button"
+            className="button button-small button-primary"
+            disabled={guess === null || revealed}
+            onClick={() => {
+              setRevealed(true);
+              if (firstTry === null) setFirstTry(guess === lab.predict.correct);
+            }}
+          >
+            Check my prediction
+          </button>
+          {!revealed && (
+            <span>
+              {guess === null
+                ? 'Choose a prediction in step 1 first.'
+                : missionsDone
+                  ? ''
+                  : 'Tip: reach the lab goals first so you have evidence.'}
+            </span>
+          )}
+          <button
+            type="button"
+            className="button button-small button-glass"
+            onClick={() => {
+              setSweeping(false);
+              setValues(labDefaults(lab));
+              setReached([]);
+              setGuess(null);
+              setRevealed(false);
+              setTrials([]);
+            }}
+          >
+            <RotateCcw size={15} aria-hidden="true" /> Reset lab
+          </button>
         </div>
-      )}
+        {revealed && guess !== null && (
+          <div className="lab-reveal" role="status" data-correct={guess === lab.predict.correct}>
+            <strong>
+              {guess === lab.predict.correct
+                ? 'Your prediction matches the model.'
+                : `The model supports: ${lab.predict.options[lab.predict.correct]}`}
+            </strong>
+            <p>{lab.predict.why}</p>
+          </div>
+        )}
+      </LabStep>
       <details className="lesson-disclosure">
         <summary>Model, equations, and limits</summary>
         <p>{lab.model}</p>

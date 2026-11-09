@@ -514,6 +514,15 @@
   min-width: 0;
   scroll-margin-top: 90px;
 }
+.la-progress {
+  justify-self: start;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
 .la-card h4,
 .tl-lab h4,
 .phet-sim h4 {
@@ -832,4 +841,64 @@
   color: var(--text);
   font: inherit;
   pointer-events: none;
+}
+
+/* Diagram rendering: a soft stage, rounded strokes, readable labels, and smooth updates. */
+.tl-svg,
+.subject-plot {
+  border-radius: 12px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--text) 7%, transparent) 1px, transparent 1.4px)
+      0 0 / 24px 24px,
+    radial-gradient(
+      120% 90% at 50% 0%,
+      color-mix(in srgb, var(--accent) 7%, var(--bg)),
+      var(--bg) 70%
+    );
+}
+.tl-stroke,
+.subject-line,
+.subject-axis {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tl-text,
+.subject-plot text {
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.tl-area {
+  opacity: 0.13;
+}
+.tl-halo {
+  opacity: 0.22;
+}
+.tl-drop {
+  stroke: var(--muted);
+  stroke-dasharray: 2 4;
+  opacity: 0.7;
+}
+.tl-marker {
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.35));
+}
+.tl-svg .tl-fill:not(.tl-area, .tl-halo, .tl-marker) {
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.16));
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion='off']) :is(.tl-svg, .subject-plot) :is(circle, rect, ellipse, line) {
+    /* Same timing as other lesson diagrams (diagram-viewer.css). */
+    transition:
+      cx 240ms ease,
+      cy 240ms ease,
+      r 240ms ease,
+      rx 240ms ease,
+      ry 240ms ease,
+      x 240ms ease,
+      y 240ms ease,
+      width 240ms ease,
+      height 240ms ease,
+      opacity 240ms ease;
+  }
 }

@@ -36,7 +36,9 @@ const divisionBRegistry: Record<string, EventLessons> = {
       return [id, withExplanations(adaptBCourse(course))];
     }),
   ),
-  ...Object.fromEntries(divisionBCourses.map((course) => [course.eventId, withExplanations(course)])),
+  ...Object.fromEntries(
+    divisionBCourses.map((course) => [course.eventId, withExplanations(course)]),
+  ),
 };
 
 export function lessonsForEvent(eventId: string, division: Division): EventLessons | null {

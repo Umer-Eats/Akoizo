@@ -93,7 +93,11 @@ test('Division B-only courses meet the lesson quality bar', () => {
   const ids = new Set<string>();
   for (const course of divisionBCourses) {
     assert.equal(course.division, 'B');
-    assert.equal(lessonsForEvent(course.eventId, 'B'), course);
+    // The registry serves the course with its written checkpoint explanations applied.
+    assert.deepEqual(
+      lessonsForEvent(course.eventId, 'B')?.lessons.map((l) => l.id),
+      course.lessons.map((l) => l.id),
+    );
     assert.equal(lessonsForEvent(course.eventId, 'C'), null);
     assert.deepEqual(
       course.units.flatMap((u) => u.lessonIds),

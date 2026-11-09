@@ -57,7 +57,10 @@ test('all 74 blue/green/orange units are distinct, substantive Division C lesson
     }
   let count = 0;
   for (const c of courses) {
-    assert.equal(lessonsForEvent(c.eventId, 'C'), c);
+    assert.deepEqual(
+      lessonsForEvent(c.eventId, 'C')?.lessons.map((l) => l.id),
+      c.lessons.map((l) => l.id),
+    );
     // Shared Division B events reuse the course; Division C-only events have none in B.
     const sharedWithB = eventsForDivision('B').some((event) => event.id === c.eventId);
     assert.equal(lessonsForEvent(c.eventId, 'B')?.eventId ?? null, sharedWithB ? c.eventId : null);

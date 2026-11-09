@@ -25,7 +25,8 @@ const schema = {
 };
 
 /**
- * Grade one written answer. Returns null whenever the service is unconfigured, slow, or returns
+ * Grade one written answer. Multiple choice is never sent: the answer key marks it and its written
+ * explanation is shown. Returns null whenever the service is unconfigured, slow, or returns
  * anything malformed, so the student can mark it against the model answer instead.
  */
 export async function gradeLessonAnswer(
@@ -36,6 +37,7 @@ export async function gradeLessonAnswer(
 ): Promise<LessonGrade | null> {
   const apiKey = config.apiKey ?? process.env.GEMINI_API_KEY;
   const model = config.model ?? process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite';
+  if (question.type !== 'short') return null;
   if (!apiKey?.trim() || !/^gemini-[a-zA-Z0-9.-]+$/.test(model) || !answer.trim()) return null;
   try {
     // No student or profile identifiers are sent.

@@ -277,10 +277,12 @@
   .an-table tbody th .tag {
     margin-left: 8px;
   }
-  .an-table td small {
+  .an-table td small,
+  .an-table tbody th small {
     display: block;
     color: var(--muted);
     font-size: 0.66rem;
+    font-weight: 400;
   }
   .an-table .text-link {
     font: inherit;

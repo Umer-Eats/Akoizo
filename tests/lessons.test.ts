@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { anatomyLessons } from '../src/lib/lessons-anatomy.ts';
 import { forensicsLessons } from '../src/lib/lessons-forensics.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
+import { lessonExplanations } from '../src/lib/lesson-explanations/index.ts';
 import { eventSlots } from '../src/lib/event-slots.ts';
 import { eventsForDivision } from '../src/lib/events.ts';
 import { atlasImages, lessonAtlas } from '../src/lib/lesson-atlas.ts';
@@ -216,4 +217,25 @@ test('a saved checkpoint is complete only when every question is checked, scoped
     lessonStorageKey('student-a', 'forensics'),
     lessonStorageKey('student-a', 'anatomy-and-physiology'),
   );
+});
+
+test('every checkpoint question has its own written explanation', () => {
+  const ids = new Set<string>();
+  for (const division of ['B', 'C'] as const) {
+    for (const event of eventsForDivision(division)) {
+      const course = lessonsForEvent(event.id, division);
+      for (const lesson of course?.lessons ?? []) {
+        for (const question of lesson.practice) {
+          ids.add(question.id);
+          const words = question.explanation.split(/\s+/).length;
+          assert.equal(question.explanation, lessonExplanations[question.id], question.id);
+          assert.doesNotMatch(question.explanation, /^Compare the mechanism/, question.id);
+          assert.ok(words >= 15 && words <= 90, `${question.id} has ${words} words`);
+        }
+      }
+    }
+  }
+  assert.ok(ids.size > 1400);
+  const stale = Object.keys(lessonExplanations).filter((id) => !ids.has(id));
+  assert.deepEqual(stale, []);
 });

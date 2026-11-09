@@ -15,10 +15,13 @@ export function ExperimentControls({
   model,
   values,
   setValues,
+  onRun,
 }: {
   model: ModelId;
   values: Record<string, number>;
   setValues: Dispatch<SetStateAction<Record<string, number>>>;
+  /** Called each time a scenario runs, with whether the prediction matched the model. */
+  onRun?: (correct: boolean) => void;
 }) {
   const [preset, setPreset] = useState(0),
     [prediction, setPrediction] = useState(''),
@@ -48,8 +51,6 @@ export function ExperimentControls({
   return (
     <div className="experiment-controls">
       <div>
-        <p className="eyebrow">PREDICT → RUN → EXPLAIN</p>
-        <h4>Test a scenario</h4>
         <p>
           Predict the change in <strong>{metric.label.toLowerCase()}</strong> relative to your
           current settings.
@@ -117,6 +118,7 @@ export function ExperimentControls({
                   ? 'increase'
                   : 'decrease';
             setValues(next);
+            onRun?.(prediction === change);
             setFeedback(
               `${prediction === change ? 'Prediction supported.' : 'Revise your explanation.'} ${metric.label}: ${Number(metric.value.toFixed(3))} → ${Number(after.value.toFixed(3))} ${metric.unit}. ${change === 'same' ? 'The modeled output stays the same.' : `The modeled output ${change === 'increase' ? 'increases' : 'decreases'}.`} Compare which inputs changed, then record the trial.`,
             );

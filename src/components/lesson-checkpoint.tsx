@@ -167,8 +167,8 @@ export function CheckpointView({
         <h4 id="lc-prompt" className="lc-prompt">
           {q.prompt}
         </h4>
-        <fieldset disabled={!!check || busy} className="lc-answer">
-          <legend className="sr-only">Your answer</legend>
+        {/* Labelled with aria-label: a visually hidden legend widens the page in Chrome. */}
+        <fieldset disabled={!!check || busy} className="lc-answer" aria-label="Your answer">
           {q.type === 'mcq' && q.options ? (
             <ChoiceOptions
               name={q.id}
@@ -268,7 +268,7 @@ export function CheckpointView({
                 You chose <strong>{answer}</strong>. The answer is <strong>{q.answer}</strong>.
               </p>
             )}
-            {check.feedback && (
+            {q.type === 'short' && check.feedback && (
               <div className="lc-block">
                 <h5>Feedback on your answer</h5>
                 <p>{check.feedback}</p>

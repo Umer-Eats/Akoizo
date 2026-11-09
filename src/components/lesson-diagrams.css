@@ -76,3 +76,44 @@
     padding: 10px;
   }
 }
+
+/* Shared polish for lesson lab diagrams: soft stage, readable labels, smooth updates. */
+.lab-figure .lab-diagram {
+  border-radius: 12px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--text) 6%, transparent) 1px, transparent 1.4px)
+      0 0 / 24px 24px,
+    radial-gradient(
+      120% 90% at 50% 0%,
+      color-mix(in srgb, var(--diagram-primary) 8%, var(--bg)),
+      var(--bg) 70%
+    );
+}
+.lab-diagram text {
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.lab-diagram :is(path, line, polyline) {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion='off']) .lab-diagram :is(circle, ellipse, rect) {
+    /* Same timing as other lesson diagrams (diagram-viewer.css). */
+    transition:
+      cx 240ms ease,
+      cy 240ms ease,
+      r 240ms ease,
+      rx 240ms ease,
+      ry 240ms ease,
+      x 240ms ease,
+      y 240ms ease,
+      width 240ms ease,
+      height 240ms ease,
+      opacity 240ms ease,
+      fill 240ms ease,
+      stroke 240ms ease;
+  }
+}

@@ -79,6 +79,7 @@ export function InvestigationDiagram({
           fillOpacity="0.22"
           stroke={has(1) ? secondary : muted}
           strokeWidth="3"
+          strokeDasharray={has(1) ? undefined : '8 7'}
         />
         <ellipse
           cx="170"
@@ -88,6 +89,7 @@ export function InvestigationDiagram({
           fill="var(--surface)"
           stroke={has(0) ? primary : muted}
           strokeWidth={has(0) ? 26 : 2}
+          strokeDasharray={has(0) ? undefined : '8 7'}
         />
         {has(0) &&
           Array.from({ length: 96 }, (_, i) => {

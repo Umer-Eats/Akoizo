@@ -68,7 +68,7 @@ export function StudentWork({
             <div className="stat-card">
               <span>Lessons completed</span>
               <strong>{lessons.length}</strong>
-              <small>Practice score {average(lessons)}</small>
+              <small>Checkpoint accuracy {average(lessons)}</small>
             </div>
             <div className="stat-card">
               <span>Lab accuracy</span>
@@ -128,15 +128,16 @@ export function StudentWork({
             <div className="empty-state">
               <h3>Nothing submitted yet.</h3>
               <p>
-                Lessons appear here when they are submitted, and labs and practice tests with their
-                accuracy.
+                Lessons appear here when their checkpoint is finished, and labs and practice tests
+                with their accuracy.
               </p>
             </div>
           )}
           <p className="source-note">
-            Lessons count as completed when submitted; their score covers the multiple-choice
-            questions. Lab accuracy is how close the latest submitted answer is to the lab’s model.
-            Practice tests list every attempt.
+            A lesson is complete once its checkpoint is finished. Its score is the checkpoint
+            answers marked right: multiple choice by the answer key, written answers by AI (or by
+            the student against the model answer when AI is unavailable). Lab accuracy is how close
+            the latest submitted answer is to the lab’s model. Practice tests list every attempt.
           </p>
         </>
       )}

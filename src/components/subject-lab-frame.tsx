@@ -1,6 +1,7 @@
 'use client';
 import { useState, type ReactNode } from 'react';
 import { DiagramViewer } from './diagram-viewer';
+import { LabGoals, LabStep, LabTask, useLabReport, useLatched, wordCount } from './lab-progress';
 import type { LessonSim } from '@/lib/lessons';
 export type Explorer = Extract<LessonSim, { kind: 'explorer' }>;
 export type Props = { sim: Explorer; preview?: boolean };
@@ -62,6 +63,16 @@ export function Metric({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+/** How many settings differ between two snapshots ("a=1; b=2" style strings). */
+function settingsChanged(a: string, b: string) {
+  const left = a.split(/;\s*/),
+    right = b.split(/;\s*/);
+  const length = Math.max(left.length, right.length);
+  return Array.from({ length }).filter((_, i) => left[i] !== right[i]).length;
+}
+
+type Trial = { settings: string; result: string };
+
 export function LabFrame({
   sim,
   preview,
@@ -75,96 +86,173 @@ export function LabFrame({
 }) {
   const [prediction, setPrediction] = useState(''),
     [notes, setNotes] = useState(''),
-    [trials, setTrials] = useState<{ settings: string; result: string; prediction: string }[]>([]);
+    [trials, setTrials] = useState<Trial[]>([]),
+    [revealed, setRevealed] = useState(false),
+    [resetKey, setResetKey] = useState(0);
+  const baseline = trials[0];
+  const compared = trials.slice(1).some((t) => settingsChanged(baseline.settings, t.settings) > 0);
+  const [predicted, recorded, varied, explained] = useLatched(
+    [wordCount(prediction) >= 5, trials.length > 0, compared, revealed],
+    resetKey,
+  );
+  const goals = [
+    { label: 'Predict what will change, and why', done: predicted },
+    { label: 'Record a baseline trial', done: recorded },
+    { label: 'Change an input and record again', done: varied },
+    { label: 'Explain the evidence and compare with the model', done: explained },
+  ];
+  useLabReport(preview ? [] : goals);
+  const note =
+    sim.lab === 'cipher'
+      ? 'Defined reversible cipher conventions.'
+      : 'Simplified teaching model with synthetic data, not observed field data.';
+  if (preview)
+    return (
+      <div className="subject-explorer subject-preview" data-subject={sim.lab}>
+        <p className="subject-model-note">EXPLANATORY DIAGRAM · {note}</p>
+        {children}
+      </div>
+    );
+  const sameAsLast = trials.at(-1)?.settings === snapshot.settings;
   return (
-    <div className={`subject-explorer${preview ? ' subject-preview' : ''}`} data-subject={sim.lab}>
-      <p className="subject-model-note">
-        {preview ? 'EXPLANATORY DIAGRAM' : 'SYNTHETIC INVESTIGATION'} ·{' '}
-        {sim.lab === 'cipher'
-          ? 'Defined reversible cipher conventions'
-          : 'Simplified teaching model; not observed field data'}
-      </p>
-      {children}
-      {!preview && (
-        <dl className="model-reading-guide">
-          <div>
-            <dt>Current inputs</dt>
-            <dd>{snapshot.settings}</dd>
-          </div>
-          <div>
-            <dt>Read the output</dt>
-            <dd>{snapshot.result}</dd>
-          </div>
-          <div>
-            <dt>Build a fair comparison</dt>
-            <dd>
-              Record a baseline, change one input, and record another trial. Compare both the
-              direction and size of the change before explaining the mechanism.
-            </dd>
-          </div>
-        </dl>
-      )}
-      {!preview && (
-        <>
-          <div className="lab-challenge">
-            <strong>Lesson challenge</strong>
-            <p>{sim.challenge}</p>
-          </div>
-          <label className="subject-note">
-            Your prediction and reason
-            <textarea
-              aria-label="Your prediction and reason"
-              rows={3}
-              maxLength={3000}
-              value={prediction}
-              onChange={(e) => setPrediction(e.target.value)}
-              placeholder="Predict what will change and name the mechanism before adjusting a control."
-            />
-          </label>
+    <div className="subject-explorer lab-guided" data-subject={sim.lab}>
+      <LabTask>{sim.challenge}</LabTask>
+      <LabGoals goals={goals} />
+      <LabStep
+        n={1}
+        title="Predict"
+        hint="Before you touch a control, write what you expect to happen and the reason."
+        done={predicted}
+      >
+        <label className="subject-note">
+          <span className="sr-only">Your prediction and reason</span>
+          <textarea
+            aria-label="Your prediction and reason"
+            rows={2}
+            maxLength={3000}
+            value={prediction}
+            onChange={(e) => setPrediction(e.target.value)}
+            placeholder="I predict … because …"
+          />
+        </label>
+      </LabStep>
+      <LabStep
+        n={2}
+        title="Experiment"
+        hint="Record a baseline first. Then change one input at a time and record each new trial."
+        done={recorded && varied}
+      >
+        <div className="subject-bench">{children}</div>
+        <p className="lab-now" aria-live="polite">
+          <strong>Current inputs:</strong> {snapshot.settings}
+          <br />
+          <strong>Output:</strong> {snapshot.result}
+        </p>
+        <div className="lab-actions">
           <button
-            className="button button-small button-glass"
-            disabled={trials.length >= 6}
-            onClick={() => setTrials((t) => [...t, { ...snapshot, prediction }])}
+            type="button"
+            className="button button-small button-primary"
+            disabled={trials.length >= 8 || sameAsLast}
+            onClick={() => setTrials((t) => [...t, snapshot])}
           >
-            Record trial ({trials.length}/6)
+            {trials.length ? 'Record this trial' : 'Record baseline'} ({trials.length}/8)
           </button>
-          {!!trials.length && (
-            <section className="subject-notebook" aria-label="Subject lab trial notebook">
-              <h4>Compare recorded trials</h4>
-              <ol>
-                {trials.map((trial, i) => (
+          <span>
+            {sameAsLast
+              ? 'Change an input before recording another trial.'
+              : trials.length >= 8
+                ? 'Notebook full. Clear it to record more.'
+                : ''}
+          </span>
+        </div>
+        {!!trials.length && (
+          <section aria-label="Recorded trials" className="lab-trial-log">
+            <ol className="lab-trials">
+              {trials.map((trial, i) => {
+                const changed = i ? settingsChanged(baseline.settings, trial.settings) : 0;
+                return (
                   <li key={i}>
-                    <strong>Trial {i + 1}</strong>
+                    <strong>{i ? `Trial ${i + 1}` : 'Trial 1 · baseline'}</strong>
                     <p>{trial.settings}</p>
-                    <p>{trial.result}</p>
-                    {trial.prediction && <p>Prediction: {trial.prediction}</p>}
+                    <p>→ {trial.result}</p>
+                    {i > 0 && (
+                      <small data-fair={changed === 1}>
+                        {changed === 1
+                          ? 'One input changed from the baseline: a fair comparison.'
+                          : `${changed} inputs changed from the baseline. Change one at a time to know which caused the result.`}
+                      </small>
+                    )}
                   </li>
-                ))}
-              </ol>
-              <button className="button button-small button-glass" onClick={() => setTrials([])}>
-                Clear trial notebook
-              </button>
-            </section>
+                );
+              })}
+            </ol>
+            <button
+              type="button"
+              className="button button-small button-glass"
+              onClick={() => setTrials([])}
+            >
+              Clear trials
+            </button>
+          </section>
+        )}
+      </LabStep>
+      <LabStep
+        n={3}
+        title="Explain"
+        hint="Use your recorded trials: what changed, by how much, and was your prediction right?"
+        done={explained}
+      >
+        <label className="subject-note">
+          <span className="sr-only">Explain the evidence</span>
+          <textarea
+            aria-label="Explain the evidence"
+            rows={3}
+            maxLength={4000}
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="When I changed …, the output … This supports my prediction because …"
+          />
+        </label>
+        <div className="lab-actions">
+          <button
+            type="button"
+            className="button button-small button-primary"
+            disabled={revealed || trials.length < 2 || wordCount(notes) < 8}
+            onClick={() => setRevealed(true)}
+          >
+            Compare with the model
+          </button>
+          {!revealed && (
+            <span>
+              {trials.length < 2
+                ? 'Record at least two trials first.'
+                : wordCount(notes) < 8
+                  ? 'Write at least one full sentence first.'
+                  : ''}
+            </span>
           )}
-          <label className="subject-note">
-            Explain the evidence
-            <textarea
-              aria-label="Explain the evidence"
-              rows={3}
-              maxLength={4000}
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Compare trials. What supports your prediction? What alternative explanation or model limitation remains?"
-            />
-          </label>
-          <p>
-            <strong>Connect to the lesson:</strong> {sim.takeaway}
-          </p>
-          <small>
-            Lab notes and trials last while this lesson is open. Practice answers save separately.
-          </small>
-        </>
-      )}
+          <button
+            type="button"
+            className="button button-small button-glass"
+            onClick={() => {
+              setPrediction('');
+              setNotes('');
+              setTrials([]);
+              setRevealed(false);
+              setResetKey((k) => k + 1);
+            }}
+          >
+            Start the lab over
+          </button>
+        </div>
+        {revealed && (
+          <div className="lab-reveal" role="status">
+            <strong>What the model shows</strong>
+            <p>{sim.takeaway}</p>
+          </div>
+        )}
+      </LabStep>
+      <p className="subject-model-note">{note} Notes and trials last while this lesson is open.</p>
     </div>
   );
 }

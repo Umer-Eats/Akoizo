@@ -30,7 +30,7 @@ import { LessonReferenceFigure } from './lesson-reference-figure';
 import { lessonReferenceFigures } from '@/lib/lesson-reference-figures';
 import { slotForEvent } from '@/lib/event-slots';
 import { extrasFor, topicLabs } from '@/lib/extras';
-import { LessonActivities, InlineCheck } from './lesson-activities';
+import { LessonActivities, InlineCheck, practiceActivities } from './lesson-activities';
 import { TopicLabView } from './topic-lab';
 import {
   AkoReading,
@@ -46,6 +46,15 @@ import {
 import { formatLesson, lessonBigIdea } from '@/lib/lesson-format';
 import './lesson-format.css';
 import { PhetSim } from './phet-sim';
+import {
+  LabGoals,
+  LabReportProvider,
+  LabStep,
+  LabTask,
+  useLabReport,
+  useLatched,
+  type LabStatus,
+} from './lab-progress';
 import './lessons.css';
 import './lesson-motion.css';
 import { akoLessonLines, akoLessonPlan } from '@/lib/ako-lesson';
@@ -56,144 +65,201 @@ function ModelLab({ sim }: { sim: Extract<LessonSim, { kind: 'model' }> }) {
   const [values, setValues] = useState(() => modelDefaults(sim.model));
   const [trials, setTrials] = useState<LabTrial[]>([]);
   const [experimentKey, setExperimentKey] = useState(0);
+  const [ran, setRan] = useState(false);
+  // The first scenario prediction is what counts; a reset lets the student practise again.
+  const [firstTry, setFirstTry] = useState<boolean | null>(null);
+  const [explained, setExplained] = useState(false);
   const result = calculateModel(sim.model, values);
   const maxBar = Math.max(1, ...result.bars.map((bar) => bar.value));
   const format = (value: number) =>
     new Intl.NumberFormat('en-US', { maximumFractionDigits: 3 }).format(value);
+  const settings = modelControls[sim.model]
+    .map((c) => `${c.label}: ${format(values[c.key])} ${c.unit}`)
+    .join('; ');
+  const [predicted, recorded, compared, understood] = useLatched(
+    [ran, trials.length > 0, new Set(trials.map((t) => t.settings)).size > 1, explained],
+    experimentKey,
+  );
+  const goals = [
+    { label: 'Predict a scenario, then run it', done: predicted },
+    { label: 'Record a baseline trial', done: recorded },
+    { label: 'Change an input and record another trial', done: compared },
+    { label: 'Compare your trials with the explanation', done: understood },
+  ];
+  useLabReport(goals, firstTry);
   return (
-    <>
-      <div className="lab-challenge">
-        <strong>Investigate</strong>
-        <p>{sim.challenge}</p>
-      </div>
-      <div className="lab-workbench">
-        <ModelDiagram model={sim.model} values={values} />
-        <div className="lab-controls">
-          {modelControls[sim.model].map((control) => (
-            <label key={control.key}>
-              <span>{control.label}</span>
-              <output>
-                {format(values[control.key])} {control.unit}
-              </output>
-              <input
-                type="range"
-                min={control.min}
-                max={control.max}
-                step={control.step}
-                value={values[control.key]}
-                onChange={(event) =>
-                  setValues((current) => ({
-                    ...current,
-                    [control.key]: Number(event.target.value),
-                  }))
-                }
-                aria-label={control.label}
-              />
-            </label>
-          ))}
-        </div>
-        <div className="lab-readout" aria-live="polite" aria-atomic="true">
-          <div className="lab-metrics">
-            {result.metrics.map((metric) => (
-              <div key={metric.label}>
-                <span>{metric.label}</span>
-                <strong>
-                  {format(metric.value)} <small>{metric.unit}</small>
-                </strong>
-              </div>
-            ))}
-          </div>
-          <div className="lab-bars" aria-label="Output comparison">
-            {result.bars.map((bar) => (
-              <div key={bar.label}>
-                <span>
-                  {bar.label}: {format(bar.value)}
-                </span>
-                <div className="lab-bar-track">
-                  <div style={{ width: `${(bar.value / maxBar) * 100}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <ExperimentControls
-        key={experimentKey}
-        model={sim.model}
-        values={values}
-        setValues={setValues}
-      />
-      <dl className="model-reading-guide">
-        <div>
-          <dt>Read the diagram</dt>
-          <dd>{modelGuides[sim.model].observe}</dd>
-        </div>
-        <div>
-          <dt>Design a comparison</dt>
-          <dd>{modelGuides[sim.model].compare}</dd>
-        </div>
-        <div>
-          <dt>Limits of this model</dt>
-          <dd>{modelGuides[sim.model].limit}</dd>
-        </div>
-      </dl>
-      <p className="lab-equation">{result.equation}</p>
-      <p className="lab-assumptions">
-        <strong>What the model means:</strong> {result.interpretation}
-      </p>
-      <div className="lesson-actions">
-        <button
-          className="button button-small button-glass"
-          disabled={trials.length >= 6}
-          onClick={() =>
-            setTrials((current) => [
-              ...current,
-              {
-                settings: modelControls[sim.model]
-                  .map((c) => `${c.label}: ${format(values[c.key])} ${c.unit}`)
-                  .join('; '),
-                result: result.metrics
-                  .map((m) => `${m.label}: ${format(m.value)} ${m.unit}`)
-                  .join('; '),
-                metrics: result.metrics,
-              },
-            ])
-          }
-        >
-          Record trial ({trials.length}/6)
-        </button>
-        <button
-          className="button button-small button-glass"
-          onClick={() => {
-            setValues(modelDefaults(sim.model));
-            setTrials([]);
-            setExperimentKey((current) => current + 1);
+    <div className="lab-guided">
+      <LabTask>{sim.challenge}</LabTask>
+      <LabGoals goals={goals} />
+      <LabStep
+        n={1}
+        title="Predict and run a scenario"
+        hint="Pick a scenario, predict how the output will change, then run it. Your first prediction is recorded."
+        done={predicted}
+      >
+        <ExperimentControls
+          key={experimentKey}
+          model={sim.model}
+          values={values}
+          setValues={setValues}
+          onRun={(correct) => {
+            setRan(true);
+            setFirstTry((current) => current ?? correct);
           }}
-        >
-          <RotateCcw size={15} aria-hidden="true" /> Reset experiment
-        </button>
-      </div>
-      {trials.length > 0 && (
-        <div className="lab-notebook">
-          <TrialComparison trials={trials} model={sim.model} />
-          <h4>Trial notebook</h4>
-          <p>Compare your trials while this lesson is open.</p>
-          <ol>
-            {trials.map((trial, i) => (
-              <li key={i}>
-                <strong>Trial {i + 1}</strong>
-                <p>{trial.settings}</p>
-                <p>{trial.result}</p>
-              </li>
+        />
+      </LabStep>
+      <LabStep
+        n={2}
+        title="Experiment"
+        hint="Record a baseline, then move one slider at a time and record each new trial."
+        done={recorded && compared}
+      >
+        <div className="lab-workbench">
+          <ModelDiagram model={sim.model} values={values} />
+          <div className="lab-controls">
+            {modelControls[sim.model].map((control) => (
+              <label key={control.key}>
+                <span>{control.label}</span>
+                <output>
+                  {format(values[control.key])} {control.unit}
+                </output>
+                <input
+                  type="range"
+                  min={control.min}
+                  max={control.max}
+                  step={control.step}
+                  value={values[control.key]}
+                  onChange={(event) =>
+                    setValues((current) => ({
+                      ...current,
+                      [control.key]: Number(event.target.value),
+                    }))
+                  }
+                  aria-label={control.label}
+                />
+              </label>
             ))}
-          </ol>
+          </div>
+          <div className="lab-readout" aria-live="polite" aria-atomic="true">
+            <div className="lab-metrics">
+              {result.metrics.map((metric) => (
+                <div key={metric.label}>
+                  <span>{metric.label}</span>
+                  <strong>
+                    {format(metric.value)} <small>{metric.unit}</small>
+                  </strong>
+                </div>
+              ))}
+            </div>
+            <div className="lab-bars" aria-label="Output comparison">
+              {result.bars.map((bar) => (
+                <div key={bar.label}>
+                  <span>
+                    {bar.label}: {format(bar.value)}
+                  </span>
+                  <div className="lab-bar-track">
+                    <div style={{ width: `${(bar.value / maxBar) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      )}
-      <details className="lesson-disclosure">
-        <summary>Explain the result</summary>
-        <p>{sim.takeaway}</p>
-      </details>
-    </>
+        <div className="lab-actions">
+          <button
+            type="button"
+            className="button button-small button-primary"
+            disabled={trials.length >= 6 || trials.at(-1)?.settings === settings}
+            onClick={() =>
+              setTrials((current) => [
+                ...current,
+                {
+                  settings,
+                  result: result.metrics
+                    .map((m) => `${m.label}: ${format(m.value)} ${m.unit}`)
+                    .join('; '),
+                  metrics: result.metrics,
+                },
+              ])
+            }
+          >
+            {trials.length ? 'Record this trial' : 'Record baseline'} ({trials.length}/6)
+          </button>
+          <button
+            type="button"
+            className="button button-small button-glass"
+            onClick={() => {
+              setValues(modelDefaults(sim.model));
+              setTrials([]);
+              setRan(false);
+              setExplained(false);
+              setExperimentKey((current) => current + 1);
+            }}
+          >
+            <RotateCcw size={15} aria-hidden="true" /> Reset experiment
+          </button>
+          {trials.at(-1)?.settings === settings && (
+            <span>Change a slider before recording another trial.</span>
+          )}
+        </div>
+        {trials.length > 0 && (
+          <div className="lab-notebook">
+            <TrialComparison trials={trials} model={sim.model} />
+            <ol className="lab-trials">
+              {trials.map((trial, i) => (
+                <li key={i}>
+                  <strong>{i ? `Trial ${i + 1}` : 'Trial 1 · baseline'}</strong>
+                  <p>{trial.settings}</p>
+                  <p>→ {trial.result}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+      </LabStep>
+      <LabStep
+        n={3}
+        title="Explain"
+        hint="Use your trials to say what changed and why, then compare with the model's explanation."
+        done={understood}
+      >
+        <dl className="model-reading-guide">
+          <div>
+            <dt>Read the diagram</dt>
+            <dd>{modelGuides[sim.model].observe}</dd>
+          </div>
+          <div>
+            <dt>Design a comparison</dt>
+            <dd>{modelGuides[sim.model].compare}</dd>
+          </div>
+          <div>
+            <dt>Limits of this model</dt>
+            <dd>{modelGuides[sim.model].limit}</dd>
+          </div>
+        </dl>
+        <p className="lab-equation">{result.equation}</p>
+        <div className="lab-actions">
+          <button
+            type="button"
+            className="button button-small button-primary"
+            disabled={explained || trials.length < 2}
+            onClick={() => setExplained(true)}
+          >
+            Show the explanation
+          </button>
+          {!explained && trials.length < 2 && <span>Record at least two trials first.</span>}
+        </div>
+        {explained && (
+          <div className="lab-reveal" role="status">
+            <strong>What the model shows</strong>
+            <p>{sim.takeaway}</p>
+            <p>
+              <strong>Model assumptions:</strong> {result.interpretation}
+            </p>
+          </div>
+        )}
+      </LabStep>
+    </div>
   );
 }
 
@@ -209,58 +275,88 @@ function InvestigationLab({
   const [observed, setObserved] = useState<number[]>([]);
   const [picked, setPicked] = useState<number | null>(null);
   const [restartKey, setRestartKey] = useState(0);
+  // The first conclusion chosen is what counts; later picks are for practice.
+  const [firstTry, setFirstTry] = useState<boolean | null>(null);
+  const allObserved = observed.length === sim.observations.length;
+  const [collected, concluded] = useLatched([allObserved, picked !== null], restartKey);
+  const goals = [
+    { label: `Collect all ${sim.observations.length} observations`, done: collected },
+    { label: 'Choose the conclusion the evidence supports', done: concluded },
+  ];
+  useLabReport(goals, firstTry);
   return (
-    <>
-      <EvidenceWorkbench
-        key={restartKey}
-        lessonId={lessonId}
-        sim={sim}
-        reference={pathway}
-        observed={observed}
-        onObserve={(i) =>
-          setObserved((current) => (current.includes(i) ? current : [...current, i]))
-        }
-      />
-      <p className="lab-observation-count">
-        {observed.length} of {sim.observations.length} observations collected
-      </p>
-      <fieldset className="lab-conclusion" disabled={observed.length !== sim.observations.length}>
-        <legend>{sim.question}</legend>
-        {observed.length !== sim.observations.length && (
-          <p>Collect all observations to make your conclusion.</p>
-        )}
-        <div className="sim-options">
-          {sim.options.map((option, i) => (
-            <button
-              key={option}
-              className="sim-option"
-              aria-pressed={picked === i}
-              onClick={() => setPicked(i)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-      </fieldset>
-      {picked !== null && (
-        <div className="sim-feedback" role="status">
-          <strong>
-            {picked === sim.correct ? 'Supported by the evidence.' : 'Revisit the evidence.'}
-          </strong>
-          <p>{sim.explanation}</p>
-        </div>
-      )}
-      <button
-        className="button button-small button-glass"
-        onClick={() => {
-          setObserved([]);
-          setPicked(null);
-          setRestartKey((current) => current + 1);
-        }}
+    <div className="lab-guided">
+      <LabTask>{sim.question}</LabTask>
+      <LabGoals goals={goals} />
+      <LabStep
+        n={1}
+        title="Observe"
+        hint="Run each test or examine each sample. Every observation is logged below."
+        done={collected}
       >
-        <RotateCcw size={15} aria-hidden="true" /> Restart investigation
-      </button>
-    </>
+        <EvidenceWorkbench
+          key={restartKey}
+          lessonId={lessonId}
+          sim={sim}
+          reference={pathway}
+          observed={observed}
+          onObserve={(i) =>
+            setObserved((current) => (current.includes(i) ? current : [...current, i]))
+          }
+        />
+        <p className="lab-observation-count">
+          {observed.length} of {sim.observations.length} observations collected
+        </p>
+      </LabStep>
+      <LabStep
+        n={2}
+        title="Conclude"
+        hint="Choose the conclusion your observations support. Your first choice is recorded."
+        done={concluded}
+      >
+        <fieldset className="lab-conclusion" disabled={!allObserved}>
+          <legend>{sim.question}</legend>
+          {!allObserved && <p>Collect all observations to make your conclusion.</p>}
+          <div className="sim-options">
+            {sim.options.map((option, i) => (
+              <button
+                key={option}
+                type="button"
+                className="sim-option"
+                aria-pressed={picked === i}
+                onClick={() => {
+                  setPicked(i);
+                  setFirstTry((current) => current ?? i === sim.correct);
+                }}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+        {picked !== null && (
+          <div className="lab-reveal" role="status" data-correct={picked === sim.correct}>
+            <strong>
+              {picked === sim.correct ? 'Supported by the evidence.' : 'Revisit the evidence.'}
+            </strong>
+            <p>{sim.explanation}</p>
+          </div>
+        )}
+        <div className="lab-actions">
+          <button
+            type="button"
+            className="button button-small button-glass"
+            onClick={() => {
+              setObserved([]);
+              setPicked(null);
+              setRestartKey((current) => current + 1);
+            }}
+          >
+            <RotateCcw size={15} aria-hidden="true" /> Restart investigation
+          </button>
+        </div>
+      </LabStep>
+    </div>
   );
 }
 
@@ -298,11 +394,45 @@ function LabsStage({
   entries,
   selected,
   onSelect,
+  onComplete,
 }: {
   entries: LabEntry[];
   selected: string;
   onSelect: (id: string) => void;
+  /** Called once every lab is complete, with goals reached plus first-try answers. */
+  onComplete: (score: number, maxScore: number) => void;
 }) {
+  const [status, setStatus] = useState<Record<string, LabStatus>>({});
+  const ids = entries.map((entry) => entry.id).join('|');
+  const reporters = useMemo(
+    () =>
+      Object.fromEntries(
+        ids.split('|').map((id) => [
+          id,
+          (next: LabStatus) =>
+            setStatus((current) => {
+              const old = current[id];
+              return old &&
+                old.score === next.score &&
+                old.maxScore === next.maxScore &&
+                old.done === next.done
+                ? current
+                : { ...current, [id]: next };
+            }),
+        ]),
+      ),
+    [ids],
+  );
+  const finished = entries.filter((entry) => status[entry.id]?.done).length;
+  const complete = entries.length > 0 && finished === entries.length;
+  const score = entries.reduce((sum, entry) => sum + (status[entry.id]?.score ?? 0), 0);
+  const maxScore = entries.reduce((sum, entry) => sum + (status[entry.id]?.maxScore ?? 0), 0);
+  const reported = useRef(false);
+  useEffect(() => {
+    if (!complete || reported.current) return;
+    reported.current = true;
+    onComplete(score, maxScore);
+  }, [complete, score, maxScore, onComplete]);
   return (
     <div className="lf-labs">
       <div className="lf-labs-intro">
@@ -312,29 +442,50 @@ function LabsStage({
         </p>
         <h3>Test the ideas</h3>
         <p>
-          Predict first, change one variable at a time, and record what happens. Labs are not
-          graded; their state resets when you leave the lesson.
+          Each lab walks you through predicting, experimenting, and explaining. Reach every goal to
+          finish it. Your goals and first-try predictions are saved for your instructor once every
+          lab is complete.
+        </p>
+        <p className="la-progress" role="status">
+          {complete
+            ? `Labs complete · ${score}/${maxScore} goals and first-try answers`
+            : `${finished} of ${entries.length} ${entries.length === 1 ? 'lab' : 'labs'} complete`}
         </p>
       </div>
       {entries.length > 1 && (
         <div className="lf-lab-picker" role="tablist" aria-label="Choose a lab">
-          {entries.map((entry, i) => (
-            <button
-              key={entry.id}
-              id={`lab-tab-${entry.id}`}
-              type="button"
-              role="tab"
-              aria-selected={selected === entry.id}
-              aria-controls={`lab-panel-${entry.id}`}
-              onClick={() => onSelect(entry.id)}
-            >
-              <span className="lf-lab-kind">
-                {i + 1} · {entry.kind}
-              </span>
-              <strong>{entry.title}</strong>
-              <small>{entry.blurb}</small>
-            </button>
-          ))}
+          {entries.map((entry, i) => {
+            const lab = status[entry.id];
+            return (
+              <button
+                key={entry.id}
+                id={`lab-tab-${entry.id}`}
+                type="button"
+                role="tab"
+                aria-selected={selected === entry.id}
+                aria-controls={`lab-panel-${entry.id}`}
+                data-done={lab?.done || undefined}
+                onClick={() => onSelect(entry.id)}
+              >
+                <span className="lf-lab-kind">
+                  {i + 1} · {entry.kind}
+                  <span className="lf-lab-status">
+                    {lab?.done ? (
+                      <>
+                        <Check size={12} strokeWidth={3} aria-hidden="true" /> Complete
+                      </>
+                    ) : lab ? (
+                      `${lab.score}/${lab.maxScore}`
+                    ) : (
+                      'Not started'
+                    )}
+                  </span>
+                </span>
+                <strong>{entry.title}</strong>
+                <small>{entry.blurb}</small>
+              </button>
+            );
+          })}
         </div>
       )}
       {entries.map((entry) => (
@@ -346,7 +497,7 @@ function LabsStage({
           aria-labelledby={entries.length > 1 ? `lab-tab-${entry.id}` : undefined}
           hidden={selected !== entry.id}
         >
-          {entry.render()}
+          <LabReportProvider value={reporters[entry.id]}>{entry.render()}</LabReportProvider>
         </div>
       ))}
     </div>
@@ -384,7 +535,6 @@ function LessonDetail({
   const stagesRef = useRef<HTMLDivElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const [stage, setStage] = useState<LessonStage>('learn');
-  const [visited, setVisited] = useState<LessonStage[]>([]);
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
   const plan = useMemo(() => akoLessonPlan(lesson), [lesson]);
   const formatted = useMemo(() => formatLesson(lesson, lines), [lesson, lines]);
@@ -471,8 +621,6 @@ function LessonDetail({
   const [selectedLab, setSelectedLab] = useState(labEntries[0].id);
 
   const goTo = (next: LessonStage, labId?: string) => {
-    if (next !== stage)
-      setVisited((current) => (current.includes(stage) ? current : [...current, stage]));
     if (labId) setSelectedLab(labId);
     setStage(next);
     requestAnimationFrame(() => {
@@ -483,11 +631,12 @@ function LessonDetail({
   };
   const done: Record<LessonStage, boolean> = {
     learn: readingDone || parts.includes('learn'),
-    practice: parts.includes('practice') || visited.includes('practice'),
-    labs: parts.includes('labs') || visited.includes('labs'),
+    practice: parts.includes('practice'),
+    labs: parts.includes('labs'),
     checkpoint: completed || checkpointProgress(attempt, lesson.practice).complete,
   };
   const mcq = lesson.practice.filter((q) => q.type === 'mcq').length;
+  const practiceCount = practiceActivities(lesson, extras.sort).length;
   const tocItems = [
     ...lesson.sections.map((section, i) => ({
       id: `lesson-section-${i}`,
@@ -560,7 +709,7 @@ function LessonDetail({
         done={done}
         counts={{
           learn: `${lesson.sections.length} topics + example`,
-          practice: `${extras.sort ? 3 : 2} activities`,
+          practice: `${practiceCount} ${practiceCount === 1 ? 'activity' : 'activities'}`,
           labs: `${labEntries.length} ${labEntries.length === 1 ? 'lab' : 'labs'}`,
           checkpoint: `${lesson.practice.length} questions`,
         }}
@@ -664,7 +813,11 @@ function LessonDetail({
         className="lf-stage"
         hidden={stage !== 'practice'}
       >
-        <LessonActivities lesson={lesson} sortActivity={extras.sort} />
+        <LessonActivities
+          lesson={lesson}
+          sortActivity={extras.sort}
+          onComplete={(score, maxScore) => onPart('practice', score, maxScore)}
+        />
         <StageFooter
           label="Labs"
           detail={`Next: ${labEntries.length === 1 ? 'a lab' : `${labEntries.length} labs`} where you change the variables yourself.`}
@@ -679,7 +832,12 @@ function LessonDetail({
         className="lf-stage"
         hidden={stage !== 'labs'}
       >
-        <LabsStage entries={labEntries} selected={selectedLab} onSelect={setSelectedLab} />
+        <LabsStage
+          entries={labEntries}
+          selected={selectedLab}
+          onSelect={setSelectedLab}
+          onComplete={(score, maxScore) => onPart('labs', score, maxScore)}
+        />
         <StageFooter
           label="Checkpoint"
           detail={`Next: ${lesson.practice.length} checkpoint questions (${mcq} multiple choice, ${lesson.practice.length - mcq} written).`}

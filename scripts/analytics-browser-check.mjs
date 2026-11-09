@@ -7,6 +7,7 @@ import { registerMember, dashboardFor } from '../src/lib/school-service.ts';
 import { createTeam, listTeams, updateTeam } from '../src/lib/team-service.ts';
 import { schoolAnalytics } from '../src/lib/analytics-service.ts';
 import { communityFor } from '../src/lib/community-service.ts';
+import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 
 // Browser-only account mocks over an in-memory database. The real analytics service runs
 // unchanged, and no live account or school record is involved.
@@ -134,6 +135,53 @@ for (const [index, [name, event, type, week, mcq, written]] of tests.entries()) 
   }
 }
 
+// Amy finishes two Forensics lessons. The first has every stage; the second only learn and the
+// checkpoint. Checkpoint answers: 5 of 7 and 3 of 4 right.
+const lessonCount = (event) => lessonsForEvent(event, 'C').lessons.length;
+const amyLessons = lessonCount('forensics') + lessonCount('water-quality');
+const [firstLesson, secondLesson] = lessonsForEvent('forensics', 'C').lessons;
+const lessonAt = new Date(Date.UTC(2026, 8, 20, 15)).toISOString();
+for (const [lesson, parts, marks] of [
+  [
+    firstLesson,
+    [
+      ['learn', null, null],
+      ['practice', 6, 8],
+      ['labs', 5, 6],
+      ['checkpoint', 5, 7],
+    ],
+    [1, 1, 1, 0, 1, 0, 1],
+  ],
+  [
+    secondLesson,
+    [
+      ['learn', null, null],
+      ['checkpoint', 3, 4],
+    ],
+    [1, 0, 1, 1],
+  ],
+]) {
+  const args = [students['Amy Chen'].id, '2027:C:forensics', lesson.id];
+  raw
+    .prepare(
+      'INSERT INTO lesson_progress (student_id,event_id,lesson_id,completed_at) VALUES (?,?,?,?)',
+    )
+    .run(...args, lessonAt);
+  for (const [part, score, max] of parts)
+    raw
+      .prepare(
+        'INSERT INTO lesson_parts (student_id,event_id,lesson_id,part,score,max_score,completed_at) VALUES (?,?,?,?,?,?,?)',
+      )
+      .run(...args, part, score, max, lessonAt);
+  for (const [i, correct] of marks.entries())
+    raw
+      .prepare(
+        "INSERT INTO lesson_answers (student_id,event_id,lesson_id,question_id,answer,correct,graded_by,checked_at) VALUES (?,?,?,?,'x',?,'key',?)",
+      )
+      .run(...args, `q${i}`, correct, lessonAt);
+}
+const pct = (n, d) => `${Math.round((n / d) * 1000) / 10}%`;
+
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const errors = [];
 const context = await browser.newContext({
@@ -253,6 +301,24 @@ try {
   const team = page.getByRole('region', { name: 'Varsity analytics', exact: true });
   await expect(tile(team, 'Students')).toHaveText('3');
   await expect(tile(team, 'Overall accuracy')).toHaveText('65.7%');
+  // Lesson completion: Amy's 2 lessons out of every lesson in the team's seated events.
+  const teamLessons = 2 * (lessonCount('forensics') + lessonCount('water-quality'));
+  await expect(tile(team, 'Lessons completed')).toHaveText(pct(2, teamLessons));
+  await expect(tile(team, 'Lesson accuracy')).toHaveText('76%'); // (8 + 6 + 5) of (11 + 8 + 6)
+  const lessonRow = team
+    .getByRole('region', { name: 'Varsity lesson progress' })
+    .locator('tbody tr', { hasText: 'Amy Chen' });
+  await expect(lessonRow.locator('th')).toHaveText(`Amy Chen2 of ${amyLessons} lessons`);
+  await expect(lessonRow.locator('td')).toHaveText([
+    pct(2, amyLessons),
+    `${pct(2, amyLessons)}2 done`,
+    `${pct(1, amyLessons)}1 done`,
+    `${pct(1, amyLessons)}1 done`,
+    `${pct(2, amyLessons)}2 done`,
+    '72.7%8 of 11 right',
+    '75%',
+    '83.3%',
+  ]);
   await expect(team.locator('.an-bars li')).toHaveText([
     /Amy Chen.*85/,
     /Ben Ortiz.*65/,
@@ -271,7 +337,7 @@ try {
     '63.3%',
     /62.5%2 taken/,
     /85%1 taken/,
-    '0',
+    `${pct(2, amyLessons)}2 of ${amyLessons}`,
     /66.7%2 of 3/,
   ]);
   await grid.getByRole('button', { name: 'Show Water Quality breakdown' }).click();
@@ -283,7 +349,7 @@ try {
     '60%',
     /70%1 taken/,
     /—0 taken/,
-    '0',
+    `0%0 of ${lessonCount('water-quality')}`,
     /100%1 of 1/,
   ]);
   await expect(

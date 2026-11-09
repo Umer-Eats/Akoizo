@@ -132,8 +132,20 @@ test('multiple choice is marked by the key as each question is checked, then loc
     checkLessonAnswer(db, amy, { ...base, questionId: q.id, answer: '  ' }),
     /Write an answer/,
   );
-  const first = await checkLessonAnswer(db, amy, { ...base, questionId: q.id, answer: wrong });
+  // Gemini is configured, but multiple choice never reaches it: the key marks it, with no AI
+  // feedback, and the student reads the question's written explanation.
+  const calls: string[] = [];
+  const first = await checkLessonAnswer(
+    db,
+    amy,
+    { ...base, questionId: q.id, answer: wrong },
+    gemini(true, calls),
+  );
   assert.deepEqual(first, { status: 'checked', result: { correct: false, by: 'key' } });
+  assert.deepEqual(calls, []);
+  assert.equal(await gradeLessonAnswer('Forensics', q, q.answer, gemini(true, calls)), null);
+  assert.deepEqual(calls, []);
+  assert.ok(q.explanation.split(/\s+/).length >= 15, 'the written explanation is shown instead');
   // Once checked, changing the answer cannot turn a red circle green.
   const again = await checkLessonAnswer(db, amy, { ...base, questionId: q.id, answer: q.answer });
   assert.deepEqual(again, first);

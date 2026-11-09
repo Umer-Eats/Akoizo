@@ -1,0 +1,285 @@
+/* Guided lab layout: task, goal checklist, and numbered Predict → Experiment → Explain steps. */
+:root {
+  --lab-good: #3ccf86;
+  --lab-good-soft: color-mix(in srgb, #3ccf86 14%, transparent);
+  --lab-bad: #ff6b6b;
+}
+:root[data-theme='light'] {
+  --lab-good: #17834a;
+  --lab-good-soft: #e3f6eb;
+  --lab-bad: #c4322b;
+}
+
+.lab-task {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.lab-task span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.lab-task p {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.lab-goals {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.lab-goals-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.lab-goals-head span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+.lab-goals[data-complete='true'] .lab-goals-head strong {
+  color: var(--lab-good);
+}
+.lab-goals-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  overflow: hidden;
+}
+.lab-goals-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lab-good);
+  transition: width 0.35s ease;
+}
+.lab-goals ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 8px;
+}
+.lab-goals li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.lab-goals li[data-done='true'] {
+  color: var(--text);
+}
+.lab-goals li > span:last-child {
+  display: grid;
+  gap: 2px;
+  justify-items: start;
+}
+.lab-goal-hint {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.lab-goal-hint-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.lab-goal-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.lab-goals li[data-done='true'] .lab-goal-mark {
+  border-color: var(--lab-good);
+  background: var(--lab-good);
+  color: #fff;
+}
+
+.lab-step {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+}
+.lab-step > header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.lab-step-n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.lab-step[data-done] .lab-step-n {
+  border-color: var(--lab-good);
+  background: var(--lab-good);
+  color: #fff;
+}
+.lab-step h5 {
+  margin: 3px 0 0;
+  font-size: 1rem;
+}
+.lab-step header p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+.lab-step-body {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.lab-step textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+/* Recorded trials */
+.lab-trials {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lab-trials li {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+.lab-trials li strong {
+  font-size: 0.8rem;
+}
+.lab-trials li p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.lab-trials li small {
+  color: var(--muted);
+}
+.lab-trials li small[data-fair='true'] {
+  color: var(--lab-good);
+}
+.lab-now {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.lab-reveal {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-left: 3px solid var(--lab-good);
+  background: var(--lab-good-soft);
+}
+.lab-reveal p {
+  margin: 0;
+  line-height: 1.55;
+}
+.lab-reveal[data-correct='false'] {
+  border-left-color: var(--lab-bad);
+  background: color-mix(in srgb, var(--lab-bad) 12%, transparent);
+}
+.lab-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.lab-actions > span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.lab-guided {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .lab-step {
+    padding: 14px;
+  }
+  .lab-goals ol {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Topic labs inside the guided steps */
+.lab-step .tl-predict {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.lab-step .tl-predict legend {
+  margin-bottom: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.tl-controls .tl-sweep {
+  margin: 4px 0 0;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 8px 10px;
+}
+.tl-controls .tl-sweep p {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+.subject-bench {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}

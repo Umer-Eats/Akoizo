@@ -6,7 +6,16 @@ import { registerMember, leaveCommunity, type Database } from '../src/lib/school
 import { createTeam, updateTeam, deleteTeam, listTeams } from '../src/lib/team-service.ts';
 import { communityFor } from '../src/lib/community-service.ts';
 import { schoolAnalytics } from '../src/lib/analytics-service.ts';
-import { accuracy, analyticsGroups, summarize, weeklyAccuracy } from '../src/lib/analytics.ts';
+import {
+  accuracy,
+  analyticsGroups,
+  lessonAccuracy,
+  lessonCompletion,
+  stageCompletion,
+  summarize,
+  weeklyAccuracy,
+} from '../src/lib/analytics.ts';
+import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 
 function fixture() {
   const raw = new DatabaseSync(':memory:');
@@ -206,6 +215,20 @@ test('school analytics itemize accuracy, points and assigned work per student an
       `INSERT INTO lesson_progress (student_id,event_id,lesson_id,completed_at) VALUES (?,'2027:C:forensics','l1','2026-10-05')`,
     )
     .run(amy.id);
+  // Lesson stages and checkpoint answers: practice and labs carry first-try scores.
+  const part = raw.prepare(
+    `INSERT INTO lesson_parts (student_id,event_id,lesson_id,part,score,max_score,completed_at) VALUES (?,'2027:C:forensics','l1',?,?,?,'2026-10-05')`,
+  );
+  part.run(amy.id, 'learn', null, null);
+  part.run(amy.id, 'practice', 6, 8);
+  part.run(amy.id, 'labs', 5, 6);
+  part.run(amy.id, 'checkpoint', 5, 7);
+  const answer = raw.prepare(
+    `INSERT INTO lesson_answers (student_id,event_id,lesson_id,question_id,answer,correct,graded_by,feedback,checked_at) VALUES (?,'2027:C:forensics','l1',?,'x',?,'key',NULL,'2026-10-05')`,
+  );
+  answer.run(amy.id, 'q1', 1);
+  answer.run(amy.id, 'q2', 1);
+  answer.run(amy.id, 'q3', 0);
 
   await assert.rejects(schoolAnalytics(db, amy), { status: 403 });
   const data = await schoolAnalytics(db, home.teacher);
@@ -241,6 +264,17 @@ test('school analytics itemize accuracy, points and assigned work per student an
   assert.equal(accuracy(team.ranked), 80);
   assert.deepEqual([team.practiceTests, team.rankedTests], [2, 1]);
   assert.deepEqual([team.lessons, team.points, team.assigned, team.completed], [1, 80, 3, 2]);
+  // Both seated students count toward the lesson total, even the one who has not started.
+  const forensicsLessons = lessonsForEvent('forensics', 'C')!.lessons.length;
+  assert.equal(team.lessonTotal, 2 * forensicsLessons);
+  assert.equal(lessonCompletion(team), Math.round((1 / (2 * forensicsLessons)) * 1000) / 10);
+  assert.deepEqual(team.stages, { learn: 1, practice: 1, labs: 1, checkpoint: 1 });
+  assert.equal(stageCompletion(team, 'labs'), lessonCompletion(team));
+  assert.deepEqual(team.checkpoint, { earned: 2, possible: 3 });
+  assert.deepEqual(team.lessonPractice, { earned: 6, possible: 8 });
+  assert.deepEqual(team.lessonLabs, { earned: 5, possible: 6 });
+  assert.equal(lessonAccuracy(team), 76.5); // 13 of 17
+  assert.equal(summarize(data, [ben.id], 'C', 'forensics').lessons, 0);
   const forensics = summarize(data, varsity.memberIds, 'C', 'forensics');
   assert.equal(accuracy(forensics.overall), 72.2); // 13 of 18
   assert.equal(accuracy(forensics.multipleChoice), 66.7);

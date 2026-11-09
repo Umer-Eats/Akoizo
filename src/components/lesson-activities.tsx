@@ -1,5 +1,12 @@
 'use client';
-import { useState, type DragEvent, type KeyboardEvent, type MouseEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type DragEvent,
+  type KeyboardEvent,
+  type MouseEvent,
+} from 'react';
 import { ArrowDown, ArrowUp, Check, RotateCcw } from 'lucide-react';
 import { useLessonDrag } from './use-lesson-drag';
 import type { Lesson } from '@/lib/lessons';
@@ -75,8 +82,29 @@ function pressable(onPress: () => void, disabled = false) {
 
 const POOL = -1;
 
-export function SortBoard({ activity, lessonId }: { activity: SortActivity; lessonId: string }) {
+/** Reports how many items were right on the first check; later retries are not recorded. */
+type FirstTry = (score: number, maxScore: number) => void;
+
+function useFirstTry(onFirstTry?: FirstTry) {
+  const reported = useRef(false);
+  return (score: number, maxScore: number) => {
+    if (reported.current) return;
+    reported.current = true;
+    onFirstTry?.(score, maxScore);
+  };
+}
+
+export function SortBoard({
+  activity,
+  lessonId,
+  onFirstTry,
+}: {
+  activity: SortActivity;
+  lessonId: string;
+  onFirstTry?: FirstTry;
+}) {
   const startDrag = useLessonDrag();
+  const firstTry = useFirstTry(onFirstTry);
   const [order] = useState(() => stableShuffle(activity.items, lessonId));
   const [placed, setPlaced] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
@@ -205,7 +233,10 @@ export function SortBoard({ activity, lessonId }: { activity: SortActivity; less
           type="button"
           className="button button-small button-glass"
           disabled={unplaced.length > 0}
-          onClick={() => setChecked(true)}
+          onClick={() => {
+            setChecked(true);
+            firstTry(right, order.length);
+          }}
         >
           Check classification
         </button>
@@ -236,9 +267,12 @@ type MatchPick = { side: 'term' | 'def'; index: number };
 
 // Two side-by-side columns: pair a term with its definition by selecting one of each, or by
 // dragging a term onto a definition. Correct pairs lock in with a shared number.
-function TermMatch({ lesson }: { lesson: Lesson }) {
+function TermMatch({ lesson, onFirstTry }: { lesson: Lesson; onFirstTry?: FirstTry }) {
   const startDrag = useLessonDrag();
+  const firstTry = useFirstTry(onFirstTry);
   const rounds = termRounds(lesson);
+  // Terms paired wrongly at least once; a term counts as right only if matched first time.
+  const missed = useRef(new Set<number>());
   // Each definition is identified by the index of the term it belongs to.
   const [definitions] = useState(() =>
     stableShuffle(
@@ -263,9 +297,13 @@ function TermMatch({ lesson }: { lesson: Lesson }) {
     setOver(null);
     // Compare definitions by text so two terms that share a definition both count.
     if (rounds[term].answer === rounds[def].answer) {
-      setMatched((current) => ({ ...current, [term]: def }));
+      const next = { ...matched, [term]: def };
+      setMatched(next);
       setMiss(null);
+      if (Object.keys(next).length === rounds.length)
+        firstTry(rounds.length - missed.current.size, rounds.length);
     } else {
+      missed.current.add(term);
       setMiss({ term, def });
       setMisses((n) => n + 1);
     }
@@ -387,8 +425,9 @@ function TermMatch({ lesson }: { lesson: Lesson }) {
   );
 }
 
-function SolutionOrder({ lesson }: { lesson: Lesson }) {
+function SolutionOrder({ lesson, onFirstTry }: { lesson: Lesson; onFirstTry?: FirstTry }) {
   const startDrag = useLessonDrag();
+  const firstTry = useFirstTry(onFirstTry);
   const sequence = solutionSequence(lesson);
   const [order, setOrder] = useState<string[]>(() => sequence?.scrambled ?? []);
   const [checked, setChecked] = useState(false);
@@ -473,7 +512,10 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
         <button
           type="button"
           className="button button-small button-glass"
-          onClick={() => setChecked(true)}
+          onClick={() => {
+            setChecked(true);
+            firstTry(order.filter((step, i) => step === sequence.answer[i]).length, order.length);
+          }}
         >
           Check order
         </button>
@@ -504,28 +546,63 @@ function SolutionOrder({ lesson }: { lesson: Lesson }) {
   );
 }
 
+type ActivityKey = 'sort' | 'order' | 'match';
+
+/** The practice activities a lesson has, in the order they appear. */
+export function practiceActivities(lesson: Lesson, sortActivity?: SortActivity): ActivityKey[] {
+  return [
+    ...(sortActivity ? (['sort'] as const) : []),
+    ...(solutionSequence(lesson) ? (['order'] as const) : []),
+    ...(termRounds(lesson).length ? (['match'] as const) : []),
+  ];
+}
+
 export function LessonActivities({
   lesson,
   sortActivity,
+  onComplete,
 }: {
   lesson: Lesson;
   sortActivity?: SortActivity;
+  /** Called once every activity has a first try, with the combined first-try accuracy. */
+  onComplete?: (score: number, maxScore: number) => void;
 }) {
+  const activities = practiceActivities(lesson, sortActivity);
+  const [results, setResults] = useState<Partial<Record<ActivityKey, [number, number]>>>({});
+  const record = (key: ActivityKey) => (score: number, maxScore: number) =>
+    setResults((current) => (current[key] ? current : { ...current, [key]: [score, maxScore] }));
+  const finished = activities.filter((key) => results[key]);
+  const score = finished.reduce((sum, key) => sum + results[key]![0], 0);
+  const maxScore = finished.reduce((sum, key) => sum + results[key]![1], 0);
+  const complete = finished.length === activities.length;
+  const reported = useRef(false);
+  useEffect(() => {
+    if (!complete || reported.current) return;
+    reported.current = true;
+    onComplete?.(score, maxScore);
+  }, [complete, score, maxScore, onComplete]);
   return (
     <section
       id="lesson-activities"
       className="lesson-activities"
       aria-labelledby="lesson-activities-title"
     >
-      <p className="eyebrow">ACTIVE RECALL · NOT GRADED</p>
+      <p className="eyebrow">ACTIVE RECALL · FIRST TRY COUNTS</p>
       <h3 id="lesson-activities-title">Recall it before you test it</h3>
       <p>
-        Short activities built from this lesson. They give instant feedback and reset when you leave
-        the lesson; only the Checkpoint is saved and sent to your instructor.
+        Short activities built from this lesson, with instant feedback. Your first try at each one
+        is saved as practice accuracy for your instructor; retry as often as you like afterwards.
       </p>
-      {sortActivity && <SortBoard activity={sortActivity} lessonId={lesson.id} />}
-      <SolutionOrder lesson={lesson} />
-      <TermMatch lesson={lesson} />
+      <p className="la-progress" role="status">
+        {complete
+          ? `Practice complete · first-try accuracy ${score}/${maxScore}${maxScore ? ` (${Math.round((score / maxScore) * 100)}%)` : ''}`
+          : `${finished.length} of ${activities.length} activities tried`}
+      </p>
+      {sortActivity && (
+        <SortBoard activity={sortActivity} lessonId={lesson.id} onFirstTry={record('sort')} />
+      )}
+      <SolutionOrder lesson={lesson} onFirstTry={record('order')} />
+      <TermMatch lesson={lesson} onFirstTry={record('match')} />
     </section>
   );
 }
