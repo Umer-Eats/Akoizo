@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Orbit } from '@/components/art';
 import { useAuth, authMessage } from '@/components/auth-context';
+import { animateInPlace } from '@/components/page-transitions';
 import type { Enrollment, Profile, Role } from '@/lib/domain';
 import type { Division } from '@/lib/events';
 import { schoolCommunities, getSchoolCommunity } from '@/lib/school-communities';
@@ -37,6 +38,14 @@ export function AuthPageClient({ role }: { role: Role }) {
   const completing = !!auth.user && !auth.profile && !auth.sessionError;
   const creating = mode === 'signup' || completing;
   const disabled = busy || auth.loading;
+  function switchMode(next: 'login' | 'signup') {
+    if (next === mode) return;
+    animateInPlace(next === 'signup' ? 'mode-signup' : 'mode-login', () => {
+      setMode(next);
+      setError('');
+      setNotice('');
+    });
+  }
   const data: Enrollment = {
     role,
     displayName: form.displayName || auth.user?.displayName || '',
@@ -168,24 +177,10 @@ export function AuthPageClient({ role }: { role: Role }) {
             <>
               {!completing && (
                 <div className="tabs" aria-label="Account options">
-                  <button
-                    aria-pressed={mode === 'login'}
-                    onClick={() => {
-                      setMode('login');
-                      setError('');
-                      setNotice('');
-                    }}
-                  >
+                  <button aria-pressed={mode === 'login'} onClick={() => switchMode('login')}>
                     Log in
                   </button>
-                  <button
-                    aria-pressed={mode === 'signup'}
-                    onClick={() => {
-                      setMode('signup');
-                      setError('');
-                      setNotice('');
-                    }}
-                  >
+                  <button aria-pressed={mode === 'signup'} onClick={() => switchMode('signup')}>
                     Create account
                   </button>
                 </div>

@@ -1,5 +1,6 @@
 'use client';
 import { ViewTransition, useEffect, useLayoutEffect, useRef, type ReactNode } from 'react';
+import { flushSync } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import { navKind } from '@/lib/page-transition';
 import { useSettings } from './providers';
@@ -49,6 +50,35 @@ export function PageTransitions({ children }: { children: ReactNode }) {
       </ViewTransition>
     </>
   );
+}
+
+/**
+ * Animates a state change that stays on the same page (like Log in ↔ Create account)
+ * with a browser view transition. `html[data-nav]` holds `kind` for the whole
+ * transition, so CSS can name the parts that should glide. `html[data-swap]` is set
+ * only once the new state renders, so live entrance animations never touch the old
+ * state's snapshot. Falls back to a plain update when motion is off.
+ */
+export function animateInPlace(kind: string, update: () => void) {
+  const root = document.documentElement;
+  const still =
+    root.dataset.motion === 'off' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still || !document.startViewTransition || document.hidden) {
+    update();
+    return;
+  }
+  root.dataset.nav = kind;
+  const transition = document.startViewTransition(() => {
+    root.dataset.swap = kind;
+    flushSync(update);
+  });
+  transition.finished.finally(() => {
+    if (root.dataset.nav === kind) delete root.dataset.nav;
+    // Entrance cascades run a little past the transition itself.
+    window.setTimeout(() => {
+      if (root.dataset.swap === kind) delete root.dataset.swap;
+    }, 700);
+  });
 }
 
 /** A thin accent bar that runs while a clicked link is loading its page. */

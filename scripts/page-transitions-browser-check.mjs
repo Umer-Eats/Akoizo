@@ -204,6 +204,35 @@ const entrance = await page.evaluate(() =>
 assert.ok(entrance.includes('vt-card-float-in'), `login entrance: ${entrance}`);
 console.log('ok  login direct visit       card floats in');
 
+// Log in ↔ Create account: same page, animated in place.
+async function swapMode(name, label, kind, nudge) {
+  const before = await page.evaluate(() => window.__vt.length);
+  await page.locator('.auth-card .tabs').getByRole('button', { name: label }).click();
+  await page.waitForFunction((n) => window.__vt.at(n)?.names, before, { timeout: 10000 });
+  const fields = await page.evaluate(() =>
+    [...document.querySelectorAll('.auth-card .auth-fields > *')].flatMap((el) =>
+      el.getAnimations().map((a) => a.animationName),
+    ),
+  );
+  await page.waitForTimeout(200);
+  await page.screenshot({ path: `${out}/${name}-mid.png` });
+  await page.waitForFunction(() => window.__vt.at(-1).finished, null, { timeout: 5000 });
+  const record = await page.evaluate(() => window.__vt.at(-1));
+  assert.equal(record.error, undefined, `${name}: ${record.error}`);
+  assert.equal(record.nav, kind, `${name} kind`);
+  for (const layer of ['auth-tab', 'auth-card'])
+    assert.ok(record.names.includes(layer), `${name}: ${layer} did not animate`);
+  assert.ok(fields.includes(nudge), `${name}: fields did not cascade (${fields})`);
+  await page.waitForFunction(() => !document.documentElement.dataset.swap, null, {
+    timeout: 3000,
+  });
+  console.log(`ok  ${name.padEnd(24)} ${kind.padEnd(9)} tab slides, card resizes, ${nudge}`);
+}
+await swapMode('login-to-create', 'Create account', 'mode-signup', 'vt-nudge-from-right');
+await expect(page.getByLabel('Confirm password')).toBeVisible();
+await swapMode('create-to-login', 'Log in', 'mode-login', 'vt-nudge-from-left');
+await expect(page.getByLabel('Confirm password')).toHaveCount(0);
+
 // Sign in (the card launches), then move around the workspace.
 await page.getByLabel('Email address', { exact: true }).fill('qa@example.test');
 await page.getByLabel('Password', { exact: true }).fill('qa-browser-only-password');
