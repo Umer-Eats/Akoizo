@@ -2,13 +2,26 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Menu, Moon, NotebookPen, Pause, Play, Search, Sun, X } from 'lucide-react';
+import {
+  ArrowRight,
+  CalendarCheck2,
+  Menu,
+  Moon,
+  NotebookPen,
+  Pause,
+  Play,
+  Search,
+  Sun,
+  X,
+} from 'lucide-react';
 import { CommandPalette, openCommandPalette } from './command-palette';
 import { useSettings } from './providers';
 import { useAuth, authMessage } from './auth-context';
 import { donationsOpen } from '@/lib/donate';
 import { eventsForDivision } from '@/lib/events';
 import { slotForEvent } from '@/lib/event-slots';
+import { MemberPresence } from './member-presence';
+import './attendance-nav.css';
 
 const links = [
   { href: '/study-tools', label: 'Study tools' },
@@ -24,6 +37,14 @@ export function LandingNav() {
   const [error, setError] = useState('');
   const { toggleTheme } = useSettings();
   const { profile, logOut } = useAuth();
+  const isWorkspace = [
+    '/dashboard',
+    '/notes',
+    '/community',
+    '/settings',
+    '/students',
+    '/attendance',
+  ].some((route) => path === route || path.startsWith(`${route}/`));
   // Inside an event, the event name (in its timeslot colour) takes the place of the main links.
   const eventId = path.match(/^\/dashboard\/student\/events\/([^/]+)(?:\/|$)/)?.[1];
   const event =
@@ -47,6 +68,7 @@ export function LandingNav() {
     path === href || (href === '/support' && path === '/donate') ? 'page' : undefined;
   return (
     <header className="lx-nav">
+      <MemberPresence />
       <div className="lx-nav-bar">
         <Link href="/" className="lx-brand" aria-label="Akoizo home">
           <span className="lx-brand-mark" aria-hidden="true" />
@@ -61,7 +83,7 @@ export function LandingNav() {
             <i aria-hidden="true" />
             {event.name}
           </Link>
-        ) : (
+        ) : !isWorkspace ? (
           <nav className="lx-nav-links" aria-label="Main navigation">
             {links.map((link) => (
               <Link key={link.href} href={link.href} aria-current={current(link.href)}>
@@ -69,14 +91,26 @@ export function LandingNav() {
               </Link>
             ))}
           </nav>
-        )}
+        ) : null}
         <div className="lx-nav-right">
+          {profile && (
+            <Link
+              className="lx-nav-notes lx-nav-attendance"
+              href="/attendance"
+              title="Attendance"
+              aria-label="Attendance"
+              aria-current={current('/attendance')}
+            >
+              <CalendarCheck2 size={15} aria-hidden="true" />
+              <span>Attendance</span>
+            </Link>
+          )}
           <button className="vx-nav-search" type="button" onClick={openCommandPalette}>
             <Search size={14} aria-hidden="true" />
             <span>Search</span>
             <kbd>Ctrl K</kbd>
           </button>
-          {profile ? (
+          {profile && isWorkspace && (
             <>
               <Link
                 className="lx-nav-notes"
@@ -125,13 +159,12 @@ export function LandingNav() {
               <button className="lx-nav-text lx-nav-hide" onClick={logout}>
                 Sign out
               </button>
-              <Link
-                className="lx-btn lx-btn-primary lx-nav-hide"
-                href={`/dashboard/${profile.role}`}
-              >
-                My dashboard
-              </Link>
             </>
+          )}
+          {profile ? (
+            <Link className="lx-btn lx-btn-primary lx-nav-hide" href={`/dashboard/${profile.role}`}>
+              My dashboard
+            </Link>
           ) : (
             <>
               <Link className="lx-nav-text lx-nav-hide lx-nav-extra" href="/login/instructor">
@@ -163,15 +196,19 @@ export function LandingNav() {
       </div>
       {open && (
         <nav id="lx-drawer" className="lx-drawer" aria-label="Mobile navigation">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} aria-current={current(link.href)}>
-              {link.label} <ArrowRight size={20} aria-hidden="true" />
-            </Link>
-          ))}
-          {profile && (
+          {!isWorkspace &&
+            links.map((link) => (
+              <Link key={link.href} href={link.href} aria-current={current(link.href)}>
+                {link.label} <ArrowRight size={20} aria-hidden="true" />
+              </Link>
+            ))}
+          {profile && isWorkspace && (
             <>
               <Link href="/notes">
                 Notes <ArrowRight size={20} aria-hidden="true" />
+              </Link>
+              <Link href="/attendance">
+                Attendance <ArrowRight size={20} aria-hidden="true" />
               </Link>
               <Link href="/community">
                 Community <ArrowRight size={20} aria-hidden="true" />
@@ -196,9 +233,11 @@ export function LandingNav() {
                 <Link className="lx-btn lx-btn-primary" href={`/dashboard/${profile.role}`}>
                   My dashboard
                 </Link>
-                <button className="lx-btn lx-btn-line" onClick={logout}>
-                  Sign out
-                </button>
+                {isWorkspace && (
+                  <button className="lx-btn lx-btn-line" onClick={logout}>
+                    Sign out
+                  </button>
+                )}
               </>
             ) : (
               <>

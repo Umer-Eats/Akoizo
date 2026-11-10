@@ -61,6 +61,7 @@ import { InstructorTeams } from './instructor-teams';
 import { InstructorAnalytics } from './instructor-analytics';
 import { NameEditor } from './name-editor';
 import { StudentWork } from './student-work';
+import { AttendanceWorkspace } from './attendance';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -723,7 +724,7 @@ export function InstructorDashboard() {
   const { profile, request } = useAuth();
   const { data, error, loading, refresh } = useDashboard();
   const [tab, setTab] = useState<
-    'school' | 'assignments' | 'ranked' | 'teams' | 'analytics' | 'progress'
+    'school' | 'assignments' | 'ranked' | 'teams' | 'analytics' | 'progress' | 'attendance'
   >('assignments');
   const [studentId, setStudentId] = useState('');
   const [pending, setPending] = useState('');
@@ -774,6 +775,7 @@ export function InstructorDashboard() {
                 ['ranked', 'Ranked Tests', Trophy],
                 ['teams', 'Teams', Table],
                 ['analytics', 'Analytics', ChartColumn],
+                ['attendance', 'Attendance', Check],
                 ['progress', 'Student Progress', Users],
               ] as const
             ).map(([id, label, Icon]) => (
@@ -801,6 +803,8 @@ export function InstructorDashboard() {
             {tab === 'analytics' &&
               'Compare accuracy, progress and points across teams, then open a team.'}
             {tab === 'progress' && 'Review each student’s next steps and event progress.'}
+            {tab === 'attendance' &&
+              'Plan workshop days, share attendance codes, and see who is here.'}
           </p>
         </aside>
         <div className="event-content instructor-content">
@@ -815,6 +819,7 @@ export function InstructorDashboard() {
           {tab === 'ranked' && <InstructorRanked students={data.students} onChanged={refresh} />}
           {tab === 'teams' && <InstructorTeams students={data.students} selections={selections} />}
           {tab === 'analytics' && <InstructorAnalytics />}
+          {tab === 'attendance' && <AttendanceWorkspace embedded />}
           {tab === 'progress' && (
             <>
               <PracticeReviews />

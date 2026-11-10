@@ -8,6 +8,12 @@ import { eventPagePath } from '@/lib/seo';
 type Item = { label: string; hint: string; href: string; kind: 'page' | 'event' };
 
 const pages: Item[] = [
+  {
+    label: 'Attendance',
+    hint: 'Workshop check-in and attendance records',
+    href: '/attendance',
+    kind: 'page',
+  },
   { label: 'Binder library', hint: 'Shared references', href: '/dashboard/binders', kind: 'page' },
   {
     label: 'Course library',

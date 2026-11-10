@@ -1,0 +1,13 @@
+@media (max-width: 520px) {
+  .lx-nav:has(.lx-nav-attendance) .lx-nav-right {
+    gap: 5px;
+  }
+  .lx-nav:has(.lx-nav-attendance) .lx-nav-bar {
+    gap: 8px;
+  }
+}
+@media (max-width: 380px) {
+  .lx-nav:has(.lx-nav-attendance) .vx-nav-search {
+    display: none;
+  }
+}

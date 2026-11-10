@@ -13,6 +13,21 @@ export const divisionIndexes = [
 ];
 
 export const schema = [
+  `CREATE TABLE IF NOT EXISTS attendance_workshops (
+    id TEXT PRIMARY KEY, school_id TEXT NOT NULL REFERENCES schools(id), instructor_id TEXT NOT NULL REFERENCES users(id),
+    title TEXT NOT NULL, opens_at TEXT NOT NULL, closes_at TEXT NOT NULL, timezone TEXT NOT NULL,
+    location_name TEXT NOT NULL, latitude REAL NOT NULL, longitude REAL NOT NULL,
+    code TEXT NOT NULL UNIQUE, cancelled INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL)`,
+  'CREATE INDEX IF NOT EXISTS idx_attendance_school ON attendance_workshops(school_id,opens_at)',
+  `CREATE TABLE IF NOT EXISTS attendance_audience (
+    workshop_id TEXT NOT NULL REFERENCES attendance_workshops(id), student_id TEXT NOT NULL REFERENCES users(id),
+    PRIMARY KEY(workshop_id,student_id))`,
+  `CREATE TABLE IF NOT EXISTS attendance_records (
+    workshop_id TEXT NOT NULL REFERENCES attendance_workshops(id), student_id TEXT NOT NULL REFERENCES users(id),
+    checked_in_at TEXT NOT NULL, distance_meters REAL NOT NULL, accuracy_meters REAL NOT NULL,
+    PRIMARY KEY(workshop_id,student_id))`,
+  `CREATE TABLE IF NOT EXISTS member_presence (
+    user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE, last_seen INTEGER NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS saved_courses (
     id TEXT PRIMARY KEY, creator_id TEXT NOT NULL, event_id TEXT NOT NULL,
     division TEXT NOT NULL CHECK(division IN ('B','C')), title TEXT NOT NULL,
