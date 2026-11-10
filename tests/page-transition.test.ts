@@ -34,6 +34,17 @@ test('deeper pages go forward and shallower pages go back', () => {
   assert.equal(navKind('/study-tools', '/study-tools/c/anatomy'), 'forward');
 });
 
+test('login pages float in and out and flip between roles', () => {
+  assert.equal(navKind('/', '/login/student'), 'auth-in');
+  assert.equal(navKind('/study-tools/c/anatomy', '/login/instructor'), 'auth-in');
+  assert.equal(navKind('/login/student', '/mission'), 'auth-out');
+  assert.equal(navKind('/login/student', '/login/instructor'), 'role-next');
+  assert.equal(navKind('/login/instructor', '/login/student'), 'role-prev');
+  // Signing in and signing out still cross the workspace boundary.
+  assert.equal(navKind('/login/instructor', '/dashboard/instructor'), 'zone-in');
+  assert.equal(navKind('/settings/student', '/login/student'), 'zone-out');
+});
+
 test('siblings at the same depth swap in place', () => {
   assert.equal(
     navKind('/dashboard/student/events/anatomy', '/dashboard/student/events/forensics'),

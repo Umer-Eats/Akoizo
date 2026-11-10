@@ -1,8 +1,22 @@
 // Picks the motion for a route change so the page moves the way the user did:
 // deeper pages rise in, going back settles out, sideways moves slide in nav order,
-// and crossing between the public site and the workspace zooms through.
+// and crossing between the public site and the workspace zooms through. The login
+// pages get their own moves: the card floats in and out, and flips between roles.
 
-export type NavKind = 'forward' | 'back' | 'next' | 'prev' | 'zone-in' | 'zone-out' | 'swap';
+export type NavKind =
+  | 'forward'
+  | 'back'
+  | 'next'
+  | 'prev'
+  | 'zone-in'
+  | 'zone-out'
+  | 'swap'
+  | 'auth-in'
+  | 'auth-out'
+  | 'role-next'
+  | 'role-prev';
+
+const roleOrder = ['student', 'instructor'];
 
 const workspaceOrder = ['dashboard', 'notes', 'community', 'attendance', 'students', 'settings'];
 const homeOrder = [
@@ -34,6 +48,17 @@ export function navKind(from: string, to: string): NavKind {
   const order = toWorkspace ? workspaceOrder : homeOrder;
   const sectionA = a[0] ?? '';
   const sectionB = b[0] ?? '';
+
+  // Login pages: the card floats in from the site, back out, or flips student ↔ instructor.
+  const fromLogin = sectionA === 'login';
+  const toLogin = sectionB === 'login';
+  if (fromLogin && toLogin) {
+    const ra = roleOrder.indexOf(a[1] ?? '');
+    const rb = roleOrder.indexOf(b[1] ?? '');
+    return rb >= ra ? 'role-next' : 'role-prev';
+  }
+  if (toLogin) return 'auth-in';
+  if (fromLogin) return 'auth-out';
 
   // Moving between sections reads like the nav bar: left to right.
   if (sectionA !== sectionB) {

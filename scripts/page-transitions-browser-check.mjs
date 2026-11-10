@@ -57,7 +57,8 @@ await page.addInitScript(() => {
         record.animations = animations
           .map((a) => [parse(a), a.animationName])
           .filter(([m]) => m && ['old', 'new'].includes(m[1]) && !chrome.includes(m[2]))
-          .map(([m, name]) => `${m[1]} ${name}`);
+          // The login card and art have their own layers; label them by name.
+          .map(([m, name]) => `${m[1]}${m[2].startsWith('auth-') ? `(${m[2]})` : ''} ${name}`);
         record.names = animations.map((a) => parse(a)?.[2]);
       })
       .catch((e) => (record.error = String(e)));
@@ -167,8 +168,43 @@ await page.goForward();
 await expect(page).toHaveURL(/\/study-tools$/, { timeout: 30000 });
 console.log('ok  browser back/forward     navigates');
 
-// Sign in, then move around the workspace.
+// Login pages: the card floats in, flips between roles, and drops away.
+const studentLogin = () =>
+  page.locator('.lx-nav').getByRole('link', { name: 'Student login', exact: true }).click();
+const switchRole = () => page.locator('.auth-footer a').click();
+await go('study-tools-to-login', studentLogin, /\/login\/student$/, 'auth-in', [
+  'old vt-sink',
+  'new(auth-art) vt-rise-in',
+  'new(auth-card) vt-card-float-in',
+]);
+await go('student-to-instructor', switchRole, /\/login\/instructor$/, 'role-next', [
+  'old(auth-card) vt-fade-out',
+  'new(auth-card) vt-card-refocus',
+  'old(auth-art) vt-slide-out-left',
+  'new(auth-art) vt-slide-in-right',
+]);
+await go('instructor-to-student', switchRole, /\/login\/student$/, 'role-prev', [
+  'old(auth-art) vt-slide-out-right',
+  'new(auth-art) vt-slide-in-left',
+]);
+await go('login-to-mission', nav('Mission'), /\/mission$/, 'auth-out', [
+  'old(auth-card) vt-card-drop',
+  'old(auth-art) vt-sink',
+  'new vt-settle-in',
+]);
+
+// A direct visit plays the login page's own entrance.
 await page.goto(`${base}/login/student`);
+const entrance = await page.evaluate(() =>
+  document
+    .querySelector('.auth-card')
+    .getAnimations()
+    .map((a) => a.animationName),
+);
+assert.ok(entrance.includes('vt-card-float-in'), `login entrance: ${entrance}`);
+console.log('ok  login direct visit       card floats in');
+
+// Sign in (the card launches), then move around the workspace.
 await page.getByLabel('Email address', { exact: true }).fill('qa@example.test');
 await page.getByLabel('Password', { exact: true }).fill('qa-browser-only-password');
 await page.locator('form').getByRole('button', { name: 'Log in', exact: true }).click();
@@ -178,9 +214,10 @@ const zoneIn = await page.waitForFunction(
   null,
   { timeout: 15000 },
 );
-console.log(
-  `ok  ${'login-to-dashboard'.padEnd(24)} zone-in   ${(await zoneIn.jsonValue()).animations.join(', ')}`,
-);
+const launch = (await zoneIn.jsonValue()).animations;
+for (const frame of ['old(auth-card) vt-card-launch', 'new vt-zoom-in'])
+  assert.ok(launch.includes(frame), `login-to-dashboard: missing ${frame} in ${launch}`);
+console.log(`ok  ${'login-to-dashboard'.padEnd(24)} zone-in   ${launch.join(', ')}`);
 await page.waitForLoadState('networkidle');
 
 await go(

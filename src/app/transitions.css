@@ -29,12 +29,18 @@
   view-transition-name: nav-progress;
 }
 
-/* Layering: old page, new page, then the fixed chrome on top. */
+/* Layering: old page, new page, the login card and art, then the fixed chrome on top. */
 ::view-transition-group(.page-exit) {
   z-index: 1;
 }
 ::view-transition-group(.page-enter) {
   z-index: 2;
+}
+::view-transition-group(auth-card),
+::view-transition-group(auth-art) {
+  z-index: 3;
+  animation-duration: 560ms;
+  animation-timing-function: var(--vt-ease-out);
 }
 ::view-transition-group(site-nav),
 ::view-transition-group(nav-glide),
@@ -42,7 +48,7 @@
 ::view-transition-group(notes-dock),
 ::view-transition-group(notes-dock-tab),
 ::view-transition-group(nav-progress) {
-  z-index: 3;
+  z-index: 4;
   animation-duration: 320ms;
   animation-timing-function: var(--vt-ease-out);
 }
@@ -146,6 +152,135 @@
 }
 :root[data-nav='zone-out']::view-transition-new(.page-enter) {
   animation: 680ms var(--vt-ease-out) 110ms both vt-zoom-out-in;
+}
+
+/* ---- Login pages ----
+   The card and the art each move on their own layer, apart from the page behind. */
+.auth-card {
+  view-transition-name: auth-card;
+}
+.auth-art {
+  view-transition-name: auth-art;
+}
+
+/* Opening a login: the site sinks back and the card floats up into place. */
+:root[data-nav='auth-in']::view-transition-old(.page-exit) {
+  animation-name: vt-sink;
+}
+:root[data-nav='auth-in']::view-transition-new(.page-enter) {
+  animation: 380ms var(--vt-ease-out) 60ms both vt-fade-in;
+}
+:root[data-nav='auth-in']::view-transition-new(auth-art) {
+  animation: 640ms var(--vt-ease-out) 90ms both vt-rise-in;
+}
+:root[data-nav='auth-in']::view-transition-new(auth-card) {
+  animation: 760ms var(--vt-ease-out) 170ms both vt-card-float-in;
+}
+
+/* Leaving a login for the site: the card drops away, the site settles in. */
+:root[data-nav='auth-out']::view-transition-old(auth-card) {
+  animation: 280ms var(--vt-ease-in) both vt-card-drop;
+}
+:root[data-nav='auth-out']::view-transition-old(auth-art) {
+  animation: 260ms var(--vt-ease-in) both vt-sink;
+}
+:root[data-nav='auth-out']::view-transition-new(.page-enter) {
+  animation-name: vt-settle-in;
+}
+
+/* Student ↔ instructor: the card stays and reshapes while its contents swap,
+   and the art slides across in the direction of the switch. */
+:root[data-nav^='role']::view-transition-image-pair(auth-card) {
+  overflow: clip;
+  border-radius: 14px;
+}
+:root[data-nav^='role']::view-transition-old(auth-card),
+:root[data-nav^='role']::view-transition-new(auth-card) {
+  height: 100%;
+  object-fit: none;
+  object-position: 50% 0;
+  mix-blend-mode: normal;
+}
+:root[data-nav^='role']::view-transition-old(auth-card) {
+  animation: 180ms var(--vt-ease-in) both vt-fade-out;
+}
+:root[data-nav^='role']::view-transition-new(auth-card) {
+  animation: 360ms var(--vt-ease-out) 120ms both vt-card-refocus;
+}
+:root[data-nav^='role']::view-transition-old(.page-exit) {
+  animation: 200ms var(--vt-ease-in) both vt-fade-out;
+}
+:root[data-nav^='role']::view-transition-new(.page-enter) {
+  animation: 320ms var(--vt-ease-out) 80ms both vt-fade-in;
+}
+:root[data-nav='role-next']::view-transition-old(auth-art) {
+  animation: 240ms var(--vt-ease-in) both vt-slide-out-left;
+}
+:root[data-nav='role-next']::view-transition-new(auth-art) {
+  animation: 560ms var(--vt-ease-out) 90ms both vt-slide-in-right;
+}
+:root[data-nav='role-prev']::view-transition-old(auth-art) {
+  animation: 240ms var(--vt-ease-in) both vt-slide-out-right;
+}
+:root[data-nav='role-prev']::view-transition-new(auth-art) {
+  animation: 560ms var(--vt-ease-out) 90ms both vt-slide-in-left;
+}
+
+/* Logging in: the card swells forward and dissolves as the dashboard zooms in. */
+:root[data-nav='zone-in']::view-transition-old(auth-card) {
+  animation: 380ms var(--vt-ease-in) both vt-card-launch;
+}
+:root[data-nav='zone-in']::view-transition-old(auth-art) {
+  animation: 300ms var(--vt-ease-in) both vt-dissolve-up;
+}
+/* Signed out to a login page: the card floats in over the site. */
+:root[data-nav='zone-out']::view-transition-new(auth-art) {
+  animation: 640ms var(--vt-ease-out) 110ms both vt-rise-in;
+}
+:root[data-nav='zone-out']::view-transition-new(auth-card) {
+  animation: 760ms var(--vt-ease-out) 190ms both vt-card-float-in;
+}
+
+/* Arriving on a login page directly (a fresh load, not a navigation). */
+:root:not([data-nav]) .auth-art > :is(h1, p) {
+  animation: vt-rise-in 760ms var(--vt-ease-out) backwards;
+}
+:root:not([data-nav]) .auth-art > h1 {
+  animation-delay: 80ms;
+}
+:root:not([data-nav]) .auth-art > p {
+  animation-delay: 180ms;
+}
+:root:not([data-nav]) .auth-card {
+  animation: vt-card-float-in 860ms var(--vt-ease-out) 240ms backwards;
+}
+
+@keyframes vt-card-float-in {
+  from {
+    opacity: 0;
+    transform: translateY(48px) scale(0.94);
+    filter: blur(8px);
+  }
+}
+@keyframes vt-card-drop {
+  to {
+    opacity: 0;
+    transform: translateY(36px) scale(0.96);
+    filter: blur(6px);
+  }
+}
+@keyframes vt-card-refocus {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+@keyframes vt-card-launch {
+  to {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(12px);
+  }
 }
 
 /* Exits never scale: a scrolled page's box starts far above the screen, so scaling
