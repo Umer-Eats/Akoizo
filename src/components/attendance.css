@@ -1,10 +1,10 @@
 .attendance {
-  --att-violet: #a7a3ff;
+  --att-accent: var(--vx-accent, #4d7cff);
   padding-top: 42px;
   padding-bottom: 40px;
 }
 :root[data-theme='light'] .attendance {
-  --att-violet: #5b50cf;
+  --att-accent: var(--vx-accent, #2455f5);
 }
 .attendance-embedded {
   padding: 0;
@@ -29,7 +29,7 @@
   margin-bottom: 12px;
 }
 .att-heading h1 span {
-  color: var(--att-violet);
+  color: var(--att-accent);
 }
 .att-heading p,
 .att-panel-title p,
@@ -64,7 +64,7 @@
   font-size: 12px;
 }
 .att-stat > div svg {
-  color: var(--att-violet);
+  color: var(--att-accent);
 }
 .att-stat > strong {
   display: block;
@@ -96,8 +96,8 @@
   font-size: 13px;
 }
 .att-tabs button[aria-selected='true'] {
-  color: var(--att-violet);
-  border-color: var(--att-violet);
+  color: var(--att-accent);
+  border-color: var(--att-accent);
 }
 .att-tabs b,
 .att-panel-title h2 b {
@@ -200,8 +200,8 @@
   background: var(--surface-2);
 }
 .att-day.is-selected {
-  background: color-mix(in srgb, var(--att-violet) 7%, var(--surface));
-  border-color: color-mix(in srgb, var(--att-violet) 35%, transparent);
+  background: color-mix(in srgb, var(--att-accent) 7%, var(--surface));
+  border-color: color-mix(in srgb, var(--att-accent) 35%, transparent);
 }
 .att-date-block {
   display: flex;
@@ -249,7 +249,7 @@
   overflow-wrap: anywhere;
 }
 .att-day-body small {
-  color: var(--att-violet);
+  color: var(--att-accent);
   font-size: 10px;
 }
 .att-badge {
@@ -274,8 +274,8 @@
   color: #137454;
 }
 .att-upcoming {
-  color: var(--att-violet);
-  background: color-mix(in srgb, var(--att-violet) 10%, var(--surface));
+  color: var(--att-accent);
+  background: color-mix(in srgb, var(--att-accent) 10%, var(--surface));
 }
 .att-badge i,
 .att-live-dot {
@@ -295,7 +295,7 @@
   padding: 25px;
   background: linear-gradient(
     130deg,
-    color-mix(in srgb, var(--att-violet) 10%, var(--surface)),
+    color-mix(in srgb, var(--att-accent) 10%, var(--surface)),
     var(--surface)
   );
   border-bottom: 1px solid var(--line);
@@ -328,7 +328,7 @@
   align-items: flex-start;
 }
 .att-detail-line > svg {
-  color: var(--att-violet);
+  color: var(--att-accent);
   margin-top: 2px;
 }
 .att-detail-line > div {
@@ -347,7 +347,7 @@
   color: var(--muted);
 }
 .att-detail-line a {
-  color: var(--att-violet);
+  color: var(--att-accent);
 }
 .att-code-box {
   text-align: center;
@@ -367,7 +367,7 @@
 .att-code-box > strong {
   font: 500 clamp(20px, 2.3vw, 30px) var(--font-mono);
   letter-spacing: 4px;
-  color: var(--att-violet);
+  color: var(--att-accent);
 }
 .att-code-box button {
   display: flex;
@@ -396,11 +396,11 @@
   border-radius: 5px;
 }
 .attendance progress::-webkit-progress-value {
-  background: var(--att-violet);
+  background: var(--att-accent);
   border-radius: 5px;
 }
 .attendance progress::-moz-progress-bar {
-  background: var(--att-violet);
+  background: var(--att-accent);
 }
 .att-controls {
   display: flex;
@@ -430,7 +430,7 @@
   line-height: 1.7;
 }
 .att-info > svg {
-  color: var(--att-violet, #8c83ee);
+  color: var(--att-accent, #4d7cff);
   margin-top: 2px;
 }
 .att-info strong {
@@ -455,7 +455,7 @@
   padding: 50px 24px;
 }
 .att-empty svg {
-  color: var(--att-violet);
+  color: var(--att-accent);
 }
 .att-empty h2,
 .att-empty h3 {
@@ -571,8 +571,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, var(--att-violet) 12%, var(--surface));
-  color: var(--att-violet);
+  background: color-mix(in srgb, var(--att-accent) 12%, var(--surface));
+  color: var(--att-accent);
   font-style: normal;
   width: 34px;
   height: 34px;
@@ -665,7 +665,7 @@
   color: var(--muted);
 }
 .att-dialog {
-  --att-violet: #a7a3ff;
+  --att-accent: var(--vx-accent, #4d7cff);
   background: var(--surface);
   color: var(--text);
   border: 1px solid var(--line-strong);
@@ -678,7 +678,7 @@
   box-shadow: 0 24px 100px #0006;
 }
 :root[data-theme='light'] .att-dialog {
-  --att-violet: #5b50cf;
+  --att-accent: var(--vx-accent, #2455f5);
 }
 .att-dialog::backdrop {
   background: #050811aa;
@@ -728,7 +728,7 @@
   margin-top: 0;
 }
 .att-label input:focus {
-  outline: 2px solid var(--att-violet);
+  outline: 2px solid var(--att-accent);
   outline-offset: 2px;
 }
 .att-form-row {
@@ -772,7 +772,7 @@
   margin-top: 6px;
 }
 .att-location-picker svg {
-  color: var(--att-violet);
+  color: var(--att-accent);
 }
 .att-dialog .att-info {
   margin-bottom: 18px;
@@ -861,7 +861,7 @@
 }
 .attendance button:focus-visible,
 .att-dialog button:focus-visible {
-  outline: 2px solid var(--att-violet);
+  outline: 2px solid var(--att-accent);
   outline-offset: 3px;
 }
 @media (min-width: 1100px) {

@@ -37,6 +37,8 @@ export function AttendanceMap({
     void import('leaflet')
       .then((L) => {
         if (disposed || !container.current) return;
+        const accent =
+          getComputedStyle(container.current).getPropertyValue('--att-accent').trim() || '#4d7cff';
         const center: [number, number] = initial
           ? [initial.latitude, initial.longitude]
           : [39.5, -98.35];
@@ -48,7 +50,7 @@ export function AttendanceMap({
         }).addTo(instance);
         ring.current = L.circle(center, {
           radius: ATTENDANCE_RADIUS_METERS,
-          color: '#6366f1',
+          color: accent,
           fillOpacity: 0.13,
           weight: 2,
         }).addTo(instance);
@@ -56,7 +58,7 @@ export function AttendanceMap({
           radius: 7,
           color: '#fff',
           weight: 3,
-          fillColor: '#6366f1',
+          fillColor: accent,
           fillOpacity: 1,
         }).addTo(instance);
         if (!initial) {
