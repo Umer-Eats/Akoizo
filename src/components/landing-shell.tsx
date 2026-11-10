@@ -88,6 +88,7 @@ export function LandingNav() {
             {links.map((link) => (
               <Link key={link.href} href={link.href} aria-current={current(link.href)}>
                 {link.label}
+                {current(link.href) && <span className="lx-nav-glide" aria-hidden="true" />}
               </Link>
             ))}
           </nav>

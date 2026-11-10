@@ -1,0 +1,304 @@
+/* Page transitions. page-transitions.tsx keys each page to its path inside a React
+   <ViewTransition>, so a route change runs a browser view transition: the old page
+   leaves as `.page-exit` and the new one arrives as `.page-enter`. html[data-nav]
+   says which way the user moved (see src/lib/page-transition.ts).
+   Unlayered on purpose: these must win over the layered theme. */
+
+:root {
+  --vt-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --vt-ease-in: cubic-bezier(0.55, 0, 0.75, 0.2);
+}
+
+/* Fixed chrome that must stay drawn above the moving page. */
+.lx-nav {
+  view-transition-name: site-nav;
+}
+.lx-nav-glide {
+  view-transition-name: nav-glide;
+}
+.ako-companion {
+  view-transition-name: ako;
+}
+.nb-dock {
+  view-transition-name: notes-dock;
+}
+.nb-dock-tab {
+  view-transition-name: notes-dock-tab;
+}
+.nav-progress {
+  view-transition-name: nav-progress;
+}
+
+/* Layering: old page, new page, then the fixed chrome on top. */
+::view-transition-group(.page-exit) {
+  z-index: 1;
+}
+::view-transition-group(.page-enter) {
+  z-index: 2;
+}
+::view-transition-group(site-nav),
+::view-transition-group(nav-glide),
+::view-transition-group(ako),
+::view-transition-group(notes-dock),
+::view-transition-group(notes-dock-tab),
+::view-transition-group(nav-progress) {
+  z-index: 3;
+  animation-duration: 320ms;
+  animation-timing-function: var(--vt-ease-out);
+}
+
+/* The nav bar cross-fades whatever changed inside it (links, event name). */
+::view-transition-old(site-nav),
+::view-transition-new(site-nav) {
+  animation-duration: 280ms;
+}
+/* Crossing zones swaps most of the nav's buttons: fade out, then in, so the two sets
+   never overlap as ghosts. */
+:root[data-nav^='zone']::view-transition-old(site-nav),
+:root[data-nav^='zone']::view-transition-new(site-nav) {
+  mix-blend-mode: normal;
+}
+:root[data-nav^='zone']::view-transition-old(site-nav) {
+  animation: 150ms var(--vt-ease-in) both vt-fade-out;
+}
+:root[data-nav^='zone']::view-transition-new(site-nav) {
+  animation: 300ms var(--vt-ease-out) 130ms both vt-fade-in;
+}
+/* Ako, the notes dock tab and the loading bar keep moving live. */
+::view-transition-old(ako),
+::view-transition-old(notes-dock-tab),
+::view-transition-old(nav-progress) {
+  display: none;
+}
+::view-transition-new(ako),
+::view-transition-new(notes-dock-tab),
+::view-transition-new(nav-progress) {
+  animation: none;
+}
+
+/* The active nav underline glides from the old link to the new one. */
+.lx-nav-links a[aria-current='page']::after {
+  opacity: 0;
+}
+.lx-nav-glide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--lx-blue, var(--accent));
+  pointer-events: none;
+}
+::view-transition-group(nav-glide) {
+  animation-duration: 460ms;
+}
+
+/* The pages. Default: a soft fade out and a rise in. */
+::view-transition-old(.page-exit) {
+  animation: 240ms var(--vt-ease-in) both vt-fade-out;
+}
+::view-transition-new(.page-enter) {
+  transform-origin: 50% 40vh;
+  animation: 520ms var(--vt-ease-out) 70ms both vt-rise-in;
+}
+
+/* Deeper: the old page sinks back, the new one rises into place. */
+:root[data-nav='forward']::view-transition-old(.page-exit) {
+  animation-name: vt-sink;
+}
+:root[data-nav='forward']::view-transition-new(.page-enter) {
+  animation-name: vt-rise-in;
+}
+
+/* Back up a level: the old page drops away, the parent settles down into focus. */
+:root[data-nav='back']::view-transition-old(.page-exit) {
+  animation-name: vt-drop-out;
+}
+:root[data-nav='back']::view-transition-new(.page-enter) {
+  animation-name: vt-settle-in;
+}
+
+/* Sideways through sections, in nav-bar order. */
+:root[data-nav='next']::view-transition-old(.page-exit) {
+  animation-name: vt-slide-out-left;
+}
+:root[data-nav='next']::view-transition-new(.page-enter) {
+  animation-name: vt-slide-in-right;
+}
+:root[data-nav='prev']::view-transition-old(.page-exit) {
+  animation-name: vt-slide-out-right;
+}
+:root[data-nav='prev']::view-transition-new(.page-enter) {
+  animation-name: vt-slide-in-left;
+}
+
+/* Into the workspace: the site dissolves and the dashboard comes forward into focus. */
+:root[data-nav='zone-in']::view-transition-old(.page-exit) {
+  animation: 300ms var(--vt-ease-in) both vt-dissolve-up;
+}
+:root[data-nav='zone-in']::view-transition-new(.page-enter) {
+  animation: 680ms var(--vt-ease-out) 110ms both vt-zoom-in;
+}
+/* Out to the site: the reverse. */
+:root[data-nav='zone-out']::view-transition-old(.page-exit) {
+  animation: 300ms var(--vt-ease-in) both vt-dissolve-down;
+}
+:root[data-nav='zone-out']::view-transition-new(.page-enter) {
+  animation: 680ms var(--vt-ease-out) 110ms both vt-zoom-out-in;
+}
+
+/* Exits never scale: a scrolled page's box starts far above the screen, so scaling
+   around it would drift. Translate, blur and fade read the same at any scroll. */
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-sink {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+    filter: blur(4px);
+  }
+}
+@keyframes vt-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes vt-drop-out {
+  to {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(3px);
+  }
+}
+@keyframes vt-settle-in {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+    filter: blur(4px);
+  }
+}
+@keyframes vt-slide-out-left {
+  to {
+    opacity: 0;
+    transform: translateX(-36px);
+    filter: blur(3px);
+  }
+}
+@keyframes vt-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+}
+@keyframes vt-slide-out-right {
+  to {
+    opacity: 0;
+    transform: translateX(36px);
+    filter: blur(3px);
+  }
+}
+@keyframes vt-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+}
+@keyframes vt-dissolve-up {
+  to {
+    opacity: 0;
+    transform: translateY(-24px);
+    filter: blur(10px);
+  }
+}
+@keyframes vt-dissolve-down {
+  to {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(10px);
+  }
+}
+@keyframes vt-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(1.045);
+    filter: blur(12px);
+  }
+}
+@keyframes vt-zoom-out-in {
+  from {
+    opacity: 0;
+    transform: scale(0.955);
+    filter: blur(12px);
+  }
+}
+
+/* After the swap, a workspace page's sections land one after another. The new
+   snapshot is live, so this plays through the page's entrance. */
+@keyframes vt-section-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+:root[data-page-enter] main.page-container:not(.practice-page) > * {
+  animation: vt-section-in 560ms var(--vt-ease-out) backwards;
+  animation-delay: 300ms;
+}
+:root[data-page-enter] main.page-container:not(.practice-page) > :nth-child(1) {
+  animation-delay: 60ms;
+}
+:root[data-page-enter] main.page-container:not(.practice-page) > :nth-child(2) {
+  animation-delay: 120ms;
+}
+:root[data-page-enter] main.page-container:not(.practice-page) > :nth-child(3) {
+  animation-delay: 180ms;
+}
+:root[data-page-enter] main.page-container:not(.practice-page) > :nth-child(4) {
+  animation-delay: 240ms;
+}
+
+/* Loading bar. */
+.nav-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  height: 2px;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-strong) 70%, #ffffff 100%);
+  box-shadow:
+    0 0 10px var(--accent),
+    0 0 2px var(--accent-strong);
+}
+
+/* Off switch: Settings → Motion (page-transitions.tsx also skips the transition),
+   or the system's reduced-motion preference. */
+:root[data-motion='off']::view-transition-group(*),
+:root[data-motion='off']::view-transition-old(*),
+:root[data-motion='off']::view-transition-new(*) {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  :root[data-page-enter] main.page-container > * {
+    animation: none;
+  }
+}

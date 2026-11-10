@@ -10,7 +10,9 @@ import './study-landing.css';
 import './vault.css';
 import './app-vault.css';
 import './app-shapes.css';
+import './transitions.css';
 import { Providers } from '@/components/providers';
+import { PageTransitions } from '@/components/page-transitions';
 import { Header, Footer } from '@/components/site-shell';
 import { AkoCompanion } from '@/components/ako-companion';
 import { ArtworkMotion } from '@/components/artwork-motion';
@@ -39,7 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             Skip to content
           </a>
           <Header />
-          {children}
+          <PageTransitions>{children}</PageTransitions>
           <NotesDock />
           <Footer />
         </Providers>
