@@ -67,7 +67,7 @@ export function AttendanceMap({
         }
         instance.on('click', (e) =>
           choose({
-            name: `Workshop location (${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)})`,
+            name: `Event location (${e.latlng.lat.toFixed(5)}, ${e.latlng.lng.toFixed(5)})`,
             latitude: e.latlng.lat,
             longitude: e.latlng.lng,
           }),
@@ -117,7 +117,7 @@ export function AttendanceMap({
     navigator.geolocation.getCurrentPosition(
       (p) => {
         choose({
-          name: 'Workshop at my current location',
+          name: 'Event at my current location',
           latitude: p.coords.latitude,
           longitude: p.coords.longitude,
         });
@@ -141,8 +141,8 @@ export function AttendanceMap({
     >
       <div className="att-dialog-head">
         <div>
-          <span className="att-eyebrow">WORKSHOP LOCATION</span>
-          <h2 id="map-title">Put your workshop on the map.</h2>
+          <span className="att-eyebrow">EVENT LOCATION</span>
+          <h2 id="map-title">Put your event on the map.</h2>
         </div>
         <button className="att-icon" aria-label="Close map" onClick={onClose}>
           <X size={20} />
@@ -157,7 +157,7 @@ export function AttendanceMap({
       >
         <Search size={18} />
         <input
-          aria-label="Search workshop address"
+          aria-label="Search event address"
           placeholder="Search a school, building, or address"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -191,7 +191,7 @@ export function AttendanceMap({
       <div
         ref={container}
         className="att-map"
-        aria-label="Workshop map: select a point to set the location"
+        aria-label="Event map: select a point to set the location"
       />
       <div className="att-map-caption">
         <span>Click the map to place a pin. The circle shows the 0.5-mile check-in area.</span>

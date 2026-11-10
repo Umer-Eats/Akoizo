@@ -10,7 +10,7 @@ type Item = { label: string; hint: string; href: string; kind: 'page' | 'event' 
 const pages: Item[] = [
   {
     label: 'Attendance',
-    hint: 'Workshop check-in and attendance records',
+    hint: 'Event check-in and attendance records',
     href: '/attendance',
     kind: 'page',
   },

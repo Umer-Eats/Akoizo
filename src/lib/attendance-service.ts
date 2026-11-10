@@ -35,7 +35,7 @@ function coordinate(value: unknown, max: number) {
   return value;
 }
 function teacher(profile: Profile) {
-  if (profile.role !== 'instructor') throw new AppError(403, 'Only teachers can manage workshops.');
+  if (profile.role !== 'instructor') throw new AppError(403, 'Only teachers can manage events.');
 }
 export async function createWorkshop(
   db: Database,
@@ -43,7 +43,7 @@ export async function createWorkshop(
   body: Record<string, unknown>,
 ) {
   teacher(profile);
-  const title = text(body.title, 100, 'workshop title');
+  const title = text(body.title, 100, 'event title');
   const location = text(body.locationName, 500, 'location name');
   const lat = coordinate(body.latitude, 90),
     lon = coordinate(body.longitude, 180);
@@ -99,9 +99,9 @@ export async function manageWorkshop(
   body: Record<string, unknown>,
 ) {
   teacher(profile);
-  const id = text(body.id, 100, 'workshop');
+  const id = text(body.id, 100, 'event');
   if (body.action !== 'cancel' && body.action !== 'rotate')
-    throw new AppError(400, 'Choose a workshop action.');
+    throw new AppError(400, 'Choose an event action.');
   const result = await db.batch(
     [
       {
@@ -120,13 +120,37 @@ export async function manageWorkshop(
     'immediate',
   );
   if (!result[0]?.rowsAffected)
-    throw new AppError(404, 'Active workshop not found in your community.');
+    throw new AppError(404, 'Active event not found in your community.');
+  return { ok: true };
+}
+export async function deleteWorkshop(db: Database, profile: Profile, value: unknown) {
+  teacher(profile);
+  const id = text(value, 100, 'event');
+  // Scope every deletion to this community and remove dependent rows in one transaction.
+  const result = await db.batch(
+    [
+      {
+        sql: 'DELETE FROM attendance_records WHERE workshop_id IN (SELECT id FROM attendance_workshops WHERE id=? AND school_id=?)',
+        args: [id, profile.schoolId],
+      },
+      {
+        sql: 'DELETE FROM attendance_audience WHERE workshop_id IN (SELECT id FROM attendance_workshops WHERE id=? AND school_id=?)',
+        args: [id, profile.schoolId],
+      },
+      {
+        sql: 'DELETE FROM attendance_workshops WHERE id=? AND school_id=?',
+        args: [id, profile.schoolId],
+      },
+    ],
+    'immediate',
+  );
+  if (!result[2]?.rowsAffected) throw new AppError(404, 'Event not found in your community.');
   return { ok: true };
 }
 export async function checkIn(db: Database, profile: Profile, body: Record<string, unknown>) {
   if (profile.role !== 'student') throw new AppError(403, 'Only students can check in.');
   await attendanceLimit(db, profile.id, 12);
-  const id = text(body.workshopId, 100, 'workshop');
+  const id = text(body.workshopId, 100, 'event');
   const code = text(body.code, 16, 'attendance code').toUpperCase();
   const w = await db.get(
     'SELECT * FROM attendance_workshops WHERE id=? AND school_id=?',
@@ -136,7 +160,7 @@ export async function checkIn(db: Database, profile: Profile, body: Record<strin
   if (!w || w.code !== code)
     throw new AppError(
       400,
-      'That workshop code did not match. Ask your teacher for the current code.',
+      'That event code did not match. Ask your teacher for the current code.',
     );
   if (
     w.cancelled ||
@@ -166,7 +190,7 @@ export async function checkIn(db: Database, profile: Profile, body: Record<strin
   if (distance + body.accuracy > ATTENDANCE_RADIUS_METERS)
     throw new AppError(
       403,
-      'We could not confirm you are within 0.5 mile of the workshop. Move closer or enable precise location and try again.',
+      'We could not confirm you are within 0.5 mile of the event. Move closer or enable precise location and try again.',
     );
   // Recheck time, code, cancellation and membership in the same atomic statement as the insert.
   const now = new Date().toISOString();
@@ -200,7 +224,7 @@ export async function checkIn(db: Database, profile: Profile, body: Record<strin
   if (!record)
     throw new AppError(
       409,
-      'This workshop is unavailable or you are not on its roster. Ask your teacher.',
+      'This event is unavailable or you are not on its roster. Ask your teacher.',
     );
   return { checkedInAt: String(record.checked_in_at), alreadyRecorded: !result[0]?.rowsAffected };
 }

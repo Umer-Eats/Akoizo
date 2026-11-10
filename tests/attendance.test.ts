@@ -7,6 +7,7 @@ import {
   checkIn,
   createWorkshop,
   manageWorkshop,
+  deleteWorkshop,
 } from '../src/lib/attendance-service.ts';
 import { ATTENDANCE_RADIUS_METERS, distanceMeters, workshopStatus } from '../src/lib/attendance.ts';
 
@@ -54,6 +55,61 @@ test('valid check-in is persisted exactly once and does not retain exact coordin
   assert.equal(rows[0].latitude, undefined);
   assert.equal(rows[0].longitude, undefined);
   assert.ok((await attendanceFor(f.db, f.student)).workshops[0].checkedInAt);
+  f.raw.close();
+});
+test('teachers can delete an event and its check-ins from all views without affecting other events', async () => {
+  const f = await setup();
+  await checkIn(f.db, f.student, f.body());
+  const other = await createWorkshop(f.db, f.teacher, {
+    ...workshopInput(),
+    title: 'Keep this event',
+  });
+  await assert.rejects(deleteWorkshop(f.db, f.student, f.id), /Only teachers/);
+  await assert.rejects(
+    deleteWorkshop(f.db, { ...f.teacher, schoolId: 'other' }, f.id),
+    /not found/,
+  );
+  assert.equal(f.raw.prepare('SELECT COUNT(*) AS n FROM attendance_records').get()!.n, 1);
+  assert.equal((await attendanceFor(f.db, f.student)).workshops.length, 2);
+  await deleteWorkshop(f.db, f.teacher, f.id);
+  assert.equal(f.raw.prepare('SELECT COUNT(*) AS n FROM attendance_records').get()!.n, 0);
+  assert.equal(
+    f.raw.prepare('SELECT COUNT(*) AS n FROM attendance_audience WHERE workshop_id=?').get(f.id)!.n,
+    0,
+  );
+  const teacher = await attendanceFor(f.db, f.teacher);
+  assert.deepEqual(
+    teacher.workshops.map((w) => w.id),
+    [other.id],
+  );
+  assert.deepEqual(teacher.records, []);
+  assert.deepEqual(
+    (await attendanceFor(f.db, f.student)).workshops.map((w) => w.id),
+    [other.id],
+  );
+  await assert.rejects(checkIn(f.db, f.student, f.body()), /code did not match/);
+  await assert.rejects(deleteWorkshop(f.db, f.teacher, f.id), /not found/);
+  f.raw.close();
+});
+test('past and cancelled events can be deleted and no longer affect attendance analytics', async () => {
+  const f = await setup();
+  await checkIn(f.db, f.student, f.body());
+  f.raw
+    .prepare('UPDATE attendance_workshops SET closes_at=? WHERE id=?')
+    .run(new Date(Date.now() - 1000).toISOString(), f.id);
+  assert.equal(
+    (await attendanceFor(f.db, f.teacher)).members.find((m) => m.id === 'student')?.expected,
+    1,
+  );
+  await deleteWorkshop(f.db, f.teacher, f.id);
+  assert.equal(
+    (await attendanceFor(f.db, f.teacher)).members.find((m) => m.id === 'student')?.rate,
+    null,
+  );
+  const cancelled = await createWorkshop(f.db, f.teacher, workshopInput());
+  await manageWorkshop(f.db, f.teacher, { id: cancelled.id, action: 'cancel' });
+  await deleteWorkshop(f.db, f.teacher, cancelled.id);
+  assert.deepEqual((await attendanceFor(f.db, f.teacher)).workshops, []);
   f.raw.close();
 });
 test('check-in rejects wrong codes, other communities, teachers and non-rostered students', async () => {

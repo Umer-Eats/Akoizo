@@ -7,6 +7,7 @@ import {
   checkIn,
   createWorkshop,
   manageWorkshop,
+  deleteWorkshop,
 } from '../src/lib/attendance-service.ts';
 
 // Mock authentication and external address lookup; exercise the real attendance service over SQLite.
@@ -16,11 +17,11 @@ await mkdir(out, { recursive: true });
 const f = attendanceFixture();
 const current = await createWorkshop(f.db, f.teacher, {
   ...workshopInput(),
-  title: 'Saturday build workshop',
+  title: 'Saturday build event',
 });
 await createWorkshop(f.db, f.teacher, {
   ...workshopInput(),
-  title: 'Astronomy field workshop',
+  title: 'Astronomy field event',
   opensAt: new Date(Date.now() + 86400000).toISOString(),
   closesAt: new Date(Date.now() + 90000000).toISOString(),
 });
@@ -103,11 +104,13 @@ async function session(profile) {
         json =
           method === 'GET'
             ? await attendanceFor(f.db, profile)
-            : method === 'PATCH'
-              ? await manageWorkshop(f.db, profile, body)
-              : profile.role === 'instructor'
-                ? await createWorkshop(f.db, profile, body)
-                : await checkIn(f.db, profile, body);
+            : method === 'DELETE'
+              ? await deleteWorkshop(f.db, profile, body.id)
+              : method === 'PATCH'
+                ? await manageWorkshop(f.db, profile, body)
+                : profile.role === 'instructor'
+                  ? await createWorkshop(f.db, profile, body)
+                  : await checkIn(f.db, profile, body);
       }
       await route.fulfill({ json });
     } catch (e) {
@@ -153,20 +156,20 @@ async function fits(page, name) {
 }
 try {
   const teacher = await session(f.teacher);
-  await fits(teacher.page, 'teacher-workshops');
+  await fits(teacher.page, 'teacher-events');
   await teacher.page.getByRole('tab', { name: 'Student analytics' }).click();
   await expect(teacher.page.getByRole('cell', { name: /Sam Patel/ })).toBeVisible();
   await fits(teacher.page, 'teacher-analytics');
   const download = teacher.page.waitForEvent('download');
   await teacher.page.getByRole('button', { name: 'Export attendance' }).click();
-  assert.equal((await download).suggestedFilename(), 'workshop-attendance.csv');
+  assert.equal((await download).suggestedFilename(), 'event-attendance.csv');
   await teacher.page.getByRole('tab', { name: 'Online now' }).click();
   await expect(teacher.page.locator('.att-online-person').getByText('Jordan Rivera')).toBeVisible();
-  await teacher.page.getByRole('button', { name: 'New workshop', exact: true }).click();
-  await teacher.page.getByLabel('Workshop name', { exact: true }).fill('Chemistry lab day');
-  await teacher.page.getByRole('button', { name: 'Workshop location', exact: true }).click();
+  await teacher.page.getByRole('button', { name: 'New event', exact: true }).click();
+  await teacher.page.getByLabel('Event name', { exact: true }).fill('Chemistry lab day');
+  await teacher.page.getByRole('button', { name: 'Event location', exact: true }).click();
   await expect(teacher.page.locator('.leaflet-container')).toBeVisible();
-  await teacher.page.getByLabel('Search workshop address').fill('123 School Lane');
+  await teacher.page.getByLabel('Search event address').fill('123 School Lane');
   await teacher.page
     .locator('.att-address-search')
     .getByRole('button', { name: 'Search', exact: true })
@@ -178,9 +181,9 @@ try {
   await teacher.page.setViewportSize({ width: 390, height: 900 });
   await teacher.page.screenshot({ path: `${out}/map-mobile.png`, fullPage: true });
   await teacher.page.getByRole('button', { name: 'Use this location' }).click();
-  await teacher.page.getByRole('button', { name: 'Create workshop', exact: true }).click();
+  await teacher.page.getByRole('button', { name: 'Create event', exact: true }).click();
   await expect(teacher.page.locator('.att-dialog')).toHaveCount(0);
-  await teacher.page.getByRole('tab', { name: 'Workshops', exact: true }).click();
+  await teacher.page.getByRole('tab', { name: 'Events', exact: true }).click();
   await expect(teacher.page.locator('.att-day')).toHaveCount(4);
   await teacher.page.setViewportSize({ width: 1440, height: 1000 });
   const student = await session(f.student);
@@ -188,10 +191,10 @@ try {
   const code = String(
     f.raw.prepare('SELECT code FROM attendance_workshops WHERE id=?').get(current.id).code,
   );
-  await student.page.getByLabel('Enter your workshop code').fill('WRONG123');
+  await student.page.getByLabel('Enter your event code').fill('WRONG123');
   await student.page.getByRole('button', { name: 'Check in with location' }).click();
   await expect(student.page.locator('.att-error')).toContainText('code did not match');
-  await student.page.getByLabel('Enter your workshop code').fill(code);
+  await student.page.getByLabel('Enter your event code').fill(code);
   await student.context.setGeolocation({ latitude: 27, longitude: -80, accuracy: 10 });
   await student.page.getByRole('button', { name: 'Check in with location' }).click();
   await expect(student.page.locator('.att-error')).toContainText('0.5 mile');
@@ -206,11 +209,26 @@ try {
     .click();
   await expect(teacher.page.locator('.attendance-embedded')).toBeVisible();
   await fits(teacher.page, 'teacher-dashboard');
+  await teacher.page.getByRole('button', { name: 'Delete event', exact: true }).click();
+  await expect(teacher.page.getByRole('group', { name: 'Confirm event deletion' })).toContainText(
+    'permanently removes',
+  );
+  await teacher.page.getByRole('button', { name: 'Keep event', exact: true }).click();
+  await expect(teacher.page.getByRole('group', { name: 'Confirm event deletion' })).toHaveCount(0);
+  await teacher.page.getByRole('button', { name: 'Delete event', exact: true }).click();
+  await teacher.page.getByRole('button', { name: 'Yes, delete event', exact: true }).click();
+  await expect(teacher.page.locator('.att-day')).toHaveCount(3);
+  await expect(teacher.page.locator('.att-success')).toContainText('Event deleted');
+  await student.page.reload();
+  await expect(student.page.locator('.att-day')).toHaveCount(3);
+  await expect(
+    student.page.locator('.att-day').filter({ hasText: 'Saturday build event' }),
+  ).toHaveCount(0);
   await student.context.close();
   await teacher.context.close();
   assert.deepEqual(errors, []);
   console.log(
-    'PASS: teacher/student attendance, real service persistence, address search and map popup, workshop creation, CSV export, presence, wrong-code rejection, browser geolocation, check-in, two themes and four viewport sizes.',
+    'PASS: teacher/student attendance, real service persistence, address search and map popup, event creation, CSV export, presence, wrong-code rejection, browser geolocation, check-in, two themes and four viewport sizes.',
   );
 } finally {
   await browser.close();

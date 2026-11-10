@@ -1,6 +1,12 @@
 import { memberFor, json, failure } from '@/lib/api';
 import { AppError } from '@/lib/domain';
-import { attendanceFor, checkIn, createWorkshop, manageWorkshop } from '@/lib/attendance-service';
+import {
+  attendanceFor,
+  checkIn,
+  createWorkshop,
+  manageWorkshop,
+  deleteWorkshop,
+} from '@/lib/attendance-service';
 async function bodyOf(request: Request) {
   const body = await request.json();
   if (!body || typeof body !== 'object' || Array.isArray(body))
@@ -33,6 +39,14 @@ export async function PATCH(request: Request) {
   try {
     const { db, profile } = await memberFor(request, 'instructor');
     return json(await manageWorkshop(db, profile, await bodyOf(request)));
+  } catch (error) {
+    return failure(error);
+  }
+}
+export async function DELETE(request: Request) {
+  try {
+    const { db, profile } = await memberFor(request, 'instructor');
+    return json(await deleteWorkshop(db, profile, (await bodyOf(request)).id));
   } catch (error) {
     return failure(error);
   }

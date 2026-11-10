@@ -804,7 +804,7 @@ export function InstructorDashboard() {
               'Compare accuracy, progress and points across teams, then open a team.'}
             {tab === 'progress' && 'Review each student’s next steps and event progress.'}
             {tab === 'attendance' &&
-              'Plan workshop days, share attendance codes, and see who is here.'}
+              'Plan event days, share attendance codes, and see who is here.'}
           </p>
         </aside>
         <div className="event-content instructor-content">

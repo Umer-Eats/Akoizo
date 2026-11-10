@@ -60,7 +60,7 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
   async function submit(e: FormEvent) {
     e.preventDefault();
     if (!location) {
-      setError('Choose the workshop location first.');
+      setError('Choose the event location first.');
       return;
     }
     setBusy(true);
@@ -91,7 +91,7 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
       <dialog
         ref={ref}
         className="att-dialog"
-        aria-labelledby="new-workshop-title"
+        aria-labelledby="new-event-title"
         onCancel={(e) => {
           if (busy) e.preventDefault();
           else onClose();
@@ -100,14 +100,14 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
         <form onSubmit={submit}>
           <div className="att-dialog-head">
             <div>
-              <span className="att-eyebrow">PLAN A WORKSHOP</span>
-              <h2 id="new-workshop-title">A day to show up.</h2>
-              <p>Each workshop gets its own attendance code.</p>
+              <span className="att-eyebrow">PLAN AN EVENT</span>
+              <h2 id="new-event-title">A day to show up.</h2>
+              <p>Each event gets its own attendance code.</p>
             </div>
             <button
               type="button"
               className="att-icon"
-              aria-label="Close workshop form"
+              aria-label="Close event form"
               onClick={onClose}
               disabled={busy}
             >
@@ -115,12 +115,12 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
             </button>
           </div>
           <label className="att-label">
-            Workshop name
+            Event name
             <input
               autoFocus
               required
               maxLength={100}
-              placeholder="e.g. Saturday build workshop"
+              placeholder="e.g. Saturday build event"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -150,7 +150,7 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
             <Clock3 size={14} /> Times use {timezone}. Check-in windows can last up to 24 hours.
           </p>
           <label className="att-label">
-            Workshop location
+            Event location
             <button type="button" className="att-location-picker" onClick={() => setMapOpen(true)}>
               <MapPin size={22} />
               <span>
@@ -172,8 +172,8 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
             </p>
           </div>
           <p className="att-help">
-            The current community student roster is saved for this workshop. Cancelled workshops do
-            not affect attendance rates.
+            The current community student roster is saved for this event. Cancelled events do not
+            affect attendance rates.
           </p>
           {error && (
             <p className="att-error" role="alert">
@@ -185,7 +185,7 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
               Cancel
             </button>
             <button className="button button-primary" disabled={busy || !location}>
-              {busy ? 'Creating…' : 'Create workshop'}
+              {busy ? 'Creating…' : 'Create event'}
               <Plus size={16} />
             </button>
           </div>
@@ -229,7 +229,8 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
     [selectedId, setSelectedId] = useState('');
   const [code, setCode] = useState(''),
     [now, setNow] = useState(Date.now()),
-    [confirmCancel, setConfirmCancel] = useState('');
+    [confirmCancel, setConfirmCancel] = useState(''),
+    [confirmDelete, setConfirmDelete] = useState('');
   const clockOffset = useRef(0),
     version = useRef(0);
   const refresh = useCallback(async () => {
@@ -266,6 +267,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
   useEffect(() => {
     setCode('');
     setConfirmCancel('');
+    setConfirmDelete('');
     setNotice('');
   }, [selectedId]);
   const workshops = data?.workshops ?? [];
@@ -289,22 +291,25 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
     workshops.find((w) => workshopStatus(w, now) === 'Upcoming') ??
     workshops[0];
 
-  async function manage(w: Workshop, action: 'rotate' | 'cancel') {
+  async function manage(w: Workshop, action: 'rotate' | 'cancel' | 'delete') {
     setBusy(w.id);
     setError('');
     setNotice('');
     try {
       await request('/api/attendance', {
-        method: 'PATCH',
+        method: action === 'delete' ? 'DELETE' : 'PATCH',
         body: JSON.stringify({ id: w.id, action }),
       });
       await refresh();
       setNotice(
-        action === 'rotate'
-          ? 'New code generated. Share it with students at the workshop.'
-          : 'Workshop cancelled. It will not count toward attendance rates.',
+        action === 'delete'
+          ? 'Event deleted. It has been removed from the schedule and attendance reports.'
+          : action === 'rotate'
+            ? 'New code generated. Share it with students at the event.'
+            : 'Event cancelled. It will not count toward attendance rates.',
       );
       setConfirmCancel('');
+      setConfirmDelete('');
     } catch (e) {
       setError(authMessage(e));
     } finally {
@@ -368,7 +373,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
       `"${String(value ?? '')
         .replace(/^[=+@\-\t\r]/, "'$&")
         .replaceAll('"', '""')}"`;
-    const rows = [['Student', 'Workshop', 'Date', 'Status', 'Checked in at']];
+    const rows = [['Student', 'Event', 'Date', 'Status', 'Checked in at']];
     for (const w of workshops)
       for (const m of students) {
         if (!w.audienceIds?.includes(m.id)) continue;
@@ -393,7 +398,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
     const url = URL.createObjectURL(blob),
       a = document.createElement('a');
     a.href = url;
-    a.download = 'workshop-attendance.csv';
+    a.download = 'event-attendance.csv';
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -402,7 +407,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
       <div className="att-heading">
         <div>
           <span className="att-eyebrow">
-            {teacher ? 'INSTRUCTOR WORKSPACE' : 'YOUR WORKSHOP RECORD'} /{' '}
+            {teacher ? 'INSTRUCTOR WORKSPACE' : 'YOUR EVENT RECORD'} /{' '}
             {profile?.schoolCommunityName || profile?.schoolName}
           </span>
           <h1>
@@ -410,8 +415,8 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
           </h1>
           <p>
             {teacher
-              ? 'Every workshop, every student. Keep your community on track.'
-              : 'Your workshops and attendance, all in one place.'}
+              ? 'Every event, every student. Keep your community on track.'
+              : 'Your events and attendance, all in one place.'}
           </p>
         </div>
         <div className="att-heading-actions">
@@ -427,7 +432,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
           {teacher && (
             <button className="button button-primary" onClick={() => setCreating(true)}>
               <Plus size={17} />
-              New workshop
+              New event
             </button>
           )}
         </div>
@@ -448,11 +453,11 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
           {
             label: 'Attendance rate',
             value: rate === null ? '—' : `${rate}%`,
-            hint: 'Across completed workshops',
+            hint: 'Across completed events',
             icon: ShieldCheck,
           },
           {
-            label: teacher ? 'Workshops scheduled' : 'Workshops attended',
+            label: teacher ? 'Events scheduled' : 'Events attended',
             value: teacher ? workshops.filter((w) => !w.cancelled).length : attended,
             hint: teacher ? 'A unique code for every day' : 'Your recorded check-ins',
             icon: CalendarDays,
@@ -464,7 +469,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
             icon: Clock3,
           },
           {
-            label: teacher ? 'Online now' : 'Upcoming workshops',
+            label: teacher ? 'Online now' : 'Upcoming events',
             value: teacher
               ? online.length
               : workshops.filter((w) => workshopStatus(w, now) === 'Upcoming').length,
@@ -505,7 +510,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
           }}
         >
           {[
-            ['workshops', 'Workshops', CalendarDays],
+            ['workshops', 'Events', CalendarDays],
             ['analytics', 'Student analytics', ShieldCheck],
             ['online', 'Online now', Users],
           ].map(([id, label, Icon]) => (
@@ -532,7 +537,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
         <div className="att-empty">
           <RefreshCw size={28} />
           <h2>{error ? 'Attendance is unavailable.' : 'Loading attendance…'}</h2>
-          <p>{error ? 'Use Refresh to try again.' : 'Getting your community’s workshops.'}</p>
+          <p>{error ? 'Use Refresh to try again.' : 'Getting your community’s events.'}</p>
         </div>
       ) : (
         <div
@@ -547,7 +552,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                   <div>
                     <span className="att-eyebrow">THE SCHEDULE</span>
                     <h2>
-                      Workshop days <b>{workshops.length}</b>
+                      Event days <b>{workshops.length}</b>
                     </h2>
                   </div>
                 </div>
@@ -555,14 +560,14 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                   <label className="att-search">
                     <Search size={16} />
                     <input
-                      aria-label="Search workshops"
-                      placeholder="Find a workshop…"
+                      aria-label="Search events"
+                      placeholder="Find an event…"
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                     />
                   </label>
                   <select
-                    aria-label="Filter workshops"
+                    aria-label="Filter events"
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
                   >
@@ -577,21 +582,19 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                   <div className="att-empty">
                     <CalendarDays size={30} />
                     <h3>
-                      {workshops.length
-                        ? 'No matching workshops.'
-                        : 'Your next workshop starts here.'}
+                      {workshops.length ? 'No matching events.' : 'Your next event starts here.'}
                     </h3>
                     <p>
                       {workshops.length
                         ? 'Try another search or filter.'
                         : teacher
-                          ? 'Create a workshop, set the window, and choose your location.'
-                          : 'Your teacher’s workshop days will appear here when scheduled.'}
+                          ? 'Create an event, set the window, and choose your location.'
+                          : 'Your teacher’s event days will appear here when scheduled.'}
                     </p>
                     {teacher && !workshops.length && (
                       <button className="button button-primary" onClick={() => setCreating(true)}>
                         <Plus size={16} />
-                        Plan a workshop
+                        Plan an event
                       </button>
                     )}
                   </div>
@@ -656,7 +659,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                     <section className="att-panel">
                       <div className="att-detail-hero">
                         <span className="att-eyebrow">
-                          {teacher ? 'WORKSHOP CONTROL' : 'YOUR CHECK-IN'}
+                          {teacher ? 'EVENT CONTROL' : 'YOUR CHECK-IN'}
                         </span>
                         <span
                           className={`att-badge att-${workshopStatus(selected, now).toLowerCase()}`}
@@ -699,9 +702,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                                 onClick={async () => {
                                   try {
                                     await navigator.clipboard.writeText(selected.code ?? '');
-                                    setNotice(
-                                      'Code copied. Share it with students at the workshop.',
-                                    );
+                                    setNotice('Code copied. Share it with students at the event.');
                                   } catch {
                                     setError(
                                       'Could not copy. Select the code and copy it manually.',
@@ -722,7 +723,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                             <progress
                               value={selected.present}
                               max={Math.max(1, selected.expected)}
-                              aria-label="Workshop attendance"
+                              aria-label="Event attendance"
                             />
                             {['Open', 'Upcoming'].includes(workshopStatus(selected, now)) && (
                               <div className="att-controls">
@@ -737,16 +738,19 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                                 <button
                                   className="att-danger"
                                   disabled={!!busy}
-                                  onClick={() => setConfirmCancel(selected.id)}
+                                  onClick={() => {
+                                    setConfirmDelete('');
+                                    setConfirmCancel(selected.id);
+                                  }}
                                 >
-                                  Cancel workshop
+                                  Cancel event
                                 </button>
                               </div>
                             )}
                             {confirmCancel === selected.id && (
                               <div className="att-confirm">
                                 <p>
-                                  Cancel this workshop? Check-in will close and it will be excluded
+                                  Cancel this event? Check-in will close and it will be excluded
                                   from attendance rates.
                                 </p>
                                 <button
@@ -754,10 +758,46 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                                   disabled={!!busy}
                                   onClick={() => void manage(selected, 'cancel')}
                                 >
-                                  Yes, cancel workshop
+                                  Yes, cancel event
                                 </button>
                                 <button className="text-link" onClick={() => setConfirmCancel('')}>
-                                  Keep workshop
+                                  Keep event
+                                </button>
+                              </div>
+                            )}
+                            <button
+                              className="att-danger"
+                              disabled={!!busy}
+                              onClick={() => {
+                                setConfirmCancel('');
+                                setConfirmDelete(selected.id);
+                              }}
+                            >
+                              Delete event
+                            </button>
+                            {confirmDelete === selected.id && (
+                              <div
+                                className="att-confirm"
+                                role="group"
+                                aria-label="Confirm event deletion"
+                              >
+                                <p>
+                                  Delete “{selected.title}”? This permanently removes the event and
+                                  its attendance records for everyone in your community.
+                                </p>
+                                <button
+                                  className="button button-small"
+                                  disabled={!!busy}
+                                  onClick={() => void manage(selected, 'delete')}
+                                >
+                                  {busy === selected.id ? 'Deleting…' : 'Yes, delete event'}
+                                </button>
+                                <button
+                                  className="text-link"
+                                  disabled={!!busy}
+                                  onClick={() => setConfirmDelete('')}
+                                >
+                                  Keep event
                                 </button>
                               </div>
                             )}
@@ -779,7 +819,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                         ) : workshopStatus(selected, now) === 'Open' ? (
                           <form className="att-checkin" onSubmit={checkIn}>
                             <label className="att-label">
-                              Enter your workshop code
+                              Enter your event code
                               <input
                                 className="att-code-input"
                                 placeholder="8-character code"
@@ -819,10 +859,10 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                             <Clock3 size={19} />
                             <p>
                               {selected.cancelled
-                                ? 'This workshop was cancelled. It does not affect your attendance.'
+                                ? 'This event was cancelled. It does not affect your attendance.'
                                 : workshopStatus(selected, now) === 'Upcoming'
                                   ? 'Check-in opens at the time above. Ask your teacher for the code when you arrive.'
-                                  : 'The check-in window has closed. No attendance was recorded for this workshop.'}
+                                  : 'The check-in window has closed. No attendance was recorded for this event.'}
                             </p>
                           </div>
                         )}
@@ -843,7 +883,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                   <div className="att-panel att-empty">
                     <MapPin size={30} />
                     <h3>A place to connect.</h3>
-                    <p>Select a workshop to see its location and check-in details.</p>
+                    <p>Select an event to see its location and check-in details.</p>
                   </div>
                 )}
               </aside>
@@ -855,7 +895,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                 <div>
                   <span className="att-eyebrow">THE BIG PICTURE</span>
                   <h2>Student attendance</h2>
-                  <p>Rates include completed workshops on each student’s saved roster.</p>
+                  <p>Rates include completed events on each student’s saved roster.</p>
                 </div>
                 <button className="button button-glass button-small" onClick={exportCsv}>
                   <Download size={15} />
@@ -873,7 +913,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                   />
                 </label>
                 <select
-                  aria-label="Workshop report"
+                  aria-label="Event report"
                   value={selected?.id ?? ''}
                   onChange={(e) => setSelectedId(e.target.value)}
                 >
@@ -891,7 +931,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                       <th>Student</th>
                       <th>Completed attendance</th>
                       <th>Attendance rate</th>
-                      <th>{selected ? 'Selected workshop' : 'Workshop'}</th>
+                      <th>{selected ? 'Selected event' : 'Event'}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -915,8 +955,7 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                               </span>
                             </td>
                             <td>
-                              {m.attended}{' '}
-                              <span className="att-muted">/ {m.expected} workshops</span>
+                              {m.attended} <span className="att-muted">/ {m.expected} events</span>
                             </td>
                             <td>
                               <div className="att-rate">
@@ -1014,8 +1053,8 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
         <span>
           Attendance belongs to your community.{' '}
           {teacher
-            ? 'Cancelled and upcoming workshops are excluded from rates.'
-            : 'Your teacher sets each workshop’s time and place.'}
+            ? 'Cancelled and upcoming events are excluded from rates.'
+            : 'Your teacher sets each event’s time and place.'}
         </span>
         {!embedded && (
           <Link href={`/dashboard/${profile?.role ?? 'student'}`}>
