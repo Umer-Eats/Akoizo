@@ -6,6 +6,23 @@ import { autoGradePracticeResult, type PracticeAIConfig } from './practice-ai.ts
 import { practiceTitle, type PracticeResult, type PracticeReview } from './practice-types.ts';
 import type { Database } from './school-service.ts';
 
+/**
+ * Grade an instructor's try at a practice test, as a student would see it. Nothing is saved: no
+ * attempt, points, or assignment credit, and written answers stay pending.
+ */
+export function previewPractice(profile: Profile, input: Record<string, unknown>) {
+  if (!profile.division) throw new AppError(403, 'Choose a division first.');
+  if (typeof input.testId !== 'string') throw new AppError(400, 'Choose a test and try again.');
+  const test = findPracticeTest(profile.division, input.testId);
+  const answers = validateAnswers(test, input.answers);
+  const result: PracticeResult = {
+    ...gradePractice(test, answers),
+    id: `preview-${createHash('sha256').update(`${profile.id}:${Date.now()}`).digest('hex').slice(0, 16)}`,
+    completedAt: new Date().toISOString(),
+  };
+  return result;
+}
+
 export async function submitPractice(
   db: Database,
   profile: Profile,

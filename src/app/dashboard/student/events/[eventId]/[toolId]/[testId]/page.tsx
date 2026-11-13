@@ -11,7 +11,7 @@ export default async function PracticePage({
   const { eventId, toolId, testId } = await params;
   if (toolId !== 'practice-tests' && toolId !== 'ranked-tests') notFound();
   return (
-    <AccountGate role="student">
+    <AccountGate role="learner">
       {toolId === 'ranked-tests' ? (
         <RankedTestView key={`${eventId}/${testId}`} eventId={eventId} testId={testId} />
       ) : (

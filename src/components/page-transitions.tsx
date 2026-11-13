@@ -26,6 +26,8 @@ export function PageTransitions({ children }: { children: ReactNode }) {
     previous.current = pathname;
     if (from === pathname) return;
     const root = document.documentElement;
+    // The fresh-load entrance (transitions.css) belongs to the first page only.
+    delete root.dataset.entry;
     root.dataset.nav = navKind(from, pathname);
     root.dataset.pageEnter = '';
     window.clearTimeout(settle.current);

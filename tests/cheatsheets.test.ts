@@ -137,9 +137,17 @@ test('drafts remain private, publication shares across schools and preserves sch
     await assert.rejects(readSheet(db, { ...other, division: 'B' }, draft.id), { status: 404 });
     assert.equal((await listSheets(db, { ...other, division: 'B' }, null, null)).sheets.length, 0);
     await assert.rejects(readSheet(db, { ...other, division: 'A' }, draft.id), { status: 403 });
-    await assert.rejects(listSheets(db, { ...other, role: 'instructor' }, null, null), {
-      status: 403,
-    });
+    // Instructors reach sheets only while viewing student tools in Division B or C.
+    assert.equal(
+      (await listSheets(db, { ...other, role: 'instructor' }, input.eventId, null)).sheets.length,
+      1,
+    );
+    await assert.rejects(
+      listSheets(db, { ...other, role: 'instructor', division: null }, null, null),
+      {
+        status: 403,
+      },
+    );
     const html = sheetDocument(shared);
     assert.equal((html.match(/class="page"/g) || []).length, 2);
     assert.ok(!html.includes(shared.createdAt));

@@ -2,6 +2,8 @@ import { eventsForDivision, type Division } from './events.ts';
 import { getSchoolCommunity, type SchoolCommunityId } from './school-communities.ts';
 
 export type Role = 'student' | 'instructor';
+/** Sent by an instructor's browser while they open student tools in a chosen division. */
+export const STUDY_DIVISION_HEADER = 'X-Akoizo-Study-Division';
 export type Profile = {
   id: string;
   role: Role;

@@ -4,8 +4,12 @@ import { ChevronLeft, Sparkles, Trophy, Users } from 'lucide-react';
 import { eventsForDivision, type Division } from '@/lib/events';
 import type { Student } from '@/lib/domain';
 import {
+  RANKED_DIFFICULTIES,
+  RANKED_LEVELS,
   RANKED_MINUTES,
   RANKED_QUESTIONS,
+  type RankedDifficulty,
+  type RankedLevel,
   type InstructorRankedDetail,
   type InstructorRankedRow,
   type InstructorRankedTest,
@@ -15,10 +19,22 @@ import { rosterDivision, type TeamSheet } from '@/lib/teams';
 import { useAuth, authMessage } from './auth-context';
 import { AssignEventModal, seatedTeams, type AssignResult } from './assign-event-modal';
 import { RankedReview } from './ranked-review';
+import { RankedReferencePanel, firstView, type ReferenceView } from './ranked-references';
 import './practice.css';
 import './ranked.css';
 
 const count = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+const difficultyHelp: Record<RankedDifficulty, string> = {
+  Mixed: 'A spread of easy, medium, and hard questions.',
+  Easy: 'Recall and single-step questions.',
+  Medium: 'Applying ideas to new cases and short calculations.',
+  Hard: 'Multi-step reasoning, data and diagram interpretation, and less common detail.',
+};
+const levelHelp: Record<RankedLevel, string> = {
+  Regional: 'Core concepts across the event’s main topics.',
+  State: 'Deeper coverage, more application and data work, some less common topics.',
+  National: 'The most demanding, specialised material at the edge of the rules.',
+};
 const statusText = {
   assigned: 'Not started',
   'in-progress': 'In progress',
@@ -41,6 +57,8 @@ function CreateRankedTest({
   const [questions, setQuestions] = useState(String(RANKED_QUESTIONS.default));
   const [minutes, setMinutes] = useState(String(RANKED_MINUTES.default));
   const [title, setTitle] = useState('');
+  const [difficulty, setDifficulty] = useState<RankedDifficulty>('Mixed');
+  const [level, setLevel] = useState<RankedLevel>('Regional');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   useEffect(() => {
@@ -79,6 +97,8 @@ function CreateRankedTest({
           eventId,
           questionCount: Number(questions),
           minutes: Number(minutes),
+          difficulty,
+          level,
           title,
         }),
       });
@@ -97,7 +117,9 @@ function CreateRankedTest({
       </h3>
       <p>
         Akoizo picks questions from several converted tests of one event and combines them into a
-        single new test. The original questions and answer keys are used unchanged.
+        single new test at the difficulty you choose. The original questions and answer keys are
+        used unchanged, and students see each source paper, with its diagrams and charts, beside the
+        test.
       </p>
       <div className="ranked-create-fields">
         <label>
@@ -152,6 +174,36 @@ function CreateRankedTest({
             onChange={(e) => setMinutes(e.target.value)}
           />
         </label>
+        <label>
+          Difficulty
+          <select
+            aria-label="Difficulty"
+            aria-describedby="ranked-difficulty-help"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value as RankedDifficulty)}
+          >
+            {RANKED_DIFFICULTIES.map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Tournament level
+          <select
+            aria-label="Tournament level"
+            aria-describedby="ranked-level-help"
+            value={level}
+            onChange={(e) => setLevel(e.target.value as RankedLevel)}
+          >
+            {RANKED_LEVELS.map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </label>
         <label className="ranked-wide">
           Test name (optional)
           <input
@@ -162,6 +214,12 @@ function CreateRankedTest({
           />
         </label>
       </div>
+      <p id="ranked-difficulty-help">
+        <strong>{difficulty} difficulty:</strong> {difficultyHelp[difficulty]}
+      </p>
+      <p id="ranked-level-help">
+        <strong>{level} level:</strong> {levelHelp[level]}
+      </p>
       {pool && !events.length && (
         <p>No Division {division} event has enough converted questions for a ranked test yet.</p>
       )}
@@ -239,6 +297,7 @@ function RankedResults({
 }) {
   const { request } = useAuth();
   const [detail, setDetail] = useState<InstructorRankedDetail | null>(null);
+  const [view, setView] = useState<ReferenceView | null>(null);
   const [open, setOpen] = useState('');
   const [scores, setScores] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState('');
@@ -287,8 +346,9 @@ function RankedResults({
         </span>
       </div>
       <p className="ranked-test-meta">
-        {count(test.questionCount, 'question')} · {test.maxScore} points · {test.minutes} minutes ·
-        combined from {count(test.sources.length, 'test')}
+        {count(test.questionCount, 'question')} · {test.maxScore} points · {test.minutes} minutes ·{' '}
+        {test.level ? `${test.level} level · ` : ''}
+        {test.difficulty} difficulty · combined from {count(test.sources.length, 'test')}
       </p>
       <div className="ranked-sources">
         {test.sources.map((source) => (
@@ -537,26 +597,39 @@ function RankedResults({
           <summary>Preview questions and answer key</summary>
           <p>
             Until a student starts, you can remove any question that does not suit this test. The
-            point total updates to match.
+            point total updates to match. Students see the source papers on the right beside their
+            test, so a question that uses a diagram or chart can stay.
           </p>
-          <RankedReview
-            questions={detail.questions}
-            result={detail.answerKey}
-            origins={detail.origins}
-            preview
-            onRemove={
-              test.assignments.some((row) => row.startedAt) ||
-              detail.questions.length <= RANKED_QUESTIONS.min ||
-              busy
-                ? undefined
-                : (questionId) =>
-                    act('remove-question', {
-                      action: 'remove-question',
-                      testId: test.id,
-                      questionId,
-                    })
-            }
-          />
+          <div className={detail.references?.sources.length ? 'ranked-review-workspace' : ''}>
+            <RankedReview
+              questions={detail.questions}
+              result={detail.answerKey}
+              origins={detail.origins}
+              references={detail.references}
+              onView={setView}
+              preview
+              onRemove={
+                test.assignments.some((row) => row.startedAt) ||
+                detail.questions.length <= RANKED_QUESTIONS.min ||
+                busy
+                  ? undefined
+                  : (questionId) =>
+                      act('remove-question', {
+                        action: 'remove-question',
+                        testId: test.id,
+                        questionId,
+                      })
+              }
+            />
+            {detail.references && (
+              <RankedReferencePanel
+                references={detail.references}
+                view={view ?? firstView(detail.references)}
+                onView={setView}
+                questionLabels={Object.fromEntries(detail.questions.map((q) => [q.id, q.label]))}
+              />
+            )}
+          </div>
         </details>
       )}
     </>
@@ -686,7 +759,8 @@ export function InstructorRanked({
                     <p>
                       {test.eventName} · Division {test.division} ·{' '}
                       {count(test.questionCount, 'question')} · {test.maxScore} points ·{' '}
-                      {test.minutes} minutes · from {count(test.sources.length, 'test')}
+                      {test.minutes} minutes · {test.level ? `${test.level} · ` : ''}
+                      {test.difficulty} · from {count(test.sources.length, 'test')}
                     </p>
                     <span>
                       {test.assignments.length} assigned <b>·</b> {done} submitted <b>·</b>{' '}

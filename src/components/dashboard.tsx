@@ -24,6 +24,7 @@ import {
   Check,
   Table,
   ChartColumn,
+  Eye,
 } from 'lucide-react';
 import {
   elementaryManualUrl,
@@ -62,6 +63,7 @@ import { InstructorAnalytics } from './instructor-analytics';
 import { NameEditor } from './name-editor';
 import { StudentWork } from './student-work';
 import { AttendanceWorkspace } from './attendance';
+import { TeacherDivisionPicker, useTeacherDivision } from './study-mode';
 const icons = {
   book: BookOpen,
   file: FileText,
@@ -219,7 +221,7 @@ function RulesPanel({ division, event }: { division: Division; event: ScienceEve
     </div>
   );
 }
-function EventCatalog({ division }: { division: Division }) {
+function EventCatalog({ division, teacher = false }: { division: Division; teacher?: boolean }) {
   const { request } = useAuth();
   const [selected, setSelected] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
@@ -228,6 +230,12 @@ function EventCatalog({ division }: { division: Division }) {
   const [retry, setRetry] = useState(0);
   useEffect(() => {
     let active = true;
+    // Instructors browse every event; competition selections belong to students.
+    if (teacher) {
+      setSelected([]);
+      setReady(true);
+      return;
+    }
     setReady(false);
     request<string[]>(`/api/event-selections?division=${division}`)
       .then((ids) => {
@@ -243,7 +251,7 @@ function EventCatalog({ division }: { division: Division }) {
     return () => {
       active = false;
     };
-  }, [request, division, retry]);
+  }, [request, division, retry, teacher]);
   async function toggle(id: string, checked: boolean) {
     if (pending || !ready) return;
     setPending(true);
@@ -323,11 +331,13 @@ function EventCatalog({ division }: { division: Division }) {
         ))}
       </div>
       <p className="selection-summary" role="status">
-        {pending
-          ? 'Saving your events…'
-          : !ready
-            ? 'Selections unavailable until loaded.'
-            : `${selected.length} competition events selected · Your events appear first.`}
+        {teacher
+          ? `Open any event to see lessons, practice, and generators exactly as Division ${division} students do.`
+          : pending
+            ? 'Saving your events…'
+            : !ready
+              ? 'Selections unavailable until loaded.'
+              : `${selected.length} competition events selected · Your events appear first.`}
       </p>
       {error && (
         <p className="form-error" role="alert">
@@ -367,15 +377,17 @@ function EventCatalog({ division }: { division: Division }) {
                   <span aria-hidden="true">↗</span>
                 </div>
               </Link>
-              <label className="event-selection">
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  disabled={!ready || pending}
-                  onChange={(e) => void toggle(event.id, e.target.checked)}
-                  aria-label={`Compete in ${event.name}`}
-                />
-              </label>
+              {!teacher && (
+                <label className="event-selection">
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    disabled={!ready || pending}
+                    onChange={(e) => void toggle(event.id, e.target.checked)}
+                    aria-label={`Compete in ${event.name}`}
+                  />
+                </label>
+              )}
             </article>
           );
         })}
@@ -720,12 +732,27 @@ export function SchoolPanel() {
     </section>
   );
 }
+const instructorTabs = [
+  ['school', 'School Code', Copy],
+  ['assignments', 'Assignments', FileText],
+  ['ranked', 'Ranked Tests', Trophy],
+  ['teams', 'Teams', Table],
+  ['analytics', 'Analytics', ChartColumn],
+  ['attendance', 'Attendance', Check],
+  ['progress', 'Student Progress', Users],
+  ['study', 'Student View', Eye],
+] as const;
+type InstructorTab = (typeof instructorTabs)[number][0];
 export function InstructorDashboard() {
   const { profile, request } = useAuth();
   const { data, error, loading, refresh } = useDashboard();
-  const [tab, setTab] = useState<
-    'school' | 'assignments' | 'ranked' | 'teams' | 'analytics' | 'progress' | 'attendance'
-  >('assignments');
+  const [tab, setTab] = useState<InstructorTab>('assignments');
+  const [studyDivision] = useTeacherDivision();
+  // Links back from student tools open the matching tab.
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('tab');
+    if (instructorTabs.some(([id]) => id === requested)) setTab(requested as InstructorTab);
+  }, []);
   const [studentId, setStudentId] = useState('');
   const [pending, setPending] = useState('');
   const [removeError, setRemoveError] = useState('');
@@ -768,17 +795,7 @@ export function InstructorDashboard() {
         <aside className="event-sidebar" aria-labelledby="instructor-toolkit-title">
           <h2 id="instructor-toolkit-title">Instructor toolkit</h2>
           <nav className="event-feature-nav" aria-label="Instructor sections">
-            {(
-              [
-                ['school', 'School Code', Copy],
-                ['assignments', 'Assignments', FileText],
-                ['ranked', 'Ranked Tests', Trophy],
-                ['teams', 'Teams', Table],
-                ['analytics', 'Analytics', ChartColumn],
-                ['attendance', 'Attendance', Check],
-                ['progress', 'Student Progress', Users],
-              ] as const
-            ).map(([id, label, Icon]) => (
+            {instructorTabs.map(([id, label, Icon]) => (
               <button
                 key={id}
                 className="event-feature-link"
@@ -805,6 +822,8 @@ export function InstructorDashboard() {
             {tab === 'progress' && 'Review each student’s next steps and event progress.'}
             {tab === 'attendance' &&
               'Plan event days, share attendance codes, and see who is here.'}
+            {tab === 'study' &&
+              'Open lessons, practice tests, labs, and generators exactly as your students see them.'}
           </p>
         </aside>
         <div className="event-content instructor-content">
@@ -820,6 +839,20 @@ export function InstructorDashboard() {
           {tab === 'teams' && <InstructorTeams students={data.students} selections={selections} />}
           {tab === 'analytics' && <InstructorAnalytics />}
           {tab === 'attendance' && <AttendanceWorkspace embedded />}
+          {tab === 'study' && (
+            <>
+              <div className="dashboard-section-title teacher-study-title">
+                <h2>See what your students see.</h2>
+                <TeacherDivisionPicker />
+              </div>
+              <p className="source-note">
+                Lessons, checkpoints, practice tests, labs, and the binder, cheat sheet, and course
+                generators open in the student format. Checkpoints and tests are graded so you can
+                try them, but nothing you do here is recorded as student work or earns points.
+              </p>
+              <EventCatalog key={`teacher:${studyDivision}`} division={studyDivision} teacher />
+            </>
+          )}
           {tab === 'progress' && (
             <>
               <PracticeReviews />
@@ -912,6 +945,8 @@ export function InstructorDashboard() {
 export function EventView({ eventId, toolId }: { eventId: string; toolId?: string }) {
   const { profile } = useAuth();
   const division = profile!.division!;
+  const teacher = profile!.role === 'instructor';
+  const home = teacher ? '/dashboard/instructor?tab=study' : '/dashboard/student';
   const event = eventsForDivision(division).find((event) => event.id === eventId);
   const availableToolIds = event ? eventToolIds(division, event) : [];
   const tool = toolCatalog.find((candidate) => candidate.id === toolId);
@@ -933,10 +968,15 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     return (
       <main id="main" className="page-container">
         <div className="empty-state">
-          <h1>That page isn’t in your division.</h1>
-          <p>Choose an event from your Division {division} study space.</p>
-          <Link className="button button-primary" href="/dashboard/student">
-            Back to my events
+          <h1>That page isn’t in {teacher ? 'this' : 'your'} division.</h1>
+          <p>
+            {teacher
+              ? `Division ${division} students don’t have this event or tool. Choose another division or event.`
+              : `Choose an event from your Division ${division} study space.`}
+          </p>
+          {teacher && <TeacherDivisionPicker />}
+          <Link className="button button-primary" href={home}>
+            {teacher ? 'Back to Student View' : 'Back to my events'}
           </Link>
         </div>
       </main>
@@ -956,12 +996,22 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     >
       <div className="event-workspace-grid">
         <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
-          <Link className="back-link" href="/dashboard/student">
-            <ChevronLeft size={16} /> My events
+          <Link className="back-link" href={home}>
+            <ChevronLeft size={16} /> {teacher ? 'Student View' : 'My events'}
           </Link>
-          <h2 id="event-toolkit-title">Your toolkit</h2>
+          <h2 id="event-toolkit-title">{teacher ? 'Student toolkit' : 'Your toolkit'}</h2>
           <FeatureNavigation division={division} event={event} activeTool={toolId} />
-          <p className="event-sidebar-note">More study content coming soon.</p>
+          {teacher ? (
+            <div className="event-sidebar-note teacher-study-note">
+              <TeacherDivisionPicker />
+              <p>
+                You’re seeing exactly what Division {division} students see. Nothing you do here
+                counts as student work.
+              </p>
+            </div>
+          ) : (
+            <p className="event-sidebar-note">More study content coming soon.</p>
+          )}
         </aside>
         <div className="event-content" key={`${event.id}/${toolId ?? 'overview'}`}>
           <div className="event-feature-heading">
@@ -986,6 +1036,18 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
           </div>
           {toolId === 'practice-tests' ? (
             <PracticeLibrary eventId={event.id} />
+          ) : toolId === 'ranked-tests' && teacher ? (
+            <section className="empty-state tool-placeholder">
+              <Trophy size={30} aria-hidden="true" />
+              <h2>Students see the ranked tests you assign here.</h2>
+              <p>
+                Build a ranked test at the difficulty you want, preview it with its source papers,
+                and assign it from your Ranked Tests section.
+              </p>
+              <Link className="button button-primary" href="/dashboard/instructor?tab=ranked">
+                Open Ranked Tests
+              </Link>
+            </section>
           ) : toolId === 'ranked-tests' ? (
             <RankedTestList key={`${profile!.id}:${division}:${event.id}`} eventId={event.id} />
           ) : division !== 'A' && toolId === 'cheatsheet-generator' ? (

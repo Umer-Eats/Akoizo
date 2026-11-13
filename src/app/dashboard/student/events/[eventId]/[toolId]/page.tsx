@@ -8,7 +8,7 @@ export default async function ToolPage({
 }) {
   const { eventId, toolId } = await params;
   return (
-    <AccountGate role="student">
+    <AccountGate role="learner">
       <EventView eventId={eventId} toolId={toolId} />
     </AccountGate>
   );

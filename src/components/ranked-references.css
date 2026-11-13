@@ -1,0 +1,181 @@
+@layer theme {
+  .ranked-reference {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+  .ranked-reference-heading h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .ranked-reference-heading h2 svg {
+    color: var(--accent);
+  }
+  .ranked-reference-heading p,
+  .ranked-reference-title span {
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .ranked-reference-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ranked-reference-tabs button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text);
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .ranked-reference-tabs button[aria-selected='true'] {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent);
+  }
+  .ranked-reference-paper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+  }
+  .ranked-reference-title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+  }
+  .ranked-reference-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ranked-reference-topics li {
+    padding: 2px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.7rem;
+  }
+  .ranked-reference iframe {
+    width: 100%;
+    height: 62dvh;
+    min-height: 320px;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    background: #fff;
+  }
+  .ranked-reference-paper > a {
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  .ranked-reference-figures {
+    display: grid;
+    gap: 12px;
+    max-height: 70dvh;
+    overflow-y: auto;
+  }
+  .ranked-reference-figures .practice-figure {
+    margin: 0;
+  }
+  .ranked-question-source button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Locked test: questions scroll on the left, the papers stay on the right. */
+  .ranked-lock-workspace {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  }
+  .ranked-lock-workspace .ranked-lock-body {
+    padding: 28px 28px 60px max(20px, calc((100vw - 1500px) / 2));
+  }
+  .ranked-lock-workspace > .ranked-reference {
+    margin: 16px 16px 16px 0;
+    overflow-y: auto;
+  }
+  .ranked-lock-workspace > .ranked-reference iframe {
+    height: calc(100dvh - 330px);
+  }
+  .ranked-lock-workspace[inert] > .ranked-reference {
+    filter: blur(14px);
+    opacity: 0.25;
+  }
+
+  /* Released review and instructor results: the papers stay in view while scrolling. */
+  .ranked-review-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+    align-items: start;
+    gap: 24px;
+  }
+  /* Beside the papers the question column is narrower, so short choices wrap two to a row
+     instead of breaking words. */
+  .ranked-review-workspace .practice-option,
+  .ranked-lock-workspace .practice-option {
+    flex-basis: 170px;
+  }
+  .ranked-review-workspace > .ranked-reference {
+    position: sticky;
+    top: 88px;
+    max-height: calc(100dvh - 104px);
+    overflow-y: auto;
+  }
+
+  @media (max-width: 960px) {
+    .ranked-lock-workspace {
+      grid-template-columns: 1fr;
+      overflow-y: auto;
+    }
+    .ranked-lock-workspace .ranked-lock-body {
+      overflow: visible;
+      padding: 18px 14px 24px;
+    }
+    .ranked-lock-workspace > .ranked-reference {
+      order: -1;
+      margin: 12px 14px 0;
+      overflow: visible;
+    }
+    .ranked-lock-workspace > .ranked-reference iframe,
+    .ranked-reference iframe {
+      height: 60dvh;
+    }
+    .ranked-review-workspace {
+      grid-template-columns: 1fr;
+    }
+    .ranked-review-workspace > .ranked-reference {
+      position: static;
+      max-height: none;
+    }
+  }
+}

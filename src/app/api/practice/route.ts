@@ -6,7 +6,7 @@ import {
   listArchiveSources,
   publicPracticePaper,
 } from '@/lib/practice-catalog';
-import { practiceHistory, submitPractice } from '@/lib/practice-service';
+import { practiceHistory, previewPractice, submitPractice } from '@/lib/practice-service';
 
 export const maxDuration = 60;
 
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
       profile.role === 'instructor'
         ? requestedDivision && ['A', 'B', 'C'].includes(requestedDivision)
           ? (requestedDivision as 'A' | 'B' | 'C')
-          : null
+          : profile.division
         : profile.division;
     if (!division) {
       if (profile.role === 'instructor')
@@ -29,7 +29,10 @@ export async function GET(request: Request) {
     const testId = params.get('testId');
     if (testId) {
       if (profile.role === 'instructor')
-        return json({ test: publicPracticePaper(findPracticeTest(division, testId)) });
+        return json({
+          test: publicPracticePaper(findPracticeTest(division, testId)),
+          attempts: [],
+        });
       return json({
         test: publicPracticePaper(findPracticeTest(division, testId)),
         attempts: await practiceHistory(db, profile, testId),
@@ -46,12 +49,14 @@ export async function GET(request: Request) {
 }
 export async function POST(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
+    const { db, profile, preview } = await memberFor(request, 'learner');
     const raw = await request.text();
     if (raw.length > 500_000) throw new AppError(413, 'Your answers are too long.');
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body))
       throw new AppError(400, 'Enter your answers.');
+    // An instructor trying a test sees it graded; no attempt is saved.
+    if (preview) return json(previewPractice(profile, body), 201);
     return json(await submitPractice(db, profile, body), 201);
   } catch (error) {
     return failure(error);

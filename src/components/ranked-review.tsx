@@ -1,5 +1,7 @@
 import type { PracticeQuestion, PracticeResult } from '@/lib/practice-types';
+import type { RankedReferences } from '@/lib/ranked-types';
 import { ChoiceOptions } from './choice-options';
+import { QuestionSource, type ReferenceView } from './ranked-references';
 import './practice.css';
 import './ranked.css';
 
@@ -15,6 +17,8 @@ export function RankedReview({
   scores,
   onScore,
   onRemove,
+  references,
+  onView,
 }: {
   questions: PracticeQuestion[];
   result: PracticeResult;
@@ -23,6 +27,9 @@ export function RankedReview({
   scores?: Record<string, string>;
   onScore?: (key: string, value: string) => void;
   onRemove?: (questionId: string) => void;
+  /** Source papers beside the review; each question links to its page. */
+  references?: RankedReferences;
+  onView?: (view: ReferenceView) => void;
 }) {
   return (
     <div className="ranked-review">
@@ -52,6 +59,9 @@ export function RankedReview({
                   </button>
                 )}
               </p>
+            )}
+            {onView && (
+              <QuestionSource references={references} questionId={question.id} onView={onView} />
             )}
             {question.context && <p className="practice-question-context">{question.context}</p>}
             <p className="ranked-prompt">{question.prompt}</p>

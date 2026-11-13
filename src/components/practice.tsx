@@ -323,6 +323,8 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
   const submissionId = useRef('');
   const summary = useRef<HTMLElement>(null);
   const storageKey = `akoizo-practice:${profile!.id}:${profile!.division}:${testId}`;
+  // Instructors try tests as students would; their tries are graded but never saved.
+  const teacher = profile!.role === 'instructor';
   const event = eventsForDivision(profile!.division!).find((e) => e.id === eventId);
   const back = `/dashboard/student/events/${eventId}/practice-tests`;
   useStudyLayer(
@@ -591,9 +593,11 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
               </div>
               <strong className="practice-percentage">{result.percentage}%</strong>
               <p>
-                {result.pendingPoints
-                  ? `${result.pendingPoints} points are awaiting grading or review. These are pending, not marked incorrect.`
-                  : 'Your submission is saved. Review every answer below.'}
+                {teacher
+                  ? 'Instructor preview: graded the way students see it, but not saved. Written answers stay pending here.'
+                  : result.pendingPoints
+                    ? `${result.pendingPoints} points are awaiting grading or review. These are pending, not marked incorrect.`
+                    : 'Your submission is saved. Review every answer below.'}
               </p>
               {result.attemptNumber && result.attemptNumber > 1 && (
                 <p>
@@ -629,13 +633,15 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                     Published answer key <ArrowUpRight size={16} />
                   </a>
                 )}
-                <button
-                  className="button button-primary"
-                  onClick={autoGrade}
-                  disabled={autoGrading || !!result.autoGradedAt || !!result.reviewedAt}
-                >
-                  {autoGrading ? 'Auto Grading…' : 'Auto Grade'}
-                </button>
+                {!teacher && (
+                  <button
+                    className="button button-primary"
+                    onClick={autoGrade}
+                    disabled={autoGrading || !!result.autoGradedAt || !!result.reviewedAt}
+                  >
+                    {autoGrading ? 'Auto Grading…' : 'Auto Grade'}
+                  </button>
+                )}
                 <button
                   className="button button-secondary"
                   onClick={startAgain}
@@ -645,13 +651,15 @@ export function PracticeTestView({ eventId, testId }: { eventId: string; testId:
                 </button>
               </div>
               <p className="practice-note">
-                {result.reviewedAt
-                  ? 'An instructor has reviewed this attempt.'
-                  : result.autoGradedAt
-                    ? 'Auto Grade is saved for this attempt. Any unresolved answers need instructor review.'
-                    : result.gradingBasis === 'ai-generated'
-                      ? 'Auto Grade generates reference answers for this paper, then checks your saved responses. Akoizo grades only after you click. No additional practice credit is awarded.'
-                      : 'Multiple-choice, numerical, and recognized short answers are checked for free. Only after you click Auto Grade does Akoizo grade unresolved written responses against their rubric. No additional practice credit is awarded.'}
+                {teacher
+                  ? 'Students can run Auto Grade on their own saved attempts to grade written answers.'
+                  : result.reviewedAt
+                    ? 'An instructor has reviewed this attempt.'
+                    : result.autoGradedAt
+                      ? 'Auto Grade is saved for this attempt. Any unresolved answers need instructor review.'
+                      : result.gradingBasis === 'ai-generated'
+                        ? 'Auto Grade generates reference answers for this paper, then checks your saved responses. Akoizo grades only after you click. No additional practice credit is awarded.'
+                        : 'Multiple-choice, numerical, and recognized short answers are checked for free. Only after you click Auto Grade does Akoizo grade unresolved written responses against their rubric. No additional practice credit is awarded.'}
               </p>
               {autoGradeError && (
                 <p className="form-error" role="alert">

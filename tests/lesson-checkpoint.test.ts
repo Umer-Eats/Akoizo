@@ -4,14 +4,18 @@ import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember, type Database } from '../src/lib/school-service.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
+import { eventsForDivision } from '../src/lib/events.ts';
 import { assignWork, studentWork } from '../src/lib/study-assignment-service.ts';
 import {
   checkLessonAnswer,
   lessonProgress,
+  previewLessonAnswer,
   recordLessonPart,
   resetCheckpoint,
 } from '../src/lib/lesson-checkpoint-service.ts';
 import { gradeLessonAnswer } from '../src/lib/lesson-ai.ts';
+import { previewPractice } from '../src/lib/practice-service.ts';
+import { practiceTests } from '../src/lib/practice-catalog.ts';
 import { checkpointProgress, readAttempt } from '../src/lib/lesson-practice.ts';
 import { createTeam, updateTeam } from '../src/lib/team-service.ts';
 
@@ -85,6 +89,26 @@ const lesson = course.lessons[0];
 const mcq = lesson.practice.filter((q) => q.type === 'mcq');
 const written = lesson.practice.filter((q) => q.type === 'short');
 const base = { eventId: 'forensics', lessonId: lesson.id };
+// Each checkpoint has one written question, so written-answer tests use three lessons.
+const writtenIn = course.lessons.slice(0, 3).map((item) => ({
+  question: item.practice.find((q) => q.type === 'short')!,
+  at: { eventId: 'forensics', lessonId: item.id },
+}));
+
+test('every checkpoint is six multiple-choice questions, then one written response', () => {
+  for (const division of ['B', 'C'] as const)
+    for (const event of eventsForDivision(division))
+      for (const item of lessonsForEvent(event.id, division)?.lessons ?? []) {
+        const kinds = item.practice.map((q) => q.type).join(',');
+        assert.equal(kinds, 'mcq,mcq,mcq,mcq,mcq,mcq,short', item.id);
+        assert.equal(new Set(item.practice.map((q) => q.id)).size, 7, item.id);
+        for (const q of item.practice.filter((q) => q.type === 'mcq')) {
+          assert.ok(q.options!.includes(q.answer), q.id);
+          assert.equal(new Set(q.options).size, q.options!.length, q.id);
+          assert.ok(q.options!.length >= 3, q.id);
+        }
+      }
+});
 /** A Gemini stand-in that marks every answer the given way, and records each request body. */
 function gemini(correct: boolean, calls: string[] = []) {
   return {
@@ -154,12 +178,13 @@ test('multiple choice is marked by the key as each question is checked, then loc
 test('written answers are marked by AI, or by the student only when AI is unavailable', async () => {
   const db = fixture();
   const { amy } = await people(db);
-  const [one, two, three] = written;
+  const [one, two, three] = writtenIn.map((w) => w.question);
+  const [atOne, atTwo, atThree] = writtenIn.map((w) => w.at);
   const calls: string[] = [];
   const ai = await checkLessonAnswer(
     db,
     amy,
-    { ...base, questionId: one.id, answer: 'My reasoning' },
+    { ...atOne, questionId: one.id, answer: 'My reasoning' },
     gemini(true, calls),
   );
   assert.deepEqual(ai, {
@@ -176,21 +201,21 @@ test('written answers are marked by AI, or by the student only when AI is unavai
   const overruled = await checkLessonAnswer(
     db,
     amy,
-    { ...base, questionId: two.id, answer: 'Vague', selfMark: true },
+    { ...atTwo, questionId: two.id, answer: 'Vague', selfMark: true },
     gemini(false),
   );
   assert.equal(overruled.status === 'checked' && overruled.result.correct, false);
 
   // With AI unavailable the student is asked to compare, and their mark is recorded.
   assert.deepEqual(
-    await checkLessonAnswer(db, amy, { ...base, questionId: three.id, answer: 'Idea' }, offline),
+    await checkLessonAnswer(db, amy, { ...atThree, questionId: three.id, answer: 'Idea' }, offline),
     { status: 'self-mark' },
   );
   assert.deepEqual(
     await checkLessonAnswer(
       db,
       amy,
-      { ...base, questionId: three.id, answer: 'Idea', selfMark: true },
+      { ...atThree, questionId: three.id, answer: 'Idea', selfMark: true },
       offline,
     ),
     { status: 'checked', result: { correct: true, by: 'self' } },
@@ -265,18 +290,18 @@ test('stored attempts are re-marked by the key and malformed checks are dropped'
   const wrong = q.options!.find((o) => o !== q.answer)!;
   const restored = readAttempt(
     {
-      answers: { [q.id]: wrong, [written[0].id]: 'Answer', [written[1].id]: 'x' },
+      answers: { [q.id]: wrong, [written[0].id]: 'Answer', [mcq[1].id]: 'x' },
       checks: {
         [q.id]: { correct: true, by: 'key' },
         [written[0].id]: { correct: true, by: 'ai', feedback: 'Good' },
-        [written[1].id]: { correct: 'yes', by: 'ai' },
+        [mcq[1].id]: { correct: 'yes', by: 'ai' },
       },
     },
     lesson.practice,
   );
   assert.deepEqual(restored.checks[q.id], { correct: false, by: 'key' });
   assert.equal(restored.checks[written[0].id].correct, true);
-  assert.equal(restored.checks[written[1].id], undefined);
+  assert.equal(restored.checks[mcq[1].id], undefined);
   assert.deepEqual(checkpointProgress(restored, lesson.practice), {
     checked: 2,
     correct: 1,
@@ -320,4 +345,57 @@ test('the AI grader returns nothing for any unusable response', async () => {
     ),
     { correct: false, feedback: 'Missing units.' },
   );
+});
+
+test('an instructor viewing lessons as a student is graded the same way, and nothing is saved', async () => {
+  const db = fixture();
+  const { teacher } = await people(db);
+  const viewer = { ...teacher, division: 'C' as const };
+  const q = mcq[0];
+  const wrong = q.options!.find((o) => o !== q.answer)!;
+  assert.deepEqual(
+    await previewLessonAnswer(viewer, { ...base, questionId: q.id, answer: wrong }),
+    {
+      status: 'checked',
+      result: { correct: false, by: 'key' },
+    },
+  );
+  const w = writtenIn[0];
+  assert.deepEqual(
+    await previewLessonAnswer(
+      viewer,
+      { ...w.at, questionId: w.question.id, answer: 'Idea' },
+      offline,
+    ),
+    { status: 'self-mark' },
+  );
+  assert.deepEqual(
+    await previewLessonAnswer(
+      viewer,
+      { ...w.at, questionId: w.question.id, answer: 'Idea' },
+      gemini(true),
+    ),
+    { status: 'checked', result: { correct: true, by: 'ai', feedback: 'Names the key idea.' } },
+  );
+  // Without a division the instructor has no student view to grade in.
+  await assert.rejects(
+    previewLessonAnswer(teacher, { ...base, questionId: q.id, answer: q.answer }),
+    { status: 403 },
+  );
+  assert.equal((await db.all('SELECT * FROM lesson_answers')).length, 0);
+  assert.equal((await db.all('SELECT * FROM lesson_progress')).length, 0);
+
+  // Practice tests grade the same way for an instructor, without an attempt.
+  const paper = practiceTests.find(
+    (t) => t.division === 'C' && t.questions.some((x) => x.type === 'mcq'),
+  )!;
+  const first = paper.questions.find((x) => x.type === 'mcq')!;
+  const graded = previewPractice(
+    { ...teacher, division: 'C' },
+    { testId: paper.id, answers: { [first.id]: first.options![0].id } },
+  );
+  assert.equal(graded.testId, paper.id);
+  assert.equal(graded.maxScore, paper.maxScore);
+  assert.match(graded.id, /^preview-/);
+  assert.equal((await db.all('SELECT * FROM practice_submissions')).length, 0);
 });

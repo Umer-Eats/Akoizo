@@ -40,10 +40,10 @@ function validUploadUrl(value: string) {
 }
 export async function POST(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
+    const { db, profile } = await memberFor(request, 'learner');
     const division = profile.division;
     if (division !== 'B' && division !== 'C')
-      throw new AppError(403, 'Build tools are available to Division B and C students.');
+      throw new AppError(403, 'Build tools are available in Division B and C.');
     // Binary chunks stay below hosting request limits. Upload URLs never reach the browser.
     if (request.headers.has('x-build-upload')) {
       const ticket = readBuildTicket(request.headers.get('x-build-upload'), profile.id);

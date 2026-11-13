@@ -16,6 +16,12 @@ import type { Answers } from '@/lib/practice-types';
 import type { StudentRankedDetail, StudentRankedTest } from '@/lib/ranked-types';
 import { ChoiceOptions } from './choice-options';
 import { RankedReview } from './ranked-review';
+import {
+  QuestionSource,
+  RankedReferencePanel,
+  firstView,
+  type ReferenceView,
+} from './ranked-references';
 import './practice.css';
 import './ranked.css';
 
@@ -188,6 +194,7 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
   const [violations, setViolations] = useState(0);
   const [saveState, setSaveState] = useState<'saved' | 'saving' | 'error'>('saved');
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [view, setView] = useState<ReferenceView | null>(null);
   // Without the Fullscreen API (some phones) the test still runs, and tab switches still count.
   const [canFullscreen, setCanFullscreen] = useState(true);
   const answersRef = useRef<Answers>({});
@@ -209,6 +216,7 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
     clockOffset.current = Date.parse(next.now) - Date.now();
     setDetail(next);
     setViolations(next.test.violations);
+    setView((current) => current ?? firstView(next.paper?.references ?? next.review?.references));
     if (next.paper) {
       answersRef.current = next.paper.answers;
       setAnswers(next.paper.answers);
@@ -353,6 +361,14 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
     const onVisibility = () => {
       if (document.hidden) flag();
     };
+    // Clicking into a source paper beside the test moves focus into its frame. That is not
+    // leaving the test; any other loss of focus is.
+    const onBlur = () =>
+      window.setTimeout(() => {
+        const active = document.activeElement;
+        if (active instanceof HTMLIFrameElement && active.closest('.ranked-reference')) return;
+        flag();
+      }, 0);
     const onUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = '';
@@ -367,7 +383,7 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
     document.documentElement.classList.add('ranked-locked');
     document.addEventListener('fullscreenchange', onFullscreen);
     document.addEventListener('visibilitychange', onVisibility);
-    window.addEventListener('blur', flag);
+    window.addEventListener('blur', onBlur);
     window.addEventListener('beforeunload', onUnload);
     window.addEventListener('popstate', onBack);
     window.addEventListener('keydown', onKey);
@@ -377,7 +393,7 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
       document.documentElement.classList.remove('ranked-locked');
       document.removeEventListener('fullscreenchange', onFullscreen);
       document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('blur', flag);
+      window.removeEventListener('blur', onBlur);
       window.removeEventListener('beforeunload', onUnload);
       window.removeEventListener('popstate', onBack);
       window.removeEventListener('keydown', onKey);
@@ -508,67 +524,84 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
             This browser cannot go full screen. Stay on this tab until you submit.
           </p>
         )}
-        <form
-          className="ranked-lock-body"
-          inert={outside || confirming || busy}
-          onSubmit={(e) => {
-            e.preventDefault();
-            setConfirming(true);
-          }}
-        >
-          {questions.map((question) => (
-            <fieldset className="practice-question" key={question.id}>
-              <legend>
-                {question.label} <span>{question.points} points</span>
-              </legend>
-              {question.context && <p className="practice-question-context">{question.context}</p>}
-              <p className="ranked-prompt">{question.prompt}</p>
-              {question.type === 'mcq' ? (
-                <>
-                  <p className="practice-question-reference">
-                    {question.multiple ? 'Select all that apply.' : 'Choose one answer.'}
-                  </p>
-                  <ChoiceOptions
-                    name={question.id}
-                    label={question.label}
-                    options={question.options!}
-                    value={answers[question.id] ?? ''}
-                    multiple={question.multiple}
-                    onChange={(value) => answer(question.id, value)}
-                  />
-                </>
-              ) : (
-                <label className="practice-written">
-                  <span>Your answer</span>
-                  <textarea
-                    rows={3}
-                    maxLength={10000}
-                    value={answers[question.id] ?? ''}
-                    placeholder="Type your answer…"
-                    autoComplete="off"
-                    spellCheck={false}
-                    onChange={(e) => answer(question.id, e.target.value)}
-                  />
-                </label>
-              )}
-            </fieldset>
-          ))}
-          {error && (
-            <p className="form-error" role="alert">
-              {error}
-            </p>
+        <div className="ranked-lock-workspace" inert={outside || confirming || busy}>
+          <form
+            className="ranked-lock-body"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setConfirming(true);
+            }}
+          >
+            {questions.map((question) => (
+              <fieldset className="practice-question" key={question.id}>
+                <legend>
+                  {question.label} <span>{question.points} points</span>
+                </legend>
+                <QuestionSource
+                  references={paper.references}
+                  questionId={question.id}
+                  onView={setView}
+                />
+                {question.context && (
+                  <p className="practice-question-context">{question.context}</p>
+                )}
+                <p className="ranked-prompt">{question.prompt}</p>
+                {question.type === 'mcq' ? (
+                  <>
+                    <p className="practice-question-reference">
+                      {question.multiple ? 'Select all that apply.' : 'Choose one answer.'}
+                    </p>
+                    <ChoiceOptions
+                      name={question.id}
+                      label={question.label}
+                      options={question.options!}
+                      value={answers[question.id] ?? ''}
+                      multiple={question.multiple}
+                      onChange={(value) => answer(question.id, value)}
+                    />
+                  </>
+                ) : (
+                  <label className="practice-written">
+                    <span>Your answer</span>
+                    <textarea
+                      rows={3}
+                      maxLength={10000}
+                      value={answers[question.id] ?? ''}
+                      placeholder="Type your answer…"
+                      autoComplete="off"
+                      spellCheck={false}
+                      onChange={(e) => answer(question.id, e.target.value)}
+                    />
+                  </label>
+                )}
+              </fieldset>
+            ))}
+            {error && (
+              <p className="form-error" role="alert">
+                {error}
+              </p>
+            )}
+            <div className="practice-submit">
+              <p>
+                {questions.length - answered > 0
+                  ? `${questions.length - answered} unanswered questions will receive zero points.`
+                  : 'Every question is answered.'}
+              </p>
+              <button className="button button-primary" type="submit" disabled={busy}>
+                {busy ? 'Submitting…' : 'Submit test'}
+              </button>
+            </div>
+          </form>
+          {paper.references && (
+            <RankedReferencePanel
+              references={paper.references}
+              view={view}
+              onView={setView}
+              locked
+              questionLabels={Object.fromEntries(questions.map((q) => [q.id, q.label]))}
+            />
           )}
-          <div className="practice-submit">
-            <p>
-              {questions.length - answered > 0
-                ? `${questions.length - answered} unanswered questions will receive zero points.`
-                : 'Every question is answered.'}
-            </p>
-            <button className="button button-primary" type="submit" disabled={busy}>
-              {busy ? 'Submitting…' : 'Submit test'}
-            </button>
-          </div>
-        </form>
+        </div>
         {confirming && !outside && (
           <div className="ranked-lock-blocker" role="alertdialog" aria-label="Submit your test?">
             <h2>Submit your test?</h2>
@@ -758,7 +791,22 @@ export function RankedTestView({ eventId, testId }: { eventId: string; testId: s
             <h2>Answer review</h2>
             <p>Correct multiple-choice options are green. Written rubric answers are red.</p>
           </div>
-          <RankedReview questions={review.questions} result={review.result} />
+          <div className={review.references?.sources.length ? 'ranked-review-workspace' : ''}>
+            <RankedReview
+              questions={review.questions}
+              result={review.result}
+              references={review.references}
+              onView={setView}
+            />
+            {review.references && (
+              <RankedReferencePanel
+                references={review.references}
+                view={view}
+                onView={setView}
+                questionLabels={Object.fromEntries(review.questions.map((q) => [q.id, q.label]))}
+              />
+            )}
+          </div>
         </>
       )}
     </main>

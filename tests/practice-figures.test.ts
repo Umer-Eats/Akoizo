@@ -21,8 +21,10 @@ test('all44 rotation papers retain original IDs and add12 figure-dependent quest
   assert.equal(papers.length, 44);
   for (const p of papers) {
     assert.ok(
-      rankedQuestionPool(p.division, p.eventId).every((c) => !c.question.figure),
-      'Figure-dependent items must not enter text-only ranked tests.',
+      rankedQuestionPool(p.division, p.eventId)
+        .filter((c) => c.question.figure)
+        .every((c) => c.usesPaper && c.test.paperUrl),
+      'Figure-dependent items enter ranked tests only with their source paper beside them.',
     );
     assert.equal(p.questionCount, 32, p.id);
     assert.deepEqual(

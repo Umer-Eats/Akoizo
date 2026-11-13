@@ -6,7 +6,7 @@ import { createSheet, listSheets, publishSheet, readSheet } from '@/lib/cheatshe
 export const maxDuration = 150;
 export async function GET(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
+    const { db, profile } = await memberFor(request, 'learner');
     const params = new URL(request.url).searchParams;
     const id = params.get('id');
     return json(
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
 }
 export async function POST(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
+    const { db, profile } = await memberFor(request, 'learner');
     const division = requireSheetStudent(profile);
     // Bound the stream before JSON parsing, including requests without a Content-Length header.
     const reader = request.body?.getReader();

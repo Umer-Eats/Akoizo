@@ -3,7 +3,12 @@ import { gradeLessonAnswer, type LessonAIConfig } from './lesson-ai.ts';
 import { checkChoice, type CheckResult } from './lesson-practice.ts';
 import { lessonsForEvent } from './lessons-registry.ts';
 import type { Database } from './school-service.ts';
-import { saveResult, settleLessons, studentEvent } from './study-assignment-service.ts';
+import {
+  learnerEvent,
+  saveResult,
+  settleLessons,
+  studentEvent,
+} from './study-assignment-service.ts';
 
 export type LessonPart = 'learn' | 'practice' | 'labs' | 'checkpoint';
 export const lessonParts: LessonPart[] = ['learn', 'practice', 'labs', 'checkpoint'];
@@ -120,6 +125,39 @@ export async function checkLessonAnswer(
   );
   await settleLessons(db, key, course, [student.id]);
   return { status: 'checked', result, lesson: { score, maxScore } };
+}
+
+/**
+ * Mark one checkpoint answer for an instructor viewing a lesson as students see it: the key marks
+ * multiple choice, AI marks the written answer (or the instructor's own mark). Nothing is saved.
+ */
+export async function previewLessonAnswer(
+  viewer: Profile,
+  body: Record<string, unknown>,
+  ai: LessonAIConfig = {},
+): Promise<CheckResponse> {
+  const { division, eventId } = learnerEvent(viewer, body.eventId);
+  const course = lessonsForEvent(eventId, division);
+  const lesson = course?.lessons.find((candidate) => candidate.id === body.lessonId);
+  const question = lesson?.practice.find((q) => q.id === body.questionId);
+  if (!course || !question) throw new AppError(404, 'That question is not in this lesson.');
+  const answer = typeof body.answer === 'string' ? body.answer : '';
+  if (!answer.trim() || answer.length > 4000)
+    throw new AppError(400, 'Write an answer before checking it.');
+  if (question.type === 'mcq') {
+    if (!question.options?.includes(answer))
+      throw new AppError(400, 'Choose one of the answer options.');
+    return { status: 'checked', result: checkChoice(question, answer) };
+  }
+  const grade = await gradeLessonAnswer(course.eventName, question, answer, ai);
+  if (grade)
+    return {
+      status: 'checked',
+      result: { correct: grade.correct, by: 'ai', feedback: grade.feedback },
+    };
+  if (typeof body.selfMark === 'boolean')
+    return { status: 'checked', result: { correct: body.selfMark, by: 'self' } };
+  return { status: 'self-mark' };
 }
 
 /** Clear a lesson's checked answers so the student can retake it. Completion is kept. */

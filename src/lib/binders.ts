@@ -99,10 +99,11 @@ export function binderEvent(id: unknown, division?: BinderDivision) {
   return event;
 }
 export function requireBinderStudent(profile: Profile): BinderDivision {
-  if (profile.role !== 'student' || (profile.division !== 'B' && profile.division !== 'C'))
+  // Instructors reach this with the division they are viewing student tools in.
+  if (profile.division !== 'B' && profile.division !== 'C')
     throw new AppError(
       403,
-      'Only Division B and C students can generate binders. All signed-in members can read the library.',
+      'Binders are generated in Division B and C. All signed-in members can read the library.',
     );
   return profile.division;
 }

@@ -316,17 +316,19 @@
   animation: 760ms var(--vt-ease-out) 190ms both vt-card-float-in;
 }
 
-/* Arriving on a login page directly (a fresh load, not a navigation). */
-:root:not([data-nav]) .auth-art > :is(h1, p) {
+/* Arriving on a login page directly (a fresh load, not a navigation). html[data-entry]
+   is set once by the head script in layout.tsx and cleared on the first route change,
+   so clearing data-nav after a transition can never replay this entrance. */
+:root[data-entry] .auth-art > :is(h1, p) {
   animation: vt-rise-in 760ms var(--vt-ease-out) backwards;
 }
-:root:not([data-nav]) .auth-art > h1 {
+:root[data-entry] .auth-art > h1 {
   animation-delay: 80ms;
 }
-:root:not([data-nav]) .auth-art > p {
+:root[data-entry] .auth-art > p {
   animation-delay: 180ms;
 }
-:root:not([data-nav]) .auth-card {
+:root[data-entry] .auth-card {
   animation: vt-card-float-in 860ms var(--vt-ease-out) 240ms backwards;
 }
 

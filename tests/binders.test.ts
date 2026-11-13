@@ -355,8 +355,9 @@ test('resumable generation, school attribution, complete-only publish, global ac
   const { db, raw } = fixture();
   try {
     await assert.rejects(
-      createBinder(db, { ...other, role: 'instructor' }, input),
-      /Only Division B and C/,
+      // An instructor generates only while viewing student tools in Division B or C.
+      createBinder(db, { ...other, role: 'instructor', division: null }, input),
+      /generated in Division B and C/,
     );
     let job = await createBinder(db, profile, input);
     await assert.rejects(createBinder(db, profile, input), /Resume or cancel/);

@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type ReactNode,
@@ -20,7 +21,14 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { getAuthInstance } from '@/lib/firebase';
-import type { Enrollment, Profile, Role, SchoolCredentials } from '@/lib/domain';
+import {
+  STUDY_DIVISION_HEADER,
+  type Enrollment,
+  type Profile,
+  type Role,
+  type SchoolCredentials,
+} from '@/lib/domain';
+import type { Division } from '@/lib/events';
 
 export class RequestError extends Error {
   status: number;
@@ -80,6 +88,9 @@ type AuthContextType = {
   request: <T>(path: string, options?: RequestInit) => Promise<T>;
 };
 const AuthContext = createContext<AuthContextType | null>(null);
+// While an instructor has student tools open, shared parts of the page outside them (such as the
+// Ako tutor) send the same division, so they work the way they do for students.
+let openStudyDivision: Division | null = null;
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -93,6 +104,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!current) throw new RequestError(401, 'Please log in to continue.');
     const headers = new Headers(options?.headers);
     headers.set('Authorization', `Bearer ${await current.getIdToken()}`);
+    if (openStudyDivision && !headers.has(STUDY_DIVISION_HEADER))
+      headers.set(STUDY_DIVISION_HEADER, openStudyDivision);
     if (options?.body) headers.set('Content-Type', 'application/json');
     return readResponse<T>(await fetch(path, { ...options, headers, cache: 'no-store' }));
   }, []);
@@ -232,6 +245,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     >
       {children}
     </AuthContext.Provider>
+  );
+}
+/**
+ * Student tools for an instructor. Inside, their profile carries the division they chose and every
+ * request names it, so the server opens student tools for them and grades without recording.
+ */
+export function StudyAs({ division, children }: { division: Division; children: ReactNode }) {
+  const auth = useAuth();
+  const base = auth.request;
+  const request = useCallback(
+    <T,>(path: string, options?: RequestInit) => {
+      const headers = new Headers(options?.headers);
+      headers.set(STUDY_DIVISION_HEADER, division);
+      return base<T>(path, { ...options, headers });
+    },
+    [base, division],
+  );
+  const profile = useMemo(
+    () => (auth.profile ? { ...auth.profile, division } : null),
+    [auth.profile, division],
+  );
+  useEffect(() => {
+    openStudyDivision = division;
+    return () => {
+      if (openStudyDivision === division) openStudyDivision = null;
+    };
+  }, [division]);
+  return (
+    <AuthContext.Provider value={{ ...auth, profile, request }}>{children}</AuthContext.Provider>
   );
 }
 export function useAuth() {

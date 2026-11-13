@@ -12,6 +12,7 @@ import type { Profile } from '../src/lib/domain.ts';
 import { createTeam, deleteTeam, listTeams, updateTeam } from '../src/lib/team-service.ts';
 import {
   buildRankedPaper,
+  rankedReferences,
   rankedPoolSummary,
   rankedQuestionPool,
 } from '../src/lib/ranked-builder.ts';
@@ -217,6 +218,67 @@ test('the builder combines standalone questions from several tests and repairs m
   }
   const firstWritten = paper.questions.findIndex((q) => q.type === 'frq');
   assert.ok(paper.questions.slice(firstWritten).every((q) => firstWritten < 0 || q.type === 'frq'));
+  assert.equal(paper.difficulty, 'Mixed');
+
+  // The source papers sit beside the test: one per converted test, every question placed in one.
+  const references = rankedReferences(paper);
+  assert.equal(references.sources.length, paper.sources.length);
+  assert.deepEqual(
+    references.sources.map((source) => source.label),
+    references.sources.map((_, i) => `Source ${String.fromCharCode(65 + i)}`),
+  );
+  for (const question of paper.questions) {
+    const placed = references.questions[question.id];
+    const origin = paper.origins[question.id];
+    const test = pool.find((c) => c.test.id === origin.testId)!.test;
+    const source = references.sources.find((s) => s.key === placed.source)!;
+    assert.equal(source.paperUrl, test.paperUrl);
+    assert.equal(placed.page, test.questions.find((q) => q.id === origin.questionId)!.page);
+  }
+
+  // A chosen difficulty reaches the builder prompt and leans the candidate list toward that level.
+  let sent: Record<string, unknown> = {};
+  const hard = await buildRankedPaper(
+    'C',
+    'water-quality',
+    10,
+    gemini((payload) => {
+      sent = payload;
+      return balanced(payload);
+    }).config,
+    'Hard',
+  );
+  assert.equal(hard.difficulty, 'Hard');
+  assert.equal(sent.targetDifficulty, 'Hard');
+  const listed = sent.candidates as (Listed & { sourceLevel: string })[];
+  const share = (level: string) =>
+    listed.filter((c) => c.sourceLevel === level).length /
+    pool.filter((c) => c.test.difficulty === level).length;
+  if (
+    pool.some((c) => c.test.difficulty === 'Hard') &&
+    pool.some((c) => c.test.difficulty === 'Easy')
+  )
+    assert.ok(share('Hard') >= share('Easy'));
+
+  // A tournament level reaches the prompt with each source's own tournament, when it reports one.
+  const national = await buildRankedPaper(
+    'C',
+    'protein-modeling',
+    8,
+    gemini((payload) => {
+      sent = payload;
+      return balanced(payload);
+    }).config,
+    'Mixed',
+    'National',
+  );
+  assert.equal(national.level, 'National');
+  assert.equal(sent.tournamentLevel, 'National');
+  const tagged = (sent.candidates as { sourceTournament?: string }[]).filter(
+    (c) => c.sourceTournament,
+  );
+  assert.ok(tagged.length > 0 && tagged.every((c) => c.sourceTournament === 'Nationals'));
+  assert.equal(paper.level, undefined);
 
   // Invented, repeated, and one-sided picks are dropped, capped, and topped up from other tests.
   const lopsided = await buildRankedPaper(
@@ -291,6 +353,19 @@ test('ranked tests reach every seated student, lock results until release, and a
     home.teacher,
     { division: 'C', eventId: 'water-quality', questionCount: 12, minutes: 30 },
     ai.config,
+  );
+  assert.equal(ai.calls.build, 1);
+  // Tests are pitched at a regional tournament unless the instructor picks State or National.
+  const created = (await listRankedForInstructor(db, home.teacher)).find((t) => t.id === testId)!;
+  assert.equal(created.level, 'Regional');
+  await assert.rejects(
+    createRankedTest(
+      db,
+      home.teacher,
+      { division: 'C', eventId: 'water-quality', level: 'Invitational' },
+      ai.config,
+    ),
+    { status: 400 },
   );
   assert.equal(ai.calls.build, 1);
   const due = '2999-01-01';

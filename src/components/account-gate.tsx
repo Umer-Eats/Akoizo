@@ -3,13 +3,20 @@ import { useEffect, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth, authMessage } from './auth-context';
 import type { Role } from '@/lib/domain';
-export function AccountGate({ role, children }: { role: Role; children: ReactNode }) {
+import { TeacherStudy } from './study-mode';
+/**
+ * Signed-in pages for one role. `learner` pages are student tools: students use them, and
+ * instructors open them too, seeing them as a student of the division they choose.
+ */
+export function AccountGate({ role, children }: { role: Role | 'learner'; children: ReactNode }) {
   const auth = useAuth();
   const router = useRouter();
+  const login = role === 'learner' ? 'student' : role;
+  const allowed = (member: Role) => role === 'learner' || member === role;
   useEffect(() => {
     if (auth.loading || auth.sessionError) return;
-    if (!auth.user || !auth.profile) router.replace(`/login/${role}`);
-    else if (auth.profile.role !== role) router.replace(`/dashboard/${auth.profile.role}`);
+    if (!auth.user || !auth.profile) router.replace(`/login/${login}`);
+    else if (!allowed(auth.profile.role)) router.replace(`/dashboard/${auth.profile.role}`);
   }, [auth.loading, auth.sessionError, auth.user, auth.profile, role, router]);
   if (auth.sessionError)
     return (
@@ -25,7 +32,7 @@ export function AccountGate({ role, children }: { role: Role; children: ReactNod
             onClick={() =>
               auth
                 .logOut()
-                .then(() => router.replace(`/login/${role}`))
+                .then(() => router.replace(`/login/${login}`))
                 .catch((error) => window.alert(authMessage(error)))
             }
           >
@@ -34,7 +41,7 @@ export function AccountGate({ role, children }: { role: Role; children: ReactNod
         </div>
       </main>
     );
-  if (auth.loading || !auth.profile || auth.profile.role !== role)
+  if (auth.loading || !auth.profile || !allowed(auth.profile.role))
     return (
       <main id="main" className="page-container">
         <p className="loading-state" role="status">
@@ -42,5 +49,7 @@ export function AccountGate({ role, children }: { role: Role; children: ReactNod
         </p>
       </main>
     );
+  if (role === 'learner' && auth.profile.role === 'instructor')
+    return <TeacherStudy>{children}</TeacherStudy>;
   return children;
 }

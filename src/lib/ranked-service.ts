@@ -9,12 +9,15 @@ import type { Answers, PracticeResult } from './practice-types.ts';
 import {
   buildRankedPaper,
   gradablePaper,
+  rankedReferences,
   type RankedBuildConfig,
   type RankedPaper,
 } from './ranked-builder.ts';
 import {
   RANKED_MINUTES,
   RANKED_QUESTIONS,
+  isRankedDifficulty,
+  isRankedLevel,
   type InstructorRankedDetail,
   type InstructorRankedTest,
   type RankedAttempt,
@@ -29,7 +32,8 @@ type Row = Record<string, string | number | null>;
 const active = 'NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)';
 // A late submission is graded from the last saved draft, not from what the browser sends.
 const GRACE_MS = 90_000;
-const testColumns = `t.id AS test_id,t.event_id,t.title,t.minutes,t.question_count,t.max_score,t.created_at,e.name AS event_name`;
+const testColumns = `t.id AS test_id,t.event_id,t.title,t.minutes,t.question_count,t.max_score,t.created_at,e.name AS event_name,
+  json_extract(t.paper_json,'$.difficulty') AS difficulty,json_extract(t.paper_json,'$.level') AS level`;
 const attemptColumns = `a.id AS assignment_id,a.student_id,a.due_date,a.started_at,a.submitted_at,a.released_at,a.violations,
   json_extract(a.result_json,'$.score') AS score, json_extract(a.result_json,'$.maxScore') AS result_max,
   json_extract(a.result_json,'$.percentage') AS percentage, json_extract(a.result_json,'$.pendingPoints') AS pending,
@@ -57,6 +61,8 @@ function summaryOf(row: Row): RankedSummary {
     minutes: Number(row.minutes),
     questionCount: Number(row.question_count),
     maxScore: Number(row.max_score),
+    difficulty: isRankedDifficulty(row.difficulty) ? row.difficulty : 'Mixed',
+    level: isRankedLevel(row.level) ? row.level : null,
     createdAt: String(row.created_at),
   };
 }
@@ -149,6 +155,11 @@ export async function createRankedTest(
     RANKED_MINUTES,
     `Choose a time limit between ${RANKED_MINUTES.min} and ${RANKED_MINUTES.max} minutes.`,
   );
+  const difficulty = body.difficulty ?? 'Mixed';
+  if (!isRankedDifficulty(difficulty))
+    throw new AppError(400, 'Choose Mixed, Easy, Medium, or Hard difficulty.');
+  const level = body.level ?? 'Regional';
+  if (!isRankedLevel(level)) throw new AppError(400, 'Choose a Regional, State, or National test.');
   const key = eventKey(division, event.id);
   const existing = await db.all(
     'SELECT event_id FROM ranked_tests WHERE school_id=?',
@@ -167,7 +178,14 @@ export async function createRankedTest(
       throw new AppError(400, 'Enter a test name of up to 80 characters.');
     title = body.title.trim();
   }
-  const paper = await buildRankedPaper(division, event.id, questionCount, config);
+  const paper = await buildRankedPaper(
+    division,
+    event.id,
+    questionCount,
+    config,
+    difficulty,
+    level,
+  );
   const id = randomUUID();
   await db.batch(
     [
@@ -256,6 +274,7 @@ export async function rankedForInstructor(
     results: Object.fromEntries(
       results.map((result) => [String(result.id), JSON.parse(String(result.result_json))]),
     ),
+    references: rankedReferences(paper),
   };
 }
 
@@ -271,13 +290,7 @@ export async function assignRanked(
   const test = await testFor(db, instructor, body.testId);
   const division = divisionOf(test.event_id);
   const due = dueDate(body);
-  const recipients = await eventRecipients(
-    db,
-    instructor,
-    division,
-    String(test.event_id),
-    body,
-  );
+  const recipients = await eventRecipients(db, instructor, division, String(test.event_id), body);
   const now = new Date().toISOString();
   const written = await db.batch(
     recipients.map((studentId) => ({
@@ -451,12 +464,14 @@ export async function rankedForStudent(
     detail.paper = {
       questions: paper.questions,
       answers: row.draft_json ? (JSON.parse(String(row.draft_json)) as Answers) : {},
+      references: rankedReferences(paper),
     };
   if (test.status === 'released')
     detail.review = {
       questions: paper.questions,
       result: JSON.parse(String(row.result_json)) as PracticeResult,
       sources: paper.sources,
+      references: rankedReferences(paper),
     };
   return detail;
 }

@@ -1,0 +1,27 @@
+@layer theme {
+  /* In the narrow event sidebar the division picker stacks above its select. */
+  .teacher-study-note {
+    display: grid;
+    gap: 10px;
+  }
+  .teacher-study-note p {
+    margin: 0;
+  }
+  .teacher-study-note .division-control {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    white-space: normal;
+  }
+  .teacher-study-note .division-control select {
+    width: 100%;
+    min-width: 0;
+  }
+  .teacher-study-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+  }
+}

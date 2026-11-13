@@ -349,7 +349,8 @@ export function Binders({ eventId }: { eventId?: string }) {
       if (active.current) setExporting('');
     }
   }
-  const canCreate = profile?.role === 'student' && ownDivision !== null && scope === ownDivision;
+  // Students, and instructors viewing student tools in a division, generate in an event view.
+  const canCreate = ownDivision !== null && scope === ownDivision;
   const jobTotal = job ? binderContentPages(job.pageCount) : 0;
   return (
     <div className="cheatsheets binders">

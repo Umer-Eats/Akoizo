@@ -236,8 +236,24 @@ const completeLab = (student: Profile, key: string, labId: string, now: string) 
  * Submit a lab simulation with the student's calculated answer for the setup they chose. The
  * accuracy is how close that answer is to the model's: 100 within the lab's 2% tolerance.
  */
-export async function submitLab(db: Database, student: Profile, body: Record<string, unknown>) {
-  const { division, eventId } = studentEvent(student, body.eventId);
+/** Any member with a division: a student, or an instructor viewing student tools. */
+export function learnerEvent(profile: Profile, eventId: unknown) {
+  if (!profile.division) throw new AppError(403, 'Choose a division first.');
+  const event = eventsForDivision(profile.division).find((candidate) => candidate.id === eventId);
+  if (!event) throw new AppError(400, 'Choose an event from your division.');
+  return { division: profile.division, eventId: event.id };
+}
+
+/** `record: false` grades an instructor's try without saving anything. */
+export async function submitLab(
+  db: Database,
+  student: Profile,
+  body: Record<string, unknown>,
+  { record = true } = {},
+) {
+  const { division, eventId } = record
+    ? studentEvent(student, body.eventId)
+    : learnerEvent(student, body.eventId);
   const lab = labsForEvent(division, eventId).find((candidate) => candidate.id === body.labId);
   if (!lab) throw new AppError(404, 'That lab simulation is not in this event.');
   const given =
@@ -264,6 +280,7 @@ export async function submitLab(db: Database, student: Profile, body: Record<str
     off <= Math.max(Math.abs(model.answer) * 0.02, 0.0002)
       ? 100
       : Math.max(0, Math.round(100 * (1 - off / Math.max(Math.abs(model.answer), 0.0002))));
+  if (!record) return { accuracy };
   const key = eventKey(division, eventId);
   const now = new Date().toISOString();
   await db.batch(

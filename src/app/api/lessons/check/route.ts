@@ -1,6 +1,10 @@
 import { failure, json, memberFor } from '@/lib/api';
 import { AppError } from '@/lib/domain';
-import { checkLessonAnswer, resetCheckpoint } from '@/lib/lesson-checkpoint-service';
+import {
+  checkLessonAnswer,
+  previewLessonAnswer,
+  resetCheckpoint,
+} from '@/lib/lesson-checkpoint-service';
 
 export const maxDuration = 30;
 
@@ -16,8 +20,11 @@ async function bodyOf(request: Request) {
 /** Check one checkpoint answer as the student goes. */
 export async function POST(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
-    return json(await checkLessonAnswer(db, profile, await bodyOf(request)));
+    const { db, profile, preview } = await memberFor(request, 'learner');
+    const body = await bodyOf(request);
+    // Instructors previewing a lesson get the same marking, but nothing is recorded.
+    if (preview) return json(await previewLessonAnswer(profile, body));
+    return json(await checkLessonAnswer(db, profile, body));
   } catch (error) {
     return failure(error);
   }
@@ -26,7 +33,8 @@ export async function POST(request: Request) {
 /** Retake a lesson's checkpoint: clears its checked answers. */
 export async function DELETE(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
+    const { db, profile, preview } = await memberFor(request, 'learner');
+    if (preview) return json({ reset: true });
     return json(await resetCheckpoint(db, profile, await bodyOf(request)));
   } catch (error) {
     return failure(error);

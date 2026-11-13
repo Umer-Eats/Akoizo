@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAdminAuth } from './firebase-admin';
 import { getDb, initializeDatabase } from './db';
-import { AppError, type Role } from './domain';
+import { AppError, STUDY_DIVISION_HEADER, isDivision, type Role } from './domain';
 import { profileForUid } from './school-service';
 
 export function json(data: unknown, status = 200) {
@@ -49,13 +49,22 @@ export async function identityFor(request: Request) {
     throw new AppError(503, 'Account services are temporarily unavailable. Please try again.');
   }
 }
-export async function memberFor(request: Request, role?: Role) {
+/**
+ * The signed-in member. `learner` admits students, and instructors viewing student tools: they
+ * send the division they are viewing, and `preview` tells routes to grade without recording.
+ */
+export async function memberFor(request: Request, role?: Role | 'learner') {
   const identity = await identityFor(request);
   await initializeDatabase();
   const db = getDb();
-  const profile = await profileForUid(db, identity.uid);
-  if (!profile) throw new AppError(403, 'Finish your school enrollment to continue.');
-  if (role && profile.role !== role)
+  const member = await profileForUid(db, identity.uid);
+  if (!member) throw new AppError(403, 'Finish your school enrollment to continue.');
+  const study = request.headers.get(STUDY_DIVISION_HEADER);
+  const profile =
+    member.role === 'instructor' && isDivision(study) ? { ...member, division: study } : member;
+  if (role === 'learner') {
+    if (!profile.division) throw new AppError(403, 'Choose a division to open student tools.');
+  } else if (role && profile.role !== role)
     throw new AppError(403, `This page requires a ${role} account.`);
-  return { db, profile };
+  return { db, profile, preview: profile.role === 'instructor' };
 }

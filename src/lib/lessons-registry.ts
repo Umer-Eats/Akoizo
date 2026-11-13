@@ -9,6 +9,7 @@ import { adaptBCourse } from './lessons-b-adaptations.ts';
 import { buildCoursesB, buildCoursesC } from './lessons-build.ts';
 import { withExplanations } from './lesson-explanations/index.ts';
 import { withGlossary } from './glossary/index.ts';
+import { withCheckpoints } from './lesson-checkpoint-shape.ts';
 
 const registry: Record<string, EventLessons> = Object.fromEntries(
   [
@@ -50,8 +51,19 @@ const divisionBRegistry: Record<string, EventLessons> = {
   ),
 };
 
-export function lessonsForEvent(eventId: string, division: Division): EventLessons | null {
+/** Courses as authored, before checkpoints take their six-plus-one shape. */
+export function authoredLessonsForEvent(eventId: string, division: Division): EventLessons | null {
   if (division === 'C') return registry[eventId] ?? null;
   if (division === 'B') return divisionBRegistry[eventId] ?? null;
   return null;
+}
+
+const shaped = new Map<string, EventLessons | null>();
+export function lessonsForEvent(eventId: string, division: Division): EventLessons | null {
+  const key = `${division}:${eventId}`;
+  if (!shaped.has(key)) {
+    const course = authoredLessonsForEvent(eventId, division);
+    shaped.set(key, course && withCheckpoints(course));
+  }
+  return shaped.get(key)!;
 }

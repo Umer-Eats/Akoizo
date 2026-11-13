@@ -14,8 +14,9 @@ export const sheetEventsByDivision: Record<SheetDivision, ReturnType<typeof even
 export const sheetEvents = sheetEventsByDivision.C;
 /** Cheat sheets are written per division: each division has its own rules and shared library. */
 export function requireSheetStudent(profile: Profile): SheetDivision {
-  if (profile.role !== 'student' || (profile.division !== 'B' && profile.division !== 'C'))
-    throw new AppError(403, 'Cheat sheets are available to Division B and C students.');
+  // Instructors reach this with the division they are viewing student tools in.
+  if (profile.division !== 'B' && profile.division !== 'C')
+    throw new AppError(403, 'Cheat sheets are available in Division B and C.');
   return profile.division;
 }
 export function sheetEvent(id: unknown, division: SheetDivision = 'C') {

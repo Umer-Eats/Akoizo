@@ -9,7 +9,7 @@ const recent = new Map<string, number[]>();
 
 export async function POST(request: Request) {
   try {
-    const { profile } = await memberFor(request, 'student');
+    const { profile } = await memberFor(request, 'learner');
     if (!profile.division) throw new AppError(400, 'Choose your division first.');
     const text = await request.text();
     if (text.length > 40_000) throw new AppError(413, 'That message is too long for Ako.');

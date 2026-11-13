@@ -14,12 +14,17 @@ export async function GET(request: Request) {
 /** A student submits a lesson's practice or a lab simulation. */
 export async function POST(request: Request) {
   try {
-    const { db, profile } = await memberFor(request, 'student');
+    const { db, profile, preview } = await memberFor(request, 'learner');
     const raw = await request.text();
     if (raw.length > 200_000) throw new AppError(413, 'The request is too large.');
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body))
       throw new AppError(400, 'Choose a lesson or lab simulation.');
+    // An instructor trying a lab sees its accuracy; nothing is recorded.
+    if (preview) {
+      if (body.labId === PHET_LAB || !('labId' in body)) return json({ completed: 0 });
+      return json(await submitLab(db, profile, body, { record: false }));
+    }
     if (!('labId' in body)) return json(await submitLesson(db, profile, body));
     // PhET runs on its own site, so it is marked complete rather than graded.
     return json(
