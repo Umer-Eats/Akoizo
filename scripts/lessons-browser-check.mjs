@@ -1,6 +1,4 @@
-import { anatomyLessons as anatomyRaw } from '../src/lib/lessons-anatomy.ts';
-import { forensicsLessons as forensicsRaw } from '../src/lib/lessons-forensics.ts';
-import { withExplanations } from '../src/lib/lesson-explanations/index.ts';
+import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { modelControls } from '../src/lib/lesson-models.ts';
 import { lessonAtlas } from '../src/lib/lesson-atlas.ts';
 import { chromium, expect } from '@playwright/test';
@@ -9,9 +7,9 @@ import { mkdir } from 'node:fs/promises';
 import { openStage, playCheckpoint } from './lib-lesson-stage.mjs';
 import { mockLessonApi } from './lib-mock-session.mjs';
 
-// The site shows each question with its written explanation, so the checks do too.
-const anatomyLessons = withExplanations(anatomyRaw);
-const forensicsLessons = withExplanations(forensicsRaw);
+// Check the lessons exactly as the site serves them: reshaped checkpoints with explanations.
+const anatomyLessons = lessonsForEvent('anatomy-and-physiology', 'C');
+const forensicsLessons = lessonsForEvent('forensics', 'C');
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3005';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 await mkdir('documents/qa/lessons', { recursive: true });

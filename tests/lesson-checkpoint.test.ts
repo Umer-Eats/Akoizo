@@ -12,11 +12,17 @@ import {
   previewLessonAnswer,
   recordLessonPart,
   resetCheckpoint,
+  saveCheckpointDraft,
 } from '../src/lib/lesson-checkpoint-service.ts';
 import { gradeLessonAnswer } from '../src/lib/lesson-ai.ts';
 import { previewPractice } from '../src/lib/practice-service.ts';
 import { practiceTests } from '../src/lib/practice-catalog.ts';
-import { checkpointProgress, readAttempt } from '../src/lib/lesson-practice.ts';
+import {
+  checkpointInProgress,
+  checkpointProgress,
+  readAttempt,
+  resumeQuestion,
+} from '../src/lib/lesson-practice.ts';
 import { createTeam, updateTeam } from '../src/lib/team-service.ts';
 
 function fixture() {
@@ -173,6 +179,85 @@ test('multiple choice is marked by the key as each question is checked, then loc
   // Once checked, changing the answer cannot turn a red circle green.
   const again = await checkLessonAnswer(db, amy, { ...base, questionId: q.id, answer: q.answer });
   assert.deepEqual(again, first);
+});
+
+test('an unfinished checkpoint keeps its unchecked answers so the student can resume', async () => {
+  const db = fixture();
+  const { teacher, amy } = await people(db);
+  const [first, second] = mcq;
+  const short = written[0];
+  const byId = (a: { questionId: string }, b: { questionId: string }) =>
+    a.questionId.localeCompare(b.questionId);
+  await assert.rejects(
+    saveCheckpointDraft(db, teacher, { ...base, questionId: first.id, answer: first.answer }),
+    /student account/,
+  );
+  await assert.rejects(
+    saveCheckpointDraft(db, amy, { ...base, questionId: first.id, answer: 'Not an option' }),
+    /answer options/,
+  );
+  await assert.rejects(
+    saveCheckpointDraft(db, amy, { ...base, questionId: short.id, answer: 'x'.repeat(4001) }),
+    /too long/,
+  );
+  // A chosen option and a half-written answer are saved, and the latest edit wins.
+  await saveCheckpointDraft(db, amy, { ...base, questionId: first.id, answer: first.options![0] });
+  await saveCheckpointDraft(db, amy, { ...base, questionId: first.id, answer: first.answer });
+  await saveCheckpointDraft(db, amy, { ...base, questionId: short.id, answer: 'Fibers are' });
+  const saved = await lessonProgress(db, amy, 'forensics');
+  assert.deepEqual(
+    saved.drafts.map(({ questionId, answer }) => ({ questionId, answer })).sort(byId),
+    [
+      { questionId: first.id, answer: first.answer },
+      { questionId: short.id, answer: 'Fibers are' },
+    ].sort(byId),
+  );
+  // Checking a question replaces its draft; a late draft cannot reopen a checked question.
+  await checkLessonAnswer(db, amy, { ...base, questionId: first.id, answer: first.answer });
+  assert.deepEqual(
+    await saveCheckpointDraft(db, amy, {
+      ...base,
+      questionId: first.id,
+      answer: first.options![0],
+    }),
+    { saved: false },
+  );
+  let progress = await lessonProgress(db, amy, 'forensics');
+  assert.deepEqual(
+    progress.drafts.map((d) => d.questionId),
+    [short.id],
+  );
+  assert.equal(progress.answers.find((a) => a.questionId === first.id)?.answer, first.answer);
+  // Clearing an answer removes its draft; a retake clears every draft in the lesson.
+  await saveCheckpointDraft(db, amy, { ...base, questionId: short.id, answer: '  ' });
+  await saveCheckpointDraft(db, amy, { ...base, questionId: second.id, answer: second.answer });
+  progress = await lessonProgress(db, amy, 'forensics');
+  assert.deepEqual(
+    progress.drafts.map((d) => d.questionId),
+    [second.id],
+  );
+  await resetCheckpoint(db, amy, base);
+  progress = await lessonProgress(db, amy, 'forensics');
+  assert.deepEqual(progress.drafts, []);
+  assert.deepEqual(progress.answers, []);
+});
+
+test('a reopened checkpoint resumes at the question the student was last on', () => {
+  const qs = lesson.practice;
+  const key = { correct: true, by: 'key' } as const;
+  assert.equal(resumeQuestion(undefined, qs), 0);
+  assert.equal(resumeQuestion({ answers: {}, checks: { [qs[0].id]: key } }, qs), 1);
+  assert.equal(resumeQuestion({ answers: {}, checks: {}, at: qs[4].id }, qs), 4);
+  // Left on a question already checked: carry on with the next open one.
+  assert.equal(
+    resumeQuestion({ answers: {}, checks: { [qs[2].id]: key, [qs[3].id]: key }, at: qs[2].id }, qs),
+    4,
+  );
+  const attempt = readAttempt({ answers: { [qs[1].id]: qs[1].answer }, at: qs[1].id }, qs);
+  assert.equal(attempt.at, qs[1].id);
+  assert.equal(readAttempt({ at: 'not-a-question' }, qs).at, undefined);
+  assert.equal(checkpointInProgress(attempt, qs), true);
+  assert.equal(checkpointInProgress({ answers: {}, checks: {} }, qs), false);
 });
 
 test('written answers are marked by AI, or by the student only when AI is unavailable', async () => {

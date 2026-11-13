@@ -11,6 +11,8 @@ export type CheckResult = {
 export type LessonAttempt = {
   answers: Record<string, string>;
   checks: Record<string, CheckResult>;
+  /** The question the student was last on, so an unfinished checkpoint resumes there. */
+  at?: string;
 };
 export const emptyAttempt: LessonAttempt = { answers: {}, checks: {} };
 
@@ -38,7 +40,11 @@ export function lessonStorageKey(studentId: string, eventId: string, division: '
 export function readAttempt(value: unknown, questions: LessonQuizQuestion[]): LessonAttempt {
   const raw =
     value && typeof value === 'object'
-      ? (value as { answers?: Record<string, unknown>; checks?: Record<string, unknown> })
+      ? (value as {
+          answers?: Record<string, unknown>;
+          checks?: Record<string, unknown>;
+          at?: unknown;
+        })
       : {};
   const answers: Record<string, string> = {};
   const checks: Record<string, CheckResult> = {};
@@ -56,7 +62,32 @@ export function readAttempt(value: unknown, questions: LessonQuizQuestion[]): Le
         ...(typeof check.feedback === 'string' ? { feedback: check.feedback.slice(0, 1500) } : {}),
       };
   }
-  return { answers, checks };
+  const at = questions.find((q) => q.id === raw.at)?.id;
+  return at ? { answers, checks, at } : { answers, checks };
+}
+
+/** Whether a checkpoint has been started (an answer chosen, typed or checked) but not finished. */
+export function checkpointInProgress(
+  attempt: LessonAttempt | undefined,
+  questions: LessonQuizQuestion[],
+) {
+  if (!attempt || checkpointProgress(attempt, questions).complete) return false;
+  return questions.some((q) => attempt.checks[q.id] || attempt.answers[q.id]?.trim());
+}
+
+/** The question to reopen: where the student last was, else the first one not yet checked. */
+export function resumeQuestion(
+  attempt: LessonAttempt | undefined,
+  questions: LessonQuizQuestion[],
+) {
+  const at = questions.findIndex((q) => q.id === attempt?.at);
+  const isOpen = (q: LessonQuizQuestion) => !attempt?.checks[q.id];
+  if (at >= 0 && isOpen(questions[at])) return at;
+  // The last question was already checked: carry on with the next one still open.
+  const after = questions.findIndex((q, i) => i > at && isOpen(q));
+  if (after >= 0) return after;
+  const open = questions.findIndex(isOpen);
+  return open >= 0 ? open : Math.max(at, 0);
 }
 
 /** How far through the checkpoint a student is, and how accurately. */

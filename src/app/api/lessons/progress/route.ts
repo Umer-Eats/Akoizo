@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   try {
     const { db, profile, preview } = await memberFor(request, 'learner');
     // An instructor previewing lessons keeps progress only in their own browser.
-    if (preview) return json({ answers: [], parts: [] });
+    if (preview) return json({ answers: [], parts: [], drafts: [] });
     return json(
       await lessonProgress(db, profile, new URL(request.url).searchParams.get('eventId')),
     );

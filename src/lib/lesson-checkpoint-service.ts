@@ -20,6 +20,12 @@ export type LessonPartRecord = {
   maxScore: number | null;
   completedAt: string;
 };
+export type DraftAnswer = {
+  lessonId: string;
+  questionId: string;
+  answer: string;
+  updatedAt: string;
+};
 export type LessonSummary = { score: number; maxScore: number };
 export type CheckResponse =
   | { status: 'checked'; result: CheckResult; lesson?: LessonSummary }
@@ -94,6 +100,10 @@ export async function checkLessonAnswer(
           result.feedback ?? null,
           now,
         ],
+      },
+      {
+        sql: 'DELETE FROM lesson_drafts WHERE student_id=? AND event_id=? AND lesson_id=? AND question_id=?',
+        args: [student.id, key, lesson.id, question.id],
       },
     ],
     'immediate',
@@ -173,10 +183,58 @@ export async function resetCheckpoint(
         sql: 'DELETE FROM lesson_answers WHERE student_id=? AND event_id=? AND lesson_id=?',
         args: [student.id, key, lesson.id],
       },
+      {
+        sql: 'DELETE FROM lesson_drafts WHERE student_id=? AND event_id=? AND lesson_id=?',
+        args: [student.id, key, lesson.id],
+      },
     ],
     'immediate',
   );
   return { reset: true };
+}
+
+/**
+ * Save an answer the student has started but not checked, so an unfinished checkpoint resumes
+ * where they left off. An empty answer clears the draft; a checked question keeps its answer.
+ */
+export async function saveCheckpointDraft(
+  db: Database,
+  student: Profile,
+  body: Record<string, unknown>,
+) {
+  const { lesson, key } = lessonFor(student, body);
+  const question = lesson.practice.find((q) => q.id === body.questionId);
+  if (!question) throw new AppError(404, 'That question is not in this lesson.');
+  const answer = typeof body.answer === 'string' ? body.answer : '';
+  if (answer.length > 4000) throw new AppError(400, 'That answer is too long.');
+  if (question.type === 'mcq' && answer && !question.options?.includes(answer))
+    throw new AppError(400, 'Choose one of the answer options.');
+  const args = [student.id, key, lesson.id, question.id];
+  if (!answer.trim()) {
+    await db.batch(
+      [
+        {
+          sql: 'DELETE FROM lesson_drafts WHERE student_id=? AND event_id=? AND lesson_id=? AND question_id=?',
+          args,
+        },
+      ],
+      'immediate',
+    );
+    return { saved: false };
+  }
+  const [{ rowsAffected }] = await db.batch(
+    [
+      {
+        // Once a question is checked its answer is locked, so a late draft is ignored.
+        sql: `INSERT INTO lesson_drafts (student_id,event_id,lesson_id,question_id,answer,updated_at)
+          SELECT ?,?,?,?,?,? WHERE NOT EXISTS (SELECT 1 FROM lesson_answers WHERE student_id=? AND event_id=? AND lesson_id=? AND question_id=?)
+          ON CONFLICT(student_id,event_id,lesson_id,question_id) DO UPDATE SET answer=excluded.answer,updated_at=excluded.updated_at`,
+        args: [...args, answer, new Date().toISOString(), ...args],
+      },
+    ],
+    'immediate',
+  );
+  return { saved: rowsAffected > 0 };
 }
 
 /**
@@ -239,7 +297,18 @@ export async function lessonProgress(db: Database, student: Profile, eventId: un
     student.id,
     key,
   );
+  const drafts = await db.all(
+    'SELECT lesson_id,question_id,answer,updated_at FROM lesson_drafts WHERE student_id=? AND event_id=? ORDER BY updated_at',
+    student.id,
+    key,
+  );
   return {
+    drafts: drafts.map((row): DraftAnswer => ({
+      lessonId: String(row.lesson_id),
+      questionId: String(row.question_id),
+      answer: String(row.answer),
+      updatedAt: String(row.updated_at),
+    })),
     answers: answers.map((row): CheckedAnswer => ({
       lessonId: String(row.lesson_id),
       questionId: String(row.question_id),

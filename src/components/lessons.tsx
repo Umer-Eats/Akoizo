@@ -7,6 +7,7 @@ import { calculateModel, modelControls, modelDefaults } from '@/lib/lesson-model
 import { modelGuides } from '@/lib/lesson-model-guides';
 import {
   checkChoice,
+  checkpointInProgress,
   checkpointProgress,
   emptyAttempt,
   lessonStorageKey,
@@ -16,6 +17,7 @@ import {
 import type {
   CheckedAnswer,
   CheckResponse,
+  DraftAnswer,
   LessonPart,
   LessonPartRecord,
 } from '@/lib/lesson-checkpoint-service';
@@ -538,6 +540,7 @@ function LessonDetail({
   onCheck,
   onRetake,
   onPart,
+  onPosition,
 }: {
   lesson: Lesson;
   eventId: string;
@@ -552,13 +555,26 @@ function LessonDetail({
   onCheck: (questionId: string, answer: string, selfMark?: boolean) => Promise<CheckOutcome>;
   onRetake: () => Promise<void>;
   onPart: (part: Exclude<LessonPart, 'checkpoint'>, score?: number, maxScore?: number) => void;
+  onPosition: (questionId: string) => void;
 }) {
   const { ako, updateAko } = useSettings();
   const [teachingLine, setTeachingLine] = useState('');
   const lastTeachingLine = useRef('');
   const stagesRef = useRef<HTMLDivElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
-  const [stage, setStage] = useState<LessonStage>('learn');
+  // A student who left a checkpoint part-way through comes back to it, not to the reading.
+  const resumeCheckpoint = checkpointInProgress(attempt, lesson.practice);
+  const [stage, setStageState] = useState<LessonStage>(resumeCheckpoint ? 'checkpoint' : 'learn');
+  const stageChosen = useRef(false);
+  const setStage = useCallback((next: LessonStage) => {
+    stageChosen.current = true;
+    setStageState(next);
+  }, []);
+  // Progress from another device can arrive after the lesson opens; follow it until the
+  // student picks a stage themselves.
+  useEffect(() => {
+    if (resumeCheckpoint && !stageChosen.current) setStageState('checkpoint');
+  }, [resumeCheckpoint]);
   const [tocOpen, setTocOpen] = useRememberedFlag('akoizo:lesson-toc-open', true);
   const lines = useMemo(() => akoLessonLines(lesson), [lesson]);
   const plan = useMemo(() => akoLessonPlan(lesson), [lesson]);
@@ -595,7 +611,7 @@ function LessonDetail({
       },
     });
     return () => setAkoStudy(null);
-  }, [eventId, lesson, plan]);
+  }, [eventId, lesson, plan, setStage]);
   const teachLine = (id: string) => {
     if (!ako.visible) updateAko({ visible: true });
     setStage('learn');
@@ -893,13 +909,20 @@ function LessonDetail({
           onAnswer={onAnswer}
           onCheck={onCheck}
           onRetake={onRetake}
+          onPosition={onPosition}
         />
       </div>
     </article>
   );
 }
 
-type LessonProgress = { answers: CheckedAnswer[]; parts: LessonPartRecord[] };
+type LessonProgress = {
+  answers: CheckedAnswer[];
+  parts: LessonPartRecord[];
+  drafts?: DraftAnswer[];
+};
+const draftKey = (lessonId: string, questionId: string) => `${lessonId}\u0000${questionId}`;
+const splitDraftKey = (key: string) => key.split('\u0000') as [string, string];
 export function LessonsView({ course, studentId }: { course: EventLessons; studentId: string }) {
   const { request } = useAuth();
   const [records, setRecords] = useState<Record<string, LessonRecord>>({});
@@ -909,6 +932,15 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
     .map((id) => course.lessons.find((lesson) => lesson.id === id)!);
   const [lessonId, setLessonId] = useState(ordered[0].id);
   const [attempts, setAttempts] = useState<Record<string, LessonAttempt>>({});
+  // Checkpoint answers changed here but not yet saved to the server. They outlive a reload, so
+  // a draft typed just before the tab closed is sent next time instead of being lost.
+  const [unsaved, setUnsaved] = useState<string[]>([]);
+  const attemptsRef = useRef(attempts);
+  const unsavedRef = useRef(unsaved);
+  useEffect(() => {
+    attemptsRef.current = attempts;
+    unsavedRef.current = unsaved;
+  }, [attempts, unsaved]);
   const [loaded, setLoaded] = useState(false);
   const [storageUnavailable, setStorageUnavailable] = useState(false);
   const storageKey = lessonStorageKey(studentId, course.eventId, course.division);
@@ -928,6 +960,14 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
               ]),
             ),
           );
+          if (Array.isArray(saved.unsaved))
+            setUnsaved(
+              saved.unsaved.filter(
+                (key: unknown): key is string =>
+                  typeof key === 'string' &&
+                  course.lessons.some((lesson) => key.startsWith(`${lesson.id}\u0000`)),
+              ),
+            );
         }
       }
     } catch {
@@ -943,11 +983,11 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   useEffect(() => {
     if (!loaded) return;
     try {
-      localStorage.setItem(storageKey, JSON.stringify({ lessonId, attempts }));
+      localStorage.setItem(storageKey, JSON.stringify({ lessonId, attempts, unsaved }));
     } catch {
       setStorageUnavailable(true);
     }
-  }, [loaded, storageKey, lessonId, attempts]);
+  }, [loaded, storageKey, lessonId, attempts, unsaved]);
   const lesson = course.lessons.find((item) => item.id === lessonId) ?? ordered[0];
   const unit = course.units.find((item) => item.id === lesson.unitId)!;
   const currentIndex = ordered.findIndex((item) => item.id === lesson.id);
@@ -990,18 +1030,39 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
     request<LessonProgress>(`/api/lessons/progress?eventId=${encodeURIComponent(course.eventId)}`)
       .then((progress) => {
         if (!active || !progress || !Array.isArray(progress.answers)) return;
+        const pending = new Set(unsavedRef.current);
+        const drafts = Array.isArray(progress.drafts) ? progress.drafts : [];
+        // Unchecked answers only this browser has (say, from before drafts were saved) go up too.
+        const onServer = new Set([
+          ...drafts.map((draft) => draftKey(draft.lessonId, draft.questionId)),
+          ...progress.answers.map((row) => draftKey(row.lessonId, row.questionId)),
+        ]);
+        const toSend = Object.entries(attemptsRef.current).flatMap(([id, attempt]) =>
+          Object.entries(attempt.answers)
+            .filter(
+              ([questionId, answer]) => answer.trim() && !onServer.has(draftKey(id, questionId)),
+            )
+            .map(([questionId]) => draftKey(id, questionId)),
+        );
         setAttempts((current) =>
           Object.fromEntries(
             course.lessons.map((item) => {
               const local = current[item.id] ?? emptyAttempt;
               const rows = progress.answers.filter((row) => row.lessonId === item.id);
+              const saved = drafts.filter((draft) => draft.lessonId === item.id);
+              const answers = { ...local.answers };
+              // A saved draft is the latest copy unless this browser has a newer, unsent one.
+              for (const draft of saved)
+                if (!pending.has(draftKey(item.id, draft.questionId)))
+                  answers[draft.questionId] = draft.answer;
+              for (const row of rows) answers[row.questionId] = row.answer;
+              // On a new device, reopen at the question the student last worked on.
+              const at = local.at ?? saved.at(-1)?.questionId;
               return [
                 item.id,
                 {
-                  answers: {
-                    ...local.answers,
-                    ...Object.fromEntries(rows.map((row) => [row.questionId, row.answer])),
-                  },
+                  ...(at ? { at } : {}),
+                  answers,
                   checks: Object.fromEntries(
                     rows.map((row) => [
                       row.questionId,
@@ -1017,6 +1078,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             }),
           ),
         );
+        if (toSend.length) setUnsaved((current) => [...new Set([...current, ...toSend])]);
         if (Array.isArray(progress.parts))
           setParts((current) => {
             const next = { ...current };
@@ -1032,6 +1094,64 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   }, [request, course]);
   const updateAttempt = (id: string, update: (attempt: LessonAttempt) => LessonAttempt) =>
     setAttempts((current) => ({ ...current, [id]: update(current[id] ?? emptyAttempt) }));
+  // Send unsaved checkpoint answers shortly after the student stops typing, and straight away
+  // when the tab is hidden or closed. A failed save stays queued and is retried.
+  const inFlight = useRef(new Set<string>());
+  const [retryTick, setRetryTick] = useState(0);
+  const flushDrafts = useCallback(() => {
+    for (const key of unsavedRef.current) {
+      if (inFlight.current.has(key)) continue;
+      const [id, questionId] = splitDraftKey(key);
+      const attempt = attemptsRef.current[id];
+      const answer = attempt?.answers[questionId] ?? '';
+      if (attempt?.checks[questionId]) {
+        setUnsaved((current) => current.filter((item) => item !== key));
+        continue;
+      }
+      inFlight.current.add(key);
+      request('/api/lessons/check', {
+        method: 'PUT',
+        keepalive: true,
+        body: JSON.stringify({ eventId: course.eventId, lessonId: id, questionId, answer }),
+      })
+        .then(() => {
+          // Only clear it if nothing changed while the save was on its way.
+          if ((attemptsRef.current[id]?.answers[questionId] ?? '') === answer)
+            setUnsaved((current) => current.filter((item) => item !== key));
+          else setRetryTick((tick) => tick + 1);
+        })
+        .catch(() => setTimeout(() => setRetryTick((tick) => tick + 1), 10_000))
+        .finally(() => inFlight.current.delete(key));
+    }
+  }, [request, course.eventId]);
+  useEffect(() => {
+    if (!loaded || !unsaved.length) return;
+    const timer = setTimeout(flushDrafts, 800);
+    return () => clearTimeout(timer);
+  }, [loaded, unsaved, attempts, retryTick, flushDrafts]);
+  useEffect(() => {
+    const hide = () => {
+      if (document.visibilityState === 'hidden') flushDrafts();
+    };
+    document.addEventListener('visibilitychange', hide);
+    window.addEventListener('pagehide', flushDrafts);
+    return () => {
+      document.removeEventListener('visibilitychange', hide);
+      window.removeEventListener('pagehide', flushDrafts);
+      // Leaving the lessons view (another tab in the app) saves what is pending too.
+      flushDrafts();
+    };
+  }, [flushDrafts]);
+  function answerQuestion(id: string, questionId: string, answer: string) {
+    if (attemptsRef.current[id]?.checks[questionId]) return;
+    updateAttempt(id, (attempt) =>
+      attempt.checks[questionId]
+        ? attempt
+        : { ...attempt, at: questionId, answers: { ...attempt.answers, [questionId]: answer } },
+    );
+    const key = draftKey(id, questionId);
+    setUnsaved((current) => (current.includes(key) ? current : [...current, key]));
+  }
   async function checkAnswer(
     id: string,
     questionId: string,
@@ -1052,9 +1172,12 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
       if (response?.status === 'self-mark') return response;
       if (response?.status !== 'checked') throw new Error('The answer could not be checked.');
       updateAttempt(id, (attempt) => ({
+        ...attempt,
         answers: { ...attempt.answers, [questionId]: answer },
         checks: { ...attempt.checks, [questionId]: response.result },
       }));
+      // The server drops the draft once a question is checked.
+      setUnsaved((current) => current.filter((key) => key !== draftKey(id, questionId)));
       if (response.lesson) {
         const summary = response.lesson;
         setRecords((current) => ({ ...current, [id]: summary }));
@@ -1074,6 +1197,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
       body: JSON.stringify({ eventId: course.eventId, lessonId: id }),
     });
     updateAttempt(id, () => emptyAttempt);
+    setUnsaved((current) => current.filter((key) => splitDraftKey(key)[0] !== id));
   }
   // Stage completion is best effort: a failed save is retried the next time the stage finishes.
   const sentParts = useRef(new Set<string>());
@@ -1142,7 +1266,7 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
         <p className="lesson-save-note" role="status">
           {storageUnavailable
             ? 'Browser storage is unavailable. You can keep studying, but this session’s progress may not survive a reload.'
-            : 'Each checkpoint answer is marked as you check it and saved for your instructor. A lesson is complete once its checkpoint is finished.'}
+            : 'Each checkpoint answer is marked as you check it and saved for your instructor. Unfinished checkpoints are saved as you go, so you can pick up where you left off on any device. A lesson is complete once its checkpoint is finished.'}
         </p>
       </div>
       {!loaded ? (
@@ -1223,12 +1347,9 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
             attempt={attempts[lesson.id] ?? emptyAttempt}
             completed={!!records[lesson.id]}
             parts={parts[lesson.id] ?? []}
-            onAnswer={(questionId, answer) =>
-              updateAttempt(lesson.id, (attempt) =>
-                attempt.checks[questionId]
-                  ? attempt
-                  : { ...attempt, answers: { ...attempt.answers, [questionId]: answer } },
-              )
+            onAnswer={(questionId, answer) => answerQuestion(lesson.id, questionId, answer)}
+            onPosition={(questionId) =>
+              updateAttempt(lesson.id, (attempt) => ({ ...attempt, at: questionId }))
             }
             onCheck={(questionId, answer, selfMark) =>
               checkAnswer(lesson.id, questionId, answer, selfMark)

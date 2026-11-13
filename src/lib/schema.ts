@@ -122,6 +122,11 @@ export const schema = [
     lesson_id TEXT NOT NULL, question_id TEXT NOT NULL, answer TEXT NOT NULL, correct INTEGER NOT NULL CHECK(correct IN (0,1)),
     graded_by TEXT NOT NULL CHECK(graded_by IN ('key','ai','self')), feedback TEXT, checked_at TEXT NOT NULL,
     PRIMARY KEY(student_id, event_id, lesson_id, question_id))`,
+  // Checkpoint answers typed or chosen but not yet checked, so a student can pick up where they
+  // left off on any device. A draft is removed once its question is checked.
+  `CREATE TABLE IF NOT EXISTS lesson_drafts (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
+    lesson_id TEXT NOT NULL, question_id TEXT NOT NULL, answer TEXT NOT NULL, updated_at TEXT NOT NULL,
+    PRIMARY KEY(student_id, event_id, lesson_id, question_id))`,
   // Each lesson stage a student has finished; graded stages also keep their accuracy.
   `CREATE TABLE IF NOT EXISTS lesson_parts (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
     lesson_id TEXT NOT NULL, part TEXT NOT NULL CHECK(part IN ('learn','practice','labs','checkpoint')),

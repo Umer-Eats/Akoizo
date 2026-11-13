@@ -4,6 +4,7 @@ import {
   checkLessonAnswer,
   previewLessonAnswer,
   resetCheckpoint,
+  saveCheckpointDraft,
 } from '@/lib/lesson-checkpoint-service';
 
 export const maxDuration = 30;
@@ -25,6 +26,19 @@ export async function POST(request: Request) {
     // Instructors previewing a lesson get the same marking, but nothing is recorded.
     if (preview) return json(await previewLessonAnswer(profile, body));
     return json(await checkLessonAnswer(db, profile, body));
+  } catch (error) {
+    return failure(error);
+  }
+}
+
+/** Save an answer the student has started but not checked yet, so they can resume later. */
+export async function PUT(request: Request) {
+  try {
+    const { db, profile, preview } = await memberFor(request, 'learner');
+    const body = await bodyOf(request);
+    // An instructor previewing lessons keeps drafts only in their own browser.
+    if (preview) return json({ saved: false });
+    return json(await saveCheckpointDraft(db, profile, body));
   } catch (error) {
     return failure(error);
   }

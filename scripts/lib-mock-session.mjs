@@ -110,18 +110,38 @@ export async function mockSession(page, { role = 'student', theme = 'dark', api 
  * written answer stands in for AI marking (six or more words count as correct), unless the
  * answer starts with "self:" which exercises the self-mark path.
  */
-export function mockLessonApi(url, request, division, answers) {
+export function mockLessonApi(url, request, division, answers, drafts = []) {
   const body = request.method() === 'GET' ? {} : JSON.parse(request.postData() || '{}');
   if (url.pathname === '/api/lessons/progress')
-    return request.method() === 'GET' ? { answers, parts: [] } : { recorded: body.part };
+    return request.method() === 'GET' ? { answers, parts: [], drafts } : { recorded: body.part };
   const lesson = lessonsForEvent(body.eventId, division)?.lessons.find((l) => l.id === body.lessonId);
   if (!lesson) return { error: 'Lesson not found.' };
   if (request.method() === 'DELETE') {
     for (let i = answers.length - 1; i >= 0; i--)
       if (answers[i].lessonId === lesson.id) answers.splice(i, 1);
+    for (let i = drafts.length - 1; i >= 0; i--)
+      if (drafts[i].lessonId === lesson.id) drafts.splice(i, 1);
     return { reset: true };
   }
   const q = lesson.practice.find((item) => item.id === body.questionId);
+  const dropDraft = () => {
+    const at = drafts.findIndex((d) => d.lessonId === lesson.id && d.questionId === q.id);
+    if (at >= 0) drafts.splice(at, 1);
+  };
+  // Unchecked answers are saved as drafts, newest last, like the lesson_drafts table.
+  if (request.method() === 'PUT') {
+    if (answers.some((a) => a.lessonId === lesson.id && a.questionId === q.id))
+      return { saved: false };
+    dropDraft();
+    if (!body.answer.trim()) return { saved: false };
+    drafts.push({
+      lessonId: lesson.id,
+      questionId: q.id,
+      answer: body.answer,
+      updatedAt: new Date().toISOString(),
+    });
+    return { saved: true };
+  }
   const existing = answers.find((a) => a.lessonId === lesson.id && a.questionId === q.id);
   if (existing)
     return { status: 'checked', result: { correct: existing.correct, by: existing.by } };
@@ -140,6 +160,7 @@ export function mockLessonApi(url, request, division, answers) {
     };
   }
   answers.push({ lessonId: lesson.id, questionId: q.id, answer: body.answer, ...result });
+  dropDraft();
   const done = answers.filter((a) => a.lessonId === lesson.id);
   return done.length === lesson.practice.length
     ? {

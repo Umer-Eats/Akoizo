@@ -2,7 +2,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, RotateCcw, X } from 'lucide-react';
 import type { Lesson } from '@/lib/lessons';
-import { checkpointProgress, type CheckResult, type LessonAttempt } from '@/lib/lesson-practice';
+import {
+  checkpointProgress,
+  resumeQuestion,
+  type CheckResult,
+  type LessonAttempt,
+} from '@/lib/lesson-practice';
 import { ChoiceOptions } from './choice-options';
 import './lesson-checkpoint.css';
 
@@ -31,6 +36,7 @@ export function CheckpointView({
   onAnswer,
   onCheck,
   onRetake,
+  onPosition,
 }: {
   lesson: Lesson;
   attempt: LessonAttempt;
@@ -39,10 +45,18 @@ export function CheckpointView({
   onAnswer: (questionId: string, answer: string) => void;
   onCheck: (questionId: string, answer: string, selfMark?: boolean) => Promise<CheckOutcome>;
   onRetake: () => Promise<void>;
+  /** The student moved to another question; saved so the checkpoint reopens there. */
+  onPosition?: (questionId: string) => void;
 }) {
   const questions = lesson.practice;
-  const firstOpen = questions.findIndex((q) => !attempt.checks[q.id]);
-  const [index, setIndex] = useState(firstOpen < 0 ? 0 : firstOpen);
+  const resume = resumeQuestion(attempt, questions);
+  const [index, setIndex] = useState(resume);
+  // Progress saved on another device can arrive after this opens. Follow it until the student
+  // starts working here, so the view never jumps away from what they are doing.
+  const touched = useRef(false);
+  useEffect(() => {
+    if (!touched.current) setIndex(resume);
+  }, [resume]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   // Written answer waiting for the student's own mark because AI marking is unavailable.
@@ -60,7 +74,9 @@ export function CheckpointView({
     return attempt.answers[id]?.trim() ? 'answered' : 'empty';
   };
   const go = (next: number) => {
+    touched.current = true;
     setIndex(next);
+    onPosition?.(questions[next].id);
     setError('');
     setSelfMarking('');
     requestAnimationFrame(() => cardRef.current?.focus({ preventScroll: true }));
@@ -70,7 +86,12 @@ export function CheckpointView({
     const any = questions.findIndex((item) => !attempt.checks[item.id] && item.id !== q.id);
     return after >= 0 ? after : any;
   };
+  const answerQuestion = (value: string) => {
+    touched.current = true;
+    onAnswer(q.id, value);
+  };
   const submit = async (selfMark?: boolean) => {
+    touched.current = true;
     setBusy(true);
     setError('');
     const outcome = await onCheck(q.id, answer, selfMark);
@@ -176,7 +197,7 @@ export function CheckpointView({
               options={q.options.map((option) => ({ id: option, text: option }))}
               value={answer}
               correctOptions={check ? [q.answer] : []}
-              onChange={(value) => onAnswer(q.id, value)}
+              onChange={answerQuestion}
             />
           ) : (
             <label className="quiz-written">
@@ -186,7 +207,7 @@ export function CheckpointView({
                 maxLength={4000}
                 value={answer}
                 readOnly={!!check}
-                onChange={(event) => onAnswer(q.id, event.target.value)}
+                onChange={(event) => answerQuestion(event.target.value)}
                 placeholder="Explain your reasoning. Show any calculation and include units."
               />
             </label>
