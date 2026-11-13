@@ -14,7 +14,8 @@ import {
   Upload,
   X,
 } from 'lucide-react';
-import { useAuth, authMessage } from './auth-context';
+import { StudyAs, useAuth, authMessage } from './auth-context';
+import { useTeacherDivision } from './study-mode';
 import { sheetEventsByDivision } from '@/lib/cheatsheets';
 import { fitSheetDocument, sheetDocument } from '@/lib/cheatsheet-document';
 import { exportPreview, saveFile, type ExportFormat } from '@/lib/document-export';
@@ -23,8 +24,33 @@ import './cheatsheets.css';
 
 type Library = { sheets: SheetCard[]; drafts?: SheetCard[]; nextCursor: string | null };
 
+/** Instructors read a division's library as one of its students would. Only B and C have sheets. */
+function TeacherSheetLibrary() {
+  const [saved, setSaved] = useTeacherDivision();
+  const division = saved === 'B' ? 'B' : 'C';
+  return (
+    <>
+      <label className="division-control teacher-sheet-division">
+        Library
+        <select
+          aria-label="Cheat sheet library division"
+          value={division}
+          onChange={(e) => setSaved(e.target.value as 'B' | 'C')}
+        >
+          <option value="B">Division B</option>
+          <option value="C">Division C</option>
+        </select>
+      </label>
+      <StudyAs division={division}>
+        <CheatSheets key={`teacher:${division}`} />
+      </StudyAs>
+    </>
+  );
+}
+
 export function CheatSheetLibraryPage() {
   const { loading, profile, sessionError } = useAuth();
+  const teacher = profile?.role === 'instructor';
   const eligible =
     profile?.role === 'student' && (profile.division === 'B' || profile.division === 'C');
   return (
@@ -37,6 +63,8 @@ export function CheatSheetLibraryPage() {
       <ReferenceLibraryTabs current="cheatsheets" />
       {loading ? (
         <p role="status">Loading your account…</p>
+      ) : teacher ? (
+        <TeacherSheetLibrary />
       ) : eligible ? (
         <CheatSheets key={profile.id} />
       ) : (

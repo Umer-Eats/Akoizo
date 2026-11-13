@@ -17,6 +17,10 @@
     width: 100%;
     min-width: 0;
   }
+  .teacher-sheet-division {
+    justify-content: flex-end;
+    margin: 0 0 16px;
+  }
   .teacher-study-title {
     display: flex;
     flex-wrap: wrap;

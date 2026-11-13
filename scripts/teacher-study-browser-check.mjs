@@ -249,6 +249,35 @@ try {
     await expect(coach.locator('.event-content')).toContainText(text);
     await coach.screenshot({ path: `${shots}/teacher-${tool}.png` });
   }
+  // The shared cheat sheet library in the top navigation opens for instructors too.
+  raw
+    .prepare(
+      `INSERT INTO cheat_sheets (id,creator_id,event_id,title,school_name,level,created_at,status,
+      has_exclusions,image_count,exclusions,content_json,images_json,division)
+      VALUES (?,?,?,?,?,?,?,'published',0,0,'','{}','[]','C')`,
+    )
+    .run(
+      '00000000-0000-4000-8000-000000000001',
+      amy.id,
+      'forensics',
+      'Forensics QA Sheet',
+      'Pembroke Pines Charter High School',
+      'state',
+      new Date().toISOString(),
+    );
+  await coach.goto(`${base}/dashboard/cheatsheets`);
+  await expect(coach.getByRole('heading', { name: 'The cheat sheet library.' })).toBeVisible();
+  await expect(coach.getByText('Cheat sheets are available to Division B and C')).toHaveCount(0);
+  await expect(coach.getByLabel('Cheat sheet library division')).toHaveValue('C');
+  await expect(coach.getByText('Forensics QA Sheet')).toBeVisible();
+  await noOverflow(coach, 'teacher cheat sheet library');
+  await coach.screenshot({ path: `${shots}/teacher-cheatsheet-library.png` });
+  await coach.getByLabel('Cheat sheet library division').selectOption('B');
+  await expect(coach.getByRole('heading', { name: 'The Division B sheet library' })).toBeVisible();
+  await expect(coach.getByText('Forensics QA Sheet')).toHaveCount(0);
+  assert.ok(headersSeen.includes('/api/cheatsheets:B'), 'Division B library requested');
+  await coach.getByLabel('Cheat sheet library division').selectOption('C');
+
   await coach.goto(`${base}/dashboard/student/events/forensics/ranked-tests`);
   await expect(coach.getByText('Students see the ranked tests you assign here.')).toBeVisible();
   assert.ok(headersSeen.some((h) => h.startsWith('/api/cheatsheets:C')), 'study division header sent');
