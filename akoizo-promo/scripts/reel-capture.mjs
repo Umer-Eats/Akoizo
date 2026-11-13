@@ -212,6 +212,90 @@ const clips = {
     await scrollBy(page, 900, 1200);
     await page.waitForTimeout(500);
   },
+  // Coaches: reveal and copy the student joining password.
+  async school(page) {
+    await page.goto(`${base}/dashboard/instructor?tab=school`);
+    await page.waitForLoadState('networkidle').catch(() => {});
+    await page.mouse.move(270, 500);
+    await page.waitForTimeout(900);
+    await tryStep('reveal', async () => {
+      await tap(page, page.getByRole('button', { name: 'Show student joining password' }));
+      await page.waitForTimeout(1200);
+    });
+    await tryStep('copy', async () => {
+      await tap(page, page.getByRole('button', { name: /Copy password|Copied/ }));
+      await page.waitForTimeout(1400);
+    });
+  },
+  // Coaches: pick an event, choose a lesson, assign it to the seated students.
+  async assign(page) {
+    await page.goto(`${base}/dashboard/instructor?tab=assignments`);
+    await page.locator('.event-card-link').first().waitFor();
+    await page.mouse.move(270, 500);
+    await page.waitForTimeout(700);
+    await scrollBy(page, 420, 800);
+    await tryStep('event', async () => {
+      await tap(page, page.locator('.event-card-link', { hasText: 'Astronomy' }).first());
+      await page.waitForTimeout(900);
+    });
+    await tryStep('lessons tab', async () => {
+      await tap(page, page.getByRole('button', { name: 'Lessons by unit' }));
+      await page.waitForTimeout(700);
+    });
+    await tryStep('work', async () => {
+      await tap(page, page.locator('.assign-pill:not([disabled])').first());
+      await page.waitForTimeout(800);
+    });
+    await tryStep('students', async () => {
+      const boxes = page.locator('.assign-student-list input[type=checkbox]');
+      const n = Math.min(3, await boxes.count());
+      for (let i = 0; i < n; i++) {
+        await tap(page, boxes.nth(i));
+        await page.waitForTimeout(220);
+      }
+    });
+    await tryStep('due', async () => {
+      const due = page.getByLabel('Due date');
+      if (!(await due.inputValue())) await due.fill('2026-12-05');
+    });
+    await tryStep('assign', async () => {
+      await tap(page, page.locator('.assign-modal-footer .button-primary'));
+      await page.waitForTimeout(1500);
+    });
+  },
+  // Coaches: school analytics.
+  async analytics(page) {
+    await page.goto(`${base}/dashboard/instructor?tab=analytics`);
+    await page.waitForLoadState('networkidle').catch(() => {});
+    await page.mouse.move(270, 500);
+    await page.waitForTimeout(900);
+    await scrollBy(page, 700, 1300);
+    await page.waitForTimeout(500);
+    await scrollBy(page, 800, 1300);
+    await page.waitForTimeout(600);
+  },
+  // Coaches: each student's next steps.
+  async progress(page) {
+    await page.goto(`${base}/dashboard/instructor?tab=progress`);
+    await page.waitForLoadState('networkidle').catch(() => {});
+    await page.mouse.move(270, 500);
+    await page.waitForTimeout(900);
+    await scrollBy(page, 600, 1100);
+    await page.waitForTimeout(500);
+    await scrollBy(page, 700, 1200);
+    await page.waitForTimeout(600);
+  },
+  // Coaches: see lessons exactly as students do.
+  async studyview(page) {
+    await page.goto(`${base}/dashboard/instructor?tab=study`);
+    await page.waitForLoadState('networkidle').catch(() => {});
+    await page.mouse.move(270, 500);
+    await page.waitForTimeout(900);
+    await scrollBy(page, 600, 1100);
+    await page.waitForTimeout(500);
+    await scrollBy(page, 700, 1200);
+    await page.waitForTimeout(600);
+  },
   // School community analytics.
   async community(page) {
     await page.goto(`${base}/community`);
@@ -226,12 +310,61 @@ const clips = {
 };
 
 const world = await qaWorld();
+
+// Six weeks of plausible practice, lessons and checkpoints so the coach analytics and progress
+// clips show real charts. In-memory demo data only.
+async function seedActivity() {
+  const roster = {
+    'qa-student': ['C', ['astronomy', 'anatomy-and-physiology', 'chemistry-lab']],
+    'qa-ben': ['C', ['circuit-lab', 'forensics', 'codebusters']],
+    'qa-cal': ['C', ['disease-detectives', 'botany']],
+    'qa-dee': ['B', ['heredity', 'meteorology']],
+    'qa-eli': ['B', ['water-quality']],
+    'qa-fay': ['C', ['dynamic-planet', 'thermodynamics']],
+  };
+  const day = (n) => new Date(Date.UTC(2026, 10, 12) - n * 864e5).toISOString();
+  const statements = [];
+  let k = 0;
+  for (const [uid, [division, events]] of Object.entries(roster)) {
+    const id = world.profiles[uid].id;
+    for (const [e, eventId] of events.entries()) {
+      const event = `2027:${division}:${eventId}`;
+      for (let w = 0; w < 6; w++) {
+        const score = Math.round(42 + w * 7 + ((k * 13) % 17) - e * 3);
+        const attempt = `qa-attempt-${k++}`;
+        statements.push({
+          sql: 'INSERT INTO test_attempts (id,student_id,event_id,type,score,max_score,points_awarded,started_at,completed_at) VALUES (?,?,?,?,?,?,?,?,?)',
+          args: [attempt, id, event, w % 3 === 2 ? 'Ranked' : 'Practice', Math.min(98, score), 100, 20, day(42 - w * 7), day(42 - w * 7)],
+        });
+      }
+      for (let l = 0; l < 4 + ((k + e) % 4); l++) {
+        statements.push({
+          sql: 'INSERT INTO lesson_progress (student_id,event_id,lesson_id,completed_at) VALUES (?,?,?,?)',
+          args: [id, event, `qa-lesson-${l}`, day(30 - l * 4)],
+        });
+        for (const part of ['learn', 'practice', 'checkpoint'])
+          statements.push({
+            sql: 'INSERT INTO lesson_parts (student_id,event_id,lesson_id,part,score,max_score,completed_at) VALUES (?,?,?,?,?,?,?)',
+            args: [id, event, `qa-lesson-${l}`, part, part === 'learn' ? null : 7 + (l % 3), part === 'learn' ? null : 10, day(30 - l * 4)],
+          });
+        for (let q = 0; q < 5; q++)
+          statements.push({
+            sql: 'INSERT INTO lesson_answers (student_id,event_id,lesson_id,question_id,answer,correct,graded_by,checked_at) VALUES (?,?,?,?,?,?,?,?)',
+            args: [id, event, `qa-lesson-${l}`, `q${q}`, 'A', (q + l + e) % 4 ? 1 : 0, 'key', day(30 - l * 4)],
+          });
+      }
+    }
+  }
+  await world.db.batch(statements);
+}
+await seedActivity().catch((e) => console.log(`  demo activity not seeded: ${e.message}`));
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const only = process.argv.slice(2);
 try {
   for (const [name, run] of Object.entries(clips)) {
     if (only.length && !only.includes(name)) continue;
-    const role = name === 'teams' ? 'instructor' : 'student';
+    const coachClips = ['teams', 'school', 'assign', 'analytics', 'progress', 'studyview'];
+    const role = coachClips.includes(name) ? 'instructor' : 'student';
     const context = await browser.newContext({ viewport, deviceScaleFactor: 2 });
     const page = await context.newPage();
     await page.addInitScript(touchScript);
@@ -240,6 +373,10 @@ try {
       role,
       theme: 'dark',
       api: async (url, request) => {
+        if (url.pathname === '/api/school/password')
+          return { schoolName: profile.schoolName, joiningPassword: 'ORBIT-NOVA-4821' };
+        if (url.pathname === '/api/assignments' && request.method() === 'POST')
+          return { assigned: 3, alreadyAssigned: 0 };
         const json = await world.handle(url, request, profile);
         // A little progress, so the dashboard is not all zeros.
         if (url.pathname === '/api/dashboard' && role === 'student' && json)

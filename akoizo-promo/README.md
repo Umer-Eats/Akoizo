@@ -14,6 +14,10 @@ Messaging follows https://akoizo.app and existing app source. The 400+ students 
 
 Design notes: DESIGN.md. Scene preview images: output/. The main application remains separate from this video project.
 
+## How-to Reels (10 tutorials)
+
+Ten 9:16 feature tutorials (six for students, four for coaches) live in `src/tutorials/`, with original per-video music from `scripts/tutorial-soundtrack.mjs`. Renders are in `output/tutorials/`. Captions, hashtags and the posting plan are in [TUTORIALS.md](TUTORIALS.md).
+
 ## Instagram Reel (fast cut)
 
 `Akoizo-Reel`: a separate 30-second, 1080 × 1920 fast-paced Reel in `src/reel/`. Thirteen beat-synced scenes (120 BPM): curiosity hook, free, the scattered-PDF problem, logo drop, then events, lessons, labs, past tests, ranked tests (the site's real rank badges, Iron → Radiant), binders, coaches, 400+ students and the akoizo.app call to action. Important text stays inside Instagram's safe area.

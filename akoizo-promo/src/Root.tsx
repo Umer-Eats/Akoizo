@@ -7,6 +7,7 @@ import { Impact } from "./Impact";
 import { Community } from "./Community";
 import { Closing } from "./Closing";
 import { Reel } from "./reel/Reel";
+import { Tutorial, grid, tutorials } from "./tutorials/Tutorial";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -37,6 +38,34 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={900}
         defaultProps={{ music: false }}
       />
+      <Folder name="Tutorials">
+        {tutorials.map((t) => (
+          <Composition
+            key={t.id}
+            id={`Tutorial-${t.id}`}
+            component={Tutorial}
+            width={1080}
+            height={1920}
+            fps={30}
+            durationInFrames={grid(t).duration}
+            defaultProps={{ id: t.id, music: true }}
+          />
+        ))}
+      </Folder>
+      <Folder name="Tutorials-SFX-Only">
+        {tutorials.map((t) => (
+          <Composition
+            key={t.id}
+            id={`Tutorial-SFX-${t.id}`}
+            component={Tutorial}
+            width={1080}
+            height={1920}
+            fps={30}
+            durationInFrames={grid(t).duration}
+            defaultProps={{ id: t.id, music: false }}
+          />
+        ))}
+      </Folder>
       <Folder name="Scenes">
         <Composition
           id="Hook"

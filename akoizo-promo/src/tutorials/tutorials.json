@@ -1,0 +1,781 @@
+{
+  "fps": 30,
+  "beats": {
+    "hook": 4,
+    "step": 8,
+    "payoff": 6,
+    "cta": 6
+  },
+  "audiences": {
+    "student": {
+      "label": "For students",
+      "bpm": 112.5,
+      "beatFrames": 16
+    },
+    "coach": {
+      "label": "For coaches",
+      "bpm": 100,
+      "beatFrames": 18
+    }
+  },
+  "slots": {
+    "pink": "#ff4fa3",
+    "yellow": "#ffd52a",
+    "purple": "#b678ff",
+    "blue": "#4095ff",
+    "green": "#22d99b",
+    "orange": "#ff902e"
+  },
+  "tutorials": [
+    {
+      "id": "01-find-your-events",
+      "audience": "student",
+      "slot": "pink",
+      "title": "Find your events",
+      "kicker": "Still digging through rule PDFs?",
+      "hook": "Find your SciOly|events in *10 seconds.*",
+      "teaser": {
+        "clip": "catalog",
+        "from": 6.5
+      },
+      "steps": [
+        {
+          "text": "Open your|*dashboard.*",
+          "clip": "catalog",
+          "from": 0.8,
+          "rate": 1,
+          "zoom": [
+            1,
+            1.12
+          ],
+          "focus": [
+            540,
+            500,
+            540,
+            700
+          ],
+          "sticker": "Your stats live here"
+        },
+        {
+          "text": "Filter by|*timeslot.*",
+          "clip": "catalog",
+          "from": 3,
+          "rate": 0.9,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            540,
+            760,
+            540,
+            760
+          ],
+          "sticker": "Color = exam block"
+        },
+        {
+          "text": "Tap the events|you *compete in.*",
+          "clip": "catalog",
+          "from": 6,
+          "rate": 1,
+          "zoom": [
+            1,
+            1.1
+          ],
+          "focus": [
+            540,
+            900,
+            540,
+            1100
+          ]
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Every 2027 event.|*One screen.*",
+        "chips": [
+          "Division B + C",
+          "Timeslot colors",
+          "Free"
+        ]
+      },
+      "cta": {
+        "text": "Save this for|*tryouts.*",
+        "next": "Next: lessons you can drag"
+      }
+    },
+    {
+      "id": "02-interactive-lessons",
+      "audience": "student",
+      "slot": "purple",
+      "title": "Interactive lessons",
+      "kicker": "Reading notes won't win medals.",
+      "hook": "Lessons you can|*actually touch.*",
+      "teaser": {
+        "clip": "lesson",
+        "from": 5.2
+      },
+      "steps": [
+        {
+          "text": "Pick an event, open|*Lessons.*",
+          "clip": "lesson",
+          "from": 0.6,
+          "rate": 0.75,
+          "zoom": [
+            1,
+            1.15
+          ],
+          "focus": [
+            540,
+            700,
+            540,
+            900
+          ]
+        },
+        {
+          "text": "Choose a|*unit.*",
+          "clip": "lesson",
+          "from": 2.4,
+          "rate": 0.6,
+          "zoom": [
+            1.05,
+            1.25
+          ],
+          "focus": [
+            540,
+            1200,
+            540,
+            1400
+          ],
+          "sticker": "Short, focused units"
+        },
+        {
+          "text": "Drag the model.|*Watch it react.*",
+          "clip": "lesson",
+          "from": 4.2,
+          "rate": 0.4,
+          "zoom": [
+            1.1,
+            1.4
+          ],
+          "focus": [
+            540,
+            1000,
+            540,
+            1100
+          ],
+          "sticker": "Live simulation"
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Learn it by|*moving it.*",
+        "chips": [
+          "Diagrams",
+          "Simulations",
+          "Checkpoints"
+        ]
+      },
+      "cta": {
+        "text": "Send this to your|*event partner.*",
+        "next": "Next: a chem lab on your phone"
+      }
+    },
+    {
+      "id": "03-virtual-labs",
+      "audience": "student",
+      "slot": "blue",
+      "title": "Virtual labs",
+      "kicker": "No lab access before invitationals?",
+      "hook": "A chem lab|*on your phone.*",
+      "teaser": {
+        "clip": "lab",
+        "from": 5.2
+      },
+      "steps": [
+        {
+          "text": "Write your|*hypothesis.*",
+          "clip": "lab",
+          "from": 1.6,
+          "rate": 0.8,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            540,
+            1100,
+            540,
+            1150
+          ]
+        },
+        {
+          "text": "Set controls.|*Record trials.*",
+          "clip": "lab",
+          "from": 4.4,
+          "rate": 0.9,
+          "zoom": [
+            1,
+            1.2
+          ],
+          "focus": [
+            540,
+            700,
+            540,
+            1000
+          ],
+          "sticker": "Real data, every trial"
+        },
+        {
+          "text": "Check your|*calculation.*",
+          "clip": "lab",
+          "from": 7.7,
+          "rate": 0.6,
+          "zoom": [
+            1.05,
+            1.25
+          ],
+          "focus": [
+            540,
+            900,
+            540,
+            1000
+          ]
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Practice the lab|*before the lab.*",
+        "chips": [
+          "Hypothesis",
+          "Trials",
+          "Analysis"
+        ]
+      },
+      "cta": {
+        "text": "Save this for|*Chem Lab.*",
+        "next": "Next: real tournament tests"
+      }
+    },
+    {
+      "id": "04-past-tests",
+      "audience": "student",
+      "slot": "yellow",
+      "title": "Real tournament tests",
+      "kicker": "The test you'll see in March?",
+      "hook": "Practice it|*right now.*",
+      "teaser": {
+        "clip": "paper",
+        "from": 3.6
+      },
+      "steps": [
+        {
+          "text": "Open|*Practice Tests.*",
+          "clip": "paper",
+          "from": 0.9,
+          "rate": 0.7,
+          "zoom": [
+            1,
+            1.12
+          ],
+          "focus": [
+            540,
+            700,
+            540,
+            800
+          ],
+          "sticker": "Real past papers"
+        },
+        {
+          "text": "Answer like it's|*game day.*",
+          "clip": "paper",
+          "from": 2,
+          "rate": 0.6,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            540,
+            700,
+            540,
+            900
+          ]
+        },
+        {
+          "text": "Lock it in.|*Next question.*",
+          "clip": "paper",
+          "from": 3.4,
+          "rate": 0.5,
+          "zoom": [
+            1.05,
+            1.25
+          ],
+          "focus": [
+            540,
+            600,
+            540,
+            800
+          ],
+          "sticker": "Tap to answer"
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Real tournaments.|*Zero cost.*",
+        "chips": [
+          "Invitationals",
+          "Regionals",
+          "States"
+        ]
+      },
+      "cta": {
+        "text": "Tag who you're|*testing with.*",
+        "next": "Next: ranked tests"
+      }
+    },
+    {
+      "id": "05-ranked-tests",
+      "audience": "student",
+      "slot": "orange",
+      "title": "Ranked tests",
+      "kicker": "Be honest.",
+      "hook": "What rank|*are you?*",
+      "teaser": {
+        "clip": "paper",
+        "from": 2.4
+      },
+      "steps": [
+        {
+          "text": "Your coach drops a|*ranked test.*",
+          "clip": "paper",
+          "from": 1.2,
+          "rate": 0.7,
+          "zoom": [
+            1,
+            1.15
+          ],
+          "focus": [
+            540,
+            700,
+            540,
+            800
+          ],
+          "sticker": "Full screen, timed"
+        },
+        {
+          "text": "Score points.|*Rank up.*",
+          "kind": "ranks"
+        },
+        {
+          "text": "Climb past|*your team.*",
+          "clip": "paper",
+          "from": 3.4,
+          "rate": 0.5,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            540,
+            700,
+            540,
+            900
+          ],
+          "sticker": "Iron to Radiant"
+        }
+      ],
+      "payoff": {
+        "kind": "ranks",
+        "text": "Iron to|*Radiant.*"
+      },
+      "cta": {
+        "text": "Comment your|*rank.*",
+        "next": "Next: build a binder"
+      }
+    },
+    {
+      "id": "06-binder-generator",
+      "audience": "student",
+      "slot": "green",
+      "title": "Binder generator",
+      "kicker": "Still building binders by hand?",
+      "hook": "Let Akoizo build|*your binder.*",
+      "teaser": {
+        "clip": "binder",
+        "from": 6.4
+      },
+      "steps": [
+        {
+          "text": "Open|*Binder Generator.*",
+          "clip": "binder",
+          "from": 0.6,
+          "rate": 0.8,
+          "zoom": [
+            1,
+            1.2
+          ],
+          "focus": [
+            540,
+            700,
+            600,
+            800
+          ]
+        },
+        {
+          "text": "Pick pages|*and level.*",
+          "clip": "binder",
+          "from": 3,
+          "rate": 0.8,
+          "zoom": [
+            1.05,
+            1.25
+          ],
+          "focus": [
+            600,
+            900,
+            600,
+            1000
+          ],
+          "sticker": "50 to 250 pages"
+        },
+        {
+          "text": "Generate.|*Share with the team.*",
+          "clip": "binder",
+          "from": 5.2,
+          "rate": 0.55,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            600,
+            1000,
+            600,
+            1100
+          ]
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Notes events,|*sorted.*",
+        "chips": [
+          "Astronomy",
+          "Rocks",
+          "Forensics"
+        ]
+      },
+      "cta": {
+        "text": "Send this to your|*binder partner.*",
+        "next": "Next: for coaches"
+      }
+    },
+    {
+      "id": "07-coach-school-code",
+      "audience": "coach",
+      "slot": "blue",
+      "title": "Add your students",
+      "kicker": "Coaches, this one's for you.",
+      "hook": "Your whole team.|*One password.*",
+      "teaser": {
+        "clip": "school",
+        "from": 4.8
+      },
+      "steps": [
+        {
+          "text": "Open|*School Code.*",
+          "clip": "school",
+          "from": 1.4,
+          "rate": 0.8,
+          "zoom": [
+            1,
+            1.15
+          ],
+          "focus": [
+            400,
+            800,
+            500,
+            900
+          ]
+        },
+        {
+          "text": "Reveal the|*joining password.*",
+          "clip": "school",
+          "from": 2.4,
+          "rate": 0.6,
+          "zoom": [
+            1.1,
+            1.4
+          ],
+          "focus": [
+            690,
+            1150,
+            690,
+            1250
+          ],
+          "sticker": "Shared across your campus"
+        },
+        {
+          "text": "Copy it.|*Send it.*",
+          "clip": "school",
+          "from": 3.7,
+          "rate": 0.5,
+          "zoom": [
+            1.15,
+            1.45
+          ],
+          "focus": [
+            600,
+            1350,
+            600,
+            1450
+          ]
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Your roster|*fills itself.*",
+        "chips": [
+          "No spreadsheets",
+          "No emails",
+          "Free"
+        ]
+      },
+      "cta": {
+        "text": "Share with your|*co-coach.*",
+        "next": "Next: build your teams"
+      }
+    },
+    {
+      "id": "08-coach-teams",
+      "audience": "coach",
+      "slot": "purple",
+      "title": "Build your teams",
+      "kicker": "Team sheet in a messy spreadsheet?",
+      "hook": "Seat every event|*in one place.*",
+      "teaser": {
+        "clip": "teams",
+        "from": 5.6
+      },
+      "steps": [
+        {
+          "text": "Open|*Teams.*",
+          "clip": "teams",
+          "from": 1,
+          "rate": 0.8,
+          "zoom": [
+            1,
+            1.12
+          ],
+          "focus": [
+            400,
+            800,
+            500,
+            900
+          ]
+        },
+        {
+          "text": "Name a team.|*Pick a division.*",
+          "clip": "teams",
+          "from": 2.6,
+          "rate": 0.8,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            700,
+            700,
+            700,
+            800
+          ],
+          "sticker": "Varsity, JV, anything"
+        },
+        {
+          "text": "Seat partners|*by timeslot.*",
+          "clip": "teams",
+          "from": 4.6,
+          "rate": 0.8,
+          "zoom": [
+            1.05,
+            1.2
+          ],
+          "focus": [
+            700,
+            900,
+            700,
+            1100
+          ],
+          "sticker": "Color-coded blocks"
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "No double-booked|*timeslots.*",
+        "chips": [
+          "Partners",
+          "Divisions",
+          "Timeslots"
+        ]
+      },
+      "cta": {
+        "text": "Save this before|*team selection.*",
+        "next": "Next: assign work in 3 steps"
+      }
+    },
+    {
+      "id": "09-coach-assignments",
+      "audience": "coach",
+      "slot": "yellow",
+      "title": "Assign work",
+      "kicker": "Chasing students for practice?",
+      "hook": "Assign practice|*in 3 steps.*",
+      "teaser": {
+        "clip": "assign",
+        "from": 7.6
+      },
+      "steps": [
+        {
+          "text": "Pick an|*event.*",
+          "clip": "assign",
+          "from": 1.6,
+          "rate": 0.8,
+          "zoom": [
+            1,
+            1.15
+          ],
+          "focus": [
+            600,
+            900,
+            600,
+            1100
+          ]
+        },
+        {
+          "text": "Choose a lesson,|*test, or lab.*",
+          "clip": "assign",
+          "from": 4.6,
+          "rate": 0.7,
+          "zoom": [
+            1.05,
+            1.25
+          ],
+          "focus": [
+            700,
+            1000,
+            700,
+            1100
+          ],
+          "sticker": "Lessons, tests, labs"
+        },
+        {
+          "text": "Pick students.|*Set a due date.*",
+          "clip": "assign",
+          "from": 6.2,
+          "rate": 0.55,
+          "zoom": [
+            1.05,
+            1.2
+          ],
+          "focus": [
+            540,
+            900,
+            540,
+            1000
+          ],
+          "sticker": "Assigned!"
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "It shows up on|*their dashboard.*",
+        "chips": [
+          "Due dates",
+          "Partners included",
+          "Auto-tracked"
+        ]
+      },
+      "cta": {
+        "text": "Share with your|*co-coach.*",
+        "next": "Next: see who's improving"
+      }
+    },
+    {
+      "id": "10-coach-analytics",
+      "audience": "coach",
+      "slot": "green",
+      "title": "Track progress",
+      "kicker": "Who's actually studying?",
+      "hook": "See it in|*one chart.*",
+      "teaser": {
+        "clip": "analytics",
+        "from": 5.2
+      },
+      "steps": [
+        {
+          "text": "Open|*Analytics.*",
+          "clip": "analytics",
+          "from": 0.8,
+          "rate": 0.7,
+          "zoom": [
+            1,
+            1.2
+          ],
+          "focus": [
+            600,
+            900,
+            650,
+            1000
+          ],
+          "sticker": "Accuracy, lessons, tests"
+        },
+        {
+          "text": "Watch accuracy|*climb.*",
+          "clip": "analytics",
+          "from": 4.4,
+          "rate": 0.6,
+          "zoom": [
+            1.05,
+            1.3
+          ],
+          "focus": [
+            650,
+            1150,
+            650,
+            1250
+          ]
+        },
+        {
+          "text": "Drill into|*one student.*",
+          "clip": "progress",
+          "from": 5.4,
+          "rate": 0.6,
+          "zoom": [
+            1,
+            1.2
+          ],
+          "focus": [
+            650,
+            600,
+            650,
+            700
+          ],
+          "sticker": "Next steps per student"
+        }
+      ],
+      "payoff": {
+        "kind": "text",
+        "text": "Coach with data,|*not guesses.*",
+        "chips": [
+          "Per event",
+          "Per team",
+          "Per student"
+        ]
+      },
+      "cta": {
+        "text": "Follow for more|*coach tools.*",
+        "next": "Start free at akoizo.app"
+      }
+    }
+  ]
+}
