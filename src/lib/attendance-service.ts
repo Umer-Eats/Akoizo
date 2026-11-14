@@ -2,8 +2,9 @@ import { randomBytes, randomUUID } from 'node:crypto';
 import { AppError, type Profile } from './domain.ts';
 import type { Database } from './school-service.ts';
 import {
-  ATTENDANCE_RADIUS_METERS,
+  ATTENDANCE_LOCATION_MAX_AGE_MS,
   distanceMeters,
+  withinAttendanceRange,
   type AttendanceData,
   type Workshop,
 } from './attendance.ts';
@@ -170,27 +171,27 @@ export async function checkIn(db: Database, profile: Profile, body: Record<strin
     throw new AppError(409, 'Check-in is outside the teacher’s attendance window.');
   const lat = coordinate(body.latitude, 90),
     lon = coordinate(body.longitude, 180);
-  if (
-    typeof body.accuracy !== 'number' ||
-    !Number.isFinite(body.accuracy) ||
-    body.accuracy < 0 ||
-    body.accuracy > 200
-  )
-    throw new AppError(
-      400,
-      'Your location is too approximate. Enable precise location and try again.',
-    );
-  if (
-    typeof body.timestamp !== 'number' ||
-    !Number.isFinite(body.timestamp) ||
-    Math.abs(Date.now() - body.timestamp) > 60000
-  )
+  // Accuracy is required but any finite value is accepted; withinAttendanceRange caps its credit.
+  const accuracy =
+    typeof body.accuracy === 'number' && Number.isFinite(body.accuracy) && body.accuracy >= 0
+      ? body.accuracy
+      : null;
+  if (accuracy === null)
+    throw new AppError(400, 'Your location could not be read. Please try checking in again.');
+  // Prefer ageMs (measured on the device, immune to clock skew); older clients send a timestamp.
+  const age =
+    typeof body.ageMs === 'number' && Number.isFinite(body.ageMs)
+      ? body.ageMs
+      : typeof body.timestamp === 'number' && Number.isFinite(body.timestamp)
+        ? Math.abs(Date.now() - body.timestamp)
+        : NaN;
+  if (!(age >= 0 && age <= ATTENDANCE_LOCATION_MAX_AGE_MS))
     throw new AppError(400, 'Your location has expired. Please try checking in again.');
   const distance = distanceMeters(lat, lon, Number(w.latitude), Number(w.longitude));
-  if (distance + body.accuracy > ATTENDANCE_RADIUS_METERS)
+  if (!withinAttendanceRange(distance, accuracy))
     throw new AppError(
       403,
-      'We could not confirm you are within 0.5 mile of the event. Move closer or enable precise location and try again.',
+      'We could not confirm you are within 0.5 mile of the event. Connect to the event’s Wi-Fi or move closer, then try again.',
     );
   // Recheck time, code, cancellation and membership in the same atomic statement as the insert.
   const now = new Date().toISOString();
@@ -204,7 +205,7 @@ export async function checkIn(db: Database, profile: Profile, body: Record<strin
           profile.id,
           now,
           distance,
-          body.accuracy,
+          accuracy,
           profile.id,
           id,
           profile.schoolId,

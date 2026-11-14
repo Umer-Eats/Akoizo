@@ -198,7 +198,8 @@ try {
   await student.context.setGeolocation({ latitude: 27, longitude: -80, accuracy: 10 });
   await student.page.getByRole('button', { name: 'Check in with location' }).click();
   await expect(student.page.locator('.att-error')).toContainText('0.5 mile');
-  await student.context.setGeolocation({ latitude: 26, longitude: -80, accuracy: 10 });
+  // Chromebook-style Wi-Fi fix: ~1.7 km off-center with 1.5 km uncertainty still checks in.
+  await student.context.setGeolocation({ latitude: 26.015, longitude: -80, accuracy: 1500 });
   await student.page.getByRole('button', { name: 'Check in with location' }).click();
   await expect(student.page.getByRole('heading', { name: 'You showed up.' })).toBeVisible();
   await student.page.screenshot({ path: `${out}/student-checked-in.png`, fullPage: true });

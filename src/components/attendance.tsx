@@ -20,7 +20,53 @@ import {
 import { useAuth, authMessage } from './auth-context';
 import { AccountGate } from './account-gate';
 import { AttendanceMap, type WorkshopLocation } from './attendance-map';
-import { workshopStatus, type AttendanceData, type Workshop } from '@/lib/attendance';
+import {
+  ATTENDANCE_ACCURACY_ALLOWANCE_METERS,
+  workshopStatus,
+  type AttendanceData,
+  type Workshop,
+} from '@/lib/attendance';
+
+const LOCATION_HELP =
+  'On a Chromebook, turn on Settings → Security and privacy → Location access and make sure Wi-Fi is on. On a phone, turn on Location Services for your browser.';
+
+function getPosition(options: PositionOptions) {
+  return new Promise<GeolocationPosition>((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject, options),
+  );
+}
+
+// Approximate location is enough. Ask for a fast network (Wi-Fi/IP) fix first, which is what
+// Chromebooks and laptops provide; fall back to GPS when that fails or is very rough.
+async function locateForCheckIn() {
+  let quick: GeolocationPosition | null = null;
+  let quickError: GeolocationPositionError | null = null;
+  try {
+    // maximumAge 0: a student who moves closer and retries must get a new fix, not a cached one.
+    quick = await getPosition({ enableHighAccuracy: false, maximumAge: 0, timeout: 12000 });
+    if (quick.coords.accuracy <= ATTENDANCE_ACCURACY_ALLOWANCE_METERS) return quick;
+  } catch (e) {
+    quickError = e as GeolocationPositionError;
+    if (quickError.code === 1) throw locationError(quickError);
+  }
+  try {
+    const precise = await getPosition({ enableHighAccuracy: true, maximumAge: 0, timeout: 20000 });
+    return quick && quick.coords.accuracy < precise.coords.accuracy ? quick : precise;
+  } catch (e) {
+    if (quick) return quick;
+    throw locationError((e as GeolocationPositionError) ?? quickError);
+  }
+}
+
+function locationError(e: GeolocationPositionError | null) {
+  return new Error(
+    e?.code === 1
+      ? `Location access is blocked. Allow location for this site (click the icon at the left of the address bar). ${LOCATION_HELP}`
+      : e?.code === 3
+        ? `Finding your location took too long. Check that Wi-Fi is on and try again. ${LOCATION_HELP}`
+        : `Your device could not find its location. ${LOCATION_HELP}`,
+  );
+}
 import './attendance.css';
 
 function workshopDate(w: Workshop) {
@@ -167,8 +213,8 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
           <div className="att-info">
             <ShieldCheck size={21} />
             <p>
-              Students need the code and a precise browser location within <strong>0.5 mile</strong>{' '}
-              of your pin, during the check-in window.
+              Students need the code and an approximate browser location within{' '}
+              <strong>0.5 mile</strong> of your pin, during the check-in window.
             </p>
           </div>
           <p className="att-help">
@@ -327,22 +373,8 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
         throw new Error(
           'Location is unavailable in this browser. Please use a browser that supports location.',
         );
-      const position = await new Promise<GeolocationPosition>((resolve, reject) =>
-        navigator.geolocation.getCurrentPosition(
-          resolve,
-          (e) =>
-            reject(
-              new Error(
-                e.code === 1
-                  ? 'Allow location access in your browser to check in.'
-                  : e.code === 3
-                    ? 'Location timed out. Move near a window and try again.'
-                    : 'Your location could not be determined. Enable precise location and try again.',
-              ),
-            ),
-          { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 },
-        ),
-      );
+      const position = await locateForCheckIn();
+      const age = Date.now() - position.timestamp;
       const result = await request<{ alreadyRecorded: boolean }>('/api/attendance', {
         method: 'POST',
         body: JSON.stringify({
@@ -351,6 +383,9 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           accuracy: position.coords.accuracy,
+          // Device-relative age; some browsers report timestamps on another clock base, so
+          // implausible values (negative or over a day) are treated as a fresh fix.
+          ageMs: Number.isFinite(age) && age >= 0 && age < 86400000 ? age : 0,
           timestamp: position.timestamp,
         }),
       });
@@ -873,8 +908,8 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                       <div>
                         <strong>Right place. Right time.</strong>
                         <p>
-                          A valid code, the teacher’s check-in window, and a precise location within
-                          0.5 mile are required.
+                          A valid code, the teacher’s check-in window, and an approximate location
+                          within about 0.5 mile are required.
                         </p>
                       </div>
                     </div>

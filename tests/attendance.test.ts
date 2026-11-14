@@ -9,7 +9,13 @@ import {
   manageWorkshop,
   deleteWorkshop,
 } from '../src/lib/attendance-service.ts';
-import { ATTENDANCE_RADIUS_METERS, distanceMeters, workshopStatus } from '../src/lib/attendance.ts';
+import {
+  ATTENDANCE_ACCURACY_ALLOWANCE_METERS,
+  ATTENDANCE_RADIUS_METERS,
+  distanceMeters,
+  withinAttendanceRange,
+  workshopStatus,
+} from '../src/lib/attendance.ts';
 
 async function setup() {
   const f = attendanceFixture();
@@ -144,23 +150,56 @@ test('server rejects early, late and cancelled check-ins', async () => {
   await assert.rejects(checkIn(f.db, f.student, f.body()), /outside/);
   f.raw.close();
 });
-test('half-mile geofence accounts for accuracy and rejects stale, invalid or imprecise positions', async () => {
+test('half-mile geofence accepts approximate positions and rejects far, stale or invalid ones', async () => {
   const f = await setup();
   await assert.rejects(checkIn(f.db, f.student, { ...f.body(), latitude: 27 }), /0.5 mile/);
+  // ~1.67 km away: too far with a precise fix, but within reach of a rough Wi-Fi fix.
   await assert.rejects(
-    checkIn(f.db, f.student, { ...f.body(), latitude: 26.007, accuracy: 100 }),
+    checkIn(f.db, f.student, { ...f.body(), latitude: 26.015, accuracy: 100 }),
     /0.5 mile/,
   );
-  await assert.rejects(checkIn(f.db, f.student, { ...f.body(), accuracy: 500 }), /too approximate/);
+  // Huge reported uncertainty only earns the capped allowance.
+  await assert.rejects(
+    checkIn(f.db, f.student, { ...f.body(), latitude: 26.03, accuracy: 50000 }),
+    /0.5 mile/,
+  );
+  await assert.rejects(
+    checkIn(f.db, f.student, { ...f.body(), accuracy: -1 }),
+    /could not be read/,
+  );
+  await assert.rejects(
+    checkIn(f.db, f.student, { ...f.body(), accuracy: '5' }),
+    /could not be read/,
+  );
   await assert.rejects(checkIn(f.db, f.student, { ...f.body(), latitude: '26' }), /valid map/);
   await assert.rejects(checkIn(f.db, f.student, { ...f.body(), longitude: NaN }), /valid map/);
   await assert.rejects(
-    checkIn(f.db, f.student, { ...f.body(), timestamp: Date.now() - 120000 }),
+    checkIn(f.db, f.student, { ...f.body(), timestamp: Date.now() - 180000 }),
     /expired/,
   );
   await assert.rejects(checkIn(f.db, f.student, { ...f.body(), timestamp: NaN }), /expired/);
+  await assert.rejects(checkIn(f.db, f.student, { ...f.body(), ageMs: 180000 }), /expired/);
+  await assert.rejects(checkIn(f.db, f.student, { ...f.body(), ageMs: -5 }), /expired/);
+  // Device age wins over a skewed device clock (Chromebook clock 10 minutes off).
+  const skewed = await checkIn(f.db, f.student, {
+    ...f.body(),
+    latitude: 26.015,
+    accuracy: 1500,
+    timestamp: Date.now() - 600000,
+    ageMs: 2000,
+  });
+  assert.equal(skewed.alreadyRecorded, false);
   assert.equal(distanceMeters(26, -80, 26, -80), 0);
   assert.ok(distanceMeters(26, -80, 26.007, -80) < ATTENDANCE_RADIUS_METERS);
+  assert.ok(withinAttendanceRange(ATTENDANCE_RADIUS_METERS, 0));
+  assert.ok(!withinAttendanceRange(ATTENDANCE_RADIUS_METERS + 1, 0));
+  assert.ok(withinAttendanceRange(2000, 1500));
+  assert.ok(
+    !withinAttendanceRange(
+      ATTENDANCE_RADIUS_METERS + ATTENDANCE_ACCURACY_ALLOWANCE_METERS + 1,
+      1e6,
+    ),
+  );
   f.raw.close();
 });
 test('code rotation invalidates old codes and cross-school management is denied', async () => {

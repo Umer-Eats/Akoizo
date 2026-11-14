@@ -1,4 +1,16 @@
 export const ATTENDANCE_RADIUS_METERS = 804.672;
+// Chromebooks and laptops locate by Wi-Fi/IP, so their fixes are often hundreds of meters to a
+// few kilometers off. We only need approximate presence: a fix counts when its uncertainty circle
+// reaches the event radius, with the reported uncertainty credited up to this cap (1 mile).
+export const ATTENDANCE_ACCURACY_ALLOWANCE_METERS = 1609.344;
+// Maximum age of a location fix, measured on the student's device so clock skew does not matter.
+export const ATTENDANCE_LOCATION_MAX_AGE_MS = 120000;
+export function withinAttendanceRange(distance: number, accuracy: number) {
+  return (
+    distance <=
+    ATTENDANCE_RADIUS_METERS + Math.min(Math.max(accuracy, 0), ATTENDANCE_ACCURACY_ALLOWANCE_METERS)
+  );
+}
 export type Workshop = {
   id: string;
   title: string;
