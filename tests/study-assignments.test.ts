@@ -16,6 +16,7 @@ import { calculateLab, initialLabValues } from '../src/lib/division-c-lab-models
 import { listPracticeTests } from '../src/lib/practice-catalog.ts';
 import {
   assignWork,
+  editAssignment,
   recordLab,
   removeStudyAssignment,
   studentWork,
@@ -374,4 +375,103 @@ test('practice tests use the same recipients and are not assigned twice', async 
       ).assigned,
       3,
     );
+});
+
+test('instructors edit the due date and assigned work of pending assignments', async () => {
+  const db = fixture();
+  const { teacher, amy, ben } = await seated(db);
+  const [first, second] = course.lessons;
+  const unit = course.units[0];
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Lesson',
+    targetId: first.id,
+    studentIds: [amy.id],
+  });
+  const lesson = (await mine(db, amy)).find((a) => a.study?.targetId === first.id)!;
+
+  // Change the due date and swap the lesson for another lesson, then for a unit.
+  assert.deepEqual(
+    await editAssignment(db, teacher, { id: lesson.id, due: '2999-03-03', targetId: second.id }),
+    { id: lesson.id, due: '2999-03-03', kind: 'Lesson', targetId: second.id, title: second.title },
+  );
+  let edited = (await mine(db, amy)).find((a) => a.id === lesson.id)!;
+  assert.equal(edited.due, '2999-03-03');
+  assert.equal(edited.study?.targetId, second.id);
+  assert.equal(edited.study?.title, second.title);
+  await editAssignment(db, teacher, {
+    id: lesson.id,
+    due: '2999-03-03',
+    kind: 'Unit',
+    targetId: unit.id,
+  });
+  edited = (await mine(db, amy)).find((a) => a.id === lesson.id)!;
+  assert.equal(edited.study?.kind, 'Unit');
+
+  // Only the assignment's own student changes; partners keep theirs.
+  assert.equal(
+    (await mine(db, ben)).some((a) => a.id === lesson.id),
+    false,
+  );
+
+  // Bad input, other schools, students, and duplicates are refused.
+  await assert.rejects(
+    editAssignment(db, teacher, { id: lesson.id, due: '2000-01-01' }),
+    /due date/,
+  );
+  await assert.rejects(
+    editAssignment(db, teacher, { id: lesson.id, due: '2999-03-03', targetId: 'nope' }),
+    /not in this event/,
+  );
+  await assert.rejects(
+    editAssignment(db, teacher, { id: lesson.id, due: '2999-03-03', kind: 'Practice' }),
+    /lesson, unit, or lab/,
+  );
+  await assert.rejects(editAssignment(db, amy, { id: lesson.id, due: '2999-03-03' }), /Instructor/);
+  const other = await school(db, 't2', 'ppcms-central', []);
+  await assert.rejects(editAssignment(db, other.teacher, { id: lesson.id, due: '2999-03-03' }), {
+    status: 404,
+  });
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Lesson',
+    targetId: first.id,
+    studentIds: [amy.id],
+  });
+  await assert.rejects(
+    editAssignment(db, teacher, {
+      id: lesson.id,
+      due: '2999-03-03',
+      kind: 'Lesson',
+      targetId: first.id,
+    }),
+    { status: 409 },
+  );
+
+  // Practice tests switch to another test or to any test in the event.
+  const [paper, other2] = listPracticeTests('C', 'forensics');
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Practice',
+    targetId: paper.id,
+    studentIds: [amy.id],
+  });
+  const practice = (await mine(db, amy)).find((a) => a.type === 'Practice')!;
+  if (other2) {
+    await editAssignment(db, teacher, { id: practice.id, due: '2999-04-04', targetId: other2.id });
+    const changed = (await mine(db, amy)).find((a) => a.id === practice.id)!;
+    assert.equal(changed.testId, other2.id);
+    assert.equal(changed.due, '2999-04-04');
+  }
+  await editAssignment(db, teacher, { id: practice.id, due: '2999-04-05', targetId: '' });
+  assert.equal((await mine(db, amy)).find((a) => a.id === practice.id)!.testId, null);
+  await assert.rejects(
+    editAssignment(db, teacher, {
+      id: practice.id,
+      due: '2999-04-05',
+      kind: 'Lesson',
+      targetId: first.id,
+    }),
+    /another practice test/,
+  );
 });

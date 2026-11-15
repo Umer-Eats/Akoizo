@@ -1970,6 +1970,45 @@
     color: var(--muted);
     margin-top: 8px;
   }
+  .assignment-row > .assignment-editor {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px 16px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .assignment-editor label {
+    display: grid;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    min-width: 0;
+  }
+  .assignment-editor label:nth-child(2) {
+    flex: 1 1 260px;
+  }
+  .assignment-editor input,
+  .assignment-editor select {
+    min-height: 40px;
+    max-width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    background: var(--surface-2);
+    color: inherit;
+    font: inherit;
+    font-size: 0.875rem;
+  }
+  .assignment-editor-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .assignment-editor .form-error {
+    flex-basis: 100%;
+    margin: 0;
+  }
   .student-list {
     max-height: 350px;
     overflow-y: auto;

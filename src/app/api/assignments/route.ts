@@ -3,7 +3,7 @@ import { AppError, isDivision } from '@/lib/domain';
 import { eventsForDivision } from '@/lib/events';
 import { findPracticeTest } from '@/lib/practice-catalog';
 import { createAssignment, removeAssignment } from '@/lib/school-service';
-import { assignWork, removeStudyAssignment } from '@/lib/study-assignment-service';
+import { assignWork, editAssignment, removeStudyAssignment } from '@/lib/study-assignment-service';
 export async function POST(request: Request) {
   try {
     const { db, profile } = await memberFor(request, 'instructor');
@@ -36,6 +36,16 @@ export async function POST(request: Request) {
       if (!matched) throw new AppError(400, 'That converted test is not in this event.');
     }
     return json(await createAssignment(db, profile, payload), 201);
+  } catch (error) {
+    return failure(error);
+  }
+}
+export async function PATCH(request: Request) {
+  try {
+    const { db, profile } = await memberFor(request, 'instructor');
+    const body = await request.json();
+    if (!body || typeof body !== 'object') throw new AppError(400, 'Enter assignment details.');
+    return json(await editAssignment(db, profile, body as Record<string, unknown>));
   } catch (error) {
     return failure(error);
   }
