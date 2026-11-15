@@ -2005,6 +2005,11 @@
     display: flex;
     gap: 8px;
   }
+  .assignment-editor .assignment-confirm {
+    flex: 1 1 280px;
+    margin: 0;
+    font-size: 0.875rem;
+  }
   .assignment-editor .form-error {
     flex-basis: 100%;
     margin: 0;

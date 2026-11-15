@@ -7,7 +7,12 @@ import { mkdir } from 'node:fs/promises';
 import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember, dashboardFor } from '../src/lib/school-service.ts';
-import { assignWork, editAssignment, studentWork } from '../src/lib/study-assignment-service.ts';
+import {
+  assignWork,
+  editAssignment,
+  removeAssignments,
+  studentWork,
+} from '../src/lib/study-assignment-service.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { listPracticeTests } from '../src/lib/practice-catalog.ts';
 
@@ -101,7 +106,11 @@ async function api(route, member) {
       tests: listPracticeTests(url.searchParams.get('division'), url.searchParams.get('eventId')),
     }),
     '/api/assignments': () =>
-      method === 'PATCH' ? editAssignment(db, member, request.postDataJSON()) : { ok: true },
+      method === 'PATCH'
+        ? editAssignment(db, member, request.postDataJSON())
+        : method === 'DELETE'
+          ? removeAssignments(db, member, request.postDataJSON())
+          : { ok: true },
   };
   try {
     return route.fulfill({ json: (await handlers[url.pathname]?.()) ?? [] });
@@ -272,6 +281,24 @@ try {
     assert.equal(work?.due, '2999-03-20', `${student.displayName} updated`);
   }
   await page.screenshot({ path: `${shots}/assigned-list.png` });
+
+  // Remove for all: a confirm step first, then the work leaves both students.
+  await moved.getByRole('button', { name: /from all students/ }).click();
+  await expect(moved.getByRole('group', { name: 'Confirm removal' })).toContainText(
+    'Remove this from 2 students',
+  );
+  await page.screenshot({ path: `${shots}/remove-confirm.png` });
+  await moved.getByRole('button', { name: 'Cancel' }).click();
+  await expect(moved.getByRole('group', { name: 'Confirm removal' })).toHaveCount(0);
+  await moved.getByRole('button', { name: /from all students/ }).click();
+  await moved.getByRole('button', { name: 'Remove from 2 students' }).click();
+  await expect(page.locator('.assigned-group', { hasText: 'Lesson 2.1:' })).toHaveCount(0);
+  for (const student of [amy, carla])
+    assert.equal(
+      (await dashboardFor(db, student)).assignments.some((a) => a.study?.targetId === nextLesson),
+      false,
+      `${student.displayName} removed`,
+    );
 
   // The assign screen numbers units and lessons too.
   await page.getByRole('button', { name: 'Assign new work' }).click();

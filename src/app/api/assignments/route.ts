@@ -3,7 +3,12 @@ import { AppError, isDivision } from '@/lib/domain';
 import { eventsForDivision } from '@/lib/events';
 import { findPracticeTest } from '@/lib/practice-catalog';
 import { createAssignment, removeAssignment } from '@/lib/school-service';
-import { assignWork, editAssignment, removeStudyAssignment } from '@/lib/study-assignment-service';
+import {
+  assignWork,
+  editAssignment,
+  removeAssignments,
+  removeStudyAssignment,
+} from '@/lib/study-assignment-service';
 export async function POST(request: Request) {
   try {
     const { db, profile } = await memberFor(request, 'instructor');
@@ -54,7 +59,9 @@ export async function DELETE(request: Request) {
   try {
     const { db, profile } = await memberFor(request, 'instructor');
     const id = new URL(request.url).searchParams.get('id');
-    if (!id) throw new AppError(400, 'Choose an assignment.');
+    // Without an id, the body names the same work for many students: { ids: [...] }.
+    if (!id)
+      return json(await removeAssignments(db, profile, await request.json().catch(() => null)));
     if (!(await removeStudyAssignment(db, profile, id))) await removeAssignment(db, profile, id);
     return json({ removed: true });
   } catch (error) {

@@ -399,8 +399,25 @@ function AssignedWork({
   onChanged: () => Promise<void>;
 }) {
   const [query, setQuery] = useState('');
+  const { request } = useAuth();
   const [editing, setEditing] = useState('');
+  const [removing, setRemoving] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [removeError, setRemoveError] = useState('');
   const today = dateInZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  async function removeAll(ids: string[]) {
+    setBusy(true);
+    setRemoveError('');
+    try {
+      await request('/api/assignments', { method: 'DELETE', body: JSON.stringify({ ids }) });
+      await onChanged();
+      setRemoving('');
+    } catch (error) {
+      setRemoveError(authMessage(error));
+    } finally {
+      setBusy(false);
+    }
+  }
   const needle = query.trim().toLowerCase();
   const groups = groupAssigned(assignments, division).filter(
     (group) =>
@@ -438,9 +455,9 @@ function AssignedWork({
         </label>
       </div>
       <p className="source-note">
-        Each item is grouped across every student who received it. Editing it changes the due date
-        or the assigned work for every student who has not finished it yet. Ranked tests are managed
-        from the Ranked Tests tab.
+        Each item is grouped across every student who received it. Editing or removing it changes it
+        for every student who has not finished it yet; finished work stays on their record. Ranked
+        tests are managed from the Ranked Tests tab.
       </p>
       {!groups.length ? (
         <div className="empty-state">
@@ -487,13 +504,66 @@ function AssignedWork({
                       ? 'OVERDUE'
                       : group.kind.toUpperCase()}
                 </span>
-                {group.pending.length > 0 && editing !== group.key && (
-                  <button
-                    onClick={() => setEditing(group.key)}
-                    aria-label={`Edit ${group.title} for all students`}
-                  >
-                    Edit for all
-                  </button>
+                {group.pending.length > 0 && editing !== group.key && removing !== group.key && (
+                  <>
+                    <button
+                      disabled={busy}
+                      onClick={() => {
+                        setRemoving('');
+                        setEditing(group.key);
+                      }}
+                      aria-label={`Edit ${group.title} for all students`}
+                    >
+                      Edit for all
+                    </button>
+                    <button
+                      disabled={busy}
+                      onClick={() => {
+                        setEditing('');
+                        setRemoveError('');
+                        setRemoving(group.key);
+                      }}
+                      aria-label={`Remove ${group.title} from all students`}
+                    >
+                      Remove for all
+                    </button>
+                  </>
+                )}
+                {removing === group.key && (
+                  <div className="assignment-editor" role="group" aria-label="Confirm removal">
+                    <p className="assignment-confirm">
+                      Remove this from {group.pending.length}{' '}
+                      {group.pending.length === 1 ? 'student' : 'students'} who{' '}
+                      {group.pending.length === 1 ? 'hasn’t' : 'haven’t'} finished it? This can’t be
+                      undone.
+                      {done
+                        ? ` The ${done} completed ${done === 1 ? 'copy stays' : 'copies stay'}.`
+                        : ''}
+                    </p>
+                    <div className="assignment-editor-actions">
+                      <button
+                        className="button button-primary button-small"
+                        disabled={busy}
+                        onClick={() => removeAll(group.pending.map((a) => a.id))}
+                      >
+                        {busy
+                          ? 'Removing…'
+                          : `Remove from ${group.pending.length} ${group.pending.length === 1 ? 'student' : 'students'}`}
+                      </button>
+                      <button
+                        className="button button-small button-glass"
+                        disabled={busy}
+                        onClick={() => setRemoving('')}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                    {removeError && (
+                      <p className="form-error" role="alert">
+                        {removeError}
+                      </p>
+                    )}
+                  </div>
                 )}
                 {editing === group.key && (
                   <AssignmentEditor

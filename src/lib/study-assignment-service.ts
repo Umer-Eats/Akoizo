@@ -297,6 +297,60 @@ export async function editAssignment(
   return group ? { updated: statements.length, due } : result;
 }
 
+/**
+ * Remove the same pending work from every student it went to. Either all of them are removed or
+ * none is; finished work stays as a record. Ranked tests are managed from the Ranked Tests tab.
+ */
+export async function removeAssignments(db: Database, instructor: Profile, body: unknown) {
+  if (instructor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
+  const ids: unknown = body && typeof body === 'object' ? (body as { ids?: unknown }).ids : null;
+  if (
+    !Array.isArray(ids) ||
+    !ids.length ||
+    ids.length > 200 ||
+    ids.some((id) => typeof id !== 'string' || !id)
+  )
+    throw new AppError(400, 'Choose assignments to remove.');
+  const statements: { sql: string; args: string[] }[] = [];
+  for (const id of new Set(ids as string[])) {
+    if (
+      await db.get(
+        `SELECT 1 FROM study_assignments a JOIN users u ON u.id=a.student_id
+         WHERE a.id=? AND a.completed_at IS NULL AND u.school_id=?`,
+        id,
+        instructor.schoolId,
+      )
+    ) {
+      statements.push({
+        sql: 'DELETE FROM study_assignments WHERE id=? AND completed_at IS NULL',
+        args: [id],
+      });
+      continue;
+    }
+    if (
+      await db.get(
+        `SELECT 1 FROM assignments a JOIN users u ON u.id=a.student_id
+         WHERE a.id=? AND a.completed_at IS NULL AND a.type='Practice' AND a.instructor_id=? AND u.school_id=?`,
+        id,
+        instructor.id,
+        instructor.schoolId,
+      )
+    ) {
+      statements.push({
+        sql: "DELETE FROM assignments WHERE id=? AND completed_at IS NULL AND type='Practice'",
+        args: [id],
+      });
+      continue;
+    }
+    throw new AppError(
+      404,
+      'One of these assignments was completed or removed. Refresh and try again.',
+    );
+  }
+  const written = await db.batch(statements, 'immediate');
+  return { removed: written.reduce((sum, row) => sum + row.rowsAffected, 0) };
+}
+
 export function studentEvent(student: Profile, eventId: unknown) {
   if (student.role !== 'student' || !student.division)
     throw new AppError(403, 'A student account is required.');

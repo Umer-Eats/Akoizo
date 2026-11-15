@@ -17,6 +17,7 @@ import { listPracticeTests } from '../src/lib/practice-catalog.ts';
 import {
   assignWork,
   editAssignment,
+  removeAssignments,
   recordLab,
   removeStudyAssignment,
   studentWork,
@@ -527,4 +528,40 @@ test('one edit changes the same work for every student it was assigned to', asyn
     editAssignment(db, teacher, { ids: [...ids, 'missing'], due: '2999-06-06' }),
     /completed or removed/,
   );
+});
+
+test('one remove takes the same pending work away from every student it went to', async () => {
+  const db = fixture();
+  const { teacher, amy, ben, cal } = await seated(db);
+  const [first] = course.lessons;
+  const [paper] = listPracticeTests('C', 'forensics');
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Lesson',
+    targetId: first.id,
+    everyone: true,
+  });
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Practice',
+    targetId: paper.id,
+    everyone: true,
+  });
+  const all = (await dashboardFor(db, teacher)).assignments;
+  const lessonIds = all.filter((a) => a.study?.targetId === first.id).map((a) => a.id);
+  const testIds = all.filter((a) => a.testId === paper.id).map((a) => a.id);
+
+  await assert.rejects(removeAssignments(db, amy, { ids: lessonIds }), /Instructor/);
+  await assert.rejects(removeAssignments(db, teacher, { ids: [] }), /Choose assignments/);
+  // A missing id removes nothing at all.
+  await assert.rejects(removeAssignments(db, teacher, { ids: [...lessonIds, 'missing'] }), {
+    status: 404,
+  });
+  const other = await school(db, 't2', 'ppcms-central', []);
+  await assert.rejects(removeAssignments(db, other.teacher, { ids: lessonIds }), { status: 404 });
+  assert.equal((await mine(db, amy)).length, 2);
+
+  assert.deepEqual(await removeAssignments(db, teacher, { ids: lessonIds }), { removed: 3 });
+  assert.deepEqual(await removeAssignments(db, teacher, { ids: testIds }), { removed: 3 });
+  for (const student of [amy, ben, cal]) assert.equal((await mine(db, student)).length, 0);
 });
