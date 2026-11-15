@@ -475,3 +475,56 @@ test('instructors edit the due date and assigned work of pending assignments', a
     /another practice test/,
   );
 });
+
+test('one edit changes the same work for every student it was assigned to', async () => {
+  const db = fixture();
+  const { teacher, amy, ben, cal, dee } = await seated(db);
+  const [first, second] = course.lessons;
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Lesson',
+    targetId: first.id,
+    everyone: true,
+  });
+  const ids = (await dashboardFor(db, teacher)).assignments
+    .filter((a) => a.study?.targetId === first.id)
+    .map((a) => a.id);
+  assert.equal(ids.length, 3);
+
+  assert.deepEqual(
+    await editAssignment(db, teacher, {
+      ids,
+      due: '2999-05-05',
+      kind: 'Lesson',
+      targetId: second.id,
+    }),
+    { updated: 3, due: '2999-05-05' },
+  );
+  for (const student of [amy, ben, cal]) {
+    const [work] = await mine(db, student);
+    assert.equal(work.study?.targetId, second.id);
+    assert.equal(work.due, '2999-05-05');
+  }
+  assert.equal((await mine(db, dee)).length, 0);
+
+  // A clash for one student saves nothing for anyone, and names who clashes.
+  await assignWork(db, teacher, {
+    ...forensics,
+    kind: 'Lesson',
+    targetId: first.id,
+    studentIds: [cal.id],
+  });
+  await assert.rejects(
+    editAssignment(db, teacher, { ids, due: '2999-06-06', kind: 'Lesson', targetId: first.id }),
+    /cal already has that item/,
+  );
+  for (const student of [amy, ben]) assert.equal((await mine(db, student))[0].due, '2999-05-05');
+  await assert.rejects(
+    editAssignment(db, teacher, { ids: [], due: '2999-06-06' }),
+    /Choose an assignment/,
+  );
+  await assert.rejects(
+    editAssignment(db, teacher, { ids: [...ids, 'missing'], due: '2999-06-06' }),
+    /completed or removed/,
+  );
+});

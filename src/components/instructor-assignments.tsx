@@ -1,6 +1,6 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import { BookOpen, ChevronLeft, FileText, FlaskConical, Search, Users } from 'lucide-react';
+import { BookOpen, ChevronLeft, Clock3, FileText, FlaskConical, Search, Users } from 'lucide-react';
 import { eventSlots, slotForEvent } from '@/lib/event-slots';
 import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/events';
 import {
@@ -10,11 +10,13 @@ import {
   matchesPracticeFilters,
   type PracticeSummary,
 } from '@/lib/practice-types';
-import { PHET_LAB, type Assignment, type Student, type StudyKind } from '@/lib/domain';
+import { PHET_LAB, dateInZone, type Assignment, type Student, type StudyKind } from '@/lib/domain';
+import { lessonLabel, studyLabel, unitLabel } from '@/lib/lesson-labels';
 import { lessonsForEvent } from '@/lib/lessons-registry';
 import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
 import { rosterDivision, type TeamSheet } from '@/lib/teams';
 import { AssignEventModal, type AssignResult } from './assign-event-modal';
+import { AssignmentEditor } from './assignment-editor';
 import { useAuth, authMessage } from './auth-context';
 
 type Work = { kind: 'Practice' | StudyKind; id: string; title: string; meta: string };
@@ -338,6 +340,188 @@ function InstructorTestList({
   );
 }
 
+/** One piece of work as it was handed out: the same item in the same event, for many students. */
+type AssignedGroup = {
+  key: string;
+  eventId: string;
+  eventName: string;
+  kind: 'Practice' | StudyKind;
+  title: string;
+  members: Assignment[];
+  pending: Assignment[];
+};
+
+function groupAssigned(assignments: Assignment[], division: Division) {
+  const groups = new Map<string, AssignedGroup>();
+  for (const a of assignments) {
+    if (a.ranked || a.division !== division) continue;
+    const kind = a.study?.kind ?? 'Practice';
+    const target = a.study?.targetId ?? a.testId ?? '';
+    const key = `${a.eventId}|${kind}|${target}`;
+    let group = groups.get(key);
+    if (!group) {
+      const course = a.study ? lessonsForEvent(a.eventId, division) : null;
+      group = {
+        key,
+        eventId: a.eventId,
+        eventName: a.eventName,
+        kind,
+        title: a.study
+          ? studyLabel(course, a.study.kind, a.study.targetId, a.study.title)
+          : a.testId
+            ? (a.testTitle ?? a.testId)
+            : 'Any practice test in this event',
+        members: [],
+        pending: [],
+      };
+      groups.set(key, group);
+    }
+    group.members.push(a);
+    if (!a.completedAt) group.pending.push(a);
+  }
+  return [...groups.values()].sort(
+    (a, b) =>
+      a.eventName.localeCompare(b.eventName) ||
+      a.title.localeCompare(b.title, undefined, { numeric: true }),
+  );
+}
+
+/** Everything already assigned in a division, grouped so one edit reaches every student. */
+function AssignedWork({
+  assignments,
+  division,
+  onDivision,
+  onChanged,
+}: {
+  assignments: Assignment[];
+  division: Division;
+  onDivision: (division: Division) => void;
+  onChanged: () => Promise<void>;
+}) {
+  const [query, setQuery] = useState('');
+  const [editing, setEditing] = useState('');
+  const today = dateInZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const needle = query.trim().toLowerCase();
+  const groups = groupAssigned(assignments, division).filter(
+    (group) =>
+      !needle ||
+      `${group.eventName} ${group.title} ${group.members.map((m) => m.studentName).join(' ')}`
+        .toLowerCase()
+        .includes(needle),
+  );
+  return (
+    <section aria-label="Already assigned work">
+      <div className="event-toolbar">
+        <label className="search-field">
+          <span className="sr-only">Search assigned work</span>
+          <Search size={16} />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search by event, lesson, or student"
+          />
+        </label>
+        <label className="division-control">
+          Division
+          <select
+            aria-label="Assigned work division"
+            value={division}
+            onChange={(e) => onDivision(e.target.value as Division)}
+          >
+            {(['A', 'B', 'C'] as const).map((value) => (
+              <option key={value} value={value}>
+                Division {value}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <p className="source-note">
+        Each item is grouped across every student who received it. Editing it changes the due date
+        or the assigned work for every student who has not finished it yet. Ranked tests are managed
+        from the Ranked Tests tab.
+      </p>
+      {!groups.length ? (
+        <div className="empty-state">
+          <Clock3 size={26} />
+          <h3>{needle ? 'Nothing assigned matches your search.' : 'Nothing assigned yet.'}</h3>
+          <p>
+            {needle
+              ? 'Try an event, lesson, or student name.'
+              : `Work you assign in Division ${division} appears here.`}
+          </p>
+        </div>
+      ) : (
+        <div className="assignment-list">
+          {groups.map((group) => {
+            const dues = [...new Set(group.pending.map((a) => a.due))].sort();
+            const done = group.members.length - group.pending.length;
+            const names = group.members.map((m) => m.studentName);
+            return (
+              <article className="assignment-row assigned-group" key={group.key}>
+                <Clock3 size={20} />
+                <div>
+                  <h3>{group.title}</h3>
+                  <p>
+                    {group.eventName} · {group.kind} · {group.members.length}{' '}
+                    {group.members.length === 1 ? 'student' : 'students'}
+                    {done ? ` · ${done} completed` : ''}
+                    {dues.length === 1 && (
+                      <>
+                        {' '}
+                        · Due <time dateTime={dues[0]}>{dues[0]}</time>
+                      </>
+                    )}
+                    {dues.length > 1 && ` · Due dates vary (${dues[0]} to ${dues.at(-1)})`}
+                  </p>
+                  <small>
+                    {names.slice(0, 6).join(', ')}
+                    {names.length > 6 ? ` and ${names.length - 6} more` : ''}
+                  </small>
+                </div>
+                <span className="tag">
+                  {!group.pending.length
+                    ? 'COMPLETED'
+                    : dues[0] < today
+                      ? 'OVERDUE'
+                      : group.kind.toUpperCase()}
+                </span>
+                {group.pending.length > 0 && editing !== group.key && (
+                  <button
+                    onClick={() => setEditing(group.key)}
+                    aria-label={`Edit ${group.title} for all students`}
+                  >
+                    Edit for all
+                  </button>
+                )}
+                {editing === group.key && (
+                  <AssignmentEditor
+                    target={{
+                      ids: group.pending.map((a) => a.id),
+                      division,
+                      eventId: group.eventId,
+                      eventName: group.eventName,
+                      due: dues[0] ?? today,
+                      study: group.pending[0].study,
+                      testId: group.pending[0].testId,
+                    }}
+                    onCancel={() => setEditing('')}
+                    onSaved={async () => {
+                      await onChanged();
+                      setEditing('');
+                    }}
+                  />
+                )}
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
 export function InstructorAssignments({
   students,
   assignments,
@@ -352,6 +536,7 @@ export function InstructorAssignments({
   const [pickedDivision, setDivision] = useState<Division | null>(null);
   const division =
     pickedDivision ?? rosterDivision(students, profile?.schoolCommunityName ?? profile?.schoolName);
+  const [view, setView] = useState<'assign' | 'assigned'>('assign');
   const [activeEvent, setActiveEvent] = useState<ScienceEvent | null>(null);
   const [work, setWork] = useState<Work | null>(null);
   const [tab, setTab] = useState<'Practice' | 'Lesson' | 'Lab'>('Practice');
@@ -383,17 +568,45 @@ export function InstructorAssignments({
         <p>Share your school password. Students appear here after joining your school.</p>
       </div>
     );
+  const pendingGroups = groupAssigned(assignments, division).filter(
+    (group) => group.pending.length,
+  ).length;
+  const switcher = (
+    <div className="archive-view-switch" role="group" aria-label="Assignments view">
+      <button aria-pressed={view === 'assign'} onClick={() => setView('assign')}>
+        Assign new work
+      </button>
+      <button aria-pressed={view === 'assigned'} onClick={() => setView('assigned')}>
+        Already assigned{pendingGroups ? ` (${pendingGroups})` : ''}
+      </button>
+    </div>
+  );
+  if (view === 'assigned')
+    return (
+      <>
+        {switcher}
+        <AssignedWork
+          assignments={assignments}
+          division={division}
+          onDivision={chooseDivision}
+          onChanged={onAssigned}
+        />
+      </>
+    );
   if (!activeEvent)
     return (
-      <InstructorEventCatalog
-        division={division}
-        onDivision={chooseDivision}
-        onSelect={(event) => {
-          setActiveEvent(event);
-          setUnitId('');
-          setTab('Practice');
-        }}
-      />
+      <>
+        {switcher}
+        <InstructorEventCatalog
+          division={division}
+          onDivision={chooseDivision}
+          onSelect={(event) => {
+            setActiveEvent(event);
+            setUnitId('');
+            setTab('Practice');
+          }}
+        />
+      </>
     );
   const course = lessonsForEvent(activeEvent.id, division);
   const units = course?.units.filter((unit) => !unitId || unit.id === unitId) ?? [];
@@ -417,6 +630,7 @@ export function InstructorAssignments({
   );
   return (
     <>
+      {switcher}
       <button className="back-link" onClick={() => setActiveEvent(null)}>
         <ChevronLeft size={16} /> All Division {division} events
       </button>
@@ -472,7 +686,7 @@ export function InstructorAssignments({
                 <option value="">All units</option>
                 {course.units.map((unit) => (
                   <option key={unit.id} value={unit.id}>
-                    {unit.title}
+                    {unitLabel(course, unit.id)}
                   </option>
                 ))}
               </select>
@@ -480,11 +694,11 @@ export function InstructorAssignments({
             {units.map((unit) => (
               <section key={unit.id} className="ranked-create">
                 <div className="dashboard-section-title">
-                  <h3>{unit.title}</h3>
+                  <h3>{unitLabel(course, unit.id)}</h3>
                   {choose({
                     kind: 'Unit',
                     id: unit.id,
-                    title: unit.title,
+                    title: unitLabel(course, unit.id) ?? unit.title,
                     meta: `${unit.lessonIds.length} lessons`,
                   })}
                 </div>
@@ -495,7 +709,7 @@ export function InstructorAssignments({
                     const item: Work = {
                       kind: 'Lesson',
                       id,
-                      title: lesson.title,
+                      title: lessonLabel(course, id) ?? lesson.title,
                       meta: `${lesson.durationMin} minutes · ${lesson.practice.length} practice questions`,
                     };
                     return (

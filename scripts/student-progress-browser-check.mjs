@@ -80,6 +80,14 @@ await assignWork(db, teacher.profile, {
   targetId: course.lessons[0].id,
 });
 await assignWork(db, teacher.profile, { ...forensics, kind: 'Practice', targetId: paper.id });
+// Amy and Carla share the first unit, edited for both from the Assignments tab.
+const carla = students[2].profile;
+await assignWork(db, teacher.profile, {
+  ...forensics,
+  studentIds: [amy.id, carla.id],
+  kind: 'Unit',
+  targetId: course.units[0].id,
+});
 
 async function api(route, member) {
   const request = route.request();
@@ -186,7 +194,9 @@ try {
   await rows.first().click();
   await expect(page.getByRole('heading', { name: 'Amy Chen’s progress.' })).toBeVisible();
   const list = page.locator('.assignment-list');
-  await expect(list.locator('.assignment-row')).toHaveCount(2);
+  await expect(list.locator('.assignment-row')).toHaveCount(3);
+  // Lessons show their unit and lesson number.
+  await expect(list).toContainText(`Lesson: Lesson 1.1: ${course.lessons[0].title}`);
   const lessonRow = list.locator('.assignment-row', { hasText: course.lessons[0].title });
   await lessonRow.getByRole('button', { name: /^Edit Forensics lesson/ }).click();
   const editor = lessonRow.locator('form.assignment-editor');
@@ -219,10 +229,63 @@ try {
   await expect(edited.locator('.assignment-editor [role="alert"]')).toContainText('due date');
   await page.screenshot({ path: `${shots}/edit-error.png` });
   await edited.getByRole('button', { name: 'Cancel' }).click();
-  const [lessonNow] = (await dashboardFor(db, amy)).assignments.filter((a) => a.study);
+  const lessonNow = (await dashboardFor(db, amy)).assignments.find(
+    (a) => a.study?.kind === 'Lesson',
+  );
   assert.equal(lessonNow.study.targetId, course.lessons[1].id);
   assert.equal(lessonNow.due, '2999-02-14');
   await search.fill('');
+
+  // Assignments tab → Already assigned: the shared unit is one item for both students.
+  await page
+    .getByRole('navigation', { name: 'Instructor sections' })
+    .getByRole('button', { name: /Assignments/ })
+    .click();
+  await page.getByRole('button', { name: /^Already assigned/ }).click();
+  await page.getByLabel('Assigned work division').selectOption('C');
+  const unitTitle = course.units[0].title.replace(/^unit\s*\d+\s*[:.\-–—]\s*/i, '');
+  const group = page.locator('.assigned-group', { hasText: `Unit 1: ${unitTitle}` });
+  await expect(group).toContainText('2 students');
+  await expect(group).toContainText('Amy Chen, Carla Diaz');
+  await group.getByRole('button', { name: /for all students/ }).click();
+  const groupEditor = group.locator('form.assignment-editor');
+  const select = groupEditor.getByLabel('Assigned work');
+  // The dropdown is organized by unit, with numbered lessons.
+  assert.equal(
+    await select.locator('optgroup').first().getAttribute('label'),
+    `Unit 1: ${unitTitle}`,
+  );
+  const nextLesson = course.units[1].lessonIds[0];
+  await expect(select.locator(`option[value="Lesson:${nextLesson}"]`)).toHaveText(/^Lesson 2\.1: /);
+  await select.selectOption(`Lesson:${nextLesson}`);
+  await groupEditor.getByLabel('Due date').fill('2999-03-20');
+  await page.screenshot({ path: `${shots}/assigned-group-edit.png` });
+  await groupEditor.getByRole('button', { name: 'Save for 2 students' }).click();
+  await expect(groupEditor).toHaveCount(0);
+  const moved = page.locator('.assigned-group', { hasText: 'Lesson 2.1:' });
+  await expect(moved).toContainText('2 students');
+  await expect(moved).toContainText('Due 2999-03-20');
+  for (const student of [amy, carla]) {
+    const work = (await dashboardFor(db, student)).assignments.find(
+      (a) => a.study?.targetId === nextLesson,
+    );
+    assert.equal(work?.due, '2999-03-20', `${student.displayName} updated`);
+  }
+  await page.screenshot({ path: `${shots}/assigned-list.png` });
+
+  // The assign screen numbers units and lessons too.
+  await page.getByRole('button', { name: 'Assign new work' }).click();
+  await page.locator('.event-card-link', { hasText: 'Forensics' }).click();
+  await page.getByRole('button', { name: 'Lessons by unit' }).click();
+  await expect(page.getByRole('heading', { name: `Unit 1: ${unitTitle}` })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: `Lesson 1.1: ${course.lessons[0].title}` }),
+  ).toBeVisible();
+  await page.screenshot({ path: `${shots}/assign-numbered.png` });
+  await page
+    .getByRole('navigation', { name: 'Instructor sections' })
+    .getByRole('button', { name: /Student Progress/ })
+    .click();
 
   await page.setViewportSize({ width: 390, height: 900 });
   assert.equal(
@@ -235,7 +298,7 @@ try {
 
   const relevant = errors.filter((e) => !/hydrat|favicon/i.test(e));
   assert.deepEqual(relevant, [], 'no page errors');
-  console.log('Student search and assignment editing checks passed.');
+  console.log('Student search, assignment editing, and group editing checks passed.');
 } finally {
   await browser.close();
 }

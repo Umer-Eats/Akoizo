@@ -36,7 +36,6 @@ import {
 } from '@/lib/events';
 import { eventToolIds, rulesForEvent } from '@/lib/event-rules';
 import {
-  PHET_LAB,
   dateInZone,
   type Assignment,
   type DashboardData,
@@ -53,8 +52,9 @@ import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
 import { DivisionCLabs } from './division-c-labs';
-import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
-import { practiceTitle, type PracticeSummary } from '@/lib/practice-types';
+import { labsForEvent } from '@/lib/division-c-labs';
+import { studyLabel } from '@/lib/lesson-labels';
+import { AssignmentEditor } from './assignment-editor';
 import { CheatSheets } from './cheatsheets';
 import { Binders } from './binders';
 import { BuildTools } from './build-tools';
@@ -449,165 +449,6 @@ function assignmentHref(assignment: Assignment) {
   return `${base}/${tool}${assignment.testId ? `/${encodeURIComponent(assignment.testId)}` : ''}`;
 }
 
-/** Change a pending assignment's due date and what it asks for, within the same event. */
-function AssignmentEditor({
-  assignment,
-  onSaved,
-  onCancel,
-}: {
-  assignment: Assignment;
-  onSaved: () => Promise<void>;
-  onCancel: () => void;
-}) {
-  const { request } = useAuth();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const today = dateInZone(timeZone);
-  const study = assignment.study;
-  const [due, setDue] = useState(assignment.due < today ? today : assignment.due);
-  const [choice, setChoice] = useState(
-    study ? `${study.kind}:${study.targetId}` : `Practice:${assignment.testId ?? ''}`,
-  );
-  const [tests, setTests] = useState<PracticeSummary[] | null>(study ? [] : null);
-  const [error, setError] = useState('');
-  const [saving, setSaving] = useState(false);
-  useEffect(() => {
-    if (study) return;
-    let active = true;
-    request<{ tests: PracticeSummary[] }>(
-      `/api/practice?division=${assignment.division}&eventId=${encodeURIComponent(assignment.eventId)}`,
-    )
-      .then((data) => {
-        if (active) setTests(data.tests);
-      })
-      .catch((error) => {
-        if (!active) return;
-        setTests([]);
-        setError(authMessage(error));
-      });
-    return () => {
-      active = false;
-    };
-  }, [request, study, assignment.division, assignment.eventId]);
-
-  const groups: { label: string; options: { value: string; label: string }[] }[] = [];
-  if (study) {
-    const course = lessonsForEvent(assignment.eventId, assignment.division);
-    if (course) {
-      groups.push({
-        label: 'Units',
-        options: course.units.map((unit) => ({ value: `Unit:${unit.id}`, label: unit.title })),
-      });
-      groups.push({
-        label: 'Lessons',
-        options: course.lessons.map((lesson) => ({
-          value: `Lesson:${lesson.id}`,
-          label: lesson.title,
-        })),
-      });
-    }
-    const labs = labsForEvent(assignment.division, assignment.eventId).map((lab) => ({
-      value: `Lab:${lab.id}`,
-      label: lab.title,
-    }));
-    const phet = labs.length ? phetActivities[assignment.eventId] : undefined;
-    if (phet) labs.push({ value: `Lab:${PHET_LAB}`, label: `PhET: ${phet.title}` });
-    if (labs.length) groups.push({ label: 'Lab simulations', options: labs });
-    // Keep the current item listed even if the catalog no longer offers it.
-    if (!groups.some((group) => group.options.some((option) => option.value === choice)))
-      groups.unshift({ label: 'Current', options: [{ value: choice, label: study.title }] });
-  } else {
-    const options = [{ value: 'Practice:', label: 'Any practice test in this event' }];
-    for (const test of tests ?? [])
-      options.push({ value: `Practice:${test.id}`, label: practiceTitle(test) });
-    if (!options.some((option) => option.value === choice))
-      options.push({ value: choice, label: assignment.testId ?? 'Current test' });
-    groups.push({ label: 'Practice tests', options });
-  }
-
-  async function save(event: React.FormEvent) {
-    event.preventDefault();
-    const split = choice.indexOf(':');
-    setSaving(true);
-    setError('');
-    try {
-      await request('/api/assignments', {
-        method: 'PATCH',
-        body: JSON.stringify({
-          id: assignment.id,
-          due,
-          timeZone,
-          kind: choice.slice(0, split),
-          targetId: choice.slice(split + 1),
-        }),
-      });
-      await onSaved();
-    } catch (error) {
-      setError(authMessage(error));
-      setSaving(false);
-    }
-  }
-
-  return (
-    <form
-      className="assignment-editor"
-      onSubmit={save}
-      aria-label={`Edit ${assignment.eventName} assignment`}
-    >
-      <label>
-        Due date
-        <input
-          type="date"
-          required
-          min={today}
-          value={due}
-          onChange={(e) => setDue(e.target.value)}
-        />
-      </label>
-      <label>
-        Assigned work
-        <select
-          value={choice}
-          disabled={!tests}
-          onChange={(e) => setChoice(e.target.value)}
-          aria-busy={!tests}
-        >
-          {groups.map((group) => (
-            <optgroup key={group.label} label={group.label}>
-              {group.options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </optgroup>
-          ))}
-        </select>
-      </label>
-      <div className="assignment-editor-actions">
-        <button
-          className="button button-primary button-small"
-          type="submit"
-          disabled={saving || !tests}
-        >
-          {saving ? 'Saving…' : 'Save changes'}
-        </button>
-        <button
-          className="button button-small button-glass"
-          type="button"
-          disabled={saving}
-          onClick={onCancel}
-        >
-          Cancel
-        </button>
-      </div>
-      {error && (
-        <p className="form-error" role="alert">
-          {error}
-        </p>
-      )}
-    </form>
-  );
-}
-
 function AssignmentList({
   assignments,
   division,
@@ -648,7 +489,7 @@ function AssignmentList({
               {assignment.ranked
                 ? ` Ranked test: ${assignment.testTitle} · `
                 : assignment.study
-                  ? ` ${assignment.study.kind}: ${assignment.study.title} · `
+                  ? ` ${assignment.study.kind}: ${studyLabel(lessonsForEvent(assignment.eventId, assignment.division), assignment.study.kind, assignment.study.targetId, assignment.study.title)} · `
                   : assignment.testId
                     ? ' Assigned converted test · '
                     : ` Complete any 1 ${assignment.type.toLowerCase()} test · `}
@@ -691,7 +532,15 @@ function AssignmentList({
               </button>
               {onEdited && editing === assignment.id && (
                 <AssignmentEditor
-                  assignment={assignment}
+                  target={{
+                    ids: [assignment.id],
+                    division: assignment.division,
+                    eventId: assignment.eventId,
+                    eventName: assignment.eventName,
+                    due: assignment.due,
+                    study: assignment.study,
+                    testId: assignment.testId,
+                  }}
                   onCancel={() => setEditing('')}
                   onSaved={async () => {
                     await onEdited();

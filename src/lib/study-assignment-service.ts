@@ -165,11 +165,19 @@ export async function removeStudyAssignment(db: Database, instructor: Profile, i
 const isConflict = (error: unknown) =>
   error instanceof Error && /UNIQUE constraint failed/i.test(error.message);
 
+const eventOf = (key: string) => {
+  const [, division, eventId] = key.split(':');
+  if (!isDivision(division) || !eventId)
+    throw new AppError(409, 'That event is no longer offered.');
+  return { division, eventId };
+};
+
 /**
- * Change one student's pending assignment after it was given: its due date and what it asks for.
- * The work stays in the same event and family: a practice test becomes another practice test (or
- * any test when `targetId` is empty), and a lesson, unit or lab becomes another lesson, unit or lab.
- * Ranked tests are managed from the Ranked Tests tab.
+ * Change pending assignments after they were given: their due date and what they ask for. Pass
+ * one `id`, or `ids` to change the same work for every student it went to; either every change
+ * is saved or none is. The work stays in the same event and family: a practice test becomes
+ * another practice test (or any test when `targetId` is empty), and a lesson, unit or lab becomes
+ * another lesson, unit or lab. Ranked tests are managed from the Ranked Tests tab.
  */
 export async function editAssignment(
   db: Database,
@@ -177,102 +185,116 @@ export async function editAssignment(
   body: Record<string, unknown>,
 ) {
   if (instructor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
-  const id = body.id;
-  if (typeof id !== 'string' || !id) throw new AppError(400, 'Choose an assignment.');
+  const group = Array.isArray(body.ids);
+  const ids: unknown[] = group ? (body.ids as unknown[]) : [body.id];
+  if (!ids.length || ids.length > 200 || ids.some((id) => typeof id !== 'string' || !id))
+    throw new AppError(400, 'Choose an assignment.');
   const due = dueDate(body);
   const targetId = body.targetId ?? '';
   if (typeof targetId !== 'string' || targetId.length > 160)
     throw new AppError(400, 'Choose what to assign.');
-  const eventOf = (key: string) => {
-    const [, division, eventId] = key.split(':');
-    if (!isDivision(division) || !eventId)
-      throw new AppError(409, 'That event is no longer offered.');
-    return { division, eventId };
-  };
+  const whose = (row: Record<string, unknown>) =>
+    group ? String(row.display_name) : 'This student';
 
-  const study = await db.get(
-    `SELECT a.id,a.student_id,a.event_id,a.kind,a.target_id FROM study_assignments a
-     JOIN users u ON u.id=a.student_id
-     WHERE a.id=? AND a.completed_at IS NULL AND u.school_id=?`,
-    id,
-    instructor.schoolId,
-  );
-  if (study) {
-    const key = String(study.event_id);
-    const { division, eventId } = eventOf(key);
-    const kind = body.kind === undefined ? String(study.kind) : body.kind;
-    if (kind !== 'Lesson' && kind !== 'Unit' && kind !== 'Lab')
-      throw new AppError(400, 'Choose a lesson, unit, or lab simulation.');
-    const target = targetId || String(study.target_id);
-    const title = titleOf(division, eventId, kind, target);
-    try {
-      const [result] = await db.batch(
-        [
-          {
-            sql: `UPDATE study_assignments SET kind=?,target_id=?,title=?,due_date=?
-              WHERE id=? AND completed_at IS NULL`,
-            args: [kind, target, title, due, id],
-          },
-        ],
-        'immediate',
-      );
-      if (!result.rowsAffected) throw new AppError(404, 'Pending assignment not found.');
-    } catch (error) {
-      if (isConflict(error))
-        throw new AppError(409, 'This student already has that item assigned in this event.');
-      throw error;
+  const statements: { sql: string; args: (string | null)[] }[] = [];
+  const settle: { key: string; division: Division; eventId: string; studentId: string }[] = [];
+  let result: Record<string, unknown> = {};
+  for (const id of new Set(ids as string[])) {
+    const study = await db.get(
+      `SELECT a.id,a.student_id,a.event_id,a.kind,a.target_id,u.display_name FROM study_assignments a
+       JOIN users u ON u.id=a.student_id
+       WHERE a.id=? AND a.completed_at IS NULL AND u.school_id=?`,
+      id,
+      instructor.schoolId,
+    );
+    if (study) {
+      const key = String(study.event_id);
+      const { division, eventId } = eventOf(key);
+      const kind = body.kind === undefined ? String(study.kind) : body.kind;
+      if (kind !== 'Lesson' && kind !== 'Unit' && kind !== 'Lab')
+        throw new AppError(400, 'Choose a lesson, unit, or lab simulation.');
+      const target = targetId || String(study.target_id);
+      const title = titleOf(division, eventId, kind, target);
+      if (
+        await db.get(
+          `SELECT 1 FROM study_assignments WHERE student_id=? AND event_id=? AND kind=? AND target_id=? AND id<>?`,
+          String(study.student_id),
+          key,
+          kind,
+          target,
+          id,
+        )
+      )
+        throw new AppError(409, `${whose(study)} already has that item assigned in this event.`);
+      statements.push({
+        sql: `UPDATE study_assignments SET kind=?,target_id=?,title=?,due_date=?
+          WHERE id=? AND completed_at IS NULL`,
+        args: [kind, target, title, due, id],
+      });
+      if (kind !== 'Lab')
+        settle.push({ key, division, eventId, studentId: String(study.student_id) });
+      result = { id, due, kind, targetId: target, title };
+      continue;
     }
-    const course = kind === 'Lab' ? null : lessonsForEvent(eventId, division);
-    if (course) await settleLessons(db, key, course, [String(study.student_id)]);
-    return { id, due, kind, targetId: target, title };
+
+    const test = await db.get(
+      `SELECT a.id,a.student_id,a.event_id,a.type,u.display_name FROM assignments a
+       JOIN users u ON u.id=a.student_id
+       WHERE a.id=? AND a.completed_at IS NULL AND a.instructor_id=? AND u.school_id=?`,
+      id,
+      instructor.id,
+      instructor.schoolId,
+    );
+    if (!test)
+      throw new AppError(
+        404,
+        group
+          ? 'One of these assignments was completed or removed. Refresh and try again.'
+          : 'Pending assignment not found.',
+      );
+    if (test.type !== 'Practice')
+      throw new AppError(400, 'Edit ranked tests from the Ranked Tests tab.');
+    if (body.kind !== undefined && body.kind !== 'Practice')
+      throw new AppError(400, 'A practice test can only be changed to another practice test.');
+    const key = String(test.event_id);
+    const { division, eventId } = eventOf(key);
+    if (targetId) titleOf(division, eventId, 'Practice', targetId);
+    if (
+      targetId &&
+      (await db.get(
+        `SELECT 1 FROM assignments WHERE student_id=? AND event_id=? AND test_id=? AND completed_at IS NULL AND id<>?`,
+        String(test.student_id),
+        key,
+        targetId,
+        id,
+      ))
+    )
+      throw new AppError(409, `${whose(test)} already has that test assigned.`);
+    statements.push({
+      sql: 'UPDATE assignments SET due_date=?,test_id=? WHERE id=? AND completed_at IS NULL',
+      args: [due, targetId || null, id],
+    });
+    result = { id, due, kind: 'Practice', targetId: targetId || null };
   }
 
-  const test = await db.get(
-    `SELECT a.id,a.student_id,a.event_id,a.type FROM assignments a JOIN users u ON u.id=a.student_id
-     WHERE a.id=? AND a.completed_at IS NULL AND a.instructor_id=? AND u.school_id=?`,
-    id,
-    instructor.id,
-    instructor.schoolId,
-  );
-  if (!test) throw new AppError(404, 'Pending assignment not found.');
-  if (test.type !== 'Practice')
-    throw new AppError(400, 'Edit ranked tests from the Ranked Tests tab.');
-  if (body.kind !== undefined && body.kind !== 'Practice')
-    throw new AppError(400, 'A practice test can only be changed to another practice test.');
-  const key = String(test.event_id);
-  const { division, eventId } = eventOf(key);
-  if (targetId) titleOf(division, eventId, 'Practice', targetId);
-  if (
-    targetId &&
-    (await db.get(
-      `SELECT 1 FROM assignments WHERE student_id=? AND event_id=? AND test_id=? AND completed_at IS NULL AND id<>?`,
-      String(test.student_id),
-      key,
-      targetId,
-      id,
-    ))
-  )
-    throw new AppError(409, 'This student already has that test assigned.');
   try {
-    const [result] = await db.batch(
-      [
-        {
-          sql: 'UPDATE assignments SET due_date=?,test_id=? WHERE id=? AND completed_at IS NULL',
-          args: [due, targetId || null, id],
-        },
-      ],
-      'immediate',
-    );
-    if (!result.rowsAffected) throw new AppError(404, 'Pending assignment not found.');
+    const written = await db.batch(statements, 'immediate');
+    if (written.some((row) => !row.rowsAffected))
+      throw new AppError(409, 'An assignment changed while saving. Refresh and try again.');
   } catch (error) {
     if (isConflict(error))
       throw new AppError(
         409,
-        'This student already has a practice test in this event due that day. Pick another date.',
+        `${group ? 'A student' : 'This student'} already has a practice test in this event due that day. Pick another date.`,
       );
     throw error;
   }
-  return { id, due, kind: 'Practice' as const, targetId: targetId || null };
+  // Lessons a student already finished complete the edited assignment at once.
+  for (const item of settle) {
+    const course = lessonsForEvent(item.eventId, item.division);
+    if (course) await settleLessons(db, item.key, course, [item.studentId]);
+  }
+  return group ? { updated: statements.length, due } : result;
 }
 
 export function studentEvent(student: Profile, eventId: unknown) {
