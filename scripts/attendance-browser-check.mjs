@@ -198,8 +198,8 @@ try {
   await student.context.setGeolocation({ latitude: 27, longitude: -80, accuracy: 10 });
   await student.page.getByRole('button', { name: 'Check in with location' }).click();
   await expect(student.page.locator('.att-error')).toContainText('0.5 mile');
-  // Chromebook-style Wi-Fi fix: ~1.7 km off-center with 1.5 km uncertainty still checks in.
-  await student.context.setGeolocation({ latitude: 26.015, longitude: -80, accuracy: 1500 });
+  // Chromebook IP-based fix: ~9 km off-center with 5 km uncertainty still checks in.
+  await student.context.setGeolocation({ latitude: 26.08, longitude: -80, accuracy: 5000 });
   await student.page.getByRole('button', { name: 'Check in with location' }).click();
   await expect(student.page.getByRole('heading', { name: 'You showed up.' })).toBeVisible();
   await student.page.screenshot({ path: `${out}/student-checked-in.png`, fullPage: true });
@@ -210,6 +210,36 @@ try {
     .click();
   await expect(teacher.page.locator('.attendance-embedded')).toBeVisible();
   await fits(teacher.page, 'teacher-dashboard');
+  // Edit the event the student already checked into; the check-in must survive.
+  await teacher.page.getByRole('button', { name: 'Edit event', exact: true }).click();
+  const editDialog = teacher.page.locator('.att-dialog');
+  await expect(editDialog.getByLabel('Event name')).toHaveValue('Saturday build event');
+  await editDialog.getByLabel('Event name').fill('Saturday build event (gym)');
+  await teacher.page.screenshot({ path: `${out}/teacher-edit-event.png` });
+  await editDialog.getByRole('button', { name: 'Save changes' }).click();
+  await expect(teacher.page.locator('.att-dialog')).toHaveCount(0);
+  await expect(teacher.page.getByText('Event updated. Existing check-ins were kept.')).toBeVisible();
+  await expect(teacher.page.getByText('Saturday build event (gym)').first()).toBeVisible();
+  await expect(teacher.page.locator('.att-progress-label strong')).toContainText(/^\s*1\s*\//);
+  assert.equal(
+    f.raw.prepare('SELECT COUNT(*) n FROM attendance_records WHERE workshop_id=?').get(current.id).n,
+    1,
+  );
+  await student.page.reload();
+  await expect(student.page.getByRole('heading', { name: 'You showed up.' })).toBeVisible();
+  // Teacher marks a student present by hand, then undoes it.
+  await teacher.page.locator('.att-roster summary').click();
+  await expect(teacher.page.getByRole('list', { name: 'Event roster' })).toContainText('Checked in');
+  await teacher.page.getByRole('button', { name: 'Mark Sam Patel present' }).click();
+  await expect(teacher.page.getByText('Sam Patel is marked present.')).toBeVisible();
+  await expect(teacher.page.getByRole('list', { name: 'Event roster' })).toContainText(
+    'Marked present',
+  );
+  await expect(teacher.page.locator('.att-progress-label strong')).toContainText(/^\s*2\s*\//);
+  await teacher.page.locator('.att-roster').screenshot({ path: `${out}/teacher-mark-present.png` });
+  await teacher.page.getByRole('button', { name: 'Undo present mark for Sam Patel' }).click();
+  await expect(teacher.page.getByRole('button', { name: 'Mark Sam Patel present' })).toBeVisible();
+  await expect(teacher.page.locator('.att-progress-label strong')).toContainText(/^\s*1\s*\//);
   await teacher.page.getByRole('button', { name: 'Delete event', exact: true }).click();
   await expect(teacher.page.getByRole('group', { name: 'Confirm event deletion' })).toContainText(
     'permanently removes',

@@ -11,6 +11,7 @@ import {
   assignWork,
   editAssignment,
   removeAssignments,
+  setAssignedStudents,
   studentWork,
 } from '../src/lib/study-assignment-service.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
@@ -107,7 +108,9 @@ async function api(route, member) {
     }),
     '/api/assignments': () =>
       method === 'PATCH'
-        ? editAssignment(db, member, request.postDataJSON())
+        ? request.postDataJSON().action === 'students'
+          ? setAssignedStudents(db, member, request.postDataJSON())
+          : editAssignment(db, member, request.postDataJSON())
         : method === 'DELETE'
           ? removeAssignments(db, member, request.postDataJSON())
           : { ok: true },
@@ -299,6 +302,32 @@ try {
       false,
       `${student.displayName} removed`,
     );
+
+  // Edit students: swap Amy for Carla and Ella on Amy's lesson.
+  const lessonGroup = page.locator('.assigned-group', { hasText: 'Lesson 1.2:' });
+  await lessonGroup.getByRole('button', { name: /^Edit students assigned/ }).click();
+  const picker = page.getByRole('dialog', { name: /^Students assigned Lesson 1\.2/ });
+  await expect(picker.getByLabel('Amy Chen has this work')).toBeChecked();
+  await expect(picker.getByLabel('Carla Diaz has this work')).not.toBeChecked();
+  // Only Division C students are offered.
+  await expect(picker.getByLabel('Ben Ortiz has this work')).toHaveCount(0);
+  await picker.getByLabel('Amy Chen has this work').uncheck();
+  await picker.getByLabel('Carla Diaz has this work').check();
+  await picker.getByLabel('Ella Brooks has this work').check();
+  await expect(picker.locator('.selection-summary')).toContainText(
+    '2 students will have it · 2 to add · 1 to remove',
+  );
+  await picker.getByLabel('Due date for added students').fill('2999-04-01');
+  await page.screenshot({ path: `${shots}/edit-students.png` });
+  await picker.getByRole('button', { name: 'Save students' }).click();
+  await expect(picker).toHaveCount(0);
+  await expect(lessonGroup).toContainText('2 students');
+  await expect(lessonGroup).toContainText('Carla Diaz, Ella Brooks');
+  const ella = students[4].profile;
+  const lessonOf = (list) => list.find((a) => a.study?.targetId === course.lessons[1].id);
+  assert.equal(lessonOf((await dashboardFor(db, amy)).assignments), undefined, 'Amy removed');
+  assert.equal(lessonOf((await dashboardFor(db, carla)).assignments)?.due, '2999-04-01');
+  assert.equal(lessonOf((await dashboardFor(db, ella)).assignments)?.due, '2999-04-01');
 
   // The assign screen numbers units and lessons too.
   await page.getByRole('button', { name: 'Assign new work' }).click();

@@ -17,6 +17,7 @@ import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
 import { rosterDivision, type TeamSheet } from '@/lib/teams';
 import { AssignEventModal, type AssignResult } from './assign-event-modal';
 import { AssignmentEditor } from './assignment-editor';
+import { AssignedStudentsModal } from './assigned-students-modal';
 import { useAuth, authMessage } from './auth-context';
 
 type Work = { kind: 'Practice' | StudyKind; id: string; title: string; meta: string };
@@ -346,6 +347,8 @@ type AssignedGroup = {
   eventId: string;
   eventName: string;
   kind: 'Practice' | StudyKind;
+  /** The lesson, unit, lab or test id; empty for "any practice test in this event". */
+  targetId: string;
   title: string;
   members: Assignment[];
   pending: Assignment[];
@@ -366,6 +369,7 @@ function groupAssigned(assignments: Assignment[], division: Division) {
         eventId: a.eventId,
         eventName: a.eventName,
         kind,
+        targetId: target,
         title: a.study
           ? studyLabel(course, a.study.kind, a.study.targetId, a.study.title)
           : a.testId
@@ -392,15 +396,20 @@ function AssignedWork({
   division,
   onDivision,
   onChanged,
+  students,
+  teams,
 }: {
   assignments: Assignment[];
   division: Division;
   onDivision: (division: Division) => void;
   onChanged: () => Promise<void>;
+  students: Student[];
+  teams: TeamSheet[] | null;
 }) {
   const [query, setQuery] = useState('');
   const { request } = useAuth();
   const [editing, setEditing] = useState('');
+  const [picking, setPicking] = useState('');
   const [removing, setRemoving] = useState('');
   const [busy, setBusy] = useState(false);
   const [removeError, setRemoveError] = useState('');
@@ -504,6 +513,47 @@ function AssignedWork({
                       ? 'OVERDUE'
                       : group.kind.toUpperCase()}
                 </span>
+                {editing !== group.key && removing !== group.key && (
+                  <button
+                    disabled={busy}
+                    onClick={() => {
+                      setEditing('');
+                      setRemoving('');
+                      setPicking(group.key);
+                    }}
+                    aria-label={`Edit students assigned ${group.title}`}
+                  >
+                    Edit students
+                  </button>
+                )}
+                {picking === group.key && (
+                  <AssignedStudentsModal
+                    target={{
+                      division,
+                      eventId: group.eventId,
+                      eventName: group.eventName,
+                      kind: group.kind,
+                      targetId: group.targetId,
+                      title: group.title,
+                      pending: group.pending.map((a) => a.studentId),
+                      finished: group.members.filter((a) => a.completedAt).map((a) => a.studentId),
+                      due:
+                        dues[0] ??
+                        group.members
+                          .map((a) => a.due)
+                          .sort()
+                          .at(-1) ??
+                        today,
+                    }}
+                    students={students}
+                    teams={teams}
+                    onClose={() => setPicking('')}
+                    onSaved={async () => {
+                      await onChanged();
+                      setPicking('');
+                    }}
+                  />
+                )}
                 {group.pending.length > 0 && editing !== group.key && removing !== group.key && (
                   <>
                     <button
@@ -660,6 +710,8 @@ export function InstructorAssignments({
           division={division}
           onDivision={chooseDivision}
           onChanged={onAssigned}
+          students={students}
+          teams={teams}
         />
       </>
     );

@@ -351,6 +351,128 @@ export async function removeAssignments(db: Database, instructor: Profile, body:
   return { removed: written.reduce((sum, row) => sum + row.rowsAffected, 0) };
 }
 
+/**
+ * Change who has one piece of already-assigned work. `studentIds` is the full list of students
+ * who should have it pending: students left off lose their unfinished copy, and new students get
+ * it due on `due`. Students who finished it keep their record. Everything is saved or nothing is.
+ * Unlike a new assignment, partners are not added automatically: the list is used as given.
+ */
+export async function setAssignedStudents(
+  db: Database,
+  instructor: Profile,
+  body: Record<string, unknown>,
+) {
+  if (instructor.role !== 'instructor') throw new AppError(403, 'Instructor access is required.');
+  const division = body.division;
+  if (!isDivision(division)) throw new AppError(400, 'Choose Division A, B, or C.');
+  const event = eventsForDivision(division).find((candidate) => candidate.id === body.eventId);
+  if (!event) throw new AppError(400, `Choose a Division ${division} event.`);
+  const kind = kinds.find((value) => value === body.kind);
+  if (!kind) throw new AppError(400, 'Choose a practice test, lesson, unit, or lab simulation.');
+  const targetId = body.targetId ?? '';
+  if (typeof targetId !== 'string' || targetId.length > 160 || (!targetId && kind !== 'Practice'))
+    throw new AppError(400, 'Choose what to assign.');
+  const title = targetId ? titleOf(division, event.id, kind, targetId) : '';
+  const wanted: unknown = body.studentIds;
+  if (
+    !Array.isArray(wanted) ||
+    wanted.length > 200 ||
+    wanted.some((id) => typeof id !== 'string' || !id)
+  )
+    throw new AppError(400, 'Choose valid students.');
+  const due = dueDate(body);
+  const key = eventKey(division, event.id);
+  const students = new Map(
+    (
+      await db.all(
+        `SELECT u.id,u.display_name FROM users u WHERE u.school_id=? AND u.role='student' AND u.division=?
+         AND NOT EXISTS (SELECT 1 FROM departed_members d WHERE d.user_id=u.id)`,
+        instructor.schoolId,
+        division,
+      )
+    ).map((row) => [String(row.id), String(row.display_name)]),
+  );
+  const keep = new Set(wanted as string[]);
+  if ([...keep].some((id) => !students.has(id)))
+    throw new AppError(404, `A selected student is not in Division ${division} at your school.`);
+
+  // Everyone who has this work now, finished or not.
+  const rows =
+    kind === 'Practice'
+      ? await db.all(
+          `SELECT a.id,a.student_id,a.completed_at FROM assignments a JOIN users u ON u.id=a.student_id
+           WHERE u.school_id=? AND a.event_id=? AND a.type='Practice' AND a.instructor_id=?
+           AND ${targetId ? 'a.test_id=?' : 'a.test_id IS NULL'}`,
+          ...[instructor.schoolId, key, instructor.id, ...(targetId ? [targetId] : [])],
+        )
+      : await db.all(
+          `SELECT a.id,a.student_id,a.completed_at FROM study_assignments a JOIN users u ON u.id=a.student_id
+           WHERE u.school_id=? AND a.event_id=? AND a.kind=? AND a.target_id=?`,
+          instructor.schoolId,
+          key,
+          kind,
+          targetId,
+        );
+  const pending = rows.filter((row) => !row.completed_at);
+  const finished = new Set(
+    rows.filter((row) => row.completed_at).map((row) => String(row.student_id)),
+  );
+  const has = new Set(pending.map((row) => String(row.student_id)));
+
+  const statements: { sql: string; args: (string | null)[] }[] = [];
+  let removed = 0;
+  for (const row of pending)
+    if (!keep.has(String(row.student_id))) {
+      removed++;
+      statements.push({
+        sql:
+          kind === 'Practice'
+            ? 'DELETE FROM assignments WHERE id=? AND completed_at IS NULL'
+            : 'DELETE FROM study_assignments WHERE id=? AND completed_at IS NULL',
+        args: [String(row.id)],
+      });
+    }
+  const added: string[] = [];
+  const now = new Date().toISOString();
+  for (const studentId of keep) {
+    if (has.has(studentId)) continue;
+    // A lesson, unit or lab is assigned once; a student who finished it keeps that record.
+    if (kind !== 'Practice' && finished.has(studentId)) continue;
+    if (
+      kind === 'Practice' &&
+      (await db.get(
+        `SELECT 1 FROM assignments WHERE student_id=? AND event_id=? AND type='Practice' AND due_date=? AND completed_at IS NULL`,
+        studentId,
+        key,
+        due,
+      ))
+    )
+      throw new AppError(
+        409,
+        `${students.get(studentId)} already has a practice test in this event due ${due}. Pick another date.`,
+      );
+    added.push(studentId);
+    statements.push(
+      kind === 'Practice'
+        ? {
+            sql: `INSERT INTO assignments (id,student_id,instructor_id,event_id,type,due_date,test_id)
+              VALUES (?,?,?,?,'Practice',?,?)`,
+            args: [randomUUID(), studentId, instructor.id, key, due, targetId || null],
+          }
+        : {
+            sql: `INSERT INTO study_assignments (id,student_id,instructor_id,event_id,kind,target_id,title,due_date,assigned_at)
+              VALUES (?,?,?,?,?,?,?,?,?)`,
+            args: [randomUUID(), studentId, instructor.id, key, kind, targetId, title, due, now],
+          },
+    );
+  }
+  if (statements.length) await db.batch(statements, 'immediate');
+  // Lessons a new student already finished count at once.
+  const course = kind === 'Lesson' || kind === 'Unit' ? lessonsForEvent(event.id, division) : null;
+  if (course && added.length) await settleLessons(db, key, course, added);
+  return { added: added.length, removed };
+}
+
 export function studentEvent(student: Profile, eventId: unknown) {
   if (student.role !== 'student' || !student.division)
     throw new AppError(403, 'A student account is required.');

@@ -8,6 +8,7 @@ import {
   editAssignment,
   removeAssignments,
   removeStudyAssignment,
+  setAssignedStudents,
 } from '@/lib/study-assignment-service';
 export async function POST(request: Request) {
   try {
@@ -50,7 +51,10 @@ export async function PATCH(request: Request) {
     const { db, profile } = await memberFor(request, 'instructor');
     const body = await request.json();
     if (!body || typeof body !== 'object') throw new AppError(400, 'Enter assignment details.');
-    return json(await editAssignment(db, profile, body as Record<string, unknown>));
+    const payload = body as Record<string, unknown>;
+    // Change who has an already-assigned piece of work.
+    if (payload.action === 'students') return json(await setAssignedStudents(db, profile, payload));
+    return json(await editAssignment(db, profile, payload));
   } catch (error) {
     return failure(error);
   }

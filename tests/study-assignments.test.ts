@@ -8,7 +8,7 @@ import {
   leaveCommunity,
   type Database,
 } from '../src/lib/school-service.ts';
-import type { Profile } from '../src/lib/domain.ts';
+import type { Assignment, Profile } from '../src/lib/domain.ts';
 import { createTeam, updateTeam } from '../src/lib/team-service.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
 import { labsForEvent } from '../src/lib/division-c-labs.ts';
@@ -18,6 +18,7 @@ import {
   assignWork,
   editAssignment,
   removeAssignments,
+  setAssignedStudents,
   recordLab,
   removeStudyAssignment,
   studentWork,
@@ -564,4 +565,95 @@ test('one remove takes the same pending work away from every student it went to'
   assert.deepEqual(await removeAssignments(db, teacher, { ids: lessonIds }), { removed: 3 });
   assert.deepEqual(await removeAssignments(db, teacher, { ids: testIds }), { removed: 3 });
   for (const student of [amy, ben, cal]) assert.equal((await mine(db, student)).length, 0);
+});
+
+test('instructors change which students have already-assigned work', async () => {
+  const db = fixture();
+  const { teacher, amy, ben, cal, dee, eve } = await seated(db);
+  const [first] = course.lessons;
+  const [paper] = listPracticeTests('C', 'forensics');
+  const lesson = { ...forensics, kind: 'Lesson', targetId: first.id };
+  await assignWork(db, teacher, { ...lesson, studentIds: [amy.id] }); // amy + partner ben
+  const has = async (student: Profile, match: (a: Assignment) => boolean) =>
+    (await mine(db, student)).some(match);
+  const isLesson = (a: Assignment) => a.study?.targetId === first.id;
+
+  // Drop ben, add dee (not seated): exactly the given list, no partners pulled in.
+  assert.deepEqual(
+    await setAssignedStudents(db, teacher, {
+      ...lesson,
+      action: 'students',
+      studentIds: [amy.id, dee.id],
+      due: '2999-02-02',
+    }),
+    { added: 1, removed: 1 },
+  );
+  assert.equal(await has(amy, isLesson), true);
+  assert.equal(await has(ben, isLesson), false);
+  assert.equal(await has(cal, isLesson), false);
+  const deeWork = (await mine(db, dee)).find(isLesson)!;
+  assert.equal(deeWork.due, '2999-02-02');
+  assert.equal(deeWork.study?.title, first.title);
+
+  // Finished work stays even when the student is left off.
+  await db.batch(
+    [
+      {
+        sql: 'UPDATE study_assignments SET completed_at=? WHERE id=?',
+        args: ['2026-01-01', deeWork.id],
+      },
+    ],
+    'immediate',
+  );
+  assert.deepEqual(
+    await setAssignedStudents(db, teacher, { ...lesson, studentIds: [], due: '2999-02-02' }),
+    { added: 0, removed: 1 },
+  );
+  assert.equal(await has(dee, isLesson), true);
+  assert.equal(await has(amy, isLesson), false);
+
+  // Refusals: other divisions, other schools, students, bad dates.
+  await assert.rejects(
+    setAssignedStudents(db, teacher, { ...lesson, studentIds: [eve.id], due: '2999-02-02' }),
+    /not in Division C/,
+  );
+  const other = await school(db, 't2', 'ppcms-central', ['zed']);
+  await assert.rejects(
+    setAssignedStudents(db, teacher, {
+      ...lesson,
+      studentIds: [other.members[0].id],
+      due: '2999-02-02',
+    }),
+    /not in Division C/,
+  );
+  await assert.rejects(
+    setAssignedStudents(db, amy, { ...lesson, studentIds: [], due: '2999-02-02' }),
+    /Instructor/,
+  );
+  await assert.rejects(
+    setAssignedStudents(db, teacher, { ...lesson, studentIds: [amy.id], due: '2000-01-01' }),
+    /due date/,
+  );
+
+  // Practice tests, including "any practice test", work the same way.
+  const isTest = (a: Assignment) => a.type === 'Practice' && a.testId === paper.id;
+  const test = { ...forensics, kind: 'Practice', targetId: paper.id, due: '2999-03-03' };
+  assert.deepEqual(
+    await setAssignedStudents(db, teacher, { ...test, studentIds: [amy.id, cal.id] }),
+    {
+      added: 2,
+      removed: 0,
+    },
+  );
+  assert.deepEqual(await setAssignedStudents(db, teacher, { ...test, studentIds: [cal.id] }), {
+    added: 0,
+    removed: 1,
+  });
+  assert.equal(await has(amy, isTest), false);
+  assert.equal(await has(cal, isTest), true);
+  // Another practice test due the same day for that student is a clear conflict.
+  await assert.rejects(
+    setAssignedStudents(db, teacher, { ...test, targetId: '', studentIds: [cal.id] }),
+    /cal already has a practice test in this event due 2999-03-03/,
+  );
 });

@@ -613,6 +613,52 @@
   font-weight: 500;
   min-width: 32px;
 }
+.att-roster {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.att-roster summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.att-roster summary .att-muted {
+  font-weight: 400;
+}
+.att-roster ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 14px 6px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.att-roster li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  border-top: 1px solid var(--line);
+}
+.att-roster li > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.att-roster .text-link {
+  font-size: 12px;
+}
+.att-roster-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
 .att-record-time {
   display: block;
   font-size: 10px;

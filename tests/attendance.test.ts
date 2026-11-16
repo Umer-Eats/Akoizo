@@ -52,6 +52,107 @@ test('each workshop has its own code, roster, time window and school-scoped stud
   assert.equal((await attendanceFor(f.db, f.outsider)).workshops.length, 0);
   f.raw.close();
 });
+test('teachers can mark rostered students present and undo only their own marks', async () => {
+  const f = await setup();
+  const mark = (studentId: string, present: boolean, profile = f.teacher) =>
+    manageWorkshop(f.db, profile, { id: f.id, action: 'mark', studentId, present });
+  assert.deepEqual(await mark('absent', true), { ok: true, present: true });
+  // Marking again is harmless.
+  assert.deepEqual(await mark('absent', true), { ok: true, present: true });
+  let data = await attendanceFor(f.db, f.teacher);
+  assert.equal(data.workshops[0].present, 1);
+  assert.deepEqual(
+    data.records.map((r) => [r.studentId, r.markedByTeacher]),
+    [['absent', true]],
+  );
+  // The student sees themselves as checked in and does not need to check in again.
+  const absent = { ...f.student, id: 'absent' };
+  assert.ok((await attendanceFor(f.db, absent)).workshops[0].checkedInAt);
+  assert.equal((await checkIn(f.db, absent, f.body())).alreadyRecorded, true);
+  // Undo removes a teacher mark.
+  assert.deepEqual(await mark('absent', false), { ok: true, present: false });
+  assert.equal((await attendanceFor(f.db, f.teacher)).workshops[0].present, 0);
+  // A student's own check-in is never removed by undo, and marking it keeps it as is.
+  await checkIn(f.db, f.student, f.body());
+  await mark('student', true);
+  data = await attendanceFor(f.db, f.teacher);
+  assert.equal(data.records.find((r) => r.studentId === 'student')?.markedByTeacher, false);
+  await assert.rejects(mark('student', false), /checked in themselves/);
+  // Works after the window closes; rejects non-roster students, other schools, students and bad input.
+  f.raw
+    .prepare('UPDATE attendance_workshops SET opens_at=?,closes_at=? WHERE id=?')
+    .run(
+      new Date(Date.now() - 7200000).toISOString(),
+      new Date(Date.now() - 3600000).toISOString(),
+      f.id,
+    );
+  assert.deepEqual(await mark('absent', true), { ok: true, present: true });
+  await assert.rejects(mark('outsider', true), /not on this event/);
+  await assert.rejects(
+    mark('absent', true, { ...f.teacher, schoolId: 'other' }),
+    /not on this event/,
+  );
+  await assert.rejects(mark('absent', true, f.student), /Only teachers/);
+  await assert.rejects(
+    manageWorkshop(f.db, f.teacher, {
+      id: f.id,
+      action: 'mark',
+      studentId: 'absent',
+      present: 'yes',
+    }),
+    /present or not/,
+  );
+  f.raw.prepare('UPDATE attendance_workshops SET cancelled=1 WHERE id=?').run(f.id);
+  await assert.rejects(mark('absent', false), /cancelled/);
+  f.raw.close();
+});
+test('editing an event keeps its code, roster and existing check-ins', async () => {
+  const f = await setup();
+  await checkIn(f.db, f.student, f.body());
+  const before = f.raw.prepare('SELECT * FROM attendance_records').all();
+  const moved = {
+    ...workshopInput(),
+    id: f.id,
+    action: 'edit',
+    title: 'Build lab (moved)',
+    locationName: 'Gym',
+    latitude: 27,
+    longitude: -81,
+    opensAt: new Date(Date.now() + 86400000).toISOString(),
+    closesAt: new Date(Date.now() + 90000000).toISOString(),
+  };
+  assert.deepEqual(await manageWorkshop(f.db, f.teacher, moved), { ok: true });
+  const w = (await attendanceFor(f.db, f.teacher)).workshops[0];
+  assert.equal(w.id, f.id);
+  assert.equal(w.title, 'Build lab (moved)');
+  assert.equal(w.locationName, 'Gym');
+  assert.equal(w.latitude, 27);
+  assert.equal(w.code, f.code);
+  assert.equal(w.present, 1);
+  assert.deepEqual(w.audienceIds?.sort(), ['absent', 'student']);
+  assert.deepEqual(f.raw.prepare('SELECT * FROM attendance_records').all(), before);
+  // The student still shows as checked in, even though the event moved and has not opened yet.
+  assert.ok((await attendanceFor(f.db, f.student)).workshops[0].checkedInAt);
+  // Past events can be corrected; invalid windows, other schools and students are rejected.
+  await manageWorkshop(f.db, f.teacher, {
+    ...moved,
+    opensAt: new Date(Date.now() - 7200000).toISOString(),
+    closesAt: new Date(Date.now() - 3600000).toISOString(),
+  });
+  await assert.rejects(
+    manageWorkshop(f.db, f.teacher, { ...moved, closesAt: moved.opensAt }),
+    /closing time after opening/,
+  );
+  await assert.rejects(manageWorkshop(f.db, f.teacher, { ...moved, title: ' ' }), /event title/);
+  await assert.rejects(
+    manageWorkshop(f.db, { ...f.teacher, schoolId: 'other' }, moved),
+    /not found/,
+  );
+  await assert.rejects(manageWorkshop(f.db, f.student, moved), /Only teachers/);
+  f.raw.prepare('UPDATE attendance_workshops SET cancelled=1 WHERE id=?').run(f.id);
+  await assert.rejects(manageWorkshop(f.db, f.teacher, moved), /cancelled/);
+  f.raw.close();
+});
 test('valid check-in is persisted exactly once and does not retain exact coordinates', async () => {
   const f = await setup();
   assert.equal((await checkIn(f.db, f.student, f.body())).alreadyRecorded, false);
@@ -160,8 +261,8 @@ test('half-mile geofence accepts approximate positions and rejects far, stale or
   );
   // Huge reported uncertainty only earns the capped allowance.
   await assert.rejects(
-    checkIn(f.db, f.student, { ...f.body(), latitude: 26.03, accuracy: 50000 }),
-    /0.5 mile/,
+    checkIn(f.db, f.student, { ...f.body(), latitude: 26.3, accuracy: 50000 }),
+    /about 20\.7 miles away \(accuracy ±31\.1 miles\)/,
   );
   await assert.rejects(
     checkIn(f.db, f.student, { ...f.body(), accuracy: -1 }),
@@ -194,6 +295,10 @@ test('half-mile geofence accepts approximate positions and rejects far, stale or
   assert.ok(withinAttendanceRange(ATTENDANCE_RADIUS_METERS, 0));
   assert.ok(!withinAttendanceRange(ATTENDANCE_RADIUS_METERS + 1, 0));
   assert.ok(withinAttendanceRange(2000, 1500));
+  // Chromebook IP-based fix: ~9 km off with 5 km reported uncertainty still counts.
+  assert.ok(withinAttendanceRange(distanceMeters(26, -80, 26.08, -80), 5000));
+  // A GPS-grade fix 1.7 km away does not.
+  assert.ok(!withinAttendanceRange(distanceMeters(26, -80, 26.015, -80), 20));
   assert.ok(
     !withinAttendanceRange(
       ATTENDANCE_RADIUS_METERS + ATTENDANCE_ACCURACY_ALLOWANCE_METERS + 1,

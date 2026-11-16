@@ -10,6 +10,7 @@ import {
   Copy,
   Download,
   MapPin,
+  Pencil,
   Plus,
   RefreshCw,
   Search,
@@ -21,7 +22,7 @@ import { useAuth, authMessage } from './auth-context';
 import { AccountGate } from './account-gate';
 import { AttendanceMap, type WorkshopLocation } from './attendance-map';
 import {
-  ATTENDANCE_ACCURACY_ALLOWANCE_METERS,
+  ATTENDANCE_ROUGH_FIX_METERS,
   workshopStatus,
   type AttendanceData,
   type Workshop,
@@ -44,7 +45,7 @@ async function locateForCheckIn() {
   try {
     // maximumAge 0: a student who moves closer and retries must get a new fix, not a cached one.
     quick = await getPosition({ enableHighAccuracy: false, maximumAge: 0, timeout: 12000 });
-    if (quick.coords.accuracy <= ATTENDANCE_ACCURACY_ALLOWANCE_METERS) return quick;
+    if (quick.coords.accuracy <= ATTENDANCE_ROUGH_FIX_METERS) return quick;
   } catch (e) {
     quickError = e as GeolocationPositionError;
     if (quickError.code === 1) throw locationError(quickError);
@@ -89,13 +90,34 @@ function localInput(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
 }
 
-function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () => Promise<void> }) {
+function WorkshopForm({
+  workshop,
+  onClose,
+  onSaved,
+}: {
+  workshop?: Workshop;
+  onClose: () => void;
+  onSaved: () => Promise<void>;
+}) {
   const { request } = useAuth();
   const ref = useRef<HTMLDialogElement>(null);
-  const [title, setTitle] = useState(''),
-    [opens, setOpens] = useState(() => localInput(new Date(Date.now() + 3600000))),
-    [closes, setCloses] = useState(() => localInput(new Date(Date.now() + 7200000)));
-  const [location, setLocation] = useState<WorkshopLocation | null>(null),
+  const editing = !!workshop;
+  const [title, setTitle] = useState(workshop?.title ?? ''),
+    [opens, setOpens] = useState(() =>
+      localInput(workshop ? new Date(workshop.opensAt) : new Date(Date.now() + 3600000)),
+    ),
+    [closes, setCloses] = useState(() =>
+      localInput(workshop ? new Date(workshop.closesAt) : new Date(Date.now() + 7200000)),
+    );
+  const [location, setLocation] = useState<WorkshopLocation | null>(
+      workshop
+        ? {
+            name: workshop.locationName,
+            latitude: workshop.latitude,
+            longitude: workshop.longitude,
+          }
+        : null,
+    ),
     [mapOpen, setMapOpen] = useState(false);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState('');
@@ -113,8 +135,9 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
     setError('');
     try {
       await request('/api/attendance', {
-        method: 'POST',
+        method: editing ? 'PATCH' : 'POST',
         body: JSON.stringify({
+          ...(workshop ? { id: workshop.id, action: 'edit' } : {}),
           title,
           opensAt: new Date(opens).toISOString(),
           closesAt: new Date(closes).toISOString(),
@@ -146,9 +169,13 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
         <form onSubmit={submit}>
           <div className="att-dialog-head">
             <div>
-              <span className="att-eyebrow">PLAN AN EVENT</span>
-              <h2 id="new-event-title">A day to show up.</h2>
-              <p>Each event gets its own attendance code.</p>
+              <span className="att-eyebrow">{editing ? 'EDIT EVENT' : 'PLAN AN EVENT'}</span>
+              <h2 id="new-event-title">{editing ? 'Update the details.' : 'A day to show up.'}</h2>
+              <p>
+                {editing
+                  ? 'The code stays the same and students who already checked in stay checked in.'
+                  : 'Each event gets its own attendance code.'}
+              </p>
             </div>
             <button
               type="button"
@@ -218,8 +245,9 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
             </p>
           </div>
           <p className="att-help">
-            The current community student roster is saved for this event. Cancelled events do not
-            affect attendance rates.
+            {editing
+              ? 'The event roster and existing check-ins are kept. Changing the location or times does not ask anyone to check in again.'
+              : 'The current community student roster is saved for this event. Cancelled events do not affect attendance rates.'}
           </p>
           {error && (
             <p className="att-error" role="alert">
@@ -231,8 +259,8 @@ function WorkshopForm({ onClose, onSaved }: { onClose: () => void; onSaved: () =
               Cancel
             </button>
             <button className="button button-primary" disabled={busy || !location}>
-              {busy ? 'Creating…' : 'Create event'}
-              <Plus size={16} />
+              {editing ? (busy ? 'Saving…' : 'Save changes') : busy ? 'Creating…' : 'Create event'}
+              {editing ? <Check size={16} /> : <Plus size={16} />}
             </button>
           </div>
         </form>
@@ -268,7 +296,8 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
     [notice, setNotice] = useState('');
   const [loading, setLoading] = useState(true),
     [busy, setBusy] = useState(''),
-    [creating, setCreating] = useState(false);
+    [creating, setCreating] = useState(false),
+    [editingId, setEditingId] = useState('');
   const [tab, setTab] = useState('workshops'),
     [filter, setFilter] = useState('all'),
     [search, setSearch] = useState(''),
@@ -356,6 +385,23 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
       );
       setConfirmCancel('');
       setConfirmDelete('');
+    } catch (e) {
+      setError(authMessage(e));
+    } finally {
+      setBusy('');
+    }
+  }
+  async function markPresent(w: Workshop, studentId: string, name: string, present: boolean) {
+    setBusy(`mark:${studentId}`);
+    setError('');
+    setNotice('');
+    try {
+      await request('/api/attendance', {
+        method: 'PATCH',
+        body: JSON.stringify({ id: w.id, action: 'mark', studentId, present }),
+      });
+      await refresh();
+      setNotice(present ? `${name} is marked present.` : `${name} is no longer marked present.`);
     } catch (e) {
       setError(authMessage(e));
     } finally {
@@ -760,6 +806,63 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                               max={Math.max(1, selected.expected)}
                               aria-label="Event attendance"
                             />
+                            {!selected.cancelled && (
+                              <details className="att-roster">
+                                <summary>
+                                  Mark students present
+                                  <span className="att-muted">
+                                    {selected.expected - selected.present} not checked in
+                                  </span>
+                                </summary>
+                                <ul aria-label="Event roster">
+                                  {students
+                                    .filter((m) => selected.audienceIds?.includes(m.id))
+                                    .map((m) => {
+                                      const r = data?.records.find(
+                                        (r) => r.workshopId === selected.id && r.studentId === m.id,
+                                      );
+                                      return (
+                                        <li key={m.id}>
+                                          <span>{m.name}</span>
+                                          {r ? (
+                                            <span className="att-roster-status">
+                                              <span className="att-badge att-present">
+                                                {r.markedByTeacher
+                                                  ? 'Marked present'
+                                                  : 'Checked in'}
+                                              </span>
+                                              {r.markedByTeacher && (
+                                                <button
+                                                  className="text-link"
+                                                  disabled={!!busy}
+                                                  aria-label={`Undo present mark for ${m.name}`}
+                                                  onClick={() =>
+                                                    void markPresent(selected, m.id, m.name, false)
+                                                  }
+                                                >
+                                                  Undo
+                                                </button>
+                                              )}
+                                            </span>
+                                          ) : (
+                                            <button
+                                              className="button button-glass button-small"
+                                              disabled={!!busy}
+                                              aria-label={`Mark ${m.name} present`}
+                                              onClick={() =>
+                                                void markPresent(selected, m.id, m.name, true)
+                                              }
+                                            >
+                                              <Check size={14} />
+                                              {busy === `mark:${m.id}` ? 'Saving…' : 'Mark present'}
+                                            </button>
+                                          )}
+                                        </li>
+                                      );
+                                    })}
+                                </ul>
+                              </details>
+                            )}
                             {['Open', 'Upcoming'].includes(workshopStatus(selected, now)) && (
                               <div className="att-controls">
                                 <button
@@ -799,6 +902,21 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
                                   Keep event
                                 </button>
                               </div>
+                            )}
+                            {!selected.cancelled && (
+                              <button
+                                className="button button-glass button-small"
+                                disabled={!!busy}
+                                onClick={() => {
+                                  setConfirmCancel('');
+                                  setConfirmDelete('');
+                                  setNotice('');
+                                  setEditingId(selected.id);
+                                }}
+                              >
+                                <Pencil size={14} />
+                                Edit event
+                              </button>
                             )}
                             <button
                               className="att-danger"
@@ -1098,6 +1216,16 @@ export function AttendanceWorkspace({ embedded = false }: { embedded?: boolean }
         )}
       </div>
       {creating && <WorkshopForm onClose={() => setCreating(false)} onSaved={refresh} />}
+      {editingId && workshops.some((w) => w.id === editingId) && (
+        <WorkshopForm
+          workshop={workshops.find((w) => w.id === editingId)}
+          onClose={() => setEditingId('')}
+          onSaved={async () => {
+            await refresh();
+            setNotice('Event updated. Existing check-ins were kept.');
+          }}
+        />
+      )}
     </>
   );
   return embedded ? (
