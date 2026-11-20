@@ -79,7 +79,8 @@
   color: var(--muted);
 }
 .presentation-live-badge,
-.presentation-done {
+.presentation-done,
+.presentation-progress-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
@@ -96,6 +97,10 @@
 .presentation-done {
   background: var(--pr-good-soft);
   color: var(--pr-good);
+}
+.presentation-progress-badge {
+  background: var(--accent-soft);
+  color: var(--text);
 }
 
 /* Join form */
@@ -1117,4 +1122,9 @@
 .pd-nir {
   fill: var(--pd-nir);
   background-color: var(--pd-nir);
+}
+
+.presentation-total {
+  max-width: 36rem;
+  margin: 0.25rem auto 0;
 }

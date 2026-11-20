@@ -293,7 +293,8 @@ test('a self-paced presentation is graded on the server and completes its assign
   // A weaker later run does not replace the best result.
   await finishSolo(db, amy, { eventId: 'remote-sensing', lessonId, answers: {} });
   const [result] = await presentationResults(db, amy, 'remote-sensing');
-  assert.equal(result.score, deck.slides.filter(isGraded).length);
+  assert.equal(result.earned, deck.slides.filter(isGraded).length);
+  assert.ok(result.completedAt);
   const work = await studentWork(db, teacher, amy.id);
   const record = work.find((w) => w.type === 'Presentation')!;
   assert.equal(record.title, course.lessons.find((l) => l.id === lessonId)!.title);
@@ -356,8 +357,7 @@ test('a live presentation is hosted, joined by code, paced by the host, and reco
   assert.deepEqual(await liveSessions(db, ben, 'remote-sensing'), []);
   for (const student of [amy, ben]) {
     const [result] = await presentationResults(db, student, 'remote-sensing');
-    assert.equal(result.mode, 'live');
-    assert.equal(result.score, 1);
+    assert.deepEqual({ ...result, completedAt: null }, { lessonId, earned: 1, possible: deck.slides.filter(isGraded).length, answered: 1, completedAt: null });
   }
   assert.deepEqual(await presentationResults(db, cal, 'remote-sensing'), []);
 
@@ -366,6 +366,96 @@ test('a live presentation is hosted, joined by code, paced by the host, and reco
   const session = await hostSession(db, lead, { eventId: 'remote-sensing', lessonId });
   await joinSession(db, cal, { code: session.code });
   await controlSession(db, lead, { id: session.id, action: 'end' });
-  assert.equal((await presentationResults(db, cal, 'remote-sensing'))[0].score, 0);
+  assert.deepEqual(await presentationResults(db, cal, 'remote-sensing'), [], 'joining without answering records nothing');
   assert.deepEqual(await presentationResults(db, lead, 'remote-sensing'), []);
+});
+
+test('the best score on each slide adds up across sessions and days to complete a deck', async () => {
+  const { db } = fixture();
+  const { teacher, members } = await school(db, ['amy', 'ben']);
+  const [amy, ben] = members;
+  const lead = { ...teacher, division: 'C' as const };
+  const lessonId = 'remote-u3-l1';
+  const deck = deckFor('C', 'remote-sensing', lessonId)!;
+  const graded = deck.slides.flatMap((slide, index) => (isGraded(slide) ? [index] : []));
+  const half = Math.ceil(graded.length / 2);
+  await assignWork(db, teacher, {
+    action: 'assign',
+    division: 'C',
+    eventId: 'remote-sensing',
+    kind: 'Presentation',
+    targetId: lessonId,
+    studentIds: [amy.id],
+    due: '2999-01-01',
+    timeZone: 'UTC',
+  });
+  // A wrong answer: any other choice, or an empty fill-in.
+  const wrong = (slide: ActivitySlide): SlideAnswer =>
+    slide.kind === 'mcq'
+      ? (slide.answer + 1) % slide.options.length
+      : slide.kind === 'fill'
+        ? slide.blanks.map(() => 'zzz')
+        : slide.kind === 'numeric'
+          ? slide.answer + 1000
+          : keyAnswer(slide);
+  async function answer(sessionId: string, index: number, value: (slide: ActivitySlide) => SlideAnswer) {
+    await controlSession(db, lead, { id: sessionId, slide: index });
+    const slide = deck.slides[index] as ActivitySlide;
+    await answerSlide(db, amy, { id: sessionId, slideId: slide.id, answer: value(slide) });
+  }
+
+  // Day one: the first half, the opening activity answered wrong. The teacher leaves without ending.
+  const day1 = await hostSession(db, lead, { eventId: 'remote-sensing', lessonId });
+  await joinSession(db, amy, { code: day1.code });
+  await answer(day1.id, graded[0], wrong);
+  for (const index of graded.slice(1, half)) await answer(day1.id, index, keyAnswer);
+  let [standing] = await presentationResults(db, amy, 'remote-sensing');
+  const firstWrong = gradeSlide(deck.slides[graded[0]] as ActivitySlide, wrong(deck.slides[graded[0]] as ActivitySlide)).earned;
+  assert.deepEqual(standing, {
+    lessonId,
+    earned: half - 1 + firstWrong,
+    possible: graded.length,
+    answered: half,
+    completedAt: null,
+  });
+  assert.ok(!(await dashboardFor(db, amy)).assignments[0].completedAt, 'half a deck is not complete');
+
+  // Day two: a new session (which ends the old one). Amy fixes the first activity and does the rest;
+  // a worse answer to a slide she already had right does not lower her score.
+  const day2 = await hostSession(db, lead, { eventId: 'remote-sensing', lessonId });
+  assert.equal((await sessionState(db, amy, day1.id)).status, 'ended');
+  await joinSession(db, amy, { code: day2.code });
+  await answer(day2.id, graded[0], keyAnswer);
+  await answer(day2.id, graded[1], wrong);
+  for (const index of graded.slice(half)) await answer(day2.id, index, keyAnswer);
+  [standing] = await presentationResults(db, amy, 'remote-sensing');
+  assert.equal(standing.earned, graded.length);
+  assert.equal(standing.answered, graded.length);
+  assert.ok(standing.completedAt);
+  assert.ok((await dashboardFor(db, amy)).assignments[0].completedAt, 'the assignment completes');
+  const work = await studentWork(db, teacher, amy.id);
+  assert.equal(work.find((w) => w.type === 'Presentation')!.score, graded.length);
+
+  // The ended screen shows the session's own score and the running total.
+  await controlSession(db, lead, { id: day2.id, action: 'end' });
+  const ended = await sessionState(db, amy, day2.id);
+  assert.ok(ended.score!.earned < graded.length);
+  assert.deepEqual(ended.total, { earned: graded.length, possible: graded.length, answered: graded.length });
+
+  // Solo runs add to the same total: Ben does half alone and half live.
+  const soloHalf = Object.fromEntries(
+    graded.slice(0, half).map((index) => [deck.slides[index].id, keyAnswer(deck.slides[index] as ActivitySlide)]),
+  );
+  const run = await finishSolo(db, ben, { eventId: 'remote-sensing', lessonId, answers: soloHalf });
+  assert.deepEqual(run.total, { earned: half, possible: graded.length, answered: half });
+  const day3 = await hostSession(db, lead, { eventId: 'remote-sensing', lessonId });
+  await joinSession(db, ben, { code: day3.code });
+  for (const index of graded.slice(half)) {
+    await controlSession(db, lead, { id: day3.id, slide: index });
+    const slide = deck.slides[index] as ActivitySlide;
+    await answerSlide(db, ben, { id: day3.id, slideId: slide.id, answer: keyAnswer(slide) });
+  }
+  const [benStanding] = await presentationResults(db, ben, 'remote-sensing');
+  assert.equal(benStanding.earned, graded.length);
+  assert.ok(benStanding.completedAt);
 });

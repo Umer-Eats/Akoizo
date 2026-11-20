@@ -2,7 +2,7 @@ import { randomInt, randomUUID } from 'node:crypto';
 import { AppError, eventKey, type Profile } from './domain.ts';
 import { eventsForDivision, type Division } from './events.ts';
 import { gradeSlide, scoreDeck, validAnswer } from './presentation-grading.ts';
-import { isActivity, type ActivitySlide, type Deck } from './presentation-types.ts';
+import { isActivity, isGraded, type ActivitySlide, type Deck } from './presentation-types.ts';
 import { deckFor } from './presentations.ts';
 import type { Database } from './school-service.ts';
 import { settlePresentations } from './study-assignment-service.ts';
@@ -13,12 +13,20 @@ const ACTIVE_MS = 30_000;
 const LISTED_MS = 3 * 60 * 60 * 1000;
 const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 
-export type PresentationResult = {
+/** A student's standing on one deck: the best score on each graded activity, summed. */
+export type PresentationProgress = {
+  /** Sum of the best score earned on each graded activity, across every run and session. */
+  earned: number;
+  /** Graded activities in the deck (one point each). */
+  possible: number;
+  /** Graded activities the student has answered at least once. */
+  answered: number;
+};
+
+export type PresentationResult = PresentationProgress & {
   lessonId: string;
-  mode: 'solo' | 'live';
-  score: number;
-  maxScore: number;
-  completedAt: string;
+  /** Set once every graded activity has been answered; the deck then counts as complete. */
+  completedAt: string | null;
 };
 
 export type LiveSummary = {
@@ -55,8 +63,10 @@ export type LiveState = {
   } | null;
   /** This member's answers so far, by slide id. */
   mine: Record<string, unknown>;
-  /** This member's score once the host ends the session. */
+  /** This member's score in this session once the host ends it. */
   score: { earned: number; possible: number } | null;
+  /** A student's best-of-every-session standing on the deck once the session ends. */
+  total: PresentationProgress | null;
 };
 
 /** The member's division event and its deck. Instructors use the division they are viewing. */
@@ -73,70 +83,148 @@ function deckOf(profile: Profile, eventId: unknown, lessonId: unknown) {
 const parseAnswers = (raw: unknown) =>
   raw && typeof raw === 'object' && !Array.isArray(raw) ? (raw as Record<string, unknown>) : {};
 
-/** Keep a student's best finished run of a deck, then complete any assignment it satisfies. */
-async function recordResult(
+const round = (value: number) => Math.round(value * 100) / 100;
+
+/** Sum the best per-slide scores over the deck's graded activities. */
+function progressOf(deck: Deck, best: Map<string, number>): PresentationProgress {
+  const graded = deck.slides.filter(isGraded);
+  let earned = 0;
+  let answered = 0;
+  for (const slide of graded) {
+    const score = best.get(slide.id);
+    if (score === undefined) continue;
+    answered++;
+    earned += score;
+  }
+  return { earned: round(earned), possible: graded.length, answered };
+}
+
+async function deckProgress(db: Database, studentId: string, key: string, deck: Deck) {
+  const rows = await db.all(
+    'SELECT slide_id,earned FROM presentation_slide_scores WHERE student_id=? AND event_id=? AND lesson_id=?',
+    studentId,
+    key,
+    deck.lessonId,
+  );
+  return progressOf(deck, new Map(rows.map((row) => [String(row.slide_id), Number(row.earned)])));
+}
+
+/**
+ * Raise a student's best score on each answered slide, whichever run or session it came from.
+ * Once every graded activity has a score the deck is complete: its result is the sum of the
+ * best scores, and any assignment for it is completed.
+ */
+async function recordSlides(
   db: Database,
   studentId: string,
   key: string,
-  lessonId: string,
+  deck: Deck,
   mode: 'solo' | 'live',
-  score: { earned: number; possible: number },
+  scores: { slideId: string; earned: number }[],
 ) {
+  if (!scores.length) return deckProgress(db, studentId, key, deck);
+  const now = new Date().toISOString();
+  await db.batch(
+    scores.map(({ slideId, earned }) => ({
+      sql: `INSERT INTO presentation_slide_scores (student_id,event_id,lesson_id,slide_id,earned,mode,updated_at)
+        VALUES (?,?,?,?,?,?,?)
+        ON CONFLICT(student_id,event_id,lesson_id,slide_id) DO UPDATE SET
+          earned=MAX(presentation_slide_scores.earned, excluded.earned),
+          mode=CASE WHEN excluded.earned > presentation_slide_scores.earned THEN excluded.mode ELSE presentation_slide_scores.mode END,
+          updated_at=CASE WHEN excluded.earned > presentation_slide_scores.earned THEN excluded.updated_at ELSE presentation_slide_scores.updated_at END`,
+      args: [studentId, key, deck.lessonId, slideId, earned, mode, now],
+    })),
+    'immediate',
+  );
+  const progress = await deckProgress(db, studentId, key, deck);
+  if (progress.answered < progress.possible) return progress;
+  // The first completion keeps its date; later improvements only raise the score.
   await db.batch(
     [
       {
         sql: `INSERT INTO presentation_results (student_id,event_id,lesson_id,mode,score,max_score,completed_at)
           VALUES (?,?,?,?,?,?,?)
-          ON CONFLICT(student_id,event_id,lesson_id) DO UPDATE SET mode=excluded.mode,score=excluded.score,
-          max_score=excluded.max_score,completed_at=excluded.completed_at
-          WHERE excluded.score * presentation_results.max_score >= presentation_results.score * excluded.max_score`,
-        args: [
-          studentId,
-          key,
-          lessonId,
-          mode,
-          score.earned,
-          score.possible,
-          new Date().toISOString(),
-        ],
+          ON CONFLICT(student_id,event_id,lesson_id) DO UPDATE SET
+            score=MAX(presentation_results.score, excluded.score),max_score=excluded.max_score`,
+        args: [studentId, key, deck.lessonId, mode, progress.earned, progress.possible, now],
       },
     ],
     'immediate',
   );
   await settlePresentations(db, key, [studentId]);
+  return progress;
 }
 
-/** The student's finished presentations in one event. Instructors previewing see none. */
+/** The student's standing on every presentation they have started in one event. Instructors see none. */
 export async function presentationResults(
   db: Database,
   profile: Profile,
   eventId: unknown,
 ): Promise<PresentationResult[]> {
   if (profile.role !== 'student' || !profile.division) return [];
-  const event = eventsForDivision(profile.division).find((candidate) => candidate.id === eventId);
+  const division = profile.division;
+  const event = eventsForDivision(division).find((candidate) => candidate.id === eventId);
   if (!event) throw new AppError(400, 'Choose an event from your division.');
-  const rows = await db.all(
-    'SELECT lesson_id,mode,score,max_score,completed_at FROM presentation_results WHERE student_id=? AND event_id=?',
-    profile.id,
-    eventKey(profile.division, event.id),
-  );
-  return rows.map((row) => ({
-    lessonId: String(row.lesson_id),
-    mode: row.mode === 'live' ? 'live' : 'solo',
-    score: Number(row.score),
-    maxScore: Number(row.max_score),
-    completedAt: String(row.completed_at),
-  }));
+  const key = eventKey(division, event.id);
+  const [slides, finished] = await Promise.all([
+    db.all(
+      'SELECT lesson_id,slide_id,earned FROM presentation_slide_scores WHERE student_id=? AND event_id=?',
+      profile.id,
+      key,
+    ),
+    db.all(
+      'SELECT lesson_id,score,completed_at FROM presentation_results WHERE student_id=? AND event_id=?',
+      profile.id,
+      key,
+    ),
+  ]);
+  const best = new Map<string, Map<string, number>>();
+  for (const row of slides) {
+    const lesson = String(row.lesson_id);
+    if (!best.has(lesson)) best.set(lesson, new Map());
+    best.get(lesson)!.set(String(row.slide_id), Number(row.earned));
+  }
+  const done = new Map(finished.map((row) => [String(row.lesson_id), row]));
+  const results: PresentationResult[] = [];
+  for (const lessonId of new Set([...best.keys(), ...done.keys()])) {
+    const deck = deckFor(division, event.id, lessonId);
+    if (!deck) continue;
+    const progress = progressOf(deck, best.get(lessonId) ?? new Map());
+    const row = done.get(lessonId);
+    results.push({
+      lessonId,
+      ...progress,
+      // A completed deck stays complete even if its slides are later revised.
+      earned: row ? Math.max(progress.earned, Number(row.score)) : progress.earned,
+      answered: row ? progress.possible : progress.answered,
+      completedAt: row ? String(row.completed_at) : null,
+    });
+  }
+  return results;
 }
 
-/** Finish a self-paced run: the answers are graded here against the deck and the best run kept. */
+/** Grade the graded activities a member answered; unanswered or malformed ones are skipped. */
+function slideScores(deck: Deck, answers: Record<string, unknown>) {
+  return deck.slides.filter(isGraded).flatMap((slide) => {
+    const answer = validAnswer(slide, answers[slide.id]);
+    return answer === null ? [] : [{ slideId: slide.id, earned: gradeSlide(slide, answer).earned }];
+  });
+}
+
+/**
+ * Finish a self-paced run: the answers are graded here against the deck. The run's score is
+ * returned with the student's total, which keeps the best score of each slide from every run.
+ */
 export async function finishSolo(db: Database, profile: Profile, body: Record<string, unknown>) {
   const { key, deck } = deckOf(profile, body.eventId, body.lessonId);
-  const score = scoreDeck(deck, parseAnswers(body.answers));
+  const answers = parseAnswers(body.answers);
+  const score = scoreDeck(deck, answers);
   // An instructor previewing the presentation is graded without anything being recorded.
-  if (profile.role === 'student')
-    await recordResult(db, profile.id, key, deck.lessonId, 'solo', score);
-  return score;
+  const total =
+    profile.role === 'student'
+      ? await recordSlides(db, profile.id, key, deck, 'solo', slideScores(deck, answers))
+      : null;
+  return { ...score, total };
 }
 
 async function sessionRow(db: Database, profile: Profile, id: unknown) {
@@ -340,6 +428,10 @@ export async function sessionState(
     tally: isActivity(slide) ? tallyOf(slide, current, revealed || isHost) : null,
     mine,
     score: row.status === 'ended' ? scoreDeck(deck, mine) : null,
+    total:
+      row.status === 'ended' && profile.role === 'student'
+        ? await deckProgress(db, profile.id, String(row.event_id), deck)
+        : null,
   };
 }
 
@@ -407,6 +499,12 @@ export async function answerSlide(db: Database, profile: Profile, body: Record<s
     ],
     'immediate',
   );
+  // A student's live answer counts toward their best-of-every-session total straight away, so
+  // nothing is lost if the host leaves without ending or the class continues another day.
+  if (profile.role === 'student' && isGraded(slide))
+    await recordSlides(db, profile.id, String(row.event_id), deck, 'live', [
+      { slideId: slide.id, earned },
+    ]);
   return { saved: true };
 }
 
@@ -450,7 +548,7 @@ export async function controlSession(
   return { slide, revealed: revealed === 1 };
 }
 
-/** End a live session and record each student member's result from their answers in it. */
+/** End a live session. Students' answers were already counted as they submitted them. */
 async function endSession(db: Database, profile: Profile, id: string) {
   const row = await sessionRow(db, profile, id);
   if (row.host_id !== profile.id)
@@ -465,35 +563,5 @@ async function endSession(db: Database, profile: Profile, id: string) {
     ],
     'immediate',
   );
-  let deck: Deck;
-  try {
-    deck = sessionDeck(row).deck;
-  } catch {
-    return { ended: true };
-  }
-  const students = await db.all(
-    `SELECT m.user_id FROM presentation_members m JOIN users u ON u.id=m.user_id
-     WHERE m.session_id=? AND u.role='student'`,
-    id,
-  );
-  for (const student of students) {
-    const answers = await db.all(
-      'SELECT slide_id,answer FROM presentation_answers WHERE session_id=? AND user_id=?',
-      id,
-      String(student.user_id),
-    );
-    const score = scoreDeck(
-      deck,
-      Object.fromEntries(answers.map((a) => [String(a.slide_id), JSON.parse(String(a.answer))])),
-    );
-    await recordResult(
-      db,
-      String(student.user_id),
-      String(row.event_id),
-      deck.lessonId,
-      'live',
-      score,
-    );
-  }
   return { ended: true };
 }

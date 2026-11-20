@@ -180,11 +180,14 @@ try {
   }
   await a.getByRole('button', { name: 'Finish presentation' }).click();
   const possible = deck.slides.filter(isGraded).length;
-  await expect(a.getByRole('heading', { name: 'Presentation complete!' })).toBeVisible();
-  await expect(a.getByText(`You earned ${mcqs} of ${possible} activity points`)).toBeVisible();
-  assert.equal((await service.presentationResults(db, amy, 'remote-sensing'))[0].score, mcqs);
+  await expect(a.getByRole('heading', { name: 'Progress saved!' })).toBeVisible();
+  await expect(a.getByText(`This run: ${mcqs} of ${possible} activity points`)).toBeVisible();
+  await expect(a.locator(".presentation-total")).toContainText(`Your total: ${mcqs} of ${possible} points`);
+  await expect(a.locator(".presentation-total")).toContainText("finish the rest another day");
+  await a.screenshot({ path: `${shots}/3-solo-finished.png` });
+  assert.equal((await service.presentationResults(db, amy, 'remote-sensing'))[0].earned, mcqs);
   await a.getByRole('button', { name: 'Back to presentations' }).click();
-  await expect(a.locator('.presentation-done').first()).toBeVisible();
+  await expect(a.locator('.presentation-progress-badge').first()).toHaveText(`${mcqs}/${possible} activities`);
 
   // Host a presentation; Ben joins by code from the list page.
   const second = course.units[1].lessonIds[0];
@@ -220,9 +223,11 @@ try {
   await a.getByRole('button', { name: 'End presentation now' }).click();
   await expect(a.getByRole('heading', { name: 'You ended the presentation.' })).toBeVisible();
   await expect(b.getByRole('heading', { name: 'Amy ended the presentation.' })).toBeVisible({ timeout: 8000 });
-  await expect(b.getByText(`You earned 1 of ${liveDeck.slides.filter(isGraded).length} activity points`)).toBeVisible();
+  await expect(b.getByText(`This session: 1 of ${liveDeck.slides.filter(isGraded).length} activity points`)).toBeVisible();
+  await expect(b.locator(".presentation-total")).toContainText(`Your total: 1 of ${liveDeck.slides.filter(isGraded).length} points`);
+  await b.screenshot({ path: `${shots}/5-joined-ended.png` });
   const benResult = await service.presentationResults(db, ben, 'remote-sensing');
-  assert.deepEqual(benResult.map((r) => [r.lessonId, r.mode, r.score]), [[second, 'live', 1]]);
+  assert.deepEqual(benResult.map((r) => [r.lessonId, r.earned, r.answered, r.completedAt]), [[second, 1, 1, null]]);
 
   // Narrow screens keep the slide readable.
   await b.setViewportSize({ width: 390, height: 844 });

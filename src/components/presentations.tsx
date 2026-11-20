@@ -24,7 +24,12 @@ import {
   type Deck,
   type SlideAnswer,
 } from '@/lib/presentation-types';
-import type { LiveState, LiveSummary, PresentationResult } from '@/lib/presentation-service';
+import type {
+  LiveState,
+  LiveSummary,
+  PresentationProgress,
+  PresentationResult,
+} from '@/lib/presentation-service';
 import { useAuth, authMessage } from './auth-context';
 import { useStudyLayer } from './notes-store';
 import {
@@ -51,6 +56,32 @@ const deckStats = (deck: Deck) => ({
   slides: deck.slides.length,
   activities: deck.slides.filter(isActivity).length,
 });
+
+type SoloScore = { earned: number; possible: number; total: PresentationProgress | null };
+
+/** The student's best-of-every-session total, shown after a solo run or a live session. */
+function TotalStanding({ total }: { total: PresentationProgress | null }) {
+  if (!total) return null;
+  return (
+    <p className="presentation-total">
+      <strong>Your total: {standing(total)}.</strong>{' '}
+      {total.answered < total.possible
+        ? 'Your best score on each activity is kept across every run and live session, so you can finish the rest another day.'
+        : 'Your best score on each activity is kept across every run and live session and saved for your instructor.'}
+    </p>
+  );
+}
+
+const percentOf = (progress: { earned: number; possible: number }) =>
+  progress.possible ? Math.round((progress.earned / progress.possible) * 100) : 100;
+const points = (value: number) => value.toFixed(value % 1 ? 1 : 0);
+
+/** "6 of 9 points (67%) · 8 of 9 activities answered", from the best score on each slide. */
+const standing = (progress: PresentationProgress) =>
+  `${points(progress.earned)} of ${progress.possible} points (${percentOf(progress)}%)` +
+  (progress.answered < progress.possible
+    ? ` · ${progress.answered} of ${progress.possible} activities answered`
+    : '');
 
 export function PresentationsView({
   course,
@@ -145,7 +176,9 @@ export function PresentationsView({
         </p>
         <div className="course-facts">
           <span>{presented.length} presentations</span>
-          <span>{Object.keys(results).length} completed</span>
+          <span>
+            {Object.values(results).filter((result) => result.completedAt).length} completed
+          </span>
           <span>{sessions.length} live now</span>
         </div>
       </div>
@@ -182,14 +215,17 @@ export function PresentationsView({
                         <Radio size={12} aria-hidden="true" /> {live} live
                       </span>
                     )}
-                    {result && (
-                      <span className="presentation-done">
-                        <Check size={14} aria-hidden="true" />
-                        {result.maxScore
-                          ? `${Math.round((result.score / result.maxScore) * 100)}%`
-                          : 'Done'}
-                      </span>
-                    )}
+                    {result &&
+                      (result.completedAt ? (
+                        <span className="presentation-done">
+                          <Check size={14} aria-hidden="true" />
+                          {percentOf(result)}%
+                        </span>
+                      ) : (
+                        <span className="presentation-progress-badge">
+                          {result.answered}/{result.possible} activities
+                        </span>
+                      ))}
                   </button>
                 </li>
               );
@@ -291,8 +327,7 @@ function ModeChooser({
       <h2>{title}</h2>
       <p>
         {stats.slides} slides · {stats.activities} activities
-        {result &&
-          ` · Completed${result.maxScore ? ` with ${Math.round((result.score / result.maxScore) * 100)}%` : ''}`}
+        {result && ` · ${result.completedAt ? 'Completed' : 'In progress'}: ${standing(result)}`}
         {' · '}
         <Link
           className="text-link"
@@ -421,7 +456,7 @@ function SoloRunner({
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, SlideAnswer>>({});
   const [loaded, setLoaded] = useState(false);
-  const [finished, setFinished] = useState<{ earned: number; possible: number } | null>(null);
+  const [finished, setFinished] = useState<SoloScore | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const stage = useRef<HTMLDivElement>(null);
@@ -471,7 +506,7 @@ function SoloRunner({
     setSaving(true);
     setError('');
     try {
-      const score = await request<{ earned: number; possible: number }>('/api/presentations', {
+      const score = await request<SoloScore>('/api/presentations', {
         method: 'POST',
         body: JSON.stringify({
           action: 'finish',
@@ -493,12 +528,16 @@ function SoloRunner({
     return (
       <section className="presentation-finished">
         <Check size={36} aria-hidden="true" />
-        <h2>Presentation complete!</h2>
+        <h2>
+          {!finished.total || finished.total.answered >= finished.total.possible
+            ? 'Presentation complete!'
+            : 'Progress saved!'}
+        </h2>
         <p>
-          You earned {finished.earned} of {finished.possible} activity points (
-          {finished.possible ? Math.round((finished.earned / finished.possible) * 100) : 100}%).
-          Your result is saved for your instructor.
+          This run: {points(finished.earned)} of {finished.possible} activity points (
+          {percentOf(finished)}%).
         </p>
+        <TotalStanding total={finished.total} />
         <div className="presentation-finished-actions">
           <button
             className="button button-secondary"
@@ -672,13 +711,11 @@ function LiveRunner({
         <p>{title}</p>
         {state.score && (
           <p>
-            You earned {state.score.earned} of {state.score.possible} activity points
-            {state.score.possible
-              ? ` (${Math.round((state.score.earned / state.score.possible) * 100)}%)`
-              : ''}
-            . Student results are saved for your instructor.
+            This session: {points(state.score.earned)} of {state.score.possible} activity points (
+            {percentOf(state.score)}%).
           </p>
         )}
+        <TotalStanding total={state.total} />
         <button className="button button-primary" onClick={onExit}>
           Back to presentations
         </button>
@@ -747,7 +784,9 @@ function LiveRunner({
                 className="button button-primary"
                 disabled={busy}
                 onClick={() => {
-                  if (window.confirm('End the presentation for everyone and save results?'))
+                  if (
+                    window.confirm('End the presentation for everyone? Answers are already saved.')
+                  )
                     void control({ action: 'end' });
                 }}
               >
@@ -789,7 +828,7 @@ function LiveRunner({
             className="text-link"
             disabled={busy}
             onClick={() => {
-              if (window.confirm('End the presentation for everyone and save results?'))
+              if (window.confirm('End the presentation for everyone? Answers are already saved.'))
                 void control({ action: 'end' });
             }}
           >

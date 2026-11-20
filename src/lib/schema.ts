@@ -112,7 +112,14 @@ export const schema = [
     kind TEXT NOT NULL CHECK(kind IN ('Lesson','Unit','Lab','Presentation')), target_id TEXT NOT NULL, title TEXT NOT NULL,
     due_date TEXT NOT NULL, assigned_at TEXT NOT NULL, completed_at TEXT,
     UNIQUE(student_id, event_id, kind, target_id))`,
-  // Presentations: the best finished run of a lesson's deck, self-paced or in a live session.
+  // Presentations: a student's best score on each activity slide, kept across every solo run and
+  // live session, so a deck can be completed over several days and sessions.
+  `CREATE TABLE IF NOT EXISTS presentation_slide_scores (student_id TEXT NOT NULL REFERENCES users(id),
+    event_id TEXT NOT NULL REFERENCES events(id), lesson_id TEXT NOT NULL, slide_id TEXT NOT NULL,
+    earned REAL NOT NULL, mode TEXT NOT NULL CHECK(mode IN ('solo','live')), updated_at TEXT NOT NULL,
+    PRIMARY KEY(student_id, event_id, lesson_id, slide_id))`,
+  // A completed deck: written once every graded activity has a score; the score is the sum of the
+  // best per-slide scores and keeps rising as the student improves.
   `CREATE TABLE IF NOT EXISTS presentation_results (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
     lesson_id TEXT NOT NULL, mode TEXT NOT NULL CHECK(mode IN ('solo','live')), score REAL NOT NULL, max_score REAL NOT NULL,
     completed_at TEXT NOT NULL, PRIMARY KEY(student_id, event_id, lesson_id))`,
