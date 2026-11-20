@@ -143,16 +143,47 @@ try {
   await expect(a.locator('.presentation-lesson')).toHaveCount(course.lessons.length);
   await a.screenshot({ path: `${shots}/1-list.png`, fullPage: true });
 
-  // Every slide of every deck renders without a page error.
+  // Every slide of every deck renders without a page error, at the same 16:9 size, with its
+  // content fitting on the page (no scrolling) and every photo loaded.
+  const sizes = new Set();
+  const fits = [];
+  const shotKinds = new Set();
   for (const lesson of course.lessons) {
     const deck = deckFor('C', 'remote-sensing', lesson.id);
     await a.goto(`${tab}?lesson=${lesson.id}`);
     await a.getByRole('button', { name: /Start/ }).click();
     for (let i = 0; i < deck.slides.length; i++) {
+      const slide = deck.slides[i];
       await a.getByRole('button', { name: `Go to slide ${i + 1}`, exact: true }).click();
       await expect(a.locator('.presentation-slide')).toHaveAttribute('aria-label', `Slide ${i + 1} of ${deck.slides.length}`);
+      await a.locator('.presentation-slide img').evaluateAll((imgs) =>
+        Promise.all(imgs.map((img) => img.complete || new Promise((done) => img.addEventListener('load', done, { once: true })))),
+      );
+      await a.waitForTimeout(60);
+      const page = await a.evaluate(() => {
+        const slide = document.querySelector('.presentation-slide');
+        const body = slide.querySelector('.presentation-slide-body');
+        return {
+          size: `${slide.clientWidth}x${slide.clientHeight}`,
+          fit: Number(getComputedStyle(slide).getPropertyValue('--fit')),
+          scrolls: body.style.overflowY === 'auto',
+          brokenImages: [...slide.querySelectorAll('img')].filter((img) => !img.naturalWidth).length,
+        };
+      });
+      sizes.add(page.size);
+      fits.push([slide.id, slide.kind, page.fit]);
+      assert.equal(page.scrolls, false, `${slide.id} (${slide.kind}) fits without scrolling`);
+      assert.equal(page.brokenImages, 0, `${slide.id} photos load`);
+      const key = slide.image ? `${slide.kind}-photo` : slide.kind;
+      if (!shotKinds.has(key)) {
+        shotKinds.add(key);
+        await a.locator('.presentation-viewport').screenshot({ path: `${shots}/slide-${key}.png` });
+      }
     }
   }
+  assert.equal(sizes.size, 1, `every slide is the same size: ${[...sizes]}`);
+  const tight = fits.filter(([, , fit]) => fit < 0.8);
+  console.log(`Slides: ${fits.length} at ${[...sizes]}; ${tight.length} shrunk below 80%:`, tight.map(([id, kind, fit]) => `${id}:${kind}:${fit.toFixed(2)}`).join(' '));
   assert.deepEqual(errors, [], 'no page errors while rendering every slide');
 
   // Learn by yourself: answer the multiple-choice activities and finish.

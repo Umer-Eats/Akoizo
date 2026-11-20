@@ -25,18 +25,8 @@ export type DiagramId =
   | 'stretch-histogram'
   | 'ndvi-scale';
 
-/** Small interactive models drawn by components/presentation-widgets.tsx. */
-export type WidgetId =
-  | 'ndvi'
-  | 'pulse-range'
-  | 'mixed-pixel'
-  | 'albedo'
-  | 'snell'
-  | 'composite'
-  | 'map-scale'
-  | 'bit-depth'
-  | 'wave'
-  | 'revisit';
+/** Real photographs and satellite images, listed with their sources in lib/presentation-photos.ts. */
+export type PhotoId = keyof typeof import('./presentation-photos.ts').presentationPhotos;
 
 type Base = {
   id: string;
@@ -46,12 +36,14 @@ type Base = {
 
 export type InfoSlide = Base &
   (
-    | { kind: 'title'; title: string; subtitle: string; objectives: string[] }
+    | { kind: 'title'; title: string; subtitle: string; objectives: string[]; image?: PhotoId }
     | {
         kind: 'bullets';
         title: string;
         bullets: string[];
         diagram?: DiagramId;
+        /** A real photograph shown beside the bullets (instead of a diagram). */
+        image?: PhotoId;
         callout?: string;
       }
     | { kind: 'diagram'; title: string; diagram: DiagramId; caption: string; bullets?: string[] }
@@ -64,7 +56,6 @@ export type InfoSlide = Base &
     | { kind: 'flow'; title: string; steps: { label: string; detail: string }[] }
     | { kind: 'cards'; title: string; cards: { front: string; back: string }[] }
     | { kind: 'example'; title: string; problem: string; steps: string[]; conclusion: string }
-    | { kind: 'explore'; title: string; widget: WidgetId; prompt: string; takeaway: string }
     | { kind: 'summary'; title: string; points: string[] }
   );
 

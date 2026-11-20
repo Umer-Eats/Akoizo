@@ -1,12 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowUp, Check, ChevronRight, RotateCcw, X } from 'lucide-react';
 import type { Lesson } from '@/lib/lessons';
-import type { ActivitySlide, InfoSlide, Slide, SlideAnswer } from '@/lib/presentation-types';
+import type {
+  ActivitySlide,
+  InfoSlide,
+  PhotoId,
+  Slide,
+  SlideAnswer,
+} from '@/lib/presentation-types';
 import { gradeSlide, slideOrder, validAnswer } from '@/lib/presentation-grading';
 import type { LiveState } from '@/lib/presentation-service';
+import { presentationPhotos } from '@/lib/presentation-photos';
 import { PresentationDiagram } from './presentation-diagrams';
-import { PresentationWidget } from './presentation-widgets';
 
 /** A student's in-progress answer, before it becomes a SlideAnswer. */
 export type Draft = number | number[] | string | string[] | undefined;
@@ -65,23 +71,101 @@ export function SlideFrame({
   children: React.ReactNode;
 }) {
   const heading = sectionHeading(lesson, slide);
+  const ref = useRef<HTMLElement>(null);
+  useFitToSlide(ref, slide.id);
   return (
-    <article
-      className={`presentation-slide slide-${slide.kind}`}
-      aria-roledescription="slide"
-      aria-label={`Slide ${index + 1} of ${total}`}
-    >
-      <header className="presentation-slide-meta">
-        <span>
-          {index + 1} / {total}
-        </span>
-        {heading && <span className="presentation-section-chip">Lesson section · {heading}</span>}
-        {kindLabel[slide.kind] && (
-          <span className="presentation-kind-chip">{kindLabel[slide.kind]}</span>
-        )}
-      </header>
-      {children}
-    </article>
+    <div className="presentation-viewport">
+      <article
+        ref={ref}
+        className={`presentation-slide slide-${slide.kind}`}
+        aria-roledescription="slide"
+        aria-label={`Slide ${index + 1} of ${total}`}
+      >
+        <header className="presentation-slide-meta">
+          <span>
+            {index + 1} / {total}
+          </span>
+          {heading && <span className="presentation-section-chip">Lesson section · {heading}</span>}
+          {kindLabel[slide.kind] && (
+            <span className="presentation-kind-chip">{kindLabel[slide.kind]}</span>
+          )}
+        </header>
+        <div className="presentation-slide-body">{children}</div>
+      </article>
+    </div>
+  );
+}
+
+/** The smallest text scale a slide may shrink to before it scrolls instead. */
+const MIN_FIT = 0.55;
+/** Short slides grow up to this scale so every slide fills its page. */
+const MAX_FIT = 1.35;
+
+/**
+ * Every slide is the same fixed 16:9 canvas, like a presentation slide. Everything inside is sized
+ * in em, so this picks the largest scale at which the slide's content (including a revealed answer,
+ * flipped card or feedback) fits the page: short slides grow, long ones shrink, and only beyond
+ * MIN_FIT does the body scroll.
+ */
+function useFitToSlide(ref: React.RefObject<HTMLElement | null>, slideId: string) {
+  useLayoutEffect(() => {
+    const slide = ref.current;
+    const body = slide?.querySelector<HTMLElement>('.presentation-slide-body');
+    if (!slide || !body) return;
+    const overflows = () => body.scrollHeight > body.clientHeight + 1;
+    const fit = () => {
+      body.style.overflowY = 'hidden';
+      slide.style.setProperty('--fit', String(MAX_FIT));
+      if (!overflows()) return;
+      let lo = MIN_FIT;
+      let hi = MAX_FIT;
+      for (let step = 0; step < 7; step++) {
+        const mid = (lo + hi) / 2;
+        slide.style.setProperty('--fit', String(mid));
+        if (overflows()) hi = mid;
+        else lo = mid;
+      }
+      slide.style.setProperty('--fit', String(lo));
+      if (overflows()) body.style.overflowY = 'auto';
+    };
+    fit();
+    let frame = 0;
+    const refit = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(fit);
+    };
+    const resize = new ResizeObserver(refit);
+    resize.observe(slide);
+    const changes = new MutationObserver(refit);
+    changes.observe(body, { childList: true, subtree: true, characterData: true });
+    body.addEventListener('load', refit, true);
+    return () => {
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      changes.disconnect();
+      body.removeEventListener('load', refit, true);
+    };
+  }, [ref, slideId]);
+}
+
+/** A real photograph or satellite image, credited to its source. */
+function Photo({ id }: { id: PhotoId }) {
+  const photo = presentationPhotos[id];
+  return (
+    <figure className="presentation-photo">
+      <img
+        src={`/presentations/${photo.file}`}
+        alt={photo.alt}
+        width={photo.width}
+        height={photo.height}
+      />
+      <figcaption>
+        {photo.caption}{' '}
+        <a href={photo.source} target="_blank" rel="noreferrer">
+          {photo.credit}
+        </a>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -95,7 +179,6 @@ const kindLabel: Partial<Record<Slide['kind'], string>> = {
   fill: 'Fill in the blanks',
   poll: 'Poll',
   open: 'Your thinking',
-  explore: 'Explore',
   cards: 'Flashcards',
   example: 'Worked example',
 };
@@ -151,55 +234,47 @@ function StepReveal({ slide }: { slide: Extract<InfoSlide, { kind: 'example' }> 
   );
 }
 
-function Explore({ slide }: { slide: Extract<InfoSlide, { kind: 'explore' }> }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <p className="presentation-prompt">{slide.prompt}</p>
-      <PresentationWidget id={slide.widget} />
-      {open ? (
-        <p className="presentation-callout">
-          <strong>Takeaway:</strong> {slide.takeaway}
-        </p>
-      ) : (
-        <button className="text-link" onClick={() => setOpen(true)}>
-          I’ve experimented — show the takeaway
-        </button>
-      )}
-    </>
-  );
-}
-
 export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
   switch (slide.kind) {
     case 'title':
       return (
-        <div className="presentation-title-slide">
-          <h2>{slide.title}</h2>
-          <p>{slide.subtitle}</p>
-          <h3>By the end you will be able to…</h3>
-          <ul className="presentation-objectives">
-            {slide.objectives.map((objective) => (
-              <li key={objective}>{objective}</li>
-            ))}
-          </ul>
+        <div className={`presentation-title-slide${slide.image ? ' presentation-split' : ''}`}>
+          <div>
+            <h2>{slide.title}</h2>
+            <p>{slide.subtitle}</p>
+            <h3>By the end you will be able to…</h3>
+            <ul className="presentation-objectives">
+              {slide.objectives.map((objective) => (
+                <li key={objective}>{objective}</li>
+              ))}
+            </ul>
+          </div>
+          {slide.image && <Photo id={slide.image} />}
         </div>
       );
-    case 'bullets':
+    case 'bullets': {
+      const side = slide.image ? (
+        <Photo id={slide.image} />
+      ) : slide.diagram ? (
+        <PresentationDiagram id={slide.diagram} />
+      ) : null;
       return (
         <>
           <h2>{slide.title}</h2>
-          <div className={slide.diagram ? 'presentation-split' : undefined}>
-            <ul className="presentation-bullets">
-              {slide.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-            {slide.diagram && <PresentationDiagram id={slide.diagram} />}
+          <div className={side ? 'presentation-split' : 'presentation-text'}>
+            <div className="presentation-split-text">
+              <ul className="presentation-bullets">
+                {slide.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+              {slide.callout && <p className="presentation-callout">{slide.callout}</p>}
+            </div>
+            {side}
           </div>
-          {slide.callout && <p className="presentation-callout">{slide.callout}</p>}
         </>
       );
+    }
     case 'diagram':
       return (
         <>
@@ -269,13 +344,6 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
         <>
           <h2>{slide.title}</h2>
           <StepReveal slide={slide} />
-        </>
-      );
-    case 'explore':
-      return (
-        <>
-          <h2>{slide.title}</h2>
-          <Explore slide={slide} />
         </>
       );
     case 'summary':

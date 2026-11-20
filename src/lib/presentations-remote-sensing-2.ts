@@ -17,6 +17,7 @@ const indices = defineDeck('remote-u6-l1', [
     kind: 'bullets',
     section: 0,
     title: 'Coordinates and reference systems',
+    image: 'mercator-map',
     bullets: [
       'A coordinate pair needs its reference system, units, axis order, and datum to mean anything.',
       'Latitude/longitude are angles; projected coordinates are often metres.',
@@ -53,14 +54,6 @@ const indices = defineDeck('remote-u6-l1', [
     ],
   },
   {
-    kind: 'explore',
-    section: 1,
-    title: 'Explore: map scale',
-    widget: 'map-scale',
-    prompt: 'Set the scale to 1:50,000 and measure 3 cm. What ground distance do you get?',
-    takeaway: 'Multiply map length by the scale denominator, then convert units.',
-  },
-  {
     kind: 'numeric',
     section: 1,
     prompt: 'At 1:50,000, how many kilometres does 3 cm on the map represent?',
@@ -91,14 +84,6 @@ const indices = defineDeck('remote-u6-l1', [
     ],
   },
   {
-    kind: 'explore',
-    section: 2,
-    title: 'Explore: NDVI and EVI calculator',
-    widget: 'ndvi',
-    prompt: 'Reproduce NDVI = 0.5, then change only blue. Which index changes?',
-    takeaway: 'NDVI ignores blue; EVI uses blue in its denominator, so only EVI changes.',
-  },
-  {
     kind: 'numeric',
     section: 2,
     prompt: 'Compute NDVI for NIR = 0.6 and red = 0.2.',
@@ -123,6 +108,7 @@ const indices = defineDeck('remote-u6-l1', [
     kind: 'bullets',
     section: 3,
     title: 'EVI and scaling',
+    image: 'modis-ndvi-global',
     bullets: [
       'A common form: EVI = 2.5 (NIR − red) ⁄ (NIR + 6·red − 7.5·blue + 1).',
       'The blue term and background adjustment distinguish it from NDVI.',
@@ -273,14 +259,6 @@ const light = defineDeck('remote-u7-l1', [
     ],
   },
   {
-    kind: 'explore',
-    section: 0,
-    title: 'Explore: wavelength, frequency, energy',
-    widget: 'wave',
-    prompt: 'Double the wavelength. What happens to frequency and photon energy?',
-    takeaway: 'Doubling wavelength halves frequency and photon energy.',
-  },
-  {
     kind: 'mcq',
     section: 0,
     prompt: 'If wavelength doubles in vacuum, frequency…',
@@ -321,6 +299,7 @@ const light = defineDeck('remote-u7-l1', [
     kind: 'bullets',
     section: 2,
     title: 'Reflection and scattering',
+    image: 'atmosphere-limb',
     bullets: [
       'Specular reflection: mirror-like, concentrated in one direction.',
       'Diffuse scattering: spread broadly.',
@@ -353,15 +332,6 @@ const light = defineDeck('remote-u7-l1', [
       'Going from high to low index, if the computed sine exceeds 1, total internal reflection occurs.',
       'Draw the normal first to avoid using angles from the surface.',
     ],
-  },
-  {
-    kind: 'explore',
-    section: 3,
-    title: 'Explore: refraction',
-    widget: 'snell',
-    prompt: 'Light goes from n = 1.5 into n = 1.0. Increase the angle until the ray disappears.',
-    takeaway:
-      'Beyond the critical angle, no ordinary refracted ray exists — total internal reflection.',
   },
   {
     kind: 'example',
@@ -397,6 +367,7 @@ const light = defineDeck('remote-u7-l1', [
     kind: 'bullets',
     section: 4,
     title: 'Atmospheric effects',
+    image: 'borneo-haze',
     bullets: [
       'Gases absorb in selected bands; particles and molecules scatter along the path.',
       'Short visible wavelengths scatter strongly off small molecules → haze and blue sky.',
@@ -500,21 +471,13 @@ const albedo = defineDeck('remote-u8-l1', [
     kind: 'bullets',
     section: 0,
     title: 'Albedo as a fraction',
+    image: 'baffin-sea-ice',
     bullets: [
       'Albedo = the fraction of incoming shortwave radiation reflected.',
       'Fresh snow is high; dark water and some soils are low.',
       'Absorbed shortwave = incoming × (1 − albedo).',
       'Albedo alone does not set temperature — emission, storage, and transport matter too.',
     ],
-  },
-  {
-    kind: 'explore',
-    section: 0,
-    title: 'Explore: albedo energy bars',
-    widget: 'albedo',
-    prompt:
-      'Hold incoming flux at 400 W/m² and raise albedo from 0.2 to 0.6. Predict both bars first.',
-    takeaway: 'Higher albedo shifts energy from absorbed to reflected; no temperature is computed.',
   },
   {
     kind: 'example',
@@ -567,6 +530,7 @@ const albedo = defineDeck('remote-u8-l1', [
     kind: 'bullets',
     section: 2,
     title: 'Longwave emission and the greenhouse effect',
+    image: 'earth-eastern-hemisphere',
     bullets: [
       'Surfaces emit thermal (longwave) radiation; the atmosphere absorbs and re-emits parts of it.',
       'Greenhouse gases change the balance between absorbed solar and outgoing thermal energy.',
@@ -593,6 +557,7 @@ const albedo = defineDeck('remote-u8-l1', [
     kind: 'bullets',
     section: 3,
     title: 'Dimming and competing influences',
+    image: 'pinatubo-1991',
     bullets: [
       'Aerosols and clouds reduce sunlight reaching the surface (“dimming”).',
       'Absorbing aerosols can heat atmospheric layers while the surface gets less sunlight.',
@@ -737,6 +702,7 @@ const systems = defineDeck('remote-u9-l1', [
     kind: 'bullets',
     section: 0,
     title: 'Linked reservoirs and flows',
+    image: 'katrina-2005',
     bullets: [
       'Atmosphere, ocean, land, ice, and life exchange matter and energy.',
       'Reservoir = a stored quantity. Flux = a transfer per unit time.',
@@ -815,6 +781,7 @@ const systems = defineDeck('remote-u9-l1', [
     kind: 'bullets',
     section: 3,
     title: 'Ozone in context',
+    image: 'ozone-hole-2010',
     bullets: [
       'Stratospheric ozone absorbs much solar UV, protecting life at the surface.',
       'Ozone depletion and greenhouse warming are different mechanisms (though they interact).',
@@ -892,6 +859,7 @@ const systems = defineDeck('remote-u9-l1', [
     kind: 'bullets',
     section: 5,
     title: 'Building a multi-evidence explanation',
+    image: 'aral-sea-1989-2014',
     bullets: [
       'State what changed, where, when, and in which measurement.',
       'Compare before, during, and after; add independent reference information.',
@@ -965,6 +933,7 @@ const agriculture = defineDeck('remote-u10-l1', [
     kind: 'bullets',
     section: 0,
     title: 'Start with the decision',
+    image: 'al-jowf-pivots',
     bullets: [
       'Define the decision and target scale before selecting an index.',
       'Draw field boundaries that isolate the crop, excluding roads, neighbors, and mixed edges.',
@@ -1049,6 +1018,7 @@ const agriculture = defineDeck('remote-u10-l1', [
     kind: 'bullets',
     section: 4,
     title: 'Change detection',
+    image: 'rondonia-2007',
     bullets: [
       'Use comparable products, registration, masks, and units across dates.',
       'Compute change from calibrated values — never from independently stretched colors.',
@@ -1069,15 +1039,6 @@ const agriculture = defineDeck('remote-u10-l1', [
     ],
     answers: [0, 2, 3],
     explanation: 'Registration, consistent masks, and an explicit baseline make change meaningful.',
-  },
-  {
-    kind: 'explore',
-    section: 5,
-    title: 'Explore: cover change alone moves NDVI',
-    widget: 'mixed-pixel',
-    prompt: 'Record NDVI at vegetation fractions 1, 0.5, and 0. What trend do you see?',
-    takeaway:
-      'A ratio can fall simply because the footprint contains more soil — no disease required.',
   },
   {
     kind: 'example',

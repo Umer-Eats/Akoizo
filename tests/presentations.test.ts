@@ -459,3 +459,23 @@ test('the best score on each slide adds up across sessions and days to complete 
   assert.equal(benStanding.earned, graded.length);
   assert.ok(benStanding.completedAt);
 });
+
+test('presentation photos are real files with sources, and no deck has lab-style explorers', async () => {
+  const { existsSync } = await import('node:fs');
+  const { presentationPhotos } = await import('../src/lib/presentation-photos.ts');
+  const used = new Set<string>();
+  for (const lesson of course.lessons) {
+    const deck = deckFor('C', 'remote-sensing', lesson.id)!;
+    for (const slide of deck.slides) {
+      assert.notEqual(slide.kind as string, 'explore', slide.id);
+      if ((slide.kind === 'bullets' || slide.kind === 'title') && slide.image) used.add(slide.image);
+    }
+  }
+  assert.ok(used.size >= 15, `photos are used across the decks (${used.size})`);
+  for (const [id, photo] of Object.entries(presentationPhotos)) {
+    assert.ok(existsSync(`public/presentations/${photo.file}`), `${id} file exists`);
+    assert.match(photo.source, /^https:\/\/(commons\.wikimedia\.org|images\.nasa\.gov)\//, id);
+    assert.ok(photo.alt && photo.caption && photo.credit, id);
+    assert.ok(used.has(id), `${id} is used on a slide`);
+  }
+});

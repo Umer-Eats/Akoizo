@@ -31,6 +31,7 @@ const foundations = defineDeck('remote-u1-l1', [
     kind: 'bullets',
     section: 0,
     title: 'Observing without direct contact',
+    image: 'blue-marble-americas',
     bullets: [
       'Remote sensing measures energy that a target reflects, emits, or scatters — without sampling the target.',
       'A satellite never records “forest health”; it records radiance in selected spectral bands.',
@@ -100,6 +101,7 @@ const foundations = defineDeck('remote-u1-l1', [
     kind: 'bullets',
     section: 2,
     title: 'Historical development',
+    image: 'boston-1860',
     bullets: [
       'Aerial photography made systematic overhead mapping possible before satellites.',
       'Orbital instruments expanded coverage, repeatability, and access to more wavelengths.',
@@ -246,15 +248,6 @@ const foundations = defineDeck('remote-u1-l1', [
     explanation: 'These four words appear throughout the course — keep them distinct.',
   },
   {
-    kind: 'explore',
-    title: 'Explore: measurement versus derived value',
-    widget: 'ndvi',
-    prompt:
-      'Change red and NIR reflectance separately. Which numbers are measurements, and which output is derived?',
-    takeaway:
-      'Red and NIR are the measured inputs; the index is a ratio derived from them, not a new observation.',
-  },
-  {
     kind: 'mcq',
     prompt: 'What does an optical sensor directly record?',
     options: [
@@ -336,6 +329,7 @@ const sensors = defineDeck('remote-u2-l1', [
     kind: 'bullets',
     section: 1,
     title: 'Active measurements',
+    image: 'sentinel1-estonia',
     bullets: [
       'An active system transmits energy and measures the return: radar uses microwaves, lidar uses laser pulses.',
       'Known timing lets us compute range: d = c·t ⁄ 2.',
@@ -356,15 +350,6 @@ const sensors = defineDeck('remote-u2-l1', [
       ['Natural-light photograph', 1],
     ],
     explanation: 'Only radar and lidar transmit their own illumination.',
-  },
-  {
-    kind: 'explore',
-    section: 5,
-    title: 'Explore: pulse timing and range',
-    widget: 'pulse-range',
-    prompt: 'Double the travel time. Predict the new range before you move the slider.',
-    takeaway:
-      'Range is proportional to round-trip time; halving accounts for the out-and-back path.',
   },
   {
     kind: 'example',
@@ -535,6 +520,7 @@ const orbits = defineDeck('remote-u3-l1', [
   {
     kind: 'title',
     title: 'Satellite orbits and observing strategies',
+    image: 'landsat8-orbit',
     subtitle: 'Coverage, revisit, swath, and mission tradeoffs.',
     objectives: [
       'Compare geostationary and polar observing geometry.',
@@ -598,6 +584,7 @@ const orbits = defineDeck('remote-u3-l1', [
     kind: 'bullets',
     section: 2,
     title: 'Geostationary tradeoffs',
+    image: 'goes16-full-disk',
     bullets: [
       'Revisits a broad region frequently — ideal for evolving weather.',
       'Large distance and geometry trade away spatial detail compared with low orbits.',
@@ -622,6 +609,7 @@ const orbits = defineDeck('remote-u3-l1', [
     kind: 'bullets',
     section: 3,
     title: 'Mission examples and continuity',
+    image: 'landsat9-launch',
     bullets: [
       'Landsat: long-term calibrated land observation.',
       'Sentinel family: complementary optical and radar capabilities.',
@@ -653,14 +641,6 @@ const orbits = defineDeck('remote-u3-l1', [
       'Effective revisit can be far longer than the nominal schedule.',
       'For a short-lived flood, one missed date can lose the peak entirely.',
     ],
-  },
-  {
-    kind: 'explore',
-    section: 4,
-    title: 'Explore: nominal versus usable revisit',
-    widget: 'revisit',
-    prompt: 'Raise the cloud cover. How many usable optical observations remain this month?',
-    takeaway: 'Usable revisit depends on quality-controlled observations, not the orbit schedule.',
   },
   {
     kind: 'example',
@@ -791,15 +771,6 @@ const composites = defineDeck('remote-u4-l1', [
     ],
   },
   {
-    kind: 'explore',
-    section: 0,
-    title: 'Explore: change the band assignment',
-    widget: 'composite',
-    prompt:
-      'Switch between true color and NIR-as-red. Did any surface change, or only its color code?',
-    takeaway: 'Only the display mapping changed; the measured reflectances stayed the same.',
-  },
-  {
     kind: 'mcq',
     section: 0,
     prompt: 'What determines false-color appearance?',
@@ -841,6 +812,7 @@ const composites = defineDeck('remote-u4-l1', [
     kind: 'bullets',
     section: 2,
     title: 'Water and built surfaces',
+    image: 'dubai-false-color',
     bullets: [
       'Water usually has low NIR — but sediment, depth, sun glint, and shoreline mixtures change that.',
       'Roofs, asphalt, concrete, and shadows do not share one signature.',
@@ -1013,6 +985,7 @@ const resolution = defineDeck('remote-u5-l1', [
     kind: 'bullets',
     section: 0,
     title: 'Spatial support',
+    image: 'kansas-crops-aster',
     bullets: [
       'Spatial resolution = distinguishable ground detail; pixel spacing = sampling. Related, not always identical.',
       'A 30 m × 30 m pixel covers 900 m² — not 30 m².',
@@ -1063,14 +1036,6 @@ const resolution = defineDeck('remote-u5-l1', [
     ],
   },
   {
-    kind: 'explore',
-    section: 3,
-    title: 'Explore: bit depth',
-    widget: 'bit-depth',
-    prompt: 'Increase the bit depth. How many levels does each extra bit add?',
-    takeaway: 'Each added bit doubles the number of encoded levels.',
-  },
-  {
     kind: 'numeric',
     section: 3,
     prompt: 'How many ideal levels does an 8-bit encoding have?',
@@ -1085,14 +1050,6 @@ const resolution = defineDeck('remote-u5-l1', [
     diagram: 'mixed-pixel',
     caption:
       'Linear mixture: each band of the pixel is the area-weighted mean of its components. Mix the bands first, then compute the index.',
-  },
-  {
-    kind: 'explore',
-    section: 4,
-    title: 'Explore: mixing vegetation and soil',
-    widget: 'mixed-pixel',
-    prompt: 'Vary the vegetation fraction from 0 to 1. Is NDVI a straight line?',
-    takeaway: 'Bands mix linearly, but NDVI is a ratio — it does not change linearly with cover.',
   },
   {
     kind: 'example',
