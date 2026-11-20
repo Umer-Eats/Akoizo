@@ -47,11 +47,12 @@ export function StudentWork({
   const lessons = of('Lesson');
   const labs = of('Lab');
   const tests = of('Practice');
+  const presentations = of('Presentation');
   return (
     <section aria-label="Submitted work">
       <div className="dashboard-section-title">
         <h2>Submitted work.</h2>
-        <span className="tag">LESSONS · LABS · PRACTICE TESTS</span>
+        <span className="tag">LESSONS · PRESENTATIONS · LABS · PRACTICE TESTS</span>
       </div>
       {error ? (
         <div className="empty-state">
@@ -69,6 +70,11 @@ export function StudentWork({
               <span>Lessons completed</span>
               <strong>{lessons.length}</strong>
               <small>Checkpoint accuracy {average(lessons)}</small>
+            </div>
+            <div className="stat-card">
+              <span>Presentations completed</span>
+              <strong>{presentations.length}</strong>
+              <small>Activity accuracy {average(presentations)}</small>
             </div>
             <div className="stat-card">
               <span>Lab accuracy</span>
@@ -104,13 +110,15 @@ export function StudentWork({
                           ? 'Practice test'
                           : record.type === 'Lab'
                             ? 'Lab simulation'
-                            : 'Lesson'}
+                            : record.type === 'Presentation'
+                              ? 'Presentation'
+                              : 'Lesson'}
                       </td>
                       <td>{record.eventName}</td>
                       <td>
                         {record.type === 'Lab'
                           ? `${record.percentage}% accuracy`
-                          : record.type === 'Lesson'
+                          : record.type === 'Lesson' || record.type === 'Presentation'
                             ? `Completed${record.percentage === null ? '' : ` · ${record.score} / ${record.maxScore} (${record.percentage}%)`}`
                             : `${record.score} / ${record.maxScore} · ${record.percentage ?? 0}% accuracy`}
                       </td>

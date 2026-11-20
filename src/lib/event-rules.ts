@@ -1,5 +1,6 @@
 import eventRulePages from './event-rule-pages.json' with { type: 'json' };
 import type { Division, EventToolId, ScienceEvent } from './events';
+import { authoredLessonsForEvent } from './lessons-registry.ts';
 
 export type RulesInfo = {
   division: Division;
@@ -171,6 +172,13 @@ const specialTools: Record<string, EventToolId[]> = {
 };
 
 export function eventToolIds(division: Division, event: ScienceEvent): EventToolId[] {
+  const ids = baseToolIds(division, event);
+  // Every Division C event with lessons can also be learned as an interactive presentation.
+  const lessons = ids.indexOf('lessons');
+  if (division !== 'C' || lessons < 0 || !authoredLessonsForEvent(event.id, division)) return ids;
+  return [...ids.slice(0, lessons + 1), 'presentation', ...ids.slice(lessons + 1)];
+}
+function baseToolIds(division: Division, event: ScienceEvent): EventToolId[] {
   const key = `${division}/${event.id}`;
   if (specialTools[key]) return specialTools[key];
   const ids: EventToolId[] = ['lessons'];

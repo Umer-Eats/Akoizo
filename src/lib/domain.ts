@@ -25,7 +25,7 @@ export type Assignment = {
   eventId: string;
   eventName: string;
   division: Division;
-  type: 'Practice' | 'Ranked' | 'Lesson' | 'Lab';
+  type: 'Practice' | 'Ranked' | 'Lesson' | 'Lab' | 'Presentation';
   due: string;
   completedAt: string | null;
   testId?: string | null;
@@ -35,12 +35,12 @@ export type Assignment = {
   /** A custom ranked test, managed from the instructor's Ranked Tests tab. */
   ranked?: boolean;
 };
-export type StudyKind = 'Lesson' | 'Unit' | 'Lab';
+export type StudyKind = 'Lesson' | 'Unit' | 'Lab' | 'Presentation';
 /** The PhET simulation of an event, assigned beside its built-in labs. */
 export const PHET_LAB = 'phet';
 /** One graded submission: a lesson's practice, a lab simulation, or a practice test. */
 export type WorkRecord = {
-  type: 'Lesson' | 'Lab' | 'Practice';
+  type: 'Lesson' | 'Lab' | 'Practice' | 'Presentation';
   eventId: string;
   eventName: string;
   targetId: string;

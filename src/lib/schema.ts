@@ -109,9 +109,26 @@ export const schema = [
     UNIQUE(test_id, student_id))`,
   `CREATE TABLE IF NOT EXISTS study_assignments (id TEXT PRIMARY KEY, student_id TEXT NOT NULL REFERENCES users(id),
     instructor_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
-    kind TEXT NOT NULL CHECK(kind IN ('Lesson','Unit','Lab')), target_id TEXT NOT NULL, title TEXT NOT NULL,
+    kind TEXT NOT NULL CHECK(kind IN ('Lesson','Unit','Lab','Presentation')), target_id TEXT NOT NULL, title TEXT NOT NULL,
     due_date TEXT NOT NULL, assigned_at TEXT NOT NULL, completed_at TEXT,
     UNIQUE(student_id, event_id, kind, target_id))`,
+  // Presentations: the best finished run of a lesson's deck, self-paced or in a live session.
+  `CREATE TABLE IF NOT EXISTS presentation_results (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
+    lesson_id TEXT NOT NULL, mode TEXT NOT NULL CHECK(mode IN ('solo','live')), score REAL NOT NULL, max_score REAL NOT NULL,
+    completed_at TEXT NOT NULL, PRIMARY KEY(student_id, event_id, lesson_id))`,
+  // A live presentation one member hosts and classmates in the same school join by code.
+  `CREATE TABLE IF NOT EXISTS presentation_sessions (id TEXT PRIMARY KEY, code TEXT NOT NULL UNIQUE,
+    school_id TEXT NOT NULL REFERENCES schools(id), host_id TEXT NOT NULL REFERENCES users(id),
+    event_id TEXT NOT NULL REFERENCES events(id), lesson_id TEXT NOT NULL, slide INTEGER NOT NULL DEFAULT 0,
+    revealed INTEGER NOT NULL DEFAULT 0, status TEXT NOT NULL CHECK(status IN ('live','ended')),
+    created_at TEXT NOT NULL, updated_at TEXT NOT NULL)`,
+  'CREATE INDEX IF NOT EXISTS idx_presentation_sessions_school ON presentation_sessions(school_id,status,event_id)',
+  `CREATE TABLE IF NOT EXISTS presentation_members (session_id TEXT NOT NULL REFERENCES presentation_sessions(id),
+    user_id TEXT NOT NULL REFERENCES users(id), display_name TEXT NOT NULL, joined_at TEXT NOT NULL,
+    last_seen INTEGER NOT NULL, PRIMARY KEY(session_id, user_id))`,
+  `CREATE TABLE IF NOT EXISTS presentation_answers (session_id TEXT NOT NULL REFERENCES presentation_sessions(id),
+    user_id TEXT NOT NULL REFERENCES users(id), slide_id TEXT NOT NULL, answer TEXT NOT NULL,
+    earned REAL NOT NULL, answered_at TEXT NOT NULL, PRIMARY KEY(session_id, user_id, slide_id))`,
   // The latest graded submission of one lesson or lab. Lab scores are an accuracy out of 100.
   `CREATE TABLE IF NOT EXISTS study_results (student_id TEXT NOT NULL REFERENCES users(id), event_id TEXT NOT NULL REFERENCES events(id),
     kind TEXT NOT NULL CHECK(kind IN ('Lesson','Lab')), target_id TEXT NOT NULL, score REAL NOT NULL, max_score REAL NOT NULL,
@@ -152,6 +169,22 @@ export const schema = [
   'CREATE INDEX IF NOT EXISTS idx_team_slots_student ON team_slots(student_id)',
   'CREATE INDEX IF NOT EXISTS idx_ranked_tests_school ON ranked_tests(school_id)',
   'CREATE INDEX IF NOT EXISTS idx_ranked_assignments_student ON ranked_assignments(student_id)',
+];
+/**
+ * Databases created before presentations allowed only lessons, units and labs in
+ * study_assignments. SQLite cannot change a CHECK constraint, so initializeDatabase rebuilds the
+ * table once with these statements, in one transaction, copying every row before the swap.
+ */
+const studyAssignmentColumns =
+  'id,student_id,instructor_id,event_id,kind,target_id,title,due_date,assigned_at,completed_at';
+export const studyAssignmentKindsRebuild = [
+  'DROP TABLE IF EXISTS study_assignments_next',
+  schema
+    .find((sql) => sql.includes('TABLE IF NOT EXISTS study_assignments'))!
+    .replace('IF NOT EXISTS study_assignments', 'study_assignments_next'),
+  `INSERT INTO study_assignments_next (${studyAssignmentColumns}) SELECT ${studyAssignmentColumns} FROM study_assignments`,
+  'DROP TABLE study_assignments',
+  'ALTER TABLE study_assignments_next RENAME TO study_assignments',
 ];
 export const eventSeeds = (['A', 'B', 'C'] as const).flatMap((division) =>
   eventsForDivision(division).map((event) => ({

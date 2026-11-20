@@ -15,6 +15,7 @@ import {
   FlaskConical,
   FileCheck2,
   ScrollText,
+  Presentation,
   Search,
   ChevronLeft,
   Clock3,
@@ -48,6 +49,7 @@ import {
 import { useAuth, authMessage } from './auth-context';
 import { PracticeLibrary } from './practice';
 import { LessonsView } from './lessons';
+import { PresentationsView } from './presentations';
 import { lessonsForEvent } from '@/lib/lessons-registry';
 import { PracticeReviews } from './practice-reviews';
 import { InstructorAssignments } from './instructor-assignments';
@@ -78,6 +80,7 @@ const icons = {
   flask: FlaskConical,
   'file-check': FileCheck2,
   scroll: ScrollText,
+  presentation: Presentation,
 };
 
 function useDashboard() {
@@ -441,6 +444,7 @@ function assignmentHref(assignment: Assignment) {
   if (assignment.study) {
     const { kind, targetId } = assignment.study;
     const query = encodeURIComponent(targetId);
+    if (kind === 'Presentation') return `${base}/presentation?lesson=${query}`;
     return kind === 'Lab'
       ? `${base}/lab-practice?lab=${query}`
       : `${base}/lessons?${kind === 'Unit' ? 'unit' : 'lesson'}=${query}`;
@@ -1048,7 +1052,8 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     );
   }
   const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
-  const course = toolId === 'lessons' ? lessonsForEvent(event.id, division) : null;
+  const course =
+    toolId === 'lessons' || toolId === 'presentation' ? lessonsForEvent(event.id, division) : null;
   const hasDivisionCLabs =
     division !== 'A' &&
     (toolId === 'lab-practice' || toolId === 'lab-generator') &&
@@ -1133,6 +1138,12 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
               eventName={event.name}
               studentId={profile!.id}
               division={division === 'B' ? 'B' : 'C'}
+            />
+          ) : toolId === 'presentation' && course ? (
+            <PresentationsView
+              key={`${profile!.id}:${division}:${course.eventId}`}
+              course={course}
+              division={division}
             />
           ) : toolId === 'lessons' && course ? (
             <LessonsView

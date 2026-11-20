@@ -30,6 +30,6 @@ export function studyLabel(
 ) {
   if (!course) return fallback;
   if (kind === 'Unit') return unitLabel(course, targetId) ?? fallback;
-  if (kind === 'Lesson') return lessonLabel(course, targetId) ?? fallback;
+  if (kind === 'Lesson' || kind === 'Presentation') return lessonLabel(course, targetId) ?? fallback;
   return fallback;
 }

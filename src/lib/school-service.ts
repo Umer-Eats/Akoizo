@@ -320,7 +320,7 @@ export async function dashboardFor(db: Database, profile: Profile): Promise<Dash
           eventId: String(a.event_id).split(':').slice(2).join(':'),
           eventName: String(a.name),
           division: a.division,
-          type: a.kind === 'Lab' ? 'Lab' : 'Lesson',
+          type: a.kind === 'Lab' || a.kind === 'Presentation' ? a.kind : 'Lesson',
           due: String(a.due_date),
           completedAt: a.completed_at,
           study: { kind: a.kind, targetId: String(a.target_id), title: String(a.title) },

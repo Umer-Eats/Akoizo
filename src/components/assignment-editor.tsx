@@ -5,6 +5,7 @@ import type { Division } from '@/lib/events';
 import { lessonsForEvent } from '@/lib/lessons-registry';
 import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
 import { lessonLabel, unitLabel } from '@/lib/lesson-labels';
+import { presentedLessons } from '@/lib/presentations';
 import { practiceTitle, type PracticeSummary } from '@/lib/practice-types';
 import { useAuth, authMessage } from './auth-context';
 
@@ -48,6 +49,17 @@ export function studyChoices(division: Division, eventId: string): Group[] {
         options: loose.map((lesson) => ({ value: `Lesson:${lesson.id}`, label: lesson.title })),
       });
   }
+  const decks = course ? presentedLessons(division, eventId) : [];
+  if (course && decks.length)
+    groups.push({
+      label: 'Presentations',
+      options: course.lessons
+        .filter((lesson) => decks.includes(lesson.id))
+        .map((lesson) => ({
+          value: `Presentation:${lesson.id}`,
+          label: `Presentation: ${lessonLabel(course, lesson.id) ?? lesson.title}`,
+        })),
+    });
   const labs = labsForEvent(division, eventId).map((lab) => ({
     value: `Lab:${lab.id}`,
     label: lab.title,

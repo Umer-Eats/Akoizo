@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Akoizo | Science Olympiad walkthrough</title>
+<style>
+:root{font-family:Manrope,system-ui,sans-serif;color:#f4f5f8;background:#08090c;--ice:#8aaeff;--line:#2a3348}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 75% -20%,#192d6a,transparent 60%)}
+main{max-width:1440px;margin:auto;padding:clamp(20px,4vw,56px)}
+header{margin-bottom:30px;display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.25rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ice)}
+h1,h2,p{margin:0} h1{font-size:clamp(1.8rem,4vw,3.5rem);letter-spacing:-.045em;line-height:1.05;margin-top:10px}
+a{color:var(--ice);text-underline-offset:4px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(235px,300px);gap:20px;align-items:start}
+.screen,.chapters,.follow{border:1px solid var(--line);background:#101522;border-radius:12px;overflow:hidden}
+video{display:block;width:100%;aspect-ratio:16/9;background:#08090c}
+.follow{margin-top:16px;padding:17px 20px}
+.follow p{margin-top:6px;color:#d0dbf5;line-height:1.55}
+.chapters{padding:18px 12px}
+h2{font-size:1rem;letter-spacing:.02em}
+.chapters h2{margin:0 7px 12px}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+button{font:inherit;cursor:pointer}
+.chapter{display:grid;grid-template-columns:2.8rem 1fr;text-align:left;align-items:center;gap:8px;width:100%;padding:10px 9px;border:1px solid transparent;border-radius:7px;background:transparent;color:inherit;font-size:.92rem;min-height:44px}
+.chapter:hover{background:#1b2540}.chapter[aria-current=true]{background:#1b2f62;border-color:#3659ba}
+.time{font: .78rem ui-monospace,monospace;color:var(--ice);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px}
+.load{padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.load[hidden]{display:none}
+.load input{max-width:100%;color:var(--ice)}
+@media(max-width:780px){.layout{grid-template-columns:1fr}}
+</style>
+<main>
+  <header>
+    <div><div class="brand">Akoizo</div><h1>Science Olympiad walkthrough</h1></div>
+    <a href="https://akoizo.app" target="_blank" rel="noopener noreferrer">Open Akoizo ↗</a>
+  </header>
+  <div class="layout">
+    <section aria-label="Video">
+      <div class="screen">
+        <video id="video" controls playsinline preload="metadata"></video>
+        <div id="load" class="load" hidden><label for="select">Open the edited MP4</label><input id="select" type="file" accept="video/mp4"></div>
+      </div>
+      <div class="follow" id="follow">
+        <h2>Follow along</h2><p id="prompt"></p>
+      </div>
+    </section>
+    <nav class="chapters" aria-labelledby="chapter-label"><h2 id="chapter-label">Jump to a chapter</h2><ol id="chapters"></ol></nav>
+  </div>
+</main>
+<script>
+const chapters = [{"start":3,"title":"Find an event","prompt":"Open the dashboard, choose your division, and pick one event card to study."},{"start":68.6,"title":"Study a lesson","prompt":"Open a lesson, review a diagram, and finish the checkpoint before moving on."},{"start":143.7,"title":"Take a practice test","prompt":"Open a past test. Use the PDF and answer pane side by side to try the first question."},{"start":171.6,"title":"Build your binder","prompt":"Choose a tournament level and decide which topics or documents to include in your study materials."},{"start":229.5,"title":"Explore labs and builds","prompt":"Open the lab or build tools in an event and choose one simulation or course setup to try."},{"start":304.8,"title":"Find your team and progress","prompt":"Open Community to find your team, then use Notes and progress to pick up where you left off."},{"start":375.5,"title":"Open the rankings","prompt":"Open Rankings and look at a rank profile or the rank breakdown."}];
+const captionData = "WEBVTT\n\n1\n00:00:03.050 --> 00:00:05.972\nAnd essentially, as soon as the\nstudent logs in, they'll be\n\n2\n00:00:05.972 --> 00:00:07.484\nable to see their dashboard page.\n\n3\n00:00:08.364 --> 00:00:10.177\nAnd this is where everything\nis saved for them.\n\n4\n00:00:11.020 --> 00:00:15.898\nSo the first thing they'll be able to\nsee is all the events in that division.\n\n5\n00:00:15.918 --> 00:00:18.755\nSo you can see that this is a\nhigh school team, so they have\n\n6\n00:00:18.755 --> 00:00:20.000\ndivisions here on the top here.\n\n7\n00:00:20.772 --> 00:00:23.399\nUm, it'll show what school\nthey're in, and we'll go through\n\n8\n00:00:23.400 --> 00:00:24.859\nall the features in a second.\n\n9\n00:00:24.873 --> 00:00:30.892\nBut basically, they have all the events\nhere, and each event is broken up into\n\n10\n00:00:30.900 --> 00:00:35.457\ntime slots based on when the competition\nsays that those time slots will occur.\n\n11\n00:00:37.150 --> 00:00:42.333\nSo if you go back to all the events\nagain, there's different types of events.\n\n12\n00:00:42.361 --> 00:00:47.122\nWe have the study events, build\nevents, lab events, So study\n\n13\n00:00:47.122 --> 00:00:48.760\nevents have the testing portion.\n\n14\n00:00:49.170 --> 00:00:51.501\nBuild events are obviously building.\n\n15\n00:00:52.260 --> 00:00:55.565\nSome have a building and test portion,\nso you can see protein modeling has both.\n\n16\n00:00:56.381 --> 00:01:01.931\nUm, a lab event right here has\na testing portion and a lab.\n\n17\n00:01:01.976 --> 00:01:05.945\nSo, um, chemistry lab\nwould also fall into this\n\n18\n00:01:08.600 --> 00:01:08.908\nOkay.\n\n19\n00:01:09.405 --> 00:01:13.576\nAnd then if we click on one of these\nevent cards, we can go to this event.\n\n20\n00:01:14.244 --> 00:01:17.468\nThe first thing the students will be able\nto see is the lessons for that event.\n\n21\n00:01:17.521 --> 00:01:20.678\nAnd in each lesson, it teaches them\neverything they need to know with the\n\n22\n00:01:20.678 --> 00:01:27.404\nvocab words right here, things to keep\nin mind, diagrams, the lesson breakdown.\n\n23\n00:01:28.518 --> 00:01:31.611\nTo continue on, they'll be able to\ncomplete the entire lesson, and then\n\n24\n00:01:31.611 --> 00:01:35.556\nthey can go to the practice section\nto practice more stuff on the lesson.\n\n25\n00:01:36.303 --> 00:01:41.089\nAnd then each event also has a lab\nwhich focuses on a specific aspect.\n\n26\n00:01:41.686 --> 00:01:45.498\nUm, for a lab, specific events like\nCircuit Lab and Chem Lab, there'll\n\n27\n00:01:45.506 --> 00:01:48.702\nbe a tab over here that'll show the\nactual lab that they might compete\n\n28\n00:01:48.765 --> 00:01:51.676\non during a competition, and that's\nsomething we'll look into in a second.\n\n29\n00:01:52.296 --> 00:01:56.205\nBut at the end of each lesson, there's\na lesson checkpoint that students must\n\n30\n00:01:56.235 --> 00:01:59.686\ncomplete, And students can continue\non to the next lesson after this.\n\n31\n00:02:00.943 --> 00:02:05.621\nThey can also use a Coach Ako to help\nthem teach the lesson as they go, and\n\n32\n00:02:05.621 --> 00:02:07.722\nhe'll explain everything more in-depth.\n\n33\n00:02:09.395 --> 00:02:13.162\nYou can also open your notes on the\nside if you decide to make them, and\n\n34\n00:02:13.162 --> 00:02:16.785\nyou can open your notes back here in\nthe full binder section over here.\n\n35\n00:02:17.424 --> 00:02:21.397\nYou can also generate notes if you think\ntyping them out is gonna take too long.\n\n36\n00:02:23.700 --> 00:02:27.234\nFor the practice tests, students can\nlook at all practice  tests on the\n\n37\n00:02:27.234 --> 00:02:30.635\ntesting, um, bank that's on scioly.org,\n\n38\n00:02:30.910 --> 00:02:33.782\nand they can also look at the Akoizo\nones that were generated by us.\n\n39\n00:02:34.206 --> 00:02:38.617\nIf I show you one from a different\ncompetition, students will be able to\n\n40\n00:02:38.623 --> 00:02:42.412\nsee the PDF on the side and then be able\nto submit the questions on the side.\n\n41\n00:02:42.775 --> 00:02:46.071\nThey can also ask a coach what the\nright answer is and how to solve it\n\n42\n00:02:51.600 --> 00:02:55.761\nStudents can generate their own binders\nand cheat sheets, um, based on the\n\n43\n00:02:55.763 --> 00:02:59.097\ntournament level, what things they want\nto include or what things not to include.\n\n44\n00:02:59.234 --> 00:03:02.120\nIf you want to include specific documents\nor images, you can attach them here.\n\n45\n00:03:02.398 --> 00:03:03.707\nYou can generate your images.\n\n46\n00:03:04.419 --> 00:03:08.434\nRight here, someone has created a\nbinder for Dynamic Planet, and you can\n\n47\n00:03:08.434 --> 00:03:10.168\nsee what schools already made them.\n\n48\n00:03:11.663 --> 00:03:12.818\nAnd it'll show up right here.\n\n49\n00:03:15.506 --> 00:03:19.178\nAnd then you can also export\nas a Docs PDF and edit it later\n\n50\n00:03:19.180 --> 00:03:20.855\non Google Docs if you'd like.\n\n51\n00:03:21.708 --> 00:03:23.699\nAnd the rules are also\nhere for every event.\n\n52\n00:03:26.141 --> 00:03:31.206\nIf we go to another event, like\na cheat sheet event, you'll\n\n53\n00:03:31.207 --> 00:03:34.917\nbe able to see the cheat sheet\ngenerator, which is right here.\n\n54\n00:03:35.830 --> 00:03:38.384\nWater quality also has a build portion.\n\n55\n00:03:38.862 --> 00:03:44.632\nSo if you record the build portion of\nthat event and upload it as a video right\n\n56\n00:03:44.632 --> 00:03:47.156\nhere, a coach will grade it for you.\n\n57\n00:03:49.500 --> 00:03:55.187\nThe lab practice is the actual lab that\nyou might do at a specific event, and\n\n58\n00:03:55.187 --> 00:03:58.440\nyou can-- at a specific competition,\nand you can go through the entire thing.\n\n59\n00:03:58.811 --> 00:04:01.344\nOn top of this, you can look at\nthe PhET lab simulations, which\n\n60\n00:04:01.347 --> 00:04:02.890\nare included in here as well\n\n61\n00:04:07.821 --> 00:04:10.375\nUm, and then the rules\nare also at the bottom\n\n62\n00:04:14.029 --> 00:04:19.213\nFor building events, we have\nlessons for every single subject,\n\n63\n00:04:19.871 --> 00:04:21.310\nand we have checkpoints as well.\n\n64\n00:04:21.553 --> 00:04:26.374\nThey mostly score-- They're mostly\nabout mechanical and engineering design\n\n65\n00:04:26.374 --> 00:04:31.661\nconcepts, though they also test you\na lot more on the actual rule set\n\n66\n00:04:34.771 --> 00:04:37.473\nAfter students make their cheat\nsheets and binders, they can access\n\n67\n00:04:37.474 --> 00:04:39.237\nthem on the public bank right here.\n\n68\n00:04:39.595 --> 00:04:42.120\nYou can do the same for courses\nif you're doing a build event.\n\n69\n00:04:42.688 --> 00:04:46.872\nUm, basically for build events, they\ncan generate a course that they might\n\n70\n00:04:46.872 --> 00:04:52.629\nwant or track setup, and then students\ncan use that with the schematics and the\n\n71\n00:04:52.965 --> 00:04:56.933\nspecific dimensions of the track that\nthey might have in actual competition.\n\n72\n00:04:58.858 --> 00:05:01.017\nAnd then the binders they\ncan access here as well\n\n73\n00:05:04.800 --> 00:05:09.323\nRight here in the community tab, if\nyou register as a school, you would\n\n74\n00:05:09.336 --> 00:05:11.007\nbe able to see all the other teams.\n\n75\n00:05:11.116 --> 00:05:14.284\nAnd on top of this, they can\nsee the teams on this side.\n\n76\n00:05:14.439 --> 00:05:16.380\nThey can identify who is in what team.\n\n77\n00:05:17.287 --> 00:05:18.757\nYou can see the entire member bank.\n\n78\n00:05:19.526 --> 00:05:24.107\nYou can also see other communities\nand each student's rank placement\n\n79\n00:05:24.612 --> 00:05:28.261\nacross, um, the entire Akoizo website\n\n80\n00:05:32.563 --> 00:05:39.234\nYou're also able to see student analytics,\nIf you go to the notes page, the\n\n81\n00:05:39.235 --> 00:05:42.892\nstudents will be able to see all their\nnotes that they've created per lesson.\n\n82\n00:05:43.183 --> 00:05:49.630\nSo this student on whoever's account\nthis is, has created lessons and\n\n83\n00:05:49.631 --> 00:05:52.235\nnotes on each of these subjects.\n\n84\n00:05:53.037 --> 00:05:57.760\nAnd as they progress through each unit,\nyou'll be able to see what they have done\n\n85\n00:06:03.751 --> 00:06:05.480\nThere's also light mode and dark mode.\n\n86\n00:06:06.756 --> 00:06:09.891\nStudents can also change their\nusername, leave the community if they\n\n87\n00:06:09.891 --> 00:06:11.540\ndon't think they joined the right one\n\n88\n00:06:15.426 --> 00:06:19.434\nIf you go back to the original\nAkoizo page, Akoizo app, you'll\n\n89\n00:06:19.434 --> 00:06:22.715\nalso be able to see the ranking\npage, and this will be global.\n\n90\n00:06:23.276 --> 00:06:27.596\nSo every student that does ranked\ntesting or any ranked type event\n\n91\n00:06:27.601 --> 00:06:30.926\npoint section will be placed on\nthis leaderboard and get a rank.\n\n92\n00:06:32.069 --> 00:06:35.797\nYou can also view the student's rank\nprofile, and you should be able to see all\n\n93\n00:06:35.800 --> 00:06:37.728\ntheir statistics on the ranked testing.\n\n94\n00:06:39.048 --> 00:06:41.547\nYou're also able to see the\nentire ranked breakdown and\n\n95\n00:06:41.547 --> 00:06:43.805\nhow each ranking system works.\n\n96\n00:06:46.101 --> 00:06:49.520\nThis is basically just to\npromote student activity and\n\n97\n00:06:49.523 --> 00:06:51.436\ncompetition between schools online\n\n";
+const embeddedVideo = /* VIDEO */ "";
+const video = document.querySelector("#video");
+const list = document.querySelector("#chapters");
+const promptText = document.querySelector("#prompt");
+const loadPanel = document.querySelector("#load");
+let pendingSeek = null;
+let localVideo;
+let selected = -1;
+
+function showChapter(index) {
+  if (selected === index || index < 0) return;
+  if (selected >= 0) buttons[selected].removeAttribute("aria-current");
+  buttons[index].setAttribute("aria-current", "true");
+  promptText.textContent = chapters[index].prompt;
+  selected = index;
+}
+
+const buttons = chapters.map(({title, start}) => {
+  const item = document.createElement("li");
+  const button = document.createElement("button");
+  const time = document.createElement("span");
+  const label = document.createElement("span");
+  button.type = "button";
+  button.className = "chapter";
+  time.className = "time";
+  time.textContent = Math.floor(start / 60) + ":" + String(Math.floor(start % 60)).padStart(2, "0");
+  label.textContent = title;
+  button.append(time, label);
+  item.append(button);
+  list.append(item);
+  button.addEventListener("click", () => {
+    if (video.readyState >= 1) {
+      video.currentTime = start;
+    } else {
+      pendingSeek = start;
+    }
+    showChapter(chapters.findIndex(chapter => chapter.start === start));
+    if (!video.getAttribute("src") || video.error) {
+      loadPanel.hidden = false;
+      document.querySelector("#select").focus();
+      return;
+    }
+    video.play().catch(() => {});
+  });
+  return button;
+});
+
+video.addEventListener("loadedmetadata", () => {
+  if (pendingSeek !== null) {
+    video.currentTime = Math.min(pendingSeek, video.duration);
+    pendingSeek = null;
+  }
+  loadPanel.hidden = true;
+});
+video.addEventListener("timeupdate", () => {
+  const index = chapters.findLastIndex(chapter => chapter.start <= video.currentTime + .05);
+  showChapter(Math.max(index, 0));
+});
+video.addEventListener("error", () => { loadPanel.hidden = false; });
+document.querySelector("#select").addEventListener("change", ({target}) => {
+  if (!target.files.length) return;
+  if (localVideo) URL.revokeObjectURL(localVideo);
+  localVideo = URL.createObjectURL(target.files[0]);
+  video.src = localVideo;
+  video.play().catch(() => {});
+});
+if (captionData) {
+  const track = document.createElement("track");
+  track.kind = "captions";
+  track.label = "English";
+  track.srclang = "en";
+  track.src = URL.createObjectURL(new Blob([captionData], {type:"text/vtt"}));
+  video.append(track);
+}
+if (embeddedVideo) {
+  const pieces = [];
+  for (let start = 0; start < embeddedVideo.length; start += 262144) {
+    const decoded = atob(embeddedVideo.slice(start, start + 262144));
+    pieces.push(Uint8Array.from(decoded, char => char.charCodeAt(0)));
+  }
+  video.src = URL.createObjectURL(new Blob(pieces, {type:"video/mp4"}));
+} else {
+  video.src = "Akoizo-Walkthrough.mp4";
+}
+showChapter(0);
+</script>
+</html>

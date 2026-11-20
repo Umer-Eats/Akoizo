@@ -1,6 +1,15 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import { BookOpen, ChevronLeft, Clock3, FileText, FlaskConical, Search, Users } from 'lucide-react';
+import {
+  BookOpen,
+  ChevronLeft,
+  Clock3,
+  FileText,
+  FlaskConical,
+  Presentation,
+  Search,
+  Users,
+} from 'lucide-react';
 import { eventSlots, slotForEvent } from '@/lib/event-slots';
 import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/events';
 import {
@@ -13,6 +22,8 @@ import {
 import { PHET_LAB, dateInZone, type Assignment, type Student, type StudyKind } from '@/lib/domain';
 import { lessonLabel, studyLabel, unitLabel } from '@/lib/lesson-labels';
 import { lessonsForEvent } from '@/lib/lessons-registry';
+import { deckFor } from '@/lib/presentations';
+import { isActivity } from '@/lib/presentation-types';
 import { labsForEvent, phetActivities } from '@/lib/division-c-labs';
 import { rosterDivision, type TeamSheet } from '@/lib/teams';
 import { AssignEventModal, type AssignResult } from './assign-event-modal';
@@ -659,7 +670,7 @@ export function InstructorAssignments({
   const [view, setView] = useState<'assign' | 'assigned'>('assign');
   const [activeEvent, setActiveEvent] = useState<ScienceEvent | null>(null);
   const [work, setWork] = useState<Work | null>(null);
-  const [tab, setTab] = useState<'Practice' | 'Lesson' | 'Lab'>('Practice');
+  const [tab, setTab] = useState<'Practice' | 'Lesson' | 'Presentation' | 'Lab'>('Practice');
   const [unitId, setUnitId] = useState('');
   const [teams, setTeams] = useState<TeamSheet[] | null>(null);
   const [error, setError] = useState('');
@@ -774,13 +785,15 @@ export function InstructorAssignments({
       )}
       {!teams && !error && <p role="status">Loading teams…</p>}
       <div className="archive-view-switch" role="group" aria-label="Assignment content">
-        {(['Practice', 'Lesson', 'Lab'] as const).map((kind) => (
+        {(['Practice', 'Lesson', 'Presentation', 'Lab'] as const).map((kind) => (
           <button key={kind} aria-pressed={tab === kind} onClick={() => setTab(kind)}>
             {kind === 'Practice'
               ? 'Practice tests'
               : kind === 'Lesson'
                 ? 'Lessons by unit'
-                : 'Lab simulations'}
+                : kind === 'Presentation'
+                  ? 'Presentations'
+                  : 'Lab simulations'}
           </button>
         ))}
       </div>
@@ -858,6 +871,58 @@ export function InstructorAssignments({
             <p>Units and lessons will appear here when available for Division {division}.</p>
           </div>
         ))}
+      {tab === 'Presentation' &&
+        (course && course.lessons.some((lesson) => deckFor(division, activeEvent.id, lesson.id)) ? (
+          <section aria-label="Assignable presentations">
+            <p>
+              Each presentation teaches the same material as its lesson with slides and interactive
+              activities. Students finish it by themselves or in a live session, and their activity
+              score is recorded.
+            </p>
+            {course.units.map((unit) => {
+              const decks = unit.lessonIds.flatMap((id) => {
+                const deck = deckFor(division, activeEvent.id, id);
+                return deck ? [{ id, deck }] : [];
+              });
+              if (!decks.length) return null;
+              return (
+                <section key={unit.id} className="ranked-create">
+                  <h3>{unitLabel(course, unit.id)}</h3>
+                  <ul className="practice-test-list instructor-test-list">
+                    {decks.map(({ id, deck }) => {
+                      const lesson = course.lessons.find((item) => item.id === id)!;
+                      const activities = deck.slides.filter(isActivity).length;
+                      const item: Work = {
+                        kind: 'Presentation',
+                        id,
+                        title: lessonLabel(course, id) ?? lesson.title,
+                        meta: `${deck.slides.length} slides · ${activities} activities`,
+                      };
+                      return (
+                        <li key={id}>
+                          <div className="instructor-test-card">
+                            <Presentation size={22} />
+                            <div className="instructor-test-body">
+                              <h3>{item.title}</h3>
+                              <p>{item.meta}</p>
+                            </div>
+                            {choose(item)}
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              );
+            })}
+          </section>
+        ) : (
+          <div className="practice-empty">
+            <Presentation size={30} />
+            <h3>No presentations for this event yet.</h3>
+            <p>Presentations will appear here as they are added for Division {division}.</p>
+          </div>
+        ))}
       {tab === 'Lab' &&
         (labs.length ? (
           <ul className="practice-test-list instructor-test-list">
@@ -902,6 +967,8 @@ export function InstructorAssignments({
               ? 'Complete every lesson practice in this unit.'
               : work.kind === 'Lesson'
                 ? 'Complete the lesson practice.'
+                : work.kind === 'Presentation'
+                  ? 'Finish the presentation by yourself or in a live session.'
                 : work.kind === 'Lab'
                   ? 'Complete the simulation and mark it finished.'
                   : 'Submit this practice test to complete the assignment.'

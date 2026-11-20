@@ -15,7 +15,7 @@ export type AssignedWorkTarget = {
   division: Division;
   eventId: string;
   eventName: string;
-  kind: 'Practice' | 'Lesson' | 'Unit' | 'Lab';
+  kind: 'Practice' | 'Lesson' | 'Unit' | 'Lab' | 'Presentation';
   /** The lesson, unit, lab or test id; empty for "any practice test in this event". */
   targetId: string;
   title: string;

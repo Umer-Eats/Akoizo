@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Akoizo | Science Olympiad walkthrough</title>
+<style>
+:root{font-family:Manrope,system-ui,sans-serif;color:#f4f5f8;background:#08090c;--ice:#8aaeff;--line:#2a3348}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 75% -20%,#192d6a,transparent 60%)}
+main{max-width:1440px;margin:auto;padding:clamp(20px,4vw,56px)}
+header{margin-bottom:30px;display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.25rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ice)}
+h1,h2,p{margin:0} h1{font-size:clamp(1.8rem,4vw,3.5rem);letter-spacing:-.045em;line-height:1.05;margin-top:10px}
+a{color:var(--ice);text-underline-offset:4px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(235px,300px);gap:20px;align-items:start}
+.screen,.chapters,.follow{border:1px solid var(--line);background:#101522;border-radius:12px;overflow:hidden}
+video{display:block;width:100%;aspect-ratio:16/9;background:#08090c}
+.follow{margin-top:16px;padding:17px 20px}
+.follow p{margin-top:6px;color:#d0dbf5;line-height:1.55}
+.chapters{padding:18px 12px}
+h2{font-size:1rem;letter-spacing:.02em}
+.chapters h2{margin:0 7px 12px}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+button{font:inherit;cursor:pointer}
+.chapter{display:grid;grid-template-columns:2.8rem 1fr;text-align:left;align-items:center;gap:8px;width:100%;padding:10px 9px;border:1px solid transparent;border-radius:7px;background:transparent;color:inherit;font-size:.92rem;min-height:44px}
+.chapter:hover{background:#1b2540}.chapter[aria-current=true]{background:#1b2f62;border-color:#3659ba}
+.time{font: .78rem ui-monospace,monospace;color:var(--ice);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px}
+.load{padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.load[hidden]{display:none}
+.load input{max-width:100%;color:var(--ice)}
+@media(max-width:780px){.layout{grid-template-columns:1fr}}
+</style>
+<main>
+  <header>
+    <div><div class="brand">Akoizo</div><h1>Science Olympiad walkthrough</h1></div>
+    <a href="https://akoizo.app" target="_blank" rel="noopener noreferrer">Open Akoizo ↗</a>
+  </header>
+  <div class="layout">
+    <section aria-label="Video">
+      <div class="screen">
+        <video id="video" controls playsinline preload="metadata"></video>
+        <div id="load" class="load" hidden><label for="select">Open the edited MP4</label><input id="select" type="file" accept="video/mp4"></div>
+      </div>
+      <div class="follow" id="follow">
+        <h2>Follow along</h2><p id="prompt"></p>
+      </div>
+    </section>
+    <nav class="chapters" aria-labelledby="chapter-label"><h2 id="chapter-label">Jump to a chapter</h2><ol id="chapters"></ol></nav>
+  </div>
+</main>
+<script>
+const chapters = /* CHAPTERS */ [];
+const captionData = /* CAPTIONS */ "";
+const embeddedVideo = /* VIDEO */ "";
+const video = document.querySelector("#video");
+const list = document.querySelector("#chapters");
+const promptText = document.querySelector("#prompt");
+const loadPanel = document.querySelector("#load");
+let pendingSeek = null;
+let localVideo;
+let selected = -1;
+
+function showChapter(index) {
+  if (selected === index || index < 0) return;
+  if (selected >= 0) buttons[selected].removeAttribute("aria-current");
+  buttons[index].setAttribute("aria-current", "true");
+  promptText.textContent = chapters[index].prompt;
+  selected = index;
+}
+
+const buttons = chapters.map(({title, start}) => {
+  const item = document.createElement("li");
+  const button = document.createElement("button");
+  const time = document.createElement("span");
+  const label = document.createElement("span");
+  button.type = "button";
+  button.className = "chapter";
+  time.className = "time";
+  time.textContent = Math.floor(start / 60) + ":" + String(Math.floor(start % 60)).padStart(2, "0");
+  label.textContent = title;
+  button.append(time, label);
+  item.append(button);
+  list.append(item);
+  button.addEventListener("click", () => {
+    if (video.readyState >= 1) {
+      video.currentTime = start;
+    } else {
+      pendingSeek = start;
+    }
+    showChapter(chapters.findIndex(chapter => chapter.start === start));
+    if (!video.getAttribute("src") || video.error) {
+      loadPanel.hidden = false;
+      document.querySelector("#select").focus();
+      return;
+    }
+    video.play().catch(() => {});
+  });
+  return button;
+});
+
+video.addEventListener("loadedmetadata", () => {
+  if (pendingSeek !== null) {
+    video.currentTime = Math.min(pendingSeek, video.duration);
+    pendingSeek = null;
+  }
+  loadPanel.hidden = true;
+});
+video.addEventListener("timeupdate", () => {
+  const index = chapters.findLastIndex(chapter => chapter.start <= video.currentTime + .05);
+  showChapter(Math.max(index, 0));
+});
+video.addEventListener("error", () => { loadPanel.hidden = false; });
+document.querySelector("#select").addEventListener("change", ({target}) => {
+  if (!target.files.length) return;
+  if (localVideo) URL.revokeObjectURL(localVideo);
+  localVideo = URL.createObjectURL(target.files[0]);
+  video.src = localVideo;
+  video.play().catch(() => {});
+});
+if (captionData) {
+  const track = document.createElement("track");
+  track.kind = "captions";
+  track.label = "English";
+  track.srclang = "en";
+  track.src = URL.createObjectURL(new Blob([captionData], {type:"text/vtt"}));
+  video.append(track);
+}
+if (embeddedVideo) {
+  const pieces = [];
+  for (let start = 0; start < embeddedVideo.length; start += 262144) {
+    const decoded = atob(embeddedVideo.slice(start, start + 262144));
+    pieces.push(Uint8Array.from(decoded, char => char.charCodeAt(0)));
+  }
+  video.src = URL.createObjectURL(new Blob(pieces, {type:"video/mp4"}));
+} else {
+  video.src = "Akoizo-Walkthrough.mp4";
+}
+showChapter(0);
+</script>
+</html>

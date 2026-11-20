@@ -10,6 +10,7 @@ export type ScienceEvent = {
 };
 export type EventToolId =
   | 'lessons'
+  | 'presentation'
   | 'practice-tests'
   | 'ranked-tests'
   | 'question-bank'
@@ -126,6 +127,12 @@ export const tools = [
     name: 'Lessons',
     description: 'Build understanding, one concept at a time.',
     icon: 'book',
+  },
+  {
+    id: 'presentation',
+    name: 'Presentation',
+    description: 'Learn each lesson as an interactive presentation, alone or live with classmates.',
+    icon: 'presentation',
   },
   {
     id: 'practice-tests',

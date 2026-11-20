@@ -14,11 +14,12 @@ import { scorePractice } from './lesson-practice.ts';
 import { eventsForDivision, type Division } from './events.ts';
 import type { EventLessons } from './lessons.ts';
 import { lessonsForEvent } from './lessons-registry.ts';
+import { deckFor } from './presentations.ts';
 import { findPracticeTest, allPracticeTests } from './practice-catalog.ts';
 import { practiceTitle } from './practice-types.ts';
 import type { Database } from './school-service.ts';
 
-const kinds = ['Practice', 'Lesson', 'Unit', 'Lab'] as const;
+const kinds = ['Practice', 'Lesson', 'Unit', 'Lab', 'Presentation'] as const;
 type WorkKind = (typeof kinds)[number];
 
 /** The title of one assignable item, or an error when the event does not offer it. */
@@ -39,6 +40,12 @@ function titleOf(division: Division, eventId: string, kind: WorkKind, targetId: 
     return title;
   }
   const course = lessonsForEvent(eventId, division);
+  if (kind === 'Presentation') {
+    const lesson = course?.lessons.find((item) => item.id === targetId);
+    if (!lesson || !deckFor(division, eventId, targetId))
+      throw new AppError(404, 'That presentation is not in this event.');
+    return lesson.title;
+  }
   const title =
     kind === 'Unit'
       ? course?.units.find((unit) => unit.id === targetId)?.title
@@ -46,6 +53,24 @@ function titleOf(division: Division, eventId: string, kind: WorkKind, targetId: 
   if (!title)
     throw new AppError(404, `That ${kind === 'Unit' ? 'unit' : 'lesson'} is not in this event.`);
   return title;
+}
+
+/** Complete the pending presentation assignments these students have already finished. */
+export async function settlePresentations(db: Database, key: string, students: string[]) {
+  if (!students.length) return;
+  const marks = students.map(() => '?').join(',');
+  await db.batch(
+    [
+      {
+        sql: `UPDATE study_assignments SET completed_at=? WHERE event_id=? AND kind='Presentation'
+          AND completed_at IS NULL AND student_id IN (${marks})
+          AND EXISTS (SELECT 1 FROM presentation_results r WHERE r.student_id=study_assignments.student_id
+            AND r.event_id=study_assignments.event_id AND r.lesson_id=study_assignments.target_id)`,
+        args: [new Date().toISOString(), key, ...students],
+      },
+    ],
+    'immediate',
+  );
 }
 
 /** Complete the pending lesson and unit assignments that these students' lesson progress covers. */
@@ -142,6 +167,7 @@ export async function assignWork(db: Database, instructor: Profile, body: Record
   // Lessons a student finished before the assignment count at once.
   const course = kind === 'Lesson' || kind === 'Unit' ? lessonsForEvent(event.id, division) : null;
   if (course) await settleLessons(db, key, course, recipients);
+  if (kind === 'Presentation') await settlePresentations(db, key, recipients);
   const assigned = written.reduce((sum, result) => sum + result.rowsAffected, 0);
   return { assigned, alreadyAssigned: recipients.length - assigned };
 }
@@ -198,6 +224,7 @@ export async function editAssignment(
 
   const statements: { sql: string; args: (string | null)[] }[] = [];
   const settle: { key: string; division: Division; eventId: string; studentId: string }[] = [];
+  const settleDecks: { key: string; studentId: string }[] = [];
   let result: Record<string, unknown> = {};
   for (const id of new Set(ids as string[])) {
     const study = await db.get(
@@ -211,8 +238,8 @@ export async function editAssignment(
       const key = String(study.event_id);
       const { division, eventId } = eventOf(key);
       const kind = body.kind === undefined ? String(study.kind) : body.kind;
-      if (kind !== 'Lesson' && kind !== 'Unit' && kind !== 'Lab')
-        throw new AppError(400, 'Choose a lesson, unit, or lab simulation.');
+      if (kind !== 'Lesson' && kind !== 'Unit' && kind !== 'Lab' && kind !== 'Presentation')
+        throw new AppError(400, 'Choose a lesson, unit, presentation, or lab simulation.');
       const target = targetId || String(study.target_id);
       const title = titleOf(division, eventId, kind, target);
       if (
@@ -231,7 +258,8 @@ export async function editAssignment(
           WHERE id=? AND completed_at IS NULL`,
         args: [kind, target, title, due, id],
       });
-      if (kind !== 'Lab')
+      if (kind === 'Presentation') settleDecks.push({ key, studentId: String(study.student_id) });
+      else if (kind !== 'Lab')
         settle.push({ key, division, eventId, studentId: String(study.student_id) });
       result = { id, due, kind, targetId: target, title };
       continue;
@@ -294,6 +322,7 @@ export async function editAssignment(
     const course = lessonsForEvent(item.eventId, item.division);
     if (course) await settleLessons(db, item.key, course, [item.studentId]);
   }
+  for (const item of settleDecks) await settlePresentations(db, item.key, [item.studentId]);
   return group ? { updated: statements.length, due } : result;
 }
 
@@ -470,6 +499,7 @@ export async function setAssignedStudents(
   // Lessons a new student already finished count at once.
   const course = kind === 'Lesson' || kind === 'Unit' ? lessonsForEvent(event.id, division) : null;
   if (course && added.length) await settleLessons(db, key, course, added);
+  if (kind === 'Presentation') await settlePresentations(db, key, added);
   return { added: added.length, removed };
 }
 
@@ -645,7 +675,11 @@ export async function studentWork(
      UNION ALL
      SELECT 'Practice',t.event_id,p.test_id,t.score,t.max_score,t.completed_at
      FROM test_attempts t JOIN practice_submissions p ON p.id=t.id WHERE t.student_id=? AND t.type='Practice'
+     UNION ALL
+     SELECT 'Presentation',x.event_id,x.lesson_id,x.score,x.max_score,x.completed_at
+     FROM presentation_results x WHERE x.student_id=?
      ORDER BY completed_at DESC`,
+    id,
     id,
     id,
   );
@@ -657,7 +691,7 @@ export async function studentWork(
     const practice =
       type === 'Practice' ? allPracticeTests.find((test) => test.id === targetId) : undefined;
     const title =
-      type === 'Lesson'
+      type === 'Lesson' || type === 'Presentation'
         ? lessonsForEvent(eventId, division)?.lessons.find((lesson) => lesson.id === targetId)
             ?.title
         : type === 'Lab'

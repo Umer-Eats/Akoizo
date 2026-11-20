@@ -29,7 +29,7 @@ test('division slates follow the two national lists and the supplied Florida man
     false,
   );
   assert.notEqual(eventKey('B', 'circuit-lab'), eventKey('C', 'circuit-lab'));
-  assert.equal(new Set(tools.map((tool) => tool.id)).size, 7);
+  assert.equal(new Set(tools.map((tool) => tool.id)).size, 8);
 });
 test('event toolkits follow the competition format and keep Lessons first and Rules last', () => {
   for (const division of ['A', 'B', 'C'] as const) {
@@ -54,7 +54,7 @@ test('event toolkits follow the competition format and keep Lessons first and Ru
       'C',
       eventsForDivision('C').find((event) => event.id === 'experimental-design')!,
     ),
-    ['lessons', 'practice-tests', 'lab-generator', 'rules'],
+    ['lessons', 'presentation', 'practice-tests', 'lab-generator', 'rules'],
   );
   const thermodynamics = eventsForDivision('C').find((event) => event.id === 'thermodynamics')!;
   assert.ok(eventToolIds('C', thermodynamics).includes('video-grader'));

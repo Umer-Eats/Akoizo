@@ -1,5 +1,11 @@
 import { connect } from '@tursodatabase/serverless';
-import { schema, eventSeeds, divisionIndexes, divisionMigrations } from './schema.ts';
+import {
+  schema,
+  eventSeeds,
+  divisionIndexes,
+  divisionMigrations,
+  studyAssignmentKindsRebuild,
+} from './schema.ts';
 import { AppError } from './domain.ts';
 import {
   migrateCampusRosters,
@@ -15,6 +21,17 @@ export function getDb() {
     throw new AppError(503, 'School services are not configured yet. Please try again later.');
   // Transactions must never share a connection across requests.
   return connect({ url, authToken });
+}
+/** Let older databases' study_assignments accept presentations (see studyAssignmentKindsRebuild). */
+async function migrateStudyAssignmentKinds(db: ReturnType<typeof getDb>) {
+  const table = await db.get(
+    "SELECT sql FROM sqlite_master WHERE type='table' AND name='study_assignments'",
+  );
+  if (!table || String(table.sql).includes("'Presentation'")) return;
+  await db.batch(
+    studyAssignmentKindsRebuild.map((sql) => ({ sql, args: [] })),
+    'immediate',
+  );
 }
 let initialization: Promise<void> | null = null;
 export async function initializeDatabase() {
@@ -59,6 +76,7 @@ export async function initializeDatabase() {
         }
       }
       await db.batch(divisionIndexes, 'immediate');
+      await migrateStudyAssignmentKinds(db);
     })().catch((error) => {
       initialization = null;
       throw error;

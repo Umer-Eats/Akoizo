@@ -427,7 +427,7 @@ test('instructors edit the due date and assigned work of pending assignments', a
   );
   await assert.rejects(
     editAssignment(db, teacher, { id: lesson.id, due: '2999-03-03', kind: 'Practice' }),
-    /lesson, unit, or lab/,
+    /lesson, unit, presentation, or lab/,
   );
   await assert.rejects(editAssignment(db, amy, { id: lesson.id, due: '2999-03-03' }), /Instructor/);
   const other = await school(db, 't2', 'ppcms-central', []);
