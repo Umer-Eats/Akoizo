@@ -33,7 +33,10 @@ const db = {
   async batch(statements) {
     raw.exec('BEGIN IMMEDIATE');
     try {
-      const out = statements.map(({ sql, args }) => ({ rowsAffected: Number(raw.prepare(sql).run(...args).changes), rows: [] }));
+      const out = statements.map(({ sql, args }) => ({
+        rowsAffected: Number(raw.prepare(sql).run(...args).changes),
+        rows: [],
+      }));
       raw.exec('COMMIT');
       return out;
     } catch (error) {
@@ -45,7 +48,12 @@ const db = {
 const teacher = await registerMember(
   db,
   { uid: 'teacher', email: 'teacher@example.test' },
-  { role: 'instructor', displayName: 'Ms. Rivera', instructorInvitePassword: 'invite', schoolCommunityId: 'ppchs' },
+  {
+    role: 'instructor',
+    displayName: 'Ms. Rivera',
+    instructorInvitePassword: 'invite',
+    schoolCommunityId: 'ppchs',
+  },
   'invite',
 );
 const student = async (name) =>
@@ -53,7 +61,12 @@ const student = async (name) =>
     await registerMember(
       db,
       { uid: name, email: `${name}@example.test` },
-      { role: 'student', displayName: name, division: 'C', schoolPassword: teacher.credentials.joiningPassword },
+      {
+        role: 'student',
+        displayName: name,
+        division: 'C',
+        schoolPassword: teacher.credentials.joiningPassword,
+      },
       'invite',
     )
   ).profile;
@@ -66,7 +79,8 @@ const errors = [];
 async function api(profile, url, request) {
   const method = request.method();
   const body = method === 'GET' ? {} : JSON.parse(request.postData() || '{}');
-  if (url.pathname === '/api/presentations/live') return service.sessionState(db, profile, url.searchParams.get('id'));
+  if (url.pathname === '/api/presentations/live')
+    return service.sessionState(db, profile, url.searchParams.get('id'));
   if (method === 'GET') {
     const eventId = url.searchParams.get('eventId');
     return {
@@ -86,7 +100,10 @@ async function api(profile, url, request) {
 }
 
 async function openAs(profile, motion = false) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: motion ? 'no-preference' : 'reduce' });
+  const page = await browser.newPage({
+    viewport: { width: 1440, height: 1000 },
+    reducedMotion: motion ? 'no-preference' : 'reduce',
+  });
   page.on('pageerror', (error) => errors.push(`${profile.displayName}: ${error.message}`));
   page.on('dialog', (dialog) => dialog.accept());
   await page.addInitScript(() =>
@@ -94,25 +111,63 @@ async function openAs(profile, motion = false) {
   );
   const now = Math.floor(Date.now() / 1000);
   const payload = Buffer.from(
-    JSON.stringify({ sub: profile.id, user_id: profile.id, iat: now, exp: now + 3600, aud: 'qa', iss: 'https://securetoken.google.com/qa', firebase: { sign_in_provider: 'password' } }),
+    JSON.stringify({
+      sub: profile.id,
+      user_id: profile.id,
+      iat: now,
+      exp: now + 3600,
+      aud: 'qa',
+      iss: 'https://securetoken.google.com/qa',
+      firebase: { sign_in_provider: 'password' },
+    }),
   ).toString('base64url');
   const token = Buffer.from('{"alg":"none"}').toString('base64url') + '.' + payload + '.signature';
   const email = `${profile.displayName}@example.test`;
   await page.route('https://identitytoolkit.googleapis.com/**', (route) =>
     route.fulfill({
       json: route.request().url().includes('signInWithPassword')
-        ? { localId: profile.id, email, idToken: token, refreshToken: 'qa', expiresIn: '3600', registered: true }
-        : { users: [{ localId: profile.id, email, emailVerified: true, providerUserInfo: [{ providerId: 'password', email, federatedId: email }] }] },
+        ? {
+            localId: profile.id,
+            email,
+            idToken: token,
+            refreshToken: 'qa',
+            expiresIn: '3600',
+            registered: true,
+          }
+        : {
+            users: [
+              {
+                localId: profile.id,
+                email,
+                emailVerified: true,
+                providerUserInfo: [{ providerId: 'password', email, federatedId: email }],
+              },
+            ],
+          },
     }),
   );
-  const shown = { schoolName: 'Science Team', schoolCommunityName: 'Science Team', schoolCommunityId: 'ppchs', ...profile };
+  const shown = {
+    schoolName: 'Science Team',
+    schoolCommunityName: 'Science Team',
+    schoolCommunityId: 'ppchs',
+    ...profile,
+  };
   const lessonAnswers = [];
   await page.route('**/api/**', async (route) => {
     const url = new URL(route.request().url());
     if (url.pathname === '/api/auth/profile') return route.fulfill({ json: shown });
     if (url.pathname === '/api/dashboard')
-      return route.fulfill({ json: { profile: shown, students: [], stats: { lessons: 0, practice: 0, ranked: 0, points: 0 }, assignments: [], progress: {} } });
-    if (url.pathname === '/api/event-selections') return route.fulfill({ json: ['remote-sensing'] });
+      return route.fulfill({
+        json: {
+          profile: shown,
+          students: [],
+          stats: { lessons: 0, practice: 0, ranked: 0, points: 0 },
+          assignments: [],
+          progress: {},
+        },
+      });
+    if (url.pathname === '/api/event-selections')
+      return route.fulfill({ json: ['remote-sensing', 'anatomy-and-physiology'] });
     if (url.pathname.startsWith('/api/lessons/'))
       return route.fulfill({ json: mockLessonApi(url, route.request(), 'C', lessonAnswers) });
     if (url.pathname.startsWith('/api/presentations')) {
@@ -138,7 +193,9 @@ const tab = `${base}/dashboard/student/events/remote-sensing/presentation`;
 try {
   const a = await openAs(amy);
   await a.goto(tab);
-  await expect(a.getByRole('heading', { name: /as a presentation/ })).toBeVisible({ timeout: 30000 });
+  await expect(a.getByRole('heading', { name: /as a presentation/ })).toBeVisible({
+    timeout: 30000,
+  });
   await expect(a.locator('.presentation-unit')).toHaveCount(course.units.length);
   await expect(a.locator('.presentation-lesson')).toHaveCount(course.lessons.length);
   await a.screenshot({ path: `${shots}/1-list.png`, fullPage: true });
@@ -153,8 +210,12 @@ try {
         (kind) =>
           new Promise((resolve) => {
             const check = () => {
-              const groups = document.getAnimations().map((a) => a.effect?.pseudoElement).filter(Boolean);
-              if (document.documentElement.dataset.nav === kind && groups.length) return resolve({ kind, groups });
+              const groups = document
+                .getAnimations()
+                .map((a) => a.effect?.pseudoElement)
+                .filter(Boolean);
+              if (document.documentElement.dataset.nav === kind && groups.length)
+                return resolve({ kind, groups });
               requestAnimationFrame(check);
             };
             check();
@@ -169,20 +230,44 @@ try {
       await m.waitForFunction(() => !document.documentElement.dataset.nav);
       await m.screenshot({ path: `${shots}/0-transition-${name}-end.png` });
       assert.ok(result, `${kind} transition ran`);
-      assert.ok(result.groups.some((p) => p.includes('pres-pane')), `${kind} animates the pane: ${result.groups}`);
+      assert.ok(
+        result.groups.some((p) => p.includes('pres-pane')),
+        `${kind} animates the pane: ${result.groups}`,
+      );
       return result.groups;
     };
-    const open = await during(() => m.locator('.presentation-lesson').nth(1).click(), 'pres-open', 'open');
-    assert.ok(open.some((p) => p.includes('pres-card')), 'the clicked card morphs into the chooser');
+    const open = await during(
+      () => m.locator('.presentation-lesson').nth(1).click(),
+      'pres-open',
+      'open',
+    );
+    assert.ok(
+      open.some((p) => p.includes('pres-card')),
+      'the clicked card morphs into the chooser',
+    );
     await expect(m.getByRole('heading', { level: 3 })).toHaveCount(3);
     await during(() => m.getByRole('button', { name: /Start/ }).click(), 'pres-start', 'start');
     await expect(m.locator('.presentation-viewport')).toBeVisible();
-    await m.getByRole('button', { name: /All presentations|Exit|Leave/ }).first().click();
+    await m
+      .getByRole('button', { name: /All presentations|Exit|Leave/ })
+      .first()
+      .click();
     await m.waitForFunction(() => !document.documentElement.dataset.nav);
     await expect(m.locator('.presentation-lesson').first()).toBeVisible();
-    const again = await during(() => m.locator('.presentation-lesson').nth(2).click(), 'pres-open', 'reopen');
-    assert.ok(again.some((p) => p.includes('pres-card')), 'reopening another card still morphs');
-    await during(() => m.getByRole('button', { name: /All presentations/ }).click(), 'pres-back', 'back');
+    const again = await during(
+      () => m.locator('.presentation-lesson').nth(2).click(),
+      'pres-open',
+      'reopen',
+    );
+    assert.ok(
+      again.some((p) => p.includes('pres-card')),
+      'reopening another card still morphs',
+    );
+    await during(
+      () => m.getByRole('button', { name: /All presentations/ }).click(),
+      'pres-back',
+      'back',
+    );
     console.log('View transitions: open, start, back all animated');
     await m.close();
   }
@@ -192,45 +277,69 @@ try {
   const sizes = new Set();
   const fits = [];
   const shotKinds = new Set();
-  for (const lesson of course.lessons) {
-    const deck = deckFor('C', 'remote-sensing', lesson.id);
-    await a.goto(`${tab}?lesson=${lesson.id}`);
-    await a.getByRole('button', { name: /Start/ }).click();
-    for (let i = 0; i < deck.slides.length; i++) {
-      const slide = deck.slides[i];
-      await a.getByRole('button', { name: `Go to slide ${i + 1}`, exact: true }).click();
-      await expect(a.locator('.presentation-slide')).toHaveAttribute('aria-label', `Slide ${i + 1} of ${deck.slides.length}`);
-      await a.locator('.presentation-slide img').evaluateAll((imgs) =>
-        Promise.all(imgs.map((img) => img.complete || new Promise((done) => img.addEventListener('load', done, { once: true })))),
-      );
-      await a.waitForTimeout(60);
-      const page = await a.evaluate(() => {
-        const slide = document.querySelector('.presentation-slide');
-        const body = slide.querySelector('.presentation-slide-body');
-        return {
-          size: `${slide.clientWidth}x${slide.clientHeight}`,
-          fit: Number(getComputedStyle(slide).getPropertyValue('--fit')),
-          scrolls: body.style.overflowY === 'auto',
-          brokenImages: [...slide.querySelectorAll('img')].filter((img) => !img.naturalWidth).length,
-        };
-      });
-      sizes.add(page.size);
-      fits.push([slide.id, slide.kind, page.fit]);
-      assert.equal(page.scrolls, false, `${slide.id} (${slide.kind}) fits without scrolling`);
-      assert.equal(page.brokenImages, 0, `${slide.id} photos load`);
-      const key = slide.image ? `${slide.kind}-photo` : slide.kind;
-      // SHOT_ALL=1 saves every slide, for reviewing layout and type across whole decks.
-      if (process.env.SHOT_ALL)
-        await a.locator('.presentation-viewport').screenshot({ path: `${shots}/all-${slide.id}-${slide.kind}.png` });
-      if (!shotKinds.has(key)) {
-        shotKinds.add(key);
-        await a.locator('.presentation-viewport').screenshot({ path: `${shots}/slide-${key}.png` });
+  // PRES_EVENTS narrows the render pass to some events, e.g. PRES_EVENTS=anatomy-and-physiology.
+  const renderEvents = (process.env.PRES_EVENTS || 'remote-sensing,anatomy-and-physiology').split(
+    ',',
+  );
+  for (const eventId of renderEvents)
+    for (const lesson of lessonsForEvent(eventId, 'C').lessons) {
+      const deck = deckFor('C', eventId, lesson.id);
+      await a.goto(`${base}/dashboard/student/events/${eventId}/presentation?lesson=${lesson.id}`);
+      await a.getByRole('button', { name: /Start/ }).click();
+      for (let i = 0; i < deck.slides.length; i++) {
+        const slide = deck.slides[i];
+        await a.getByRole('button', { name: `Go to slide ${i + 1}`, exact: true }).click();
+        await expect(a.locator('.presentation-slide')).toHaveAttribute(
+          'aria-label',
+          `Slide ${i + 1} of ${deck.slides.length}`,
+        );
+        await a
+          .locator('.presentation-slide img')
+          .evaluateAll((imgs) =>
+            Promise.all(
+              imgs.map(
+                (img) =>
+                  img.complete ||
+                  new Promise((done) => img.addEventListener('load', done, { once: true })),
+              ),
+            ),
+          );
+        await a.waitForTimeout(60);
+        const page = await a.evaluate(() => {
+          const slide = document.querySelector('.presentation-slide');
+          const body = slide.querySelector('.presentation-slide-body');
+          return {
+            size: `${slide.clientWidth}x${slide.clientHeight}`,
+            fit: Number(getComputedStyle(slide).getPropertyValue('--fit')),
+            scrolls: body.style.overflowY === 'auto',
+            brokenImages: [...slide.querySelectorAll('img')].filter((img) => !img.naturalWidth)
+              .length,
+          };
+        });
+        sizes.add(page.size);
+        fits.push([slide.id, slide.kind, page.fit]);
+        assert.equal(page.scrolls, false, `${slide.id} (${slide.kind}) fits without scrolling`);
+        assert.equal(page.brokenImages, 0, `${slide.id} photos load`);
+        const key = slide.image ? `${slide.kind}-photo` : slide.kind;
+        // SHOT_ALL=1 saves every slide, for reviewing layout and type across whole decks.
+        if (process.env.SHOT_ALL)
+          await a
+            .locator('.presentation-viewport')
+            .screenshot({ path: `${shots}/all-${slide.id}-${slide.kind}.png` });
+        if (!shotKinds.has(key)) {
+          shotKinds.add(key);
+          await a
+            .locator('.presentation-viewport')
+            .screenshot({ path: `${shots}/slide-${key}.png` });
+        }
       }
     }
-  }
   assert.equal(sizes.size, 1, `every slide is the same size: ${[...sizes]}`);
   const tight = fits.filter(([, , fit]) => fit < 0.8);
-  console.log(`Slides: ${fits.length} at ${[...sizes]}; ${tight.length} shrunk below 80%:`, tight.map(([id, kind, fit]) => `${id}:${kind}:${fit.toFixed(2)}`).join(' '));
+  console.log(
+    `Slides: ${fits.length} at ${[...sizes]}; ${tight.length} shrunk below 80%:`,
+    tight.map(([id, kind, fit]) => `${id}:${kind}:${fit.toFixed(2)}`).join(' '),
+  );
   assert.deepEqual(errors, [], 'no page errors while rendering every slide');
 
   // Event vocabulary: terms are marked on slides and open the lessons' definition pop-up.
@@ -259,12 +368,18 @@ try {
         assert.ok(tip.text.length > 20, `the pop-up shows a definition: ${tip.text}`);
         await a.screenshot({ path: `${shots}/7-term-popup.png` });
         await a.mouse.move(5, 5);
-        assert.equal(await term.evaluate((el) => el.querySelector('.pres-term-tip').matches(':popover-open')), false, 'leaving the term closes it');
+        assert.equal(
+          await term.evaluate((el) => el.querySelector('.pres-term-tip').matches(':popover-open')),
+          false,
+          'leaving the term closes it',
+        );
       }
     }
     assert.ok(marked >= 4, `event terms are marked on the first slides (${marked})`);
     const keyTerms = await a.locator('.pres-key-term').count();
-    console.log(`Vocabulary: ${marked} terms marked on slides 1–4 (${keyTerms} key terms on the last)`);
+    console.log(
+      `Vocabulary: ${marked} terms marked on slides 1–4 (${keyTerms} key terms on the last)`,
+    );
   }
 
   // Learn by yourself: answer the multiple-choice activities and finish.
@@ -273,33 +388,49 @@ try {
   await a.evaluate(() => localStorage.clear());
   await a.goto(tab);
   await a.locator('.presentation-lesson').first().click();
-  await expect(a.getByRole('heading', { level: 3 })).toHaveText(['Learn by yourself', 'Join a presentation', 'Host a presentation']);
+  await expect(a.getByRole('heading', { level: 3 })).toHaveText([
+    'Learn by yourself',
+    'Join a presentation',
+    'Host a presentation',
+  ]);
   await a.screenshot({ path: `${shots}/2-chooser.png` });
   await a.getByRole('button', { name: /Start/ }).click();
   let mcqs = 0;
   for (let i = 0; i < deck.slides.length; i++) {
     const slide = deck.slides[i];
-    await expect(a.locator('.presentation-slide')).toHaveAttribute('aria-label', `Slide ${i + 1} of ${deck.slides.length}`);
+    await expect(a.locator('.presentation-slide')).toHaveAttribute(
+      'aria-label',
+      `Slide ${i + 1} of ${deck.slides.length}`,
+    );
     if (slide.kind === 'mcq') {
-      await a.locator('.presentation-option', { hasText: slide.options[slide.answer] }).first().click();
+      await a
+        .locator('.presentation-option', { hasText: slide.options[slide.answer] })
+        .first()
+        .click();
       await a.getByRole('button', { name: 'Check answer' }).click();
       await expect(a.getByText(/^Correct!/)).toBeVisible();
       mcqs++;
     }
     if (['figure', 'cards', 'match', 'sort'].includes(slide.kind) && i < 16)
-      await a.screenshot({ path: `${shots}/3-solo-${String(i + 1).padStart(2, '0')}-${slide.kind}.png` });
+      await a.screenshot({
+        path: `${shots}/3-solo-${String(i + 1).padStart(2, '0')}-${slide.kind}.png`,
+      });
     if (i < deck.slides.length - 1) await a.getByRole('button', { name: /^Next/ }).click();
   }
   await a.getByRole('button', { name: 'Finish presentation' }).click();
   const possible = deck.slides.filter(isGraded).length;
   await expect(a.getByRole('heading', { name: 'Progress saved!' })).toBeVisible();
   await expect(a.getByText(`This run: ${mcqs} of ${possible} activity points`)).toBeVisible();
-  await expect(a.locator(".presentation-total")).toContainText(`Your total: ${mcqs} of ${possible} points`);
-  await expect(a.locator(".presentation-total")).toContainText("finish the rest another day");
+  await expect(a.locator('.presentation-total')).toContainText(
+    `Your total: ${mcqs} of ${possible} points`,
+  );
+  await expect(a.locator('.presentation-total')).toContainText('finish the rest another day');
   await a.screenshot({ path: `${shots}/3-solo-finished.png` });
   assert.equal((await service.presentationResults(db, amy, 'remote-sensing'))[0].earned, mcqs);
   await a.getByRole('button', { name: 'Back to presentations' }).click();
-  await expect(a.locator('.presentation-progress-badge').first()).toHaveText(`${mcqs}/${possible} activities`);
+  await expect(a.locator('.presentation-progress-badge').first()).toHaveText(
+    `${mcqs}/${possible} activities`,
+  );
 
   // Host a presentation; Ben joins by code from the list page.
   const second = course.units[1].lessonIds[0];
@@ -320,13 +451,22 @@ try {
   const mcq = liveDeck.slides[target];
   for (let i = 0; i < target; i++) {
     await a.getByRole('button', { name: /^Next/ }).click();
-    await expect(a.locator('.presentation-slide')).toHaveAttribute('aria-label', `Slide ${i + 2} of ${liveDeck.slides.length}`);
+    await expect(a.locator('.presentation-slide')).toHaveAttribute(
+      'aria-label',
+      `Slide ${i + 2} of ${liveDeck.slides.length}`,
+    );
   }
-  await expect(b.locator('.presentation-slide')).toHaveAttribute('aria-label', `Slide ${target + 1} of ${liveDeck.slides.length}`, { timeout: 8000 });
+  await expect(b.locator('.presentation-slide')).toHaveAttribute(
+    'aria-label',
+    `Slide ${target + 1} of ${liveDeck.slides.length}`,
+    { timeout: 8000 },
+  );
   await b.locator('.presentation-option', { hasText: mcq.options[mcq.answer] }).first().click();
   await b.getByRole('button', { name: 'Submit answer' }).click();
   await expect(b.getByRole('button', { name: 'Submitted' })).toBeVisible();
-  await expect(a.getByRole('button', { name: 'Reveal answers (1/2)' })).toBeVisible({ timeout: 8000 });
+  await expect(a.getByRole('button', { name: 'Reveal answers (1/2)' })).toBeVisible({
+    timeout: 8000,
+  });
   await a.getByRole('button', { name: /Reveal answers/ }).click();
   await expect(b.getByText(/fully correct/)).toBeVisible({ timeout: 8000 });
   await a.screenshot({ path: `${shots}/4-host-revealed.png` });
@@ -334,12 +474,21 @@ try {
 
   await a.getByRole('button', { name: 'End presentation now' }).click();
   await expect(a.getByRole('heading', { name: 'You ended the presentation.' })).toBeVisible();
-  await expect(b.getByRole('heading', { name: 'Amy ended the presentation.' })).toBeVisible({ timeout: 8000 });
-  await expect(b.getByText(`This session: 1 of ${liveDeck.slides.filter(isGraded).length} activity points`)).toBeVisible();
-  await expect(b.locator(".presentation-total")).toContainText(`Your total: 1 of ${liveDeck.slides.filter(isGraded).length} points`);
+  await expect(b.getByRole('heading', { name: 'Amy ended the presentation.' })).toBeVisible({
+    timeout: 8000,
+  });
+  await expect(
+    b.getByText(`This session: 1 of ${liveDeck.slides.filter(isGraded).length} activity points`),
+  ).toBeVisible();
+  await expect(b.locator('.presentation-total')).toContainText(
+    `Your total: 1 of ${liveDeck.slides.filter(isGraded).length} points`,
+  );
   await b.screenshot({ path: `${shots}/5-joined-ended.png` });
   const benResult = await service.presentationResults(db, ben, 'remote-sensing');
-  assert.deepEqual(benResult.map((r) => [r.lessonId, r.earned, r.answered, r.completedAt]), [[second, 1, 1, null]]);
+  assert.deepEqual(
+    benResult.map((r) => [r.lessonId, r.earned, r.answered, r.completedAt]),
+    [[second, 1, 1, null]],
+  );
 
   // Narrow screens keep the slide readable.
   await b.setViewportSize({ width: 390, height: 844 });
@@ -347,11 +496,16 @@ try {
   await b.getByRole('button', { name: /Start/ }).click();
   const diagram = deck.slides.findIndex((s) => s.kind === 'figure');
   await b.getByRole('button', { name: `Go to slide ${diagram + 1}`, exact: true }).click();
-  assert.ok(await b.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'no sideways scroll on a phone');
+  assert.ok(
+    await b.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
+    'no sideways scroll on a phone',
+  );
   await b.screenshot({ path: `${shots}/6-mobile-diagram.png`, fullPage: true });
 
   assert.deepEqual(errors, []);
-  console.log(`Presentation browser check passed: ${course.lessons.length} decks rendered, solo ${mcqs}/${possible}, live code ${code}.`);
+  console.log(
+    `Presentation browser check passed: ${fits.length} slides rendered (${renderEvents.join(', ')}), solo ${mcqs}/${possible}, live code ${code}.`,
+  );
 } finally {
   await browser.close();
 }

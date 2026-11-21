@@ -121,14 +121,27 @@ const keyAnswers = (lessonId: string) =>
   );
 
 const course = authoredLessonsForEvent('remote-sensing', 'C')!;
+/** Division C events whose every lesson is taught by a presentation. */
+const presentedEvents = ['remote-sensing', 'anatomy-and-physiology'];
+/** Every authored deck, with its event and lesson. */
+const allDecks = presentedEvents.flatMap((eventId) =>
+  authoredLessonsForEvent(eventId, 'C')!.lessons.map((lesson) => ({
+    eventId,
+    lesson,
+    deck: deckFor('C', eventId, lesson.id)!,
+  })),
+);
 
-test('every Remote Sensing C lesson has a presentation aligned to its sections', () => {
-  assert.deepEqual(
-    [...presentedLessons('C', 'remote-sensing')].sort(),
-    course.lessons.map((lesson) => lesson.id).sort(),
-  );
-  for (const lesson of course.lessons) {
-    const deck = deckFor('C', 'remote-sensing', lesson.id)!;
+test('every Remote Sensing and Anatomy C lesson has a presentation aligned to its sections', () => {
+  for (const eventId of presentedEvents)
+    assert.deepEqual(
+      [...presentedLessons('C', eventId)].sort(),
+      authoredLessonsForEvent(eventId, 'C')!
+        .lessons.map((lesson) => lesson.id)
+        .sort(),
+      eventId,
+    );
+  for (const { lesson, deck } of allDecks) {
     assert.equal(new Set(deck.slides.map((s) => s.id)).size, deck.slides.length);
     assert.equal(deck.slides[0].kind, 'title', lesson.id);
     // Every lesson section is taught by at least one slide.
@@ -165,7 +178,10 @@ test('every Remote Sensing C lesson has a presentation aligned to its sections',
         assert.ok(gradeSlide(slide, key!).correct, `${slide.id} key grades correct`);
     }
     // A run with every key answer earns every point.
-    const score = scoreDeck(deck, keyAnswers(lesson.id));
+    const score = scoreDeck(
+      deck,
+      Object.fromEntries(deck.slides.filter(isActivity).map((s) => [s.id, keyAnswer(s)])),
+    );
     assert.equal(score.earned, score.possible);
     assert.ok(score.possible >= 6, `${lesson.id} has enough graded activities`);
   }
@@ -495,8 +511,7 @@ test('presentation images are found files with sources, with no explorers or dra
   const { presentationPhotos } = await import('../src/lib/presentation-photos.ts');
   const used = new Set<string>();
   let figures = 0;
-  for (const lesson of course.lessons) {
-    const deck = deckFor('C', 'remote-sensing', lesson.id)!;
+  for (const { deck } of allDecks) {
     for (const slide of deck.slides) {
       assert.ok(!['explore', 'diagram'].includes(slide.kind as string), slide.id);
       assert.ok(!('diagram' in slide), `${slide.id} has no drawn diagram`);
@@ -555,8 +570,8 @@ test('hand-marked emphasis sits only in reading text, balanced, never in answers
         ? Object.values(value).flatMap(strings)
         : [];
   let marked = 0;
-  for (const lesson of course.lessons) {
-    for (const slide of deckFor('C', 'remote-sensing', lesson.id)!.slides) {
+  for (const { deck } of allDecks) {
+    for (const slide of deck.slides) {
       const allowed = new Set(reading(slide));
       for (const text of strings(slide)) {
         const hasMarkup = text.includes('**') || text.includes('==');
@@ -568,5 +583,5 @@ test('hand-marked emphasis sits only in reading text, balanced, never in answers
       }
     }
   }
-  assert.ok(marked >= 100, `key ideas are marked across the decks (${marked} lines)`);
+  assert.ok(marked >= 250, `key ideas are marked across the decks (${marked} lines)`);
 });
