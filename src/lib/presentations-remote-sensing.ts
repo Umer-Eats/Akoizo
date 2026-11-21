@@ -36,10 +36,10 @@ const foundations = defineDeck('remote-u1-l1', [
       'Remote sensing measures energy that a target reflects, emits, or scatters — without sampling the target.',
       'A satellite never records “forest health”; it records radiance in selected spectral bands.',
       'Processing plus a physical or empirical model links those numbers to a property such as vegetation cover.',
-      'Keep three layers separate: the observation, the intermediate product, and the interpretation.',
+      '==Keep three layers separate==: the **observation**, the **intermediate product**, and the **interpretation**.',
     ],
     callout:
-      'The same signal can come from different mixtures of materials, lighting, atmosphere, and viewing angle — inference is a constrained problem, not automatic recognition.',
+      'The same signal can come from different mixtures of materials, lighting, atmosphere, and viewing angle — ==inference is a constrained problem==, not automatic recognition.',
   },
   {
     kind: 'sort',
@@ -65,7 +65,7 @@ const foundations = defineDeck('remote-u1-l1', [
     caption:
       'Energy source → atmospheric path → target interaction → atmospheric path → sensor response → calibration and correction → interpreted product.',
     bullets: [
-      'Optical sensors record reflected sunlight; thermal sensors record emitted radiation; radar supplies its own microwaves.',
+      '**Optical sensors** record reflected sunlight; **thermal sensors** record emitted radiation; radar supplies its own microwaves.',
       'Clouds, aerosols, absorption, and scattering all alter the path.',
     ],
   },
@@ -95,7 +95,7 @@ const foundations = defineDeck('remote-u1-l1', [
       'A visually attractive composite is not automatically a calibrated product you can compare across dates.',
     ],
     image: 'contrast-stretch-photo',
-    callout: 'Ask of every image: are these stored physical values, or only display colors?',
+    callout: '==Ask of every image==: are these **stored physical values**, or only **display colors**?',
   },
   {
     kind: 'bullets',
@@ -106,7 +106,7 @@ const foundations = defineDeck('remote-u1-l1', [
       'Aerial photography made systematic overhead mapping possible before satellites.',
       'Orbital instruments expanded coverage, repeatability, and access to more wavelengths.',
       'Digital detectors and computing enabled time series, multi-band analysis, and large-area change detection.',
-      'The key shift: from one descriptive picture to a repeatable measurement system.',
+      'The key shift: from one descriptive picture to ==a repeatable measurement system==.',
     ],
     callout:
       'Spatial detail is only one improvement. Spectral sampling, revisit timing, radiometric sensitivity, and calibration stability can matter just as much.',
@@ -133,8 +133,8 @@ const foundations = defineDeck('remote-u1-l1', [
       'One pixel integrates everything inside its footprint. A field plot is usually much smaller and may sit near a boundary.',
     bullets: [
       'Compare field measurements collected near the image date.',
-      '“Ground truth” is really reference data with its own sampling and measurement uncertainty.',
-      'A mixed pixel can disagree with a plot without either being wrong.',
+      '“Ground truth” is really **reference data with its own sampling** and measurement uncertainty.',
+      'A mixed pixel can disagree with a plot ==without either being wrong==.',
     ],
   },
   {
@@ -156,7 +156,7 @@ const foundations = defineDeck('remote-u1-l1', [
     section: 4,
     title: 'Choosing an observable',
     bullets: [
-      'Begin with a specific question: flood extent? canopy cover? surface temperature?',
+      '**Begin with a specific question**: flood extent? canopy cover? surface temperature?',
       'Identify the physical property that separates the alternatives, then the wavelength or geometry that measures it.',
       'Optical color can fail under clouds; thermal emission answers a different question than red reflectance.',
       'Plan resolution, dates, calibration, reference samples, and validation before choosing an index or display.',
@@ -181,9 +181,9 @@ const foundations = defineDeck('remote-u1-l1', [
     title: 'Responsible interpretation',
     bullets: [
       'Record product type, units, acquisition date, band definitions, and quality masks.',
-      'Brighter display ≠ changed surface: it may only be a new contrast stretch.',
+      '==Brighter display ≠ changed surface==: it may only be a new contrast stretch.',
       'Compare like products under comparable conditions and say what remains unresolved.',
-      'A vegetation index is a derived ratio, not a species diagnosis.',
+      'A vegetation index is a **derived ratio, not a species diagnosis**.',
     ],
   },
   {
@@ -197,7 +197,7 @@ const foundations = defineDeck('remote-u1-l1', [
       'Confirm the stretch changes only how values are mapped to screen brightness.',
       'Compare calibrated values and acquisition conditions before claiming physical change.',
     ],
-    conclusion: 'The display change alone supplies no evidence of a reflectance increase.',
+    conclusion: 'The display change alone supplies ==no evidence== of a reflectance increase.',
   },
   {
     kind: 'mcq',
@@ -220,7 +220,7 @@ const foundations = defineDeck('remote-u1-l1', [
     rows: [
       ['Raw counts', 'Detector output', 'Not automatically reflectance.'],
       ['Calibrated product', 'Values with defined units', 'Quality and geometry still matter.'],
-      ['Display composite', 'Maps bands to colors', 'Color is not a direct material label.'],
+      ['Display composite', 'Maps bands to colors', '==Color is not a direct material label==.'],
     ],
   },
   {
@@ -282,7 +282,7 @@ const foundations = defineDeck('remote-u1-l1', [
       'Remote sensing connects energy measurements to hypotheses through explicit processing and validation.',
       'Name the source, path, target interaction, sensor, and processing for every measurement.',
       'Pixels and field plots sample different supports — expect honest disagreement.',
-      'Display changes are not physical changes; check units and conditions.',
+      '==Display changes are not physical changes==; check units and conditions.',
     ],
   },
 ]);
@@ -306,9 +306,9 @@ const sensors = defineDeck('remote-u2-l1', [
     caption:
       'Passive sensors detect naturally available radiation (reflected sunlight or emitted heat). Active sensors send energy and time its return.',
     bullets: [
-      'Reflected-sunlight sensors need illumination; thermal sensors can work at night.',
+      'Reflected-sunlight sensors need illumination; **thermal sensors can work at night**.',
       'Visible, NIR, SWIR, and thermal regions respond to different material properties.',
-      'A warm target can be bright thermally without looking bright in a photo.',
+      'A warm target can be **bright thermally** without looking bright in a photo.',
     ],
   },
   {
@@ -331,10 +331,10 @@ const sensors = defineDeck('remote-u2-l1', [
     title: 'Active measurements',
     image: 'sentinel1-estonia',
     bullets: [
-      'An active system transmits energy and measures the return: radar uses microwaves, lidar uses laser pulses.',
-      'Known timing lets us compute range: d = c·t ⁄ 2.',
-      'The factor of 2 accounts for the trip out and back.',
-      'Active ≠ immune: rain, attenuation, geometry, and target properties still alter returns.',
+      'An **active system** transmits energy and **measures the return**: radar uses microwaves, lidar uses laser pulses.',
+      'Known timing lets us compute range: **d = c·t ⁄ 2**.',
+      'The **factor of 2** accounts for the trip out and back.',
+      '**Active ≠ immune**: rain, attenuation, geometry, and target properties still alter returns.',
     ],
   },
   {
@@ -359,7 +359,7 @@ const sensors = defineDeck('remote-u2-l1', [
     steps: [
       'Convert 8 microseconds to 8 × 10⁻⁶ s.',
       'Round-trip distance = 3 × 10⁸ × 8 × 10⁻⁶ = 2400 m.',
-      'Divide by two to obtain one-way range 1200 m.',
+      'Divide by two to obtain ==one-way range 1200 m==.',
     ],
     conclusion:
       'The idealized sensor-to-target range is 1200 m — not a ground elevation without platform geometry.',
@@ -387,10 +387,10 @@ const sensors = defineDeck('remote-u2-l1', [
     title: 'Radar backscatter',
     image: 'manaus-radar',
     caption:
-      'Smooth water reflects microwaves away (dark); rough surfaces scatter some back; buildings can double-bounce (very bright).',
+      '**Smooth water** reflects microwaves away (dark); **rough surfaces** scatter some back; buildings can **double-bounce** (very bright).',
     bullets: [
       'Brightness depends on wavelength, polarization, roughness relative to wavelength, dielectric (moisture) properties, and geometry.',
-      'Terrain causes foreshortening, layover, and shadow that depend on viewing direction.',
+      'Terrain causes **foreshortening**, **layover**, and **shadow** that depend on viewing direction.',
       'A bright radar pixel is NOT simply a high-elevation pixel.',
     ],
   },
@@ -422,11 +422,11 @@ const sensors = defineDeck('remote-u2-l1', [
     title: 'Lidar structure and returns',
     image: 'lidar-waveform',
     caption:
-      'One pulse can return from the canopy top, middle layers, and the ground. Canopy height ≈ canopy return elevation − ground elevation.',
+      'One pulse can return from the canopy top, middle layers, and the ground. ==Canopy height ≈ canopy return elevation − ground elevation==.',
     bullets: [
-      'Multiple returns sample the illuminated footprint; they are not a photo of every leaf.',
+      '**Multiple returns** sample the illuminated footprint; they are not a photo of every leaf.',
       'Classification errors and gaps affect derived surfaces.',
-      'Range is along the beam — platform position and orientation are needed to place each 3-D point.',
+      '**Range is along the beam** — platform position and orientation are needed to place each 3-D point.',
     ],
   },
   {
@@ -509,8 +509,8 @@ const sensors = defineDeck('remote-u2-l1', [
     title: 'Takeaways',
     points: [
       'A sensor name does not specify a unique surface property — follow the physical measurement.',
-      'Range = c·t ⁄ 2; convert units before multiplying.',
-      'Radar brightness reflects roughness, moisture, and geometry, not height.',
+      '**Range = c·t ⁄ 2**; convert units before multiplying.',
+      'Radar brightness reflects roughness, moisture, and geometry, **not height**.',
       'Lidar separates canopy and ground returns to measure structure.',
     ],
   },
@@ -536,7 +536,7 @@ const orbits = defineDeck('remote-u3-l1', [
     caption:
       'A near-polar low-Earth orbit sweeps many latitudes as Earth turns beneath it. A geostationary satellite stays above one point on the equator.',
     bullets: [
-      'The orbit sets where and when a sensor can look; the instrument sets swath and sampling.',
+      '**The orbit** sets where and when a sensor can look; **the instrument** sets swath and sampling.',
       'Orbit alone tells you nothing about pixel size, calibration, or spectral bands.',
     ],
   },
@@ -561,10 +561,10 @@ const orbits = defineDeck('remote-u3-l1', [
     section: 1,
     title: 'Sun-synchronous sampling',
     bullets: [
-      'Observations happen near a consistent local solar time, giving similar illumination.',
+      'Observations happen near a ==consistent local solar time==, giving similar illumination.',
       'Shadows, season, atmosphere, and surface change still vary.',
-      'Consistent local time ≠ continuous coverage of a location.',
-      'Separate the repeat cycle, acquisition opportunities, and cloud-free usable images.',
+      '**Consistent local time ≠ continuous coverage** of a location.',
+      'Separate the **repeat cycle**, acquisition opportunities, and **cloud-free usable images**.',
     ],
   },
   {
@@ -586,10 +586,10 @@ const orbits = defineDeck('remote-u3-l1', [
     title: 'Geostationary tradeoffs',
     image: 'goes16-full-disk',
     bullets: [
-      'Revisits a broad region frequently — ideal for evolving weather.',
-      'Large distance and geometry trade away spatial detail compared with low orbits.',
+      'Revisits a broad region frequently — **ideal for evolving weather**.',
+      'Large distance and geometry **trade away spatial detail** compared with low orbits.',
       'High latitudes are viewed obliquely or fall outside useful geometry.',
-      'Choose temporal sampling by the process timescale — the sharpest image is not always the most useful.',
+      '==Choose temporal sampling by the process timescale== — the sharpest image is not always the most useful.',
     ],
   },
   {
@@ -614,10 +614,10 @@ const orbits = defineDeck('remote-u3-l1', [
       'Landsat: long-term calibrated land observation.',
       'Sentinel family: complementary optical and radar capabilities.',
       'Weather platforms: frequent regional monitoring.',
-      'Joining records across sensors needs documentation and cross-sensor comparison — not simple concatenation.',
+      'Joining records across sensors needs documentation and cross-sensor comparison — **not simple concatenation**.',
     ],
     callout:
-      'A calibration change or resolution difference between sensors can look like a real trend.',
+      'A calibration change or resolution difference between sensors ==can look like a real trend==.',
   },
   {
     kind: 'match',
@@ -638,8 +638,8 @@ const orbits = defineDeck('remote-u3-l1', [
     caption:
       'Wider swaths cover more ground per pass; constellations add opportunities; clouds remove usable optical views.',
     bullets: [
-      'Effective revisit can be far longer than the nominal schedule.',
-      'For a short-lived flood, one missed date can lose the peak entirely.',
+      'Effective revisit can be **far longer** than the nominal schedule.',
+      'For a short-lived flood, ==one missed date can lose the peak entirely==.',
     ],
   },
   {
@@ -651,9 +651,9 @@ const orbits = defineDeck('remote-u3-l1', [
     steps: [
       'Separate scheduled opportunities from quality-controlled observations.',
       'Reject the three cloud-obscured scenes for surface optical measurement.',
-      'Retain one usable scene and report the temporal gap.',
+      'Retain ==one usable scene== and **report the temporal gap**.',
     ],
-    conclusion: 'Nominal revisit does not imply four usable measurements.',
+    conclusion: 'Nominal revisit **does not imply four usable measurements**.',
   },
   {
     kind: 'numeric',
@@ -671,8 +671,8 @@ const orbits = defineDeck('remote-u3-l1', [
     bullets: [
       'Start with location, process duration, required detail, and needed wavelengths.',
       'Storm → temporal coverage. Small farm plots → spatial support and spectral response.',
-      'Check that dates sample the event itself, not only its aftermath.',
-      'Record rejected observations: missing data limit what was observed — they are not evidence of no change.',
+      'Check that dates sample ==the event itself==, not only its aftermath.',
+      'Record rejected observations: missing data limit what was observed — **they are not evidence of no change**.',
     ],
   },
   {
@@ -739,7 +739,7 @@ const orbits = defineDeck('remote-u3-l1', [
     title: 'Takeaways',
     points: [
       'An observing plan must fit both where a process occurs and how quickly it changes.',
-      'Swath (coverage width) and pixel size (detail) are different quantities.',
+      'Swath (coverage width) and pixel size (detail) are ==different quantities==.',
       'Nominal revisit ≠ usable revisit; clouds and quality checks matter.',
       'Compare sensors before merging records to avoid artificial trends.',
     ],
@@ -765,9 +765,9 @@ const composites = defineDeck('remote-u4-l1', [
     caption:
       'A composite assigns three measured bands to the screen’s red, green, and blue channels.',
     bullets: [
-      'True color ≈ visible red, green, blue → R, G, B.',
+      '**True color** ≈ visible red, green, blue → R, G, B.',
       'False color puts other wavelengths (like NIR) into visible channels.',
-      'Colors are a code for the band mapping — read the legend first.',
+      'Colors are a code for the band mapping — ==read the legend first==.',
     ],
   },
   {
@@ -789,10 +789,10 @@ const composites = defineDeck('remote-u4-l1', [
     title: 'Spectral signatures',
     image: 'reflectance-spectra',
     caption:
-      'Healthy leaves absorb red (pigments) and reflect NIR strongly (leaf structure). Water is dark in NIR. Soil rises gradually.',
+      'Healthy leaves **absorb red** (pigments) and **reflect NIR strongly** (leaf structure). Water is dark in NIR. Soil rises gradually.',
     bullets: [
-      'With NIR displayed as red, vegetation appears red.',
-      'This is useful evidence — not a diagnosis of health or species.',
+      'With NIR displayed as red, ==vegetation appears red==.',
+      'This is useful evidence — **not a diagnosis of health or species**.',
       'Soil exposure, canopy density, moisture, illumination, and atmosphere all alter the response.',
     ],
   },
@@ -816,7 +816,7 @@ const composites = defineDeck('remote-u4-l1', [
     bullets: [
       'Water usually has low NIR — but sediment, depth, sun glint, and shoreline mixtures change that.',
       'Roofs, asphalt, concrete, and shadows do not share one signature.',
-      'A dark pixel could be water, shadow, or another low-response surface.',
+      'A dark pixel could be **water, shadow, or another low-response surface**.',
       'Use spatial context, texture, shape, and other band combinations to decide.',
     ],
   },
@@ -843,8 +843,8 @@ const composites = defineDeck('remote-u4-l1', [
     caption: 'A linear stretch maps a chosen range of stored values onto the full display range.',
     bullets: [
       'Histogram-based enhancements redistribute contrast to reveal subtle variation.',
-      'Stretching two dates independently makes equal colors mean unequal values.',
-      'Enhancement cannot create information that was not measured — and can amplify noise.',
+      '==Stretching two dates independently== makes equal colors mean unequal values.',
+      '**Enhancement cannot create information** that was not measured — and can amplify noise.',
     ],
   },
   {
@@ -866,9 +866,9 @@ const composites = defineDeck('remote-u4-l1', [
     title: 'Merging and registration',
     bullets: [
       'Registration aligns images so corresponding pixels are the same ground location.',
-      'Small misalignments create fake change along roads, rivers, and field edges.',
+      'Small misalignments create **fake change** along roads, rivers, and field edges.',
       'Pan-sharpening adds spatial detail but can alter spectral relationships.',
-      'Sharper-looking ≠ better for band-ratio calculations.',
+      '**Sharper-looking ≠ better** for band-ratio calculations.',
     ],
   },
   {
@@ -891,7 +891,7 @@ const composites = defineDeck('remote-u4-l1', [
       'Check other bands, atmosphere, mixtures, and reference data before a specific health claim.',
     ],
     conclusion:
-      'Red false-color appearance is a channel-coded observation, not the field’s literal visible color.',
+      'Red false-color appearance is a **channel-coded observation**, not the field’s literal visible color.',
   },
   {
     kind: 'order',
@@ -943,7 +943,7 @@ const composites = defineDeck('remote-u4-l1', [
     kind: 'summary',
     title: 'Takeaways',
     points: [
-      'Color meaning comes from the channel assignment and measurement context.',
+      'Color meaning comes from ==the channel assignment== and measurement context.',
       'Spectral signatures are evidence conditioned on geometry and processing.',
       'Use consistent stretches (or calibrated values) when comparing dates.',
       'Register images before comparing; inspect pan-sharpening before ratios.',
@@ -967,7 +967,7 @@ const resolution = defineDeck('remote-u5-l1', [
     title: 'Four kinds of resolution',
     image: 'pixel-size-mixing',
     caption:
-      'Spatial (how much ground per pixel), spectral (which wavelengths), temporal (how often), radiometric (how many signal levels).',
+      '**Spatial** (how much ground per pixel), **spectral** (which wavelengths), **temporal** (how often), radiometric (how many signal levels).',
   },
   {
     kind: 'match',
@@ -988,9 +988,9 @@ const resolution = defineDeck('remote-u5-l1', [
     image: 'kansas-crops-aster',
     bullets: [
       'Spatial resolution = distinguishable ground detail; pixel spacing = sampling. Related, not always identical.',
-      'A 30 m × 30 m pixel covers 900 m² — not 30 m².',
+      'A 30 m × 30 m pixel covers **900 m²** — not 30 m².',
       'A narrow stream can influence a pixel without filling it.',
-      'Boundary pixels integrate several surfaces, hiding sub-pixel variation.',
+      'Boundary pixels integrate several surfaces, hiding **sub-pixel variation**.',
     ],
   },
   {
@@ -1009,7 +1009,7 @@ const resolution = defineDeck('remote-u5-l1', [
     bullets: [
       'How finely the spectrum is sampled and distinguished.',
       'Many narrow bands can separate materials with subtle absorption features.',
-      'Band count alone is not enough — bandwidth and placement matter.',
+      'Band count alone is not enough — **bandwidth and placement** matter.',
       'Fine spatial detail with the wrong wavelengths can fail a material-ID task.',
     ],
   },
@@ -1018,10 +1018,10 @@ const resolution = defineDeck('remote-u5-l1', [
     section: 2,
     title: 'Temporal resolution',
     bullets: [
-      'How often observations are available.',
+      '**How often** observations are available.',
       'Sparse dates can miss peaks or confuse seasonal change with disturbance.',
       'Quality filtering reduces usable sampling — report actual gaps.',
-      'Match sampling to the process: a smoke plume and a slow land-cover change need different strategies.',
+      '==Match sampling to the process==: a smoke plume and a slow land-cover change need different strategies.',
     ],
   },
   {
@@ -1029,9 +1029,9 @@ const resolution = defineDeck('remote-u5-l1', [
     section: 3,
     title: 'Radiometric discrimination',
     bullets: [
-      'The ability to distinguish signal levels, often described by bit depth.',
-      '8-bit → 2⁸ = 256 levels; 12-bit → 2¹² = 4096 levels.',
-      'More levels ≠ more accuracy: noise and calibration may dominate.',
+      'The ability to distinguish signal levels, often described by **bit depth**.',
+      '**8-bit → 2⁸ = 256 levels**; 12-bit → 2¹² = 4096 levels.',
+      '**More levels ≠ more accuracy**: noise and calibration may dominate.',
       'A one-count difference may be below the real measurement precision.',
     ],
   },
@@ -1049,7 +1049,7 @@ const resolution = defineDeck('remote-u5-l1', [
     title: 'Mixed-pixel arithmetic',
     image: 'mixed-pixel',
     caption:
-      'Linear mixture: each band of the pixel is the area-weighted mean of its components. Mix the bands first, then compute the index.',
+      'Linear mixture: each band of the pixel is the **area-weighted mean** of its components. ==Mix the bands first==, then compute the index.',
   },
   {
     kind: 'example',
@@ -1062,7 +1062,7 @@ const resolution = defineDeck('remote-u5-l1', [
       'NDVI = (0.45 − 0.15)/(0.45 + 0.15) = 0.5.',
     ],
     conclusion:
-      'Calculate the ratio after mixing the measured bands; do not assume indices average linearly.',
+      'Calculate the ratio after mixing the measured bands; **do not assume** indices average linearly.',
   },
   {
     kind: 'numeric',
@@ -1079,9 +1079,9 @@ const resolution = defineDeck('remote-u5-l1', [
     title: 'Choosing and enhancing data',
     bullets: [
       'Useful resolution = what supports the question with tolerable uncertainty.',
-      'Upsampling makes smoother pixels but adds no new ground measurements.',
+      'Upsampling makes smoother pixels but ==adds no new ground measurements==.',
       'Aggregation can reduce noise but mixes classes and hides small features.',
-      'Document resampling and remember the original support when reporting area or change.',
+      'Document resampling and **remember the original support** when reporting area or change.',
     ],
   },
   {
@@ -1144,7 +1144,7 @@ const resolution = defineDeck('remote-u5-l1', [
       'Resolution has four dimensions: spatial, spectral, temporal, radiometric.',
       'Pixel area is side squared; boundary pixels mix surfaces.',
       'Mix bands, then compute ratios — indices do not average linearly.',
-      'Interpolation smooths a display; it cannot recover missing detail.',
+      'Interpolation smooths a display; ==it cannot recover missing detail==.',
     ],
   },
 ]);

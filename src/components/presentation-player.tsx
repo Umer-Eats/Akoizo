@@ -12,6 +12,7 @@ import type {
 import { gradeSlide, slideOrder, validAnswer } from '@/lib/presentation-grading';
 import type { LiveState } from '@/lib/presentation-service';
 import { presentationPhotos } from '@/lib/presentation-photos';
+import { Rich, SlideTermsProvider } from './presentation-terms';
 
 /** A student's in-progress answer, before it becomes a SlideAnswer. */
 export type Draft = number | number[] | string | string[] | undefined;
@@ -73,25 +74,29 @@ export function SlideFrame({
   const ref = useRef<HTMLElement>(null);
   useFitToSlide(ref, slide.id);
   return (
-    <div className="presentation-viewport">
-      <article
-        ref={ref}
-        className={`presentation-slide slide-${slide.kind}`}
-        aria-roledescription="slide"
-        aria-label={`Slide ${index + 1} of ${total}`}
-      >
-        <header className="presentation-slide-meta">
-          <span>
-            {index + 1} / {total}
-          </span>
-          {heading && <span className="presentation-section-chip">Lesson section · {heading}</span>}
-          {kindLabel[slide.kind] && (
-            <span className="presentation-kind-chip">{kindLabel[slide.kind]}</span>
-          )}
-        </header>
-        <div className="presentation-slide-body">{children}</div>
-      </article>
-    </div>
+    <SlideTermsProvider slide={slide} lesson={lesson}>
+      <div className="presentation-viewport">
+        <article
+          ref={ref}
+          className={`presentation-slide slide-${slide.kind}`}
+          aria-roledescription="slide"
+          aria-label={`Slide ${index + 1} of ${total}`}
+        >
+          <header className="presentation-slide-meta">
+            <span>
+              {index + 1} / {total}
+            </span>
+            {heading && (
+              <span className="presentation-section-chip">Lesson section · {heading}</span>
+            )}
+            {kindLabel[slide.kind] && (
+              <span className="presentation-kind-chip">{kindLabel[slide.kind]}</span>
+            )}
+          </header>
+          <div className="presentation-slide-body">{children}</div>
+        </article>
+      </div>
+    </SlideTermsProvider>
   );
 }
 
@@ -214,10 +219,14 @@ function StepReveal({ slide }: { slide: Extract<InfoSlide, { kind: 'example' }> 
   const [shown, setShown] = useState(0);
   return (
     <div className="presentation-example">
-      <p className="presentation-problem">{slide.problem}</p>
+      <p className="presentation-problem">
+        <Rich text={slide.problem} />
+      </p>
       <ol>
         {slide.steps.slice(0, shown).map((step) => (
-          <li key={step}>{step}</li>
+          <li key={step}>
+            <Rich text={step} />
+          </li>
         ))}
       </ol>
       {shown < slide.steps.length ? (
@@ -226,7 +235,10 @@ function StepReveal({ slide }: { slide: Extract<InfoSlide, { kind: 'example' }> 
         </button>
       ) : (
         <p className="presentation-conclusion">
-          <Check size={16} aria-hidden="true" /> {slide.conclusion}
+          <Check size={16} aria-hidden="true" />{' '}
+          <span>
+            <Rich text={slide.conclusion} />
+          </span>
         </p>
       )}
     </div>
@@ -240,11 +252,15 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
         <div className={`presentation-title-slide${slide.image ? ' presentation-split' : ''}`}>
           <div>
             <h2>{slide.title}</h2>
-            <p>{slide.subtitle}</p>
+            <p>
+              <Rich text={slide.subtitle} />
+            </p>
             <h3>By the end you will be able to…</h3>
             <ul className="presentation-objectives">
               {slide.objectives.map((objective) => (
-                <li key={objective}>{objective}</li>
+                <li key={objective}>
+                  <Rich text={objective} />
+                </li>
               ))}
             </ul>
           </div>
@@ -260,10 +276,16 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
             <div className="presentation-split-text">
               <ul className="presentation-bullets">
                 {slide.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
+                  <li key={bullet}>
+                    <Rich text={bullet} />
+                  </li>
                 ))}
               </ul>
-              {slide.callout && <p className="presentation-callout">{slide.callout}</p>}
+              {slide.callout && (
+                <p className="presentation-callout">
+                  <Rich text={slide.callout} />
+                </p>
+              )}
             </div>
             {side}
           </div>
@@ -282,11 +304,15 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
           >
             <Photo id={slide.image} creditOnly />
             <div className="presentation-split-text">
-              <p className="presentation-caption">{slide.caption}</p>
+              <p className="presentation-caption">
+                <Rich text={slide.caption} />
+              </p>
               {slide.bullets && (
                 <ul className="presentation-bullets">
                   {slide.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
+                    <li key={bullet}>
+                      <Rich text={bullet} />
+                    </li>
                   ))}
                 </ul>
               )}
@@ -313,9 +339,15 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
               <tbody>
                 {slide.rows.map((row) => (
                   <tr key={row[0]}>
-                    <th scope="row">{row[0]}</th>
-                    <td>{row[1]}</td>
-                    <td>{row[2]}</td>
+                    <th scope="row">
+                      <Rich text={row[0]} />
+                    </th>
+                    <td>
+                      <Rich text={row[1]} />
+                    </td>
+                    <td>
+                      <Rich text={row[2]} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -330,8 +362,12 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
           <ol className="presentation-flow">
             {slide.steps.map((step) => (
               <li key={step.label}>
-                <strong>{step.label}</strong>
-                <span>{step.detail}</span>
+                <strong>
+                  <Rich text={step.label} />
+                </strong>
+                <span>
+                  <Rich text={step.detail} />
+                </span>
               </li>
             ))}
           </ol>
@@ -358,7 +394,10 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
           <ul className="presentation-summary">
             {slide.points.map((point) => (
               <li key={point}>
-                <Check size={18} aria-hidden="true" /> {point}
+                <Check size={18} aria-hidden="true" />{' '}
+                <span>
+                  <Rich text={point} />
+                </span>
               </li>
             ))}
           </ul>
@@ -738,7 +777,7 @@ export function ActivityBody({
                 ? `Partly right (${Math.round(result.earned * 100)}%). `
                 : 'Not quite. '
             : ''}
-          {slide.explanation}
+          <Rich text={slide.explanation} />
         </p>
       )}
       {tally && total > 0 && slide.kind !== 'poll' && slide.kind !== 'open' && reveal && (

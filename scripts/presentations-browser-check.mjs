@@ -233,6 +233,40 @@ try {
   console.log(`Slides: ${fits.length} at ${[...sizes]}; ${tight.length} shrunk below 80%:`, tight.map(([id, kind, fit]) => `${id}:${kind}:${fit.toFixed(2)}`).join(' '));
   assert.deepEqual(errors, [], 'no page errors while rendering every slide');
 
+  // Event vocabulary: terms are marked on slides and open the lessons' definition pop-up.
+  {
+    const lesson = course.lessons[0];
+    await a.goto(`${tab}?lesson=${lesson.id}`);
+    await a.getByRole('button', { name: /Start/ }).click();
+    let marked = 0;
+    for (let i = 1; i <= 4; i++) {
+      await a.getByRole('button', { name: `Go to slide ${i}`, exact: true }).click();
+      marked += await a.locator('.presentation-slide .pres-term').count();
+      if (i === 3) {
+        const term = a.locator('.presentation-slide .pres-term').first();
+        await term.hover();
+        const tip = await term.evaluate((el) => {
+          const box = el.querySelector('.pres-term-tip');
+          const r = box.getBoundingClientRect();
+          return {
+            open: box.matches(':popover-open'),
+            text: box.textContent,
+            inside: r.left >= 0 && r.top >= 0 && r.right <= innerWidth && r.bottom <= innerHeight,
+          };
+        });
+        assert.ok(tip.open, 'hovering a term opens its definition');
+        assert.ok(tip.inside, 'the definition stays on screen');
+        assert.ok(tip.text.length > 20, `the pop-up shows a definition: ${tip.text}`);
+        await a.screenshot({ path: `${shots}/7-term-popup.png` });
+        await a.mouse.move(5, 5);
+        assert.equal(await term.evaluate((el) => el.querySelector('.pres-term-tip').matches(':popover-open')), false, 'leaving the term closes it');
+      }
+    }
+    assert.ok(marked >= 4, `event terms are marked on the first slides (${marked})`);
+    const keyTerms = await a.locator('.pres-key-term').count();
+    console.log(`Vocabulary: ${marked} terms marked on slides 1–4 (${keyTerms} key terms on the last)`);
+  }
+
   // Learn by yourself: answer the multiple-choice activities and finish.
   const first = course.units[0].lessonIds[0];
   const deck = deckFor('C', 'remote-sensing', first);

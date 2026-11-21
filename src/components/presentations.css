@@ -1177,6 +1177,72 @@
   font-size: 1em;
 }
 
+/* ---- Event vocabulary and emphasis on slides (presentation-terms.tsx) ----
+   Lesson key terms: a highlighter mark. Other event terms: bold with a dotted underline, as in the
+   lessons. Both open the lessons' definition pop-up on hover or focus. */
+.pres-term {
+  border-bottom: 0.09em dotted var(--accent);
+  color: var(--text);
+  font-weight: 650;
+  cursor: help;
+}
+.pres-key-term {
+  padding: 0 0.12em;
+  border-radius: 0.2em;
+  border-bottom-style: solid;
+  background: linear-gradient(transparent 52%, color-mix(in srgb, var(--accent) 32%, transparent) 52%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.pres-term:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.pres-em {
+  color: var(--text);
+  font-weight: 750;
+}
+.pres-mark {
+  padding: 0 0.12em;
+  border-radius: 0.2em;
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: inherit;
+}
+/* The same card as the lessons' pop-up (.lf-term-tip), opened in the top layer. */
+.pres-term-tip {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  width: max-content;
+  max-width: min(300px, 80vw);
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 10px 28px #0000003a;
+  color: var(--muted);
+  font: 400 0.8rem/1.5 var(--font-body);
+  letter-spacing: normal;
+  text-align: left;
+  white-space: normal;
+  pointer-events: none;
+}
+.pres-term-tip:popover-open {
+  animation: pres-tip-in 120ms ease;
+}
+.pres-term-tip strong {
+  display: block;
+  color: var(--text);
+  font-weight: 650;
+}
+@keyframes pres-tip-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
 /* ---- Moving between the list, a lesson's chooser and a running presentation ----
    PresentationsView switches views through animateInPlace (page-transitions.tsx), which sets
    html[data-nav] to pres-open, pres-start or pres-back for the length of a view transition.

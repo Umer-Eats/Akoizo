@@ -13,6 +13,7 @@ import {
   isActivity,
   isGraded,
   type ActivitySlide,
+  type Slide,
   type SlideAnswer,
 } from '../src/lib/presentation-types.ts';
 import {
@@ -523,4 +524,49 @@ test('presentation images are found files with sources, with no explorers or dra
     assert.ok(photo.alt && photo.caption && photo.credit, id);
     assert.ok(used.has(id), `${id} is used on a slide`);
   }
+});
+
+test('hand-marked emphasis sits only in reading text, balanced, never in answers or prompts', () => {
+  // Reading text is where the player draws **bold** and ==highlight== (presentation-terms.tsx).
+  const reading = (slide: Slide): string[] => {
+    switch (slide.kind) {
+      case 'title':
+        return [slide.subtitle, ...slide.objectives];
+      case 'bullets':
+        return [...slide.bullets, ...(slide.callout ? [slide.callout] : [])];
+      case 'figure':
+        return [slide.caption, ...(slide.bullets ?? [])];
+      case 'compare':
+        return slide.rows.flat();
+      case 'flow':
+        return slide.steps.flatMap((step) => [step.label, step.detail]);
+      case 'example':
+        return [slide.problem, ...slide.steps, slide.conclusion];
+      case 'summary':
+        return slide.points;
+      default:
+        return 'explanation' in slide ? [slide.explanation] : [];
+    }
+  };
+  const strings = (value: unknown): string[] =>
+    typeof value === 'string'
+      ? [value]
+      : value && typeof value === 'object'
+        ? Object.values(value).flatMap(strings)
+        : [];
+  let marked = 0;
+  for (const lesson of course.lessons) {
+    for (const slide of deckFor('C', 'remote-sensing', lesson.id)!.slides) {
+      const allowed = new Set(reading(slide));
+      for (const text of strings(slide)) {
+        const hasMarkup = text.includes('**') || text.includes('==');
+        if (!hasMarkup) continue;
+        assert.ok(allowed.has(text), `${slide.id}: markup only in reading text: ${text}`);
+        assert.equal(text.split('**').length % 2, 1, `${slide.id}: balanced bold: ${text}`);
+        assert.equal(text.split('==').length % 2, 1, `${slide.id}: balanced highlight: ${text}`);
+        marked++;
+      }
+    }
+  }
+  assert.ok(marked >= 100, `key ideas are marked across the decks (${marked} lines)`);
 });

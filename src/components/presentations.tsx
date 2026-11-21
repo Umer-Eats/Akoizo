@@ -43,6 +43,7 @@ import {
   type Draft,
 } from './presentation-player';
 import { animateInPlace } from './page-transitions';
+import { SlideGlossary } from './presentation-terms';
 import './presentations.css';
 
 type View =
@@ -90,7 +91,9 @@ type ViewProps = { course: EventLessons; division: Division };
 export function PresentationsView(props: ViewProps) {
   return (
     <div className="presentations-pane">
-      <PresentationsViews {...props} />
+      <SlideGlossary value={props.course.glossary ?? []}>
+        <PresentationsViews {...props} />
+      </SlideGlossary>
     </div>
   );
 }

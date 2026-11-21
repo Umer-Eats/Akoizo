@@ -19,12 +19,12 @@ const indices = defineDeck('remote-u6-l1', [
     title: 'Coordinates and reference systems',
     image: 'mercator-map',
     bullets: [
-      'A coordinate pair needs its reference system, units, axis order, and datum to mean anything.',
-      'Latitude/longitude are angles; projected coordinates are often metres.',
+      'A coordinate pair needs its **reference system, units, axis order**, and datum to mean anything.',
+      '**Latitude/longitude are angles**; projected coordinates are often metres.',
       'Subtracting degrees does not give a ground distance without a proper conversion.',
       'A raster row/column is an array position until a spatial transform places it on Earth.',
     ],
-    callout: 'Before interpreting a map: find north, the scale, and the legend.',
+    callout: 'Before interpreting a map: ==find north, the scale, and the legend==.',
   },
   {
     kind: 'mcq',
@@ -46,11 +46,11 @@ const indices = defineDeck('remote-u6-l1', [
     title: 'Scale and area calculations',
     image: 'noaa-scale',
     caption:
-      'At 1:50,000, 1 cm on the map = 50,000 cm = 500 m on the ground. Area scales with the square of length.',
+      'At 1:50,000, **1 cm on the map = 50,000 cm = 500 m on the ground**. ==Area scales with the square of length==.',
     bullets: [
-      'A 10 m pixel covers 100 m²; 100 full pixels = 10,000 m² = 1 hectare.',
+      'A 10 m pixel covers 100 m²; 100 full pixels = **10,000 m² = 1 hectare**.',
       'Boundary mixtures and classification errors make pixel counts estimates, not surveys.',
-      'Keep units at every step — do not confuse length with area.',
+      'Keep units at every step — **do not confuse length with area**.',
     ],
   },
   {
@@ -75,11 +75,11 @@ const indices = defineDeck('remote-u6-l1', [
     section: 2,
     title: 'NDVI from reflectance',
     image: 'ndvi-leaves',
-    caption: 'NDVI = (NIR − red) ⁄ (NIR + red). With valid inputs it runs from −1 to +1.',
+    caption: 'NDVI = (NIR − red) ⁄ (NIR + red). With valid inputs it runs from ==−1 to +1==.',
     bullets: [
       'Higher values often mean stronger red/NIR contrast associated with green vegetation.',
-      'No universal threshold identifies health or species in every scene.',
-      'If NIR and red are both zero, NDVI is undefined.',
+      '**No universal threshold** identifies health or species in every scene.',
+      'If NIR and red are both zero, NDVI is **undefined**.',
       'Use calibrated reflectances and quality masks; clouds, snow, water, and soil all shift values.',
     ],
   },
@@ -112,7 +112,7 @@ const indices = defineDeck('remote-u6-l1', [
     bullets: [
       'A common form: EVI = 2.5 (NIR − red) ⁄ (NIR + 6·red − 7.5·blue + 1).',
       'The blue term and background adjustment distinguish it from NDVI.',
-      'The “+1” means stored integer reflectances must be converted with their scale factor first.',
+      'The “+1” means stored integer reflectances **must be converted** with their scale factor first.',
       'A near-zero denominator or odd output should trigger a quality review. EVI is not limited to NDVI’s range.',
     ],
   },
@@ -159,8 +159,8 @@ const indices = defineDeck('remote-u6-l1', [
     bullets: [
       'Use the same target, date, and valid band definitions for each index.',
       'NDVI and EVI emphasize related but different information.',
-      'Agreement strengthens a description of spectral change — not a biological cause.',
-      'Index difference ≠ percentage change: 0.2 → 0.4 is +0.2 units and +100%.',
+      'Agreement strengthens a description of spectral change — ==not a biological cause==.',
+      '**Index difference ≠ percentage change**: 0.2 → 0.4 is +0.2 units and +100%.',
     ],
   },
   {
@@ -177,10 +177,10 @@ const indices = defineDeck('remote-u6-l1', [
     section: 5,
     title: 'A complete calculation response',
     bullets: [
-      'State the equation.',
-      'Substitute values with their scaling.',
-      'Evaluate numerator and denominator separately.',
-      'Interpret the dimensionless result, check validity, and give one limitation.',
+      '**State the equation.**',
+      '**Substitute** values with their scaling.',
+      '**Evaluate** numerator and denominator separately.',
+      '**Interpret** the dimensionless result, check validity, and give one limitation.',
     ],
   },
   {
@@ -228,7 +228,7 @@ const indices = defineDeck('remote-u6-l1', [
     title: 'Takeaways',
     points: [
       'Correct arithmetic begins with valid units and band definitions.',
-      'Scale: map length × denominator, then convert; area scales with length squared.',
+      'Scale: map length × denominator, then convert; ==area scales with length squared==.',
       'NDVI = (NIR − red)/(NIR + red); EVI adds blue and a +1 background term.',
       'Report index differences and percent changes separately.',
     ],
@@ -251,11 +251,11 @@ const light = defineDeck('remote-u7-l1', [
     section: 0,
     title: 'Wave relationships',
     image: 'em-spectrum-properties',
-    caption: 'c = λ × f. Longer wavelength ↔ lower frequency ↔ lower photon energy (E = h·f).',
+    caption: '**c = λ × f**. Longer wavelength ↔ lower frequency ↔ lower photon energy (E = h·f).',
     bullets: [
       'Keep units consistent: 500 nm = 5 × 10⁻⁷ m.',
       'Microwave, visible, and thermal sensors reveal different features because matter interacts differently.',
-      'Across a boundary, frequency stays the same while speed and wavelength change.',
+      'Across a boundary, ==frequency stays the same== while speed and wavelength change.',
     ],
   },
   {
@@ -281,10 +281,10 @@ const light = defineDeck('remote-u7-l1', [
     title: 'Partitioning incoming energy',
     image: 'solar-energy-breakdown',
     caption:
-      'Incident radiation is reflected, absorbed, or transmitted. For one wavelength and geometry, the fractions sum to 1.',
+      'Incident radiation is **reflected, absorbed, or transmitted**. For one wavelength and geometry, ==the fractions sum to 1==.',
     bullets: [
       'Absorbed energy can heat the material; emission is a separate temperature- and material-dependent response.',
-      'A material can reflect strongly at one wavelength and absorb at another — so name the wavelength when you say “bright.”',
+      'A material can reflect strongly at one wavelength and absorb at another — so **name the wavelength** when you say “bright.”',
     ],
   },
   {
@@ -301,9 +301,9 @@ const light = defineDeck('remote-u7-l1', [
     title: 'Reflection and scattering',
     image: 'atmosphere-limb',
     bullets: [
-      'Specular reflection: mirror-like, concentrated in one direction.',
-      'Diffuse scattering: spread broadly.',
-      'Roughness is judged relative to wavelength — a surface can be smooth to microwaves but rough to light.',
+      '**Specular reflection**: mirror-like, concentrated in one direction.',
+      '**Diffuse** scattering: spread broadly.',
+      'Roughness is **judged relative to** wavelength — a surface can be smooth to microwaves but rough to light.',
       'Sun glint can make water bright in optical images, even though water is usually dark in NIR.',
     ],
   },
@@ -326,11 +326,11 @@ const light = defineDeck('remote-u7-l1', [
     title: 'Snell’s law',
     image: 'snells-law',
     caption:
-      'n₁ sin θ₁ = n₂ sin θ₂, with angles measured from the NORMAL (perpendicular to the surface).',
+      '**n₁ sin θ₁ = n₂ sin θ₂**, with angles measured from the NORMAL (perpendicular to the surface).',
     bullets: [
       'Entering a higher index, light bends toward the normal.',
-      'Going from high to low index, if the computed sine exceeds 1, total internal reflection occurs.',
-      'Draw the normal first to avoid using angles from the surface.',
+      'Going from high to low index, if the computed sine exceeds 1, **total internal reflection** occurs.',
+      '==Draw the normal first== to avoid using angles from the surface.',
     ],
   },
   {
@@ -343,7 +343,7 @@ const light = defineDeck('remote-u7-l1', [
       'θ₂ = arcsin(1 ⁄ 3) ≈ 19.5°.',
       'The smaller angle is toward the normal, consistent with the higher index.',
     ],
-    conclusion: 'The refracted angle is about 19.5° from the normal.',
+    conclusion: 'The refracted angle is about ==19.5°== from the normal.',
   },
   {
     kind: 'numeric',
@@ -369,10 +369,10 @@ const light = defineDeck('remote-u7-l1', [
     title: 'Atmospheric effects',
     image: 'borneo-haze',
     bullets: [
-      'Gases absorb in selected bands; particles and molecules scatter along the path.',
-      'Short visible wavelengths scatter strongly off small molecules → haze and blue sky.',
+      '**Gases absorb** in selected bands; **particles and molecules scatter** along the path.',
+      'Short visible wavelengths scatter strongly off small molecules → **haze and blue sky**.',
       'Aerosols have more complex, size-dependent behavior.',
-      'Atmospheric correction is an inference with assumptions — not perfect removal.',
+      'Atmospheric correction is ==an inference with assumptions== — not perfect removal.',
     ],
   },
   {
@@ -394,7 +394,7 @@ const light = defineDeck('remote-u7-l1', [
     title: 'Connecting physics to a scene',
     bullets: [
       'Ask which interaction causes a difference: pigment absorption, leaf scattering, moisture absorption, thermal emission, or radar geometry.',
-      'Name the wavelength and process before proposing a class label.',
+      'Name the wavelength and process ==before proposing a class label==.',
       'State simplifications so an ideal equation is not mistaken for a full scene model.',
     ],
   },
@@ -444,7 +444,7 @@ const light = defineDeck('remote-u7-l1', [
     title: 'Takeaways',
     points: [
       'A remote-sensing interpretation should name the wavelength, interaction, and geometry.',
-      'c = λf; E = hf. Longer wavelength → lower frequency and energy.',
+      '**c = λf; E = hf.** Longer wavelength → lower frequency and energy.',
       'Reflected + absorbed + transmitted fractions = 1 for a given wavelength.',
       'Snell’s law uses angles from the normal.',
     ],
@@ -473,10 +473,10 @@ const albedo = defineDeck('remote-u8-l1', [
     title: 'Albedo as a fraction',
     image: 'baffin-sea-ice',
     bullets: [
-      'Albedo = the fraction of incoming shortwave radiation reflected.',
-      'Fresh snow is high; dark water and some soils are low.',
-      'Absorbed shortwave = incoming × (1 − albedo).',
-      'Albedo alone does not set temperature — emission, storage, and transport matter too.',
+      'Albedo = the **fraction** of incoming shortwave radiation **reflected**.',
+      '**Fresh snow is high**; dark water and some soils are **low**.',
+      '**Absorbed shortwave = incoming × (1 − albedo)**.',
+      '**Albedo alone does not set temperature** — emission, storage, and transport matter too.',
     ],
   },
   {
@@ -490,7 +490,7 @@ const albedo = defineDeck('remote-u8-l1', [
       'The absorption difference is 160 W/m² with all else fixed.',
     ],
     conclusion:
-      'Higher albedo halves absorbed shortwave flux here; temperature is not calculated by this balance alone.',
+      'Higher albedo ==halves absorbed shortwave flux== here; temperature is **not calculated** by this balance alone.',
   },
   {
     kind: 'numeric',
@@ -507,10 +507,10 @@ const albedo = defineDeck('remote-u8-l1', [
     title: 'A planetary average',
     image: 'nasa-energy-budget',
     caption:
-      'Earth intercepts sunlight over a disk (πR²) but spreads it over a sphere (4πR²): average incoming = S ⁄ 4; absorbed = S(1 − α) ⁄ 4.',
+      'Earth intercepts sunlight over a disk (πR²) but spreads it over a sphere (4πR²): **average incoming = S ⁄ 4**; **absorbed = S(1 − α) ⁄ 4**.',
     bullets: [
       'Useful for reasoning about changes — not for local noon, seasons, clouds, or heat transport.',
-      'Always say whether a number is local and instantaneous or a planetary average.',
+      'Always say whether a number is ==local and instantaneous or a planetary average==.',
     ],
   },
   {
@@ -532,10 +532,10 @@ const albedo = defineDeck('remote-u8-l1', [
     title: 'Longwave emission and the greenhouse effect',
     image: 'earth-eastern-hemisphere',
     bullets: [
-      'Surfaces emit thermal (longwave) radiation; the atmosphere absorbs and re-emits parts of it.',
-      'Greenhouse gases change the balance between absorbed solar and outgoing thermal energy.',
-      'That is a different mechanism from changing shortwave reflectivity (albedo).',
-      'One hot infrared image does not establish a climate trend or its cause.',
+      'Surfaces emit **thermal (longwave) radiation**; the atmosphere absorbs and re-emits parts of it.',
+      '**Greenhouse gases** change the balance between absorbed solar and outgoing thermal energy.',
+      'That is ==a different mechanism== from changing shortwave reflectivity (albedo).',
+      'One hot infrared image **does not establish a climate trend** or its cause.',
     ],
   },
   {
@@ -559,10 +559,10 @@ const albedo = defineDeck('remote-u8-l1', [
     title: 'Dimming and competing influences',
     image: 'pinatubo-1991',
     bullets: [
-      'Aerosols and clouds reduce sunlight reaching the surface (“dimming”).',
-      'Absorbing aerosols can heat atmospheric layers while the surface gets less sunlight.',
+      'Aerosols and clouds reduce sunlight reaching the surface (“**dimming**”).',
+      '**Absorbing aerosols** can heat atmospheric layers while the surface gets less sunlight.',
       'Clouds affect both shortwave reflection and longwave exchange.',
-      'Analyze each energy pathway separately before judging the net effect.',
+      '==Analyze each energy pathway separately== before judging the net effect.',
     ],
   },
   {
@@ -583,9 +583,9 @@ const albedo = defineDeck('remote-u8-l1', [
     section: 4,
     title: 'Weather and climate scales',
     bullets: [
-      'Weather: short-term conditions. Climate: long-term distributions and patterns.',
+      '**Weather**: short-term conditions. **Climate**: long-term distributions and patterns.',
       'Satellites give broad coverage, but sampling, calibration continuity, and variability affect trends.',
-      'Compare many consistently processed observations — not two convenient images.',
+      'Compare many consistently processed observations — ==not two convenient images==.',
       'A regional anomaly can coexist with a different global pattern.',
     ],
   },
@@ -611,8 +611,8 @@ const albedo = defineDeck('remote-u8-l1', [
     caption:
       'Snow-albedo feedback: warming → less snow → lower albedo → more absorbed sunlight → more warming.',
     bullets: [
-      'A feedback amplifies (positive) or opposes (negative) an initial change.',
-      'A feedback is not independent proof of the original cause; distinguish feedback from forcing.',
+      'A feedback **amplifies (positive)** or **opposes (negative)** an initial change.',
+      'A feedback is not independent proof of the original cause; ==distinguish feedback from forcing==.',
     ],
   },
   {
@@ -679,9 +679,9 @@ const albedo = defineDeck('remote-u8-l1', [
     kind: 'summary',
     title: 'Takeaways',
     points: [
-      'Absorbed shortwave = incoming × (1 − albedo).',
+      '**Absorbed shortwave = incoming × (1 − albedo)**.',
       'Planetary average absorbed flux = S(1 − α) ⁄ 4.',
-      'Albedo (shortwave) and greenhouse (longwave) are different pathways.',
+      'Albedo (shortwave) and greenhouse (longwave) are ==different pathways==.',
       'Distinguish energy pathways before assigning a warming or cooling mechanism.',
     ],
   },
@@ -705,9 +705,9 @@ const systems = defineDeck('remote-u9-l1', [
     image: 'katrina-2005',
     bullets: [
       'Atmosphere, ocean, land, ice, and life exchange matter and energy.',
-      'Reservoir = a stored quantity. Flux = a transfer per unit time.',
+      'Reservoir = **a stored quantity**. Flux = **a transfer per unit time**.',
       'Satellites constrain parts of these: vegetation cover, clouds, sea-surface temperature, ice extent.',
-      'A map of one reservoir does not give the full flux in or out of it.',
+      'A map of one reservoir ==does not give the full flux in or out of it==.',
     ],
   },
   {
@@ -731,10 +731,10 @@ const systems = defineDeck('remote-u9-l1', [
     title: 'The water cycle',
     image: 'usgs-water-cycle',
     caption:
-      'Evaporation, transpiration, condensation, precipitation, infiltration, runoff, and storage connect water across Earth systems.',
+      '**Evaporation**, **transpiration**, **condensation**, **precipitation**, **infiltration**, **runoff**, and **storage** connect water across Earth systems.',
     bullets: [
       'Different sensors see different parts: clouds, precipitation returns, snow cover, surface-water extent.',
-      'A wet-surface image is not a groundwater measurement.',
+      'A wet-surface image ==is not a groundwater measurement==.',
       'Time sequences separate rain-driven flooding from permanent water bodies.',
     ],
   },
@@ -757,11 +757,11 @@ const systems = defineDeck('remote-u9-l1', [
     title: 'Carbon and vegetation',
     image: 'carbon-cycle',
     caption:
-      'Photosynthesis moves carbon into organic matter; respiration, decomposition, combustion, and ocean exchange return or redistribute it.',
+      '**Photosynthesis** moves carbon into organic matter; **respiration**, **decomposition**, **combustion**, and **ocean exchange** return or redistribute it.',
     bullets: [
       'Vegetation indices describe canopy spectra — not total carbon storage or net uptake.',
       'Biomass models need calibration, structural data, and ecological context.',
-      'Keep gross uptake, net exchange, and stored biomass distinct.',
+      'Keep **gross uptake**, **net exchange**, and **stored biomass** distinct.',
     ],
   },
   {
@@ -783,10 +783,10 @@ const systems = defineDeck('remote-u9-l1', [
     title: 'Ozone in context',
     image: 'ozone-hole-2010',
     bullets: [
-      'Stratospheric ozone absorbs much solar UV, protecting life at the surface.',
-      'Ozone depletion and greenhouse warming are different mechanisms (though they interact).',
-      'Tropospheric (near-ground) ozone is an air-quality concern.',
-      'Column ozone integrates the whole vertical column — it does not give ground-level concentration.',
+      '**Stratospheric** ozone **absorbs much solar UV**, protecting life at the surface.',
+      'Ozone depletion and greenhouse warming are ==different mechanisms== (though they interact).',
+      '**Tropospheric** (near-ground) ozone is an **air-quality concern**.',
+      '**Column ozone** integrates the whole vertical column — it ==does not give ground-level concentration==.',
     ],
   },
   {
@@ -809,10 +809,10 @@ const systems = defineDeck('remote-u9-l1', [
     title: 'Hazard observation versus risk',
     image: 'risk-equation',
     caption:
-      'Risk combines hazard, exposure, and vulnerability. A hazard map alone shows only the first.',
+      'Risk combines hazard, **exposure**, and **vulnerability**. A hazard map alone shows ==only the first==.',
     bullets: [
       'Satellites map fire scars, floods, volcanic ash, landslides, and ground deformation.',
-      'A post-event image can miss the maximum flood extent.',
+      'A post-event image can **miss the maximum flood extent**.',
       'Radar deformation needs careful geometry and coherence interpretation.',
     ],
   },
@@ -840,7 +840,7 @@ const systems = defineDeck('remote-u9-l1', [
       'Check whether the scene captured the peak and whether clouds or mixtures limit mapping.',
       'Request exposure and vulnerability information before estimating damage or risk.',
     ],
-    conclusion: 'Mapped hazard extent is evidence, but it is not a complete loss or risk estimate.',
+    conclusion: 'Mapped hazard extent is evidence, but it is ==not a complete loss or risk estimate==.',
   },
   {
     kind: 'mcq',
@@ -863,8 +863,8 @@ const systems = defineDeck('remote-u9-l1', [
     bullets: [
       'State what changed, where, when, and in which measurement.',
       'Compare before, during, and after; add independent reference information.',
-      'Coincident changes suggest a link — not its direction, and not that a third cause is excluded.',
-      'Pick additional observations that discriminate between the alternatives.',
+      '**Coincident changes suggest a link** — not its direction, and not that a third cause is excluded.',
+      'Pick additional observations that ==discriminate between the alternatives==.',
     ],
   },
   {
@@ -910,7 +910,7 @@ const systems = defineDeck('remote-u9-l1', [
     kind: 'summary',
     title: 'Takeaways',
     points: [
-      'Distinguish reservoirs (stocks) from fluxes (rates).',
+      'Distinguish reservoirs (**stocks**) from fluxes (**rates**).',
       'Indices are proxies — not carbon storage or uptake.',
       'Column ozone ≠ surface ozone; depletion ≠ greenhouse warming.',
       'Hazard maps are evidence; risk also needs exposure and vulnerability.',
@@ -935,10 +935,10 @@ const agriculture = defineDeck('remote-u10-l1', [
     title: 'Start with the decision',
     image: 'al-jowf-pivots',
     bullets: [
-      'Define the decision and target scale before selecting an index.',
+      '==Define the decision and target scale== before selecting an index.',
       'Draw field boundaries that isolate the crop, excluding roads, neighbors, and mixed edges.',
       'Record dates relative to planting, management, rainfall, and harvest.',
-      'Two fields planted on different dates can differ in greenness without differing in condition.',
+      'Two fields planted on different dates can differ in greenness **without differing in condition**.',
     ],
   },
   {
@@ -947,11 +947,11 @@ const agriculture = defineDeck('remote-u10-l1', [
     title: 'Phenology and time series',
     image: 'modis-ndvi-profile',
     caption:
-      'An index rises during canopy development, peaks, and falls at senescence or harvest. Comparing different stages can imitate stress.',
+      'An index rises during canopy development, peaks, and falls at senescence or harvest. ==Comparing different stages can imitate stress==.',
     bullets: [
       'Use consistent time series and compare similar developmental windows.',
       'Clouds and shadows interrupt the series.',
-      'Interpolated points are estimates — report gaps and smoothing choices.',
+      '**Interpolated points are estimates** — report gaps and smoothing choices.',
     ],
   },
   {
@@ -973,9 +973,9 @@ const agriculture = defineDeck('remote-u10-l1', [
     title: 'Separating possible causes',
     bullets: [
       'Low vegetation contrast can come from sparse cover, exposed soil, water stress, nutrients, disease, normal senescence, or measurement effects.',
-      'The index does not choose among them.',
+      'The index ==does not choose among them==.',
       'Thermal data, other bands, field visits, weather, and management history can discriminate.',
-      'Ask: what evidence would differ between the leading hypotheses?',
+      '**Ask**: what evidence would ==differ between the leading hypotheses==?',
     ],
   },
   {
@@ -996,8 +996,8 @@ const agriculture = defineDeck('remote-u10-l1', [
     title: 'Sampling and validation',
     bullets: [
       'Choose reference sites that span the variation — not just the easiest locations.',
-      'Keep validation data independent of the data used to fit thresholds.',
-      'Report class-specific errors: overall accuracy can hide a poorly detected rare class.',
+      'Keep validation data **independent** of the data used to fit thresholds.',
+      'Report class-specific errors: ==overall accuracy can hide a poorly detected rare class==.',
       'Match field timing and spatial support to the imagery.',
     ],
   },
@@ -1021,7 +1021,7 @@ const agriculture = defineDeck('remote-u10-l1', [
     image: 'rondonia-2007',
     bullets: [
       'Use comparable products, registration, masks, and units across dates.',
-      'Compute change from calibrated values — never from independently stretched colors.',
+      'Compute change from calibrated values — ==never from independently stretched colors==.',
       'Field averages can hide a damaged patch; pixel differences can exaggerate noise.',
       'State the baseline: last week, last year, or an untreated reference field are different comparisons.',
     ],
@@ -1049,9 +1049,9 @@ const agriculture = defineDeck('remote-u10-l1', [
     steps: [
       'Initial NDVI = 0.5 ⁄ 0.7 ≈ 0.714.',
       'Mixed NIR/red = 0.45 ⁄ 0.15, so new NDVI = 0.5.',
-      'The drop can arise from changed cover fraction alone; investigate before naming a stress cause.',
+      'The drop can arise from **changed cover fraction alone**; investigate before naming a stress cause.',
     ],
-    conclusion: 'A lower ratio demonstrates a spectral change, not a unique diagnosis.',
+    conclusion: 'A lower ratio demonstrates ==a spectral change, not a unique diagnosis==.',
   },
   {
     kind: 'numeric',
