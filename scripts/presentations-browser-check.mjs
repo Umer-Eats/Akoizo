@@ -85,8 +85,8 @@ async function api(profile, url, request) {
   return actions[body.action](db, profile, body);
 }
 
-async function openAs(profile) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+async function openAs(profile, motion = false) {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: motion ? 'no-preference' : 'reduce' });
   page.on('pageerror', (error) => errors.push(`${profile.displayName}: ${error.message}`));
   page.on('dialog', (dialog) => dialog.accept());
   await page.addInitScript(() =>
@@ -143,6 +143,50 @@ try {
   await expect(a.locator('.presentation-lesson')).toHaveCount(course.lessons.length);
   await a.screenshot({ path: `${shots}/1-list.png`, fullPage: true });
 
+  // With motion on, each view switch runs a view transition: list → chooser → solo → list.
+  {
+    const m = await openAs(amy, true);
+    await m.goto(tab);
+    await expect(m.locator('.presentation-lesson').first()).toBeVisible({ timeout: 30000 });
+    const during = async (click, kind, name) => {
+      const seen = m.evaluate(
+        (kind) =>
+          new Promise((resolve) => {
+            const check = () => {
+              const groups = document.getAnimations().map((a) => a.effect?.pseudoElement).filter(Boolean);
+              if (document.documentElement.dataset.nav === kind && groups.length) return resolve({ kind, groups });
+              requestAnimationFrame(check);
+            };
+            check();
+            setTimeout(() => resolve(null), 3000);
+          }),
+        kind,
+      );
+      await click();
+      const result = await seen;
+      await m.waitForTimeout(160);
+      await m.screenshot({ path: `${shots}/0-transition-${name}-mid.png` });
+      await m.waitForFunction(() => !document.documentElement.dataset.nav);
+      await m.screenshot({ path: `${shots}/0-transition-${name}-end.png` });
+      assert.ok(result, `${kind} transition ran`);
+      assert.ok(result.groups.some((p) => p.includes('pres-pane')), `${kind} animates the pane: ${result.groups}`);
+      return result.groups;
+    };
+    const open = await during(() => m.locator('.presentation-lesson').nth(1).click(), 'pres-open', 'open');
+    assert.ok(open.some((p) => p.includes('pres-card')), 'the clicked card morphs into the chooser');
+    await expect(m.getByRole('heading', { level: 3 })).toHaveCount(3);
+    await during(() => m.getByRole('button', { name: /Start/ }).click(), 'pres-start', 'start');
+    await expect(m.locator('.presentation-viewport')).toBeVisible();
+    await m.getByRole('button', { name: /All presentations|Exit|Leave/ }).first().click();
+    await m.waitForFunction(() => !document.documentElement.dataset.nav);
+    await expect(m.locator('.presentation-lesson').first()).toBeVisible();
+    const again = await during(() => m.locator('.presentation-lesson').nth(2).click(), 'pres-open', 'reopen');
+    assert.ok(again.some((p) => p.includes('pres-card')), 'reopening another card still morphs');
+    await during(() => m.getByRole('button', { name: /All presentations/ }).click(), 'pres-back', 'back');
+    console.log('View transitions: open, start, back all animated');
+    await m.close();
+  }
+
   // Every slide of every deck renders without a page error, at the same 16:9 size, with its
   // content fitting on the page (no scrolling) and every photo loaded.
   const sizes = new Set();
@@ -175,6 +219,9 @@ try {
       assert.equal(page.scrolls, false, `${slide.id} (${slide.kind}) fits without scrolling`);
       assert.equal(page.brokenImages, 0, `${slide.id} photos load`);
       const key = slide.image ? `${slide.kind}-photo` : slide.kind;
+      // SHOT_ALL=1 saves every slide, for reviewing layout and type across whole decks.
+      if (process.env.SHOT_ALL)
+        await a.locator('.presentation-viewport').screenshot({ path: `${shots}/all-${slide.id}-${slide.kind}.png` });
       if (!shotKinds.has(key)) {
         shotKinds.add(key);
         await a.locator('.presentation-viewport').screenshot({ path: `${shots}/slide-${key}.png` });
@@ -205,7 +252,7 @@ try {
       await expect(a.getByText(/^Correct!/)).toBeVisible();
       mcqs++;
     }
-    if (['diagram', 'explore', 'cards', 'match', 'sort'].includes(slide.kind) && i < 16)
+    if (['figure', 'cards', 'match', 'sort'].includes(slide.kind) && i < 16)
       await a.screenshot({ path: `${shots}/3-solo-${String(i + 1).padStart(2, '0')}-${slide.kind}.png` });
     if (i < deck.slides.length - 1) await a.getByRole('button', { name: /^Next/ }).click();
   }
@@ -264,7 +311,7 @@ try {
   await b.setViewportSize({ width: 390, height: 844 });
   await b.goto(`${tab}?lesson=${first}`);
   await b.getByRole('button', { name: /Start/ }).click();
-  const diagram = deck.slides.findIndex((s) => s.kind === 'diagram' || (s.kind === 'bullets' && s.diagram));
+  const diagram = deck.slides.findIndex((s) => s.kind === 'figure');
   await b.getByRole('button', { name: `Go to slide ${diagram + 1}`, exact: true }).click();
   assert.ok(await b.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'no sideways scroll on a phone');
   await b.screenshot({ path: `${shots}/6-mobile-diagram.png`, fullPage: true });

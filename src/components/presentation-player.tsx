@@ -12,7 +12,6 @@ import type {
 import { gradeSlide, slideOrder, validAnswer } from '@/lib/presentation-grading';
 import type { LiveState } from '@/lib/presentation-service';
 import { presentationPhotos } from '@/lib/presentation-photos';
-import { PresentationDiagram } from './presentation-diagrams';
 
 /** A student's in-progress answer, before it becomes a SlideAnswer. */
 export type Draft = number | number[] | string | string[] | undefined;
@@ -149,7 +148,7 @@ function useFitToSlide(ref: React.RefObject<HTMLElement | null>, slideId: string
 }
 
 /** A real photograph or satellite image, credited to its source. */
-function Photo({ id }: { id: PhotoId }) {
+function Photo({ id, creditOnly }: { id: PhotoId; creditOnly?: boolean }) {
   const photo = presentationPhotos[id];
   return (
     <figure className="presentation-photo">
@@ -160,7 +159,7 @@ function Photo({ id }: { id: PhotoId }) {
         height={photo.height}
       />
       <figcaption>
-        {photo.caption}{' '}
+        {creditOnly ? 'Source: ' : `${photo.caption} `}
         <a href={photo.source} target="_blank" rel="noreferrer">
           {photo.credit}
         </a>
@@ -253,11 +252,7 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
         </div>
       );
     case 'bullets': {
-      const side = slide.image ? (
-        <Photo id={slide.image} />
-      ) : slide.diagram ? (
-        <PresentationDiagram id={slide.diagram} />
-      ) : null;
+      const side = slide.image ? <Photo id={slide.image} /> : null;
       return (
         <>
           <h2>{slide.title}</h2>
@@ -275,21 +270,31 @@ export function InfoSlideBody({ slide }: { slide: InfoSlide }) {
         </>
       );
     }
-    case 'diagram':
+    case 'figure': {
+      const { width, height } = presentationPhotos[slide.image];
+      // Wide figures (spectra, scale bars, equations) sit above the text; the rest beside it.
+      const wide = width / height > 2;
       return (
         <>
           <h2>{slide.title}</h2>
-          <PresentationDiagram id={slide.diagram} />
-          <p className="presentation-caption">{slide.caption}</p>
-          {slide.bullets && (
-            <ul className="presentation-bullets">
-              {slide.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-          )}
+          <div
+            className={wide ? 'presentation-figure-wide' : 'presentation-split presentation-figure'}
+          >
+            <Photo id={slide.image} creditOnly />
+            <div className="presentation-split-text">
+              <p className="presentation-caption">{slide.caption}</p>
+              {slide.bullets && (
+                <ul className="presentation-bullets">
+                  {slide.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </>
       );
+    }
     case 'compare':
       return (
         <>

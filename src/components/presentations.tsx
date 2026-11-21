@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   Check,
@@ -42,6 +42,7 @@ import {
   initialDraft,
   type Draft,
 } from './presentation-player';
+import { animateInPlace } from './page-transitions';
 import './presentations.css';
 
 type View =
@@ -83,15 +84,28 @@ const standing = (progress: PresentationProgress) =>
     ? ` · ${progress.answered} of ${progress.possible} activities answered`
     : '');
 
-export function PresentationsView({
-  course,
-  division,
-}: {
-  course: EventLessons;
-  division: Division;
-}) {
+type ViewProps = { course: EventLessons; division: Division };
+
+/** One pane that holds whichever view is showing, so switching views animates as one layer. */
+export function PresentationsView(props: ViewProps) {
+  return (
+    <div className="presentations-pane">
+      <PresentationsViews {...props} />
+    </div>
+  );
+}
+
+function PresentationsViews({ course, division }: ViewProps) {
   const { request } = useAuth();
   const [view, setView] = useState<View>({ kind: 'list' });
+  // The lesson last opened: its card in the list and the chooser's heading morph into each other.
+  const [focus, setFocus] = useState('');
+  /** Switch views with an animated view transition (see presentations.css). */
+  const go = (next: View, kind: 'pres-open' | 'pres-start' | 'pres-back') =>
+    animateInPlace(kind, () => {
+      setView(next);
+      if (next.kind === 'choose') setFocus(next.lessonId);
+    });
   const [results, setResults] = useState<Record<string, PresentationResult>>({});
   const [sessions, setSessions] = useState<LiveSummary[]>([]);
   const [error, setError] = useState('');
@@ -131,9 +145,17 @@ export function PresentationsView({
   }, [view.kind, refresh]);
 
   const back = () => {
-    setView({ kind: 'list' });
+    go({ kind: 'list' }, 'pres-back');
     void refresh();
   };
+
+  // Coming back to the list, bring the card that was opened into view before the new view is drawn.
+  useLayoutEffect(() => {
+    if (view.kind !== 'list' || !focus) return;
+    document
+      .querySelector<HTMLElement>(`.presentation-lesson[data-lesson="${CSS.escape(focus)}"]`)
+      ?.scrollIntoView({ block: 'nearest' });
+  }, [view.kind, focus]);
 
   if (view.kind === 'solo')
     return (
@@ -158,8 +180,8 @@ export function PresentationsView({
         result={results[view.lessonId]}
         sessions={sessions.filter((session) => session.lessonId === view.lessonId)}
         onBack={back}
-        onSolo={() => setView({ kind: 'solo', lessonId: view.lessonId })}
-        onLive={(sessionId) => setView({ kind: 'live', sessionId })}
+        onSolo={() => go({ kind: 'solo', lessonId: view.lessonId }, 'pres-start')}
+        onLive={(sessionId) => go({ kind: 'live', sessionId }, 'pres-start')}
       />
     );
 
@@ -182,7 +204,7 @@ export function PresentationsView({
           <span>{sessions.length} live now</span>
         </div>
       </div>
-      <JoinByCode onJoined={(id) => setView({ kind: 'live', sessionId: id })} />
+      <JoinByCode onJoined={(id) => go({ kind: 'live', sessionId: id }, 'pres-start')} />
       {error && <p role="alert">{error}</p>}
       {course.units.map((unit) => (
         <section key={unit.id} className="presentation-unit" aria-label={unit.title}>
@@ -199,7 +221,16 @@ export function PresentationsView({
                   <button
                     className="presentation-lesson"
                     disabled={!deck}
-                    onClick={() => setView({ kind: 'choose', lessonId: id })}
+                    data-lesson={id}
+                    data-vt={id === focus ? 'card' : undefined}
+                    onClick={(event) => {
+                      // The clicked card, and only it, grows into the chooser.
+                      document
+                        .querySelectorAll<HTMLElement>('.presentation-lesson[data-vt]')
+                        .forEach((card) => delete card.dataset.vt);
+                      event.currentTarget.dataset.vt = 'card';
+                      go({ kind: 'choose', lessonId: id }, 'pres-open');
+                    }}
                   >
                     <PresentationIcon size={22} aria-hidden="true" />
                     <span className="presentation-lesson-body">
@@ -323,19 +354,21 @@ function ModeChooser({
       <button className="back-link" onClick={onBack}>
         <ChevronLeft size={16} /> All presentations
       </button>
-      <p className="eyebrow">PRESENTATION</p>
-      <h2>{title}</h2>
-      <p>
-        {stats.slides} slides · {stats.activities} activities
-        {result && ` · ${result.completedAt ? 'Completed' : 'In progress'}: ${standing(result)}`}
-        {' · '}
-        <Link
-          className="text-link"
-          href={`/dashboard/student/events/${course.eventId}/lessons?lesson=${encodeURIComponent(lessonId)}`}
-        >
-          Read this lesson instead
-        </Link>
-      </p>
+      <div className="presentation-chooser-head" data-vt="card">
+        <p className="eyebrow">PRESENTATION</p>
+        <h2>{title}</h2>
+        <p>
+          {stats.slides} slides · {stats.activities} activities
+          {result && ` · ${result.completedAt ? 'Completed' : 'In progress'}: ${standing(result)}`}
+          {' · '}
+          <Link
+            className="text-link"
+            href={`/dashboard/student/events/${course.eventId}/lessons?lesson=${encodeURIComponent(lessonId)}`}
+          >
+            Read this lesson instead
+          </Link>
+        </p>
+      </div>
       {error && <p role="alert">{error}</p>}
       <div className="presentation-modes">
         <article className="presentation-mode">

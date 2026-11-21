@@ -1,4 +1,4 @@
-/* Presentation tool: lesson list, mode chooser, slide stage, activities, live room, diagrams. */
+/* Presentation tool: lesson list, mode chooser, slide stage, activities, live room. */
 .presentations,
 .presentation-chooser,
 .presentation-stage,
@@ -8,23 +8,12 @@
   --pr-good-soft: color-mix(in srgb, #3ccf86 14%, transparent);
   --pr-bad: #ff6b6b;
   --pr-bad-soft: color-mix(in srgb, #ff6b6b 14%, transparent);
-  --pd-veg: #3fae6a;
-  --pd-soil: #b9895a;
-  --pd-water: #3b82c4;
-  --pd-warm: #f2a03d;
-  --pd-cool: #7cc4e8;
-  --pd-cloud: #c9d3df;
-  --pd-b: #4c7df0;
-  --pd-g: #3fbf6a;
-  --pd-r: #e85a5a;
-  --pd-nir: #b05ad8;
 }
 :root[data-theme='light'] :is(.presentations, .presentation-chooser, .presentation-stage, .presentation-live, .presentation-finished) {
   --pr-good: #17834a;
   --pr-good-soft: #e3f6eb;
   --pr-bad: #c43c3c;
   --pr-bad-soft: #fbe7e7;
-  --pd-cloud: #aab6c4;
 }
 
 /* Lesson list */
@@ -882,107 +871,6 @@
 }
 
 
-/* Diagram palette: fills for SVG shapes, backgrounds for widget bars and cells. */
-.presentation-diagram {
-  display: block;
-  width: 100%;
-  max-height: 22rem;
-  margin: 0.5rem auto;
-}
-.pd-ink {
-  stroke: var(--text);
-}
-.pd-ink-fill {
-  fill: var(--text);
-  background-color: var(--text);
-}
-.pd-text {
-  fill: var(--text);
-  font: 600 14px var(--font-body);
-}
-.pd-small {
-  fill: var(--text);
-  font-size: 12px;
-  font-weight: 500;
-  /* A halo keeps small labels readable on coloured shapes and where arrows cross them. */
-  stroke: var(--surface);
-  stroke-width: 3px;
-  stroke-linejoin: round;
-  paint-order: stroke;
-}
-.pd-dash {
-  stroke-dasharray: 5 5;
-}
-.pd-faint {
-  opacity: 0.25;
-}
-.pd-soft {
-  opacity: 0.35;
-}
-.pd-accent {
-  fill: var(--accent);
-  background-color: var(--accent);
-}
-.pd-accent-line {
-  stroke: var(--accent);
-}
-.pd-panel {
-  fill: var(--surface-2);
-  stroke: var(--line-strong);
-}
-.pd-veg {
-  fill: var(--pd-veg);
-  background-color: var(--pd-veg);
-}
-.pd-veg-line {
-  stroke: var(--pd-veg);
-}
-.pd-soil {
-  fill: var(--pd-soil);
-  background-color: var(--pd-soil);
-}
-.pd-soil-line {
-  stroke: var(--pd-soil);
-}
-.pd-water {
-  fill: var(--pd-water);
-  background-color: var(--pd-water);
-}
-.pd-water-line {
-  stroke: var(--pd-water);
-}
-.pd-warm {
-  fill: var(--pd-warm);
-  background-color: var(--pd-warm);
-}
-.pd-warm-line {
-  stroke: var(--pd-warm);
-}
-.pd-cool {
-  fill: var(--pd-cool);
-  background-color: var(--pd-cool);
-}
-.pd-cloud {
-  fill: var(--pd-cloud);
-  background-color: var(--pd-cloud);
-}
-.pd-b {
-  fill: var(--pd-b);
-  background-color: var(--pd-b);
-}
-.pd-g {
-  fill: var(--pd-g);
-  background-color: var(--pd-g);
-}
-.pd-r {
-  fill: var(--pd-r);
-  background-color: var(--pd-r);
-}
-.pd-nir {
-  fill: var(--pd-nir);
-  background-color: var(--pd-nir);
-}
-
 .presentation-total {
   max-width: 36rem;
   margin: 0.25rem auto 0;
@@ -1048,13 +936,6 @@
 .presentation-title-slide.presentation-split > div {
   align-self: center;
 }
-.presentation-split > .presentation-diagram {
-  align-self: center;
-}
-.presentation-slide .presentation-diagram {
-  max-height: 15em;
-  margin: 0.3em auto;
-}
 .presentation-photo {
   display: flex;
   flex-direction: column;
@@ -1081,6 +962,33 @@
 .presentation-photo figcaption a {
   color: inherit;
   white-space: nowrap;
+}
+/* Figure slides: a published diagram beside its explanation, or above it when the figure is
+   wide (a spectrum, a scale bar, an equation). Diagrams are white-backed images, so no frame. */
+.presentation-slide .presentation-figure {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+.presentation-figure-wide {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 1.1em;
+  min-height: 0;
+}
+.presentation-figure-wide > .presentation-photo {
+  flex: 0 1 auto;
+  height: auto;
+  max-height: 45%;
+}
+.presentation-figure-wide > .presentation-split-text {
+  align-self: stretch;
+}
+.presentation-figure-wide .presentation-photo img {
+  max-height: 100%;
+}
+.presentation-photo img[src$='.png'] {
+  border-radius: 6px;
+  background: transparent;
 }
 .presentation-text .presentation-bullets {
   max-width: 46em;
@@ -1174,4 +1082,173 @@
 }
 .presentation-slide .presentation-table thead th {
   font-size: 0.8em;
+}
+
+/* ---- Slide typography ----
+   One type scale for every slide, in em of the slide's base size so it scales with the page.
+   Display text is set tight; reading text is set open; small uppercase labels are tracked out. */
+.presentation-slide {
+  line-height: 1.5;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.presentation-slide :is(h2, h3, .presentation-activity-prompt) {
+  text-wrap: balance;
+}
+.presentation-slide :is(p, li, td, figcaption, .presentation-option) {
+  text-wrap: pretty;
+}
+.presentation-slide h2 {
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.presentation-slide .presentation-title-slide h2 {
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+.presentation-slide .presentation-title-slide h3,
+.presentation-slide .presentation-table thead th {
+  letter-spacing: 0.08em;
+}
+.presentation-slide .presentation-activity-prompt {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.presentation-slide-meta {
+  align-items: center;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+.presentation-slide :is(.presentation-bullets, .presentation-objectives) {
+  gap: 0.7em;
+  line-height: 1.5;
+}
+.presentation-slide .presentation-bullets li {
+  padding-left: 0.2em;
+}
+.presentation-slide .presentation-caption {
+  margin: 0 0 1em;
+  color: color-mix(in srgb, var(--text) 82%, transparent);
+  font-size: 1.05em;
+  line-height: 1.55;
+}
+.presentation-slide .presentation-caption:last-child {
+  margin-bottom: 0;
+}
+.presentation-slide .presentation-callout,
+.presentation-slide .presentation-problem,
+.presentation-slide .presentation-example ol {
+  line-height: 1.55;
+}
+.presentation-slide .presentation-example ol {
+  gap: 0.6em;
+}
+.presentation-slide .presentation-photo figcaption {
+  line-height: 1.4;
+}
+.presentation-slide .presentation-table :is(th, td) {
+  line-height: 1.4;
+}
+.presentation-slide .presentation-card strong {
+  line-height: 1.3;
+}
+.presentation-slide .presentation-card small {
+  line-height: 1.4;
+}
+.presentation-slide .presentation-option {
+  line-height: 1.35;
+}
+.presentation-slide .fill-text {
+  line-height: 2.1;
+}
+/* Wide figures put the text below at full slide width; keep its lines a readable length. */
+.presentation-figure-wide > .presentation-split-text {
+  max-width: 52em;
+}
+/* Buttons, labels and inputs on a slide scale with it instead of staying at page size. */
+.presentation-slide .button {
+  min-height: 2.4em;
+  padding: 0.55em 1.15em;
+  font-size: 0.85em;
+  letter-spacing: 0.01em;
+}
+.presentation-slide .presentation-numeric label {
+  font-size: 1em;
+}
+
+/* ---- Moving between the list, a lesson's chooser and a running presentation ----
+   PresentationsView switches views through animateInPlace (page-transitions.tsx), which sets
+   html[data-nav] to pres-open, pres-start or pres-back for the length of a view transition.
+   The keyframes (vt-*) live in app/transitions.css. */
+:root[data-nav^='pres'] .presentations-pane {
+  view-transition-name: pres-pane;
+}
+/* The clicked lesson card grows into the chooser's heading, and shrinks back on the way out. */
+:root:is([data-nav='pres-open'], [data-nav='pres-back']) [data-vt='card'] {
+  view-transition-name: pres-card;
+}
+::view-transition-group(pres-pane) {
+  z-index: 1;
+}
+::view-transition-group(pres-card) {
+  z-index: 2;
+  animation-duration: 520ms;
+  animation-timing-function: var(--vt-ease-out);
+}
+::view-transition-image-pair(pres-card) {
+  overflow: clip;
+  border-radius: 14px;
+}
+::view-transition-old(pres-card),
+::view-transition-new(pres-card) {
+  height: 100%;
+  object-fit: none;
+  object-position: 0 0;
+  mix-blend-mode: normal;
+}
+::view-transition-old(pres-card) {
+  animation: 200ms var(--vt-ease-in) both vt-fade-out;
+}
+::view-transition-new(pres-card) {
+  animation: 320ms var(--vt-ease-out) 140ms both vt-fade-in;
+}
+
+/* Opening a lesson: the list sinks back and the chooser rises in, its three options landing in turn. */
+:root[data-nav='pres-open']::view-transition-old(pres-pane) {
+  animation: 180ms var(--vt-ease-in) both vt-sink;
+}
+:root[data-nav='pres-open']::view-transition-new(pres-pane) {
+  animation: 480ms var(--vt-ease-out) 80ms both vt-rise-in;
+}
+:root[data-swap='pres-open'] .presentation-modes > * {
+  animation: vt-section-in 520ms var(--vt-ease-out) 160ms backwards;
+}
+:root[data-swap='pres-open'] .presentation-modes > :nth-child(2) {
+  animation-delay: 230ms;
+}
+:root[data-swap='pres-open'] .presentation-modes > :nth-child(3) {
+  animation-delay: 300ms;
+}
+
+/* Starting a presentation: the chooser dissolves and the slide comes forward into focus. */
+:root[data-nav='pres-start']::view-transition-old(pres-pane) {
+  animation: 260ms var(--vt-ease-in) both vt-dissolve-up;
+}
+:root[data-nav='pres-start']::view-transition-new(pres-pane) {
+  animation: 600ms var(--vt-ease-out) 90ms both vt-zoom-in;
+}
+
+/* Back to the list: the view drops away and the list settles into focus. */
+:root[data-nav='pres-back']::view-transition-old(pres-pane) {
+  animation: 240ms var(--vt-ease-in) both vt-drop-out;
+}
+:root[data-nav='pres-back']::view-transition-new(pres-pane) {
+  animation: 480ms var(--vt-ease-out) 60ms both vt-settle-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-swap='pres-open'] .presentation-modes > * {
+    animation: none;
+  }
 }

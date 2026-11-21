@@ -1,6 +1,6 @@
-// Real photographs and satellite images used on presentation slides, served from
-// public/presentations. Each was downloaded from Wikimedia Commons or the NASA Image and Video
-// Library; `source` links the original page.
+// Real photographs, satellite images and published diagrams used on presentation slides, served
+// from public/presentations. Each was downloaded from Wikimedia Commons, English Wikipedia or the
+// NASA Image and Video Library; `source` links the original page.
 
 type Photo = {
   file: string;
@@ -15,6 +15,7 @@ type Photo = {
 
 const commons = (name: string) => `https://commons.wikimedia.org/wiki/File:${name}`;
 const nasa = (id: string) => `https://images.nasa.gov/details/${id}`;
+const enwiki = (name: string) => `https://en.wikipedia.org/wiki/File:${name}`;
 
 export const presentationPhotos = {
   'blue-marble-americas': {
@@ -218,5 +219,239 @@ export const presentationPhotos = {
       'Center-pivot farms in Al Jowf, Saudi Arabia, in false color: red circles are actively growing crops, grey ones are fallow.',
     credit: 'NASA',
     source: nasa('PIA23955'),
+  },
+
+  // Published diagrams and figures.
+  'remote-sensing-schematic': {
+    file: 'remote-sensing-schematic.png',
+    width: 500,
+    height: 412,
+    alt: 'Schematic of remote sensing: sunlight passes through the atmosphere, interacts with the ground, and travels back up to a sensor, with arrows for transmission, absorption, reflection and emission.',
+    caption:
+      'Energy travels from the source, through the atmosphere, to the surface and back up to the sensor.',
+    credit: 'Wcpatrick6572',
+    source: commons('Schematic_Drawing_of_Remote_Sensing.png'),
+  },
+  'remote-sensing-illustration': {
+    file: 'remote-sensing-illustration.png',
+    width: 1200,
+    height: 1121,
+    alt: 'Two panels: on top a satellite records sunlight reflected from land (passive); below, the satellite sends its own pulse and records the echo (active). Both relay data to a ground station.',
+    caption:
+      'Passive sensing (top) records sunlight the surface reflects; active sensing (bottom) sends its own energy and records the echo.',
+    credit: 'Arkarjun',
+    source: commons('Remote_Sensing_Illustration.jpg'),
+  },
+  'lidar-waveform': {
+    file: 'lidar-waveform.png',
+    width: 1200,
+    height: 1403,
+    alt: 'An aircraft fires an infrared laser pulse into a tree; beside it, the returned echo over time, recorded as discrete returns and as a full waveform with peaks at the canopy and the ground.',
+    caption:
+      'One lidar pulse through a tree: echoes come back from the canopy, the branches and the ground, recorded as discrete returns or a full waveform.',
+    credit: 'Anthony Beck',
+    source: commons(
+      'Airborne_Laser_Scanning_Discrete_Echo_and_Full_Waveform_signal_comparison.svg',
+    ),
+  },
+  'orbit-altitudes': {
+    file: 'orbit-altitudes.png',
+    width: 1200,
+    height: 1200,
+    alt: 'Earth drawn to scale with circles for low Earth orbit (ISS, Hubble), medium orbits (GPS, Galileo) and geostationary orbit, labelled with altitude, period and speed.',
+    caption:
+      'Orbits to scale: low Earth orbit circles in about 90 minutes; geostationary orbit, 35,786 km up, takes exactly one day.',
+    credit: 'cmglee',
+    source: commons('Comparison_satellite_navigation_orbits.svg'),
+  },
+  'trmm-swath': {
+    file: 'trmm-swath.png',
+    width: 1200,
+    height: 900,
+    alt: 'Globe with several diagonal bands of satellite data crossing the Americas, with gaps of unobserved ground between the bands.',
+    caption:
+      'TRMM’s data swaths over the Americas: each pass covers a strip, leaving gaps that later orbits fill in.',
+    credit: 'NASA Scientific Visualization Studio',
+    source: commons('TRMM_Data_Swath_(SVS174_-_orbit2).jpg'),
+  },
+  'additive-rgb': {
+    file: 'additive-rgb.png',
+    width: 1200,
+    height: 1144,
+    alt: 'Three overlapping circles of red, green and blue light; where they overlap they make yellow, cyan, magenta, and white in the center.',
+    caption:
+      'Screens mix red, green and blue light. A composite decides which measured band drives each of the three.',
+    credit: 'Quark67',
+    source: commons('Synthese+.svg'),
+  },
+  'reflectance-spectra': {
+    file: 'reflectance-spectra.png',
+    width: 1200,
+    height: 992,
+    alt: 'Graph of reflectance against wavelength from 400 to 2,400 nm for snow, vegetation, dry soil and water. Vegetation jumps up in the near infrared; water stays low.',
+    caption:
+      'Reflectance spectra of snow, vegetation, dry soil and water: each surface has its own spectral signature.',
+    credit: 'NASA, ESA, Leah Hustak (STScI)',
+    source: commons(
+      'Reflectance_Spectra_of_Materials_on_Earth’s_Surface_(01F8GFAGTM98YTKDS0FZAAWWV2).png',
+    ),
+  },
+  'mixed-pixel': {
+    file: 'mixed-pixel.png',
+    width: 1200,
+    height: 849,
+    alt: 'Diagram: a strip of grass and water, the sensor’s three pixel footprints across it (pure, mixed, pure), their raw values 60, 111 and 156, and the classified output.',
+    caption:
+      'A pixel straddling grass and water records a blend of both, and can be classified wrongly.',
+    credit: 'Anthony Beck',
+    source: commons('Mixed_pixel.svg'),
+  },
+  'pixel-size-mixing': {
+    file: 'pixel-size-mixing.png',
+    width: 1200,
+    height: 1703,
+    alt: 'The same blue shapes sampled by grids of different cell sizes, with a graph of how the share of mixed pixels rises as the pixels get coarser.',
+    caption: 'Spatial resolution: the coarser the grid, the more pixels mix background and target.',
+    credit: 'Anthony Beck',
+    source: commons('Relationship_pixel_size_and_mixed_pixels.svg'),
+  },
+  'em-spectrum-properties': {
+    file: 'em-spectrum-properties.png',
+    width: 1200,
+    height: 712,
+    alt: 'The electromagnetic spectrum from radio to gamma rays, with wavelength, objects of similar size, frequency, and the temperature of objects that emit most strongly at each wavelength.',
+    caption:
+      'Radio to gamma rays: as wavelength shrinks, frequency and photon energy rise. The top bar shows which bands get through the atmosphere.',
+    credit: 'Inductiveload, NASA',
+    source: commons('EM_Spectrum_Properties_edit.svg'),
+  },
+  'snells-law': {
+    file: 'snells-law.png',
+    width: 1200,
+    height: 665,
+    alt: 'A light ray P–O–Q crosses an interface, bending toward the dashed normal as it enters the medium with index n₂. Angles θ₁ and θ₂ are measured from the normal.',
+    caption: 'A ray bends at the interface; θ₁ and θ₂ are measured from the normal.',
+    credit: 'Cristan, Sawims',
+    source: commons('Snells_law.svg'),
+  },
+  'solar-energy-breakdown': {
+    file: 'solar-energy-breakdown.png',
+    width: 1200,
+    height: 871,
+    alt: 'Arrow diagram of incoming sunlight: parts reflected by the atmosphere, clouds and surface, parts absorbed by the atmosphere, and 89 PW absorbed by land and oceans.',
+    caption:
+      'Where incoming sunlight goes: some is reflected by air, clouds and ground, some absorbed in the atmosphere, most absorbed at the surface.',
+    credit: 'User A1, English Wikipedia',
+    source: commons('Breakdown_of_the_incoming_solar_energy.svg'),
+  },
+  'nasa-energy-budget': {
+    file: 'nasa-energy-budget.png',
+    width: 1200,
+    height: 927,
+    alt: 'NASA poster of Earth’s energy budget: 340.4 W/m² of incoming sunlight, 99.9 reflected, 239.9 emitted as infrared, and flows between surface and atmosphere.',
+    caption:
+      'Earth’s energy budget as global averages in W/m²: about 340 arrives, about 100 is reflected (albedo ≈ 0.3), and the rest leaves as infrared.',
+    credit: 'NASA',
+    source: commons(
+      "The-NASA-Earth's-Energy-Budget-Poster-Radiant-Energy-System-satellite-infrared-radiation-fluxes.jpg",
+    ),
+  },
+  'surface-albedo': {
+    file: 'surface-albedo.png',
+    width: 1200,
+    height: 1678,
+    alt: 'Chart of albedo ranges in percent: fresh snow 75–95, old snow 40–70, clouds 30–90, sand, deserts and soils 10–45, forest 5–20, water 3–10.',
+    caption:
+      'Albedo ranges by surface: fresh snow reflects most sunlight; forest and open water reflect little.',
+    credit: 'Wereon',
+    source: commons('Albedo-e_hg.svg'),
+  },
+  'usgs-water-cycle': {
+    file: 'usgs-water-cycle.png',
+    width: 500,
+    height: 342,
+    alt: 'USGS water cycle illustration: evaporation from oceans, condensation into clouds, precipitation, snowmelt, runoff, infiltration and groundwater discharge.',
+    caption: 'The USGS water cycle: storage in oceans, ice, air and ground, linked by flows.',
+    credit: 'John M. Evans, USGS',
+    source: commons('Water_cycle.png'),
+  },
+  'carbon-cycle': {
+    file: 'carbon-cycle.png',
+    width: 1200,
+    height: 921,
+    alt: 'Carbon cycle diagram with stores in the atmosphere, vegetation, soil, oceans and fossil fuels, and arrows for photosynthesis, respiration, ocean exchange and emissions, in gigatons of carbon.',
+    caption:
+      'The carbon cycle: stores in gigatons of carbon and yearly flows between air, plants, soil, ocean and fossil fuels.',
+    credit: 'Kevin Saff, FischX (after NASA Earth Observatory)',
+    source: commons('Carbon_cycle-cute_diagram.svg'),
+  },
+  'risk-equation': {
+    file: 'risk-equation.png',
+    width: 1200,
+    height: 255,
+    alt: 'Equation drawn as circles: Disaster Risk = Hazard × Exposure × Vulnerability.',
+    caption: 'Disaster risk = hazard × exposure × vulnerability.',
+    credit: 'Gill, J.C. et al.',
+    source: commons('Risk_equation.png'),
+  },
+  'modis-ndvi-profile': {
+    file: 'modis-ndvi-profile.png',
+    width: 500,
+    height: 364,
+    alt: 'Graph of MODIS NDVI from 2000 to 2006 for a conifer site: the index rises and falls each year, with the start, end and length of one growing season marked.',
+    caption:
+      'Six years of MODIS NDVI at one site: each year’s rise and fall marks the growing season.',
+    credit: 'English Wikipedia',
+    source: enwiki('MODIS_NDVI_Temporal_Profile_Conifer.jpg'),
+  },
+  'noaa-scale': {
+    file: 'noaa-scale.png',
+    width: 960,
+    height: 134,
+    alt: 'Graphic scale bar from a NOAA nautical chart, marked in nautical miles, yards and meters.',
+    caption:
+      'A graphic scale from a NOAA chart: measure on the map, read the ground distance off the bar.',
+    credit: 'NOAA',
+    source: commons('Scale_from_NOAA_Chart_13272.png'),
+  },
+  'ndvi-leaves': {
+    file: 'ndvi-leaves.png',
+    width: 1200,
+    height: 798,
+    alt: 'Average NDVI map of Great Britain and nearby Europe for June 2003, with a color bar running from −1 to 1; land is mostly green (high NDVI) and the sea black.',
+    caption:
+      'Average NDVI in June 2003: land in green scores high, while water falls at or below zero.',
+    credit: 'Gennaro Cappelluti',
+    source: commons('NDVI_062003.png'),
+  },
+  'manaus-radar': {
+    file: 'manaus-radar.png',
+    width: 1200,
+    height: 960,
+    alt: 'SIR-C radar image of the Solimões River near Manaus beside a map classifying flooded forest, unflooded forest, open water and floating grasses.',
+    caption:
+      'SIR-C radar near Manaus, 1994: smooth open water returns little and looks dark, while flooded forest double-bounces and shows up bright.',
+    credit: 'NASA/JPL',
+    source: nasa('PIA01712'),
+  },
+  'contrast-stretch-photo': {
+    file: 'contrast-stretch-photo.png',
+    width: 1200,
+    height: 395,
+    alt: 'The same grey landscape photograph twice: flat and low-contrast on the left, stretched to full contrast on the right.',
+    caption:
+      'The same stored values, displayed raw (left) and stretched (right): only the display changed, not the measurement.',
+    credit: 'Phillip Capper, modified by Konstable',
+    source: commons('Unequalized_Hawkes_Bay_NZ.jpg'),
+  },
+  'contrast-stretch-histogram': {
+    file: 'contrast-stretch-histogram.png',
+    width: 1200,
+    height: 380,
+    alt: 'Two histograms: on the left, values bunched in a narrow range; on the right, the same values spread across the full 0–255 range.',
+    caption:
+      'Histograms before and after: a narrow cluster of values is spread across the full display range.',
+    credit: 'Jarekt',
+    source: commons('Unequalized_Histogram.svg'),
   },
 } satisfies Record<string, Photo>;

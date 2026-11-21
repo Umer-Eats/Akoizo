@@ -357,7 +357,16 @@ test('a live presentation is hosted, joined by code, paced by the host, and reco
   assert.deepEqual(await liveSessions(db, ben, 'remote-sensing'), []);
   for (const student of [amy, ben]) {
     const [result] = await presentationResults(db, student, 'remote-sensing');
-    assert.deepEqual({ ...result, completedAt: null }, { lessonId, earned: 1, possible: deck.slides.filter(isGraded).length, answered: 1, completedAt: null });
+    assert.deepEqual(
+      { ...result, completedAt: null },
+      {
+        lessonId,
+        earned: 1,
+        possible: deck.slides.filter(isGraded).length,
+        answered: 1,
+        completedAt: null,
+      },
+    );
   }
   assert.deepEqual(await presentationResults(db, cal, 'remote-sensing'), []);
 
@@ -366,7 +375,11 @@ test('a live presentation is hosted, joined by code, paced by the host, and reco
   const session = await hostSession(db, lead, { eventId: 'remote-sensing', lessonId });
   await joinSession(db, cal, { code: session.code });
   await controlSession(db, lead, { id: session.id, action: 'end' });
-  assert.deepEqual(await presentationResults(db, cal, 'remote-sensing'), [], 'joining without answering records nothing');
+  assert.deepEqual(
+    await presentationResults(db, cal, 'remote-sensing'),
+    [],
+    'joining without answering records nothing',
+  );
   assert.deepEqual(await presentationResults(db, lead, 'remote-sensing'), []);
 });
 
@@ -398,7 +411,11 @@ test('the best score on each slide adds up across sessions and days to complete 
         : slide.kind === 'numeric'
           ? slide.answer + 1000
           : keyAnswer(slide);
-  async function answer(sessionId: string, index: number, value: (slide: ActivitySlide) => SlideAnswer) {
+  async function answer(
+    sessionId: string,
+    index: number,
+    value: (slide: ActivitySlide) => SlideAnswer,
+  ) {
     await controlSession(db, lead, { id: sessionId, slide: index });
     const slide = deck.slides[index] as ActivitySlide;
     await answerSlide(db, amy, { id: sessionId, slideId: slide.id, answer: value(slide) });
@@ -410,7 +427,10 @@ test('the best score on each slide adds up across sessions and days to complete 
   await answer(day1.id, graded[0], wrong);
   for (const index of graded.slice(1, half)) await answer(day1.id, index, keyAnswer);
   let [standing] = await presentationResults(db, amy, 'remote-sensing');
-  const firstWrong = gradeSlide(deck.slides[graded[0]] as ActivitySlide, wrong(deck.slides[graded[0]] as ActivitySlide)).earned;
+  const firstWrong = gradeSlide(
+    deck.slides[graded[0]] as ActivitySlide,
+    wrong(deck.slides[graded[0]] as ActivitySlide),
+  ).earned;
   assert.deepEqual(standing, {
     lessonId,
     earned: half - 1 + firstWrong,
@@ -418,7 +438,10 @@ test('the best score on each slide adds up across sessions and days to complete 
     answered: half,
     completedAt: null,
   });
-  assert.ok(!(await dashboardFor(db, amy)).assignments[0].completedAt, 'half a deck is not complete');
+  assert.ok(
+    !(await dashboardFor(db, amy)).assignments[0].completedAt,
+    'half a deck is not complete',
+  );
 
   // Day two: a new session (which ends the old one). Amy fixes the first activity and does the rest;
   // a worse answer to a slide she already had right does not lower her score.
@@ -440,11 +463,17 @@ test('the best score on each slide adds up across sessions and days to complete 
   await controlSession(db, lead, { id: day2.id, action: 'end' });
   const ended = await sessionState(db, amy, day2.id);
   assert.ok(ended.score!.earned < graded.length);
-  assert.deepEqual(ended.total, { earned: graded.length, possible: graded.length, answered: graded.length });
+  assert.deepEqual(ended.total, {
+    earned: graded.length,
+    possible: graded.length,
+    answered: graded.length,
+  });
 
   // Solo runs add to the same total: Ben does half alone and half live.
   const soloHalf = Object.fromEntries(
-    graded.slice(0, half).map((index) => [deck.slides[index].id, keyAnswer(deck.slides[index] as ActivitySlide)]),
+    graded
+      .slice(0, half)
+      .map((index) => [deck.slides[index].id, keyAnswer(deck.slides[index] as ActivitySlide)]),
   );
   const run = await finishSolo(db, ben, { eventId: 'remote-sensing', lessonId, answers: soloHalf });
   assert.deepEqual(run.total, { earned: half, possible: graded.length, answered: half });
@@ -460,21 +489,37 @@ test('the best score on each slide adds up across sessions and days to complete 
   assert.ok(benStanding.completedAt);
 });
 
-test('presentation photos are real files with sources, and no deck has lab-style explorers', async () => {
+test('presentation images are found files with sources, with no explorers or drawn diagrams', async () => {
   const { existsSync } = await import('node:fs');
   const { presentationPhotos } = await import('../src/lib/presentation-photos.ts');
   const used = new Set<string>();
+  let figures = 0;
   for (const lesson of course.lessons) {
     const deck = deckFor('C', 'remote-sensing', lesson.id)!;
     for (const slide of deck.slides) {
-      assert.notEqual(slide.kind as string, 'explore', slide.id);
-      if ((slide.kind === 'bullets' || slide.kind === 'title') && slide.image) used.add(slide.image);
+      assert.ok(!['explore', 'diagram'].includes(slide.kind as string), slide.id);
+      assert.ok(!('diagram' in slide), `${slide.id} has no drawn diagram`);
+      if (slide.kind === 'figure') figures++;
+      if (
+        (slide.kind === 'bullets' || slide.kind === 'title' || slide.kind === 'figure') &&
+        slide.image
+      )
+        used.add(slide.image);
     }
   }
-  assert.ok(used.size >= 15, `photos are used across the decks (${used.size})`);
+  assert.ok(figures >= 20, `published figures replace the drawn diagrams (${figures})`);
+  assert.ok(
+    !existsSync('src/components/presentation-diagrams.tsx'),
+    'the drawn diagram component is gone',
+  );
+  assert.ok(used.size >= 35, `images are used across the decks (${used.size})`);
   for (const [id, photo] of Object.entries(presentationPhotos)) {
     assert.ok(existsSync(`public/presentations/${photo.file}`), `${id} file exists`);
-    assert.match(photo.source, /^https:\/\/(commons\.wikimedia\.org|images\.nasa\.gov)\//, id);
+    assert.match(
+      photo.source,
+      /^https:\/\/(commons\.wikimedia\.org|en\.wikipedia\.org|images\.nasa\.gov)\//,
+      id,
+    );
     assert.ok(photo.alt && photo.caption && photo.credit, id);
     assert.ok(used.has(id), `${id} is used on a slide`);
   }

@@ -41,10 +41,10 @@ const indices = defineDeck('remote-u6-l1', [
       'Latitude and longitude are angular; converting to distance needs a method, and the longitude scale also depends on latitude.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'Scale and area calculations',
-    diagram: 'map-scale',
+    image: 'noaa-scale',
     caption:
       'At 1:50,000, 1 cm on the map = 50,000 cm = 500 m on the ground. Area scales with the square of length.',
     bullets: [
@@ -71,10 +71,10 @@ const indices = defineDeck('remote-u6-l1', [
     explanation: 'Each pixel is 100 m², so 10,000 ÷ 100 = 100 pixels.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 2,
     title: 'NDVI from reflectance',
-    diagram: 'ndvi-scale',
+    image: 'ndvi-leaves',
     caption: 'NDVI = (NIR − red) ⁄ (NIR + red). With valid inputs it runs from −1 to +1.',
     bullets: [
       'Higher values often mean stronger red/NIR contrast associated with green vegetation.',
@@ -247,10 +247,10 @@ const light = defineDeck('remote-u7-l1', [
     ],
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 0,
     title: 'Wave relationships',
-    diagram: 'em-spectrum',
+    image: 'em-spectrum-properties',
     caption: 'c = λ × f. Longer wavelength ↔ lower frequency ↔ lower photon energy (E = h·f).',
     bullets: [
       'Keep units consistent: 500 nm = 5 × 10⁻⁷ m.',
@@ -276,10 +276,10 @@ const light = defineDeck('remote-u7-l1', [
     explanation: '1 nm = 10⁻⁹ m, so 500 nm = 5 × 10⁻⁷ m; E = hf rises with frequency.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'Partitioning incoming energy',
-    diagram: 'energy-partition',
+    image: 'solar-energy-breakdown',
     caption:
       'Incident radiation is reflected, absorbed, or transmitted. For one wavelength and geometry, the fractions sum to 1.',
     bullets: [
@@ -321,10 +321,10 @@ const light = defineDeck('remote-u7-l1', [
     explanation: 'Glint, sediment, or mixtures can brighten water; geometry and context matter.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 3,
     title: 'Snell’s law',
-    diagram: 'snell',
+    image: 'snells-law',
     caption:
       'n₁ sin θ₁ = n₂ sin θ₂, with angles measured from the NORMAL (perpendicular to the surface).',
     bullets: [
@@ -502,10 +502,10 @@ const albedo = defineDeck('remote-u8-l1', [
     explanation: '500 × (1 − 0.3) = 350 W/m².',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'A planetary average',
-    diagram: 'albedo-balance',
+    image: 'nasa-energy-budget',
     caption:
       'Earth intercepts sunlight over a disk (πR²) but spreads it over a sphere (4πR²): average incoming = S ⁄ 4; absorbed = S(1 − α) ⁄ 4.',
     bullets: [
@@ -604,10 +604,10 @@ const albedo = defineDeck('remote-u8-l1', [
     explanation: 'Weather is short-term; climate describes long-term statistics and trends.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 5,
     title: 'Testing a feedback explanation',
-    diagram: 'albedo-balance',
+    image: 'surface-albedo',
     caption:
       'Snow-albedo feedback: warming → less snow → lower albedo → more absorbed sunlight → more warming.',
     bullets: [
@@ -726,10 +726,10 @@ const systems = defineDeck('remote-u9-l1', [
     explanation: 'Reservoirs are amounts; fluxes have “per time” units.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'The water cycle',
-    diagram: 'water-cycle',
+    image: 'usgs-water-cycle',
     caption:
       'Evaporation, transpiration, condensation, precipitation, infiltration, runoff, and storage connect water across Earth systems.',
     bullets: [
@@ -752,10 +752,10 @@ const systems = defineDeck('remote-u9-l1', [
       'Satellites observe some of these directly; others, like infiltration, stay hidden.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 2,
     title: 'Carbon and vegetation',
-    diagram: 'carbon-cycle',
+    image: 'carbon-cycle',
     caption:
       'Photosynthesis moves carbon into organic matter; respiration, decomposition, combustion, and ocean exchange return or redistribute it.',
     bullets: [
@@ -804,10 +804,10 @@ const systems = defineDeck('remote-u9-l1', [
       'Column values are vertical totals; depletion and greenhouse warming are distinct mechanisms.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 4,
     title: 'Hazard observation versus risk',
-    diagram: 'hazard-risk',
+    image: 'risk-equation',
     caption:
       'Risk combines hazard, exposure, and vulnerability. A hazard map alone shows only the first.',
     bullets: [
@@ -942,10 +942,10 @@ const agriculture = defineDeck('remote-u10-l1', [
     ],
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'Phenology and time series',
-    diagram: 'phenology-curve',
+    image: 'modis-ndvi-profile',
     caption:
       'An index rises during canopy development, peaks, and falls at senescence or harvest. Comparing different stages can imitate stress.',
     bullets: [

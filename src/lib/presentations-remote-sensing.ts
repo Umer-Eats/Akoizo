@@ -58,10 +58,10 @@ const foundations = defineDeck('remote-u1-l1', [
       'Sensors record band-dependent energy. Health, crop type, and causes are interpretations built on those measurements with models and reference data.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'The measurement chain',
-    diagram: 'measurement-chain',
+    image: 'remote-sensing-schematic',
     caption:
       'Energy source → atmospheric path → target interaction → atmospheric path → sensor response → calibration and correction → interpreted product.',
     bullets: [
@@ -94,7 +94,7 @@ const foundations = defineDeck('remote-u1-l1', [
       'Atmospheric correction then estimates surface reflectance.',
       'A visually attractive composite is not automatically a calibrated product you can compare across dates.',
     ],
-    diagram: 'stretch-histogram',
+    image: 'contrast-stretch-photo',
     callout: 'Ask of every image: are these stored physical values, or only display colors?',
   },
   {
@@ -125,10 +125,10 @@ const foundations = defineDeck('remote-u1-l1', [
       'Photography came first, then orbiting platforms, then digital detectors that made consistent, computer-processed time series possible.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 3,
     title: 'Scale and ground truth',
-    diagram: 'mixed-pixel',
+    image: 'mixed-pixel',
     caption:
       'One pixel integrates everything inside its footprint. A field plot is usually much smaller and may sit near a boundary.',
     bullets: [
@@ -299,10 +299,10 @@ const sensors = defineDeck('remote-u2-l1', [
     ],
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 0,
     title: 'Passive does not mean visible',
-    diagram: 'active-passive',
+    image: 'remote-sensing-illustration',
     caption:
       'Passive sensors detect naturally available radiation (reflected sunlight or emitted heat). Active sensors send energy and time its return.',
     bullets: [
@@ -382,10 +382,10 @@ const sensors = defineDeck('remote-u2-l1', [
     explanation: '3 × 10⁸ × 10⁻⁶ = 300 m round trip, so 150 m one way — precise timing matters.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 2,
     title: 'Radar backscatter',
-    diagram: 'radar-backscatter',
+    image: 'manaus-radar',
     caption:
       'Smooth water reflects microwaves away (dark); rough surfaces scatter some back; buildings can double-bounce (very bright).',
     bullets: [
@@ -417,10 +417,10 @@ const sensors = defineDeck('remote-u2-l1', [
       'Several target and geometry properties affect backscatter; brightness only means strong return.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 3,
     title: 'Lidar structure and returns',
-    diagram: 'lidar-returns',
+    image: 'lidar-waveform',
     caption:
       'One pulse can return from the canopy top, middle layers, and the ground. Canopy height ≈ canopy return elevation − ground elevation.',
     bullets: [
@@ -529,10 +529,10 @@ const orbits = defineDeck('remote-u3-l1', [
     ],
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 0,
     title: 'Orbit as an observing constraint',
-    diagram: 'orbits',
+    image: 'orbit-altitudes',
     caption:
       'A near-polar low-Earth orbit sweeps many latitudes as Earth turns beneath it. A geostationary satellite stays above one point on the equator.',
     bullets: [
@@ -631,10 +631,10 @@ const orbits = defineDeck('remote-u3-l1', [
     explanation: 'These are mission families used as examples of observing strategies.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 4,
     title: 'Swath and revisit',
-    diagram: 'swath-revisit',
+    image: 'trmm-swath',
     caption:
       'Wider swaths cover more ground per pass; constellations add opportunities; clouds remove usable optical views.',
     bullets: [
@@ -758,10 +758,10 @@ const composites = defineDeck('remote-u4-l1', [
     ],
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 0,
     title: 'Bands become display channels',
-    diagram: 'rgb-composite',
+    image: 'additive-rgb',
     caption:
       'A composite assigns three measured bands to the screen’s red, green, and blue channels.',
     bullets: [
@@ -784,10 +784,10 @@ const composites = defineDeck('remote-u4-l1', [
     explanation: 'Channel mapping defines what each color means.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 1,
     title: 'Spectral signatures',
-    diagram: 'spectral-signatures',
+    image: 'reflectance-spectra',
     caption:
       'Healthy leaves absorb red (pigments) and reflect NIR strongly (leaf structure). Water is dark in NIR. Soil rises gradually.',
     bullets: [
@@ -836,10 +836,10 @@ const composites = defineDeck('remote-u4-l1', [
       'Water, shadow, and some dark surfaces can all be dark in NIR; healthy vegetation and snow are typically bright in NIR.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 3,
     title: 'Stretching and enhancement',
-    diagram: 'stretch-histogram',
+    image: 'contrast-stretch-histogram',
     caption: 'A linear stretch maps a chosen range of stored values onto the full display range.',
     bullets: [
       'Histogram-based enhancements redistribute contrast to reveal subtle variation.',
@@ -963,9 +963,9 @@ const resolution = defineDeck('remote-u5-l1', [
     ],
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     title: 'Four kinds of resolution',
-    diagram: 'resolution-types',
+    image: 'pixel-size-mixing',
     caption:
       'Spatial (how much ground per pixel), spectral (which wavelengths), temporal (how often), radiometric (how many signal levels).',
   },
@@ -1044,10 +1044,10 @@ const resolution = defineDeck('remote-u5-l1', [
     explanation: '2⁸ = 256.',
   },
   {
-    kind: 'diagram',
+    kind: 'figure',
     section: 4,
     title: 'Mixed-pixel arithmetic',
-    diagram: 'mixed-pixel',
+    image: 'mixed-pixel',
     caption:
       'Linear mixture: each band of the pixel is the area-weighted mean of its components. Mix the bands first, then compute the index.',
   },

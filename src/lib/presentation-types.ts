@@ -1,31 +1,7 @@
 // Slide decks for the Presentation tool: a lesson taught as a paced, interactive presentation.
 // The same deck runs self-paced, hosted live, or joined from another student's live session.
 
-/** Named SVG diagrams drawn by components/presentation-diagrams.tsx. */
-export type DiagramId =
-  | 'measurement-chain'
-  | 'active-passive'
-  | 'lidar-returns'
-  | 'radar-backscatter'
-  | 'orbits'
-  | 'swath-revisit'
-  | 'rgb-composite'
-  | 'spectral-signatures'
-  | 'mixed-pixel'
-  | 'resolution-types'
-  | 'em-spectrum'
-  | 'snell'
-  | 'energy-partition'
-  | 'albedo-balance'
-  | 'water-cycle'
-  | 'carbon-cycle'
-  | 'hazard-risk'
-  | 'phenology-curve'
-  | 'map-scale'
-  | 'stretch-histogram'
-  | 'ndvi-scale';
-
-/** Real photographs and satellite images, listed with their sources in lib/presentation-photos.ts. */
+/** Real photographs, satellite images and published diagrams, with sources in lib/presentation-photos.ts. */
 export type PhotoId = keyof typeof import('./presentation-photos.ts').presentationPhotos;
 
 type Base = {
@@ -41,12 +17,12 @@ export type InfoSlide = Base &
         kind: 'bullets';
         title: string;
         bullets: string[];
-        diagram?: DiagramId;
-        /** A real photograph shown beside the bullets (instead of a diagram). */
+        /** An image shown beside the bullets. */
         image?: PhotoId;
         callout?: string;
       }
-    | { kind: 'diagram'; title: string; diagram: DiagramId; caption: string; bullets?: string[] }
+    /** A figure explained beside it: what to notice (caption), then supporting points. */
+    | { kind: 'figure'; title: string; image: PhotoId; caption: string; bullets?: string[] }
     | {
         kind: 'compare';
         title: string;
