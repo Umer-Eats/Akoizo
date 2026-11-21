@@ -7,7 +7,7 @@ import type { Profile } from '../src/lib/domain.ts';
 import { eventToolIds } from '../src/lib/event-rules.ts';
 import { eventsForDivision } from '../src/lib/events.ts';
 import { authoredLessonsForEvent } from '../src/lib/lessons-registry.ts';
-import { deckFor, presentedLessons } from '../src/lib/presentations.ts';
+import { deckFor, presentedEventsC, presentedLessons } from '../src/lib/presentations.ts';
 import { gradeSlide, scoreDeck, slideOrder, validAnswer } from '../src/lib/presentation-grading.ts';
 import {
   isActivity,
@@ -121,8 +121,12 @@ const keyAnswers = (lessonId: string) =>
   );
 
 const course = authoredLessonsForEvent('remote-sensing', 'C')!;
-/** Division C events whose every lesson is taught by a presentation. */
-const presentedEvents = ['remote-sensing', 'anatomy-and-physiology'];
+/** Division C events with presentations, which must then cover every lesson. PRES_EVENTS narrows
+ * the deck checks to some events while their decks are being written, e.g. PRES_EVENTS=botany. */
+const narrowed = !!process.env.PRES_EVENTS;
+const presentedEvents = presentedEventsC().filter(
+  (eventId) => !process.env.PRES_EVENTS || process.env.PRES_EVENTS.split(',').includes(eventId),
+);
 /** Every authored deck, with its event and lesson. */
 const allDecks = presentedEvents.flatMap((eventId) =>
   authoredLessonsForEvent(eventId, 'C')!.lessons.map((lesson) => ({
@@ -132,7 +136,7 @@ const allDecks = presentedEvents.flatMap((eventId) =>
   })),
 );
 
-test('every Remote Sensing and Anatomy C lesson has a presentation aligned to its sections', () => {
+test('every lesson of a presented Division C event has a presentation aligned to its sections', () => {
   for (const eventId of presentedEvents)
     assert.deepEqual(
       [...presentedLessons('C', eventId)].sort(),
@@ -523,12 +527,14 @@ test('presentation images are found files with sources, with no explorers or dra
         used.add(slide.image);
     }
   }
-  assert.ok(figures >= 20, `published figures replace the drawn diagrams (${figures})`);
+  // Totals and unused-photo checks span every event, so they wait for an un-narrowed run.
+  if (!narrowed)
+    assert.ok(figures >= 20, `published figures replace the drawn diagrams (${figures})`);
   assert.ok(
     !existsSync('src/components/presentation-diagrams.tsx'),
     'the drawn diagram component is gone',
   );
-  assert.ok(used.size >= 35, `images are used across the decks (${used.size})`);
+  if (!narrowed) assert.ok(used.size >= 35, `images are used across the decks (${used.size})`);
   for (const [id, photo] of Object.entries(presentationPhotos)) {
     assert.ok(existsSync(`public/presentations/${photo.file}`), `${id} file exists`);
     assert.match(
@@ -537,7 +543,7 @@ test('presentation images are found files with sources, with no explorers or dra
       id,
     );
     assert.ok(photo.alt && photo.caption && photo.credit, id);
-    assert.ok(used.has(id), `${id} is used on a slide`);
+    if (!narrowed) assert.ok(used.has(id), `${id} is used on a slide`);
   }
 });
 
@@ -583,5 +589,6 @@ test('hand-marked emphasis sits only in reading text, balanced, never in answers
       }
     }
   }
-  assert.ok(marked >= 250, `key ideas are marked across the decks (${marked} lines)`);
+  if (!narrowed)
+    assert.ok(marked >= 250, `key ideas are marked across the decks (${marked} lines)`);
 });

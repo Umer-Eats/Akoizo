@@ -9,7 +9,7 @@ import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember } from '../src/lib/school-service.ts';
 import { AppError } from '../src/lib/domain.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
-import { deckFor } from '../src/lib/presentations.ts';
+import { deckFor, presentedEventsC } from '../src/lib/presentations.ts';
 import { isGraded } from '../src/lib/presentation-types.ts';
 import * as service from '../src/lib/presentation-service.ts';
 import { mockLessonApi } from './lib-mock-session.mjs';
@@ -167,7 +167,7 @@ async function openAs(profile, motion = false) {
         },
       });
     if (url.pathname === '/api/event-selections')
-      return route.fulfill({ json: ['remote-sensing', 'anatomy-and-physiology'] });
+      return route.fulfill({ json: presentedEventsC() });
     if (url.pathname.startsWith('/api/lessons/'))
       return route.fulfill({ json: mockLessonApi(url, route.request(), 'C', lessonAnswers) });
     if (url.pathname.startsWith('/api/presentations')) {
@@ -278,9 +278,7 @@ try {
   const fits = [];
   const shotKinds = new Set();
   // PRES_EVENTS narrows the render pass to some events, e.g. PRES_EVENTS=anatomy-and-physiology.
-  const renderEvents = (process.env.PRES_EVENTS || 'remote-sensing,anatomy-and-physiology').split(
-    ',',
-  );
+  const renderEvents = process.env.PRES_EVENTS?.split(',') ?? presentedEventsC();
   for (const eventId of renderEvents)
     for (const lesson of lessonsForEvent(eventId, 'C').lessons) {
       const deck = deckFor('C', eventId, lesson.id);

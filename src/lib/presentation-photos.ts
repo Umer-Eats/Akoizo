@@ -2,22 +2,31 @@
 // from public/presentations. Each was downloaded from Wikimedia Commons, English Wikipedia or the
 // NASA Image and Video Library; `source` links the original page.
 
-type Photo = {
-  file: string;
-  width: number;
-  height: number;
-  alt: string;
-  /** What students are looking at, shown under the image. */
-  caption: string;
-  credit: string;
-  source: string;
-};
+import { commons, enwiki, nasa, type Photo } from './presentation-photo-source.ts';
+import { photos as botany } from './presentation-photos-botany.ts';
+import { photos as designerGenes } from './presentation-photos-designer-genes.ts';
+import { photos as diseaseDetectives } from './presentation-photos-disease-detectives.ts';
+import { photos as waterQuality } from './presentation-photos-water-quality.ts';
+import { photos as astronomy } from './presentation-photos-astronomy.ts';
+import { photos as dynamicPlanet } from './presentation-photos-dynamic-planet.ts';
+import { photos as rocksAndMinerals } from './presentation-photos-rocks-and-minerals.ts';
+import { photos as chemistryLab } from './presentation-photos-chemistry-lab.ts';
+import { photos as circuitLab } from './presentation-photos-circuit-lab.ts';
+import { photos as forensics } from './presentation-photos-forensics.ts';
+import { photos as hovercraft } from './presentation-photos-hovercraft.ts';
+import { photos as proteinModeling } from './presentation-photos-protein-modeling.ts';
+import { photos as thermodynamics } from './presentation-photos-thermodynamics.ts';
+import { photos as boomilever } from './presentation-photos-boomilever.ts';
+import { photos as electricVehicle } from './presentation-photos-electric-vehicle.ts';
+import { photos as missionPossible } from './presentation-photos-mission-possible.ts';
+import { photos as wrightStuff } from './presentation-photos-wright-stuff.ts';
+import { photos as codebusters } from './presentation-photos-codebusters.ts';
+import { photos as experimentalDesign } from './presentation-photos-experimental-design.ts';
+import { photos as pingPongParachute } from './presentation-photos-ping-pong-parachute.ts';
 
-const commons = (name: string) => `https://commons.wikimedia.org/wiki/File:${name}`;
-const nasa = (id: string) => `https://images.nasa.gov/details/${id}`;
-const enwiki = (name: string) => `https://en.wikipedia.org/wiki/File:${name}`;
-
-export const presentationPhotos = {
+// Remote Sensing and Anatomy figures live here; every other event keeps its own figures in
+// presentation-photos-<event>.ts, merged into presentationPhotos at the end of this file.
+const corePhotos = {
   'blue-marble-americas': {
     file: 'blue-marble-americas.jpg',
     width: 1000,
@@ -895,3 +904,27 @@ export const presentationPhotos = {
     source: commons('Normal_posteroanterior_(PA)_chest_radiograph_(X-ray).jpg'),
   },
 } satisfies Record<string, Photo>;
+
+export const presentationPhotos = {
+  ...corePhotos,
+  ...botany,
+  ...designerGenes,
+  ...diseaseDetectives,
+  ...waterQuality,
+  ...astronomy,
+  ...dynamicPlanet,
+  ...rocksAndMinerals,
+  ...chemistryLab,
+  ...circuitLab,
+  ...forensics,
+  ...hovercraft,
+  ...proteinModeling,
+  ...thermodynamics,
+  ...boomilever,
+  ...electricVehicle,
+  ...missionPossible,
+  ...wrightStuff,
+  ...codebusters,
+  ...experimentalDesign,
+  ...pingPongParachute,
+};

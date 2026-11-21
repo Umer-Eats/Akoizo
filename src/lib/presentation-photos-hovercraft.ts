@@ -1,0 +1,118 @@
+import { commons, type Photo } from './presentation-photo-source.ts';
+
+// Figures for the Hovercraft presentations, served from public/presentations.
+export const photos = {
+  'hov-srn4': {
+    file: 'hov-srn4.jpg',
+    width: 1200,
+    height: 771,
+    alt: 'A large SR.N4 passenger hovercraft speeding across the sea, throwing up a cloud of spray from its cushion.',
+    caption:
+      'A full-size SR.N4 cross-Channel hovercraft rides on its air cushion: the same physics as a competition vehicle.',
+    credit: 'Andrew Berridge',
+    source: commons('SRN4_Hovercraft_Mountbatten_Class.jpg'),
+  },
+  'hov-scheme': {
+    file: 'hov-scheme.png',
+    width: 960,
+    height: 764,
+    alt: 'Cross-section diagram of a hovercraft: propellers (1), air drawn in (2), fans (3) blowing air down under the hull, and a flexible skirt (4) holding the cushion.',
+    caption:
+      'Fans (3) push air under the hull, where the skirt (4) holds it as a pressurized cushion before it leaks out at the edges.',
+    credit: 'MesserWoland',
+    source: commons('Hovercraft_-_scheme.svg'),
+  },
+  'hov-skirt': {
+    file: 'hov-skirt.jpg',
+    width: 1200,
+    height: 789,
+    alt: 'A Griffon 2000TDX patrol hovercraft resting on a slipway, its thick black inflated skirt running around the whole hull.',
+    caption: 'The black inflated skirt runs all the way around this patrol hovercraft’s hull.',
+    credit: 'Bahnfrend',
+    source: commons('PA_Griffon_2000TDX_Mk_II,_2006,_inflated.JPG'),
+  },
+  'hov-underside': {
+    file: 'hov-underside.jpg',
+    width: 960,
+    height: 720,
+    alt: 'The underside of a homemade hovercraft: a flat board with a white foam cushion area and two rectangular air holes.',
+    caption:
+      'Underside of a homemade hovercraft: air enters the cushion area through the two holes.',
+    credit: 'Drew Dollas',
+    source: commons('Bottom_of_our_Hover_Craft.jpg'),
+  },
+  'hov-propeller': {
+    file: 'hov-propeller.jpg',
+    width: 1200,
+    height: 957,
+    alt: 'A four-bladed propeller on its red pylon from an SR.N4 hovercraft, displayed outdoors at Dover.',
+    caption: 'A propeller and pylon from an SR.N4 hovercraft, now displayed at Dover.',
+    credit: 'Bernd Kirchberg',
+    source: commons('Propeller_SR.N4_Hovercraft_Dover.JPG'),
+  },
+  'hov-nimh': {
+    file: 'hov-nimh.jpg',
+    width: 1200,
+    height: 800,
+    alt: 'Four Energizer rechargeable NiMH AA batteries standing upright, with labels showing 2000 mAh.',
+    caption: 'Rechargeable NiMH AA cells with their original labels.',
+    credit: 'Multicherry',
+    source: commons('Energizer_NiMH_rechargeable_AA_batteries_(four)_(vertical).jpg'),
+  },
+  'hov-potentiometer': {
+    file: 'hov-potentiometer.jpg',
+    width: 500,
+    height: 586,
+    alt: 'A rotary potentiometer with a knurled metal shaft and three solder terminals.',
+    caption: 'A rotary potentiometer: the shaft turns a wiper along a resistive track.',
+    credit: 'Iainf',
+    source: commons('Potentiometer.jpg'),
+  },
+  'hov-toggle': {
+    file: 'hov-toggle.jpg',
+    width: 500,
+    height: 398,
+    alt: 'An assortment of mechanical switches on a red board, including toggle, rocker, rotary, push-button, and wall switches.',
+    caption: 'Mechanical switches of many kinds, including toggles, rockers, and push-buttons.',
+    credit: 'ArnoldReinhold',
+    source: commons('Switches-electrical.agr.jpg'),
+  },
+  'hov-nickels': {
+    file: 'hov-nickels.jpg',
+    width: 960,
+    height: 960,
+    alt: 'Close-up of a 1988 United States nickel showing Thomas Jefferson’s portrait.',
+    caption: 'A U.S. nickel: about 5 g and 21.2 mm across.',
+    credit: 'Luisino09',
+    source: commons('Nickel_Front.jpg'),
+  },
+  'hov-accuracy': {
+    file: 'hov-accuracy.png',
+    width: 960,
+    height: 960,
+    alt: 'A red and white target with four black shots clustered tightly together, well away from the center.',
+    caption: 'High precision, low accuracy: the shots cluster tightly but miss the center.',
+    credit: 'DarkEvil',
+    source: commons('High_precision_Low_accuracy.svg'),
+  },
+  'hov-photogate': {
+    file: 'hov-photogate.jpg',
+    width: 1200,
+    height: 1607,
+    alt: 'A small photogate sensor wired to a handheld data logger whose screen reads Blocked.',
+    caption:
+      'A photogate wired to a data logger reads “Blocked” while something interrupts its beam.',
+    credit: 'Evanm1993',
+    source: commons('Photogate_blocked.jpg'),
+  },
+  'hov-toy': {
+    file: 'hov-toy.jpg',
+    width: 1200,
+    height: 848,
+    alt: 'A vintage battery-powered toy hovercraft in blue and white, with yellow fans, beside its original box.',
+    caption:
+      'A battery-powered toy hovercraft: a small, electric cousin of the competition vehicle.',
+    credit: 'Rundvald',
+    source: commons('Joustra-Aeroglisseur-electrique-teleguide-tole+plastique-31cm.jpg'),
+  },
+} satisfies Record<string, Photo>;

@@ -1,0 +1,68 @@
+import { commons, type Photo } from './presentation-photo-source.ts';
+
+// Figures for the Electric Vehicle presentations, served from public/presentations.
+export const photos = {
+  'ev-motor': {
+    file: 'ev-motor.jpg',
+    width: 1200,
+    height: 675,
+    alt: 'A small silver cylindrical R280 DC hobby motor rated 3.0 V, with a white plastic gear on its shaft.',
+    caption: 'A small DC hobby motor of the kind used to drive model vehicles.',
+    credit: 'Raimond Spekking',
+    source: commons('TecTro_14165009_-_Motor_R280-6440.jpg'),
+  },
+  'ev-encoder': {
+    file: 'ev-encoder.jpg',
+    width: 500,
+    height: 377,
+    alt: 'A cylindrical industrial rotary encoder with a metal shaft and a cable gland.',
+    caption: 'A rotary encoder: its shaft turns and it sends out a pulse for each small step.',
+    credit: 'Joao Paulo Chagas',
+    source: commons('Rotary_encoder.jpg'),
+  },
+  'ev-quadrature': {
+    file: 'ev-quadrature.png',
+    width: 330,
+    height: 192,
+    alt: 'A code wheel with two rings of black and white segments offset from each other, a sensor window, and a two-bit readout.',
+    caption: 'A quadrature code wheel: two offset rings give two signals that reveal direction.',
+    credit: 'Sidehack, English Wikibooks',
+    source: commons('Incremental_directional_encoder.gif'),
+  },
+  'ev-arduino': {
+    file: 'ev-arduino.jpg',
+    width: 500,
+    height: 500,
+    alt: 'A blue Arduino Uno microcontroller board with USB and power connectors and rows of header pins.',
+    caption: 'An Arduino Uno microcontroller board.',
+    credit: 'SparkFun Electronics',
+    source: commons('Arduino_Uno_-_R3.jpg'),
+  },
+  'ev-pid': {
+    file: 'ev-pid.png',
+    width: 960,
+    height: 640,
+    alt: 'Block diagram of a PID controller: the error between setpoint r(t) and output y(t) feeds P, I, and D blocks that are summed to drive the plant.',
+    caption: 'Block diagram of a PID feedback loop.',
+    credit: 'TravTigerEE',
+    source: commons('PID_en_updated_feedback.svg'),
+  },
+  'ev-aa': {
+    file: 'ev-aa.jpg',
+    width: 1200,
+    height: 935,
+    alt: 'Three green rechargeable NiMH AA batteries labeled AA3000 lying on a white surface.',
+    caption: 'Rechargeable NiMH AA batteries with their labels.',
+    credit: 'Revital Salomon',
+    source: commons('Three_AA_batteries_on_a_white_background.JPG'),
+  },
+  'ev-supercap': {
+    file: 'ev-supercap.jpg',
+    width: 1200,
+    height: 600,
+    alt: 'An assortment of supercapacitor products, from small cylindrical cells to large boxed modules.',
+    caption: 'Supercapacitors, from single cells to large modules.',
+    credit: 'Sechsa',
+    source: commons('Supercapacitor_-_ultracapacitor_products_of_SECH_SA.jpg'),
+  },
+} satisfies Record<string, Photo>;
