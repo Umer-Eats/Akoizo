@@ -19,7 +19,6 @@ import { eventPagePath } from '@/lib/seo';
 import { HomeShowcase } from './home-showcase';
 import { groupBySlot } from './landing-data';
 import { openCommandPalette } from './command-palette';
-import { VaultGraph } from './vault-graph';
 import { VaultWorkspace } from './vault-workspace';
 
 const delay = (d: number) => ({ '--d': d }) as CSSProperties;
@@ -263,8 +262,6 @@ export function Home() {
   return (
     <main id="main" className="lx-page vx-page">
       <section className="vx-hero" aria-labelledby="hero-title">
-        <VaultGraph />
-        <div className="vx-hero-fade" aria-hidden="true" />
         <div className="lx-wrap vx-hero-inner" data-enter>
           <p className="vx-eyebrow" style={delay(0)}>
             Akoizo
@@ -289,7 +286,6 @@ export function Home() {
         </div>
         <div className="lx-wrap vx-hero-foot" aria-hidden="true">
           <span>Free for every student. Always.</span>
-          <span>Hover the graph · click a note to open it</span>
         </div>
       </section>
 
