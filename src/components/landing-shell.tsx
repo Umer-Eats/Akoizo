@@ -47,9 +47,10 @@ export function LandingNav() {
   ].some((route) => path === route || path.startsWith(`${route}/`));
   // Inside an event, the event name (in its timeslot colour) takes the place of the main links.
   const eventId = path.match(/^\/dashboard\/student\/events\/([^/]+)(?:\/|$)/)?.[1];
+  const division = profile?.division;
   const event =
-    profile?.division && eventId
-      ? eventsForDivision(profile.division).find((item) => item.id === eventId)
+    division && eventId
+      ? eventsForDivision(division).find((item) => item.id === eventId)
       : undefined;
   const logout = () => logOut().catch((e) => setError(authMessage(e)));
   useEffect(() => setOpen(false), [path]);
@@ -74,10 +75,10 @@ export function LandingNav() {
           <span className="lx-brand-mark" aria-hidden="true" />
           akoizo
         </Link>
-        {event ? (
+        {event && division ? (
           <Link
             className="lx-nav-event"
-            data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}
+            data-slot={slotForEvent(event.id, division)?.color ?? 'unassigned'}
             href={`/dashboard/student/events/${event.id}`}
           >
             <i aria-hidden="true" />

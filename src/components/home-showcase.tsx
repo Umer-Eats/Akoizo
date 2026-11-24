@@ -118,12 +118,12 @@ export function ClipPlayer({ id, label }: { id: string; label: string }) {
 export function HomeShowcase() {
   const [active, setActive] = useState(0);
   const clip = clips[active];
-  const slot = clip.event ? slotForEvent(clip.event.id) : undefined;
+  const slot = clip.event ? slotForEvent(clip.event.id, 'C') : undefined;
   return (
     <div className="vx-showcase" data-slot={slot?.color}>
       <div className="vx-showcase-tabs" role="tablist" aria-label="Study formats">
         {clips.map((item, index) => {
-          const itemSlot = item.event ? slotForEvent(item.event.id) : undefined;
+          const itemSlot = item.event ? slotForEvent(item.event.id, 'C') : undefined;
           return (
             <button
               key={item.id}

@@ -7,7 +7,11 @@ import type { Profile } from '../src/lib/domain.ts';
 import { eventToolIds } from '../src/lib/event-rules.ts';
 import { eventsForDivision } from '../src/lib/events.ts';
 import { authoredLessonsForEvent } from '../src/lib/lessons-registry.ts';
-import { deckFor, presentedEventsC, presentedLessons } from '../src/lib/presentations.ts';
+import {
+  deckFor,
+  presentedEvents as eventsWithDecks,
+  presentedLessons,
+} from '../src/lib/presentations.ts';
 import { gradeSlide, scoreDeck, slideOrder, validAnswer } from '../src/lib/presentation-grading.ts';
 import {
   isActivity,
@@ -121,29 +125,34 @@ const keyAnswers = (lessonId: string) =>
   );
 
 const course = authoredLessonsForEvent('remote-sensing', 'C')!;
-/** Division C events with presentations, which must then cover every lesson. PRES_EVENTS narrows
- * the deck checks to some events while their decks are being written, e.g. PRES_EVENTS=botany. */
+/** Division B and C events with presentations, which must then cover every lesson. PRES_EVENTS
+ * narrows the deck checks to some events while their decks are being written: a bare id is
+ * Division C (PRES_EVENTS=botany), and B/ marks Division B (PRES_EVENTS=B/botany). */
 const narrowed = !!process.env.PRES_EVENTS;
-const presentedEvents = presentedEventsC().filter(
-  (eventId) => !process.env.PRES_EVENTS || process.env.PRES_EVENTS.split(',').includes(eventId),
+const wanted = process.env.PRES_EVENTS?.split(',').map((id) => (id.includes('/') ? id : `C/${id}`));
+const presentedEvents = (['B', 'C'] as const).flatMap((division) =>
+  eventsWithDecks(division)
+    .filter((eventId) => !wanted || wanted.includes(`${division}/${eventId}`))
+    .map((eventId) => ({ division, eventId })),
 );
-/** Every authored deck, with its event and lesson. */
-const allDecks = presentedEvents.flatMap((eventId) =>
-  authoredLessonsForEvent(eventId, 'C')!.lessons.map((lesson) => ({
+/** Every authored deck, with its division, event and lesson. */
+const allDecks = presentedEvents.flatMap(({ division, eventId }) =>
+  authoredLessonsForEvent(eventId, division)!.lessons.map((lesson) => ({
+    division,
     eventId,
     lesson,
-    deck: deckFor('C', eventId, lesson.id)!,
+    deck: deckFor(division, eventId, lesson.id)!,
   })),
 );
 
-test('every lesson of a presented Division C event has a presentation aligned to its sections', () => {
-  for (const eventId of presentedEvents)
+test('every lesson of a presented Division B or C event has a presentation aligned to its sections', () => {
+  for (const { division, eventId } of presentedEvents)
     assert.deepEqual(
-      [...presentedLessons('C', eventId)].sort(),
-      authoredLessonsForEvent(eventId, 'C')!
+      [...presentedLessons(division, eventId)].sort(),
+      authoredLessonsForEvent(eventId, division)!
         .lessons.map((lesson) => lesson.id)
         .sort(),
-      eventId,
+      `${division}/${eventId}`,
     );
   for (const { lesson, deck } of allDecks) {
     assert.equal(new Set(deck.slides.map((s) => s.id)).size, deck.slides.length);
@@ -223,23 +232,27 @@ test('grading gives partial credit and rejects malformed answers', () => {
   });
 });
 
-test('the Presentation tab appears after Lessons on Division C events with lessons only', () => {
+test('the Presentation tab appears after Lessons on Division B and C events with lessons only', () => {
   let shown = 0;
-  for (const event of eventsForDivision('C')) {
-    const tools = eventToolIds('C', event);
-    const hasLessons = !!authoredLessonsForEvent(event.id, 'C');
-    assert.equal(tools.includes('presentation'), hasLessons && tools.includes('lessons'), event.id);
-    if (tools.includes('presentation')) {
-      shown++;
-      assert.equal(tools.indexOf('presentation'), tools.indexOf('lessons') + 1);
+  for (const division of ['B', 'C'] as const)
+    for (const event of eventsForDivision(division)) {
+      const tools = eventToolIds(division, event);
+      const hasLessons = !!authoredLessonsForEvent(event.id, division);
+      assert.equal(
+        tools.includes('presentation'),
+        hasLessons && tools.includes('lessons'),
+        `${division}/${event.id}`,
+      );
+      if (tools.includes('presentation')) {
+        shown++;
+        assert.equal(tools.indexOf('presentation'), tools.indexOf('lessons') + 1);
+      }
     }
-  }
   assert.ok(shown > 0);
   const remote = eventsForDivision('C').find((e) => e.id === 'remote-sensing')!;
   assert.ok(eventToolIds('C', remote).includes('presentation'));
-  for (const division of ['A', 'B'] as const)
-    for (const event of eventsForDivision(division))
-      assert.ok(!eventToolIds(division, event).includes('presentation'), `${division}/${event.id}`);
+  for (const event of eventsForDivision('A'))
+    assert.ok(!eventToolIds('A', event).includes('presentation'), `A/${event.id}`);
 });
 
 const insertAssignment =

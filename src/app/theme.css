@@ -2108,6 +2108,7 @@
   [data-slot='orange'] {
     --slot: var(--orange);
   }
+  [data-slot='gray'],
   [data-slot='unassigned'] {
     --slot: var(--muted);
   }

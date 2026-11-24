@@ -106,6 +106,7 @@ function Explorer() {
   const groups = useMemo(() => {
     const q = query.trim().toLowerCase();
     return groupBySlot(
+      division,
       eventsForDivision(division).filter((event) => event.name.toLowerCase().includes(q)),
     );
   }, [division, query]);

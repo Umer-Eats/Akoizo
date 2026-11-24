@@ -30,7 +30,7 @@ import { ExperimentControls, TrialComparison, type LabTrial } from './lesson-exp
 import { SubjectExplorer } from './subject-explorer';
 import { LessonReferenceFigure } from './lesson-reference-figure';
 import { lessonReferenceFigures } from '@/lib/lesson-reference-figures';
-import { slotForEvent } from '@/lib/event-slots';
+import { eventSlotLabel, slotForEvent } from '@/lib/event-slots';
 import { extrasFor, topicLabs } from '@/lib/extras';
 import { LessonActivities, InlineCheck, practiceActivities } from './lesson-activities';
 import { TopicLabView } from './topic-lab';
@@ -1228,6 +1228,8 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
       recordPart(lessonId, part, score, maxScore),
     [recordPart, lessonId],
   );
+  const slot = slotForEvent(course.eventId, course.division);
+
   function selectLesson(id: string, focus = false) {
     setLessonId(id);
     if (focus)
@@ -1240,15 +1242,13 @@ export function LessonsView({ course, studentId }: { course: EventLessons; stude
   return (
     <section
       className="lessons-workspace"
-      data-lesson-slot={slotForEvent(course.eventId)?.color}
+      data-lesson-slot={slot?.color}
       aria-label={`${course.eventName} lessons`}
     >
       <div className="lessons-intro">
         <p className="eyebrow">
           <span className="lesson-slot-dot" /> DIVISION {course.division}
-          {slotForEvent(course.eventId)
-            ? ` · ${slotForEvent(course.eventId)!.label.toUpperCase()} TIMESLOT`
-            : ' · LESSONS'}
+          {slot ? ` · ${eventSlotLabel(slot).toUpperCase()}` : ' · LESSONS'}
         </p>
         <h2>{course.eventName}</h2>
         <p>{course.intro}</p>

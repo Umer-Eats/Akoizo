@@ -631,6 +631,7 @@ async function eventNotebook(
   const found = await find();
   if (found) return asNotebook(found as Row);
   const at = now();
+  const slot = slotForEvent(event.id, division);
   await db.batch(
     [
       {
@@ -641,7 +642,7 @@ async function eventNotebook(
           event.name,
           event.id,
           division,
-          slotForEvent(event.id)?.color ?? 'unassigned',
+          slot && slot.color !== 'gray' ? slot.color : 'unassigned',
           '[]',
           await nextPosition(db, 'notebooks', profile),
           at,

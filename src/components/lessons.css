@@ -37,6 +37,10 @@
 :root[data-theme='light'] .lessons-workspace[data-lesson-slot='purple'] {
   --lesson-pink: #7d2fd0;
 }
+.lessons-workspace[data-lesson-slot='gray'],
+:root[data-theme='light'] .lessons-workspace[data-lesson-slot='gray'] {
+  --lesson-pink: var(--muted);
+}
 .lessons-workspace h2 {
   font-size: clamp(1.6rem, 3vw, 2.5rem);
   line-height: 1.18;

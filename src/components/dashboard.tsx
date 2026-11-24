@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useStudyLayer } from './notes-store';
-import { eventSlots, slotForEvent } from '@/lib/event-slots';
+import { eventSlotLabel, slotForEvent, slotsForDivision } from '@/lib/event-slots';
 import {
   BookOpen,
   FileText,
@@ -283,7 +283,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
       (event) =>
         `${event.name} ${event.category}`.toLowerCase().includes(query.toLowerCase()) &&
         (type === 'All' || event.type === type) &&
-        (slotFilter === 'All' || slotForEvent(event.id)?.color === slotFilter),
+        (slotFilter === 'All' || slotForEvent(event.id, division)?.color === slotFilter),
     )
     .sort((a, b) => Number(selected.includes(b.id)) - Number(selected.includes(a.id)));
   return (
@@ -323,7 +323,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
         >
           All timeslots
         </button>
-        {eventSlots.map((slot) => (
+        {slotsForDivision(division).map((slot) => (
           <button
             className="slot-chip"
             data-slot={slot.color}
@@ -331,7 +331,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
             aria-pressed={slotFilter === slot.color}
             onClick={() => setSlotFilter(slotFilter === slot.color ? 'All' : slot.color)}
           >
-            {slot.label} timeslot
+            {eventSlotLabel(slot)}
           </button>
         ))}
       </div>
@@ -356,7 +356,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
       )}
       <div className="event-grid">
         {matches.map((event) => {
-          const slot = slotForEvent(event.id);
+          const slot = slotForEvent(event.id, division);
           const checked = selected.includes(event.id);
           return (
             <article
@@ -372,7 +372,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
                 <span className="eyebrow">{event.category.toUpperCase()}</span>
                 <h3>{event.name}</h3>
                 <span className="sr-only">
-                  {slot ? `${slot.label} timeslot` : 'Timeslot not assigned'}
+                  {slot ? eventSlotLabel(slot) : 'Timeslot not assigned'}
                 </span>
                 <div className="event-card-footer">
                   <span>
@@ -1051,6 +1051,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
       </main>
     );
   }
+  const slot = slotForEvent(event.id, division);
   const rulePages = toolId === 'rules' ? rulesForEvent(division, event).pageRange : undefined;
   const course =
     toolId === 'lessons' || toolId === 'presentation' ? lessonsForEvent(event.id, division) : null;
@@ -1062,7 +1063,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
     <main
       id="main"
       className={`page-container event-workspace${course ? ' event-with-lessons' : ''}${hasDivisionCLabs ? ' event-with-archive-labs' : ''}`}
-      data-slot={slotForEvent(event.id)?.color}
+      data-slot={slot?.color}
     >
       <div className="event-workspace-grid">
         <aside className="event-sidebar" aria-labelledby="event-toolkit-title">
@@ -1099,9 +1100,7 @@ export function EventView({ eventId, toolId }: { eventId: string; toolId?: strin
             <p className="event-feature-meta">
               DIVISION {division} / {event.category.toUpperCase()} / {event.type.toUpperCase()}
               {event.special ? ' / SPECIAL EVENT' : ''}
-              {slotForEvent(event.id)
-                ? ` / ${slotForEvent(event.id)!.label.toUpperCase()} TIMESLOT`
-                : ''}
+              {slot ? ` / ${eventSlotLabel(slot).toUpperCase()}` : ''}
             </p>
           </div>
           {toolId === 'practice-tests' ? (

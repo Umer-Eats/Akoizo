@@ -96,7 +96,7 @@ export default async function EventStudyGuidePage({ params }: { params: Promise<
     <main
       id="main"
       className="page-container event-study-guide"
-      data-slot={slotForEvent(event.id)?.color}
+      data-slot={slotForEvent(event.id, division)?.color}
     >
       <script
         type="application/ld+json"

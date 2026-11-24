@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { eventsForDivision } from '@/lib/events';
 import { eventPagePath, pageMetadata } from '@/lib/seo';
-import { slotColor } from '@/components/landing-data';
+import { slotForEvent } from '@/lib/event-slots';
 import { Notes, PageHero } from '@/components/landing-page';
 import { HomeShowcase } from '@/components/home-showcase';
 
@@ -87,7 +87,7 @@ export default function StudyToolsPage() {
               <p>{note}</p>
               <ul>
                 {eventsForDivision(division).map((event) => (
-                  <li key={event.id} data-slot={slotColor(event.id)}>
+                  <li key={event.id} data-slot={slotForEvent(event.id, division)?.color}>
                     <Link className="lx-event" href={eventPagePath(division, event.id)}>
                       {event.name}
                       {event.special && <small>Special</small>}

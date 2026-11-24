@@ -10,7 +10,7 @@ import {
   Search,
   Users,
 } from 'lucide-react';
-import { eventSlots, slotForEvent } from '@/lib/event-slots';
+import { eventSlotLabel, slotForEvent, slotsForDivision } from '@/lib/event-slots';
 import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/events';
 import {
   competitionLevels,
@@ -56,7 +56,7 @@ export function InstructorEventCatalog({
     (event) =>
       `${event.name} ${event.category}`.toLowerCase().includes(query.toLowerCase()) &&
       (type === 'All' || event.type === type) &&
-      (slotFilter === 'All' || slotForEvent(event.id)?.color === slotFilter),
+      (slotFilter === 'All' || slotForEvent(event.id, division)?.color === slotFilter),
   );
   return (
     <>
@@ -81,7 +81,10 @@ export function InstructorEventCatalog({
           <select
             aria-label="Assignment division"
             value={division}
-            onChange={(e) => onDivision(e.target.value as Division)}
+            onChange={(e) => {
+              setSlotFilter('All');
+              onDivision(e.target.value as Division);
+            }}
           >
             {(['A', 'B', 'C'] as const).map((value) => (
               <option key={value} value={value}>
@@ -109,7 +112,7 @@ export function InstructorEventCatalog({
         >
           All timeslots
         </button>
-        {eventSlots.map((slot) => (
+        {slotsForDivision(division).map((slot) => (
           <button
             className="slot-chip"
             data-slot={slot.color}
@@ -117,13 +120,13 @@ export function InstructorEventCatalog({
             aria-pressed={slotFilter === slot.color}
             onClick={() => setSlotFilter(slotFilter === slot.color ? 'All' : slot.color)}
           >
-            {slot.label} timeslot
+            {eventSlotLabel(slot)}
           </button>
         ))}
       </div>
       <div className="event-grid">
         {matches.map((event) => {
-          const slot = slotForEvent(event.id);
+          const slot = slotForEvent(event.id, division);
           return (
             <article
               className="event-card selectable-event"
@@ -134,7 +137,7 @@ export function InstructorEventCatalog({
                 <span className="eyebrow">{event.category.toUpperCase()}</span>
                 <h3>{event.name}</h3>
                 <span className="sr-only">
-                  {slot ? `${slot.label} timeslot` : 'Timeslot not assigned'}
+                  {slot ? eventSlotLabel(slot) : 'Timeslot not assigned'}
                 </span>
                 <div className="event-card-footer">
                   <span>
@@ -969,9 +972,9 @@ export function InstructorAssignments({
                 ? 'Complete the lesson practice.'
                 : work.kind === 'Presentation'
                   ? 'Finish the presentation by yourself or in a live session.'
-                : work.kind === 'Lab'
-                  ? 'Complete the simulation and mark it finished.'
-                  : 'Submit this practice test to complete the assignment.'
+                  : work.kind === 'Lab'
+                    ? 'Complete the simulation and mark it finished.'
+                    : 'Submit this practice test to complete the assignment.'
           }
           already={
             new Set(

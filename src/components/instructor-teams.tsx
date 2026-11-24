@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { Plus, Search, Trash2, TriangleAlert, Users } from 'lucide-react';
-import { eventSlots, slotForEvent } from '@/lib/event-slots';
+import { eventSlotLabel, slotForEvent, slotsForDivision } from '@/lib/event-slots';
 import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/events';
 import type { Student } from '@/lib/domain';
 import { partnerLimit, rosterDivision, TEAM_SIZE, type TeamSheet } from '@/lib/teams';
@@ -16,7 +16,8 @@ const seatedIn = (team: TeamSheet, studentId: string) =>
 /** Events one student holds in the same timeslot: they cannot compete in both. */
 function clashes(team: TeamSheet, studentId: string, events: ScienceEvent[]) {
   const mine = seatedIn(team, studentId);
-  return eventSlots.flatMap((slot) => {
+  return slotsForDivision(team.division).flatMap((slot) => {
+    if (slot.color === 'gray') return [];
     const held = mine.filter((id) => (slot.events as readonly string[]).includes(id));
     return held.length > 1
       ? [
@@ -53,7 +54,7 @@ function StudentPicker({
 }) {
   const [search, setSearch] = useState('');
   const current = team.slots[event.id][seat];
-  const slot = slotForEvent(event.id);
+  const slot = slotForEvent(event.id, team.division);
   const eligible = students.filter((student) => student.division === team.division);
   const hidden = students.length - eligible.length;
   const cards = eligible
@@ -99,7 +100,7 @@ function StudentPicker({
           <div>
             <p className="eyebrow">
               {team.name.toUpperCase()} ·{' '}
-              {slot ? `${slot.label.toUpperCase()} TIMESLOT` : 'NO TIMESLOT'}
+              {slot ? eventSlotLabel(slot).toUpperCase() : 'NO TIMESLOT'}
             </p>
             <h2>
               {event.name} · Partner {seat + 1}
@@ -298,7 +299,7 @@ function Sheet({
                         <span
                           key={id}
                           className="team-dot"
-                          data-slot={slotForEvent(id)?.color ?? 'unassigned'}
+                          data-slot={slotForEvent(id, team.division)?.color ?? 'unassigned'}
                           title={events.find((e) => e.id === id)?.name}
                         />
                       ))}
@@ -323,9 +324,9 @@ function Sheet({
         </table>
       </div>
       <div className="slot-legend" aria-label="Timeslot colors">
-        {eventSlots.map((slot) => (
+        {slotsForDivision(team.division).map((slot) => (
           <span className="slot-chip" data-slot={slot.color} key={slot.color}>
-            {slot.label} timeslot
+            {eventSlotLabel(slot)}
           </span>
         ))}
         <span className="slot-chip" data-slot="unassigned">
@@ -344,13 +345,13 @@ function Sheet({
           </thead>
           <tbody>
             {events.map((event) => {
-              const slot = slotForEvent(event.id);
+              const slot = slotForEvent(event.id, team.division);
               return (
                 <tr key={event.id} data-slot={slot?.color ?? 'unassigned'}>
                   <th scope="row">
                     {event.name}
                     <span className="sr-only">
-                      {slot ? `, ${slot.label} timeslot` : ', no timeslot'}
+                      {slot ? `, ${eventSlotLabel(slot)}` : ', no timeslot'}
                     </span>
                   </th>
                   {[0, 1, 2].map((seat) => {

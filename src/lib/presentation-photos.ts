@@ -23,6 +23,28 @@ import { photos as wrightStuff } from './presentation-photos-wright-stuff.ts';
 import { photos as codebusters } from './presentation-photos-codebusters.ts';
 import { photos as experimentalDesign } from './presentation-photos-experimental-design.ts';
 import { photos as pingPongParachute } from './presentation-photos-ping-pong-parachute.ts';
+import { photos as bAnatomyAndPhysiology } from './presentation-photos-b-anatomy-and-physiology.ts';
+import { photos as bBotany } from './presentation-photos-b-botany.ts';
+import { photos as bDiseaseDetectives } from './presentation-photos-b-disease-detectives.ts';
+import { photos as bHeredity } from './presentation-photos-b-heredity.ts';
+import { photos as bWaterQuality } from './presentation-photos-b-water-quality.ts';
+import { photos as bDynamicPlanet } from './presentation-photos-b-dynamic-planet.ts';
+import { photos as bMeteorology } from './presentation-photos-b-meteorology.ts';
+import { photos as bRemoteSensing } from './presentation-photos-b-remote-sensing.ts';
+import { photos as bRocksAndMinerals } from './presentation-photos-b-rocks-and-minerals.ts';
+import { photos as bSolarSystem } from './presentation-photos-b-solar-system.ts';
+import { photos as bCircuitLab } from './presentation-photos-b-circuit-lab.ts';
+import { photos as bCrimeBusters } from './presentation-photos-b-crime-busters.ts';
+import { photos as bFoodScience } from './presentation-photos-b-food-science.ts';
+import { photos as bHovercraft } from './presentation-photos-b-hovercraft.ts';
+import { photos as bThermodynamics } from './presentation-photos-b-thermodynamics.ts';
+import { photos as bBoomilever } from './presentation-photos-b-boomilever.ts';
+import { photos as bElasticLaunchedGliders } from './presentation-photos-b-elastic-launched-gliders.ts';
+import { photos as bRollerCoaster } from './presentation-photos-b-roller-coaster.ts';
+import { photos as bScrambler } from './presentation-photos-b-scrambler.ts';
+import { photos as bCodebusters } from './presentation-photos-b-codebusters.ts';
+import { photos as bExperimentalDesign } from './presentation-photos-b-experimental-design.ts';
+import { photos as bPingPongParachute } from './presentation-photos-b-ping-pong-parachute.ts';
 
 // Remote Sensing and Anatomy figures live here; every other event keeps its own figures in
 // presentation-photos-<event>.ts, merged into presentationPhotos at the end of this file.
@@ -927,4 +949,26 @@ export const presentationPhotos = {
   ...codebusters,
   ...experimentalDesign,
   ...pingPongParachute,
+  ...bAnatomyAndPhysiology,
+  ...bBotany,
+  ...bDiseaseDetectives,
+  ...bHeredity,
+  ...bWaterQuality,
+  ...bDynamicPlanet,
+  ...bMeteorology,
+  ...bRemoteSensing,
+  ...bRocksAndMinerals,
+  ...bSolarSystem,
+  ...bCircuitLab,
+  ...bCrimeBusters,
+  ...bFoodScience,
+  ...bHovercraft,
+  ...bThermodynamics,
+  ...bBoomilever,
+  ...bElasticLaunchedGliders,
+  ...bRollerCoaster,
+  ...bScrambler,
+  ...bCodebusters,
+  ...bExperimentalDesign,
+  ...bPingPongParachute,
 };

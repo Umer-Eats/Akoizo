@@ -158,6 +158,34 @@ try {
   await expect(astronomy).toBeChecked();
   await p.getByLabel('Your division', { exact: true }).selectOption('B');
   await expect(p.locator('.selection-summary')).toContainText('0 competition events');
+  for (const [label, color, events] of [
+    ['Yellow timeslot', 'yellow', ['Codebusters', 'Disease Detectives', 'Remote Sensing']],
+    ['Orange timeslot', 'orange', ['Experimental Design', 'Solar System', 'Water Quality']],
+    ['Purple timeslot', 'purple', ['Botany', 'Meteorology']],
+    ['Green timeslot', 'green', ['Circuit Lab', 'Dynamic Planet', 'Food Science']],
+    ['Blue timeslot', 'blue', ['Heredity', 'Rocks and Minerals', 'Thermodynamics']],
+    ['Pink timeslot', 'pink', ['Anatomy and Physiology', 'Crime Busters', 'Write It Do It']],
+    [
+      'Self-scheduled builds',
+      'gray',
+      [
+        'Boomilever',
+        'Elastic Launched Gliders',
+        'Hovercraft',
+        'Ping-Pong Parachute',
+        'Roller Coaster',
+        'Scrambler',
+      ],
+    ],
+  ]) {
+    await p.getByRole('button', { name: label, exact: true }).click();
+    const cards = p.locator('.event-card');
+    await expect(cards).toHaveCount(events.length);
+    for (const event of events) {
+      await expect(cards.getByRole('heading', { name: event, exact: true })).toHaveCount(1);
+    }
+    await expect(p.locator(`.event-card[data-slot="${color}"]`)).toHaveCount(events.length);
+  }
   await p.getByLabel('Your division', { exact: true }).selectOption('C');
   await expect(astronomy).toBeChecked();
   await p.emulateMedia({ reducedMotion: 'no-preference' });

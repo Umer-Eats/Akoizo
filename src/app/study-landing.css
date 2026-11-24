@@ -668,6 +668,7 @@
     font-size: 0.7rem;
     line-height: 1.8;
   }
+  .lx-page [data-slot='gray'],
   .lx-page [data-slot='unassigned'] {
     --slot: var(--lx-faint);
   }

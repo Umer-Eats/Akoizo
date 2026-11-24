@@ -8,7 +8,7 @@ import { AccountGate } from './account-gate';
 import { InstructorAnalytics } from './instructor-analytics';
 import type { CommunityData } from '@/lib/community';
 import { eventsForDivision } from '@/lib/events';
-import { eventSlots, slotForEvent } from '@/lib/event-slots';
+import { eventSlotLabel, slotForEvent, slotsForDivision } from '@/lib/event-slots';
 import { partnerLimit, TEAM_SIZE } from '@/lib/teams';
 import './teams.css';
 import './community.css';
@@ -195,7 +195,9 @@ function CommunityView() {
                                       <span
                                         key={id}
                                         className="team-dot"
-                                        data-slot={slotForEvent(id)?.color ?? 'unassigned'}
+                                        data-slot={
+                                          slotForEvent(id, team.division)?.color ?? 'unassigned'
+                                        }
                                         title={
                                           eventsForDivision(team.division).find((e) => e.id === id)
                                             ?.name
@@ -218,9 +220,9 @@ function CommunityView() {
                       </table>
                     </div>
                     <div className="slot-legend" aria-label="Timeslot colors">
-                      {eventSlots.map((slot) => (
+                      {slotsForDivision(team.division).map((slot) => (
                         <span className="slot-chip" data-slot={slot.color} key={slot.color}>
-                          {slot.label} timeslot
+                          {eventSlotLabel(slot)}
                         </span>
                       ))}
                       <span className="slot-chip" data-slot="unassigned">
@@ -250,7 +252,9 @@ function CommunityView() {
                             .map((event) => (
                               <tr
                                 key={event.id}
-                                data-slot={slotForEvent(event.id)?.color ?? 'unassigned'}
+                                data-slot={
+                                  slotForEvent(event.id, team.division)?.color ?? 'unassigned'
+                                }
                               >
                                 <th scope="row">{event.name}</th>
                                 {[0, 1, 2].map((seat) =>

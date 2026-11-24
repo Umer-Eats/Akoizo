@@ -9,7 +9,7 @@ import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember } from '../src/lib/school-service.ts';
 import { AppError } from '../src/lib/domain.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
-import { deckFor, presentedEventsC } from '../src/lib/presentations.ts';
+import { deckFor, presentedEvents } from '../src/lib/presentations.ts';
 import { isGraded } from '../src/lib/presentation-types.ts';
 import * as service from '../src/lib/presentation-service.ts';
 import { mockLessonApi } from './lib-mock-session.mjs';
@@ -56,7 +56,7 @@ const teacher = await registerMember(
   },
   'invite',
 );
-const student = async (name) =>
+const student = async (name, division = 'C') =>
   (
     await registerMember(
       db,
@@ -64,7 +64,7 @@ const student = async (name) =>
       {
         role: 'student',
         displayName: name,
-        division: 'C',
+        division,
         schoolPassword: teacher.credentials.joiningPassword,
       },
       'invite',
@@ -72,6 +72,7 @@ const student = async (name) =>
   ).profile;
 const amy = await student('Amy');
 const ben = await student('Ben');
+const bea = await student('Bea', 'B');
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const errors = [];
@@ -167,9 +168,11 @@ async function openAs(profile, motion = false) {
         },
       });
     if (url.pathname === '/api/event-selections')
-      return route.fulfill({ json: presentedEventsC() });
+      return route.fulfill({ json: presentedEvents(profile.division) });
     if (url.pathname.startsWith('/api/lessons/'))
-      return route.fulfill({ json: mockLessonApi(url, route.request(), 'C', lessonAnswers) });
+      return route.fulfill({
+        json: mockLessonApi(url, route.request(), profile.division, lessonAnswers),
+      });
     if (url.pathname.startsWith('/api/presentations')) {
       try {
         return route.fulfill({ json: await api(profile, url, route.request()) });
@@ -277,11 +280,17 @@ try {
   const sizes = new Set();
   const fits = [];
   const shotKinds = new Set();
-  // PRES_EVENTS narrows the render pass to some events, e.g. PRES_EVENTS=anatomy-and-physiology.
-  const renderEvents = process.env.PRES_EVENTS?.split(',') ?? presentedEventsC();
-  for (const eventId of renderEvents)
-    for (const lesson of lessonsForEvent(eventId, 'C').lessons) {
-      const deck = deckFor('C', eventId, lesson.id);
+  // PRES_EVENTS narrows the render pass to some events: a bare id is Division C
+  // (PRES_EVENTS=anatomy-and-physiology) and B/ marks Division B (PRES_EVENTS=B/botany).
+  const renderEvents =
+    process.env.PRES_EVENTS?.split(',').map((id) => (id.includes('/') ? id : `C/${id}`)) ??
+    ['B', 'C'].flatMap((division) => presentedEvents(division).map((id) => `${division}/${id}`));
+  const studentPage = a;
+  const bPage = renderEvents.some((id) => id.startsWith('B/')) ? await openAs(bea) : null;
+  for (const [division, eventId] of renderEvents.map((id) => id.split('/')))
+    for (const lesson of lessonsForEvent(eventId, division).lessons) {
+      const deck = deckFor(division, eventId, lesson.id);
+      const a = division === 'B' ? bPage : studentPage;
       await a.goto(`${base}/dashboard/student/events/${eventId}/presentation?lesson=${lesson.id}`);
       await a.getByRole('button', { name: /Start/ }).click();
       for (let i = 0; i < deck.slides.length; i++) {
