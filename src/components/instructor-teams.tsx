@@ -6,6 +6,7 @@ import { eventsForDivision, type Division, type ScienceEvent } from '@/lib/event
 import type { Student } from '@/lib/domain';
 import { partnerLimit, rosterDivision, TEAM_SIZE, type TeamSheet } from '@/lib/teams';
 import { useAuth, authMessage } from './auth-context';
+import { groupBySlot } from './landing-data';
 import './teams.css';
 
 const initials = (name: string) => name.slice(0, 2).toUpperCase();
@@ -214,6 +215,10 @@ function Sheet({
     () => [...eventsForDivision(team.division)].sort((a, b) => a.name.localeCompare(b.name)),
     [team.division],
   );
+  const eventGroups =
+    team.division === 'B'
+      ? groupBySlot(team.division, events)
+      : [{ color: 'all', label: '', events }];
   const byId = useMemo(() => new Map(students.map((s) => [s.id, s])), [students]);
   const roster = [...new Set(Object.values(team.slots).flat())]
     .flatMap((id) => (id && byId.has(id) ? [byId.get(id)!] : []))
@@ -323,16 +328,18 @@ function Sheet({
           </tbody>
         </table>
       </div>
-      <div className="slot-legend" aria-label="Timeslot colors">
-        {slotsForDivision(team.division).map((slot) => (
-          <span className="slot-chip" data-slot={slot.color} key={slot.color}>
-            {eventSlotLabel(slot)}
+      {team.division !== 'B' && (
+        <div className="slot-legend" aria-label="Timeslot colors">
+          {slotsForDivision(team.division).map((slot) => (
+            <span className="slot-chip" data-slot={slot.color} key={slot.color}>
+              {eventSlotLabel(slot)}
+            </span>
+          ))}
+          <span className="slot-chip" data-slot="unassigned">
+            No timeslot
           </span>
-        ))}
-        <span className="slot-chip" data-slot="unassigned">
-          No timeslot
-        </span>
-      </div>
+        </div>
+      )}
       <div className="team-grid-wrap" role="region" aria-label={`${team.name} events`} tabIndex={0}>
         <table className="team-grid team-events">
           <thead>
@@ -343,60 +350,69 @@ function Sheet({
               <th scope="col">Partner 3</th>
             </tr>
           </thead>
-          <tbody>
-            {events.map((event) => {
-              const slot = slotForEvent(event.id, team.division);
-              return (
-                <tr key={event.id} data-slot={slot?.color ?? 'unassigned'}>
-                  <th scope="row">
-                    {event.name}
-                    <span className="sr-only">
-                      {slot ? `, ${eventSlotLabel(slot)}` : ', no timeslot'}
-                    </span>
+          {eventGroups.map((group) => (
+            <tbody key={group.color}>
+              {group.label && (
+                <tr className="team-slot-heading" data-slot={group.color}>
+                  <th colSpan={4} scope="rowgroup">
+                    {group.label}
                   </th>
-                  {[0, 1, 2].map((seat) => {
-                    if (seat >= partnerLimit(event.id))
-                      return <td key={seat} className="team-seat-none" aria-hidden="true" />;
-                    const student = byId.get(team.slots[event.id]?.[seat] ?? '');
-                    const clash =
-                      student &&
-                      clashes(team, student.id, events).find((c) => c.events.includes(event.id));
-                    return (
-                      <td key={seat}>
-                        <button
-                          className="team-seat"
-                          data-empty={!student}
-                          data-clash={!!clash}
-                          disabled={busy}
-                          title={clash ? `Timeslot clash — ${clash.label}` : undefined}
-                          onClick={() => setPicker({ event, seat })}
-                          aria-label={
-                            student
-                              ? `${event.name} partner ${seat + 1}: ${student.displayName}. Change`
-                              : `Add a student to ${event.name} partner ${seat + 1}`
-                          }
-                        >
-                          {student ? (
-                            <>
-                              <span className="student-avatar">
-                                {initials(student.displayName)}
-                              </span>
-                              <span>{student.displayName}</span>
-                              {clash && <TriangleAlert size={13} aria-hidden="true" />}
-                            </>
-                          ) : (
-                            <>
-                              <Plus size={13} aria-hidden="true" /> Add student
-                            </>
-                          )}
-                        </button>
-                      </td>
-                    );
-                  })}
                 </tr>
-              );
-            })}
-          </tbody>
+              )}
+              {group.events.map((event) => {
+                const slot = slotForEvent(event.id, team.division);
+                return (
+                  <tr key={event.id} data-slot={slot?.color ?? 'unassigned'}>
+                    <th scope="row">
+                      {event.name}
+                      <span className="sr-only">
+                        {slot ? `, ${eventSlotLabel(slot)}` : ', no timeslot'}
+                      </span>
+                    </th>
+                    {[0, 1, 2].map((seat) => {
+                      if (seat >= partnerLimit(event.id))
+                        return <td key={seat} className="team-seat-none" aria-hidden="true" />;
+                      const student = byId.get(team.slots[event.id]?.[seat] ?? '');
+                      const clash =
+                        student &&
+                        clashes(team, student.id, events).find((c) => c.events.includes(event.id));
+                      return (
+                        <td key={seat}>
+                          <button
+                            className="team-seat"
+                            data-empty={!student}
+                            data-clash={!!clash}
+                            disabled={busy}
+                            title={clash ? `Timeslot clash — ${clash.label}` : undefined}
+                            onClick={() => setPicker({ event, seat })}
+                            aria-label={
+                              student
+                                ? `${event.name} partner ${seat + 1}: ${student.displayName}. Change`
+                                : `Add a student to ${event.name} partner ${seat + 1}`
+                            }
+                          >
+                            {student ? (
+                              <>
+                                <span className="student-avatar">
+                                  {initials(student.displayName)}
+                                </span>
+                                <span>{student.displayName}</span>
+                                {clash && <TriangleAlert size={13} aria-hidden="true" />}
+                              </>
+                            ) : (
+                              <>
+                                <Plus size={13} aria-hidden="true" /> Add student
+                              </>
+                            )}
+                          </button>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          ))}
         </table>
       </div>
       {picker && (

@@ -311,7 +311,8 @@ const canBonus = defineDeck('scr-u6-l1', [
       'With wheels a track width w apart, the outer wheel travels (R + w/2) ÷ (R − w/2) times as far.',
       'For R = 11 m and w = 0.15 m, that ratio is about ==1.014==: a tiny difference.',
     ],
-    callout: 'Small steering changes make big path changes over 8 to 10 m, so adjust in tiny steps.',
+    callout:
+      'Small steering changes make big path changes over 8 to 10 m, so adjust in tiny steps.',
   },
   {
     kind: 'mcq',
@@ -486,6 +487,19 @@ const competition = defineDeck('scr-u7-l1', [
         detail: 'Use an ==unsharpened #2 pencil==, touching only the pencil and adding no energy.',
       },
     ],
+  },
+  {
+    kind: 'order',
+    section: 3,
+    prompt: 'Put the setup and launch steps in order.',
+    items: [
+      'Attach the falling mass and tape the egg',
+      'Place the vehicle at the Start Point',
+      'Tell the supervisor you are ready',
+      'Trigger the run with an unsharpened #2 pencil',
+    ],
+    explanation:
+      'Prepare the vehicle and egg first, place it, tell the supervisor, and only then trigger with the pencil.',
   },
   {
     kind: 'bullets',

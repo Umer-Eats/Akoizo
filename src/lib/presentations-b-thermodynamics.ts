@@ -46,10 +46,18 @@ const gasProcesses = defineDeck('therm-u6-l1-b', [
     title: 'Identify what stays fixed',
     columns: ['Process', 'What stays fixed', 'Clue words'],
     rows: [
-      ['**Isothermal**', 'Temperature', 'Slow change while touching a large constant-temperature bath'],
+      [
+        '**Isothermal**',
+        'Temperature',
+        'Slow change while touching a large constant-temperature bath',
+      ],
       ['**Isobaric**', 'Pressure', 'A piston free to move under a constant weight'],
       ['**Isochoric**', 'Volume', 'A sealed, rigid container'],
-      ['**Adiabatic**', '==No heat crosses the boundary==', 'Very fast change or perfect insulation'],
+      [
+        '**Adiabatic**',
+        '==No heat crosses the boundary==',
+        'Very fast change or perfect insulation',
+      ],
     ],
   },
   {
@@ -68,8 +76,7 @@ const gasProcesses = defineDeck('therm-u6-l1-b', [
   {
     kind: 'mcq',
     section: 0,
-    prompt:
-      'A gas in a perfectly insulated cylinder is compressed. Which statement is correct?',
+    prompt: 'A gas in a perfectly insulated cylinder is compressed. Which statement is correct?',
     options: [
       'Its temperature must stay constant because it is insulated',
       'No heat crosses the boundary, but its temperature can still change',
@@ -137,7 +144,12 @@ const gasProcesses = defineDeck('therm-u6-l1-b', [
     kind: 'mcq',
     section: 2,
     prompt: 'A gas is heated in a sealed rigid tank. How much expansion work does it do?',
-    options: ['Zero', 'Pressure × volume of the tank', 'Equal to the heat added', 'It cannot be known'],
+    options: [
+      'Zero',
+      'Pressure × volume of the tank',
+      'Equal to the heat added',
+      'It cannot be known',
+    ],
     answer: 0,
     explanation:
       'The volume does not change, so the change in volume is zero and the expansion work is zero.',
@@ -279,7 +291,8 @@ const secondLaw = defineDeck('therm-u8-l1-b', [
   {
     kind: 'multi',
     section: 1,
-    prompt: 'A refrigerator is running in a kitchen. Which statements are true? Choose all that apply.',
+    prompt:
+      'A refrigerator is running in a kitchen. Which statements are true? Choose all that apply.',
     options: [
       'It moves heat from the cold inside to the warmer room',
       'It needs work (electrical energy) to do this',

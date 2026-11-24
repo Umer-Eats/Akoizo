@@ -4,7 +4,7 @@ import { mkdir } from 'node:fs/promises';
 import { DatabaseSync } from 'node:sqlite';
 import { schema, eventSeeds } from '../src/lib/schema.ts';
 import { registerMember, dashboardFor } from '../src/lib/school-service.ts';
-import { createTeam, listTeams, updateTeam } from '../src/lib/team-service.ts';
+import { createTeam, deleteTeam, listTeams, updateTeam } from '../src/lib/team-service.ts';
 import { schoolAnalytics } from '../src/lib/analytics-service.ts';
 import { communityFor } from '../src/lib/community-service.ts';
 import { lessonsForEvent } from '../src/lib/lessons-registry.ts';
@@ -358,6 +358,50 @@ try {
   await fits('team');
   await team.getByRole('button', { name: 'All teams' }).click();
   await expect(overview).toBeVisible();
+
+  const divisionBTeam = await createTeam(db, teacher.profile, {
+    name: 'Division B roster',
+    division: 'B',
+  });
+  await page
+    .getByRole('navigation', { name: 'Instructor sections' })
+    .getByRole('button', { name: 'Teams', exact: true })
+    .click();
+  await page.getByRole('tab', { name: 'Division B roster', exact: true }).click();
+  const teamSheet = page.getByRole('region', { name: 'Division B roster events' });
+  const expectedGroups = [
+    ['yellow', 'Yellow timeslot', ['Codebusters', 'Disease Detectives', 'Remote Sensing']],
+    ['orange', 'Orange timeslot', ['Experimental Design', 'Solar System', 'Water Quality']],
+    ['purple', 'Purple timeslot', ['Botany', 'Meteorology']],
+    ['green', 'Green timeslot', ['Circuit Lab', 'Dynamic Planet', 'Food Science']],
+    ['blue', 'Blue timeslot', ['Heredity', 'Rocks and Minerals', 'Thermodynamics']],
+    ['pink', 'Pink timeslot', ['Anatomy and Physiology', 'Crime Busters', 'Write It Do It']],
+    [
+      'gray',
+      'Self-scheduled builds',
+      [
+        'Boomilever',
+        'Elastic Launched Gliders',
+        'Hovercraft',
+        'Ping-Pong Parachute',
+        'Roller Coaster',
+        'Scrambler',
+      ],
+    ],
+  ];
+  await expect(teamSheet.locator('tbody')).toHaveCount(expectedGroups.length);
+  for (const [index, [color, label, events]] of expectedGroups.entries()) {
+    const group = teamSheet.locator('tbody').nth(index);
+    await expect(group.locator('.team-slot-heading')).toHaveAttribute('data-slot', color);
+    await expect(group.locator('th[scope="rowgroup"]')).toHaveText(label);
+    await expect(group.locator(`tr:not(.team-slot-heading)[data-slot="${color}"]`)).toHaveCount(
+      events.length,
+    );
+    await expect(group.locator('th[scope="row"]')).toHaveText(
+      events.map((event) => `${event}, ${label}`),
+    );
+  }
+  await deleteTeam(db, teacher.profile, divisionBTeam.id);
 
   // A student sees the same live analytics, static team sheets and all members.
   handlers['/api/auth/profile'] = () => students['Amy Chen'];

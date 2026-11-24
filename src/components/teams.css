@@ -176,6 +176,12 @@
     border-left: 5px solid var(--slot) !important;
     color: var(--text);
   }
+  .team-events .team-slot-heading th {
+    height: 32px;
+    background: var(--surface-2);
+    color: var(--slot);
+    font-weight: 700;
+  }
   .team-events td {
     min-width: 170px;
     padding: 3px;

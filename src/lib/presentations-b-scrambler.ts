@@ -704,6 +704,20 @@ const stopping = defineDeck('scr-u4-l1', [
     ],
   },
   {
+    kind: 'mcq',
+    section: 3,
+    prompt: 'Why do teams test the brake from full speed?',
+    options: [
+      'To measure how far the vehicle travels after the trigger, and include it in calibration',
+      'To make the egg crack on purpose',
+      'To use up extra falling-mass energy',
+      'Because the rules require a full-speed stop',
+    ],
+    answer: 0,
+    explanation:
+      'The vehicle keeps moving a little after the brake triggers. Measuring that skid at real speed lets you include it in the calibration.',
+  },
+  {
     kind: 'bullets',
     section: 4,
     title: 'Calibration',

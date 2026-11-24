@@ -9,7 +9,8 @@ const mendel = defineDeck('her-u1-l1', [
   {
     kind: 'title',
     title: 'Mendel’s laws, Punnett squares, and probability',
-    subtitle: 'How paired alleles separate and combine, and how to predict what the offspring look like.',
+    subtitle:
+      'How paired alleles separate and combine, and how to predict what the offspring look like.',
     objectives: [
       'State the laws of segregation and independent assortment.',
       'Build monohybrid and dihybrid Punnett squares from parent genotypes.',
@@ -109,9 +110,12 @@ const mendel = defineDeck('her-u1-l1', [
     kind: 'order',
     section: 3,
     prompt: 'Order the phenotype classes of an AaBb × AaBb cross from most to least common.',
-    items: ['Dominant for both (A_B_)', 'Dominant A, recessive b (A_bb)', 'Recessive for both (aabb)'],
-    explanation:
-      'A_B_ is 9/16, A_bb is 3/16 (tied with aaB_), and aabb is only 1/16.',
+    items: [
+      'Dominant for both (A_B_)',
+      'Dominant A, recessive b (A_bb)',
+      'Recessive for both (aabb)',
+    ],
+    explanation: 'A_B_ is 9/16, A_bb is 3/16 (tied with aaB_), and aabb is only 1/16.',
   },
   {
     kind: 'example',
@@ -187,7 +191,10 @@ const mendel = defineDeck('her-u1-l1', [
     title: 'Key terms — tap to flip',
     cards: [
       { front: 'Allele', back: 'One version of a gene.' },
-      { front: 'Test cross', back: 'Crossing an unknown with a homozygous recessive to reveal its genotype.' },
+      {
+        front: 'Test cross',
+        back: 'Crossing an unknown with a homozygous recessive to reveal its genotype.',
+      },
       { front: 'Product rule', back: 'Multiply probabilities of independent events (“and”).' },
       { front: 'Sum rule', back: 'Add probabilities of mutually exclusive outcomes (“or”).' },
     ],
@@ -274,6 +281,16 @@ const pedigrees = defineDeck('her-u2-l1', [
     ],
   },
   {
+    kind: 'mcq',
+    section: 2,
+    prompt:
+      'A man heterozygous for an autosomal dominant trait has children with an unaffected woman. What is the chance each child is affected?',
+    options: ['0', '1/4', '1/2', '3/4'],
+    answer: 2,
+    explanation:
+      'Aa × aa gives Aa and aa in equal numbers. Every Aa child shows the dominant trait, so each child has a ½ chance.',
+  },
+  {
     kind: 'figure',
     section: 3,
     title: 'X-linked recessive clues',
@@ -327,7 +344,8 @@ const pedigrees = defineDeck('her-u2-l1', [
       '**Two unaffected parents with an affected child** rule out dominant inheritance.',
       'If several patterns remain, ==name the most likely one and the evidence that would decide==.',
     ],
-    callout: 'Do not assume people marrying into the family carry a rare allele unless the case says so.',
+    callout:
+      'Do not assume people marrying into the family carry a rare allele unless the case says so.',
   },
   {
     kind: 'mcq',
@@ -369,9 +387,18 @@ const pedigrees = defineDeck('her-u2-l1', [
     title: 'Key terms — tap to flip',
     cards: [
       { front: 'Proband', back: 'The person whose case first drew attention to the family.' },
-      { front: 'Carrier', back: 'A heterozygote who has a recessive allele but does not show the trait.' },
-      { front: 'Hemizygous', back: 'Having only one copy of a gene, as males do for X-linked genes.' },
-      { front: 'Consanguinity', back: 'Mating between close relatives, which raises the chance of recessive traits.' },
+      {
+        front: 'Carrier',
+        back: 'A heterozygote who has a recessive allele but does not show the trait.',
+      },
+      {
+        front: 'Hemizygous',
+        back: 'Having only one copy of a gene, as males do for X-linked genes.',
+      },
+      {
+        front: 'Consanguinity',
+        back: 'Mating between close relatives, which raises the chance of recessive traits.',
+      },
     ],
   },
   {
@@ -398,12 +425,14 @@ const beyond = defineDeck('her-u3-l1', [
     ],
   },
   {
-    kind: 'bullets',
+    kind: 'figure',
     section: 0,
     title: 'Incomplete dominance',
+    image: 'b-her-snapdragon',
+    caption:
+      'Red (RR) × white (WW) snapdragons give all **pink** (RW) offspring; pink × pink gives red : pink : white in a **1 : 2 : 1** ratio.',
     bullets: [
-      'The heterozygote has an **intermediate** phenotype: red (RR) × white (WW) snapdragons give **pink** (RW).',
-      'Pink × pink gives red : pink : white in a **1 : 2 : 1** ratio.',
+      'The heterozygote has an **intermediate** phenotype.',
       'The ==phenotype ratio matches the genotype ratio==.',
       'The alleles did not blend: red and white return in the next generation.',
     ],
@@ -540,7 +569,11 @@ const beyond = defineDeck('her-u3-l1', [
     title: 'Recognizing modified ratios',
     columns: ['Ratio you see', 'Likely model', 'Why'],
     rows: [
-      ['1 : 2 : 1 (one gene)', '**Incomplete dominance** or codominance', 'Heterozygotes look different'],
+      [
+        '1 : 2 : 1 (one gene)',
+        '**Incomplete dominance** or codominance',
+        'Heterozygotes look different',
+      ],
       ['9 : 3 : 4', '**Recessive epistasis**', 'Two classes merge'],
       ['9 : 7', 'Two genes ==both needed for one product==', 'Three classes merge'],
       ['Mostly parental classes', '**Linkage**', 'Few recombinants'],
@@ -564,7 +597,10 @@ const beyond = defineDeck('her-u3-l1', [
     title: 'Key terms — tap to flip',
     cards: [
       { front: 'Codominance', back: 'Both alleles fully expressed in the heterozygote.' },
-      { front: 'Recombinant', back: 'An offspring with a new combination of alleles made by crossing over.' },
+      {
+        front: 'Recombinant',
+        back: 'An offspring with a new combination of alleles made by crossing over.',
+      },
       {
         front: 'Complementation',
         back: 'Two mutants together give a normal phenotype because their defects are in different genes.',
@@ -620,7 +656,8 @@ const division = defineDeck('her-u4-l1', [
     section: 1,
     title: 'Mitosis',
     image: 'gene-mitosis',
-    caption: 'After replication, mitosis gives each daughter cell **one copy of every chromosome**.',
+    caption:
+      'After replication, mitosis gives each daughter cell **one copy of every chromosome**.',
     bullets: [
       '**Prophase**: chromosomes condense and the spindle forms.',
       '**Metaphase**: chromosomes line up single file at the middle.',
@@ -695,7 +732,8 @@ const division = defineDeck('her-u4-l1', [
   {
     kind: 'numeric',
     section: 3,
-    prompt: 'A cell with 2n = 6 finishes meiosis I. How many chromatids are in each of the two cells?',
+    prompt:
+      'A cell with 2n = 6 finishes meiosis I. How many chromatids are in each of the two cells?',
     answer: 6,
     tolerance: 0,
     unit: 'chromatids',
@@ -750,7 +788,8 @@ const division = defineDeck('her-u4-l1', [
       ['47,XXY', 'Klinefelter syndrome'],
       ['46,XX', 'Typical female'],
     ],
-    explanation: 'Read the count first, then the sex chromosomes, then any extra numbered chromosome.',
+    explanation:
+      'Read the count first, then the sex chromosomes, then any extra numbered chromosome.',
   },
   {
     kind: 'cards',
@@ -760,8 +799,14 @@ const division = defineDeck('her-u4-l1', [
         front: 'Homologous chromosomes',
         back: 'A matching pair, one from each parent, carrying the same genes.',
       },
-      { front: 'Sister chromatids', back: 'Two identical copies of a chromosome joined at the centromere.' },
-      { front: 'Nondisjunction', back: 'Chromosomes or chromatids fail to separate during division.' },
+      {
+        front: 'Sister chromatids',
+        back: 'Two identical copies of a chromosome joined at the centromere.',
+      },
+      {
+        front: 'Nondisjunction',
+        back: 'Chromosomes or chromatids fail to separate during division.',
+      },
       { front: 'Aneuploidy', back: 'An extra or missing chromosome, such as 47 or 45 in humans.' },
     ],
   },
