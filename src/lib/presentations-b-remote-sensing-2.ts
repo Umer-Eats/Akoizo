@@ -31,7 +31,8 @@ const lightRadar = defineDeck('remote-u7-l1-b', [
   {
     kind: 'numeric',
     section: 0,
-    prompt: 'A radar uses microwaves with a wavelength of 0.03 m. What is their frequency in gigahertz (GHz)?',
+    prompt:
+      'A radar uses microwaves with a wavelength of 0.03 m. What is their frequency in gigahertz (GHz)?',
     answer: 10,
     tolerance: 0,
     unit: 'GHz',
@@ -43,7 +44,8 @@ const lightRadar = defineDeck('remote-u7-l1-b', [
     prompt: 'If the wavelength of light doubles, what happens to its frequency?',
     options: ['It halves', 'It doubles', 'It stays the same', 'It becomes four times larger'],
     answer: 0,
-    explanation: 'Speed is fixed, so wavelength × frequency stays constant. Doubling one halves the other.',
+    explanation:
+      'Speed is fixed, so wavelength × frequency stays constant. Doubling one halves the other.',
   },
   {
     kind: 'figure',
@@ -62,7 +64,8 @@ const lightRadar = defineDeck('remote-u7-l1-b', [
   {
     kind: 'numeric',
     section: 1,
-    prompt: 'Earth’s surface is about 290 K. Using b = 2.9 × 10⁻³ m·K, what is its peak wavelength in micrometers (µm)?',
+    prompt:
+      'Earth’s surface is about 290 K. Using b = 2.9 × 10⁻³ m·K, what is its peak wavelength in micrometers (µm)?',
     answer: 10,
     tolerance: 0.2,
     unit: 'µm',
@@ -79,7 +82,8 @@ const lightRadar = defineDeck('remote-u7-l1-b', [
       'A 600 K wildfire',
       'Earth’s surface, about 290 K',
     ],
-    explanation: 'Peak wavelength = b ÷ T, so the hottest object peaks at the shortest wavelength and the coolest at the longest.',
+    explanation:
+      'Peak wavelength = b ÷ T, so the hottest object peaks at the shortest wavelength and the coolest at the longest.',
   },
   {
     kind: 'bullets',
@@ -107,7 +111,8 @@ const lightRadar = defineDeck('remote-u7-l1-b', [
   {
     kind: 'numeric',
     section: 2,
-    prompt: 'A radar pulse returns after 0.002 s. Using 3 × 10⁸ m/s, how far away is the surface, in kilometers?',
+    prompt:
+      'A radar pulse returns after 0.002 s. Using 3 × 10⁸ m/s, how far away is the surface, in kilometers?',
     answer: 300,
     tolerance: 0,
     unit: 'km',
@@ -155,7 +160,8 @@ const albedoThermal = defineDeck('remote-u8-l1-b', [
   {
     kind: 'title',
     title: 'Albedo, surface temperature, and image comparisons',
-    subtitle: 'How much light a surface reflects, how warm it gets, and how to compare images fairly.',
+    subtitle:
+      'How much light a surface reflects, how warm it gets, and how to compare images fairly.',
     objectives: [
       'Separate reflected light from emitted thermal energy.',
       'Compare surfaces under matching conditions.',
@@ -192,7 +198,8 @@ const albedoThermal = defineDeck('remote-u8-l1-b', [
       'The air temperature where people stand',
     ],
     answer: 0,
-    explanation: 'Thermal sensors detect the infrared energy that surfaces emit, which depends on their temperature.',
+    explanation:
+      'Thermal sensors detect the infrared energy that surfaces emit, which depends on their temperature.',
   },
   {
     kind: 'bullets',
@@ -208,7 +215,8 @@ const albedoThermal = defineDeck('remote-u8-l1-b', [
   {
     kind: 'multi',
     section: 1,
-    prompt: 'You compare a city thermal image from a July afternoon with one from a January morning. Which are confounders?',
+    prompt:
+      'You compare a city thermal image from a July afternoon with one from a January morning. Which are confounders?',
     options: ['Season', 'Time of day', 'Sun angle', 'The thermal scale’s units'],
     answers: [0, 1, 2],
     explanation:
@@ -237,7 +245,8 @@ const albedoThermal = defineDeck('remote-u8-l1-b', [
       ['Bright clouds', 1],
       ['Black asphalt', 0],
     ],
-    explanation: 'Low-albedo surfaces such as forest, water and asphalt absorb most sunlight; snow and clouds reflect most of it.',
+    explanation:
+      'Low-albedo surfaces such as forest, water and asphalt absorb most sunlight; snow and clouds reflect most of it.',
   },
   {
     kind: 'example',
@@ -255,7 +264,8 @@ const albedoThermal = defineDeck('remote-u8-l1-b', [
   {
     kind: 'numeric',
     section: 2,
-    prompt: 'In the example, how many degrees Celsius warmer is the pavement surface than the trees?',
+    prompt:
+      'In the example, how many degrees Celsius warmer is the pavement surface than the trees?',
     answer: 14,
     tolerance: 0,
     unit: '°C',
@@ -282,7 +292,8 @@ const albedoThermal = defineDeck('remote-u8-l1-b', [
       'The lot will always be 50 °C',
     ],
     answer: 0,
-    explanation: 'Thermal imagery measures surface temperature at one time. Air temperature above the surface is usually different.',
+    explanation:
+      'Thermal imagery measures surface temperature at one time. Air temperature above the surface is usually different.',
   },
   {
     kind: 'match',
@@ -311,7 +322,8 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
   {
     kind: 'title',
     title: 'Land-cover change, hazards, and classification',
-    subtitle: 'Spot real change, sort pixels into classes, and say what a change map does and does not prove.',
+    subtitle:
+      'Spot real change, sort pixels into classes, and say what a change map does and does not prove.',
     objectives: [
       'Recognize floods, fires and urban growth in images.',
       'Compare supervised and unsupervised classification.',
@@ -345,15 +357,23 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
       ['A river wider than its usual channel', 0],
       ['A blackened scar inside a forest', 1],
     ],
-    explanation: 'Water darkens and spreads, fire scars change vegetation reflectance, and urban growth adds regular roads and buildings.',
+    explanation:
+      'Water darkens and spreads, fire scars change vegetation reflectance, and urban growth adds regular roads and buildings.',
   },
   {
     kind: 'mcq',
     section: 0,
-    prompt: 'A field turns dark in an after image taken on a day with scattered clouds. Besides flooding, what could explain it?',
-    options: ['A cloud shadow', 'A higher sun angle making it brighter', 'The scale bar changing', 'Nothing else could'],
+    prompt:
+      'A field turns dark in an after image taken on a day with scattered clouds. Besides flooding, what could explain it?',
+    options: [
+      'A cloud shadow',
+      'A higher sun angle making it brighter',
+      'The scale bar changing',
+      'Nothing else could',
+    ],
     answer: 0,
-    explanation: 'Clouds and their shadows can imitate real surface change, so check a cloud mask or another image before calling it a flood.',
+    explanation:
+      'Clouds and their shadows can imitate real surface change, so check a cloud mask or another image before calling it a flood.',
   },
   {
     kind: 'compare',
@@ -361,18 +381,33 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
     title: 'Classify with examples',
     columns: ['Method', 'How it works', 'Watch out for'],
     rows: [
-      ['**Supervised**', 'Learns from **labeled examples** such as known water, forest and pavement', 'Poor training examples give poor labels'],
-      ['**Unsupervised**', 'Groups similar measurements **first**; people then name the groups', 'A group may mix several real classes'],
+      [
+        '**Supervised**',
+        'Learns from **labeled examples** such as known water, forest and pavement',
+        'Poor training examples give poor labels',
+      ],
+      [
+        '**Unsupervised**',
+        'Groups similar measurements **first**; people then name the groups',
+        'A group may mix several real classes',
+      ],
       ['Both', 'Assign a class to each pixel', '==Neither guarantees every pixel is correct=='],
     ],
   },
   {
     kind: 'mcq',
     section: 1,
-    prompt: 'An analyst marks known patches of water, forest and pavement, then lets the computer label the rest. Which method is this?',
-    options: ['Supervised classification', 'Unsupervised classification', 'Change detection', 'Validation'],
+    prompt:
+      'An analyst marks known patches of water, forest and pavement, then lets the computer label the rest. Which method is this?',
+    options: [
+      'Supervised classification',
+      'Unsupervised classification',
+      'Change detection',
+      'Validation',
+    ],
     answer: 0,
-    explanation: 'Using labeled training examples is supervised classification. Unsupervised methods group pixels first and are labeled afterward.',
+    explanation:
+      'Using labeled training examples is supervised classification. Unsupervised methods group pixels first and are labeled afterward.',
   },
   {
     kind: 'compare',
@@ -396,7 +431,8 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
       ['Find low land likely to flood', 'SRTM'],
       ['Watch a storm develop hour by hour', 'GOES'],
     ],
-    explanation: 'Radar sees through clouds, Landsat compares land cover, SRTM gives elevation, and GOES gives frequent weather views.',
+    explanation:
+      'Radar sees through clouds, Landsat compares land cover, SRTM gives elevation, and GOES gives frequent weather views.',
   },
   {
     kind: 'example',
@@ -428,7 +464,8 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
   {
     kind: 'multi',
     section: 3,
-    prompt: 'A change map shows forest loss in a county. Which conclusions are supported by the map alone?',
+    prompt:
+      'A change map shows forest loss in a county. Which conclusions are supported by the map alone?',
     options: [
       'Forest cover decreased in the mapped areas',
       'The change can be measured in area from the legend and scale',
@@ -436,7 +473,8 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
       'Every mapped pixel is certainly correct',
     ],
     answers: [0, 1],
-    explanation: 'The map shows where and how much forest changed. It cannot establish who caused it, and classification errors are always possible.',
+    explanation:
+      'The map shows where and how much forest changed. It cannot establish who caused it, and classification errors are always possible.',
   },
   {
     kind: 'fill',
@@ -445,7 +483,8 @@ const changeHazards = defineDeck('remote-u9-l1-b', [
     text: 'Comparing images over time to find differences is called change {0}. Checking predictions against independent evidence is called {1}.',
     blanks: ['detection', 'validation'],
     distractors: ['classification', 'calibration'],
-    explanation: 'Change detection finds differences between dates; validation tests whether the mapped classes match independent observations.',
+    explanation:
+      'Change detection finds differences between dates; validation tests whether the mapped classes match independent observations.',
   },
   {
     kind: 'summary',

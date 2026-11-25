@@ -605,7 +605,12 @@ const stability = defineDeck('met-u3-l1', [
     section: 5,
     prompt:
       'A sounding has high CAPE but almost no change in wind with height. What storms are most likely?',
-    options: ['Short-lived pulse storms', 'Long-lived supercells', 'No clouds at all', 'A hurricane'],
+    options: [
+      'Short-lived pulse storms',
+      'Long-lived supercells',
+      'No clouds at all',
+      'A hurricane',
+    ],
     answer: 0,
     explanation:
       'Without shear, a storm’s downdraft chokes its updraft, so it rains itself out quickly.',
@@ -709,7 +714,8 @@ const ingredients = defineDeck('met-u4-l1', [
       'A high-pressure center',
     ],
     answer: 0,
-    explanation: 'Cold air wedges under warm air at a cold front, forcing rapid lifting and storms.',
+    explanation:
+      'Cold air wedges under warm air at a cold front, forcing rapid lifting and storms.',
   },
   {
     kind: 'bullets',
@@ -783,7 +789,8 @@ const ingredients = defineDeck('met-u4-l1', [
       'Turns the snow into hail',
     ],
     answer: 0,
-    explanation: 'A long path over open water adds heat and moisture, which feeds lake-effect bands.',
+    explanation:
+      'A long path over open water adds heat and moisture, which feeds lake-effect bands.',
   },
   {
     kind: 'bullets',

@@ -9,7 +9,8 @@ const rules = defineDeck('elg-u1-l1', [
   {
     kind: 'title',
     title: 'Rules, scoring, and planning five flights',
-    subtitle: 'All the energy comes from one stretch of elastic, and the score rewards three good flights.',
+    subtitle:
+      'All the energy comes from one stretch of elastic, and the score rewards three good flights.',
     objectives: [
       'State the **glider** and **launch handle** limits.',
       'Calculate a final score from several flights.',
@@ -116,7 +117,8 @@ const rules = defineDeck('elg-u1-l1', [
   {
     kind: 'mcq',
     section: 3,
-    prompt: 'A student launches without saying whether the flight is a trim flight. How is it counted?',
+    prompt:
+      'A student launches without saying whether the flight is a trim flight. How is it counted?',
     options: [
       'As an official flight',
       'As a trim flight',
@@ -141,8 +143,7 @@ const rules = defineDeck('elg-u1-l1', [
   {
     kind: 'numeric',
     section: 4,
-    prompt:
-      'A team with a complete log flies 20, 18, 15, 12, and 10 s. What is its final score?',
+    prompt: 'A team with a complete log flies 20, 18, 15, 12, and 10 s. What is its final score?',
     answer: 63.6,
     tolerance: 0.05,
     explanation:
@@ -275,7 +276,8 @@ const glide = defineDeck('elg-u2-l1', [
   {
     kind: 'numeric',
     section: 1,
-    prompt: 'A glider with a glide ratio of 6 loses 2.5 m of height. How far forward does it travel, in meters?',
+    prompt:
+      'A glider with a glide ratio of 6 loses 2.5 m of height. How far forward does it travel, in meters?',
     answer: 15,
     tolerance: 0.05,
     unit: 'm',
@@ -300,14 +302,14 @@ const glide = defineDeck('elg-u2-l1', [
     answer: 16,
     tolerance: 0.1,
     unit: 's',
-    explanation:
-      'Sink rate = 3.0 ÷ 6 = 0.50 m/s, so the glide lasts 8.0 m ÷ 0.50 m/s = 16 s.',
+    explanation: 'Sink rate = 3.0 ÷ 6 = 0.50 m/s, so the glide lasts 8.0 m ÷ 0.50 m/s = 16 s.',
   },
   {
     kind: 'example',
     section: 2,
     title: 'Worked example: glide time',
-    problem: 'A glider reaches 9.0 m and glides at 3.2 m/s with glide ratio 8. Estimate the glide time.',
+    problem:
+      'A glider reaches 9.0 m and glides at 3.2 m/s with glide ratio 8. Estimate the glide time.',
     steps: [
       'Sink rate = airspeed ÷ glide ratio = 3.2 ÷ 8 = **0.40 m/s**.',
       'Glide time = 9.0 m ÷ 0.40 m/s = **22.5 s**.',
@@ -435,7 +437,8 @@ const launch = defineDeck('elg-u3-l1', [
   {
     kind: 'title',
     title: 'Launch energy: from stretched elastic to height',
-    subtitle: 'The stretch you pull sets the energy, and the energy sets how high the glider climbs.',
+    subtitle:
+      'The stretch you pull sets the energy, and the energy sets how high the glider climbs.',
     objectives: [
       'Calculate **elastic potential energy**.',
       'Estimate launch speed and ideal height.',
@@ -461,7 +464,8 @@ const launch = defineDeck('elg-u3-l1', [
   {
     kind: 'numeric',
     section: 0,
-    prompt: 'An elastic with k = 40 N/m is stretched 0.25 m. How much energy does it store, in joules?',
+    prompt:
+      'An elastic with k = 40 N/m is stretched 0.25 m. How much energy does it store, in joules?',
     answer: 1.25,
     tolerance: 0.01,
     unit: 'J',
@@ -561,7 +565,8 @@ const launch = defineDeck('elg-u3-l1', [
   {
     kind: 'multi',
     section: 4,
-    prompt: 'Which habits keep launch energy the same from practice to competition? Select all that apply.',
+    prompt:
+      'Which habits keep launch energy the same from practice to competition? Select all that apply.',
     options: [
       'Using the same elastic type you tested with',
       'Replacing the elastic before it gets tired',
@@ -586,7 +591,8 @@ const launch = defineDeck('elg-u3-l1', [
   {
     kind: 'mcq',
     section: 5,
-    prompt: 'The competition room has a lower ceiling than your practice gym. What is the simplest fix?',
+    prompt:
+      'The competition room has a lower ceiling than your practice gym. What is the simplest fix?',
     options: [
       'Pull the elastic a shorter, marked distance',
       'Add a lot of nose weight',
@@ -614,11 +620,13 @@ const launch = defineDeck('elg-u3-l1', [
     text: 'Elastic energy is one half k times the stretch {0}. It becomes {1} energy at launch, then height, while {2} steals energy during the climb.',
     blanks: ['squared', 'kinetic', 'drag'],
     distractors: ['cubed', 'chemical', 'lift'],
-    explanation: 'E = ½kx², which becomes ½mv² and then mgh, with drag taking a share the whole way up.',
+    explanation:
+      'E = ½kx², which becomes ½mv² and then mgh, with drag taking a share the whole way up.',
   },
   {
     kind: 'open',
-    prompt: 'Your glider climbed 8 m last week but only 6 m today with the same pull. List possible causes.',
+    prompt:
+      'Your glider climbed 8 m last week but only 6 m today with the same pull. List possible causes.',
     model:
       'The elastic may be tired or a different type, the room may be colder so the rubber is stiffer, the pull may be shorter than marked, or the glider may be bent so it has more drag or flutters in the climb.',
   },
@@ -736,7 +744,8 @@ const trim = defineDeck('elg-u4-l1', [
     section: 3,
     title: 'The roll-out',
     image: 'ws-flight-axes',
-    callout: 'Roll tilts the wings, pitch raises or lowers the nose, and yaw swings the nose sideways.',
+    callout:
+      'Roll tilts the wings, pitch raises or lowers the nose, and yaw swings the nose sideways.',
     bullets: [
       'Many teams launch the glider **banked**, so it climbs in a curving path instead of looping.',
       'As speed drops near the top, it ==rolls level and begins to glide==.',
@@ -771,7 +780,8 @@ const trim = defineDeck('elg-u4-l1', [
   {
     kind: 'mcq',
     section: 4,
-    prompt: 'The glide circle keeps tightening until the glider spirals into the floor. What should you try?',
+    prompt:
+      'The glide circle keeps tightening until the glider spirals into the floor. What should you try?',
     options: [
       'Reduce the turn or add dihedral',
       'Add more rudder offset',

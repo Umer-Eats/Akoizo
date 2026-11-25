@@ -147,6 +147,7 @@ const egg = defineDeck('scr-u5-l1', [
     kind: 'bullets',
     section: 5,
     title: 'Testing safely',
+    image: 'b-scram-egg-cracked',
     bullets: [
       'Practice with **egg-shaped substitutes** of similar mass, then confirm with real eggs.',
       'Check for **hairline cracks** after every test.',

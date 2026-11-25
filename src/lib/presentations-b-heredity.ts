@@ -430,9 +430,9 @@ const beyond = defineDeck('her-u3-l1', [
     title: 'Incomplete dominance',
     image: 'b-her-snapdragon',
     caption:
-      'Red (RR) × white (WW) snapdragons give all **pink** (RW) offspring; pink × pink gives red : pink : white in a **1 : 2 : 1** ratio.',
+      'Two **pink** (RW) snapdragons give red, pink, and white offspring in a **1 : 2 : 1** ratio.',
     bullets: [
-      'The heterozygote has an **intermediate** phenotype.',
+      'The heterozygote has an **intermediate** phenotype: red (RR) × white (WW) gives all pink (RW).',
       'The ==phenotype ratio matches the genotype ratio==.',
       'The alleles did not blend: red and white return in the next generation.',
     ],

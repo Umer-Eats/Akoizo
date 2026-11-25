@@ -158,6 +158,7 @@ try {
   await expect(astronomy).toBeChecked();
   await p.getByLabel('Your division', { exact: true }).selectOption('B');
   await expect(p.locator('.selection-summary')).toContainText('0 competition events');
+  const divisionBColors = new Set();
   for (const [label, color, events] of [
     ['Yellow timeslot', 'yellow', ['Codebusters', 'Disease Detectives', 'Remote Sensing']],
     ['Orange timeslot', 'orange', ['Experimental Design', 'Solar System', 'Water Quality']],
@@ -185,7 +186,23 @@ try {
       await expect(cards.getByRole('heading', { name: event, exact: true })).toHaveCount(1);
     }
     await expect(p.locator(`.event-card[data-slot="${color}"]`)).toHaveCount(events.length);
+    await expect(cards.locator('.slot-chip')).toHaveText(events.map(() => label));
+    const cardColors = await cards.evaluateAll((elements) =>
+      elements.map((card) => {
+        const border = getComputedStyle(card);
+        const title = getComputedStyle(card.querySelector('h3'));
+        const chip = getComputedStyle(card.querySelector('.slot-chip'));
+        return [border.borderTopWidth, border.borderTopColor, title.color, chip.color];
+      }),
+    );
+    for (const [width, border, title, chip] of cardColors) {
+      assert.equal(width, '3px');
+      assert.equal(border, title);
+      assert.equal(chip, title);
+      divisionBColors.add(title);
+    }
   }
+  assert.equal(divisionBColors.size, 7);
   await p.getByLabel('Your division', { exact: true }).selectOption('C');
   await expect(astronomy).toBeChecked();
   await p.emulateMedia({ reducedMotion: 'no-preference' });

@@ -15,8 +15,14 @@ const oceanWorlds = defineDeck('sol-u5-l1', [
   },
   {
     kind: 'poll',
-    prompt: 'Warm-up: how could a spacecraft tell there is an ocean under kilometers of ice it cannot see through?',
-    options: ['Magnetic measurements', 'Watching jets or plumes', 'Measuring gravity', 'Any of these'],
+    prompt:
+      'Warm-up: how could a spacecraft tell there is an ocean under kilometers of ice it cannot see through?',
+    options: [
+      'Magnetic measurements',
+      'Watching jets or plumes',
+      'Measuring gravity',
+      'Any of these',
+    ],
   },
   {
     kind: 'figure',
@@ -69,7 +75,8 @@ const oceanWorlds = defineDeck('sol-u5-l1', [
       'It orbits Saturn',
     ],
     answers: [0, 1, 2],
-    explanation: 'Ganymede is Jupiter’s moon, bigger than Mercury, with its own magnetic field and an ocean inferred from its auroras. Methane lakes belong to Titan.',
+    explanation:
+      'Ganymede is Jupiter’s moon, bigger than Mercury, with its own magnetic field and an ocean inferred from its auroras. Methane lakes belong to Titan.',
   },
   {
     kind: 'figure',
@@ -94,7 +101,8 @@ const oceanWorlds = defineDeck('sol-u5-l1', [
       ['Molecular hydrogen', 'Chemical energy is available'],
       ['Phosphates', 'A key element for life is present'],
     ],
-    explanation: 'Each ingredient adds a piece: a salty ocean, hydrothermal activity, an energy source, and phosphorus, one of the CHNOPS elements.',
+    explanation:
+      'Each ingredient adds a piece: a salty ocean, hydrothermal activity, an energy source, and phosphorus, one of the CHNOPS elements.',
   },
   {
     kind: 'figure',
@@ -135,7 +143,8 @@ const oceanWorlds = defineDeck('sol-u5-l1', [
       ['A thick nitrogen atmosphere', 2],
       ['An ocean revealed by an induced magnetic field', 0],
     ],
-    explanation: 'Europa: chaos terrain and an induced field. Enceladus: tiger stripes and a plume. Titan: a thick atmosphere and a methane cycle.',
+    explanation:
+      'Europa: chaos terrain and an induced field. Enceladus: tiger stripes and a plume. Titan: a thick atmosphere and a methane cycle.',
   },
   {
     kind: 'compare',
@@ -143,18 +152,37 @@ const oceanWorlds = defineDeck('sol-u5-l1', [
     title: 'Galileo, Europa Clipper, and JUICE',
     columns: ['Mission', 'When', 'What it does'],
     rows: [
-      ['Galileo (NASA)', 'Orbited Jupiter 1995–2003', 'Discovered the evidence for **oceans on Europa and Ganymede**'],
-      ['Europa Clipper (NASA)', 'Launched 2024', 'Dozens of close Europa flybys with **ice-penetrating radar**, cameras, a magnetometer, and gas and dust samplers'],
-      ['JUICE (ESA)', 'Launched 2023', 'Studies Ganymede, Europa and Callisto; ==first spacecraft to orbit a moon other than ours=='],
+      [
+        'Galileo (NASA)',
+        'Orbited Jupiter 1995–2003',
+        'Discovered the evidence for **oceans on Europa and Ganymede**',
+      ],
+      [
+        'Europa Clipper (NASA)',
+        'Launched 2024',
+        'Dozens of close Europa flybys with **ice-penetrating radar**, cameras, a magnetometer, and gas and dust samplers',
+      ],
+      [
+        'JUICE (ESA)',
+        'Launched 2023',
+        'Studies Ganymede, Europa and Callisto; ==first spacecraft to orbit a moon other than ours==',
+      ],
     ],
   },
   {
     kind: 'mcq',
     section: 4,
-    prompt: 'Which mission will become the first spacecraft to orbit a moon other than Earth’s Moon?',
-    options: ['JUICE, at Ganymede', 'Europa Clipper, at Europa', 'Galileo, at Io', 'Dragonfly, at Titan'],
+    prompt:
+      'Which mission will become the first spacecraft to orbit a moon other than Earth’s Moon?',
+    options: [
+      'JUICE, at Ganymede',
+      'Europa Clipper, at Europa',
+      'Galileo, at Io',
+      'Dragonfly, at Titan',
+    ],
     answer: 0,
-    explanation: 'JUICE will finish its tour by orbiting Ganymede. Europa Clipper orbits Jupiter and makes flybys of Europa.',
+    explanation:
+      'JUICE will finish its tour by orbiting Ganymede. Europa Clipper orbits Jupiter and makes flybys of Europa.',
   },
   {
     kind: 'figure',
@@ -179,7 +207,8 @@ const oceanWorlds = defineDeck('sol-u5-l1', [
       ['Dragonfly', 'Will fly between sites on Titan'],
       ['Galileo', 'Found evidence for Europa’s ocean'],
     ],
-    explanation: 'Cassini was the Saturn orbiter, Huygens its Titan lander, Dragonfly the future rotorcraft, and Galileo the earlier Jupiter orbiter.',
+    explanation:
+      'Cassini was the Saturn orbiter, Huygens its Titan lander, Dragonfly the future rotorcraft, and Galileo the earlier Jupiter orbiter.',
   },
   {
     kind: 'summary',
@@ -197,7 +226,8 @@ const smallBodies = defineDeck('sol-u6-l1', [
   {
     kind: 'title',
     title: 'Small bodies and the building blocks of life',
-    subtitle: 'Dwarf planets, asteroids and comets as time capsules, and the molecules and organisms that stretch our idea of where life could live.',
+    subtitle:
+      'Dwarf planets, asteroids and comets as time capsules, and the molecules and organisms that stretch our idea of where life could live.',
     objectives: [
       'Describe Makemake, Bennu, and 67P and what missions learned.',
       'Explain how small bodies delivered water and organics.',
@@ -226,15 +256,15 @@ const smallBodies = defineDeck('sol-u6-l1', [
       'Its moon is made of methane',
     ],
     answer: 0,
-    explanation: 'No spacecraft has visited Makemake. Telescope spectra show the absorption features of methane ice.',
+    explanation:
+      'No spacecraft has visited Makemake. Telescope spectra show the absorption features of methane ice.',
   },
   {
     kind: 'figure',
     section: 1,
     title: 'Bennu and OSIRIS-REx',
     image: 'b-sol-bennu-sample',
-    caption:
-      'OSIRIS-REx collected this sample in 2020 and ==returned it to Earth in 2023==.',
+    caption: 'OSIRIS-REx collected this sample in 2020 and ==returned it to Earth in 2023==.',
     bullets: [
       'Bennu is a near-Earth asteroid about **500 m** across: a carbon-rich **rubble pile** of loose boulders.',
       'The sample holds **hydrated clay minerals**, **carbon compounds**, **phosphates**, and salts left by evaporating **brines**.',
@@ -245,9 +275,16 @@ const smallBodies = defineDeck('sol-u6-l1', [
     kind: 'multi',
     section: 1,
     prompt: 'Which were found in the Bennu sample?',
-    options: ['Hydrated clay minerals', 'Amino acids', 'Evaporated salts from brines', 'Living microbes', 'Liquid water pools'],
+    options: [
+      'Hydrated clay minerals',
+      'Amino acids',
+      'Evaporated salts from brines',
+      'Living microbes',
+      'Liquid water pools',
+    ],
     answers: [0, 1, 2],
-    explanation: 'The sample contained clays, carbon compounds, phosphates, salts, amino acids and nucleobases: ingredients of life, not life itself.',
+    explanation:
+      'The sample contained clays, carbon compounds, phosphates, salts, amino acids and nucleobases: ingredients of life, not life itself.',
   },
   {
     kind: 'figure',
@@ -271,7 +308,8 @@ const smallBodies = defineDeck('sol-u6-l1', [
       ['Bennu', 'Carbon-rich rubble-pile asteroid sampled by OSIRIS-REx'],
       ['67P', 'Two-lobed comet studied by Rosetta and Philae'],
     ],
-    explanation: 'Makemake is a distant dwarf planet, Bennu a near-Earth asteroid, and 67P a comet.',
+    explanation:
+      'Makemake is a distant dwarf planet, Bennu a near-Earth asteroid, and 67P a comet.',
   },
   {
     kind: 'bullets',
@@ -287,7 +325,8 @@ const smallBodies = defineDeck('sol-u6-l1', [
   {
     kind: 'mcq',
     section: 3,
-    prompt: 'A comet’s water has a D/H ratio three times that of Earth’s oceans. What does that suggest?',
+    prompt:
+      'A comet’s water has a D/H ratio three times that of Earth’s oceans. What does that suggest?',
     options: [
       'Comets like it were not the main source of Earth’s water',
       'All of Earth’s water came from that type of comet',
@@ -295,7 +334,8 @@ const smallBodies = defineDeck('sol-u6-l1', [
       'The comet must have come from Earth',
     ],
     answer: 0,
-    explanation: 'Isotope ratios act like fingerprints. Water with a different D/H ratio from Earth’s oceans cannot be their main source.',
+    explanation:
+      'Isotope ratios act like fingerprints. Water with a different D/H ratio from Earth’s oceans cannot be their main source.',
   },
   {
     kind: 'bullets',
@@ -333,7 +373,8 @@ const smallBodies = defineDeck('sol-u6-l1', [
       ['Nucleotide', 1],
       ['Lipid', 1],
     ],
-    explanation: 'Amorphous ice, clathrates and brines are water phases or mixtures; amino acids, nucleotides and lipids are the molecules life is built from.',
+    explanation:
+      'Amorphous ice, clathrates and brines are water phases or mixtures; amino acids, nucleotides and lipids are the molecules life is built from.',
   },
   {
     kind: 'figure',
@@ -356,7 +397,8 @@ const smallBodies = defineDeck('sol-u6-l1', [
     text: 'Microbes at deep-sea hydrothermal vents get energy from {0} chemicals instead of sunlight and make food from {1}. They are called {2}.',
     blanks: ['inorganic', 'carbon dioxide', 'chemolithoautotrophs'],
     distractors: ['radioactive', 'oxygen', 'photosynthesizers'],
-    explanation: 'Chemolithoautotrophs “eat rocks”: they use chemicals such as hydrogen or sulfur compounds for energy and fix carbon dioxide into food.',
+    explanation:
+      'Chemolithoautotrophs “eat rocks”: they use chemicals such as hydrogen or sulfur compounds for energy and fix carbon dioxide into food.',
   },
   {
     kind: 'summary',
@@ -374,7 +416,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
   {
     kind: 'title',
     title: 'Exoplanets: detection and the named systems',
-    subtitle: 'How astronomers find planets around other stars, and the systems and telescopes named in the rules.',
+    subtitle:
+      'How astronomers find planets around other stars, and the systems and telescopes named in the rules.',
     objectives: [
       'Explain transit, radial velocity, microlensing, and direct imaging.',
       'Describe TRAPPIST-1, Kepler-452, and LHS 1140.',
@@ -395,7 +438,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
   {
     kind: 'numeric',
     section: 0,
-    prompt: 'A planet’s radius is one tenth of its star’s radius. What percentage of the star’s light does the transit block?',
+    prompt:
+      'A planet’s radius is one tenth of its star’s radius. What percentage of the star’s light does the transit block?',
     answer: 1,
     tolerance: 0,
     unit: '%',
@@ -415,7 +459,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
   {
     kind: 'mcq',
     section: 1,
-    prompt: 'What can astronomers find by combining a planet’s transit radius with its radial-velocity mass?',
+    prompt:
+      'What can astronomers find by combining a planet’s transit radius with its radial-velocity mass?',
     options: [
       'Its density, which hints at its composition',
       'Its exact surface temperature',
@@ -423,7 +468,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
       'The age of its star',
     ],
     answer: 0,
-    explanation: 'Mass divided by volume gives density, which tells whether a planet is likely rocky, water-rich or gaseous.',
+    explanation:
+      'Mass divided by volume gives density, which tells whether a planet is likely rocky, water-rich or gaseous.',
   },
   {
     kind: 'bullets',
@@ -449,7 +495,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
       ['Can find free-floating planets', 2],
       ['Gives the planet’s minimum mass', 1],
     ],
-    explanation: 'Transits dim the star, radial velocity shifts its spectrum, microlensing brightens a background star once, and direct imaging blocks the star to see the planet.',
+    explanation:
+      'Transits dim the star, radial velocity shifts its spectrum, microlensing brightens a background star once, and direct imaging blocks the star to see the planet.',
   },
   {
     kind: 'figure',
@@ -470,7 +517,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
     prompt: 'Which TRAPPIST-1 planets are in the habitable zone?',
     options: ['e, f and g', 'b and c', 'Only h', 'All seven'],
     answer: 0,
-    explanation: 'Planets e, f and g sit in the habitable zone. JWST suggests the innermost planets b and c lack thick atmospheres.',
+    explanation:
+      'Planets e, f and g sit in the habitable zone. JWST suggests the innermost planets b and c lack thick atmospheres.',
   },
   {
     kind: 'compare',
@@ -481,7 +529,11 @@ const exoplanets = defineDeck('sol-u7-l1', [
       ['Star', 'A **Sun-like G star**', 'A **red dwarf**'],
       ['Distance', 'About 1,400–1,800 light-years', 'About **48 light-years**'],
       ['Size', 'About **1.6** Earth radii', 'About **1.7** Earth radii'],
-      ['Notes', 'Period 385 days; ==detection questioned by later reanalysis==', 'Rocky or water-rich; JWST hints at an ==atmosphere=='],
+      [
+        'Notes',
+        'Period 385 days; ==detection questioned by later reanalysis==',
+        'Rocky or water-rich; JWST hints at an ==atmosphere==',
+      ],
     ],
   },
   {
@@ -493,7 +545,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
       ['LHS 1140 b', 'Super-Earth around a red dwarf about 48 light-years away'],
       ['TRAPPIST-1 e', 'Earth-sized habitable-zone planet in a seven-planet system'],
     ],
-    explanation: 'Kepler-452 b orbits a G star, LHS 1140 b a nearby red dwarf, and TRAPPIST-1 e is one of seven planets around an ultracool dwarf.',
+    explanation:
+      'Kepler-452 b orbits a G star, LHS 1140 b a nearby red dwarf, and TRAPPIST-1 e is one of seven planets around an ultracool dwarf.',
   },
   {
     kind: 'compare',
@@ -501,9 +554,21 @@ const exoplanets = defineDeck('sol-u7-l1', [
     title: 'Kepler, JWST, and Roman',
     columns: ['Telescope', 'Main method', 'Contribution'],
     rows: [
-      ['Kepler', 'Transits', 'Stared at one patch of sky 2009–2018; found thousands of planets and showed ==small planets are common=='],
-      ['JWST', 'Infrared **transmission spectroscopy**', 'Reads starlight filtered through a planet’s atmosphere to detect gases like **CO₂** and **water**'],
-      ['Roman', 'Microlensing and a coronagraph', 'Will survey the galactic center for **microlensing planets** and test **direct imaging**'],
+      [
+        'Kepler',
+        'Transits',
+        'Stared at one patch of sky 2009–2018; found thousands of planets and showed ==small planets are common==',
+      ],
+      [
+        'JWST',
+        'Infrared **transmission spectroscopy**',
+        'Reads starlight filtered through a planet’s atmosphere to detect gases like **CO₂** and **water**',
+      ],
+      [
+        'Roman',
+        'Microlensing and a coronagraph',
+        'Will survey the galactic center for **microlensing planets** and test **direct imaging**',
+      ],
     ],
   },
   {
@@ -517,7 +582,8 @@ const exoplanets = defineDeck('sol-u7-l1', [
       'It waits for a microlensing event',
     ],
     answer: 0,
-    explanation: 'In transmission spectroscopy, gases in the planet’s atmosphere absorb specific wavelengths of the starlight passing through it.',
+    explanation:
+      'In transmission spectroscopy, gases in the planet’s atmosphere absorb specific wavelengths of the starlight passing through it.',
   },
   {
     kind: 'summary',

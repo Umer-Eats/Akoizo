@@ -18,7 +18,8 @@ const passiveActive = defineDeck('remote-u2-l1-b', [
   {
     kind: 'title',
     title: 'Passive images and active radar',
-    subtitle: 'Some sensors wait for energy to arrive; others send their own and listen for the echo.',
+    subtitle:
+      'Some sensors wait for energy to arrive; others send their own and listen for the echo.',
     objectives: [
       'Explain what a passive sensor detects.',
       'Describe how radar backscatter forms an image.',
@@ -147,13 +148,20 @@ const passiveActive = defineDeck('remote-u2-l1-b', [
       'Radar gives different evidence, but ==dark returns are not unique to flooding==.',
       'Use **elevation** and **independent observations** to test the flood idea.',
     ],
-    conclusion: 'Compare the radar pattern with elevation and independent flood reports before concluding.',
+    conclusion:
+      'Compare the radar pattern with elevation and independent flood reports before concluding.',
   },
   {
     kind: 'multi',
     section: 1,
     prompt: 'Which factors change how bright a surface looks in a radar image?',
-    options: ['Surface roughness', 'Moisture', 'Viewing direction', 'The color of the surface', 'Whether it is day or night'],
+    options: [
+      'Surface roughness',
+      'Moisture',
+      'Viewing direction',
+      'The color of the surface',
+      'Whether it is day or night',
+    ],
     answers: [0, 1, 2],
     explanation:
       'Backscatter depends on roughness, moisture, material and viewing direction. Radar brings its own energy, so visible color and daylight do not matter.',
@@ -197,8 +205,7 @@ const orbits = defineDeck('remote-u3-l1-b', [
     section: 0,
     title: 'Height and coverage',
     image: 'orbit-altitudes',
-    caption:
-      'Low Earth orbit sits close to the surface; geostationary orbit is ==35,786 km up==.',
+    caption: 'Low Earth orbit sits close to the surface; geostationary orbit is ==35,786 km up==.',
     bullets: [
       '**Low Earth orbit** is relatively close, so it can collect detailed images along a moving track.',
       '**Higher orbits** can view larger areas at once.',
@@ -298,8 +305,14 @@ const orbits = defineDeck('remote-u3-l1-b', [
   {
     kind: 'mcq',
     section: 3,
-    prompt: 'Satellite A orbits 700 km up; satellite B orbits 20,000 km up. Which has the longer period?',
-    options: ['Satellite B', 'Satellite A', 'They are equal', 'It depends on the satellites’ masses'],
+    prompt:
+      'Satellite A orbits 700 km up; satellite B orbits 20,000 km up. Which has the longer period?',
+    options: [
+      'Satellite B',
+      'Satellite A',
+      'They are equal',
+      'It depends on the satellites’ masses',
+    ],
     answer: 0,
     explanation:
       'Around the same planet, a larger orbit always takes longer. The satellite’s own mass does not matter.',
@@ -394,7 +407,8 @@ const mapsScale = defineDeck('remote-u6-l1-b', [
   {
     kind: 'numeric',
     section: 1,
-    prompt: 'On a 1:50,000 map, two towns are 6 cm apart. How far apart are they on the ground, in km?',
+    prompt:
+      'On a 1:50,000 map, two towns are 6 cm apart. How far apart are they on the ground, in km?',
     answer: 3,
     tolerance: 0,
     unit: 'km',
@@ -407,7 +421,8 @@ const mapsScale = defineDeck('remote-u6-l1-b', [
     answer: 1000000,
     tolerance: 0,
     unit: 'm²',
-    explanation: '2 cm is 1,000 m, so the field is 1,000 m × 1,000 m = 1,000,000 m² (1 km²). Area grows with the square of the scale.',
+    explanation:
+      '2 cm is 1,000 m, so the field is 1,000 m × 1,000 m = 1,000,000 m² (1 km²). Area grows with the square of the scale.',
   },
   {
     kind: 'figure',
@@ -426,7 +441,8 @@ const mapsScale = defineDeck('remote-u6-l1-b', [
     kind: 'example',
     section: 2,
     title: 'Calculate a slope',
-    problem: 'Scale: 1 cm represents 500 m. Two sites are 4 cm apart on the map and differ in elevation by 100 m.',
+    problem:
+      'Scale: 1 cm represents 500 m. Two sites are 4 cm apart on the map and differ in elevation by 100 m.',
     steps: [
       'Convert the horizontal distance: **4 × 500 = 2,000 m**.',
       'Divide rise by run: **100 ÷ 2,000 = 0.05**.',
@@ -437,7 +453,8 @@ const mapsScale = defineDeck('remote-u6-l1-b', [
   {
     kind: 'numeric',
     section: 2,
-    prompt: 'With 1 cm = 500 m, two points are 2 cm apart and differ in elevation by 50 m. What is the percent slope?',
+    prompt:
+      'With 1 cm = 500 m, two points are 2 cm apart and differ in elevation by 50 m. What is the percent slope?',
     answer: 5,
     tolerance: 0,
     unit: '%',
@@ -459,7 +476,8 @@ const mapsScale = defineDeck('remote-u6-l1-b', [
   {
     kind: 'mcq',
     section: 3,
-    prompt: 'A July image shows green fields; a January image of the same place shows brown fields. What should you do first?',
+    prompt:
+      'A July image shows green fields; a January image of the same place shows brown fields. What should you do first?',
     options: [
       'Compare images from similar seasons before concluding',
       'Report that the farms were abandoned',
@@ -467,7 +485,8 @@ const mapsScale = defineDeck('remote-u6-l1-b', [
       'Measure the area of brown fields as cleared land',
     ],
     answer: 0,
-    explanation: 'Seasonal change can turn fields brown. Compare same-season images before claiming land cover changed.',
+    explanation:
+      'Seasonal change can turn fields brown. Compare same-season images before claiming land cover changed.',
   },
   {
     kind: 'match',

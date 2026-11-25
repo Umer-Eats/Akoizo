@@ -354,7 +354,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
           )}
         </p>
       )}
-      <div className="event-grid">
+      <div className="event-grid" data-division={division}>
         {matches.map((event) => {
           const slot = slotForEvent(event.id, division);
           const checked = selected.includes(event.id);
@@ -371,7 +371,7 @@ function EventCatalog({ division, teacher = false }: { division: Division; teach
               >
                 <span className="eyebrow">{event.category.toUpperCase()}</span>
                 <h3>{event.name}</h3>
-                <span className="sr-only">
+                <span className={division === 'B' && slot ? 'slot-chip' : 'sr-only'}>
                   {slot ? eventSlotLabel(slot) : 'Timeslot not assigned'}
                 </span>
                 <div className="event-card-footer">

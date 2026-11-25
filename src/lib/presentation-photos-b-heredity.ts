@@ -5,11 +5,10 @@ import { commons, type Photo } from './presentation-photo-source.ts';
 export const photos = {
   'b-her-snapdragon': {
     file: 'b-her-snapdragon.jpg',
-    width: 1200,
-    height: 558,
-    alt: 'Snapdragon crosses: a red and a white parent give four pink offspring; two pink plants give one red, two pink and one white offspring.',
-    caption:
-      'Red × white snapdragons give all pink offspring; pink × pink gives 1 red : 2 pink : 1 white.',
+    width: 634,
+    height: 595,
+    alt: 'Two pink snapdragons, each with one red and one white allele, give four offspring: one red, two pink and one white.',
+    caption: 'Pink × pink snapdragons give 1 red : 2 pink : 1 white offspring.',
     credit: 'Jacek Halicki, I am Jim, Crochet.david and Sciencia58',
     source: commons('Incomplete_dominance_-_Antirrhinum_majus.png'),
   },

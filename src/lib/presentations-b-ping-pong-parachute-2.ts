@@ -103,6 +103,7 @@ const parachute = defineDeck('pppb-u5-l1', [
     kind: 'bullets',
     section: 3,
     title: 'Drag coefficient',
+    image: 'b-ppp-canopy',
     bullets: [
       'A **dome-shaped** canopy has C_d around 1.3 to 1.5; a flat sheet that does not fully inflate has less.',
       'A small **vent hole** at the top lets air escape steadily and ==reduces swinging==.',

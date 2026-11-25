@@ -168,6 +168,13 @@
     transform: translateY(-3px);
     border-color: color-mix(in srgb, var(--slot, var(--accent)) 55%, transparent);
   }
+  .event-grid[data-division='B'] .selectable-event {
+    border-top: 3px solid var(--slot);
+  }
+
+  .event-grid[data-division='B'] .selectable-event h3 {
+    color: var(--slot);
+  }
 
   /* Event workspace: a file-tree sidebar, accented in the event's timeslot colour. */
   .event-workspace[data-slot],

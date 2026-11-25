@@ -7,7 +7,8 @@ const construction = defineDeck('elg-u5-l1', [
   {
     kind: 'title',
     title: 'Construction: light, stiff, and legal',
-    subtitle: 'A glider has to survive a hard launch, pass inspection, and keep its shape flight after flight.',
+    subtitle:
+      'A glider has to survive a hard launch, pass inspection, and keep its shape flight after flight.',
     objectives: [
       'Choose materials and shapes for an elastic glider.',
       'Meet the **mass window**, **box**, and **blunt nose** rules.',
@@ -194,7 +195,8 @@ const construction = defineDeck('elg-u5-l1', [
   },
   {
     kind: 'open',
-    prompt: 'Your best glider breaks during the Flight Period. What should already be in place so the team keeps scoring?',
+    prompt:
+      'Your best glider breaks during the Flight Period. What should already be in place so the team keeps scoring?',
     model:
       'A second glider trimmed to the same settings, labeled, with its trim notes, ready to fly. Marked wing and tail positions and spare ballast help too, because there is no extra time for repairs.',
   },
@@ -214,7 +216,8 @@ const technique = defineDeck('elg-u6-l1', [
   {
     kind: 'title',
     title: 'Launch technique and the ceiling',
-    subtitle: 'The same glider can fly great or terribly depending on how, and where, it is launched.',
+    subtitle:
+      'The same glider can fly great or terribly depending on how, and where, it is launched.',
     objectives: [
       'Choose **launch angle**, bank, and pull for a room.',
       'Use the launch handle safely and legally.',
@@ -224,7 +227,12 @@ const technique = defineDeck('elg-u6-l1', [
   {
     kind: 'poll',
     prompt: 'Warm-up: what is the biggest risk in a gym with a low ceiling?',
-    options: ['Hitting the ceiling', 'Running out of floor', 'The glider getting cold', 'Not sure yet'],
+    options: [
+      'Hitting the ceiling',
+      'Running out of floor',
+      'The glider getting cold',
+      'Not sure yet',
+    ],
   },
   {
     kind: 'figure',
@@ -243,7 +251,8 @@ const technique = defineDeck('elg-u6-l1', [
   {
     kind: 'mcq',
     section: 0,
-    prompt: 'A glider launched at 30 degrees flies across the gym and lands early. What is the likely fix?',
+    prompt:
+      'A glider launched at 30 degrees flies across the gym and lands early. What is the likely fix?',
     options: [
       'Launch steeper, around 60 to 80 degrees',
       'Launch flat along the floor',
@@ -410,7 +419,8 @@ const technique = defineDeck('elg-u6-l1', [
   },
   {
     kind: 'open',
-    prompt: 'You arrive and the competition ceiling is much lower than your practice gym. Describe your plan.',
+    prompt:
+      'You arrive and the competition ceiling is much lower than your practice gym. Describe your plan.',
     model:
       'Use the log to scale the pull down (pull ∝ √height), aiming below the ceiling. Add a little more bank so the climb curves, then check with a trim flight before the first official flight, watching for beams and lights.',
   },
@@ -430,7 +440,8 @@ const competition = defineDeck('elg-u7-l1', [
   {
     kind: 'title',
     title: 'The flight log and competition day',
-    subtitle: 'A good log earns a 20 percent bonus and tells you exactly how to launch in a new room.',
+    subtitle:
+      'A good log earns a 20 percent bonus and tells you exactly how to launch in a new room.',
     objectives: [
       'Build a complete **flight log** with four parameters.',
       'Use log data to predict competition settings.',
@@ -491,7 +502,8 @@ const competition = defineDeck('elg-u7-l1', [
     answer: 6,
     tolerance: 0.01,
     unit: 'points',
-    explanation: 'Complete: 60 × 1.2 = 72. Partial: 60 × 1.1 = 66. The complete log is worth 6 more points.',
+    explanation:
+      'Complete: 60 × 1.2 = 72. Partial: 60 × 1.1 = 66. The complete log is worth 6 more points.',
   },
   {
     kind: 'bullets',
@@ -606,8 +618,14 @@ const competition = defineDeck('elg-u7-l1', [
     kind: 'cards',
     title: 'Key terms — tap to flip',
     cards: [
-      { front: 'Peak flight height', back: 'The highest point after launch; a required log entry.' },
-      { front: 'Relaxed elastic length', back: 'The elastic’s length when not stretched; required.' },
+      {
+        front: 'Peak flight height',
+        back: 'The highest point after launch; a required log entry.',
+      },
+      {
+        front: 'Relaxed elastic length',
+        back: 'The elastic’s length when not stretched; required.',
+      },
       { front: 'Complete log', back: '10+ flights and 4+ parameters: ×1.2 bonus.' },
       { front: 'Partial log', back: 'An incomplete log: ×1.1 bonus.' },
       { front: 'Re-check', back: 'The supervisor may recheck mass and handle after flights.' },
@@ -623,7 +641,8 @@ const competition = defineDeck('elg-u7-l1', [
   },
   {
     kind: 'open',
-    prompt: 'Which extra parameter would you add to your log, and how would it help you on competition day?',
+    prompt:
+      'Which extra parameter would you add to your log, and how would it help you on competition day?',
     model:
       'Elastic stretch (pull distance). Graphing peak height against pull lets me pick the pull that reaches just below the announced ceiling, so the first official flight is already close to the best setting.',
   },

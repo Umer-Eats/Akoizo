@@ -9,7 +9,8 @@ const habitability = defineDeck('sol-u1-l1', [
   {
     kind: 'title',
     title: 'What makes a world habitable?',
-    subtitle: 'The conditions life as we know it needs, and the places in the solar system that may have them.',
+    subtitle:
+      'The conditions life as we know it needs, and the places in the solar system that may have them.',
     objectives: [
       'List the conditions relevant to habitability.',
       'Explain how a world keeps an atmosphere and stable liquids.',
@@ -19,7 +20,12 @@ const habitability = defineDeck('sol-u1-l1', [
   {
     kind: 'poll',
     prompt: 'Warm-up: which place do you think is most likely to be habitable today?',
-    options: ['The surface of Mars', 'An ocean under Europa’s ice', 'The surface of Venus', 'Titan’s methane lakes'],
+    options: [
+      'The surface of Mars',
+      'An ocean under Europa’s ice',
+      'The surface of Venus',
+      'Titan’s methane lakes',
+    ],
   },
   {
     kind: 'bullets',
@@ -203,7 +209,8 @@ const light = defineDeck('sol-u2-l1', [
   {
     kind: 'title',
     title: 'Light, radiation, and temperature',
-    subtitle: 'How starlight spreads out, how temperature sets the color and power of glowing objects, and what moving light reveals.',
+    subtitle:
+      'How starlight spreads out, how temperature sets the color and power of glowing objects, and what moving light reveals.',
     objectives: [
       'Apply the inverse-square law to stellar flux.',
       'Use the Stefan–Boltzmann law, Wien’s law, and albedo to estimate temperatures.',
@@ -215,8 +222,7 @@ const light = defineDeck('sol-u2-l1', [
     section: 0,
     title: 'Flux and the inverse-square law',
     image: 'astro-inverse-square',
-    caption:
-      'The same light spreads over a larger area farther away, so **flux falls as 1/d²**.',
+    caption: 'The same light spreads over a larger area farther away, so **flux falls as 1/d²**.',
     bullets: [
       '**Flux** is the power received per unit area.',
       'Doubling the distance gives **one quarter** the flux; at 3 AU a planet gets **one ninth** of the flux at 1 AU.',
@@ -226,7 +232,8 @@ const light = defineDeck('sol-u2-l1', [
   {
     kind: 'numeric',
     section: 0,
-    prompt: 'A planet orbits at 4 AU. What fraction of Earth’s sunlight does it receive? Give a decimal.',
+    prompt:
+      'A planet orbits at 4 AU. What fraction of Earth’s sunlight does it receive? Give a decimal.',
     answer: 0.0625,
     tolerance: 0.002,
     explanation: 'Flux scales as 1/d², so 1/4² = 1/16 = 0.0625 of the flux at 1 AU.',
@@ -245,7 +252,8 @@ const light = defineDeck('sol-u2-l1', [
   {
     kind: 'numeric',
     section: 1,
-    prompt: 'Star B has the same size as star A but three times the surface temperature. How many times more power does it emit?',
+    prompt:
+      'Star B has the same size as star A but three times the surface temperature. How many times more power does it emit?',
     answer: 81,
     tolerance: 0,
     unit: 'times',
@@ -256,8 +264,7 @@ const light = defineDeck('sol-u2-l1', [
     section: 2,
     title: 'Wien’s displacement law',
     image: 'astro-blackbody',
-    caption:
-      'Hotter objects peak at **shorter wavelengths**: λmax = b/T, with b ≈ 2.9 × 10⁻³ m·K.',
+    caption: 'Hotter objects peak at **shorter wavelengths**: λmax = b/T, with b ≈ 2.9 × 10⁻³ m·K.',
     bullets: [
       'The Sun, near 5,800 K, peaks in **visible** light at about 500 nm.',
       'Earth, near 290 K, peaks in the **infrared**, around 10 µm.',
@@ -270,7 +277,8 @@ const light = defineDeck('sol-u2-l1', [
     prompt: 'Which object has its peak emission at the longest wavelength?',
     options: ['A 290 K planet', 'A 3,000 K red dwarf', 'The 5,800 K Sun', 'A 10,000 K blue star'],
     answer: 0,
-    explanation: 'Peak wavelength is inversely proportional to temperature, so the coldest object, the planet, peaks at the longest wavelength.',
+    explanation:
+      'Peak wavelength is inversely proportional to temperature, so the coldest object, the planet, peaks at the longest wavelength.',
   },
   {
     kind: 'bullets',
@@ -286,7 +294,8 @@ const light = defineDeck('sol-u2-l1', [
   {
     kind: 'mcq',
     section: 3,
-    prompt: 'Earth’s calculated equilibrium temperature is about 255 K, but its real average is about 288 K. Why?',
+    prompt:
+      'Earth’s calculated equilibrium temperature is about 255 K, but its real average is about 288 K. Why?',
     options: [
       'The greenhouse effect of Earth’s atmosphere',
       'Earth’s albedo is zero',
@@ -331,7 +340,8 @@ const light = defineDeck('sol-u2-l1', [
       'For speeds much less than light: **Δλ/λ = v/c**.',
       'Doppler shifts reveal ==stars wobbling because of planets==, spinning planets and stars, and winds.',
     ],
-    callout: 'A line at 500.00 nm seen at 500.01 nm is shifted by 2 × 10⁻⁵: motion away at about 6 km/s.',
+    callout:
+      'A line at 500.00 nm seen at 500.01 nm is shifted by 2 × 10⁻⁵: motion away at about 6 km/s.',
   },
   {
     kind: 'sort',
@@ -344,7 +354,8 @@ const light = defineDeck('sol-u2-l1', [
       ['A star moving away from Earth', 0],
       ['The approaching side of a spinning planet', 1],
     ],
-    explanation: 'Longer observed wavelengths mean motion away (redshift); shorter ones mean motion toward us (blueshift).',
+    explanation:
+      'Longer observed wavelengths mean motion away (redshift); shorter ones mean motion toward us (blueshift).',
   },
   {
     kind: 'summary',
@@ -363,7 +374,8 @@ const gravity = defineDeck('sol-u3-l1', [
   {
     kind: 'title',
     title: 'Gravity, orbits, and tides',
-    subtitle: 'How one force explains falling objects, orbiting planets, escaping gas, and moons that always show the same face.',
+    subtitle:
+      'How one force explains falling objects, orbiting planets, escaping gas, and moons that always show the same face.',
     objectives: [
       'Use Newton’s law of gravitation in proportion problems.',
       'Apply Kepler’s laws and calculate escape velocity relationships.',
@@ -384,7 +396,8 @@ const gravity = defineDeck('sol-u3-l1', [
   {
     kind: 'numeric',
     section: 0,
-    prompt: 'A planet has 4 times Earth’s mass and 2 times Earth’s radius. Its surface gravity is how many times Earth’s?',
+    prompt:
+      'A planet has 4 times Earth’s mass and 2 times Earth’s radius. Its surface gravity is how many times Earth’s?',
     answer: 1,
     tolerance: 0,
     unit: 'times',
@@ -407,9 +420,15 @@ const gravity = defineDeck('sol-u3-l1', [
     kind: 'mcq',
     section: 1,
     prompt: 'Where on its elliptical orbit does a comet move fastest?',
-    options: ['At perihelion, closest to the Sun', 'At aphelion, farthest from the Sun', 'Halfway between them', 'Its speed never changes'],
+    options: [
+      'At perihelion, closest to the Sun',
+      'At aphelion, farthest from the Sun',
+      'Halfway between them',
+      'Its speed never changes',
+    ],
     answer: 0,
-    explanation: 'Equal areas in equal times means the comet must cover more distance near the Sun, so it moves fastest at perihelion.',
+    explanation:
+      'Equal areas in equal times means the comet must cover more distance near the Sun, so it moves fastest at perihelion.',
   },
   {
     kind: 'bullets',
@@ -425,7 +444,8 @@ const gravity = defineDeck('sol-u3-l1', [
   {
     kind: 'numeric',
     section: 2,
-    prompt: 'An asteroid orbits the Sun with a semi-major axis of 9 AU. What is its period in years?',
+    prompt:
+      'An asteroid orbits the Sun with a semi-major axis of 9 AU. What is its period in years?',
     answer: 27,
     tolerance: 0,
     unit: 'years',
@@ -446,7 +466,12 @@ const gravity = defineDeck('sol-u3-l1', [
     kind: 'multi',
     section: 3,
     prompt: 'Which changes would raise a world’s escape velocity?',
-    options: ['More mass, same radius', 'Same mass, smaller radius', 'Same mass, larger radius', 'Less mass, same radius'],
+    options: [
+      'More mass, same radius',
+      'Same mass, smaller radius',
+      'Same mass, larger radius',
+      'Less mass, same radius',
+    ],
     answers: [0, 1],
     explanation: 'v = √(2GM/R): more mass or a smaller radius both raise the escape velocity.',
   },
@@ -464,7 +489,8 @@ const gravity = defineDeck('sol-u3-l1', [
   {
     kind: 'mcq',
     section: 4,
-    prompt: 'The Sun is far more massive than the Moon. Why does the Moon raise larger tides on Earth?',
+    prompt:
+      'The Sun is far more massive than the Moon. Why does the Moon raise larger tides on Earth?',
     options: [
       'Tidal force falls as 1/d³, and the Moon is much closer',
       'The Moon is made of denser rock than the Sun',
@@ -472,7 +498,8 @@ const gravity = defineDeck('sol-u3-l1', [
       'The Moon has a magnetic field',
     ],
     answer: 0,
-    explanation: 'Because tides depend on the cube of distance, the Moon’s closeness outweighs the Sun’s much larger mass.',
+    explanation:
+      'Because tides depend on the cube of distance, the Moon’s closeness outweighs the Sun’s much larger mass.',
   },
   {
     kind: 'figure',
@@ -495,7 +522,8 @@ const gravity = defineDeck('sol-u3-l1', [
     text: 'A moon that always shows the same face to its planet is tidally {0}. If its orbit stays {1}, the tidal bulge changes size each orbit and the interior {2} and heats up.',
     blanks: ['locked', 'elliptical', 'flexes'],
     distractors: ['heated', 'circular', 'cools'],
-    explanation: 'Tidal locking matches spin to orbit. An elliptical orbit keeps changing the tidal stretch, and that flexing generates heat.',
+    explanation:
+      'Tidal locking matches spin to orbit. An elliptical orbit keeps changing the tidal stretch, and that flexing generates heat.',
   },
   {
     kind: 'summary',
@@ -513,7 +541,8 @@ const venusMars = defineDeck('sol-u4-l1', [
   {
     kind: 'title',
     title: 'Venus and Mars: rocky neighbors',
-    subtitle: 'Two Earth-like planets that took very different paths, and the missions studying why.',
+    subtitle:
+      'Two Earth-like planets that took very different paths, and the missions studying why.',
     objectives: [
       'Compare the atmospheres and surfaces of Venus and Mars with Earth’s.',
       'Interpret geologic and chemical evidence for past water.',
@@ -543,7 +572,8 @@ const venusMars = defineDeck('sol-u4-l1', [
       'Venus spins faster, making friction heat',
     ],
     answer: 0,
-    explanation: 'Venus actually reflects most sunlight, but its dense carbon dioxide atmosphere traps heat so well that the surface reaches about 465 °C.',
+    explanation:
+      'Venus actually reflects most sunlight, but its dense carbon dioxide atmosphere traps heat so well that the surface reaches about 465 °C.',
   },
   {
     kind: 'figure',
@@ -569,7 +599,8 @@ const venusMars = defineDeck('sol-u4-l1', [
       'Light hydrogen escaped faster than deuterium',
       'A high deuterium-to-hydrogen ratio remained',
     ],
-    explanation: 'The leftover deuterium is the fingerprint: when ordinary hydrogen escapes faster, the heavy form builds up.',
+    explanation:
+      'The leftover deuterium is the fingerprint: when ordinary hydrogen escapes faster, the heavy form builds up.',
   },
   {
     kind: 'compare',
@@ -577,9 +608,21 @@ const venusMars = defineDeck('sol-u4-l1', [
     title: 'Venus missions',
     columns: ['Mission', 'Type', 'Goal'],
     rows: [
-      ['Venus Express (ESA)', 'Orbiter, 2006–2014', 'Studied atmospheric circulation; found **infrared hot spots** hinting at recent volcanism'],
-      ['DAVINCI (NASA)', 'Planned descent probe', 'Measure atmospheric composition, including **noble gases and isotopes** that record water loss; image tesserae'],
-      ['VERITAS (NASA)', 'Planned orbiter', 'Map **topography with radar** and identify rock types from ==infrared emission=='],
+      [
+        'Venus Express (ESA)',
+        'Orbiter, 2006–2014',
+        'Studied atmospheric circulation; found **infrared hot spots** hinting at recent volcanism',
+      ],
+      [
+        'DAVINCI (NASA)',
+        'Planned descent probe',
+        'Measure atmospheric composition, including **noble gases and isotopes** that record water loss; image tesserae',
+      ],
+      [
+        'VERITAS (NASA)',
+        'Planned orbiter',
+        'Map **topography with radar** and identify rock types from ==infrared emission==',
+      ],
     ],
   },
   {
@@ -591,7 +634,8 @@ const venusMars = defineDeck('sol-u4-l1', [
       ['DAVINCI', 'Drops a probe to sample the atmosphere'],
       ['VERITAS', 'Maps surface topography with radar'],
     ],
-    explanation: 'Venus Express was the ESA orbiter; DAVINCI samples the atmosphere on the way down; VERITAS maps the surface from orbit.',
+    explanation:
+      'Venus Express was the ESA orbiter; DAVINCI samples the atmosphere on the way down; VERITAS maps the surface from orbit.',
   },
   {
     kind: 'bullets',
@@ -618,7 +662,8 @@ const venusMars = defineDeck('sol-u4-l1', [
       ['Lost its magnetic field early', 1],
       ['A day longer than its year', 0],
     ],
-    explanation: 'Venus is thick, hot and cloudy; Mars is thin, cold and dusty. Both have mostly carbon dioxide atmospheres.',
+    explanation:
+      'Venus is thick, hot and cloudy; Mars is thin, cold and dusty. Both have mostly carbon dioxide atmospheres.',
   },
   {
     kind: 'figure',
@@ -646,7 +691,8 @@ const venusMars = defineDeck('sol-u4-l1', [
       ['Flood-carved outflow channels', 0],
       ['Hematite concretions', 1],
     ],
-    explanation: 'Shapes carved by flowing water are morphology; minerals that form in water are chemical evidence. The two lines of evidence agree.',
+    explanation:
+      'Shapes carved by flowing water are morphology; minerals that form in water are chemical evidence. The two lines of evidence agree.',
   },
   {
     kind: 'compare',
@@ -654,9 +700,17 @@ const venusMars = defineDeck('sol-u4-l1', [
     title: 'Mars missions',
     columns: ['Mission', 'Type', 'Goal'],
     rows: [
-      ['Mars Reconnaissance Orbiter', 'Orbiter', '**HiRISE** high-resolution images, mineral mapping, and relaying rover data'],
+      [
+        'Mars Reconnaissance Orbiter',
+        'Orbiter',
+        '**HiRISE** high-resolution images, mineral mapping, and relaying rover data',
+      ],
       ['MAVEN', 'Orbiter', 'Measures how fast the upper atmosphere ==escapes to space=='],
-      ['Perseverance', 'Rover', 'Explores **Jezero crater’s delta**, seeks signs of ancient life, and **caches samples**'],
+      [
+        'Perseverance',
+        'Rover',
+        'Explores **Jezero crater’s delta**, seeks signs of ancient life, and **caches samples**',
+      ],
     ],
   },
   {
@@ -668,7 +722,8 @@ const venusMars = defineDeck('sol-u4-l1', [
       ['MAVEN', 'Measures atmospheric escape'],
       ['Perseverance', 'Collects rock samples in Jezero crater'],
     ],
-    explanation: 'MRO images and relays, MAVEN studies how Mars lost its air, and Perseverance explores and samples the Jezero delta.',
+    explanation:
+      'MRO images and relays, MAVEN studies how Mars lost its air, and Perseverance explores and samples the Jezero delta.',
   },
   {
     kind: 'summary',

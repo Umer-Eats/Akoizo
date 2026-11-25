@@ -127,7 +127,8 @@ export const photos = {
     width: 960,
     height: 637,
     alt: 'A narrow tornado funnel reaching from a dark cloud base to the ground, kicking up debris over flat land.',
-    caption: 'A tornado near Anadarko, Oklahoma, on May 3, 1999, touching the ground below the storm.',
+    caption:
+      'A tornado near Anadarko, Oklahoma, on May 3, 1999, touching the ground below the storm.',
     credit: 'Daphne Zaras (NOAA NSSL)',
     source: commons('A_tornado_near_Anadarko,_Oklahoma,_on_May_3,_1999.jpg'),
   },
