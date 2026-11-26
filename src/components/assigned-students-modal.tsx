@@ -48,13 +48,26 @@ export function AssignedStudentsModal({
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const today = dateInZone(timeZone);
   const [due, setDue] = useState(target.due < today ? today : target.due);
-  const [checked, setChecked] = useState(() => new Set(target.pending));
+  // Only this division's students at the school can have the work; anyone else who still has an
+  // old copy (moved division or left) is not listed, ticked, or sent, and keeps what they have.
+  const eligible = useMemo(
+    () => students.filter((student) => student.division === target.division),
+    [students, target.division],
+  );
+  const eligibleIds = useMemo(() => new Set(eligible.map((s) => s.id)), [eligible]);
+  const pending = useMemo(
+    () => target.pending.filter((id) => eligibleIds.has(id)),
+    [target.pending, eligibleIds],
+  );
+  const [checked, setChecked] = useState(() => new Set(pending));
   const [search, setSearch] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const finished = useMemo(() => new Set(target.finished), [target.finished]);
-  const names = useMemo(() => new Map(students.map((s) => [s.id, s.displayName])), [students]);
-  const eligible = students.filter((student) => student.division === target.division);
+  const finished = useMemo(
+    () => new Set(target.finished.filter((id) => eligibleIds.has(id))),
+    [target.finished, eligibleIds],
+  );
+  const names = useMemo(() => new Map(eligible.map((s) => [s.id, s.displayName])), [eligible]);
   const seated = seatedTeams(target.division, target.eventId, teams ?? [])
     .map((entry) => ({ ...entry, ids: entry.ids.filter((id) => names.has(id)) }))
     .filter((entry) => entry.ids.length);
@@ -66,8 +79,8 @@ export function AssignedStudentsModal({
   const visible = eligible.filter((student) =>
     student.displayName.toLowerCase().includes(search.trim().toLowerCase()),
   );
-  const added = [...checked].filter((id) => !target.pending.includes(id));
-  const removed = target.pending.filter((id) => !checked.has(id));
+  const added = [...checked].filter((id) => !pending.includes(id));
+  const removed = pending.filter((id) => !checked.has(id));
   const changed = added.length + removed.length > 0;
 
   useEffect(() => {
@@ -99,7 +112,7 @@ export function AssignedStudentsModal({
           eventId: target.eventId,
           kind: target.kind,
           targetId: target.targetId,
-          studentIds: [...checked],
+          studentIds: [...checked].filter((id) => eligibleIds.has(id)),
           due,
           timeZone,
         }),
@@ -182,7 +195,7 @@ export function AssignedStudentsModal({
           {visible.map((student) => {
             const done = finished.has(student.id);
             const isChecked = done || checked.has(student.id);
-            const had = target.pending.includes(student.id);
+            const had = pending.includes(student.id);
             const partners = partnersOf(student.id);
             const unassignedPartner = partners.some((id) => !checked.has(id) && !finished.has(id));
             return (

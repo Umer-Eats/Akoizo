@@ -451,7 +451,7 @@ export async function setAssignedStudents(
   const statements: { sql: string; args: (string | null)[] }[] = [];
   let removed = 0;
   for (const row of pending)
-    if (!keep.has(String(row.student_id))) {
+    if (students.has(String(row.student_id)) && !keep.has(String(row.student_id))) {
       removed++;
       statements.push({
         sql:

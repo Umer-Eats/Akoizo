@@ -612,6 +612,23 @@ test('instructors change which students have already-assigned work', async () =>
   assert.equal(await has(dee, isLesson), true);
   assert.equal(await has(amy, isLesson), false);
 
+  // A student who moved out of Division C after getting the work is left as is, not refused.
+  await setAssignedStudents(db, teacher, { ...lesson, studentIds: [cal.id], due: '2999-02-02' });
+  await db.batch(
+    [{ sql: "UPDATE users SET division='B' WHERE id=?", args: [cal.id] }],
+    'immediate',
+  );
+  assert.deepEqual(
+    await setAssignedStudents(db, teacher, { ...lesson, studentIds: [amy.id], due: '2999-02-02' }),
+    { added: 1, removed: 0 },
+  );
+  assert.equal(await has(cal, isLesson), true);
+  await db.batch(
+    [{ sql: "UPDATE users SET division='C' WHERE id=?", args: [cal.id] }],
+    'immediate',
+  );
+  await setAssignedStudents(db, teacher, { ...lesson, studentIds: [], due: '2999-02-02' });
+
   // Refusals: other divisions, other schools, students, bad dates.
   await assert.rejects(
     setAssignedStudents(db, teacher, { ...lesson, studentIds: [eve.id], due: '2999-02-02' }),
